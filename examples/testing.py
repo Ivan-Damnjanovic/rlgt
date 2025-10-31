@@ -1,11 +1,13 @@
 import numpy as np
-from graphs.graph import GraphBatch
+from rl_graph_theory.graphs.graph import GraphBatch
 
+
+# gb = GraphBatch()
 
 gb = GraphBatch.from_bitmask_format(np.array(
     [
         [
-            [6, 1, 9, 4],
+            [6, 1, 1, 0],
             [8, 4, 2, 1],
             [0, 8, 0, 2],
         ]

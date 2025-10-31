@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "rl-graph-theory"
+version = "0.1.0"
+description = "This is a reinforcement learning framework that aims to facilitate research in extremal graph theory."
+authors = ["Ivan Damnjanović"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+numpy = "^2.3.4"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.4.2"
+black = "^25.9.0"
+isort = "^7.0.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
