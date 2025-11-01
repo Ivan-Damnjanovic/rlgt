@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from enum import Enum
 from math import isqrt
-from typing import Optional
 
 import numpy as np
 
@@ -109,8 +108,8 @@ class Graph:
         if self.__bitmask_format is not None:
             return self.__bitmask_format
 
-        color_indices = np.arange(self.__edge_colors, dtype=int)[:, None, None]
-        temp = (self.adjacency_matrix == color_indices).astype(int)
+        color_indices = np.arange(self.__edge_colors, dtype=int)
+        temp = (self.adjacency_matrix == color_indices[:, None, None]).astype(int)
         np.fill_diagonal(temp[0], 0)
 
         masks = 1 << np.arange(self.__order, dtype=int)
@@ -207,71 +206,69 @@ class GraphBatch:
         raise TypeError(f"The GraphBatch class cannot be instantiated directly.")
 
     @classmethod
-    def from_bitmask_format(cls, bitmask_format: np.ndarray) -> GraphBatch:
+    def from_bitmask_format_batch(cls, bitmask_format_batch: np.ndarray) -> GraphBatch:
+        """
+        #TODO
+        """
+
         self = object.__new__(cls)
 
-        self.__bitmask_format = bitmask_format
-        self.__adjacency_matrix = None
-        self.__flat_column_first = None
-        self.__flat_row_first = None
+        self.__batch_size = bitmask_format_batch.shape[0]
+        self.__edge_colors = bitmask_format_batch.shape[1]
+        self.__order = bitmask_format_batch.shape[2]
 
-        self.__batch_size = bitmask_format.shape[0]
-        self.__edge_colors = bitmask_format.shape[1]
-        self.__order = bitmask_format.shape[2]
+        self.__bitmask_format_batch = bitmask_format_batch
+        self.__adjacency_matrix_batch = None
+        self.__flattened_column_first_batch = None
+        self.__flattened_row_first_batch = None
 
         return self
 
-    @property
-    def bitmask_format(self) -> np.ndarray:
+    @classmethod
+    def from_adjacency_matrix_batch(
+        cls, adjacency_matrix_batch: np.ndarray, edge_colors: int
+    ) -> GraphBatch:
         """
         #TODO
         """
 
-        if self.__bitmask_format is not None:
-            return self.__bitmask_format
+        self = object.__new__(cls)
 
-        raise NotImplementedError
+        self.__batch_size = adjacency_matrix_batch.shape[0]
+        self.__edge_colors = edge_colors
+        self.__order = adjacency_matrix_batch.shape[1]
 
-    @property
-    def adjacency_matrix(self) -> np.ndarray:
+        self.__bitmask_format_batch = None
+        self.__adjacency_matrix_batch = adjacency_matrix_batch
+        self.__flattened_column_first_batch = None
+        self.__flattened_row_first_batch = None
+
+        return self
+
+    @classmethod
+    def from_flattened_format_batch(
+        cls, flattened_format_batch: np.ndarray, edge_ordering: EdgeOrdering, edge_colors: int
+    ) -> GraphBatch:
         """
         #TODO
         """
 
-        if self.__adjacency_matrix is not None:
-            return self.__adjacency_matrix
+        self = object.__new__(cls)
 
-        if self.__bitmask_format is not None:
-            masks = (1 << np.arange(self.__order, dtype=int)).reshape(-1, 1, 1, 1)
-            temp = (self.__bitmask_format & masks).transpose(1, 2, 3, 0)
-            temp = (temp != 0).astype(int)
+        self.__batch_size = flattened_format_batch.shape[0]
+        self.__edge_colors = edge_colors
+        self.__order = (isqrt(8 * flattened_format_batch.shape[1] + 1) + 1) // 2
 
-            sums = np.cumsum(temp, axis=1)
-            sums = np.sum(sums, axis=1)
+        self.__bitmask_format_batch = None
+        self.__adjacency_matrix_batch = None
+        if edge_ordering == EdgeOrdering.COLUMN_FIRST:
+            self.__flattened_column_first_batch = flattened_format_batch
+            self.__flattened_row_first_batch = None
+        else:
+            self.__flattened_column_first_batch = None
+            self.__flattened_row_first_batch = flattened_format_batch
 
-            result = (
-                np.full(
-                    (self.__batch_size, self.__order, self.__order), self.__edge_colors, dtype=int
-                )
-                - sums
-            )
-            np.einsum("bii->bi", result)[:] = 0
-
-            self.__adjacency_matrix = result
-
-            return self.__adjacency_matrix
-
-    @property
-    def flat_column_first(self) -> np.ndarray:
-        """
-        #TODO
-        """
-
-        if self.__flat_column_first is not None:
-            return self.__flat_column_first
-
-        if self.__bitmask_format is not None:
-            pass
+        return self
 
     @property
     def batch_size(self) -> int:
@@ -296,3 +293,105 @@ class GraphBatch:
         """
 
         return self.__order
+
+    @property
+    def bitmask_format_batch(self) -> np.ndarray:
+        """
+        #TODO
+        """
+
+        if self.__bitmask_format_batch is not None:
+            return self.__bitmask_format_batch
+
+        color_indices = np.arange(self.__edge_colors, dtype=int)
+        temp = (
+            self.adjacency_matrix_batch[:, None, :, :] == color_indices[None, :, None, None]
+        ).astype(int)
+        np.einsum("bcii->bci", temp)[:] = 0
+
+        masks = 1 << np.arange(self.__order, dtype=int)
+        result = temp @ masks
+
+        self.__bitmask_format_batch = result
+
+        return self.__bitmask_format_batch
+
+    @property
+    def adjacency_matrix_batch(self) -> np.ndarray:
+        """
+        #TODO
+        """
+
+        if self.__adjacency_matrix_batch is not None:
+            return self.__adjacency_matrix_batch
+
+        if self.__flattened_column_first_batch is not None:
+            tril_rows, tril_columns = np.tril_indices(self.__order, k=-1)
+
+            result = np.zeros((self.__batch_size, self.__order, self.__order), dtype=int)
+            result[:, tril_rows, tril_columns] = self.__flattened_column_first_batch
+            result[:, tril_columns, tril_rows] = self.__flattened_column_first_batch
+
+            self.__adjacency_matrix_batch = result
+
+            return self.__adjacency_matrix_batch
+
+        if self.__flattened_row_first_batch is not None:
+            triu_rows, triu_columns = np.triu_indices(self.__order, k=1)
+
+            result = np.zeros((self.__batch_size, self.__order, self.__order), dtype=int)
+            result[:, triu_rows, triu_columns] = self.__flattened_row_first_batch
+            result[:, triu_columns, triu_rows] = self.__flattened_row_first_batch
+
+            self.__adjacency_matrix_batch = result
+
+            return self.__adjacency_matrix_batch
+
+        masks = (1 << np.arange(self.__order, dtype=int)).reshape(-1, 1, 1, 1)
+        temp = (self.__bitmask_format_batch & masks).transpose(1, 2, 3, 0)
+        temp = (temp != 0).astype(int)
+
+        sums = np.cumsum(temp, axis=1)
+        sums = np.sum(sums, axis=1)
+
+        result = (
+            np.full((self.__batch_size, self.__order, self.__order), self.__edge_colors, dtype=int)
+            - sums
+        )
+        np.einsum("bii->bi", result)[:] = 0
+
+        self.__adjacency_matrix_batch = result
+
+        return self.__adjacency_matrix_batch
+
+    @property
+    def flattened_column_first_batch(self) -> np.ndarray:
+        """
+        #TODO
+        """
+
+        if self.__flattened_column_first_batch is not None:
+            return self.__flattened_column_first_batch
+
+        tril_rows, tril_columns = np.tril_indices(self.__order, k=-1)
+        result = self.adjacency_matrix_batch[:, tril_rows, tril_columns]
+
+        self.__flattened_column_first_batch = result
+
+        return self.__flattened_column_first_batch
+
+    @property
+    def flattened_row_first_batch(self) -> np.ndarray:
+        """
+        #TODO
+        """
+
+        if self.__flattened_row_first_batch is not None:
+            return self.__flattened_row_first_batch
+
+        triu_rows, triu_columns = np.triu_indices(self.__order, k=1)
+        result = self.adjacency_matrix_batch[:, triu_rows, triu_columns]
+
+        self.__flattened_row_first_batch = result
+
+        return self.__flattened_row_first_batch

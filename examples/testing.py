@@ -4,7 +4,7 @@ from rl_graph_theory.graphs.graph import GraphBatch
 
 # gb = GraphBatch()
 
-gb = GraphBatch.from_bitmask_format(np.array(
+gb = GraphBatch.from_bitmask_format_batch(np.array(
     [
         [
             [6, 1, 1, 0],
@@ -14,5 +14,5 @@ gb = GraphBatch.from_bitmask_format(np.array(
     ]
 ))
 
-print(gb.bitmask_format)
+print(gb.bitmask_format_batch)
 print(gb.adjacency_matrix)
