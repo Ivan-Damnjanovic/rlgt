@@ -1,7 +1,8 @@
 from typing import Callable, Optional, Tuple
 
 import numpy as np
-from graph_environment import ActionBatch, GraphEnvironment, RewardBatch, RewardType, StateBatch
+from graph_environment import (ActionBatch, GraphEnvironment, RewardBatch,
+                               RewardType, StateBatch)
 
 from ..graphs.graph import EdgeOrdering, Graph, GraphBatch
 
@@ -36,7 +37,7 @@ class LinearEnvironment(GraphEnvironment):
             temp_matrix[:, 0] -= 1 << np.arange(graph_order, dtype=int)
             default_initial_graph = Graph(temp_matrix)
         self._default_initial_graph: Graph = default_initial_graph
-    
+
         if special_initial_graph is None:
             temp_matrix = np.zeros((graph_order, edge_colors), dtype=int)
             temp_matrix[:, 0] = (1 << graph_order) - 1
@@ -67,13 +68,16 @@ class LinearEnvironment(GraphEnvironment):
 
         temp_matrix = np.tile(self._default_initial_graph, (batch_size, 1, 1))
 
-        generated_values = self._rng.random(size=(batch_size,))        
-        temp_matrix[generated_values < self._special_initial_graph_probability] = self._special_initial_graph
+        generated_values = self._rng.random(size=(batch_size,))
+        temp_matrix[generated_values < self._special_initial_graph_probability] = (
+            self._special_initial_graph
+        )
 
         return self._state_batch
 
     def step_batch(self, action_batch: ActionBatch) -> Tuple[StateBatch, RewardBatch]:
         pass
+
 
 # n (n - 1) / 2 * color_number
 # to potice od toga sto prvih n (n - 1) / 2 * (color_number - 1) elemenata oznacava za svaku od prvih color_number - 1

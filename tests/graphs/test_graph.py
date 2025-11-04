@@ -1,3 +1,7 @@
+"""
+This file is used for testing the functionalities from the `graphs.graph.py` module.
+"""
+
 import numpy as np
 import pytest
 
@@ -213,10 +217,6 @@ def test_graph_bitmask_format(
     flattened_column_first: np.ndarray,
     flattened_row_first: np.ndarray,
 ):
-    """
-    #TODO
-    """
-
     example = Graph.from_bitmask_format(bitmask_format)
     assert example.edge_colors == edge_colors
     assert example.order == order
@@ -247,10 +247,6 @@ def test_graph_adjacency_matrix(
     flattened_column_first: np.ndarray,
     flattened_row_first: np.ndarray,
 ):
-    """
-    #TODO
-    """
-
     example = Graph.from_adjacency_matrix(adjacency_matrix, edge_colors)
     assert example.edge_colors == edge_colors
     assert example.order == order
@@ -281,10 +277,6 @@ def test_graph_flattened_column_first(
     flattened_column_first: np.ndarray,
     flattened_row_first: np.ndarray,
 ):
-    """
-    #TODO
-    """
-
     example = Graph.from_flattened_format(
         flattened_column_first, EdgeOrdering.COLUMN_FIRST, edge_colors
     )
@@ -323,10 +315,6 @@ def test_graph_flattened_row_first(
     flattened_column_first: np.ndarray,
     flattened_row_first: np.ndarray,
 ):
-    """
-    #TODO
-    """
-
     example = Graph.from_flattened_format(flattened_row_first, EdgeOrdering.ROW_FIRST, edge_colors)
     assert example.edge_colors == edge_colors
     assert example.order == order
@@ -358,10 +346,6 @@ def test_graph_batch_bitmask_format_batch(
     flattened_column_first_batch: np.ndarray,
     flattened_row_first_batch: np.ndarray,
 ):
-    """
-    #TODO
-    """
-
     example = GraphBatch.from_bitmask_format_batch(bitmask_format_batch)
     assert example.batch_size == batch_size
     assert example.edge_colors == edge_colors
@@ -394,10 +378,6 @@ def test_graph_batch_adjacency_matrix_batch(
     flattened_column_first_batch: np.ndarray,
     flattened_row_first_batch: np.ndarray,
 ):
-    """
-    #TODO
-    """
-
     example = GraphBatch.from_adjacency_matrix_batch(adjacency_matrix_batch, edge_colors)
     assert example.batch_size == batch_size
     assert example.edge_colors == edge_colors
@@ -430,10 +410,6 @@ def test_graph_batch_flattened_column_first_batch(
     flattened_column_first_batch: np.ndarray,
     flattened_row_first_batch: np.ndarray,
 ):
-    """
-    #TODO
-    """
-
     example = GraphBatch.from_flattened_format_batch(
         flattened_column_first_batch, EdgeOrdering.COLUMN_FIRST, edge_colors
     )
@@ -474,10 +450,6 @@ def test_graph_batch_flattened_row_first_batch(
     flattened_column_first_batch: np.ndarray,
     flattened_row_first_batch: np.ndarray,
 ):
-    """
-    #TODO
-    """
-
     example = GraphBatch.from_flattened_format_batch(
         flattened_row_first_batch, EdgeOrdering.ROW_FIRST, edge_colors
     )

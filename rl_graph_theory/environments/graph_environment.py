@@ -3,7 +3,6 @@ from enum import Enum
 from typing import Callable, Optional, Tuple
 
 import numpy as np
-
 from graphs.graph import GraphBatch
 
 
