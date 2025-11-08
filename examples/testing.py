@@ -4,7 +4,7 @@ from rl_graph_theory.graphs.graph import GraphBatch
 
 # gb = GraphBatch()
 
-gb = GraphBatch.from_bitmask_format_batch(np.array(
+gb = GraphBatch.from_bitmask_batch(np.array(
     [
         [
             [6, 1, 1, 0],
