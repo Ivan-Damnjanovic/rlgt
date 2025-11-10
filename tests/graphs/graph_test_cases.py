@@ -5,7 +5,6 @@ This file initializes the lists containing the test cases for the `test_graph` t
 import numpy as np
 
 
-# This list contains the test cases for the `test_graph` testing function.
 GRAPH_TEST_CASES = [
     (
         4,
@@ -109,10 +108,17 @@ GRAPH_TEST_CASES = [
         np.array([1, 1, 0, 0, 1, 1, 1, 0, 1, 0], dtype=int),
         np.array([1, 1, 0, 1, 0, 1, 0, 1, 1, 0], dtype=int),
     ),
+    (
+        3,
+        1,
+        np.array([[0], [0]], dtype=int),
+        np.array([[0]], dtype=int),
+        np.zeros((0,), dtype=int),
+        np.zeros((0,), dtype=int),
+    ),
 ]
 
 
-# This list contains the test cases for the `test_graph_batch` testing function.
 GRAPH_BATCH_TEST_CASES = [
     (
         1,
@@ -233,6 +239,15 @@ GRAPH_BATCH_TEST_CASES = [
         ),
         np.array([[1, 1, 0, 0, 1, 1, 1, 0, 1, 0]], dtype=int),
         np.array([[1, 1, 0, 1, 0, 1, 0, 1, 1, 0]], dtype=int),
+    ),
+    (
+        1,
+        3,
+        1,
+        np.array([[[0], [0]]], dtype=int),
+        np.array([[[0]]], dtype=int),
+        np.zeros((1, 0), dtype=int),
+        np.zeros((1, 0), dtype=int),
     ),
     (
         3,
@@ -364,5 +379,14 @@ GRAPH_BATCH_TEST_CASES = [
             ],
             dtype=int,
         ),
+    ),
+    (
+        7,
+        4,
+        1,
+        np.zeros((7, 3, 1), dtype=int),
+        np.zeros((7, 1, 1), dtype=int),
+        np.zeros((7, 0), dtype=int),
+        np.zeros((7, 0), dtype=int),
     ),
 ]

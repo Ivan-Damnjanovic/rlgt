@@ -427,16 +427,16 @@
 
         <div class="moduleDocstring">
           <div><p>This class encapsulates the concept of a batch of edge-colored complete graphs of the same
-order. The graphs are of order <tt class="rst-docutils rst-literal">n</tt>, and each of their edges can be colored in one of the
-colors from the set $\{ 0, 1, 2, \ldots c - 1 \}$, where <tt class="rst-docutils rst-literal">c</tt> is the number of available
-edge colors. The positive integer <tt class="rst-docutils rst-literal">c</tt> must be at least two. An edge can also be uncolored,
-which is represented by the de facto auxiliary edge color <tt class="rst-docutils rst-literal">c</tt>, as explained in the
-<code><a href="rl_graph_theory.graphs.graph.GraphFormat.html" class="internal-link" title="rl_graph_theory.graphs.graph.GraphFormat">GraphFormat</a></code> enumeration.</p>
+order. The graphs are of order $n$, and each of their edges can be colored in one of the colors
+from the set $\{ 0, 1, 2, \ldots c - 1 \}$, where $c$ is the number of available edge
+colors. The positive integer $c$ must be at least two. An edge can also be uncolored, which is
+represented by the de facto auxiliary edge color $c$, as explained in the <code><a href="rl_graph_theory.graphs.graph.GraphFormat.html" class="internal-link" title="rl_graph_theory.graphs.graph.GraphFormat">GraphFormat</a></code>
+enumeration.</p>
 <p>The batch of graphs can be represented in any of the four graph formats from the <code><a href="rl_graph_theory.graphs.graph.GraphFormat.html" class="internal-link" title="rl_graph_theory.graphs.graph.GraphFormat">GraphFormat</a></code>
 enumeration. The representation and initialization is done in the same way as in the <code><a href="rl_graph_theory.graphs.graph.Graph.html" class="internal-link" title="rl_graph_theory.graphs.graph.Graph">Graph</a></code>
 class, the only difference being that all the <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> objects used are of one dimension
 higher. More precisely, if <tt class="rst-docutils rst-literal">a</tt> is the <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> used to describe a given batch of graphs,
-then <tt class="rst-docutils rst-literal">a[i]</tt> is the representation of the <tt class="rst-docutils rst-literal">i</tt>-th graph from the batch in the corresponding
+then <tt class="rst-docutils rst-literal">a[i]</tt> is the representation of the $i$-th graph from the batch in the corresponding
 format.</p>
 <table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Note</td></tr><tr><td colspan="2">Although available, the constructor of this class is not intended to be directly used.
 Instead, the instances should be initialized by using the three class methods
@@ -444,7 +444,7 @@ Instead, the instances should be initialized by using the three class methods
         </div>
 
         <div id="split-tables">
-          <table class="children sortable" id="id16">
+          <table class="children sortable" id="id7">
   
   
   <tr class="classmethod">
@@ -521,7 +521,7 @@ Instead, the instances should be initialized by using the three class methods
     
     <td>Instance Variable</td>
     <td><code><a href="#__edge_colors" class="internal-link" title="rl_graph_theory.graphs.graph.GraphBatch.__edge_colors">__edge<wbr></wbr>_colors</a></code></td>
-    <td>The number of available edge colors, i.e., <tt class="rst-docutils rst-literal">c</tt>.</td>
+    <td>The number of available edge colors, i.e., $c$.</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
@@ -536,7 +536,7 @@ Instead, the instances should be initialized by using the three class methods
     
     <td>Instance Variable</td>
     <td><code><a href="#__order" class="internal-link" title="rl_graph_theory.graphs.graph.GraphBatch.__order">__order</a></code></td>
-    <td>The graph order, i.e., <tt class="rst-docutils rst-literal">n</tt>.</td>
+    <td>The graph order, i.e., $n$.</td>
   </tr>
 </table>
           
@@ -944,7 +944,7 @@ graphs or computed afterwards, and otherwise, <code><a href="https://docs.python
   </div>
   <div class="functionBody">
     
-    <div><p>The number of available edge colors, i.e., <tt class="rst-docutils rst-literal">c</tt>.</p></div>
+    <div><p>The number of available edge colors, i.e., $c$.</p></div>
     
   </div>
 </div><div class="baseinstancevariable private">
@@ -1020,7 +1020,7 @@ used to initialize the batch of graphs or computed afterwards, and otherwise, <c
   </div>
   <div class="functionBody">
     
-    <div><p>The graph order, i.e., <tt class="rst-docutils rst-literal">n</tt>.</p></div>
+    <div><p>The graph order, i.e., $n$.</p></div>
     
   </div>
 </div>
@@ -1035,7 +1035,7 @@ used to initialize the batch of graphs or computed afterwards, and otherwise, <c
   <div class="container-fluid">
     <a href="index.html">API Documentation</a> for rl-graph-theory,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    25.10.1 at 2025-11-08 15:26:09.
+    25.10.1 at 2025-11-10 20:36:51.
   </div>
 
   <!-- Search related scripts needs to be loaded at the end of HTML 

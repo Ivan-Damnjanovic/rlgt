@@ -1,6 +1,7 @@
 [tool.poetry]
 name = "rl-graph-theory"
 version = "0.1.0"
+packages = [{ include = "rl_graph_theory", from = "src" }]
 description = "This is a reinforcement learning framework that aims to facilitate research in extremal graph theory."
 authors = ["Ivan Damnjanović"]
 readme = "README.md"
@@ -25,12 +26,14 @@ build-backend = "poetry.core.masonry.api"
 line-length = 99
 target-version = ['py37']
 
+
 [tool.isort]
 profile = "black"
 lines_after_imports = 2
 
 [tool.pydoctor]
 project-name = "rl-graph-theory"
+add-package = ["src/rl_graph_theory"]
 docformat = "restructuredtext"
 make-html = true
 html-output = "docs"
@@ -38,4 +41,4 @@ intersphinx = [
     "https://docs.python.org/3/objects.inv",
     "https://numpy.org/doc/stable/objects.inv",
 ]
-add-package = ["rl_graph_theory"]
+

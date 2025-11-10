@@ -285,24 +285,24 @@
         <div class="moduleDocstring">
           <div><p>This enumeration encapsulates the concept of a format used to represent an edge-colored
 complete graph. Each of the edges can be colored in one of the colors from a given set $\{ 0,
-1, 2, \ldots, c - 1 \}$, where <tt class="rst-docutils rst-literal">c</tt> is the number of available edge colors. Each edge can
-also be uncolored. The enumeration provides support for the following four graph formats:</p></div>
+1, 2, \ldots, c - 1 \}$, where $c$ is the number of available edge colors. Each edge can also
+be uncolored. The enumeration provides support for the following four graph formats:</p></div>
         </div>
 
         <div id="split-tables">
-          <table class="children sortable" id="id13">
+          <table class="children sortable" id="id4">
   
   
   <tr class="constant">
     
     <td>Constant</td>
     <td><code><a href="#ADJACENCY_MATRIX" class="internal-link" title="rl_graph_theory.graphs.graph.GraphFormat.ADJACENCY_MATRIX">ADJACENCY<wbr></wbr>_MATRIX</a></code></td>
-    <td>The adjacency matrix format. Here, the graph is represented through the number of available edge colors <tt class="rst-docutils rst-literal">c</tt> and its adjacency matrix, i.e., a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> integer square matrix <tt class="rst-docutils rst-literal">a</tt> with <tt class="rst-docutils rst-literal">n</tt> rows and columns, where ...</td>
+    <td>The adjacency matrix format. Here, the graph is represented through the number of available edge colors $c$ and its adjacency matrix, i.e., a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> integer square matrix <tt class="rst-docutils rst-literal">a</tt> with $n$ rows and columns, where $n$ is the graph order...</td>
   </tr><tr class="constant">
     
     <td>Constant</td>
     <td><code><a href="#BITMASK" class="internal-link" title="rl_graph_theory.graphs.graph.GraphFormat.BITMASK">BITMASK</a></code></td>
-    <td>The bitmask format. Here, the graph is represented through the number of available edge colors <tt class="rst-docutils rst-literal">c</tt> and a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> integer matrix <tt class="rst-docutils rst-literal">a</tt> with <tt class="rst-docutils rst-literal">c</tt> rows and <tt class="rst-docutils rst-literal">n</tt> columns, where <tt class="rst-docutils rst-literal">n</tt> is the graph order. The value <tt class="rst-docutils rst-literal">a[i, j]</tt>...</td>
+    <td>The bitmask format. Here, the graph is represented through the number of available edge colors $c$ and a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> integer matrix <tt class="rst-docutils rst-literal">a</tt> with $c$ rows and $n$ columns, where $n$ is the graph order. The value ...</td>
   </tr><tr class="constant">
     
     <td>Constant</td>
@@ -343,11 +343,11 @@ also be uncolored. The enumeration provides support for the following four graph
   <div class="functionBody">
     
     <div><p>The adjacency matrix format. Here, the graph is represented through the
-number of available edge colors <tt class="rst-docutils rst-literal">c</tt> and its adjacency matrix, i.e., a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code>
-integer square matrix <tt class="rst-docutils rst-literal">a</tt> with <tt class="rst-docutils rst-literal">n</tt> rows and columns, where <tt class="rst-docutils rst-literal">n</tt> is the graph order.
-The value <tt class="rst-docutils rst-literal">a[i, j]</tt> represents the color of the edge between the vertices <tt class="rst-docutils rst-literal">i</tt> and
-<tt class="rst-docutils rst-literal">j</tt>, with an uncolored edge being represented by the value <tt class="rst-docutils rst-literal">c</tt>. The diagonal values of
-the adjacency matrix are all equal to zero.</p></div>
+number of available edge colors $c$ and its adjacency matrix, i.e., a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> integer
+square matrix <tt class="rst-docutils rst-literal">a</tt> with $n$ rows and columns, where $n$ is the graph order. The value
+<tt class="rst-docutils rst-literal">a[i, j]</tt> represents the color of the edge between the vertices $i$ and $j$, with an
+uncolored edge being represented by the value $c$. The diagonal values of the adjacency
+matrix are all equal to zero.</p></div>
     <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>1</code></pre></td></tr></table>
   </div>
 </div><div class="baseconstant">
@@ -372,12 +372,12 @@ the adjacency matrix are all equal to zero.</p></div>
   <div class="functionBody">
     
     <div><p>The bitmask format. Here, the graph is represented through the number of
-available edge colors <tt class="rst-docutils rst-literal">c</tt> and a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> integer matrix <tt class="rst-docutils rst-literal">a</tt> with <tt class="rst-docutils rst-literal">c</tt> rows and
-<tt class="rst-docutils rst-literal">n</tt> columns, where <tt class="rst-docutils rst-literal">n</tt> is the graph order. The value <tt class="rst-docutils rst-literal">a[i, j]</tt> represents a
-nonnegative integer whose <tt class="rst-docutils rst-literal">k</tt>-th bit indicates whether the edge between the vertices
-<tt class="rst-docutils rst-literal">j</tt> and <tt class="rst-docutils rst-literal">k</tt> is of the color <tt class="rst-docutils rst-literal">i</tt>. Additionally, if there are no uncolored edges, then
-the starting row of the said <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> matrix can be omitted, and we refer to this
-format as the reduced bitmask format.</p></div>
+available edge colors $c$ and a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> integer matrix <tt class="rst-docutils rst-literal">a</tt> with $c$ rows and $n$
+columns, where $n$ is the graph order. The value <tt class="rst-docutils rst-literal">a[i, j]</tt> represents a nonnegative
+integer whose $k$-th bit indicates whether the edge between the vertices $j$ and $k$ is of
+the color $i$. Additionally, if there are no uncolored edges, then the starting row of the
+said <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> matrix can be omitted, and we refer to this format as the reduced bitmask
+format.</p></div>
     <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>0</code></pre></td></tr></table>
   </div>
 </div><div class="baseconstant">
@@ -405,7 +405,7 @@ format as the reduced bitmask format.</p></div>
 through the number of available edge colors and its adjacency matrix entries that are
 strictly above the diagonal. The entries are arranged column-first, i.e., as $(0, 1),
 (0, 2), (1, 2), (0, 3), (1, 3), (2, 3), \ldots$, and they form a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> list of
-length <tt class="rst-docutils rst-literal">n(n - 1) / 2</tt>, where <tt class="rst-docutils rst-literal">n</tt> is the graph order.</p></div>
+length <tt class="rst-docutils rst-literal">n(n - 1) // 2</tt>, where $n$ is the graph order.</p></div>
     <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>2</code></pre></td></tr></table>
   </div>
 </div><div class="baseconstant">
@@ -432,8 +432,8 @@ length <tt class="rst-docutils rst-literal">n(n - 1) / 2</tt>, where <tt class="
     <div><p>The flattened row-first format. Here, the graph is represented
 through the number of available edge colors and its adjacency matrix entries that are
 strictly above the diagonal. The entries are arranged row-first, i.e., as $(0, 1), (0, 2),
-(0, 3), ldots, (0, n - 1), (1, 2), (1, 3), \ldots$, and they form a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> list of
-length <tt class="rst-docutils rst-literal">n(n - 1) / 2</tt>, where <tt class="rst-docutils rst-literal">n</tt> is the graph order.</p></div>
+(0, 3), \ldots, (0, n - 1), (1, 2), (1, 3), \ldots$, and they form a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> list of
+length <tt class="rst-docutils rst-literal">n(n - 1) // 2</tt>, where $n$ is the graph order.</p></div>
     <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>3</code></pre></td></tr></table>
   </div>
 </div>
@@ -448,7 +448,7 @@ length <tt class="rst-docutils rst-literal">n(n - 1) / 2</tt>, where <tt class="
   <div class="container-fluid">
     <a href="index.html">API Documentation</a> for rl-graph-theory,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    25.10.1 at 2025-11-08 15:26:09.
+    25.10.1 at 2025-11-10 20:36:51.
   </div>
 
   <!-- Search related scripts needs to be loaded at the end of HTML 

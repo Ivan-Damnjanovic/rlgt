@@ -1,5 +1,5 @@
 """
-This file is used for testing the functionalities from the `graphs.graph` module.
+This file is used for testing the functionalities from the `rl_graph_theory.graphs.graph` module.
 """
 
 import numpy as np
@@ -23,10 +23,6 @@ def test_graph(
     flattened_column_first: np.ndarray,
     flattened_row_first: np.ndarray,
 ):
-    """
-    #TODO
-    """
-
     verify_instantiated_graph(
         constructor=lambda: Graph.from_bitmask(edge_colors, bitmask),
         edge_colors=edge_colors,
@@ -83,10 +79,6 @@ def test_graph_batch(
     flattened_column_first_batch: np.ndarray,
     flattened_row_first_batch: np.ndarray,
 ):
-    """
-    #TODO
-    """
-
     verify_instantiated_graph_batch(
         constructor=lambda: GraphBatch.from_bitmask_batch(edge_colors, bitmask_batch),
         batch_size=batch_size,

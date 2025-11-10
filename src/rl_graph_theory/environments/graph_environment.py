@@ -3,7 +3,8 @@ from enum import Enum
 from typing import Callable, Optional, Tuple
 
 import numpy as np
-from graphs.graph import GraphBatch
+
+from rl_graph_theory.graphs.graph import GraphBatch
 
 
 class StateBatch:

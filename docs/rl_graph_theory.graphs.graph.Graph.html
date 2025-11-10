@@ -402,15 +402,15 @@
         </div>
 
         <div class="extrasDocstring">
-          <p class="class-signature"><code><span class="py-keyword">class</span> <span class="py-defname">Graph</span>:</code></p><p>Known subclasses: <code><a href="rl_graph_theory.graphs.special_graphs.AlmostCompleteGraph.html" class="internal-link">rl_graph_theory.graphs.special_graphs.AlmostCompleteGraph</a></code>, <code><a href="rl_graph_theory.graphs.special_graphs.CompleteBipartiteGraph.html" class="internal-link">rl_graph_theory.graphs.special_graphs.CompleteBipartiteGraph</a></code>, <code><a href="rl_graph_theory.graphs.special_graphs.CompleteGraph.html" class="internal-link">rl_graph_theory.graphs.special_graphs.CompleteGraph</a></code>, <code><a href="rl_graph_theory.graphs.special_graphs.CompleteKPartiteGraph.html" class="internal-link">rl_graph_theory.graphs.special_graphs.CompleteKPartiteGraph</a></code>, <code><a href="rl_graph_theory.graphs.special_graphs.EmptyGraph.html" class="internal-link">rl_graph_theory.graphs.special_graphs.EmptyGraph</a></code>, <code><a href="rl_graph_theory.graphs.special_graphs.PathGraph.html" class="internal-link">rl_graph_theory.graphs.special_graphs.PathGraph</a></code>, <code><a href="rl_graph_theory.graphs.special_graphs.StarGraph.html" class="internal-link">rl_graph_theory.graphs.special_graphs.StarGraph</a></code></p><p>Constructors: <code><a href="#from_adjacency_matrix" class="internal-link" title="rl_graph_theory.graphs.graph.Graph.from_adjacency_matrix">Graph.from_adjacency_matrix(edge_colors, adjacency_matrix)</a></code>, <code><a href="#from_bitmask" class="internal-link" title="rl_graph_theory.graphs.graph.Graph.from_bitmask">Graph.from_bitmask(edge_colors, bitmask)</a></code>, <code><a href="#from_flattened" class="internal-link" title="rl_graph_theory.graphs.graph.Graph.from_flattened">Graph.from_flattened(edge_colors, edge_ordering, flattened)</a></code>, <code><a href="#__init__" class="internal-link" title="rl_graph_theory.graphs.graph.Graph.__init__">Graph(graph_format, edge_colors, bitmask, adjacency_matrix, ...)</a></code></p><p><a href="classIndex.html#rl_graph_theory.graphs.graph.Graph">View In Hierarchy</a></p>
+          <p class="class-signature"><code><span class="py-keyword">class</span> <span class="py-defname">Graph</span>:</code></p><p>Known subclasses: <code><a href="rl_graph_theory.graphs.special_graphs.AlmostCompleteGraph.html" class="internal-link">rl_graph_theory.graphs.special_graphs.AlmostCompleteGraph</a></code>, <code><a href="rl_graph_theory.graphs.special_graphs.BookGraph.html" class="internal-link">rl_graph_theory.graphs.special_graphs.BookGraph</a></code>, <code><a href="rl_graph_theory.graphs.special_graphs.CompleteBipartiteGraph.html" class="internal-link">rl_graph_theory.graphs.special_graphs.CompleteBipartiteGraph</a></code>, <code><a href="rl_graph_theory.graphs.special_graphs.CompleteGraph.html" class="internal-link">rl_graph_theory.graphs.special_graphs.CompleteGraph</a></code>, <code><a href="rl_graph_theory.graphs.special_graphs.CompleteKPartiteGraph.html" class="internal-link">rl_graph_theory.graphs.special_graphs.CompleteKPartiteGraph</a></code>, <code><a href="rl_graph_theory.graphs.special_graphs.CycleGraph.html" class="internal-link">rl_graph_theory.graphs.special_graphs.CycleGraph</a></code>, <code><a href="rl_graph_theory.graphs.special_graphs.EmptyGraph.html" class="internal-link">rl_graph_theory.graphs.special_graphs.EmptyGraph</a></code>, <code><a href="rl_graph_theory.graphs.special_graphs.FriendshipGraph.html" class="internal-link">rl_graph_theory.graphs.special_graphs.FriendshipGraph</a></code>, <code><a href="rl_graph_theory.graphs.special_graphs.MonochromaticGraph.html" class="internal-link">rl_graph_theory.graphs.special_graphs.MonochromaticGraph</a></code>, <code><a href="rl_graph_theory.graphs.special_graphs.PathGraph.html" class="internal-link">rl_graph_theory.graphs.special_graphs.PathGraph</a></code>, <code><a href="rl_graph_theory.graphs.special_graphs.StarGraph.html" class="internal-link">rl_graph_theory.graphs.special_graphs.StarGraph</a></code>, <code><a href="rl_graph_theory.graphs.special_graphs.WheelGraph.html" class="internal-link">rl_graph_theory.graphs.special_graphs.WheelGraph</a></code></p><p>Constructors: <code><a href="#from_adjacency_matrix" class="internal-link" title="rl_graph_theory.graphs.graph.Graph.from_adjacency_matrix">Graph.from_adjacency_matrix(edge_colors, adjacency_matrix)</a></code>, <code><a href="#from_bitmask" class="internal-link" title="rl_graph_theory.graphs.graph.Graph.from_bitmask">Graph.from_bitmask(edge_colors, bitmask)</a></code>, <code><a href="#from_flattened" class="internal-link" title="rl_graph_theory.graphs.graph.Graph.from_flattened">Graph.from_flattened(edge_colors, edge_ordering, flattened)</a></code>, <code><a href="#__init__" class="internal-link" title="rl_graph_theory.graphs.graph.Graph.__init__">Graph(graph_format, edge_colors, bitmask, adjacency_matrix, ...)</a></code></p><p><a href="classIndex.html#rl_graph_theory.graphs.graph.Graph">View In Hierarchy</a></p>
         </div>
 
         <div class="moduleDocstring">
           <div><p>This class encapsulates the concept of an edge-colored complete graph. The graph is of order
-<tt class="rst-docutils rst-literal">n</tt>, and each of its edges can be colored in one of the colors from the set $\{ 0, 1, 2,
-\ldots c - 1 \}$, where <tt class="rst-docutils rst-literal">c</tt> is the number of available edge colors. The positive integer
-<tt class="rst-docutils rst-literal">c</tt> must be at least two. An edge can also be uncolored, which is represented by the de facto
-auxiliary edge color <tt class="rst-docutils rst-literal">c</tt>, as explained in the <code><a href="rl_graph_theory.graphs.graph.GraphFormat.html" class="internal-link" title="rl_graph_theory.graphs.graph.GraphFormat">GraphFormat</a></code> enumeration.</p>
+$n$, and each of its edges can be colored in one of the colors from the set $\{ 0, 1, 2,
+\ldots c - 1 \}$, where $c$ is the number of available edge colors. The positive integer $c$
+must be at least two. An edge can also be uncolored, which is represented by the de facto
+auxiliary edge color $c$, as explained in the <code><a href="rl_graph_theory.graphs.graph.GraphFormat.html" class="internal-link" title="rl_graph_theory.graphs.graph.GraphFormat">GraphFormat</a></code> enumeration.</p>
 <p>The graph can be represented in any of the four graph formats from the <code><a href="rl_graph_theory.graphs.graph.GraphFormat.html" class="internal-link" title="rl_graph_theory.graphs.graph.GraphFormat">GraphFormat</a></code>
 enumeration. It is initialized in exactly one of these four formats so that the provided
 <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> object representing the graph is internally stored. Afterwards, the graph can be
@@ -426,7 +426,7 @@ Instead, the instances should be initialized by using the three class methods
         </div>
 
         <div id="split-tables">
-          <table class="children sortable" id="id15">
+          <table class="children sortable" id="id6">
   
   
   <tr class="classmethod">
@@ -493,7 +493,7 @@ Instead, the instances should be initialized by using the three class methods
     
     <td>Instance Variable</td>
     <td><code><a href="#__edge_colors" class="internal-link" title="rl_graph_theory.graphs.graph.Graph.__edge_colors">__edge<wbr></wbr>_colors</a></code></td>
-    <td>The number of available edge colors, i.e., <tt class="rst-docutils rst-literal">c</tt>.</td>
+    <td>The number of available edge colors, i.e., $c$.</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
@@ -508,7 +508,7 @@ Instead, the instances should be initialized by using the three class methods
     
     <td>Instance Variable</td>
     <td><code><a href="#__order" class="internal-link" title="rl_graph_theory.graphs.graph.Graph.__order">__order</a></code></td>
-    <td>The graph order, i.e., <tt class="rst-docutils rst-literal">n</tt>.</td>
+    <td>The graph order, i.e., $n$.</td>
   </tr>
 </table>
           
@@ -622,7 +622,7 @@ flattened column-first format should be used or the flattened row-first format.<
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overridden in <code><a href="rl_graph_theory.graphs.special_graphs.AlmostCompleteGraph.html" class="internal-link">rl_graph_theory.graphs.special_graphs.AlmostCompleteGraph</a></code>, <code><a href="rl_graph_theory.graphs.special_graphs.CompleteBipartiteGraph.html" class="internal-link">rl_graph_theory.graphs.special_graphs.CompleteBipartiteGraph</a></code>, <code><a href="rl_graph_theory.graphs.special_graphs.CompleteGraph.html" class="internal-link">rl_graph_theory.graphs.special_graphs.CompleteGraph</a></code>, <code><a href="rl_graph_theory.graphs.special_graphs.CompleteKPartiteGraph.html" class="internal-link">rl_graph_theory.graphs.special_graphs.CompleteKPartiteGraph</a></code>, <code><a href="rl_graph_theory.graphs.special_graphs.EmptyGraph.html" class="internal-link">rl_graph_theory.graphs.special_graphs.EmptyGraph</a></code>, <code><a href="rl_graph_theory.graphs.special_graphs.PathGraph.html" class="internal-link">rl_graph_theory.graphs.special_graphs.PathGraph</a></code>, <code><a href="rl_graph_theory.graphs.special_graphs.StarGraph.html" class="internal-link">rl_graph_theory.graphs.special_graphs.StarGraph</a></code></div>
+    <div class="interfaceinfo">overridden in <code><a href="rl_graph_theory.graphs.special_graphs.AlmostCompleteGraph.html" class="internal-link">rl_graph_theory.graphs.special_graphs.AlmostCompleteGraph</a></code>, <code><a href="rl_graph_theory.graphs.special_graphs.BookGraph.html" class="internal-link">rl_graph_theory.graphs.special_graphs.BookGraph</a></code>, <code><a href="rl_graph_theory.graphs.special_graphs.CompleteBipartiteGraph.html" class="internal-link">rl_graph_theory.graphs.special_graphs.CompleteBipartiteGraph</a></code>, <code><a href="rl_graph_theory.graphs.special_graphs.CompleteGraph.html" class="internal-link">rl_graph_theory.graphs.special_graphs.CompleteGraph</a></code>, <code><a href="rl_graph_theory.graphs.special_graphs.CompleteKPartiteGraph.html" class="internal-link">rl_graph_theory.graphs.special_graphs.CompleteKPartiteGraph</a></code>, <code><a href="rl_graph_theory.graphs.special_graphs.CycleGraph.html" class="internal-link">rl_graph_theory.graphs.special_graphs.CycleGraph</a></code>, <code><a href="rl_graph_theory.graphs.special_graphs.EmptyGraph.html" class="internal-link">rl_graph_theory.graphs.special_graphs.EmptyGraph</a></code>, <code><a href="rl_graph_theory.graphs.special_graphs.FriendshipGraph.html" class="internal-link">rl_graph_theory.graphs.special_graphs.FriendshipGraph</a></code>, <code><a href="rl_graph_theory.graphs.special_graphs.MonochromaticGraph.html" class="internal-link">rl_graph_theory.graphs.special_graphs.MonochromaticGraph</a></code>, <code><a href="rl_graph_theory.graphs.special_graphs.PathGraph.html" class="internal-link">rl_graph_theory.graphs.special_graphs.PathGraph</a></code>, <code><a href="rl_graph_theory.graphs.special_graphs.StarGraph.html" class="internal-link">rl_graph_theory.graphs.special_graphs.StarGraph</a></code>, <code><a href="rl_graph_theory.graphs.special_graphs.WheelGraph.html" class="internal-link">rl_graph_theory.graphs.special_graphs.WheelGraph</a></code></div>
     <div><p>This constructor initializes an instance using the chosen graph format. In other words, one
 of the four graph formats is selected, and then the corresponding <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> is used
 together with the provided number of available edge colors to initialize a graph with
@@ -865,7 +865,7 @@ afterwards, and otherwise, <code><a href="https://docs.python.org/3/library/cons
   </div>
   <div class="functionBody">
     
-    <div><p>The number of available edge colors, i.e., <tt class="rst-docutils rst-literal">c</tt>.</p></div>
+    <div><p>The number of available edge colors, i.e., $c$.</p></div>
     
   </div>
 </div><div class="baseinstancevariable private">
@@ -941,7 +941,7 @@ initialize the graph or computed afterwards, and otherwise, <code><a href="https
   </div>
   <div class="functionBody">
     
-    <div><p>The graph order, i.e., <tt class="rst-docutils rst-literal">n</tt>.</p></div>
+    <div><p>The graph order, i.e., $n$.</p></div>
     
   </div>
 </div>
@@ -956,7 +956,7 @@ initialize the graph or computed afterwards, and otherwise, <code><a href="https
   <div class="container-fluid">
     <a href="index.html">API Documentation</a> for rl-graph-theory,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    25.10.1 at 2025-11-08 15:26:09.
+    25.10.1 at 2025-11-10 20:36:51.
   </div>
 
   <!-- Search related scripts needs to be loaded at the end of HTML 

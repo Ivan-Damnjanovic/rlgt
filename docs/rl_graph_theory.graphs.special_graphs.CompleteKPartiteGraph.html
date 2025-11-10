@@ -336,6 +336,16 @@
         
 
         
+            <div class="itemName"><code><a href="rl_graph_theory.graphs.special_graphs.BookGraph.html" class="internal-link" title="rl_graph_theory.graphs.special_graphs.BookGraph"><wbr></wbr>Book<wbr></wbr>Graph</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
             <div class="itemName"><code><a href="rl_graph_theory.graphs.special_graphs.CompleteBipartiteGraph.html" class="internal-link" title="rl_graph_theory.graphs.special_graphs.CompleteBipartiteGraph"><wbr></wbr>Complete<wbr></wbr>Bipartite<wbr></wbr>Graph</a></code>
             </div>
         
@@ -366,7 +376,37 @@
         
 
         
+            <div class="itemName"><code><a href="rl_graph_theory.graphs.special_graphs.CycleGraph.html" class="internal-link" title="rl_graph_theory.graphs.special_graphs.CycleGraph"><wbr></wbr>Cycle<wbr></wbr>Graph</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
             <div class="itemName"><code><a href="rl_graph_theory.graphs.special_graphs.EmptyGraph.html" class="internal-link" title="rl_graph_theory.graphs.special_graphs.EmptyGraph"><wbr></wbr>Empty<wbr></wbr>Graph</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="rl_graph_theory.graphs.special_graphs.FriendshipGraph.html" class="internal-link" title="rl_graph_theory.graphs.special_graphs.FriendshipGraph"><wbr></wbr>Friendship<wbr></wbr>Graph</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="rl_graph_theory.graphs.special_graphs.MonochromaticGraph.html" class="internal-link" title="rl_graph_theory.graphs.special_graphs.MonochromaticGraph"><wbr></wbr>Monochromatic<wbr></wbr>Graph</a></code>
             </div>
         
 
@@ -390,64 +430,21 @@
             </div>
         
 
-    </li>
-</ul>
-
-        <div class="childrenKindTitle">Functions</div>
-        <ul>
-    
-    <li class="">
-        
-        
-        
-
-        
-            <div class="itemName"><code><a href="rl_graph_theory.graphs.special_graphs.html#book_graph_adjacencies" class="internal-link" title="rl_graph_theory.graphs.special_graphs.book_graph_adjacencies">book<wbr></wbr>_graph<wbr></wbr>_adjacencies</a></code>
-            </div>
-        
-
     </li><li class="">
         
         
         
 
         
-            <div class="itemName"><code><a href="rl_graph_theory.graphs.special_graphs.html#cycle_graph_adjacencies" class="internal-link" title="rl_graph_theory.graphs.special_graphs.cycle_graph_adjacencies">cycle<wbr></wbr>_graph<wbr></wbr>_adjacencies</a></code>
-            </div>
-        
-
-    </li><li class="">
-        
-        
-        
-
-        
-            <div class="itemName"><code><a href="rl_graph_theory.graphs.special_graphs.html#friendship_graph_adjacencies" class="internal-link" title="rl_graph_theory.graphs.special_graphs.friendship_graph_adjacencies">friendship<wbr></wbr>_graph<wbr></wbr>_adjacencies</a></code>
-            </div>
-        
-
-    </li><li class="">
-        
-        
-        
-
-        
-            <div class="itemName"><code><a href="rl_graph_theory.graphs.special_graphs.html#path_graph_adjacencies" class="internal-link" title="rl_graph_theory.graphs.special_graphs.path_graph_adjacencies">path<wbr></wbr>_graph<wbr></wbr>_adjacencies</a></code>
-            </div>
-        
-
-    </li><li class="">
-        
-        
-        
-
-        
-            <div class="itemName"><code><a href="rl_graph_theory.graphs.special_graphs.html#wheel_graph_adjacencies" class="internal-link" title="rl_graph_theory.graphs.special_graphs.wheel_graph_adjacencies">wheel<wbr></wbr>_graph<wbr></wbr>_adjacencies</a></code>
+            <div class="itemName"><code><a href="rl_graph_theory.graphs.special_graphs.WheelGraph.html" class="internal-link" title="rl_graph_theory.graphs.special_graphs.WheelGraph"><wbr></wbr>Wheel<wbr></wbr>Graph</a></code>
             </div>
         
 
     </li>
-</ul> 
+</ul>
+
+        
+         
 
         
          
@@ -492,25 +489,32 @@
         </div>
 
         <div class="moduleDocstring">
-          <div><p>#TODO</p></div>
+          <div><p>This class inherits the <code><a href="rl_graph_theory.graphs.graph.Graph.html" class="internal-link" title="rl_graph_theory.graphs.graph.Graph">Graph</a></code> class and it is used to initialize complete $k$-partite graphs.
+In other words, it produces a graph with two available edge colors such that its edges colored
+in the color 1 form a complete $k$-partite graph, while all the other edges are colored in the
+color 0. Here, the first $a_1$ vertices form the first $k$-partition set, the subsequent $a_2$
+vertices form the second $k$-partition set, etc., and the last $a_k$ vertices form the $k$-th
+$k$-partition set, with the parameters $k$ and $a_1, a_2, \ldots, a_k$ being configurable. It
+is also possible to configure the starting graph format that an instance should get initialized
+in, with the two possible formats being the bitmask format and the adjacency matrix format.</p></div>
         </div>
 
         <div id="split-tables">
-          <table class="children sortable" id="id26">
+          <table class="children sortable" id="id19">
   
   
   <tr class="method">
     
     <td>Method</td>
     <td><code><a href="#__init__" class="internal-link" title="rl_graph_theory.graphs.special_graphs.CompleteKPartiteGraph.__init__">__init__</a></code></td>
-    <td>#TODO</td>
+    <td>This constructor initializes the desired complete $k$-partite graph in the selected graph format.</td>
   </tr>
 </table>
           
             <p class="inheritedFrom">
               Inherited from <code><a href="rl_graph_theory.graphs.graph.Graph.html" class="internal-link" title="rl_graph_theory.graphs.graph.Graph">Graph</a></code>:
             </p>
-            <table class="children sortable" id="id27">
+            <table class="children sortable" id="id20">
   
   
   <tr class="baseclassmethod">
@@ -572,7 +576,7 @@
     
     <td>Instance Variable</td>
     <td><code><a href="rl_graph_theory.graphs.graph.Graph.html#__edge_colors" class="internal-link" title="rl_graph_theory.graphs.graph.Graph.__edge_colors">__edge<wbr></wbr>_colors</a></code></td>
-    <td>The number of available edge colors, i.e., <tt class="rst-docutils rst-literal">c</tt>.</td>
+    <td>The number of available edge colors, i.e., $c$.</td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
@@ -587,7 +591,7 @@
     
     <td>Instance Variable</td>
     <td><code><a href="rl_graph_theory.graphs.graph.Graph.html#__order" class="internal-link" title="rl_graph_theory.graphs.graph.Graph.__order">__order</a></code></td>
-    <td>The graph order, i.e., <tt class="rst-docutils rst-literal">n</tt>.</td>
+    <td>The graph order, i.e., $n$.</td>
   </tr>
 </table>
             
@@ -618,7 +622,12 @@
   </div>
   <div class="docstring functionBody">
     <div class="interfaceinfo">overrides <code><a href="rl_graph_theory.graphs.graph.Graph.html#__init__" class="internal-link">rl_graph_theory.graphs.graph.Graph.__init__</a></code></div>
-    <div><p>#TODO</p></div>
+    <div><p>This constructor initializes the desired complete $k$-partite graph in the selected graph
+format.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">graph<wbr></wbr>_format:</span><code><a href="rl_graph_theory.graphs.graph.GraphFormat.html" class="internal-link" title="rl_graph_theory.graphs.graph.GraphFormat">GraphFormat</a></code></td><td class="fieldArgDesc">The starting graph format the graph should get initialized in, given
+as one of the two items <code><a href="rl_graph_theory.graphs.graph.GraphFormat.html#BITMASK" class="internal-link" title="rl_graph_theory.graphs.graph.GraphFormat.BITMASK">GraphFormat.BITMASK</a></code> and <code><a href="rl_graph_theory.graphs.graph.GraphFormat.html#ADJACENCY_MATRIX" class="internal-link" title="rl_graph_theory.graphs.graph.GraphFormat.ADJACENCY_MATRIX">GraphFormat.ADJACENCY_MATRIX</a></code> from
+the <code><a href="rl_graph_theory.graphs.graph.GraphFormat.html" class="internal-link" title="rl_graph_theory.graphs.graph.GraphFormat">GraphFormat</a></code> enumeration.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">partition<wbr></wbr>_sizes:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#list" class="intersphinx-link">list</a>[<wbr></wbr><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a>]</code></td><td class="fieldArgDesc">A nonempty list of nonnegative integers whose elements are equal to
+$a_1, a_2, \ldots, a_k$, respectively, with $k$ being positive. These elements
+represent the sizes of the partition sets and their sum must be at least one.</td></tr></table></div>
   </div>
 </div>
         </div>
@@ -632,7 +641,7 @@
   <div class="container-fluid">
     <a href="index.html">API Documentation</a> for rl-graph-theory,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    25.10.1 at 2025-11-08 15:26:09.
+    25.10.1 at 2025-11-10 20:36:51.
   </div>
 
   <!-- Search related scripts needs to be loaded at the end of HTML 

@@ -17,32 +17,32 @@ class GraphFormat(Enum):
     r"""
     This enumeration encapsulates the concept of a format used to represent an edge-colored
     complete graph. Each of the edges can be colored in one of the colors from a given set $\\{ 0,
-    1, 2, \\ldots, c - 1 \\}$, where ``c`` is the number of available edge colors. Each edge can
-    also be uncolored. The enumeration provides support for the following four graph formats:
+    1, 2, \\ldots, c - 1 \\}$, where $c$ is the number of available edge colors. Each edge can also
+    be uncolored. The enumeration provides support for the following four graph formats:
 
     :cvar BITMASK: The bitmask format. Here, the graph is represented through the number of
-        available edge colors ``c`` and a `np.ndarray` integer matrix ``a`` with ``c`` rows and
-        ``n`` columns, where ``n`` is the graph order. The value ``a[i, j]`` represents a
-        nonnegative integer whose ``k``-th bit indicates whether the edge between the vertices
-        ``j`` and ``k`` is of the color ``i``. Additionally, if there are no uncolored edges, then
-        the starting row of the said `np.ndarray` matrix can be omitted, and we refer to this
-        format as the reduced bitmask format.
+        available edge colors $c$ and a `np.ndarray` integer matrix ``a`` with $c$ rows and $n$
+        columns, where $n$ is the graph order. The value ``a[i, j]`` represents a nonnegative
+        integer whose $k$-th bit indicates whether the edge between the vertices $j$ and $k$ is of
+        the color $i$. Additionally, if there are no uncolored edges, then the starting row of the
+        said `np.ndarray` matrix can be omitted, and we refer to this format as the reduced bitmask
+        format.
     :cvar ADJACENCY_MATRIX: The adjacency matrix format. Here, the graph is represented through the
-        number of available edge colors ``c`` and its adjacency matrix, i.e., a `np.ndarray`
-        integer square matrix ``a`` with ``n`` rows and columns, where ``n`` is the graph order.
-        The value ``a[i, j]`` represents the color of the edge between the vertices ``i`` and
-        ``j``, with an uncolored edge being represented by the value ``c``. The diagonal values of
-        the adjacency matrix are all equal to zero.
+        number of available edge colors $c$ and its adjacency matrix, i.e., a `np.ndarray` integer
+        square matrix ``a`` with $n$ rows and columns, where $n$ is the graph order. The value
+        ``a[i, j]`` represents the color of the edge between the vertices $i$ and $j$, with an
+        uncolored edge being represented by the value $c$. The diagonal values of the adjacency
+        matrix are all equal to zero.
     :cvar FLATTENED_COLUMN_FIRST: The flattened column-first format. Here, the graph is represented
         through the number of available edge colors and its adjacency matrix entries that are
         strictly above the diagonal. The entries are arranged column-first, i.e., as $(0, 1),
         (0, 2), (1, 2), (0, 3), (1, 3), (2, 3), \\ldots$, and they form a `np.ndarray` list of
-        length ``n(n - 1) / 2``, where ``n`` is the graph order.
+        length ``n(n - 1) // 2``, where $n$ is the graph order.
     :cvar FLATTENED_ROW_FIRST: The flattened row-first format. Here, the graph is represented
         through the number of available edge colors and its adjacency matrix entries that are
         strictly above the diagonal. The entries are arranged row-first, i.e., as $(0, 1), (0, 2),
-        (0, 3), \ldots, (0, n - 1), (1, 2), (1, 3), \\ldots$, and they form a `np.ndarray` list of
-        length ``n(n - 1) / 2``, where ``n`` is the graph order.
+        (0, 3), \\ldots, (0, n - 1), (1, 2), (1, 3), \\ldots$, and they form a `np.ndarray` list of
+        length ``n(n - 1) // 2``, where $n$ is the graph order.
     """
 
     BITMASK = 0
@@ -68,10 +68,10 @@ class EdgeOrdering(Enum):
 class Graph:
     r"""
     This class encapsulates the concept of an edge-colored complete graph. The graph is of order
-    ``n``, and each of its edges can be colored in one of the colors from the set $\\{ 0, 1, 2,
-    \\ldots c - 1 \\}$, where ``c`` is the number of available edge colors. The positive integer
-    ``c`` must be at least two. An edge can also be uncolored, which is represented by the de facto
-    auxiliary edge color ``c``, as explained in the `GraphFormat` enumeration.
+    $n$, and each of its edges can be colored in one of the colors from the set $\\{ 0, 1, 2,
+    \\ldots c - 1 \\}$, where $c$ is the number of available edge colors. The positive integer $c$
+    must be at least two. An edge can also be uncolored, which is represented by the de facto
+    auxiliary edge color $c$, as explained in the `GraphFormat` enumeration.
 
     The graph can be represented in any of the four graph formats from the `GraphFormat`
     enumeration. It is initialized in exactly one of these four formats so that the provided
@@ -83,8 +83,8 @@ class Graph:
     (`GraphFormat.BITMASK`), the reduced bitmask format is always used if possible, i.e., if there
     are no uncolored edges.
 
-    :ivar __edge_colors: The number of available edge colors, i.e., ``c``.
-    :ivar __order: The graph order, i.e., ``n``.
+    :ivar __edge_colors: The number of available edge colors, i.e., $c$.
+    :ivar __order: The graph order, i.e., $n$.
     :ivar __bitmask: The `np.ndarray` from the bitmask format (`GraphFormat.BITMASK`)
         representation of the given graph, if it was used to initialize the graph or computed
         afterwards, and otherwise, `None`.
@@ -422,22 +422,22 @@ class Graph:
 class GraphBatch:
     r"""
     This class encapsulates the concept of a batch of edge-colored complete graphs of the same
-    order. The graphs are of order ``n``, and each of their edges can be colored in one of the
-    colors from the set $\\{ 0, 1, 2, \\ldots c - 1 \\}$, where ``c`` is the number of available
-    edge colors. The positive integer ``c`` must be at least two. An edge can also be uncolored,
-    which is represented by the de facto auxiliary edge color ``c``, as explained in the
-    `GraphFormat` enumeration.
+    order. The graphs are of order $n$, and each of their edges can be colored in one of the colors
+    from the set $\\{ 0, 1, 2, \\ldots c - 1 \\}$, where $c$ is the number of available edge
+    colors. The positive integer $c$ must be at least two. An edge can also be uncolored, which is
+    represented by the de facto auxiliary edge color $c$, as explained in the `GraphFormat`
+    enumeration.
 
     The batch of graphs can be represented in any of the four graph formats from the `GraphFormat`
     enumeration. The representation and initialization is done in the same way as in the `Graph`
     class, the only difference being that all the `np.ndarray` objects used are of one dimension
     higher. More precisely, if ``a`` is the `np.ndarray` used to describe a given batch of graphs,
-    then ``a[i]`` is the representation of the ``i``-th graph from the batch in the corresponding
+    then ``a[i]`` is the representation of the $i$-th graph from the batch in the corresponding
     format.
 
     :ivar __batch_size: A positive integer that determines the number of graphs in the given batch.
-    :ivar __edge_colors: The number of available edge colors, i.e., ``c``.
-    :ivar __order: The graph order, i.e., ``n``.
+    :ivar __edge_colors: The number of available edge colors, i.e., $c$.
+    :ivar __order: The graph order, i.e., $n$.
     :ivar __bitmask_batch: The `np.ndarray` from the bitmask format (`GraphFormat.BITMASK`)
         representation of the given batch of graphs, if it was used to initialize the batch of
         graphs or computed afterwards, and otherwise, `None`.

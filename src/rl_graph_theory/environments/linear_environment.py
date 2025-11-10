@@ -1,7 +1,13 @@
 from typing import Callable, Optional, Tuple
 
 import numpy as np
-from graph_environment import ActionBatch, GraphEnvironment, RewardBatch, RewardType, StateBatch
+from graph_environment import (
+    ActionBatch,
+    GraphEnvironment,
+    RewardBatch,
+    RewardType,
+    StateBatch,
+)
 
 from ..graphs.graph import EdgeOrdering, Graph, GraphBatch
 
