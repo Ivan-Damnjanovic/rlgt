@@ -1,7 +1,7 @@
 from typing import Callable, Optional, Tuple
 
 import numpy as np
-from graph_environment import (
+from rl_graph_theory.environments.environment import (
     ActionBatch,
     GraphEnvironment,
     RewardBatch,

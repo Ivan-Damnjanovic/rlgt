@@ -108,6 +108,38 @@
             <div class="kind">Package</div>
             <div class="privacy">PUBLIC</div>
             <div class="summary">#TODO</div>
+          </li><li id="rl_graph_theory.environments">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments</div>
+            <div class="url">rl_graph_theory.environments.html</div>
+            <div class="type">Package</div>
+            <div class="kind">Package</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">#TODO</div>
+          </li><li id="rl_graph_theory.environments.environment">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.environment</div>
+            <div class="url">rl_graph_theory.environments.environment.html</div>
+            <div class="type">Module</div>
+            <div class="kind">Module</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">#TODO</div>
+          </li><li id="rl_graph_theory.environments.incremental_environment">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.incremental<wbr></wbr>_environment</div>
+            <div class="url">rl_graph_theory.environments.incremental_environment.html</div>
+            <div class="type">Module</div>
+            <div class="kind">Module</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
+          </li><li id="rl_graph_theory.environments.linear_environment">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.linear<wbr></wbr>_environment</div>
+            <div class="url">rl_graph_theory.environments.linear_environment.html</div>
+            <div class="type">Module</div>
+            <div class="kind">Module</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary"><span class="rst-undocumented">No module docstring; 1/1 class documented</span></div>
           </li><li id="rl_graph_theory.graphs">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.graphs</div>
@@ -484,6 +516,302 @@
             <div class="kind">Property</div>
             <div class="privacy">PUBLIC</div>
             <div class="summary">This property returns the <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> that represents the given batch of graphs in the flattened row-first format (<code><a href="rl_graph_theory.graphs.graph.GraphFormat.html#FLATTENED_ROW_FIRST" class="internal-link" title="rl_graph_theory.graphs.graph.GraphFormat.FLATTENED_ROW_FIRST">GraphFormat.FLATTENED_ROW_FIRST</a></code>).</div>
+          </li><li id="rl_graph_theory.environments.environment.StateBatch">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.environment<wbr></wbr>.<wbr></wbr>State<wbr></wbr>Batch</div>
+            <div class="url">rl_graph_theory.environments.environment.StateBatch.html</div>
+            <div class="type">Class</div>
+            <div class="kind">Class</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">This class encapsulates the concept of a batch of states in the context of a reinforcement learning environment to be used in graph theory applications. It essentially behaves as a wrapper around a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code>...</div>
+          </li><li id="rl_graph_theory.environments.environment.StateBatch.__state_batch">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.environment<wbr></wbr>.<wbr></wbr>State<wbr></wbr>Batch<wbr></wbr>.__state<wbr></wbr>_batch</div>
+            <div class="url">rl_graph_theory.environments.environment.StateBatch.html#__state_batch</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Instance Variable</div>
+            <div class="privacy">PRIVATE</div>
+            <div class="summary">The given batch of states, represented as a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> matrix. The matrix rows correspond to the states from the batch, while the number of columns depends on the concrete state space that the states are being taken from...</div>
+          </li><li id="rl_graph_theory.environments.environment.StateBatch.__init__">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.environment<wbr></wbr>.<wbr></wbr>State<wbr></wbr>Batch<wbr></wbr>.__init__</div>
+            <div class="url">rl_graph_theory.environments.environment.StateBatch.html#__init__</div>
+            <div class="type">Function</div>
+            <div class="kind">Method</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">This constructor initializes a <code><a href="rl_graph_theory.environments.environment.StateBatch.html" class="internal-link" title="rl_graph_theory.environments.environment.StateBatch">StateBatch</a></code> object that corresponds to the provided batch of states, given as a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> matrix.</div>
+          </li><li id="rl_graph_theory.environments.environment.StateBatch.data">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.environment<wbr></wbr>.<wbr></wbr>State<wbr></wbr>Batch<wbr></wbr>.data</div>
+            <div class="url">rl_graph_theory.environments.environment.StateBatch.html#data</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Property</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">This property returns the <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> matrix that represents the given batch of states. The matrix rows correspond to the states from the batch, while the number of columns depends on the concrete state space that the states are being taken from...</div>
+          </li><li id="rl_graph_theory.environments.environment.ActionBatch">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.environment<wbr></wbr>.<wbr></wbr>Action<wbr></wbr>Batch</div>
+            <div class="url">rl_graph_theory.environments.environment.ActionBatch.html</div>
+            <div class="type">Class</div>
+            <div class="kind">Class</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">This class encapsulates the concept of a batch of actions in the context of a reinforcement learning environment to be used in graph theory applications. It essentially behaves as a wrapper around a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code>...</div>
+          </li><li id="rl_graph_theory.environments.environment.ActionBatch.__action_batch">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.environment<wbr></wbr>.<wbr></wbr>Action<wbr></wbr>Batch<wbr></wbr>.__action<wbr></wbr>_batch</div>
+            <div class="url">rl_graph_theory.environments.environment.ActionBatch.html#__action_batch</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Instance Variable</div>
+            <div class="privacy">PRIVATE</div>
+            <div class="summary">The given batch of actions, represented as a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> matrix. The matrix rows correspond to the actions from the batch, while the number of columns depends on the concrete action space that the actions are being taken from...</div>
+          </li><li id="rl_graph_theory.environments.environment.ActionBatch.__init__">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.environment<wbr></wbr>.<wbr></wbr>Action<wbr></wbr>Batch<wbr></wbr>.__init__</div>
+            <div class="url">rl_graph_theory.environments.environment.ActionBatch.html#__init__</div>
+            <div class="type">Function</div>
+            <div class="kind">Method</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">This constructor initializes an <code><a href="rl_graph_theory.environments.environment.ActionBatch.html" class="internal-link" title="rl_graph_theory.environments.environment.ActionBatch">ActionBatch</a></code> object that corresponds to the provided batch of actions, given as a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> matrix.</div>
+          </li><li id="rl_graph_theory.environments.environment.ActionBatch.data">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.environment<wbr></wbr>.<wbr></wbr>Action<wbr></wbr>Batch<wbr></wbr>.data</div>
+            <div class="url">rl_graph_theory.environments.environment.ActionBatch.html#data</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Property</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">This property returns the <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> matrix that represents the given batch of actions. The matrix rows correspond to the actions from the batch, while the number of columns depends on the concrete action space that the actions are being taken from...</div>
+          </li><li id="rl_graph_theory.environments.environment.RewardBatch">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.environment<wbr></wbr>.<wbr></wbr>Reward<wbr></wbr>Batch</div>
+            <div class="url">rl_graph_theory.environments.environment.RewardBatch.html</div>
+            <div class="type">Class</div>
+            <div class="kind">Class</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">This class encapsulates the concept of a batch of rewards in the context of a reinforcement learning environment to be used in graph theory applications. It essentially behaves as a wrapper around a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code>...</div>
+          </li><li id="rl_graph_theory.environments.environment.RewardBatch.__reward_batch">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.environment<wbr></wbr>.<wbr></wbr>Reward<wbr></wbr>Batch<wbr></wbr>.__reward<wbr></wbr>_batch</div>
+            <div class="url">rl_graph_theory.environments.environment.RewardBatch.html#__reward_batch</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Instance Variable</div>
+            <div class="privacy">PRIVATE</div>
+            <div class="summary">The given batch of rewards, represented as a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> list whose elements correspond to the rewards from the batch. This list has at least one element.</div>
+          </li><li id="rl_graph_theory.environments.environment.RewardBatch.__init__">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.environment<wbr></wbr>.<wbr></wbr>Reward<wbr></wbr>Batch<wbr></wbr>.__init__</div>
+            <div class="url">rl_graph_theory.environments.environment.RewardBatch.html#__init__</div>
+            <div class="type">Function</div>
+            <div class="kind">Method</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">This constructor initializes a <code><a href="rl_graph_theory.environments.environment.RewardBatch.html" class="internal-link" title="rl_graph_theory.environments.environment.RewardBatch">RewardBatch</a></code> object that corresponds to the provided batch of rewards, given as a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> list.</div>
+          </li><li id="rl_graph_theory.environments.environment.RewardBatch.data">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.environment<wbr></wbr>.<wbr></wbr>Reward<wbr></wbr>Batch<wbr></wbr>.data</div>
+            <div class="url">rl_graph_theory.environments.environment.RewardBatch.html#data</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Property</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">This property returns the <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> list that represents the given batch of rewards. The list is nonempty and its elements correspond to the rewards from the batch.</div>
+          </li><li id="rl_graph_theory.environments.environment.RewardType">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.environment<wbr></wbr>.<wbr></wbr>Reward<wbr></wbr>Type</div>
+            <div class="url">rl_graph_theory.environments.environment.RewardType.html</div>
+            <div class="type">Class</div>
+            <div class="kind">Class</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">#TODO</div>
+          </li><li id="rl_graph_theory.environments.environment.RewardType.CUMULATIVE">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.environment<wbr></wbr>.<wbr></wbr>Reward<wbr></wbr>Type<wbr></wbr>.CUMULATIVE</div>
+            <div class="url">rl_graph_theory.environments.environment.RewardType.html#CUMULATIVE</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Constant</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
+          </li><li id="rl_graph_theory.environments.environment.RewardType.TELESCOPIC">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.environment<wbr></wbr>.<wbr></wbr>Reward<wbr></wbr>Type<wbr></wbr>.TELESCOPIC</div>
+            <div class="url">rl_graph_theory.environments.environment.RewardType.html#TELESCOPIC</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Constant</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
+          </li><li id="rl_graph_theory.environments.environment.RewardType.INCREMENTAL">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.environment<wbr></wbr>.<wbr></wbr>Reward<wbr></wbr>Type<wbr></wbr>.INCREMENTAL</div>
+            <div class="url">rl_graph_theory.environments.environment.RewardType.html#INCREMENTAL</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Constant</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
+          </li><li id="rl_graph_theory.environments.environment.GraphEnvironment">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.environment<wbr></wbr>.<wbr></wbr>Graph<wbr></wbr>Environment</div>
+            <div class="url">rl_graph_theory.environments.environment.GraphEnvironment.html</div>
+            <div class="type">Class</div>
+            <div class="kind">Class</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">#TODO</div>
+          </li><li id="rl_graph_theory.environments.environment.GraphEnvironment.__init__">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.environment<wbr></wbr>.<wbr></wbr>Graph<wbr></wbr>Environment<wbr></wbr>.__init__</div>
+            <div class="url">rl_graph_theory.environments.environment.GraphEnvironment.html#__init__</div>
+            <div class="type">Function</div>
+            <div class="kind">Method</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
+          </li><li id="rl_graph_theory.environments.environment.GraphEnvironment._reward_type">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.environment<wbr></wbr>.<wbr></wbr>Graph<wbr></wbr>Environment<wbr></wbr>._reward<wbr></wbr>_type</div>
+            <div class="url">rl_graph_theory.environments.environment.GraphEnvironment.html#_reward_type</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Instance Variable</div>
+            <div class="privacy">PRIVATE</div>
+            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
+          </li><li id="rl_graph_theory.environments.environment.GraphEnvironment._reward_function">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.environment<wbr></wbr>.<wbr></wbr>Graph<wbr></wbr>Environment<wbr></wbr>._reward<wbr></wbr>_function</div>
+            <div class="url">rl_graph_theory.environments.environment.GraphEnvironment.html#_reward_function</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Instance Variable</div>
+            <div class="privacy">PRIVATE</div>
+            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
+          </li><li id="rl_graph_theory.environments.environment.GraphEnvironment._state_batch">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.environment<wbr></wbr>.<wbr></wbr>Graph<wbr></wbr>Environment<wbr></wbr>._state<wbr></wbr>_batch</div>
+            <div class="url">rl_graph_theory.environments.environment.GraphEnvironment.html#_state_batch</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Instance Variable</div>
+            <div class="privacy">PRIVATE</div>
+            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
+          </li><li id="rl_graph_theory.environments.environment.GraphEnvironment.reset_batch">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.environment<wbr></wbr>.<wbr></wbr>Graph<wbr></wbr>Environment<wbr></wbr>.reset<wbr></wbr>_batch</div>
+            <div class="url">rl_graph_theory.environments.environment.GraphEnvironment.html#reset_batch</div>
+            <div class="type">Function</div>
+            <div class="kind">Method</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">#TODO</div>
+          </li><li id="rl_graph_theory.environments.environment.GraphEnvironment.step_batch">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.environment<wbr></wbr>.<wbr></wbr>Graph<wbr></wbr>Environment<wbr></wbr>.step<wbr></wbr>_batch</div>
+            <div class="url">rl_graph_theory.environments.environment.GraphEnvironment.html#step_batch</div>
+            <div class="type">Function</div>
+            <div class="kind">Method</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">#TODO</div>
+          </li><li id="rl_graph_theory.environments.environment.GraphEnvironment.state_batch_to_graph_batch">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.environment<wbr></wbr>.<wbr></wbr>Graph<wbr></wbr>Environment<wbr></wbr>.state<wbr></wbr>_batch<wbr></wbr>_to<wbr></wbr>_graph<wbr></wbr>_batch</div>
+            <div class="url">rl_graph_theory.environments.environment.GraphEnvironment.html#state_batch_to_graph_batch</div>
+            <div class="type">Function</div>
+            <div class="kind">Static Method</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">#TODO</div>
+          </li><li id="rl_graph_theory.environments.linear_environment.LinearEnvironment">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.linear<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Linear<wbr></wbr>Environment</div>
+            <div class="url">rl_graph_theory.environments.linear_environment.LinearEnvironment.html</div>
+            <div class="type">Class</div>
+            <div class="kind">Class</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">#TODO</div>
+          </li><li id="rl_graph_theory.environments.linear_environment.LinearEnvironment.__init__">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.linear<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Linear<wbr></wbr>Environment<wbr></wbr>.__init__</div>
+            <div class="url">rl_graph_theory.environments.linear_environment.LinearEnvironment.html#__init__</div>
+            <div class="type">Function</div>
+            <div class="kind">Method</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
+          </li><li id="rl_graph_theory.environments.linear_environment.LinearEnvironment._graph_order">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.linear<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Linear<wbr></wbr>Environment<wbr></wbr>._graph<wbr></wbr>_order</div>
+            <div class="url">rl_graph_theory.environments.linear_environment.LinearEnvironment.html#_graph_order</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Instance Variable</div>
+            <div class="privacy">PRIVATE</div>
+            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
+          </li><li id="rl_graph_theory.environments.linear_environment.LinearEnvironment._edge_colors">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.linear<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Linear<wbr></wbr>Environment<wbr></wbr>._edge<wbr></wbr>_colors</div>
+            <div class="url">rl_graph_theory.environments.linear_environment.LinearEnvironment.html#_edge_colors</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Instance Variable</div>
+            <div class="privacy">PRIVATE</div>
+            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
+          </li><li id="rl_graph_theory.environments.linear_environment.LinearEnvironment._edge_ordering">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.linear<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Linear<wbr></wbr>Environment<wbr></wbr>._edge<wbr></wbr>_ordering</div>
+            <div class="url">rl_graph_theory.environments.linear_environment.LinearEnvironment.html#_edge_ordering</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Instance Variable</div>
+            <div class="privacy">PRIVATE</div>
+            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
+          </li><li id="rl_graph_theory.environments.linear_environment.LinearEnvironment._special_initial_graph_probability">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.linear<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Linear<wbr></wbr>Environment<wbr></wbr>._special<wbr></wbr>_initial<wbr></wbr>_graph<wbr></wbr>_probability</div>
+            <div class="url">rl_graph_theory.environments.linear_environment.LinearEnvironment.html#_special_initial_graph_probability</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Instance Variable</div>
+            <div class="privacy">PRIVATE</div>
+            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
+          </li><li id="rl_graph_theory.environments.linear_environment.LinearEnvironment._default_initial_graph">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.linear<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Linear<wbr></wbr>Environment<wbr></wbr>._default<wbr></wbr>_initial<wbr></wbr>_graph</div>
+            <div class="url">rl_graph_theory.environments.linear_environment.LinearEnvironment.html#_default_initial_graph</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Instance Variable</div>
+            <div class="privacy">PRIVATE</div>
+            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
+          </li><li id="rl_graph_theory.environments.linear_environment.LinearEnvironment._special_initial_graph">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.linear<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Linear<wbr></wbr>Environment<wbr></wbr>._special<wbr></wbr>_initial<wbr></wbr>_graph</div>
+            <div class="url">rl_graph_theory.environments.linear_environment.LinearEnvironment.html#_special_initial_graph</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Instance Variable</div>
+            <div class="privacy">PRIVATE</div>
+            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
+          </li><li id="rl_graph_theory.environments.linear_environment.LinearEnvironment._rng">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.linear<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Linear<wbr></wbr>Environment<wbr></wbr>._rng</div>
+            <div class="url">rl_graph_theory.environments.linear_environment.LinearEnvironment.html#_rng</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Instance Variable</div>
+            <div class="privacy">PRIVATE</div>
+            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
+          </li><li id="rl_graph_theory.environments.linear_environment.LinearEnvironment.special_initial_graph">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.linear<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Linear<wbr></wbr>Environment<wbr></wbr>.special<wbr></wbr>_initial<wbr></wbr>_graph</div>
+            <div class="url">rl_graph_theory.environments.linear_environment.LinearEnvironment.html#special_initial_graph</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Property</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">#TODO</div>
+          </li><li id="rl_graph_theory.environments.linear_environment.LinearEnvironment.special_initial_graph.setter">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.linear<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Linear<wbr></wbr>Environment<wbr></wbr>.special<wbr></wbr>_initial<wbr></wbr>_graph<wbr></wbr>.setter</div>
+            <div class="url">rl_graph_theory.environments.linear_environment.LinearEnvironment.html#special_initial_graph.setter</div>
+            <div class="type">Function</div>
+            <div class="kind">Method</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">#TODO</div>
+          </li><li id="rl_graph_theory.environments.linear_environment.LinearEnvironment.reset_batch">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.linear<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Linear<wbr></wbr>Environment<wbr></wbr>.reset<wbr></wbr>_batch</div>
+            <div class="url">rl_graph_theory.environments.linear_environment.LinearEnvironment.html#reset_batch</div>
+            <div class="type">Function</div>
+            <div class="kind">Method</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">#TODO</div>
+          </li><li id="rl_graph_theory.environments.linear_environment.LinearEnvironment.step_batch">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.linear<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Linear<wbr></wbr>Environment<wbr></wbr>.step<wbr></wbr>_batch</div>
+            <div class="url">rl_graph_theory.environments.linear_environment.LinearEnvironment.html#step_batch</div>
+            <div class="type">Function</div>
+            <div class="kind">Method</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">#TODO</div>
           </li><li id="rl_graph_theory.graphs.special_graphs.MonochromaticGraph">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.graphs<wbr></wbr>.special<wbr></wbr>_graphs<wbr></wbr>.<wbr></wbr>Monochromatic<wbr></wbr>Graph</div>
