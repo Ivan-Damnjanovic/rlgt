@@ -1,5 +1,6 @@
 """
-#TODO
+This file initializes the lists containing the test cases for the
+`tests.graphs.test_special_graphs` testing module.
 """
 
 import numpy as np

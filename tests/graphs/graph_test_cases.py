@@ -1,5 +1,6 @@
 """
-This file initializes the lists containing the test cases for the `test_graph` testing module.
+This file initializes the lists containing the test cases for the `tests.graphs.test_graph` testing
+module.
 """
 
 import numpy as np
