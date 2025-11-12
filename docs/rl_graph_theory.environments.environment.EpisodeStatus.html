@@ -6,7 +6,7 @@
 
   <head>
     
-    <title>rl_graph_theory.environments.environment.RewardBatch</title>
+    <title>rl_graph_theory.environments.environment.EpisodeStatus</title>
     <meta name="generator" content="pydoctor 25.10.1"> 
         
     </meta>
@@ -110,7 +110,7 @@
 
       <div class="thingTitle">
         <span>Class</span>
-        <code class="thisobject"><a href="rl_graph_theory.environments.environment.RewardBatch.html" class="internal-link" title="This class"><wbr></wbr>Reward<wbr></wbr>Batch</a></code> 
+        <code class="thisobject"><a href="rl_graph_theory.environments.environment.EpisodeStatus.html" class="internal-link" title="This class"><wbr></wbr>Episode<wbr></wbr>Status</a></code> 
       </div>
       
       <div>
@@ -122,21 +122,8 @@
         
         
 
-        <div class="childrenKindTitle">Methods</div>
-        <ul>
-    
-    <li class="">
         
-        
-        
-
-        
-            <div class="itemName"><code><a href="#__init__" class="internal-link" title="rl_graph_theory.environments.environment.RewardBatch.__init__">__init__</a></code>
-            </div>
-        
-
-    </li>
-</ul> 
+         
 
         
          
@@ -150,17 +137,37 @@
         
 
         
-            <div class="itemName"><code><a href="#data" class="internal-link" title="rl_graph_theory.environments.environment.RewardBatch.data">data</a></code>
+            <div class="itemName"><code><a href="#COMPLETED" class="internal-link" title="rl_graph_theory.environments.environment.EpisodeStatus.COMPLETED">COMPLETED</a></code>
             </div>
         
 
-    </li><li class="private">
+    </li><li class="">
         
         
         
 
         
-            <div class="itemName"><code><a href="#__reward_batch" class="internal-link" title="rl_graph_theory.environments.environment.RewardBatch.__reward_batch">__reward<wbr></wbr>_batch</a></code>
+            <div class="itemName"><code><a href="#IN_PROGRESS" class="internal-link" title="rl_graph_theory.environments.environment.EpisodeStatus.IN_PROGRESS">IN<wbr></wbr>_PROGRESS</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#TERMINATED" class="internal-link" title="rl_graph_theory.environments.environment.EpisodeStatus.TERMINATED">TERMINATED</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#TRUNCATED" class="internal-link" title="rl_graph_theory.environments.environment.EpisodeStatus.TRUNCATED">TRUNCATED</a></code>
             </div>
         
 
@@ -197,7 +204,7 @@
             </div>
         
 
-    </li><li class="">
+    </li><li class=" thisobject">
         
         
         
@@ -217,7 +224,7 @@
             </div>
         
 
-    </li><li class=" thisobject">
+    </li><li class="">
         
         
         
@@ -281,7 +288,7 @@
         
 
         <div class="page-header">
-          <h1 class="class"><code><code><a href="index.html" class="internal-link">rl_graph_theory</a></code><wbr></wbr>.<code><a href="rl_graph_theory.environments.html" class="internal-link" title="rl_graph_theory.environments">environments</a></code><wbr></wbr>.<code><a href="rl_graph_theory.environments.environment.html" class="internal-link" title="rl_graph_theory.environments.environment">environment</a></code><wbr></wbr>.<code><a href="rl_graph_theory.environments.environment.RewardBatch.html" class="internal-link" title="rl_graph_theory.environments.environment.RewardBatch">RewardBatch</a></code></code></h1>
+          <h1 class="class"><code><code><a href="index.html" class="internal-link">rl_graph_theory</a></code><wbr></wbr>.<code><a href="rl_graph_theory.environments.html" class="internal-link" title="rl_graph_theory.environments">environments</a></code><wbr></wbr>.<code><a href="rl_graph_theory.environments.environment.html" class="internal-link" title="rl_graph_theory.environments.environment">environment</a></code><wbr></wbr>.<code><a href="rl_graph_theory.environments.environment.EpisodeStatus.html" class="internal-link" title="rl_graph_theory.environments.environment.EpisodeStatus">EpisodeStatus</a></code></code></h1>
           <div id="show-private">
             <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
           </div>
@@ -292,34 +299,43 @@
         </div>
 
         <div class="extrasDocstring">
-          <p class="class-signature"><code><span class="py-keyword">class</span> <span class="py-defname">RewardBatch</span>:</code></p><p>Constructor: <code><a href="#__init__" class="internal-link" title="rl_graph_theory.environments.environment.RewardBatch.__init__">RewardBatch(reward_batch)</a></code></p><p><a href="classIndex.html#rl_graph_theory.environments.environment.RewardBatch">View In Hierarchy</a></p>
+          <p class="class-signature"><code><span class="py-keyword">class</span> <span class="py-defname">EpisodeStatus</span>(<a href="https://docs.python.org/3/library/enum.html#enum.Enum" class="intersphinx-link">Enum</a>):</code></p><p><a href="classIndex.html#rl_graph_theory.environments.environment.EpisodeStatus">View In Hierarchy</a></p>
         </div>
 
         <div class="moduleDocstring">
-          <div><p>This class encapsulates the concept of a batch of rewards in the context of a reinforcement
-learning environment to be used in graph theory applications. It essentially behaves as a
-wrapper around a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> list whose elements correspond to the rewards from a given batch.</p></div>
+          <div><p>This enumeration represents all the possible statuses that an episode could have in the context
+of a reinforcement learning environment to be used in graph theory applications.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Note</td></tr><tr><td colspan="2">This enumeration is also applicable to batches of episodes. In this case, a batch of
+episodes has the status <code><a href="#COMPLETED" class="internal-link" title="rl_graph_theory.environments.environment.EpisodeStatus.COMPLETED">EpisodeStatus.COMPLETED</a></code> if at least one of its episodes has this
+status. Otherwise, it is guaranteed that all the episodes must enter an absorbing state at
+the same time, so bearing in mind that the steps are taken in all the episodes in parallel,
+this means that all the episodes have the same status. This common status is then
+considered the status of the given batch of episodes.</td></tr></table></div>
         </div>
 
         <div id="split-tables">
-          <table class="children sortable" id="id6">
+          <table class="children sortable" id="id8">
   
   
-  <tr class="method">
+  <tr class="constant">
     
-    <td>Method</td>
-    <td><code><a href="#__init__" class="internal-link" title="rl_graph_theory.environments.environment.RewardBatch.__init__">__init__</a></code></td>
-    <td>This constructor initializes a <code><a href="rl_graph_theory.environments.environment.RewardBatch.html" class="internal-link" title="rl_graph_theory.environments.environment.RewardBatch">RewardBatch</a></code> object that corresponds to the provided batch of rewards, given as a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> list.</td>
-  </tr><tr class="property">
+    <td>Constant</td>
+    <td><code><a href="#COMPLETED" class="internal-link" title="rl_graph_theory.environments.environment.EpisodeStatus.COMPLETED">COMPLETED</a></code></td>
+    <td>The episode has reached a state whose underlying graph achieves satisfactory results, hence the reinforcement learning process should be stopped and the problem can be considered solved.</td>
+  </tr><tr class="constant">
     
-    <td>Property</td>
-    <td><code><a href="#data" class="internal-link" title="rl_graph_theory.environments.environment.RewardBatch.data">data</a></code></td>
-    <td>This property returns the <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> list that represents the given batch of rewards. The list is nonempty and its elements correspond to the rewards from the batch.</td>
-  </tr><tr class="instancevariable private">
+    <td>Constant</td>
+    <td><code><a href="#IN_PROGRESS" class="internal-link" title="rl_graph_theory.environments.environment.EpisodeStatus.IN_PROGRESS">IN<wbr></wbr>_PROGRESS</a></code></td>
+    <td>The episode is in progress, which means that it is in a state that accepts further actions.</td>
+  </tr><tr class="constant">
     
-    <td>Instance Variable</td>
-    <td><code><a href="#__reward_batch" class="internal-link" title="rl_graph_theory.environments.environment.RewardBatch.__reward_batch">__reward<wbr></wbr>_batch</a></code></td>
-    <td>The given batch of rewards, represented as a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> list whose elements correspond to the rewards from the batch. This list has at least one element.</td>
+    <td>Constant</td>
+    <td><code><a href="#TERMINATED" class="internal-link" title="rl_graph_theory.environments.environment.EpisodeStatus.TERMINATED">TERMINATED</a></code></td>
+    <td>The episode has ended due to reaching an absorbing state, hence the environment cannot accept any further actions.</td>
+  </tr><tr class="constant">
+    
+    <td>Constant</td>
+    <td><code><a href="#TRUNCATED" class="internal-link" title="rl_graph_theory.environments.environment.EpisodeStatus.TRUNCATED">TRUNCATED</a></code></td>
+    <td>The episode has ended since the required number of steps has been taken. Although the current state is not absorbing, no further actions should be performed.</td>
   </tr>
 </table>
           
@@ -328,47 +344,20 @@ wrapper around a <code><a href="https://numpy.org/doc/stable/reference/generated
         </div>
 
         <div id="child-list">
-          <div class="basemethod">
+          <div class="baseconstant">
   
   
-  <a name="rl_graph_theory.environments.environment.RewardBatch.__init__">
+  <a name="rl_graph_theory.environments.environment.EpisodeStatus.COMPLETED">
     
   </a>
-  <a name="__init__">
-    
-  </a>
-  <div class="functionHeader">
-    
-    
-    <span class="py-keyword">def</span>&#160;<span class="py-defname">__init__</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">reward_batch: <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code></span>):</span>
-    
-    <a class="headerLink" href="#__init__" title="rl_graph_theory.environments.environment.RewardBatch.__init__">
-      
-      
-      ¶
-    </a>
-  </div>
-  <div class="docstring functionBody">
-    
-    <div><p>This constructor initializes a <code><a href="rl_graph_theory.environments.environment.RewardBatch.html" class="internal-link" title="rl_graph_theory.environments.environment.RewardBatch">RewardBatch</a></code> object that corresponds to the provided batch
-of rewards, given as a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> list.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">reward<wbr></wbr>_batch:</span><code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code></td><td class="fieldArgDesc">The provided batch of rewards, given as a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> list whose
-elements correspond to the rewards from the batch. The list must have at least one
-element, i.e., it cannot be empty.</td></tr></table></div>
-  </div>
-</div><div class="baseproperty">
-  
-  
-  <a name="rl_graph_theory.environments.environment.RewardBatch.data">
-    
-  </a>
-  <a name="data">
+  <a name="COMPLETED">
     
   </a>
   <div class="functionHeader">
-    <div><span class="decorator">@<a href="https://docs.python.org/3/library/functions.html#property" class="intersphinx-link">property</a><br /></span></div>
-    <span class="py-defname">data</span>: <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> =
     
-    <a class="headerLink" href="#data" title="rl_graph_theory.environments.environment.RewardBatch.data">
+    <span class="py-defname">COMPLETED</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
+    
+    <a class="headerLink" href="#COMPLETED" title="rl_graph_theory.environments.environment.EpisodeStatus.COMPLETED">
       
       
       ¶
@@ -376,24 +365,25 @@ element, i.e., it cannot be empty.</td></tr></table></div>
   </div>
   <div class="functionBody">
     
-    <div><p>This property returns the <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> list that represents the given batch of rewards.
-The list is nonempty and its elements correspond to the rewards from the batch.</p></div>
-    
+    <div><p>The episode has reached a state whose underlying graph achieves satisfactory
+results, hence the reinforcement learning process should be stopped and the problem can be
+considered solved.</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>1</code></pre></td></tr></table>
   </div>
-</div><div class="baseinstancevariable private">
+</div><div class="baseconstant">
   
   
-  <a name="rl_graph_theory.environments.environment.RewardBatch.__reward_batch">
+  <a name="rl_graph_theory.environments.environment.EpisodeStatus.IN_PROGRESS">
     
   </a>
-  <a name="__reward_batch">
+  <a name="IN_PROGRESS">
     
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">__reward_batch</span>: <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> =
+    <span class="py-defname">IN_PROGRESS</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
     
-    <a class="headerLink" href="#__reward_batch" title="rl_graph_theory.environments.environment.RewardBatch.__reward_batch">
+    <a class="headerLink" href="#IN_PROGRESS" title="rl_graph_theory.environments.environment.EpisodeStatus.IN_PROGRESS">
       
       
       ¶
@@ -401,9 +391,59 @@ The list is nonempty and its elements correspond to the rewards from the batch.<
   </div>
   <div class="functionBody">
     
-    <div><p>The given batch of rewards, represented as a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> list whose
-elements correspond to the rewards from the batch. This list has at least one element.</p></div>
+    <div><p>The episode is in progress, which means that it is in a state that accepts
+further actions.</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>0</code></pre></td></tr></table>
+  </div>
+</div><div class="baseconstant">
+  
+  
+  <a name="rl_graph_theory.environments.environment.EpisodeStatus.TERMINATED">
     
+  </a>
+  <a name="TERMINATED">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">TERMINATED</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
+    
+    <a class="headerLink" href="#TERMINATED" title="rl_graph_theory.environments.environment.EpisodeStatus.TERMINATED">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>The episode has ended due to reaching an absorbing state, hence the
+environment cannot accept any further actions.</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>2</code></pre></td></tr></table>
+  </div>
+</div><div class="baseconstant">
+  
+  
+  <a name="rl_graph_theory.environments.environment.EpisodeStatus.TRUNCATED">
+    
+  </a>
+  <a name="TRUNCATED">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">TRUNCATED</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
+    
+    <a class="headerLink" href="#TRUNCATED" title="rl_graph_theory.environments.environment.EpisodeStatus.TRUNCATED">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>The episode has ended since the required number of steps has been taken.
+Although the current state is not absorbing, no further actions should be performed.</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>3</code></pre></td></tr></table>
   </div>
 </div>
         </div>

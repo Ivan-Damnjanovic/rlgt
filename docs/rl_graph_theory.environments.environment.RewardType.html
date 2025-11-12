@@ -137,7 +137,7 @@
         
 
         
-            <div class="itemName"><code><a href="#CUMULATIVE" class="internal-link" title="rl_graph_theory.environments.environment.RewardType.CUMULATIVE">CUMULATIVE</a></code>
+            <div class="itemName"><code><a href="#PROPER" class="internal-link" title="rl_graph_theory.environments.environment.RewardType.PROPER">PROPER</a></code>
             </div>
         
 
@@ -147,7 +147,7 @@
         
 
         
-            <div class="itemName"><code><a href="#INCREMENTAL" class="internal-link" title="rl_graph_theory.environments.environment.RewardType.INCREMENTAL">INCREMENTAL</a></code>
+            <div class="itemName"><code><a href="#SPARSE" class="internal-link" title="rl_graph_theory.environments.environment.RewardType.SPARSE">SPARSE</a></code>
             </div>
         
 
@@ -191,6 +191,16 @@
 
         
             <div class="itemName"><code><a href="rl_graph_theory.environments.environment.ActionBatch.html" class="internal-link" title="rl_graph_theory.environments.environment.ActionBatch"><wbr></wbr>Action<wbr></wbr>Batch</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="rl_graph_theory.environments.environment.EpisodeStatus.html" class="internal-link" title="rl_graph_theory.environments.environment.EpisodeStatus"><wbr></wbr>Episode<wbr></wbr>Status</a></code>
             </div>
         
 
@@ -283,7 +293,10 @@
         </div>
 
         <div class="moduleDocstring">
-          <div><p>#TODO</p></div>
+          <div><p>This enumeration represents all the possible types of reward systems in the context of a
+reinforcement learning environment to be used in graph theory applications. In these
+applications, multiple episodes are acted on in parallel and all of their respective rewards
+are, therefore, also computed in parallel.</p></div>
         </div>
 
         <div id="split-tables">
@@ -293,18 +306,18 @@
   <tr class="constant">
     
     <td>Constant</td>
-    <td><code><a href="#CUMULATIVE" class="internal-link" title="rl_graph_theory.environments.environment.RewardType.CUMULATIVE">CUMULATIVE</a></code></td>
-    <td><span class="rst-undocumented">Undocumented</span></td>
+    <td><code><a href="#PROPER" class="internal-link" title="rl_graph_theory.environments.environment.RewardType.PROPER">PROPER</a></code></td>
+    <td>In each episode, a reward is issued after every action and it is computed by the formula <tt class="rst-docutils rst-literal">reward_function(old_graph_batch, new_graph_batch)</tt>, where:</td>
   </tr><tr class="constant">
     
     <td>Constant</td>
-    <td><code><a href="#INCREMENTAL" class="internal-link" title="rl_graph_theory.environments.environment.RewardType.INCREMENTAL">INCREMENTAL</a></code></td>
-    <td><span class="rst-undocumented">Undocumented</span></td>
+    <td><code><a href="#SPARSE" class="internal-link" title="rl_graph_theory.environments.environment.RewardType.SPARSE">SPARSE</a></code></td>
+    <td>A single actual reward is obtained at the end of an episode, while all the previously issued rewards are just equal to zero. The said reward is determined by the expression <tt class="rst-docutils rst-literal">graph_invariant(terminal_graph_batch)</tt>...</td>
   </tr><tr class="constant">
     
     <td>Constant</td>
     <td><code><a href="#TELESCOPIC" class="internal-link" title="rl_graph_theory.environments.environment.RewardType.TELESCOPIC">TELESCOPIC</a></code></td>
-    <td><span class="rst-undocumented">Undocumented</span></td>
+    <td>In each episode, a reward is issued after every action and it is computed by the formula <tt class="rst-docutils rst-literal">graph_invariant(new_graph_batch) - graph_invariant(old_graph_batch)</tt>, where:</td>
   </tr>
 </table>
           
@@ -316,17 +329,17 @@
           <div class="baseconstant">
   
   
-  <a name="rl_graph_theory.environments.environment.RewardType.CUMULATIVE">
+  <a name="rl_graph_theory.environments.environment.RewardType.PROPER">
     
   </a>
-  <a name="CUMULATIVE">
+  <a name="PROPER">
     
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">CUMULATIVE</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
+    <span class="py-defname">PROPER</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
     
-    <a class="headerLink" href="#CUMULATIVE" title="rl_graph_theory.environments.environment.RewardType.CUMULATIVE">
+    <a class="headerLink" href="#PROPER" title="rl_graph_theory.environments.environment.RewardType.PROPER">
       
       
       ¶
@@ -334,23 +347,36 @@
   </div>
   <div class="functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
-    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>0</code></pre></td></tr></table>
+    <div><p>In each episode, a reward is issued after every action and it is computed by
+the formula <tt class="rst-docutils rst-literal">reward_function(old_graph_batch, new_graph_batch)</tt>, where:</p>
+<ul class="rst-simple">
+<li><tt class="rst-docutils rst-literal">new_graph_batch</tt> is the underyling batch of graphs corresponding to the batch of newly
+obtained states;</li>
+<li><tt class="rst-docutils rst-literal">old_graph_batch</tt> is the underlying batch of graphs corresponding to the batch of
+previous states; and</li>
+<li><tt class="rst-docutils rst-literal">reward_function</tt> is a function that accepts a batch of previous graphs and a batch of
+new graphs, and returns the corresponding values for the element-wise differences of
+the graph invariant that is supposed to get maximized (the $i$-th element equals the
+graph invariant for the $i$-th new group minus the graph invariant for the $i$-th old
+graph).</li>
+</ul>
+</div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>2</code></pre></td></tr></table>
   </div>
 </div><div class="baseconstant">
   
   
-  <a name="rl_graph_theory.environments.environment.RewardType.INCREMENTAL">
+  <a name="rl_graph_theory.environments.environment.RewardType.SPARSE">
     
   </a>
-  <a name="INCREMENTAL">
+  <a name="SPARSE">
     
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">INCREMENTAL</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
+    <span class="py-defname">SPARSE</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
     
-    <a class="headerLink" href="#INCREMENTAL" title="rl_graph_theory.environments.environment.RewardType.INCREMENTAL">
+    <a class="headerLink" href="#SPARSE" title="rl_graph_theory.environments.environment.RewardType.SPARSE">
       
       
       ¶
@@ -358,8 +384,17 @@
   </div>
   <div class="functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
-    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>2</code></pre></td></tr></table>
+    <div><p>A single actual reward is obtained at the end of an episode, while all the
+previously issued rewards are just equal to zero. The said reward is determined by the
+expression <tt class="rst-docutils rst-literal">graph_invariant(terminal_graph_batch)</tt>, where:</p>
+<ul class="rst-simple">
+<li><tt class="rst-docutils rst-literal">terminal_graph_batch</tt> is the underlying batch of graphs corresponding to the batch of
+terminal states; and</li>
+<li><tt class="rst-docutils rst-literal">graph_invariant</tt> is a function that accepts a batch of graphs and returns the
+corresponding values for the graph invariant that is supposed to get maximized.</li>
+</ul>
+</div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>0</code></pre></td></tr></table>
   </div>
 </div><div class="baseconstant">
   
@@ -382,7 +417,17 @@
   </div>
   <div class="functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p>In each episode, a reward is issued after every action and it is computed by
+the formula <tt class="rst-docutils rst-literal">graph_invariant(new_graph_batch) - graph_invariant(old_graph_batch)</tt>, where:</p>
+<ul class="rst-simple">
+<li><tt class="rst-docutils rst-literal">new_graph_batch</tt> is the underyling batch of graphs corresponding to the batch of newly
+obtained states;</li>
+<li><tt class="rst-docutils rst-literal">old_graph_batch</tt> is the underlying batch of graphs corresponding to the batch of
+previous states; and</li>
+<li><tt class="rst-docutils rst-literal">graph_invariant</tt> is a function that accepts a batch of graphs and returns the
+corresponding values for the graph invariant that is supposed to get maximized.</li>
+</ul>
+</div>
     <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>1</code></pre></td></tr></table>
   </div>
 </div>
@@ -397,7 +442,7 @@
   <div class="container-fluid">
     <a href="index.html">API Documentation</a> for rl-graph-theory,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    25.10.1 at 2025-11-11 00:52:22.
+    25.10.1 at 2025-11-13 00:41:35.
   </div>
 
   <!-- Search related scripts needs to be loaded at the end of HTML 

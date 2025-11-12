@@ -165,6 +165,16 @@
             </div>
         
 
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_transition_batch" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment._transition_batch">_transition<wbr></wbr>_batch</a></code>
+            </div>
+        
+
     </li>
 </ul> 
 
@@ -180,7 +190,7 @@
         
 
         
-            <div class="itemName"><code><a href="#_reward_function" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment._reward_function">_reward<wbr></wbr>_function</a></code>
+            <div class="itemName"><code><a href="#__reward_function" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment.__reward_function">__reward<wbr></wbr>_function</a></code>
             </div>
         
 
@@ -190,7 +200,7 @@
         
 
         
-            <div class="itemName"><code><a href="#_reward_type" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment._reward_type">_reward<wbr></wbr>_type</a></code>
+            <div class="itemName"><code><a href="#__reward_type" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment.__reward_type">__reward<wbr></wbr>_type</a></code>
             </div>
         
 
@@ -201,6 +211,16 @@
 
         
             <div class="itemName"><code><a href="#_state_batch" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment._state_batch">_state<wbr></wbr>_batch</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_status" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment._status">_status</a></code>
             </div>
         
 
@@ -234,6 +254,16 @@
 
         
             <div class="itemName"><code><a href="rl_graph_theory.environments.environment.ActionBatch.html" class="internal-link" title="rl_graph_theory.environments.environment.ActionBatch"><wbr></wbr>Action<wbr></wbr>Batch</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="rl_graph_theory.environments.environment.EpisodeStatus.html" class="internal-link" title="rl_graph_theory.environments.environment.EpisodeStatus"><wbr></wbr>Episode<wbr></wbr>Status</a></code>
             </div>
         
 
@@ -326,11 +356,23 @@
         </div>
 
         <div class="moduleDocstring">
-          <div><p>#TODO</p></div>
+          <div><p>This abstract class encapsulates the concept of a reinforcement learning environment to be used
+in graph theory applications. For the sake of efficiency, it provides support for multiple
+episodes to be run in parallel. Concrete classes that inherit this abstract class must
+implement the following three abstract methods:</p>
+<ul class="rst-simple">
+<li><code><a href="#reset_batch" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment.reset_batch">reset_batch</a></code>, which serves to initialize a batch of episodes with a given batch size;</li>
+<li><code><a href="#_transition_batch" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment._transition_batch">_transition_batch</a></code>, which determines the transition process between states depending on the
+action taken; and</li>
+<li><code><a href="#state_batch_to_graph_batch" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment.state_batch_to_graph_batch">state_batch_to_graph_batch</a></code>, which is static and determines how underlying graphs are
+extracted from states, i.e., how an underlying batch of graphs is extracted from a given
+batch of states.</li>
+</ul>
+</div>
         </div>
 
         <div id="split-tables">
-          <table class="children sortable" id="id8">
+          <table class="children sortable" id="id9">
   
   
   <tr class="staticmethod">
@@ -342,32 +384,42 @@
     
     <td>Method</td>
     <td><code><a href="#__init__" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment.__init__">__init__</a></code></td>
-    <td><span class="rst-undocumented">Undocumented</span></td>
+    <td>This constructor initializes an instance of the <code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment">GraphEnvironment</a></code> object with a provided type of reward system and a corresponding function that helps compute the rewards.</td>
   </tr><tr class="method">
     
     <td>Method</td>
     <td><code><a href="#reset_batch" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment.reset_batch">reset<wbr></wbr>_batch</a></code></td>
-    <td>#TODO</td>
+    <td>This abstract method must be implemented in any concrete class that inherits the <code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment">GraphEnvironment</a></code> class. It should initialize a batch of episodes with a given batch size, and update the <code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html#_state_batch" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment._state_batch">_state_batch</a></code> and ...</td>
   </tr><tr class="method">
     
     <td>Method</td>
     <td><code><a href="#step_batch" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment.step_batch">step<wbr></wbr>_batch</a></code></td>
     <td>#TODO</td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_transition_batch" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment._transition_batch">_transition<wbr></wbr>_batch</a></code></td>
+    <td>#TODO</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_reward_function" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment._reward_function">_reward<wbr></wbr>_function</a></code></td>
-    <td><span class="rst-undocumented">Undocumented</span></td>
+    <td><code><a href="#__reward_function" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment.__reward_function">__reward<wbr></wbr>_function</a></code></td>
+    <td>The function that helps compute the rewards in accordance with the selected type of reward system. It plays the role of either the <tt class="rst-docutils rst-literal">graph_invariant</tt> or <tt class="rst-docutils rst-literal">reward_function</tt> function from the description of the ...</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_reward_type" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment._reward_type">_reward<wbr></wbr>_type</a></code></td>
-    <td><span class="rst-undocumented">Undocumented</span></td>
+    <td><code><a href="#__reward_type" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment.__reward_type">__reward<wbr></wbr>_type</a></code></td>
+    <td>An item of the <code><a href="rl_graph_theory.environments.environment.RewardType.html" class="internal-link" title="rl_graph_theory.environments.environment.RewardType">RewardType</a></code> enumeration that determines the type of reward system that is used in the given environment.</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
     <td><code><a href="#_state_batch" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment._state_batch">_state<wbr></wbr>_batch</a></code></td>
-    <td><span class="rst-undocumented">Undocumented</span></td>
+    <td>Either <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, or a <code><a href="rl_graph_theory.environments.environment.StateBatch.html" class="internal-link" title="rl_graph_theory.environments.environment.StateBatch">StateBatch</a></code> object that determines the batch of current states corresponding to the batch of episodes that are being run in parallel. This attribute is initially set to <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, and afterwards, it is assigned the necessary ...</td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_status" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment._status">_status</a></code></td>
+    <td>Either <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, or an item of the <code><a href="rl_graph_theory.environments.environment.EpisodeStatus.html" class="internal-link" title="rl_graph_theory.environments.environment.EpisodeStatus">EpisodeStatus</a></code> enumeration that signifies the status of the given batch of episodes, as described in the <code><a href="rl_graph_theory.environments.environment.EpisodeStatus.html" class="internal-link" title="rl_graph_theory.environments.environment.EpisodeStatus">EpisodeStatus</a></code> enumeration. This attribute is initially set to <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>...</td>
   </tr>
 </table>
           
@@ -422,7 +474,13 @@
   </div>
   <div class="docstring functionBody">
     <div class="interfaceinfo">overridden in <code><a href="rl_graph_theory.environments.linear_environment.LinearEnvironment.html" class="internal-link">rl_graph_theory.environments.linear_environment.LinearEnvironment</a></code></div>
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p>This constructor initializes an instance of the <code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment">GraphEnvironment</a></code> object with a provided
+type of reward system and a corresponding function that helps compute the rewards.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">reward<wbr></wbr>_type:</span><code><a href="rl_graph_theory.environments.environment.RewardType.html" class="internal-link" title="rl_graph_theory.environments.environment.RewardType">RewardType</a></code></td><td class="fieldArgDesc">An item of the <code><a href="rl_graph_theory.environments.environment.RewardType.html" class="internal-link" title="rl_graph_theory.environments.environment.RewardType">RewardType</a></code> enumeration that determines the type of
+reward system to be used in the instantiated environment.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">reward<wbr></wbr>_function:</span><code><a href="https://docs.python.org/3/library/typing.html#typing.Callable" class="intersphinx-link">Callable</a></code></td><td class="fieldArgDesc">The function whose goal is to help compute the rewards in
+accordance with the selected type of reward system. It plays the role of either the
+<tt class="rst-docutils rst-literal">graph_invariant</tt> or <tt class="rst-docutils rst-literal">reward_function</tt> function from the description of the
+<code><a href="rl_graph_theory.environments.environment.RewardType.html" class="internal-link" title="rl_graph_theory.environments.environment.RewardType">RewardType</a></code> enumeration, and its expected signature varies depending on the
+<tt class="rst-docutils rst-literal">reward_type</tt> argument.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -446,7 +504,13 @@
   </div>
   <div class="docstring functionBody">
     <div class="interfaceinfo">overridden in <code><a href="rl_graph_theory.environments.linear_environment.LinearEnvironment.html" class="internal-link">rl_graph_theory.environments.linear_environment.LinearEnvironment</a></code></div>
-    <div><p>#TODO</p></div>
+    <div><p>This abstract method must be implemented in any concrete class that inherits the
+<code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment">GraphEnvironment</a></code> class. It should initialize a batch of episodes with a given batch size,
+and update the <code><a href="#_state_batch" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment._state_batch">_state_batch</a></code> and <code><a href="#_status" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment._status">_status</a></code> attributes accordingly. The function should
+return the obtained batch of corresponding states after the initialization has been done,
+i.e., the value of the <code><a href="#_state_batch" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment._state_batch">_state_batch</a></code> attribute.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">batch<wbr></wbr>_size:</span><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></td><td class="fieldArgDesc">The batch size of the batch of episodes that should be initialized,
+i.e., the number of episodes in it, given as a positive integer.</td></tr></table><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="rl_graph_theory.environments.environment.StateBatch.html" class="internal-link" title="rl_graph_theory.environments.environment.StateBatch">StateBatch</a></code></td><td class="fieldArgDesc">The value of the <code><a href="#_state_batch" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment._state_batch">_state_batch</a></code> attribute after the batch of episodes has been
+initialized.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -459,8 +523,8 @@
   </a>
   <div class="functionHeader">
     
-    <div><span class="decorator">@<a href="https://docs.python.org/3/library/abc.html#abc.abstractmethod" class="intersphinx-link">abstractmethod</a><br /></span></div>
-    <span class="py-keyword">def</span>&#160;<span class="py-defname">step_batch</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">action_batch: <code><a href="rl_graph_theory.environments.environment.ActionBatch.html" class="internal-link" title="rl_graph_theory.environments.environment.ActionBatch">ActionBatch</a></code></span>) -&gt; <code><a href="https://docs.python.org/3/library/stdtypes.html#tuple" class="intersphinx-link">tuple</a>[<wbr></wbr><a href="rl_graph_theory.environments.environment.StateBatch.html" class="internal-link" title="rl_graph_theory.environments.environment.StateBatch">StateBatch</a>, <wbr></wbr><a href="rl_graph_theory.environments.environment.RewardBatch.html" class="internal-link" title="rl_graph_theory.environments.environment.RewardBatch">RewardBatch</a>]</code>:</span>
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">step_batch</span><span class="function-signature long-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">action_batch: <code><a href="rl_graph_theory.environments.environment.ActionBatch.html" class="internal-link" title="rl_graph_theory.environments.environment.ActionBatch">ActionBatch</a></code></span>) -&gt; <code><a href="https://docs.python.org/3/library/stdtypes.html#tuple" class="intersphinx-link">tuple</a>[<wbr></wbr><a href="rl_graph_theory.environments.environment.StateBatch.html" class="internal-link" title="rl_graph_theory.environments.environment.StateBatch">StateBatch</a>, <wbr></wbr><a href="rl_graph_theory.environments.environment.RewardBatch.html" class="internal-link" title="rl_graph_theory.environments.environment.RewardBatch">RewardBatch</a>, <wbr></wbr><a href="rl_graph_theory.environments.environment.EpisodeStatus.html" class="internal-link" title="rl_graph_theory.environments.environment.EpisodeStatus">EpisodeStatus</a>]</code>:</span>
     
     <a class="headerLink" href="#step_batch" title="rl_graph_theory.environments.environment.GraphEnvironment.step_batch">
       
@@ -472,20 +536,44 @@
     <div class="interfaceinfo">overridden in <code><a href="rl_graph_theory.environments.linear_environment.LinearEnvironment.html" class="internal-link">rl_graph_theory.environments.linear_environment.LinearEnvironment</a></code></div>
     <div><p>#TODO</p></div>
   </div>
-</div><div class="baseinstancevariable private">
+</div><div class="basemethod private">
   
   
-  <a name="rl_graph_theory.environments.environment.GraphEnvironment._reward_function">
+  <a name="rl_graph_theory.environments.environment.GraphEnvironment._transition_batch">
     
   </a>
-  <a name="_reward_function">
+  <a name="_transition_batch">
     
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">_reward_function</span>: <code><a href="https://docs.python.org/3/library/typing.html#typing.Callable" class="intersphinx-link">Callable</a></code> =
+    <div><span class="decorator">@<a href="https://docs.python.org/3/library/abc.html#abc.abstractmethod" class="intersphinx-link">abstractmethod</a><br /></span></div>
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">_transition_batch</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">action_batch: <code><a href="rl_graph_theory.environments.environment.ActionBatch.html" class="internal-link" title="rl_graph_theory.environments.environment.ActionBatch">ActionBatch</a></code></span>) -&gt; <code><a href="https://docs.python.org/3/library/stdtypes.html#tuple" class="intersphinx-link">tuple</a>[<wbr></wbr><a href="rl_graph_theory.environments.environment.StateBatch.html" class="internal-link" title="rl_graph_theory.environments.environment.StateBatch">StateBatch</a>, <wbr></wbr><a href="rl_graph_theory.environments.environment.EpisodeStatus.html" class="internal-link" title="rl_graph_theory.environments.environment.EpisodeStatus">EpisodeStatus</a>]</code>:</span>
     
-    <a class="headerLink" href="#_reward_function" title="rl_graph_theory.environments.environment.GraphEnvironment._reward_function">
+    <a class="headerLink" href="#_transition_batch" title="rl_graph_theory.environments.environment.GraphEnvironment._transition_batch">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>#TODO</p></div>
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="rl_graph_theory.environments.environment.GraphEnvironment.__reward_function">
+    
+  </a>
+  <a name="__reward_function">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">__reward_function</span>: <code><a href="https://docs.python.org/3/library/typing.html#typing.Callable" class="intersphinx-link">Callable</a></code> =
+    
+    <a class="headerLink" href="#__reward_function" title="rl_graph_theory.environments.environment.GraphEnvironment.__reward_function">
       
       
       ¶
@@ -493,23 +581,26 @@
   </div>
   <div class="functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p>The function that helps compute the rewards in accordance with the
+selected type of reward system. It plays the role of either the <tt class="rst-docutils rst-literal">graph_invariant</tt> or
+<tt class="rst-docutils rst-literal">reward_function</tt> function from the description of the <code><a href="rl_graph_theory.environments.environment.RewardType.html" class="internal-link" title="rl_graph_theory.environments.environment.RewardType">RewardType</a></code> enumeration, and its
+expected signature varies depending on the selected type of reward system.</p></div>
     
   </div>
 </div><div class="baseinstancevariable private">
   
   
-  <a name="rl_graph_theory.environments.environment.GraphEnvironment._reward_type">
+  <a name="rl_graph_theory.environments.environment.GraphEnvironment.__reward_type">
     
   </a>
-  <a name="_reward_type">
+  <a name="__reward_type">
     
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">_reward_type</span>: <code><a href="rl_graph_theory.environments.environment.RewardType.html" class="internal-link" title="rl_graph_theory.environments.environment.RewardType">RewardType</a></code> =
+    <span class="py-defname">__reward_type</span>: <code><a href="rl_graph_theory.environments.environment.RewardType.html" class="internal-link" title="rl_graph_theory.environments.environment.RewardType">RewardType</a></code> =
     
-    <a class="headerLink" href="#_reward_type" title="rl_graph_theory.environments.environment.GraphEnvironment._reward_type">
+    <a class="headerLink" href="#__reward_type" title="rl_graph_theory.environments.environment.GraphEnvironment.__reward_type">
       
       
       ¶
@@ -517,7 +608,8 @@
   </div>
   <div class="functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p>An item of the <code><a href="rl_graph_theory.environments.environment.RewardType.html" class="internal-link" title="rl_graph_theory.environments.environment.RewardType">RewardType</a></code> enumeration that determines the type of reward
+system that is used in the given environment.</p></div>
     
   </div>
 </div><div class="baseinstancevariable private">
@@ -541,7 +633,38 @@
   </div>
   <div class="functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p>Either <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, or a <code><a href="rl_graph_theory.environments.environment.StateBatch.html" class="internal-link" title="rl_graph_theory.environments.environment.StateBatch">StateBatch</a></code> object that determines the batch of
+current states corresponding to the batch of episodes that are being run in parallel. This
+attribute is initially set to <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, and afterwards, it is assigned the necessary
+<code><a href="rl_graph_theory.environments.environment.StateBatch.html" class="internal-link" title="rl_graph_theory.environments.environment.StateBatch">StateBatch</a></code> object after each invocation of the <code><a href="#reset_batch" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment.reset_batch">reset_batch</a></code> or <code><a href="#step_batch" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment.step_batch">step_batch</a></code> method.</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="rl_graph_theory.environments.environment.GraphEnvironment._status">
+    
+  </a>
+  <a name="_status">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_status</span>: <code><a href="rl_graph_theory.environments.environment.EpisodeStatus.html" class="internal-link" title="rl_graph_theory.environments.environment.EpisodeStatus">EpisodeStatus</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> =
+    
+    <a class="headerLink" href="#_status" title="rl_graph_theory.environments.environment.GraphEnvironment._status">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>Either <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, or an item of the <code><a href="rl_graph_theory.environments.environment.EpisodeStatus.html" class="internal-link" title="rl_graph_theory.environments.environment.EpisodeStatus">EpisodeStatus</a></code> enumeration that signifies the
+status of the given batch of episodes, as described in the <code><a href="rl_graph_theory.environments.environment.EpisodeStatus.html" class="internal-link" title="rl_graph_theory.environments.environment.EpisodeStatus">EpisodeStatus</a></code> enumeration.
+This attribute is initially set to <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, and afterwards, it is assigned the necessary
+<code><a href="rl_graph_theory.environments.environment.EpisodeStatus.html" class="internal-link" title="rl_graph_theory.environments.environment.EpisodeStatus">EpisodeStatus</a></code> enumeration item after each invocation of the <code><a href="#reset_batch" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment.reset_batch">reset_batch</a></code> or <code><a href="#step_batch" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment.step_batch">step_batch</a></code>
+method.</p></div>
     
   </div>
 </div>
@@ -556,7 +679,7 @@
   <div class="container-fluid">
     <a href="index.html">API Documentation</a> for rl-graph-theory,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    25.10.1 at 2025-11-11 00:52:22.
+    25.10.1 at 2025-11-13 00:41:35.
   </div>
 
   <!-- Search related scripts needs to be loaded at the end of HTML 
