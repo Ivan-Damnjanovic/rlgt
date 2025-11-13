@@ -428,7 +428,7 @@
     
     <td>Method</td>
     <td><code><a href="#step_batch" class="internal-link" title="rl_graph_theory.environments.linear_environment.LinearEnvironment.step_batch">step<wbr></wbr>_batch</a></code></td>
-    <td>#TODO</td>
+    <td>This method takes a batch of actions and applies them element-wise to the states from the batch of current states given by the <code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html#_state_batch" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment._state_batch">_state_batch</a></code> attribute. More precisely, these two batches must be of the same size, and the $i$-th action should be applied to the $i$-th state...</td>
   </tr><tr class="property">
     
     <td>Property</td>
@@ -482,12 +482,12 @@
     
     <td>Static Method</td>
     <td><code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html#state_batch_to_graph_batch" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment.state_batch_to_graph_batch">state<wbr></wbr>_batch<wbr></wbr>_to<wbr></wbr>_graph<wbr></wbr>_batch</a></code></td>
-    <td>#TODO</td>
+    <td>This abstract static method must be implemented in any concrete class that inherits the <code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment">GraphEnvironment</a></code> class. Its goal is to extract the batch of underlying graphs from any provided batch of states. ...</td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
     <td><code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html#_transition_batch" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment._transition_batch">_transition<wbr></wbr>_batch</a></code></td>
-    <td>#TODO</td>
+    <td>This abstract method must be implemented in any concrete class that inherits the <code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment">GraphEnvironment</a></code> class. It should determine which new batch of states should be entered after the provided batch of actions is applied element-wise to the states from the batch of current states given by the ...</td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
@@ -572,9 +572,16 @@ accordance with the selected type of reward system. It plays the role of either 
 <code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment">GraphEnvironment</a></code> class. It should initialize a batch of episodes with a given batch size,
 and update the <code><a href="#_state_batch" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment._state_batch">_state_batch</a></code> and <code><a href="#_status" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment._status">_status</a></code> attributes accordingly. The function should
 return the obtained batch of corresponding states after the initialization has been done,
-i.e., the value of the <code><a href="#_state_batch" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment._state_batch">_state_batch</a></code> attribute.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">batch<wbr></wbr>_size:</span><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></td><td class="fieldArgDesc">The batch size of the batch of episodes that should be initialized,
-i.e., the number of episodes in it, given as a positive integer.</td></tr></table><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="rl_graph_theory.environments.environment.StateBatch.html" class="internal-link" title="rl_graph_theory.environments.environment.StateBatch">StateBatch</a></code></td><td class="fieldArgDesc">The value of the <code><a href="#_state_batch" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment._state_batch">_state_batch</a></code> attribute after the batch of episodes has been
-initialized.</td></tr></table></div>
+i.e., the value of the <code><a href="#_state_batch" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment._state_batch">_state_batch</a></code> attribute, as well as the status corresponding to the
+initialized batch of episodes, i.e., the value of the <code><a href="#_status" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment._status">_status</a></code> attribute.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">batch<wbr></wbr>_size:</span><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></td><td class="fieldArgDesc">The batch size of the batch of episodes that should be initialized,
+i.e., the number of episodes in it, given as a positive integer.</td></tr></table><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="rl_graph_theory.environments.environment.StateBatch.html" class="internal-link" title="rl_graph_theory.environments.environment.StateBatch">StateBatch</a></code></td><td class="fieldArgDesc"><p>A tuple <tt class="rst-docutils rst-literal">(initial_state_batch, status)</tt>, where</p>
+<ul class="rst-simple">
+<li><tt class="rst-docutils rst-literal">initial_state_batch</tt> is the value of the <code><a href="#_state_batch" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment._state_batch">_state_batch</a></code> attribute after the batch
+of episodes has been initialized, given as a <code><a href="rl_graph_theory.environments.environment.StateBatch.html" class="internal-link" title="rl_graph_theory.environments.environment.StateBatch">StateBatch</a></code> object; and</li>
+<li><tt class="rst-docutils rst-literal">status</tt> is the value of the <code><a href="#_status" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment._status">_status</a></code> attribute after the batch of episodes has
+been initialized, given as an item of the <code><a href="rl_graph_theory.environments.environment.EpisodeStatus.html" class="internal-link" title="rl_graph_theory.environments.environment.EpisodeStatus">EpisodeStatus</a></code> enumeration.</li>
+</ul>
+</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -622,7 +629,24 @@ initialized.</td></tr></table></div>
   </div>
   <div class="docstring functionBody">
     <div class="interfaceinfo">overrides <code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html#step_batch" class="internal-link">rl_graph_theory.environments.environment.GraphEnvironment.step_batch</a></code></div>
-    <div><p>#TODO</p></div>
+    <div><p>This method takes a batch of actions and applies them element-wise to the states from the
+batch of current states given by the <code><a href="#_state_batch" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment._state_batch">_state_batch</a></code> attribute. More precisely, these two
+batches must be of the same size, and the $i$-th action should be applied to the $i$-th
+state. The method returns a batch of new states obtained after the actions have been
+performed, alongside the computed rewards and the new status corresponding to the batch of
+episodes run in parallel. Here, the order of the new states and the rewards in their
+respective batches matches the order of the performed actions and the original states.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">action<wbr></wbr>_batch:</span><code><a href="rl_graph_theory.environments.environment.ActionBatch.html" class="internal-link" title="rl_graph_theory.environments.environment.ActionBatch">ActionBatch</a></code></td><td class="fieldArgDesc">The batch of actions to be applied to the states from the current
+batch of states, given as an <code><a href="rl_graph_theory.environments.environment.ActionBatch.html" class="internal-link" title="rl_graph_theory.environments.environment.ActionBatch">ActionBatch</a></code> object. The number of actions from this
+batch must be the same as the number of states from the <code><a href="#_state_batch" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment._state_batch">_state_batch</a></code> attribute.</td></tr></table><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/stdtypes.html#tuple" class="intersphinx-link">tuple</a>[<wbr></wbr><a href="rl_graph_theory.environments.environment.StateBatch.html" class="internal-link" title="rl_graph_theory.environments.environment.StateBatch">StateBatch</a>, <wbr></wbr><a href="rl_graph_theory.environments.environment.RewardBatch.html" class="internal-link" title="rl_graph_theory.environments.environment.RewardBatch">RewardBatch</a>]</code></td><td class="fieldArgDesc"><p>A tuple <tt class="rst-docutils rst-literal">(new_state_batch, reward_batch, status)</tt>, where:</p>
+<ul class="rst-simple">
+<li><tt class="rst-docutils rst-literal">new_state_batch</tt> is the batch of newly obtained states, given as a <code><a href="rl_graph_theory.environments.environment.StateBatch.html" class="internal-link" title="rl_graph_theory.environments.environment.StateBatch">StateBatch</a></code>
+object;</li>
+<li><tt class="rst-docutils rst-literal">reward_batch</tt> is the batch of computed rewards, given as a <code><a href="rl_graph_theory.environments.environment.RewardBatch.html" class="internal-link" title="rl_graph_theory.environments.environment.RewardBatch">RewardBatch</a></code> object;
+and</li>
+<li><tt class="rst-docutils rst-literal">status</tt> is an item of the <code><a href="rl_graph_theory.environments.environment.EpisodeStatus.html" class="internal-link" title="rl_graph_theory.environments.environment.EpisodeStatus">EpisodeStatus</a></code> enumeration that determines the new
+status corresponding to the batch of episodes run in parallel.</li>
+</ul>
+</td></tr></table></div>
   </div>
 </div><div class="baseproperty">
   
@@ -828,7 +852,7 @@ initialized.</td></tr></table></div>
   <div class="container-fluid">
     <a href="index.html">API Documentation</a> for rl-graph-theory,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    25.10.1 at 2025-11-13 00:41:35.
+    25.10.1 at 2025-11-13 13:32:07.
   </div>
 
   <!-- Search related scripts needs to be loaded at the end of HTML 

@@ -145,18 +145,18 @@ class RewardType(Enum):
     :cvar TELESCOPIC:
         In each episode, a reward is issued after every action and it is computed by
         the formula ``graph_invariant(new_graph_batch) - graph_invariant(old_graph_batch)``, where:
-        
+
         * ``new_graph_batch`` is the underyling batch of graphs corresponding to the batch of newly
           obtained states;
         * ``old_graph_batch`` is the underlying batch of graphs corresponding to the batch of
           previous states; and
         * ``graph_invariant`` is a function that accepts a batch of graphs and returns the
           corresponding values for the graph invariant that is supposed to get maximized.
-    
+
     :cvar PROPER:
         In each episode, a reward is issued after every action and it is computed by
         the formula ``reward_function(old_graph_batch, new_graph_batch)``, where:
-        
+
         * ``new_graph_batch`` is the underyling batch of graphs corresponding to the batch of newly
           obtained states;
         * ``old_graph_batch`` is the underlying batch of graphs corresponding to the batch of
@@ -187,7 +187,7 @@ class EpisodeStatus(Enum):
         environment cannot accept any further actions.
     :cvar TRUNCATED: The episode has ended since the required number of steps has been taken.
         Although the current state is not absorbing, no further actions should be performed.
-    
+
     :note: This enumeration is also applicable to batches of episodes. In this case, a batch of
         episodes has the status `EpisodeStatus.COMPLETED` if at least one of its episodes has this
         status. Otherwise, it is guaranteed that all the episodes must enter an absorbing state at
@@ -212,10 +212,10 @@ class GraphEnvironment(ABC):
     * `reset_batch`, which serves to initialize a batch of episodes with a given batch size;
     * `_transition_batch`, which determines the transition process between states depending on the
       action taken; and
-    * `state_batch_to_graph_batch`, which is static and determines how underlying graphs are
+    * `state_batch_to_graph_batch`, which is static and determines how the underlying graphs are
       extracted from states, i.e., how an underlying batch of graphs is extracted from a given
       batch of states.
-    
+
     :ivar __reward_type: An item of the `RewardType` enumeration that determines the type of reward
         system that is used in the given environment.
     :ivar __reward_function: The function that helps compute the rewards in accordance with the
@@ -254,19 +254,24 @@ class GraphEnvironment(ABC):
         self._status: Optional[EpisodeStatus] = None
 
     @abstractmethod
-    def reset_batch(self, batch_size: int) -> StateBatch:
+    def reset_batch(self, batch_size: int) -> Tuple[StateBatch, EpisodeStatus]:
         """
         This abstract method must be implemented in any concrete class that inherits the
         `GraphEnvironment` class. It should initialize a batch of episodes with a given batch size,
         and update the `_state_batch` and `_status` attributes accordingly. The function should
         return the obtained batch of corresponding states after the initialization has been done,
-        i.e., the value of the `_state_batch` attribute.
+        i.e., the value of the `_state_batch` attribute, as well as the status corresponding to the
+        initialized batch of episodes, i.e., the value of the `_status` attribute.
 
         :param batch_size: The batch size of the batch of episodes that should be initialized,
             i.e., the number of episodes in it, given as a positive integer.
 
-        :return: The value of the `_state_batch` attribute after the batch of episodes has been
-            initialized.
+        :return: A tuple ``(initial_state_batch, status)``, where
+
+            * ``initial_state_batch`` is the value of the `_state_batch` attribute after the batch
+              of episodes has been initialized, given as a `StateBatch` object; and
+            * ``status`` is the value of the `_status` attribute after the batch of episodes has
+              been initialized, given as an item of the `EpisodeStatus` enumeration.
         """
 
         pass
@@ -275,7 +280,26 @@ class GraphEnvironment(ABC):
         self, action_batch: ActionBatch
     ) -> Tuple[StateBatch, RewardBatch, EpisodeStatus]:
         """
-        #TODO
+        This method takes a batch of actions and applies them element-wise to the states from the
+        batch of current states given by the `_state_batch` attribute. More precisely, these two
+        batches must be of the same size, and the $i$-th action should be applied to the $i$-th
+        state. The method returns a batch of new states obtained after the actions have been
+        performed, alongside the computed rewards and the new status corresponding to the batch of
+        episodes run in parallel. Here, the order of the new states and the rewards in their
+        respective batches matches the order of the performed actions and the original states.
+
+        :param action_batch: The batch of actions to be applied to the states from the current
+            batch of states, given as an `ActionBatch` object. The number of actions from this
+            batch must be the same as the number of states from the `_state_batch` attribute.
+
+        :return: A tuple ``(new_state_batch, reward_batch, status)``, where:
+
+            * ``new_state_batch`` is the batch of newly obtained states, given as a `StateBatch`
+              object;
+            * ``reward_batch`` is the batch of computed rewards, given as a `RewardBatch` object;
+              and
+            * ``status`` is an item of the `EpisodeStatus` enumeration that determines the new
+              status corresponding to the batch of episodes run in parallel.
         """
 
         new_state_batch, status = self._transition_batch(action_batch)
@@ -315,7 +339,29 @@ class GraphEnvironment(ABC):
     @abstractmethod
     def _transition_batch(self, action_batch: ActionBatch) -> Tuple[StateBatch, EpisodeStatus]:
         """
-        #TODO
+        This abstract method must be implemented in any concrete class that inherits the
+        `GraphEnvironment` class. It should determine which new batch of states should be entered
+        after the provided batch of actions is applied element-wise to the states from the batch of
+        current states given by the `_state_batch` attribute. The function should return this batch
+        of obtained states, alongside the new status corresponding to the batch of episodes run in
+        parallel. Here, the order of the new states in the returned batch should match the order of
+        the performed actions and the original states.
+
+        :param action_batch: The batch of actions to be applied to the states from the current
+            batch of states, given as an `ActionBatch` object. The number of actions from this
+            batch must be the same as the number of states from the `_state_batch` attribute.
+
+        :return: A tuple ``(new_state_batch, status)``, where:
+
+            * ``new_state_batch`` is the batch of newly obtained states, given as a `StateBatch`
+              object; and
+            * ``status`` is an item of the `EpisodeStatus` enumeration that determines the new
+              status corresponding to the batch of episodes run in parallel.
+
+        :note: The implementation of this method must not modify the attributes `_state_batch` and
+            `_status`. The obtained batch of new states and the corresponding status should just be
+            returned without updating these two attributes since the logic behind this is located
+            in the non-abstract `step_batch` method.
         """
 
         pass
@@ -324,8 +370,15 @@ class GraphEnvironment(ABC):
     @abstractmethod
     def state_batch_to_graph_batch(state_batch: StateBatch) -> GraphBatch:
         """
-        #TODO
+        This abstract static method must be implemented in any concrete class that inherits the
+        `GraphEnvironment` class. Its goal is to extract the batch of underlying graphs from any
+        provided batch of states. The graphs should appear in the same order as their corresponding
+        states in the given batch of states.
+
+        :param state_batch: The batch of provided states whose underlying graphs should be
+            extracted, given as a `StateBatch` object.
+
+        :return: The extracted batch of underlying graphs, given as a `GraphBatch` object.
         """
 
         pass
-
