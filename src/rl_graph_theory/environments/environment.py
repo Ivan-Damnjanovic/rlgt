@@ -212,9 +212,8 @@ class GraphEnvironment(ABC):
     * `reset_batch`, which serves to initialize a batch of episodes with a given batch size;
     * `_transition_batch`, which determines the transition process between states depending on the
       action taken; and
-    * `state_batch_to_graph_batch`, which is static and determines how the underlying graphs are
-      extracted from states, i.e., how an underlying batch of graphs is extracted from a given
-      batch of states.
+    * `state_batch_to_graph_batch`, which determines how the underlying graphs are extracted from
+      states, i.e., how an underlying batch of graphs is extracted from a given batch of states.
 
     :ivar __reward_type: An item of the `RewardType` enumeration that determines the type of reward
         system that is used in the given environment.
@@ -307,20 +306,14 @@ class GraphEnvironment(ABC):
 
         if self.__reward_type == RewardType.SPARSE:
             if status == EpisodeStatus.IN_PROGRESS:
-                reward_batch = np.zeros((new_state_batch.shape[0],), dtype=float)
+                reward_batch = np.zeros((new_state_batch.data.shape[0],), dtype=float)
             else:
-                new_underlying_graph_batch = GraphEnvironment.state_batch_to_graph_batch(
-                    new_state_batch
-                )
+                new_underlying_graph_batch = self.state_batch_to_graph_batch(new_state_batch)
                 reward_batch = self.__reward_function(new_underlying_graph_batch)
 
         else:
-            new_underlying_graph_batch = GraphEnvironment.state_batch_to_graph_batch(
-                new_state_batch
-            )
-            old_underyling_graph_batch = GraphEnvironment.state_batch_to_graph_batch(
-                self._state_batch
-            )
+            new_underlying_graph_batch = self.state_batch_to_graph_batch(new_state_batch)
+            old_underyling_graph_batch = self.state_batch_to_graph_batch(self._state_batch)
 
             if self.__reward_type == RewardType.TELESCOPIC:
                 reward_batch = self.__reward_function(
@@ -366,11 +359,10 @@ class GraphEnvironment(ABC):
 
         pass
 
-    @staticmethod
     @abstractmethod
-    def state_batch_to_graph_batch(state_batch: StateBatch) -> GraphBatch:
+    def state_batch_to_graph_batch(self, state_batch: StateBatch) -> GraphBatch:
         """
-        This abstract static method must be implemented in any concrete class that inherits the
+        This abstract method must be implemented in any concrete class that inherits the
         `GraphEnvironment` class. Its goal is to extract the batch of underlying graphs from any
         provided batch of states. The graphs should appear in the same order as their corresponding
         states in the given batch of states.
@@ -379,6 +371,9 @@ class GraphEnvironment(ABC):
             extracted, given as a `StateBatch` object.
 
         :return: The extracted batch of underlying graphs, given as a `GraphBatch` object.
+
+        :note: The implementation of this method must be a pure function, i.e., it should not
+            modify any attributes of the given instance.
         """
 
         pass
