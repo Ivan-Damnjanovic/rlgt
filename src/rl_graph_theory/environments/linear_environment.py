@@ -25,10 +25,10 @@ class LinearEnvironment(GraphEnvironment):
         edge_ordering: EdgeOrdering,
         reward_type: RewardType,
         reward_function: Callable,
-        default_initial_graph: Optional[Graph] = None,
-        special_initial_graph: Optional[Graph] = None,
-        special_initial_graph_probability: float = 0.0,
-        seed: Optional[int] = None,
+        initial_graph: Optional[Graph] = None,
+        # special_initial_graph: Optional[Graph] = None,
+        # special_initial_graph_probability: float = 0.0,
+        # seed: Optional[int] = None,
     ):
         super().__init__(reward_type, reward_function)
 
@@ -37,12 +37,12 @@ class LinearEnvironment(GraphEnvironment):
         self._edge_ordering: EdgeOrdering = edge_ordering
         self._special_initial_graph_probability: float = special_initial_graph_probability
 
-        if default_initial_graph is None:
+        if initial_graph is None:
             temp_matrix = np.zeros((graph_order, edge_colors), dtype=int)
             temp_matrix[:, 0] = (1 << graph_order) - 1
             temp_matrix[:, 0] -= 1 << np.arange(graph_order, dtype=int)
-            default_initial_graph = Graph(temp_matrix)
-        self._default_initial_graph: Graph = default_initial_graph
+            initial_graph = Graph(temp_matrix)
+        self._default_initial_graph: Graph = initial_graph
 
         if special_initial_graph is None:
             temp_matrix = np.zeros((graph_order, edge_colors), dtype=int)

@@ -249,11 +249,11 @@ class GraphEnvironment(ABC):
         self.__reward_type: RewardType = reward_type
         self.__reward_function: Callable = reward_function
 
-        self._state_batch: Optional[StateBatch] = None
+        self._state_batch: Optional[np.ndarray] = None
         self._status: Optional[EpisodeStatus] = None
 
     @abstractmethod
-    def reset_batch(self, batch_size: int) -> Tuple[StateBatch, EpisodeStatus]:
+    def reset_batch(self, batch_size: int) -> Tuple[np.ndarray, EpisodeStatus]:
         """
         This abstract method must be implemented in any concrete class that inherits the
         `GraphEnvironment` class. It should initialize a batch of episodes with a given batch size,
@@ -275,9 +275,7 @@ class GraphEnvironment(ABC):
 
         pass
 
-    def step_batch(
-        self, action_batch: ActionBatch
-    ) -> Tuple[StateBatch, RewardBatch, EpisodeStatus]:
+    def step_batch(self, action_batch: np.ndarray) -> Tuple[np.ndarray, np.ndarray, EpisodeStatus]:
         """
         This method takes a batch of actions and applies them element-wise to the states from the
         batch of current states given by the `_state_batch` attribute. More precisely, these two
@@ -306,7 +304,7 @@ class GraphEnvironment(ABC):
 
         if self.__reward_type == RewardType.SPARSE:
             if status == EpisodeStatus.IN_PROGRESS:
-                reward_batch = np.zeros((new_state_batch.data.shape[0],), dtype=float)
+                reward_batch = np.zeros((new_state_batch.shape[0],), dtype=float)
             else:
                 new_underlying_graph_batch = self.state_batch_to_graph_batch(new_state_batch)
                 reward_batch = self.__reward_function(new_underlying_graph_batch)
@@ -330,7 +328,7 @@ class GraphEnvironment(ABC):
         return self._state_batch, reward_batch, status
 
     @abstractmethod
-    def _transition_batch(self, action_batch: ActionBatch) -> Tuple[StateBatch, EpisodeStatus]:
+    def _transition_batch(self, action_batch: np.ndarray) -> Tuple[np.ndarray, EpisodeStatus]:
         """
         This abstract method must be implemented in any concrete class that inherits the
         `GraphEnvironment` class. It should determine which new batch of states should be entered
@@ -360,7 +358,7 @@ class GraphEnvironment(ABC):
         pass
 
     @abstractmethod
-    def state_batch_to_graph_batch(self, state_batch: StateBatch) -> GraphBatch:
+    def state_batch_to_graph_batch(self, state_batch: np.ndarray) -> GraphBatch:
         """
         This abstract method must be implemented in any concrete class that inherits the
         `GraphEnvironment` class. Its goal is to extract the batch of underlying graphs from any

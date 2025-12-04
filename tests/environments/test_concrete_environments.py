@@ -7,7 +7,7 @@ from typing import Callable, List
 import numpy as np
 import pytest
 
-from rl_graph_theory.environments.concrete_environments import IncrementalEnvironment
+from rl_graph_theory.environments.incremental_environment import IncrementalEnvironment
 from rl_graph_theory.environments.environment import (
     ActionBatch,
     EpisodeStatus,
@@ -48,15 +48,15 @@ def test_incremental_environment(
     )
 
     state_batch, status = environment.reset_batch(batch_size=batch_size)
-    assert np.all(state_batch.data == state_batch_history[0].data)
+    assert np.all(state_batch == state_batch_history[0])
     assert status == EpisodeStatus.IN_PROGRESS
 
     for index, (action_batch, correct_state_batch, correct_reward_batch) in enumerate(
         zip(action_batch_history, state_batch_history[1:], reward_batch_history)
     ):
         state_batch, reward_batch, status = environment.step_batch(action_batch=action_batch)
-        assert np.all(state_batch.data == correct_state_batch.data)
-        assert np.all(reward_batch.data == correct_reward_batch.data)
+        assert np.all(state_batch == correct_state_batch)
+        assert np.all(reward_batch == correct_reward_batch)
 
         if index < len(action_batch_history) - 1:
             assert status == EpisodeStatus.IN_PROGRESS

@@ -45,10 +45,11 @@ class GraphFormat(Enum):
         length ``n(n - 1) // 2``, where $n$ is the graph order.
     """
 
-    BITMASK = 0
-    ADJACENCY_MATRIX = 1
-    FLATTENED_COLUMN_FIRST = 2
-    FLATTENED_ROW_FIRST = 3
+    BITMASK_IN_NEIGHBORS = 0
+    BITMASK_OUT_NEIGHBORS = 1
+    ADJACENCY_MATRIX = 2
+    FLATTENED_COLUMN_FIRST = 3
+    FLATTENED_ROW_FIRST = 4
 
 
 class EdgeOrdering(Enum):
@@ -63,6 +64,12 @@ class EdgeOrdering(Enum):
 
     COLUMN_FIRST = 0
     ROW_FIRST = 1
+
+
+class BitmaskType(Enum):
+
+    IN_NEIGHBORS = 0
+    OUT_NEIGHBORS = 1
 
 
 class Graph:
@@ -105,12 +112,17 @@ class Graph:
 
     def __init__(
         self,
-        graph_format: GraphFormat,
         edge_colors: int,
-        bitmask: Optional[np.ndarray] = None,
+        graph_format: GraphFormat,
+        bitmask_in_neighbors: Optional[np.ndarray] = None,
+        bitmask_out_neighbors: Optional[np.ndarray] = None,
         adjacency_matrix: Optional[np.ndarray] = None,
-        flattened_column_first: Optional[np.ndarray] = None,
-        flattened_row_first: Optional[np.ndarray] = None,
+        flattened_row_major: Optional[np.ndarray] = None,
+        flattened_column_major: Optional[np.ndarray] = None,
+        flattened_clockwise_layers: Optional[np.ndarray] = None,
+        flattened_counterclockwise_layers: Optional[np.ndarray] = None,
+        allow_loops: bool = False,
+        is_directed: bool = False,
     ):
         """
         This constructor initializes an instance using the chosen graph format. In other words, one
@@ -145,36 +157,72 @@ class Graph:
         """
 
         self.__edge_colors: int = edge_colors
+        self.__allow_loops: bool = allow_loops
+        self.__is_directed: bool = is_directed
 
-        if graph_format == GraphFormat.BITMASK:
-            self.__order: int = bitmask.shape[1]
-            self.__bitmask: Optional[np.ndarray] = bitmask
-            self.__adjacency_matrix: Optional[np.ndarray] = None
-            self.__flattened_column_first: Optional[np.ndarray] = None
-            self.__flattened_row_first: Optional[np.ndarray] = None
+        self.__bitmask_in_neighbors: Optional[np.ndarray] = None
+        self.__bitmask_out_neighbors: Optional[np.ndarray] = None
+        self.__adjacency_matrix: Optional[np.ndarray] = None
+        self.__flattened_row_major: Optional[np.ndarray] = None
+        self.__flattened_column_major: Optional[np.ndarray] = None
+        self.__flattened_clockwise_layers: Optional[np.ndarray] = None
+        self.__flattened_counterclockwise_layers: Optional[np.ndarray] = None
+
+        if graph_format == GraphFormat.BITMASK_IN_NEIGHBORS:
+            self.__order: int = bitmask_in_neighbors.shape[1]
+            self.__bitmask_in_neighbors: Optional[np.ndarray] = bitmask_in_neighbors
+
+        elif graph_format == GraphFormat.BITMASK_OUT_NEIGHBORS:
+            self.__order: int = bitmask_out_neighbors.shape[1]
+            self.__bitmask_out_neighbors: Optional[np.ndarray] = bitmask_out_neighbors
 
         elif graph_format == GraphFormat.ADJACENCY_MATRIX:
             self.__order: int = adjacency_matrix.shape[0]
-            self.__bitmask: Optional[np.ndarray] = None
             self.__adjacency_matrix: Optional[np.ndarray] = adjacency_matrix
-            self.__flattened_column_first: Optional[np.ndarray] = None
-            self.__flattened_row_first: Optional[np.ndarray] = None
 
         elif graph_format == GraphFormat.FLATTENED_COLUMN_FIRST:
-            # Given $\binom{n}{2}$, find $n$.
-            self.__order: int = (isqrt(8 * flattened_column_first.shape[0] + 1) + 1) // 2
-            self.__bitmask: Optional[np.ndarray] = None
+            if self.__is_directed:
+                if self.__allow_loops:
+                    # Given $n^2$, find $n$.
+                    self.__order: int = isqrt(flattened_column_major.shape[0])
+                else:
+                    # Given $n^2 - n$, find $n$.
+                    self.__order: int = (isqrt(4 * flattened_column_major.shape[0] + 1) + 1) // 2
+            else:
+                if self.__allow_loops:
+                    # Given \binom{n + 1}{2}$, find $n$.
+                    self.__order: int = (isqrt(8 * flattened_column_major.shape[0] + 1) - 1) // 2
+                else:
+                    # Given $\binom{n}{2}$, find $n$.
+                    self.__order: int = (isqrt(8 * flattened_column_major.shape[0] + 1) + 1) // 2
+
+            self.__bitmask_in_neighbors: Optional[np.ndarray] = None
+            self.__bitmask_out_neighbors: Optional[np.ndarray] = None
             self.__adjacency_matrix: Optional[np.ndarray] = None
-            self.__flattened_column_first: Optional[np.ndarray] = flattened_column_first
-            self.__flattened_row_first: Optional[np.ndarray] = None
+            self.__flattened_column_major: Optional[np.ndarray] = flattened_column_major
+            self.__flattened_row_major: Optional[np.ndarray] = None
 
         else:
-            # Given $\binom{n}{2}$, find $n$.
-            self.__order: int = (isqrt(8 * flattened_row_first.shape[0] + 1) + 1) // 2
-            self.__bitmask: Optional[np.ndarray] = None
+            if self.__is_directed:
+                if self.__allow_loops:
+                    # Given $n^2$, find $n$.
+                    self.__order: int = isqrt(flattened_row_major.shape[0])
+                else:
+                    # Given $n^2 - n$, find $n$.
+                    self.__order: int = (isqrt(4 * flattened_row_major.shape[0] + 1) + 1) // 2
+            else:
+                if self.__allow_loops:
+                    # Given \binom{n + 1}{2}$, find $n$.
+                    self.__order: int = (isqrt(8 * flattened_row_major.shape[0] + 1) - 1) // 2
+                else:
+                    # Given $\binom{n}{2}$, find $n$.
+                    self.__order: int = (isqrt(8 * flattened_row_major.shape[0] + 1) + 1) // 2
+
+            self.__bitmask_in_neighbors: Optional[np.ndarray] = None
+            self.__bitmask_out_neighbors: Optional[np.ndarray] = None
             self.__adjacency_matrix: Optional[np.ndarray] = None
-            self.__flattened_column_first: Optional[np.ndarray] = None
-            self.__flattened_row_first: Optional[np.ndarray] = flattened_row_first
+            self.__flattened_column_major: Optional[np.ndarray] = None
+            self.__flattened_row_major: Optional[np.ndarray] = flattened_row_major
 
     @classmethod
     def from_bitmask(cls, edge_colors: int, bitmask: np.ndarray) -> Graph:
@@ -311,12 +359,12 @@ class Graph:
 
         # If the flattened column-first format representation is known, use it to obtain the
         # adjacency matrix format representation.
-        if self.__flattened_column_first is not None:
+        if self.__flattened_column_major is not None:
             tril_rows, tril_columns = np.tril_indices(self.__order, k=-1)
 
             result = np.zeros((self.__order, self.__order), dtype=int)
-            result[tril_rows, tril_columns] = self.__flattened_column_first
-            result[tril_columns, tril_rows] = self.__flattened_column_first
+            result[tril_rows, tril_columns] = self.__flattened_column_major
+            result[tril_columns, tril_rows] = self.__flattened_column_major
 
             # Update the adjacency matrix format representation to make it available for further
             # use, so that the same conversion does not have to be performed twice.
@@ -326,12 +374,12 @@ class Graph:
 
         # If the flattened row-first format representation is known, use it to obtain the adjacency
         # matrix format representation.
-        if self.__flattened_row_first is not None:
+        if self.__flattened_row_major is not None:
             triu_rows, triu_columns = np.triu_indices(self.__order, k=1)
 
             result = np.zeros((self.__order, self.__order), dtype=int)
-            result[triu_rows, triu_columns] = self.__flattened_row_first
-            result[triu_columns, triu_rows] = self.__flattened_row_first
+            result[triu_rows, triu_columns] = self.__flattened_row_major
+            result[triu_columns, triu_rows] = self.__flattened_row_major
 
             # Update the adjacency matrix format representation to make it available for further
             # use, so that the same conversion does not have to be performed twice.
@@ -378,8 +426,8 @@ class Graph:
         """
 
         # If the output `np.ndarray` is already known, then just return it.
-        if self.__flattened_column_first is not None:
-            return self.__flattened_column_first
+        if self.__flattened_column_major is not None:
+            return self.__flattened_column_major
 
         # Otherwise, compute the output `np.ndarray` by using the adjacency matrix format
         # representation. If the adjacency matrix format representation is also unknown, then it
@@ -390,9 +438,9 @@ class Graph:
 
         # Update the flattened column-first format representation to make it available for
         # further use, so that the same conversion does not have to be performed twice.
-        self.__flattened_column_first = result
+        self.__flattened_column_major = result
 
-        return self.__flattened_column_first
+        return self.__flattened_column_major
 
     @property
     def flattened_row_first(self) -> np.ndarray:
@@ -402,8 +450,8 @@ class Graph:
         """
 
         # If the output `np.ndarray` is already known, then just return it.
-        if self.__flattened_row_first is not None:
-            return self.__flattened_row_first
+        if self.__flattened_row_major is not None:
+            return self.__flattened_row_major
 
         # Otherwise, compute the output `np.ndarray` by using the adjacency matrix format
         # representation. If the adjacency matrix format representation is also unknown, then it
@@ -414,9 +462,9 @@ class Graph:
 
         # Update the flattened row-first format representation to make it available for further
         # use, so that the same conversion does not have to be performed twice.
-        self.__flattened_row_first = result
+        self.__flattened_row_major = result
 
-        return self.__flattened_row_first
+        return self.__flattened_row_major
 
 
 class GraphBatch:

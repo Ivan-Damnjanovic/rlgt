@@ -75,8 +75,8 @@ class MonochromaticGraph(Graph):
             edge_colors=edge_colors,
             bitmask=bitmask,
             adjacency_matrix=adjacency_matrix,
-            flattened_column_first=flattened_column_first,
-            flattened_row_first=flattened_row_first,
+            flattened_column_major=flattened_column_first,
+            flattened_row_major=flattened_row_first,
         )
 
 
@@ -119,8 +119,8 @@ class EmptyGraph(Graph):
             edge_colors=2,
             bitmask=bitmask,
             adjacency_matrix=adjacency_matrix,
-            flattened_column_first=flattened_column_first,
-            flattened_row_first=flattened_row_first,
+            flattened_column_major=flattened_column_first,
+            flattened_row_major=flattened_row_first,
         )
 
 
@@ -165,8 +165,8 @@ class CompleteGraph(Graph):
             edge_colors=2,
             bitmask=bitmask,
             adjacency_matrix=adjacency_matrix,
-            flattened_column_first=flattened_column_first,
-            flattened_row_first=flattened_row_first,
+            flattened_column_major=flattened_column_first,
+            flattened_row_major=flattened_row_first,
         )
 
 
@@ -224,8 +224,8 @@ class AlmostCompleteGraph(Graph):
             edge_colors=2,
             bitmask=bitmask,
             adjacency_matrix=adjacency_matrix,
-            flattened_column_first=flattened_column_first,
-            flattened_row_first=flattened_row_first,
+            flattened_column_major=flattened_column_first,
+            flattened_row_major=flattened_row_first,
         )
 
 
@@ -407,8 +407,8 @@ class StarGraph(Graph):
             edge_colors=2,
             bitmask=bitmask,
             adjacency_matrix=adjacency_matrix,
-            flattened_column_first=flattened_column_first,
-            flattened_row_first=flattened_row_first,
+            flattened_column_major=flattened_column_first,
+            flattened_row_major=flattened_row_first,
         )
 
 
@@ -469,8 +469,8 @@ class PathGraph(Graph):
             edge_colors=2,
             bitmask=bitmask,
             adjacency_matrix=adjacency_matrix,
-            flattened_column_first=flattened_column_first,
-            flattened_row_first=flattened_row_first,
+            flattened_column_major=flattened_column_first,
+            flattened_row_major=flattened_row_first,
         )
 
 
@@ -537,8 +537,8 @@ class CycleGraph(Graph):
             edge_colors=2,
             bitmask=bitmask,
             adjacency_matrix=adjacency_matrix,
-            flattened_column_first=flattened_column_first,
-            flattened_row_first=flattened_row_first,
+            flattened_column_major=flattened_column_first,
+            flattened_row_major=flattened_row_first,
         )
 
 
@@ -616,8 +616,8 @@ class WheelGraph(Graph):
             edge_colors=2,
             bitmask=bitmask,
             adjacency_matrix=adjacency_matrix,
-            flattened_column_first=flattened_column_first,
-            flattened_row_first=flattened_row_first,
+            flattened_column_major=flattened_column_first,
+            flattened_row_major=flattened_row_first,
         )
 
 
@@ -683,8 +683,8 @@ class BookGraph(Graph):
             edge_colors=2,
             bitmask=bitmask,
             adjacency_matrix=adjacency_matrix,
-            flattened_column_first=flattened_column_first,
-            flattened_row_first=flattened_row_first,
+            flattened_column_major=flattened_column_first,
+            flattened_row_major=flattened_row_first,
         )
 
 
@@ -763,6 +763,6 @@ class FriendshipGraph(Graph):
             edge_colors=2,
             bitmask=bitmask,
             adjacency_matrix=adjacency_matrix,
-            flattened_column_first=flattened_column_first,
-            flattened_row_first=flattened_row_first,
+            flattened_column_major=flattened_column_first,
+            flattened_row_major=flattened_row_first,
         )
