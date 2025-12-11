@@ -10,7 +10,7 @@ from rl_graph_theory.environments.environment import (
     StateBatch,
 )
 
-from ..graphs.graph import EdgeOrdering, Graph, GraphBatch
+from ..graphs.graph import FlattenedOrdering, Graph, GraphBatch
 
 
 class LinearEnvironment(GraphEnvironment):
@@ -22,7 +22,7 @@ class LinearEnvironment(GraphEnvironment):
         self,
         graph_order: int,
         edge_colors: int,
-        edge_ordering: EdgeOrdering,
+        edge_ordering: FlattenedOrdering,
         reward_type: RewardType,
         reward_function: Callable,
         initial_graph: Optional[Graph] = None,
@@ -34,7 +34,7 @@ class LinearEnvironment(GraphEnvironment):
 
         self._graph_order: int = graph_order
         self._edge_colors: int = edge_colors
-        self._edge_ordering: EdgeOrdering = edge_ordering
+        self._edge_ordering: FlattenedOrdering = edge_ordering
         self._special_initial_graph_probability: float = special_initial_graph_probability
 
         if initial_graph is None:

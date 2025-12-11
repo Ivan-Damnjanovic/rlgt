@@ -60,7 +60,7 @@ class MonochromaticGraph(Graph):
             if selected_edge_color != 0:
                 np.fill_diagonal(adjacency_matrix, 0)
 
-        elif graph_format == GraphFormat.FLATTENED_COLUMN_FIRST:
+        elif graph_format == GraphFormat.FLATTENED_CLOCKWISE:
             flattened_column_first = np.full(
                 (order * (order - 1) // 2,), selected_edge_color, dtype=int
             )
@@ -109,7 +109,7 @@ class EmptyGraph(Graph):
             bitmask = np.zeros((1, order), dtype=int)
         elif graph_format == GraphFormat.ADJACENCY_MATRIX:
             adjacency_matrix = np.zeros((order, order), dtype=int)
-        elif graph_format == GraphFormat.FLATTENED_COLUMN_FIRST:
+        elif graph_format == GraphFormat.FLATTENED_CLOCKWISE:
             flattened_column_first = np.zeros((order * (order - 1) // 2,), dtype=int)
         else:
             flattened_row_first = np.zeros((order * (order - 1) // 2,), dtype=int)
@@ -155,7 +155,7 @@ class CompleteGraph(Graph):
         elif graph_format == GraphFormat.ADJACENCY_MATRIX:
             adjacency_matrix = np.ones((order, order), dtype=int)
             np.fill_diagonal(adjacency_matrix, 0)
-        elif graph_format == GraphFormat.FLATTENED_COLUMN_FIRST:
+        elif graph_format == GraphFormat.FLATTENED_CLOCKWISE:
             flattened_column_first = np.ones((order * (order - 1) // 2,), dtype=int)
         else:
             flattened_row_first = np.ones((order * (order - 1) // 2,), dtype=int)
@@ -209,7 +209,7 @@ class AlmostCompleteGraph(Graph):
             adjacency_matrix[-1, -2] = 0
             adjacency_matrix[-2, -1] = 0
 
-        elif graph_format == GraphFormat.FLATTENED_COLUMN_FIRST:
+        elif graph_format == GraphFormat.FLATTENED_CLOCKWISE:
             flattened_column_first = np.ones((order * (order - 1) // 2,), dtype=int)
             # Remove the edge between the vertices $n - 2$ and $n - 1$.
             flattened_column_first[-1] = 0
@@ -380,7 +380,7 @@ class StarGraph(Graph):
             adjacency_matrix[:, central_vertex] = 1
             adjacency_matrix[central_vertex, central_vertex] = 0
 
-        elif graph_format == GraphFormat.FLATTENED_COLUMN_FIRST:
+        elif graph_format == GraphFormat.FLATTENED_CLOCKWISE:
             flattened_column_first = np.zeros((order * (order - 1) // 2,), dtype=int)
             # Add the edges between the central vertex and the vertices that precede it.
             start = central_vertex * (central_vertex - 1) // 2
@@ -452,7 +452,7 @@ class PathGraph(Graph):
             adjacency_matrix[rows, rows + 1] = 1
             adjacency_matrix[rows + 1, rows] = 1
 
-        elif graph_format == GraphFormat.FLATTENED_COLUMN_FIRST:
+        elif graph_format == GraphFormat.FLATTENED_CLOCKWISE:
             flattened_column_first = np.zeros((order * (order - 1) // 2,), dtype=int)
             indices = np.arange(2, order + 1, dtype=int)
             indices = indices * (indices - 1) // 2 - 1
@@ -514,7 +514,7 @@ class CycleGraph(Graph):
             adjacency_matrix[0, -1] = 1
             adjacency_matrix[-1, 0] = 1
 
-        elif graph_format == GraphFormat.FLATTENED_COLUMN_FIRST:
+        elif graph_format == GraphFormat.FLATTENED_CLOCKWISE:
             flattened_column_first = np.zeros((order * (order - 1) // 2,), dtype=int)
             # Add the edges from the path $0, 1, 2, \ldots, n - 1$.
             indices = np.arange(2, order + 1, dtype=int)
@@ -587,7 +587,7 @@ class WheelGraph(Graph):
             adjacency_matrix[1, -1] = 1
             adjacency_matrix[-1, 1] = 1
 
-        elif graph_format == GraphFormat.FLATTENED_COLUMN_FIRST:
+        elif graph_format == GraphFormat.FLATTENED_CLOCKWISE:
             flattened_column_first = np.zeros((order * (order - 1) // 2,), dtype=int)
             # Add the edges from 0 to all the other vertices.
             indices = np.arange(1, order, dtype=int)
@@ -662,7 +662,7 @@ class BookGraph(Graph):
             adjacency_matrix[0, 1] = 1
             adjacency_matrix[1, 0] = 1
 
-        elif graph_format == GraphFormat.FLATTENED_COLUMN_FIRST:
+        elif graph_format == GraphFormat.FLATTENED_CLOCKWISE:
             flattened_column_first = np.zeros(((index + 2) * (index + 1) // 2,), dtype=int)
             # Add the edge between the vertices 0 and 1.
             flattened_column_first[0] = 1
@@ -736,7 +736,7 @@ class FriendshipGraph(Graph):
             adjacency_matrix[rows, rows + 1] = 1
             adjacency_matrix[rows + 1, rows] = 1
 
-        elif graph_format == GraphFormat.FLATTENED_COLUMN_FIRST:
+        elif graph_format == GraphFormat.FLATTENED_CLOCKWISE:
             flattened_column_first = np.zeros(((2 * index + 1) * index,), dtype=int)
             # Add the edges from 0 to all the other vertices.
             indices = np.arange(1, 2 * index + 1, dtype=int)

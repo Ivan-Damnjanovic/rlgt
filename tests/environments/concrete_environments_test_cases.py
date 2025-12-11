@@ -11,7 +11,7 @@ from rl_graph_theory.environments.environment import (
     RewardType,
     StateBatch,
 )
-from rl_graph_theory.graphs.graph import EdgeOrdering, GraphBatch
+from rl_graph_theory.graphs.graph import FlattenedOrdering, GraphBatch
 
 
 def incremental_environment_reward_function(graph_batch: GraphBatch):
@@ -28,7 +28,7 @@ INCREMENTAL_ENVIRONMENT_TEST_CASES = [
     (
         5,
         4,
-        EdgeOrdering.COLUMN_FIRST,
+        FlattenedOrdering.CLOCKWISE,
         RewardType.SPARSE,
         incremental_environment_reward_function,
         3,

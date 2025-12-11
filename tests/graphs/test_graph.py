@@ -5,7 +5,7 @@ This file is used for testing the functionalities from the `rl_graph_theory.grap
 import numpy as np
 import pytest
 
-from rl_graph_theory.graphs.graph import EdgeOrdering, Graph, GraphBatch
+from rl_graph_theory.graphs.graph import FlattenedOrdering, Graph, GraphBatch
 
 from .graph_test_cases import GRAPH_BATCH_TEST_CASES, GRAPH_TEST_CASES
 from .utils import verify_instantiated_graph, verify_instantiated_graph_batch
@@ -43,7 +43,7 @@ def test_graph(
     )
     verify_instantiated_graph(
         constructor=lambda: Graph.from_flattened(
-            edge_colors, EdgeOrdering.COLUMN_FIRST, flattened_column_first
+            edge_colors, FlattenedOrdering.CLOCKWISE, flattened_column_first
         ),
         edge_colors=edge_colors,
         order=order,
@@ -54,7 +54,7 @@ def test_graph(
     )
     verify_instantiated_graph(
         constructor=lambda: Graph.from_flattened(
-            edge_colors, EdgeOrdering.ROW_FIRST, flattened_row_first
+            edge_colors, FlattenedOrdering.ROW_MAJOR, flattened_row_first
         ),
         edge_colors=edge_colors,
         order=order,
@@ -104,7 +104,7 @@ def test_graph_batch(
     verify_instantiated_graph_batch(
         constructor=lambda: GraphBatch.from_flattened_batch(
             edge_colors,
-            EdgeOrdering.COLUMN_FIRST,
+            FlattenedOrdering.CLOCKWISE,
             flattened_column_first_batch,
         ),
         batch_size=batch_size,
@@ -118,7 +118,7 @@ def test_graph_batch(
     verify_instantiated_graph_batch(
         constructor=lambda: GraphBatch.from_flattened_batch(
             edge_colors,
-            EdgeOrdering.ROW_FIRST,
+            FlattenedOrdering.ROW_MAJOR,
             flattened_row_first_batch,
         ),
         batch_size=batch_size,

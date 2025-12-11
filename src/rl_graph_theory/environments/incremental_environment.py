@@ -6,7 +6,7 @@ from typing import Callable, Optional, Tuple
 
 import numpy as np
 
-from ..graphs.graph import EdgeOrdering, GraphBatch
+from ..graphs.graph import FlattenedOrdering, GraphBatch
 from .environment import (
     ActionBatch,
     EpisodeStatus,
@@ -25,7 +25,7 @@ class IncrementalEnvironment(GraphEnvironment):
         self,
         graph_order: int,
         edge_colors: int,
-        edge_ordering: EdgeOrdering,
+        edge_ordering: FlattenedOrdering,
         reward_type: RewardType,
         reward_function: Callable,
     ):
@@ -37,7 +37,7 @@ class IncrementalEnvironment(GraphEnvironment):
 
         self._graph_size: int = graph_order * (graph_order - 1) // 2
         self._edge_colors: int = edge_colors
-        self._edge_ordering: EdgeOrdering = edge_ordering
+        self._edge_ordering: FlattenedOrdering = edge_ordering
 
         self._batch_size: Optional[int] = None
         self._next_edge_index: Optional[int] = None

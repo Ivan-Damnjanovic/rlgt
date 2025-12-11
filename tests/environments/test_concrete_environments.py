@@ -15,7 +15,7 @@ from rl_graph_theory.environments.environment import (
     RewardType,
     StateBatch,
 )
-from rl_graph_theory.graphs.graph import EdgeOrdering
+from rl_graph_theory.graphs.graph import FlattenedOrdering
 
 from .concrete_environments_test_cases import INCREMENTAL_ENVIRONMENT_TEST_CASES
 
@@ -29,7 +29,7 @@ from .concrete_environments_test_cases import INCREMENTAL_ENVIRONMENT_TEST_CASES
 def test_incremental_environment(
     graph_order: int,
     edge_colors: int,
-    edge_ordering: EdgeOrdering,
+    edge_ordering: FlattenedOrdering,
     reward_type: RewardType,
     reward_function: Callable,
     batch_size: int,

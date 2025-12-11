@@ -56,8 +56,8 @@ def test_monochromatic_graph(
     for graph_format in [
         GraphFormat.BITMASK,
         GraphFormat.ADJACENCY_MATRIX,
-        GraphFormat.FLATTENED_COLUMN_FIRST,
-        GraphFormat.FLATTENED_ROW_FIRST,
+        GraphFormat.FLATTENED_CLOCKWISE,
+        GraphFormat.FLATTENED_ROW_MAJOR,
     ]:
         verify_instantiated_graph(
             constructor=lambda: MonochromaticGraph(
@@ -82,8 +82,8 @@ def test_empty_graph(
     for graph_format in [
         GraphFormat.BITMASK,
         GraphFormat.ADJACENCY_MATRIX,
-        GraphFormat.FLATTENED_COLUMN_FIRST,
-        GraphFormat.FLATTENED_ROW_FIRST,
+        GraphFormat.FLATTENED_CLOCKWISE,
+        GraphFormat.FLATTENED_ROW_MAJOR,
     ]:
         verify_instantiated_graph(
             constructor=lambda: EmptyGraph(graph_format, order),
@@ -106,8 +106,8 @@ def test_complete_graph(
     for graph_format in [
         GraphFormat.BITMASK,
         GraphFormat.ADJACENCY_MATRIX,
-        GraphFormat.FLATTENED_COLUMN_FIRST,
-        GraphFormat.FLATTENED_ROW_FIRST,
+        GraphFormat.FLATTENED_CLOCKWISE,
+        GraphFormat.FLATTENED_ROW_MAJOR,
     ]:
         verify_instantiated_graph(
             constructor=lambda: CompleteGraph(graph_format, order),
@@ -132,8 +132,8 @@ def test_almost_complete_graph(
     for graph_format in [
         GraphFormat.BITMASK,
         GraphFormat.ADJACENCY_MATRIX,
-        GraphFormat.FLATTENED_COLUMN_FIRST,
-        GraphFormat.FLATTENED_ROW_FIRST,
+        GraphFormat.FLATTENED_CLOCKWISE,
+        GraphFormat.FLATTENED_ROW_MAJOR,
     ]:
         verify_instantiated_graph(
             constructor=lambda: AlmostCompleteGraph(graph_format, order),
@@ -215,8 +215,8 @@ def test_star_graph(
     for graph_format in [
         GraphFormat.BITMASK,
         GraphFormat.ADJACENCY_MATRIX,
-        GraphFormat.FLATTENED_COLUMN_FIRST,
-        GraphFormat.FLATTENED_ROW_FIRST,
+        GraphFormat.FLATTENED_CLOCKWISE,
+        GraphFormat.FLATTENED_ROW_MAJOR,
     ]:
         verify_instantiated_graph(
             constructor=lambda: StarGraph(graph_format, order, central_vertex),
@@ -243,8 +243,8 @@ def test_path_graph(
     for graph_format in [
         GraphFormat.BITMASK,
         GraphFormat.ADJACENCY_MATRIX,
-        GraphFormat.FLATTENED_COLUMN_FIRST,
-        GraphFormat.FLATTENED_ROW_FIRST,
+        GraphFormat.FLATTENED_CLOCKWISE,
+        GraphFormat.FLATTENED_ROW_MAJOR,
     ]:
         verify_instantiated_graph(
             constructor=lambda: PathGraph(graph_format, order),
@@ -271,8 +271,8 @@ def test_cycle_graph(
     for graph_format in [
         GraphFormat.BITMASK,
         GraphFormat.ADJACENCY_MATRIX,
-        GraphFormat.FLATTENED_COLUMN_FIRST,
-        GraphFormat.FLATTENED_ROW_FIRST,
+        GraphFormat.FLATTENED_CLOCKWISE,
+        GraphFormat.FLATTENED_ROW_MAJOR,
     ]:
         verify_instantiated_graph(
             constructor=lambda: CycleGraph(graph_format, order),
@@ -299,8 +299,8 @@ def test_wheel_graph(
     for graph_format in [
         GraphFormat.BITMASK,
         GraphFormat.ADJACENCY_MATRIX,
-        GraphFormat.FLATTENED_COLUMN_FIRST,
-        GraphFormat.FLATTENED_ROW_FIRST,
+        GraphFormat.FLATTENED_CLOCKWISE,
+        GraphFormat.FLATTENED_ROW_MAJOR,
     ]:
         verify_instantiated_graph(
             constructor=lambda: WheelGraph(graph_format, order),
@@ -327,8 +327,8 @@ def test_book_graph(
     for graph_format in [
         GraphFormat.BITMASK,
         GraphFormat.ADJACENCY_MATRIX,
-        GraphFormat.FLATTENED_COLUMN_FIRST,
-        GraphFormat.FLATTENED_ROW_FIRST,
+        GraphFormat.FLATTENED_CLOCKWISE,
+        GraphFormat.FLATTENED_ROW_MAJOR,
     ]:
         verify_instantiated_graph(
             constructor=lambda: BookGraph(graph_format, index),
@@ -355,8 +355,8 @@ def test_friendship_graph(
     for graph_format in [
         GraphFormat.BITMASK,
         GraphFormat.ADJACENCY_MATRIX,
-        GraphFormat.FLATTENED_COLUMN_FIRST,
-        GraphFormat.FLATTENED_ROW_FIRST,
+        GraphFormat.FLATTENED_CLOCKWISE,
+        GraphFormat.FLATTENED_ROW_MAJOR,
     ]:
         verify_instantiated_graph(
             constructor=lambda: FriendshipGraph(graph_format, index),
