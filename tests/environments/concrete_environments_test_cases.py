@@ -18,7 +18,7 @@ def incremental_environment_reward_function(graph_batch: GraphBatch):
     result = np.zeros((graph_batch.batch_size,), dtype=int)
 
     for color in range(4):
-        temp = (graph_batch.flattened_column_first_batch == color).astype(int)
+        temp = (graph_batch.flattened_clockwise == color).astype(int)
         result += np.sum(temp, axis=1) * (2 * color * color + 5)
 
     return result

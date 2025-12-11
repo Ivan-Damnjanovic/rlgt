@@ -64,4 +64,4 @@ def test_incremental_environment(
             assert status == final_status
 
     output_graph_batch = environment.state_batch_to_graph_batch(state_batch=state_batch)
-    assert np.all(output_graph_batch.bitmask_batch == output_graph_batch_bitmask)
+    assert np.all(output_graph_batch.bitmask_out == output_graph_batch_bitmask)

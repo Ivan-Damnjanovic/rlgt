@@ -80,7 +80,7 @@ def test_graph_batch(
     flattened_row_first_batch: np.ndarray,
 ):
     verify_instantiated_graph_batch(
-        constructor=lambda: GraphBatch.from_bitmask_batch(edge_colors, bitmask_batch),
+        constructor=lambda: GraphBatch.from_bitmask(edge_colors, bitmask_batch),
         batch_size=batch_size,
         edge_colors=edge_colors,
         order=order,
@@ -90,7 +90,7 @@ def test_graph_batch(
         flattened_row_first_batch=flattened_row_first_batch,
     )
     verify_instantiated_graph_batch(
-        constructor=lambda: GraphBatch.from_adjacency_matrix_batch(
+        constructor=lambda: GraphBatch.from_adjacency_matrix(
             edge_colors, adjacency_matrix_batch
         ),
         batch_size=batch_size,
@@ -102,7 +102,7 @@ def test_graph_batch(
         flattened_row_first_batch=flattened_row_first_batch,
     )
     verify_instantiated_graph_batch(
-        constructor=lambda: GraphBatch.from_flattened_batch(
+        constructor=lambda: GraphBatch.from_flattened(
             edge_colors,
             FlattenedOrdering.CLOCKWISE,
             flattened_column_first_batch,
@@ -116,7 +116,7 @@ def test_graph_batch(
         flattened_row_first_batch=flattened_row_first_batch,
     )
     verify_instantiated_graph_batch(
-        constructor=lambda: GraphBatch.from_flattened_batch(
+        constructor=lambda: GraphBatch.from_flattened(
             edge_colors,
             FlattenedOrdering.ROW_MAJOR,
             flattened_row_first_batch,
