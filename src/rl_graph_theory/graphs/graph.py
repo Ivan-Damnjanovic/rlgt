@@ -132,7 +132,7 @@ class Graph:
     :ivar __edge_colors: The number of proper edge colors, i.e., $k$.
     :ivar __order: The graph order, i.e., its number of vertices.
     :ivar __bitmask_out: The `np.ndarray` from the out-neighborhoods bitmask format
-        (`GraphFormat.BITMASK_IN`) representation of the given graph structure, if it was used to
+        (`GraphFormat.BITMASK_OUT`) representation of the given graph structure, if it was used to
         initialize the graph or computed afterwards, and otherwise, `None`.
     :ivar __bitmask_in: The `np.ndarray` from the in-neighborhoods bitmask format
         (`GraphFormat.BITMASK_IN`) representation of the given graph structure, if it was used to
