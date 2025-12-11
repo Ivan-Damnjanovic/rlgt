@@ -14,12 +14,36 @@ from rl_graph_theory.graphs.graph import (
 
 from .graph_test_cases import (
     GRAPH_BATCH_TEST_CASES,
+    GRAPH_TEST_CASES_LARGE,
     GRAPH_TEST_CASES_BASIC,
     GRAPH_TEST_CASES_LOOPS,
     GRAPH_TEST_CASES_DIRECTED,
     GRAPH_TEST_CASES_DIRECTED_LOOPS,
 )
 from .utils import verify_instantiated_graph, verify_instantiated_graph_batch
+
+
+@pytest.mark.parametrize(
+    "edge_colors, order, bitmask, adjacency_matrix, flattened_clockwise, flattened_row_major",
+    GRAPH_TEST_CASES_LARGE,
+)
+def test_graph_large(
+    edge_colors: int,
+    order: int,
+    bitmask: np.ndarray,
+    adjacency_matrix: np.ndarray,
+    flattened_clockwise: np.ndarray,
+    flattened_row_major: np.ndarray,
+):
+    verify_all(
+        edge_colors,
+        order,
+        bitmask,
+        bitmask,
+        adjacency_matrix,
+        flattened_clockwise,
+        flattened_row_major,
+    )
 
 
 @pytest.mark.parametrize(

@@ -366,7 +366,7 @@ GRAPH_TEST_CASES_DIRECTED_LOOPS = [
 ]
 
 
-GRAPH_TEST_CASES = [
+GRAPH_TEST_CASES_LARGE = [
     (
         4,
         7,
