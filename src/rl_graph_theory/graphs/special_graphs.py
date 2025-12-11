@@ -39,7 +39,7 @@ class MonochromaticGraph(Graph):
         flattened_column_first = None
         flattened_row_first = None
 
-        if graph_format == GraphFormat.BITMASK:
+        if graph_format == GraphFormat.BITMASK_IN or graph_format == GraphFormat.BITMASK_OUT:
             if selected_edge_color == edge_colors:
                 # If the graph order is at least two, then it contains edges, hence there are
                 # uncolored edges.
@@ -73,9 +73,10 @@ class MonochromaticGraph(Graph):
         super().__init__(
             graph_format=graph_format,
             edge_colors=edge_colors,
-            bitmask=bitmask,
+            bitmask_out=bitmask,
+            bitmask_in=bitmask,
             adjacency_matrix=adjacency_matrix,
-            flattened_column_major=flattened_column_first,
+            flattened_clockwise=flattened_column_first,
             flattened_row_major=flattened_row_first,
         )
 
@@ -105,7 +106,7 @@ class EmptyGraph(Graph):
         flattened_column_first = None
         flattened_row_first = None
 
-        if graph_format == GraphFormat.BITMASK:
+        if graph_format == GraphFormat.BITMASK_IN or graph_format == GraphFormat.BITMASK_OUT:
             bitmask = np.zeros((1, order), dtype=int)
         elif graph_format == GraphFormat.ADJACENCY_MATRIX:
             adjacency_matrix = np.zeros((order, order), dtype=int)
@@ -117,9 +118,10 @@ class EmptyGraph(Graph):
         super().__init__(
             graph_format=graph_format,
             edge_colors=2,
-            bitmask=bitmask,
+            bitmask_out=bitmask,
+            bitmask_in=bitmask,
             adjacency_matrix=adjacency_matrix,
-            flattened_column_major=flattened_column_first,
+            flattened_clockwise=flattened_column_first,
             flattened_row_major=flattened_row_first,
         )
 
@@ -149,7 +151,7 @@ class CompleteGraph(Graph):
         flattened_column_first = None
         flattened_row_first = None
 
-        if graph_format == GraphFormat.BITMASK:
+        if graph_format == GraphFormat.BITMASK_IN or graph_format == GraphFormat.BITMASK_OUT:
             bitmask = np.full((1, order), (1 << order) - 1, dtype=int)
             bitmask[0, :] -= 1 << np.arange(order, dtype=int)
         elif graph_format == GraphFormat.ADJACENCY_MATRIX:
@@ -163,9 +165,10 @@ class CompleteGraph(Graph):
         super().__init__(
             graph_format=graph_format,
             edge_colors=2,
-            bitmask=bitmask,
+            bitmask_out=bitmask,
+            bitmask_in=bitmask,
             adjacency_matrix=adjacency_matrix,
-            flattened_column_major=flattened_column_first,
+            flattened_clockwise=flattened_column_first,
             flattened_row_major=flattened_row_first,
         )
 
@@ -195,7 +198,7 @@ class AlmostCompleteGraph(Graph):
         flattened_column_first = None
         flattened_row_first = None
 
-        if graph_format == GraphFormat.BITMASK:
+        if graph_format == GraphFormat.BITMASK_IN or graph_format == GraphFormat.BITMASK_OUT:
             bitmask = np.full((1, order), (1 << order) - 1, dtype=int)
             bitmask[0, :] -= 1 << np.arange(order, dtype=int)
             # Remove the edge between the vertices $n - 2$ and $n - 1$.
@@ -222,9 +225,10 @@ class AlmostCompleteGraph(Graph):
         super().__init__(
             graph_format=graph_format,
             edge_colors=2,
-            bitmask=bitmask,
+            bitmask_in=bitmask,
+            bitmask_out=bitmask,
             adjacency_matrix=adjacency_matrix,
-            flattened_column_major=flattened_column_first,
+            flattened_clockwise=flattened_column_first,
             flattened_row_major=flattened_row_first,
         )
 
@@ -263,7 +267,7 @@ class CompleteBipartiteGraph(Graph):
         bitmask = None
         adjacency_matrix = None
 
-        if graph_format == GraphFormat.BITMASK:
+        if graph_format == GraphFormat.BITMASK_IN or graph_format == GraphFormat.BITMASK_OUT:
             bitmask = np.full((1, order), (1 << partition_size_1) - 1, dtype=int)
             bitmask[0, :partition_size_1] = (1 << (order)) - (1 << partition_size_1)
 
@@ -278,7 +282,8 @@ class CompleteBipartiteGraph(Graph):
         super().__init__(
             graph_format=graph_format,
             edge_colors=2,
-            bitmask=bitmask,
+            bitmask_in=bitmask,
+            bitmask_out=bitmask,
             adjacency_matrix=adjacency_matrix,
         )
 
@@ -312,7 +317,7 @@ class CompleteKPartiteGraph(Graph):
         bitmask = None
         adjacency_matrix = None
 
-        if graph_format == GraphFormat.BITMASK:
+        if graph_format == GraphFormat.BITMASK_IN or graph_format == GraphFormat.BITMASK_OUT:
             # First, make all the vertices adjacent to all the other vertices, including loops.
             bitmask = np.full((1, order), (1 << order) - 1, dtype=int)
 
@@ -339,7 +344,8 @@ class CompleteKPartiteGraph(Graph):
         super().__init__(
             graph_format=graph_format,
             edge_colors=2,
-            bitmask=bitmask,
+            bitmask_out=bitmask,
+            bitmask_in=bitmask,
             adjacency_matrix=adjacency_matrix,
         )
 
@@ -370,7 +376,7 @@ class StarGraph(Graph):
         flattened_column_first = None
         flattened_row_first = None
 
-        if graph_format == GraphFormat.BITMASK:
+        if graph_format == GraphFormat.BITMASK_IN or graph_format == GraphFormat.BITMASK_OUT:
             bitmask = np.full((1, order), 1 << central_vertex, dtype=int)
             bitmask[0, central_vertex] = (1 << order) - (1 << central_vertex) - 1
 
@@ -405,9 +411,10 @@ class StarGraph(Graph):
         super().__init__(
             graph_format=graph_format,
             edge_colors=2,
-            bitmask=bitmask,
+            bitmask_out=bitmask,
+            bitmask_in=bitmask,
             adjacency_matrix=adjacency_matrix,
-            flattened_column_major=flattened_column_first,
+            flattened_clockwise=flattened_column_first,
             flattened_row_major=flattened_row_first,
         )
 
@@ -437,7 +444,7 @@ class PathGraph(Graph):
         flattened_column_first = None
         flattened_row_first = None
 
-        if graph_format == GraphFormat.BITMASK:
+        if graph_format == GraphFormat.BITMASK_IN or graph_format == GraphFormat.BITMASK_OUT:
             if order >= 2:
                 bitmask = ((1 << np.arange(order, dtype=int)) * 5 // 2).reshape(1, -1)
                 bitmask[0, 0] = 2
@@ -467,9 +474,10 @@ class PathGraph(Graph):
         super().__init__(
             graph_format=graph_format,
             edge_colors=2,
-            bitmask=bitmask,
+            bitmask_out=bitmask,
+            bitmask_in=bitmask,
             adjacency_matrix=adjacency_matrix,
-            flattened_column_major=flattened_column_first,
+            flattened_clockwise=flattened_column_first,
             flattened_row_major=flattened_row_first,
         )
 
@@ -499,7 +507,7 @@ class CycleGraph(Graph):
         flattened_column_first = None
         flattened_row_first = None
 
-        if graph_format == GraphFormat.BITMASK:
+        if graph_format == GraphFormat.BITMASK_IN or graph_format == GraphFormat.BITMASK_OUT:
             bitmask = ((1 << np.arange(order, dtype=int)) * 5 // 2).reshape(1, -1)
             bitmask[0, 0] = (1 << (order - 1)) + 2
             bitmask[0, -1] = (1 << (order - 2)) + 1
@@ -535,9 +543,10 @@ class CycleGraph(Graph):
         super().__init__(
             graph_format=graph_format,
             edge_colors=2,
-            bitmask=bitmask,
+            bitmask_out=bitmask,
+            bitmask_in=bitmask,
             adjacency_matrix=adjacency_matrix,
-            flattened_column_major=flattened_column_first,
+            flattened_clockwise=flattened_column_first,
             flattened_row_major=flattened_row_first,
         )
 
@@ -568,7 +577,7 @@ class WheelGraph(Graph):
         flattened_column_first = None
         flattened_row_first = None
 
-        if graph_format == GraphFormat.BITMASK:
+        if graph_format == GraphFormat.BITMASK_IN or graph_format == GraphFormat.BITMASK_OUT:
             bitmask = ((1 << np.arange(order, dtype=int)) * 5 // 2 + 1).reshape(1, -1)
             bitmask[0, 0] = (1 << order) - 2
             bitmask[0, 1] = (1 << (order - 1)) + 5
@@ -614,9 +623,10 @@ class WheelGraph(Graph):
         super().__init__(
             graph_format=graph_format,
             edge_colors=2,
-            bitmask=bitmask,
+            bitmask_out=bitmask,
+            bitmask_in=bitmask,
             adjacency_matrix=adjacency_matrix,
-            flattened_column_major=flattened_column_first,
+            flattened_clockwise=flattened_column_first,
             flattened_row_major=flattened_row_first,
         )
 
@@ -647,7 +657,7 @@ class BookGraph(Graph):
         flattened_column_first = None
         flattened_row_first = None
 
-        if graph_format == GraphFormat.BITMASK:
+        if graph_format == GraphFormat.BITMASK_IN or graph_format == GraphFormat.BITMASK_OUT:
             bitmask = np.full((1, index + 2), 3, dtype=int)
             bitmask[0, 0] = (1 << (index + 2)) - 2
             bitmask[0, 1] = (1 << (index + 2)) - 3
@@ -681,9 +691,10 @@ class BookGraph(Graph):
         super().__init__(
             graph_format=graph_format,
             edge_colors=2,
-            bitmask=bitmask,
+            bitmask_out=bitmask,
+            bitmask_in=bitmask,
             adjacency_matrix=adjacency_matrix,
-            flattened_column_major=flattened_column_first,
+            flattened_clockwise=flattened_column_first,
             flattened_row_major=flattened_row_first,
         )
 
@@ -719,7 +730,7 @@ class FriendshipGraph(Graph):
         flattened_column_first = None
         flattened_row_first = None
 
-        if graph_format == GraphFormat.BITMASK:
+        if graph_format == GraphFormat.BITMASK_IN or graph_format == GraphFormat.BITMASK_OUT:
             bitmask = np.full((1, 2 * index + 1), 1, dtype=int)
             bitmask[0, 0] = (1 << (2 * index + 1)) - 2
             bitmask[0, 1::2] += 1 << np.arange(2, 2 * index + 2, 2, dtype=int)
@@ -761,8 +772,9 @@ class FriendshipGraph(Graph):
         super().__init__(
             graph_format=graph_format,
             edge_colors=2,
-            bitmask=bitmask,
+            bitmask_out=bitmask,
+            bitmask_in=bitmask,
             adjacency_matrix=adjacency_matrix,
-            flattened_column_major=flattened_column_first,
+            flattened_clockwise=flattened_column_first,
             flattened_row_major=flattened_row_first,
         )

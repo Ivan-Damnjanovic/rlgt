@@ -18,7 +18,7 @@ class GraphFormat(Enum):
     This enumeration encapsulates the concept of a format used to represent a $k$-edge-colored
     looped complete graph. Each graph is essentially represented as a quintuple ``(edge_colors,
     is_directed, allow_loops, graph_format, format_representation)``, where:
-    
+
     * ``edge_colors`` is the number of proper edge (or arc) colors, i.e., the value $k$;
     * ``is_directed`` is a boolean that indicates whether the considered graph is a
       $k$-edge-colored looped complete directed graph or a $k$-edge-colored looped complete
@@ -30,7 +30,7 @@ class GraphFormat(Enum):
       be used to represent the structure of the considered graph; and
     * ``format_representation`` is a `np.ndarray` that represents the structure of the considered
       graph in the chosen graph format.
-    
+
     The enumeration provides support for the following five graph formats:
 
     :cvar BITMASK_OUT: The bitmask format for the out-neighborhoods. Here, the graph structure is
@@ -71,7 +71,7 @@ class GraphFormat(Enum):
         from the upper triangular part of the adjacency matrix should be arranged in the clockwise
         order (with or without the diagonal, depending on whether loops are allowed). The arranged
         entries form a `np.ndarray` list of the required length.
-    
+
     :note: If the graph is undirected, then the bitmask format for the out-neighborhoods and the
         bitmask format for the in-neighborhoods are the same. Also, if the graph is undirected,
         then the flattened clockwise format can be regarded as the flattened column-major format
@@ -95,7 +95,7 @@ class BitmaskType(Enum):
     :cvar OUT_NEIGHBORS: This item corresponds to the bitmask format for the out-neighborhoods.
     :cvar IN_NEIGHBORS: This item corresponds to the bitmask format for the in-neighborhoods.
     """
-    
+
     OUT_NEIGHBORS = 0
     IN_NEIGHBORS = 1
 
@@ -132,7 +132,7 @@ class Graph:
     :ivar __edge_colors: The number of proper edge colors, i.e., $k$.
     :ivar __order: The graph order, i.e., its number of vertices.
     :ivar __bitmask_out: The `np.ndarray` from the out-neighborhoods bitmask format
-        (`GraphFormat.BITMASK_IN`) representation of the given graph structure, if it was used to
+        (`GraphFormat.BITMASK_OUT`) representation of the given graph structure, if it was used to
         initialize the graph or computed afterwards, and otherwise, `None`.
     :ivar __bitmask_in: The `np.ndarray` from the in-neighborhoods bitmask format
         (`GraphFormat.BITMASK_IN`) representation of the given graph structure, if it was used to
@@ -424,14 +424,14 @@ class Graph:
         """
 
         return self.__is_directed
-    
+
     @property
     def allow_loops(self) -> bool:
         """
         This property returns the `bool` that determines whether loops are allowed in the given
         graph. The value `True` indicates that loops are allowed.
         """
-        
+
         return self.__allow_loops
 
     @property
@@ -462,12 +462,14 @@ class Graph:
 
         # If the graph is not fully colored, then the reduced bitmask format cannot be used.
         if np.max(self.adjacency_matrix) == self.__edge_colors:
+            print("AAAAAAA")
             temp = (self.adjacency_matrix == color_indices[:, None, None]).astype(int)
             if not self.__allow_loops:
                 np.fill_diagonal(temp[0], 0)
             result = temp @ masks
         # Otherwise, we use the reduced bitmask format.
         else:
+            print("BBBBBBBB")
             temp = (self.adjacency_matrix == color_indices[1:, None, None]).astype(int)
             result = temp @ masks
 
@@ -493,7 +495,7 @@ class Graph:
         # further use.
         if not self.__is_directed:
             self.__bitmask_in = self.bitmask_out
-    
+
             return self.__bitmask_in
 
         # Otherwise, compute the output `np.ndarray` by using the adjacency matrix format
@@ -505,12 +507,14 @@ class Graph:
 
         # If the graph is not fully colored, then the reduced bitmask format cannot be used.
         if np.max(self.adjacency_matrix) == self.__edge_colors:
+            print("AAAAAA")
             temp = (self.adjacency_matrix.T == color_indices[:, None, None]).astype(int)
             if not self.__allow_loops:
                 np.fill_diagonal(temp[0], 0)
             result = temp @ masks
         # Otherwise, we use the reduced bitmask format.
         else:
+            print("BBBBBB")
             temp = (self.adjacency_matrix.T == color_indices[1:, None, None]).astype(int)
             result = temp @ masks
 
@@ -540,8 +544,9 @@ class Graph:
                 if self.__allow_loops:
                     result = self.__flattened_row_major.reshape(self.__order, self.__order)
                 else:
+                    result = np.zeros((self.__order, self.__order), dtype=int)
                     result[~np.eye(self.__order, dtype=bool)] = self.__flattened_row_major
-            
+
             else:
                 result = np.zeros((self.__order, self.__order), dtype=int)
                 triu_rows = None
@@ -551,7 +556,7 @@ class Graph:
                     triu_rows, triu_columns = np.triu_indices(self.__order, k=0)
                 else:
                     triu_rows, triu_columns = np.triu_indices(self.__order, k=1)
-            
+
                 result[triu_rows, triu_columns] = self.__flattened_row_major
                 result[triu_columns, triu_rows] = self.__flattened_row_major
 
@@ -573,10 +578,14 @@ class Graph:
 
                     start = 1
                     for layer in range(1, self.__order):
-                        result[:layer + 1, layer] = self.__flattened_clockwise[start : start + layer + 1]
+                        result[: layer + 1, layer] = self.__flattened_clockwise[
+                            start : start + layer + 1
+                        ]
                         start += layer + 1
 
-                        result[layer, :layer] = self.__flattened_clockwise[start + layer - 1 : start - 1 : -1]
+                        result[layer, :layer] = self.__flattened_clockwise[
+                            start + layer - 1 : start - 1 : -1
+                        ]
                         start += layer
 
                 else:
@@ -587,7 +596,9 @@ class Graph:
                         result[:layer, layer] = self.__flattened_clockwise[start : start + layer]
                         start += layer
 
-                        result[layer, :layer] = self.__flattened_clockwise[start + layer - 1 : start - 1 : -1]
+                        result[layer, :layer] = self.__flattened_clockwise[
+                            start + layer - 1 : start - 1 : -1
+                        ]
                         start += layer
 
             else:
@@ -629,7 +640,7 @@ class Graph:
                 np.fill_diagonal(result, 0)
             weights = np.arange(-self.__edge_colors, 0, dtype=int)
             result += np.sum(temp * weights[:, None, None], axis=0)
-        
+
         # Otherwise, a reduced bitmask format is being used.
         else:
             weights = np.arange(1, self.__edge_colors, dtype=int)
@@ -663,7 +674,9 @@ class Graph:
 
         if self.__is_directed:
             if self.__allow_loops:
-                result = self.adjacency_matrix.reshape(-1,)
+                result = self.adjacency_matrix.reshape(
+                    -1,
+                )
             else:
                 result = self.adjacency_matrix[~np.eye(self.__order, dtype=bool)]
 
@@ -672,9 +685,9 @@ class Graph:
                 triu_indices = np.triu_indices(self.__order, k=0)
             else:
                 triu_indices = np.triu_indices(self.__order, k=1)
-        
+
             result = self.adjacency_matrix[triu_indices]
-        
+
         # Update the flattened row-major format representation to make it available for further
         # use, so that the same conversion does not have to be performed twice.
         self.__flattened_row_major = result
@@ -705,12 +718,12 @@ class Graph:
 
                 start = 1
                 for layer in range(1, self.__order):
-                    result[start : start + layer + 1] = self.adjacency_matrix[:layer + 1, layer]
+                    result[start : start + layer + 1] = self.adjacency_matrix[: layer + 1, layer]
                     start += layer + 1
 
-                    result[start : start + layer] = self.adjacency_matrix[layer, layer - 1::-1]
+                    result[start : start + layer] = self.adjacency_matrix[layer, layer - 1 :: -1]
                     start += layer
-            
+
             else:
                 result = np.zeros((self.__order * (self.__order - 1),), dtype=int)
 
@@ -719,9 +732,9 @@ class Graph:
                     result[start : start + layer] = self.adjacency_matrix[:layer, layer]
                     start += layer
 
-                    result[start : start + layer] = self.adjacency_matrix[layer, layer - 1::-1]
+                    result[start : start + layer] = self.adjacency_matrix[layer, layer - 1 :: -1]
                     start += layer
-            
+
         else:
             if self.__allow_loops:
                 tril_indices = np.tril_indices(self.__order, k=0)

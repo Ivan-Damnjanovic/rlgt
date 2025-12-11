@@ -12,10 +12,13 @@ def verify_instantiated_graph(
     constructor: Callable,
     edge_colors: int,
     order: int,
-    bitmask: np.ndarray,
+    bitmask_in: np.ndarray,
+    bitmask_out: np.ndarray,
     adjacency_matrix: np.ndarray,
-    flattened_column_first: np.ndarray,
-    flattened_row_first: np.ndarray,
+    flattened_clockwise: np.ndarray,
+    flattened_row_major: np.ndarray,
+    is_directed: bool = False,
+    allow_loops: bool = False,
 ):
     """
     This function verifies whether a given constructor correctly instantiates a `Graph` object. It
@@ -28,8 +31,10 @@ def verify_instantiated_graph(
     :param edge_colors: The correct number of available edge colors of the desired graph, given as
         an `int`.
     :param order: The correct desired graph order, given as an `int`.
-    :param bitmask: The correct `np.ndarray` that represents the desired graph in the bitmask
-        format.
+    :param bitmask_in: The correct `np.ndarray` that represents the desired graph in the bitmask
+        in-neighborhoods format.
+    :param bitmask_out: The correct `np.ndarray` that represents the desired graph in the bitmask
+        out-neighborhoods format.
     :param adjacency_matrix: The correct `np.ndarray` that represents the desired graph in the
         adjacency matrix format.
     :param flattened_column_first: The correct `np.ndarray` that represents the desired graph in
@@ -41,28 +46,28 @@ def verify_instantiated_graph(
     instance = constructor()
     assert instance.edge_colors == edge_colors
     assert instance.order == order
-    assert instance.bitmask.shape == bitmask.shape
-    assert np.all(instance.bitmask == bitmask)
-    assert instance._Graph__bitmask.shape == bitmask.shape
-    assert np.all(instance._Graph__bitmask == bitmask)
+    assert instance.is_directed == is_directed
+    assert instance.allow_loops == allow_loops
 
     instance = constructor()
-    assert instance.adjacency_matrix.shape == adjacency_matrix.shape
-    assert np.all(instance.adjacency_matrix == adjacency_matrix)
-    assert instance._Graph__adjacency_matrix.shape == adjacency_matrix.shape
-    assert np.all(instance._Graph__adjacency_matrix == adjacency_matrix)
+    np.testing.assert_array_equal(instance.bitmask_in, bitmask_in)
+    np.testing.assert_array_equal(instance._Graph__bitmask_in, bitmask_in)
 
     instance = constructor()
-    assert instance.flattened_column_first.shape == flattened_column_first.shape
-    assert np.all(instance.flattened_column_first == flattened_column_first)
-    assert instance._Graph__flattened_column_first.shape == flattened_column_first.shape
-    assert np.all(instance._Graph__flattened_column_first == flattened_column_first)
+    np.testing.assert_array_equal(instance.bitmask_out, bitmask_out)
+    np.testing.assert_array_equal(instance._Graph__bitmask_out, bitmask_out)
 
     instance = constructor()
-    assert instance.flattened_row_first.shape == flattened_row_first.shape
-    assert np.all(instance.flattened_row_first == flattened_row_first)
-    assert instance._Graph__flattened_row_first.shape == flattened_row_first.shape
-    assert np.all(instance._Graph__flattened_row_first == flattened_row_first)
+    np.testing.assert_array_equal(instance.adjacency_matrix, adjacency_matrix)
+    np.testing.assert_array_equal(instance._Graph__adjacency_matrix, adjacency_matrix)
+
+    instance = constructor()
+    np.testing.assert_array_equal(instance.flattened_clockwise, flattened_clockwise)
+    np.testing.assert_array_equal(instance._Graph__flattened_clockwise, flattened_clockwise)
+
+    instance = constructor()
+    np.testing.assert_array_equal(instance.flattened_row_major, flattened_row_major)
+    np.testing.assert_array_equal(instance._Graph__flattened_row_major, flattened_row_major)
 
 
 def verify_instantiated_graph_batch(

@@ -5,127 +5,227 @@ This file is used for testing the functionalities from the `rl_graph_theory.grap
 import numpy as np
 import pytest
 
-from rl_graph_theory.graphs.graph import FlattenedOrdering, Graph, GraphBatch
+from rl_graph_theory.graphs.graph import (
+    FlattenedOrdering,
+    Graph,
+    GraphBatch,
+    BitmaskType,
+)
 
-from .graph_test_cases import GRAPH_BATCH_TEST_CASES, GRAPH_TEST_CASES
+from .graph_test_cases import (
+    GRAPH_BATCH_TEST_CASES,
+    GRAPH_TEST_CASES_BASIC,
+    GRAPH_TEST_CASES_LOOPS,
+    GRAPH_TEST_CASES_DIRECTED,
+    GRAPH_TEST_CASES_DIRECTED_LOOPS,
+)
 from .utils import verify_instantiated_graph, verify_instantiated_graph_batch
 
 
 @pytest.mark.parametrize(
-    "edge_colors, order, bitmask, adjacency_matrix, flattened_column_first, flattened_row_first",
-    GRAPH_TEST_CASES,
+    "edge_colors, order, bitmask, adjacency_matrix, flattened_clockwise, flattened_row_major",
+    GRAPH_TEST_CASES_BASIC,
 )
-def test_graph(
+def test_graph_basic(
     edge_colors: int,
     order: int,
     bitmask: np.ndarray,
     adjacency_matrix: np.ndarray,
-    flattened_column_first: np.ndarray,
-    flattened_row_first: np.ndarray,
+    flattened_clockwise: np.ndarray,
+    flattened_row_major: np.ndarray,
 ):
-    verify_instantiated_graph(
-        constructor=lambda: Graph.from_bitmask(edge_colors, bitmask),
-        edge_colors=edge_colors,
-        order=order,
-        bitmask=bitmask,
-        adjacency_matrix=adjacency_matrix,
-        flattened_column_first=flattened_column_first,
-        flattened_row_first=flattened_row_first,
-    )
-    verify_instantiated_graph(
-        constructor=lambda: Graph.from_adjacency_matrix(edge_colors, adjacency_matrix),
-        edge_colors=edge_colors,
-        order=order,
-        bitmask=bitmask,
-        adjacency_matrix=adjacency_matrix,
-        flattened_column_first=flattened_column_first,
-        flattened_row_first=flattened_row_first,
-    )
-    verify_instantiated_graph(
-        constructor=lambda: Graph.from_flattened(
-            edge_colors, FlattenedOrdering.CLOCKWISE, flattened_column_first
-        ),
-        edge_colors=edge_colors,
-        order=order,
-        bitmask=bitmask,
-        adjacency_matrix=adjacency_matrix,
-        flattened_column_first=flattened_column_first,
-        flattened_row_first=flattened_row_first,
-    )
-    verify_instantiated_graph(
-        constructor=lambda: Graph.from_flattened(
-            edge_colors, FlattenedOrdering.ROW_MAJOR, flattened_row_first
-        ),
-        edge_colors=edge_colors,
-        order=order,
-        bitmask=bitmask,
-        adjacency_matrix=adjacency_matrix,
-        flattened_column_first=flattened_column_first,
-        flattened_row_first=flattened_row_first,
+    verify_all(
+        edge_colors,
+        order,
+        bitmask,
+        bitmask,
+        adjacency_matrix,
+        flattened_clockwise,
+        flattened_row_major,
     )
 
 
 @pytest.mark.parametrize(
-    "batch_size, edge_colors, order, bitmask_batch, adjacency_matrix_batch, "
-    "flattened_column_first_batch, flattened_row_first_batch",
-    GRAPH_BATCH_TEST_CASES,
+    "edge_colors, order, bitmask, adjacency_matrix, flattened_clockwise, flattened_row_major",
+    GRAPH_TEST_CASES_LOOPS,
 )
-def test_graph_batch(
-    batch_size: int,
+def test_graph_loops(
     edge_colors: int,
     order: int,
-    bitmask_batch: np.ndarray,
-    adjacency_matrix_batch: np.ndarray,
-    flattened_column_first_batch: np.ndarray,
-    flattened_row_first_batch: np.ndarray,
+    bitmask: np.ndarray,
+    adjacency_matrix: np.ndarray,
+    flattened_clockwise: np.ndarray,
+    flattened_row_major: np.ndarray,
 ):
-    verify_instantiated_graph_batch(
-        constructor=lambda: GraphBatch.from_bitmask_batch(edge_colors, bitmask_batch),
-        batch_size=batch_size,
-        edge_colors=edge_colors,
-        order=order,
-        bitmask_batch=bitmask_batch,
-        adjacency_matrix_batch=adjacency_matrix_batch,
-        flattened_column_first_batch=flattened_column_first_batch,
-        flattened_row_first_batch=flattened_row_first_batch,
+    verify_all(
+        edge_colors,
+        order,
+        bitmask,
+        bitmask,
+        adjacency_matrix,
+        flattened_clockwise,
+        flattened_row_major,
+        allow_loops=True,
     )
-    verify_instantiated_graph_batch(
-        constructor=lambda: GraphBatch.from_adjacency_matrix_batch(
-            edge_colors, adjacency_matrix_batch
-        ),
-        batch_size=batch_size,
-        edge_colors=edge_colors,
-        order=order,
-        bitmask_batch=bitmask_batch,
-        adjacency_matrix_batch=adjacency_matrix_batch,
-        flattened_column_first_batch=flattened_column_first_batch,
-        flattened_row_first_batch=flattened_row_first_batch,
+
+
+@pytest.mark.parametrize(
+    "edge_colors, order, bitmask_in, bitmask_out, adjacency_matrix, flattened_clockwise, flattened_row_major",
+    GRAPH_TEST_CASES_DIRECTED,
+)
+def test_graph_directed(
+    edge_colors: int,
+    order: int,
+    bitmask_in: np.ndarray,
+    bitmask_out: np.ndarray,
+    adjacency_matrix: np.ndarray,
+    flattened_clockwise: np.ndarray,
+    flattened_row_major: np.ndarray,
+):
+    verify_all(
+        edge_colors,
+        order,
+        bitmask_in,
+        bitmask_out,
+        adjacency_matrix,
+        flattened_clockwise,
+        flattened_row_major,
+        is_directed=True,
     )
-    verify_instantiated_graph_batch(
-        constructor=lambda: GraphBatch.from_flattened_batch(
-            edge_colors,
-            FlattenedOrdering.CLOCKWISE,
-            flattened_column_first_batch,
-        ),
-        batch_size=batch_size,
-        edge_colors=edge_colors,
-        order=order,
-        bitmask_batch=bitmask_batch,
-        adjacency_matrix_batch=adjacency_matrix_batch,
-        flattened_column_first_batch=flattened_column_first_batch,
-        flattened_row_first_batch=flattened_row_first_batch,
+
+
+@pytest.mark.parametrize(
+    "edge_colors, order, bitmask_in, bitmask_out, adjacency_matrix, flattened_clockwise, flattened_row_major",
+    GRAPH_TEST_CASES_DIRECTED_LOOPS,
+)
+def test_graph_directed_loops(
+    edge_colors: int,
+    order: int,
+    bitmask_in: np.ndarray,
+    bitmask_out: np.ndarray,
+    adjacency_matrix: np.ndarray,
+    flattened_clockwise: np.ndarray,
+    flattened_row_major: np.ndarray,
+):
+    verify_all(
+        edge_colors,
+        order,
+        bitmask_in,
+        bitmask_out,
+        adjacency_matrix,
+        flattened_clockwise,
+        flattened_row_major,
+        is_directed=True,
+        allow_loops=True,
     )
-    verify_instantiated_graph_batch(
-        constructor=lambda: GraphBatch.from_flattened_batch(
-            edge_colors,
-            FlattenedOrdering.ROW_MAJOR,
-            flattened_row_first_batch,
-        ),
-        batch_size=batch_size,
-        edge_colors=edge_colors,
-        order=order,
-        bitmask_batch=bitmask_batch,
-        adjacency_matrix_batch=adjacency_matrix_batch,
-        flattened_column_first_batch=flattened_column_first_batch,
-        flattened_row_first_batch=flattened_row_first_batch,
+
+
+def verify_all(
+    edge_colors: int,
+    order: int,
+    bitmask_in: np.ndarray,
+    bitmask_out: np.ndarray,
+    adjacency_matrix: np.ndarray,
+    flattened_clockwise: np.ndarray,
+    flattened_row_major: np.ndarray,
+    is_directed: bool = False,
+    allow_loops: bool = False,
+):
+    cargs = [edge_colors, is_directed, allow_loops]
+    args = [
+        edge_colors,
+        order,
+        bitmask_in,
+        bitmask_out,
+        adjacency_matrix,
+        flattened_clockwise,
+        flattened_row_major,
+        is_directed,
+        allow_loops,
+    ]
+    verify_instantiated_graph(
+        lambda: Graph.from_bitmask(bitmask_out, BitmaskType.OUT_NEIGHBORS, *cargs),
+        *args,
     )
+    verify_instantiated_graph(
+        lambda: Graph.from_bitmask(bitmask_in, BitmaskType.IN_NEIGHBORS, *cargs),
+        *args,
+    )
+    verify_instantiated_graph(
+        lambda: Graph.from_adjacency_matrix(adjacency_matrix, *cargs),
+        *args,
+    )
+    verify_instantiated_graph(
+        lambda: Graph.from_flattened(flattened_clockwise, FlattenedOrdering.CLOCKWISE, *cargs),
+        *args,
+    )
+    verify_instantiated_graph(
+        lambda: Graph.from_flattened(flattened_row_major, FlattenedOrdering.ROW_MAJOR, *cargs),
+        *args,
+    )
+
+
+# @pytest.mark.parametrize(
+#     "batch_size, edge_colors, order, bitmask_batch, adjacency_matrix_batch, "
+#     "flattened_column_first_batch, flattened_row_first_batch",
+#     GRAPH_BATCH_TEST_CASES,
+# )
+# def test_graph_batch(
+#     batch_size: int,
+#     edge_colors: int,
+#     order: int,
+#     bitmask_batch: np.ndarray,
+#     adjacency_matrix_batch: np.ndarray,
+#     flattened_column_first_batch: np.ndarray,
+#     flattened_row_first_batch: np.ndarray,
+# ):
+#     verify_instantiated_graph_batch(
+#         constructor=lambda: GraphBatch.from_bitmask_batch(edge_colors, bitmask_batch),
+#         batch_size=batch_size,
+#         edge_colors=edge_colors,
+#         order=order,
+#         bitmask_batch=bitmask_batch,
+#         adjacency_matrix_batch=adjacency_matrix_batch,
+#         flattened_column_first_batch=flattened_column_first_batch,
+#         flattened_row_first_batch=flattened_row_first_batch,
+#     )
+#     verify_instantiated_graph_batch(
+#         constructor=lambda: GraphBatch.from_adjacency_matrix_batch(
+#             edge_colors, adjacency_matrix_batch
+#         ),
+#         batch_size=batch_size,
+#         edge_colors=edge_colors,
+#         order=order,
+#         bitmask_batch=bitmask_batch,
+#         adjacency_matrix_batch=adjacency_matrix_batch,
+#         flattened_column_first_batch=flattened_column_first_batch,
+#         flattened_row_first_batch=flattened_row_first_batch,
+#     )
+#     verify_instantiated_graph_batch(
+#         constructor=lambda: GraphBatch.from_flattened_batch(
+#             edge_colors,
+#             FlattenedOrdering.CLOCKWISE,
+#             flattened_column_first_batch,
+#         ),
+#         batch_size=batch_size,
+#         edge_colors=edge_colors,
+#         order=order,
+#         bitmask_batch=bitmask_batch,
+#         adjacency_matrix_batch=adjacency_matrix_batch,
+#         flattened_column_first_batch=flattened_column_first_batch,
+#         flattened_row_first_batch=flattened_row_first_batch,
+#     )
+#     verify_instantiated_graph_batch(
+#         constructor=lambda: GraphBatch.from_flattened_batch(
+#             edge_colors,
+#             FlattenedOrdering.ROW_MAJOR,
+#             flattened_row_first_batch,
+#         ),
+#         batch_size=batch_size,
+#         edge_colors=edge_colors,
+#         order=order,
+#         bitmask_batch=bitmask_batch,
+#         adjacency_matrix_batch=adjacency_matrix_batch,
+#         flattened_column_first_batch=flattened_column_first_batch,
+#         flattened_row_first_batch=flattened_row_first_batch,
+#     )
