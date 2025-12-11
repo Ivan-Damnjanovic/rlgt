@@ -101,6 +101,27 @@ GRAPH_TEST_CASES_BASIC = [
         np.array([1, 0, 0, 1, 0, 0], dtype=int),
         np.array([1, 0, 1, 0, 0, 0], dtype=int),
     ),
+    (
+        2,
+        3,
+        np.array(
+            [
+                [0, 4, 2],
+                [2, 1, 0],
+            ],
+            dtype=int,
+        ),
+        np.array(
+            [
+                [0, 1, 2],
+                [1, 0, 0],
+                [2, 0, 0],
+            ],
+            dtype=int,
+        ),
+        np.array([1, 2, 0], dtype=int),
+        np.array([1, 2, 0], dtype=int),
+    ),
 ]
 
 GRAPH_TEST_CASES_LOOPS = [
@@ -142,6 +163,27 @@ GRAPH_TEST_CASES_LOOPS = [
         ),
         np.array([1, 0, 1, 1, 0, 0], dtype=int),
         np.array([1, 0, 1, 1, 0, 0], dtype=int),
+    ),
+    (
+        2,
+        3,
+        np.array(
+            [
+                [2, 5, 6],
+                [5, 0, 1],
+            ],
+            dtype=int,
+        ),
+        np.array(
+            [
+                [1, 0, 1],
+                [0, 2, 0],
+                [1, 0, 0],
+            ],
+            dtype=int,
+        ),
+        np.array([1, 0, 2, 1, 0, 0], dtype=int),
+        np.array([1, 0, 1, 2, 0, 0], dtype=int),
     ),
 ]
 
@@ -277,6 +319,34 @@ GRAPH_TEST_CASES_DIRECTED = [
         np.array([2, 0, 1, 0, 1, 0], dtype=int),
         np.array([2, 1, 0, 0, 0, 1], dtype=int),
     ),
+    (
+        2,
+        3,
+        np.array(
+            [
+                [6, 0, 2],
+                [0, 4, 1],
+            ],
+            dtype=int,
+        ),
+        np.array(
+            [
+                [0, 5, 1],
+                [4, 0, 2],
+            ],
+            dtype=int,
+        ),
+        np.array(
+            [
+                [0, 2, 1],
+                [0, 0, 0],
+                [0, 1, 0],
+            ],
+            dtype=int,
+        ),
+        np.array([2, 0, 1, 0, 1, 0], dtype=int),
+        np.array([2, 1, 0, 0, 0, 1], dtype=int),
+    ),
 ]
 
 
@@ -349,6 +419,34 @@ GRAPH_TEST_CASES_DIRECTED_LOOPS = [
             [
                 [4, 0, 2],
                 [2, 2, 0],
+            ],
+            dtype=int,
+        ),
+        np.array(
+            [
+                [0, 2, 1],
+                [0, 2, 0],
+                [0, 1, 0],
+            ],
+            dtype=int,
+        ),
+        np.array([0, 2, 2, 0, 1, 0, 0, 1, 0], dtype=int),
+        np.array([0, 2, 1, 0, 2, 0, 0, 1, 0], dtype=int),
+    ),
+    (
+        2,
+        3,
+        np.array(
+            [
+                [7, 0, 6],
+                [0, 4, 1],
+            ],
+            dtype=int,
+        ),
+        np.array(
+            [
+                [1, 5, 5],
+                [4, 0, 2],
             ],
             dtype=int,
         ),
