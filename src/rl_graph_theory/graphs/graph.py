@@ -462,14 +462,12 @@ class Graph:
 
         # If the graph is not fully colored, then the reduced bitmask format cannot be used.
         if np.max(self.adjacency_matrix) == self.__edge_colors:
-            print("AAAAAAA")
             temp = (self.adjacency_matrix == color_indices[:, None, None]).astype(int)
             if not self.__allow_loops:
                 np.fill_diagonal(temp[0], 0)
             result = temp @ masks
         # Otherwise, we use the reduced bitmask format.
         else:
-            print("BBBBBBBB")
             temp = (self.adjacency_matrix == color_indices[1:, None, None]).astype(int)
             result = temp @ masks
 
@@ -507,14 +505,12 @@ class Graph:
 
         # If the graph is not fully colored, then the reduced bitmask format cannot be used.
         if np.max(self.adjacency_matrix) == self.__edge_colors:
-            print("AAAAAA")
             temp = (self.adjacency_matrix.T == color_indices[:, None, None]).astype(int)
             if not self.__allow_loops:
                 np.fill_diagonal(temp[0], 0)
             result = temp @ masks
         # Otherwise, we use the reduced bitmask format.
         else:
-            print("BBBBBB")
             temp = (self.adjacency_matrix.T == color_indices[1:, None, None]).astype(int)
             result = temp @ masks
 
