@@ -870,12 +870,12 @@ GRAPH_TEST_CASES_LARGE = [
 ]
 
 
-def batchify(test_cases):
+def batchify(test_cases, batch_size=1):
     return [
         tuple(
-            [1]
+            [batch_size]
             + [
-                np.expand_dims(item, axis=0) if isinstance(item, np.ndarray) else item
+                np.stack([item] * batch_size, axis=0) if isinstance(item, np.ndarray) else item
                 for item in test_case
             ]
         )
@@ -883,20 +883,75 @@ def batchify(test_cases):
     ]
 
 
+def merge(test_cases):
+    res = []
+    batch_size = len(test_cases)
+
+    for i in range(len(test_cases[0])):
+        items = [test_case[i] for test_case in test_cases]
+        if isinstance(items[0], np.ndarray):
+            res.append(np.stack(items, axis=0))
+        else:
+            assert len(set(items)) == 1
+            res.append(items[0])
+
+    return tuple([batch_size] + res)
+
+
 GRAPH_BATCH_TEST_CASES_BASIC = [
     *batchify(GRAPH_TEST_CASES_BASIC),
+    *batchify(GRAPH_TEST_CASES_BASIC, batch_size=2),
+    merge(GRAPH_TEST_CASES_BASIC[0:2]),  # edge_color=2, order=2
+    merge(GRAPH_TEST_CASES_BASIC[2:5]),  # edge_color=3, order=2
+    merge(GRAPH_TEST_CASES_BASIC[5:8]),  # edge_color=2, order=3
+    (  # one fully colored and one not
+        2,
+        2,
+        3,
+        np.array(
+            [
+                [[4, 4, 3], [2, 1, 0]],
+                [[4, 0, 1], [2, 1, 0]],
+            ],
+            dtype=int,
+        ),
+        np.array(
+            [
+                [
+                    [0, 1, 0],
+                    [1, 0, 0],
+                    [0, 0, 0],
+                ],
+                [
+                    [0, 1, 0],
+                    [1, 0, 2],
+                    [0, 2, 0],
+                ],
+            ],
+            dtype=int,
+        ),
+        np.array([[1, 0, 0], [1, 0, 2]], dtype=int),
+        np.array([[1, 0, 0], [1, 0, 2]], dtype=int),
+    ),
 ]
 
 GRAPH_BATCH_TEST_CASES_LOOPS = [
     *batchify(GRAPH_TEST_CASES_LOOPS),
+    *batchify(GRAPH_TEST_CASES_LOOPS, batch_size=2),
+    merge(GRAPH_TEST_CASES_LOOPS[0:3]),  # edge_color=2, order=2
 ]
 
 GRAPH_BATCH_TEST_CASES_DIRECTED = [
     *batchify(GRAPH_TEST_CASES_DIRECTED),
+    *batchify(GRAPH_TEST_CASES_DIRECTED, batch_size=2),
+    merge(GRAPH_TEST_CASES_DIRECTED[0:3]),  # edge_color=2, order=2
+    merge(GRAPH_TEST_CASES_DIRECTED[3:7]),  # edge_color=2, order=3
 ]
 
 GRAPH_BATCH_TEST_CASES_DIRECTED_LOOPS = [
     *batchify(GRAPH_TEST_CASES_DIRECTED_LOOPS),
+    *batchify(GRAPH_TEST_CASES_DIRECTED_LOOPS, batch_size=2),
+    merge(GRAPH_TEST_CASES_DIRECTED_LOOPS[0:3]),  # edge_color=2, order=2
 ]
 
 GRAPH_BATCH_TEST_CASES_LARGE = [
