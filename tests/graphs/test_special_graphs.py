@@ -42,7 +42,7 @@ from .utils import verify_instantiated_graph
 
 
 @pytest.mark.parametrize(
-    "order, edge_colors, selected_edge_color, bitmask, adjacency_matrix, flattened",
+    "order, edge_colors, selected_edge_color, bitmask, adjacency_matrix, flattened, allow_loops",
     MONOCHROMATIC_GRAPH_TEST_CASES,
 )
 def test_monochromatic_graph(
@@ -52,11 +52,12 @@ def test_monochromatic_graph(
     bitmask: np.ndarray,
     adjacency_matrix: np.ndarray,
     flattened: np.ndarray,
+    allow_loops: bool,
 ):
     for graph_format in GraphFormat:
         verify_instantiated_graph(
             constructor=lambda: MonochromaticGraph(
-                graph_format, order, edge_colors, selected_edge_color
+                graph_format, order, edge_colors, selected_edge_color, allow_loops
             ),
             edge_colors=edge_colors,
             order=order,
@@ -65,6 +66,7 @@ def test_monochromatic_graph(
             adjacency_matrix=adjacency_matrix,
             flattened_clockwise=flattened,
             flattened_row_major=flattened,
+            allow_loops=allow_loops,
         )
 
 
