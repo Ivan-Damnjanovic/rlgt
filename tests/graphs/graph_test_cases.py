@@ -870,7 +870,36 @@ GRAPH_TEST_CASES_LARGE = [
 ]
 
 
-GRAPH_BATCH_TEST_CASES = [
+def batchify(test_cases):
+    return [
+        tuple(
+            [1]
+            + [
+                np.expand_dims(item, axis=0) if isinstance(item, np.ndarray) else item
+                for item in test_case
+            ]
+        )
+        for test_case in test_cases
+    ]
+
+
+GRAPH_BATCH_TEST_CASES_BASIC = [
+    *batchify(GRAPH_TEST_CASES_BASIC),
+]
+
+GRAPH_BATCH_TEST_CASES_LOOPS = [
+    *batchify(GRAPH_TEST_CASES_LOOPS),
+]
+
+GRAPH_BATCH_TEST_CASES_DIRECTED = [
+    *batchify(GRAPH_TEST_CASES_DIRECTED),
+]
+
+GRAPH_BATCH_TEST_CASES_DIRECTED_LOOPS = [
+    *batchify(GRAPH_TEST_CASES_DIRECTED_LOOPS),
+]
+
+GRAPH_BATCH_TEST_CASES_LARGE = [
     (
         1,
         4,

@@ -75,10 +75,13 @@ def verify_instantiated_graph_batch(
     batch_size: int,
     edge_colors: int,
     order: int,
-    bitmask_batch: np.ndarray,
-    adjacency_matrix_batch: np.ndarray,
-    flattened_column_first_batch: np.ndarray,
-    flattened_row_first_batch: np.ndarray,
+    bitmask_in: np.ndarray,
+    bitmask_out: np.ndarray,
+    adjacency_matrix: np.ndarray,
+    flattened_clockwise: np.ndarray,
+    flattened_row_major: np.ndarray,
+    is_directed: bool = False,
+    allow_loops: bool = False,
 ):
     """
     This function verifies whether a given constructor correctly instantiates a `GraphBatch`
@@ -108,30 +111,25 @@ def verify_instantiated_graph_batch(
     assert instance.batch_size == batch_size
     assert instance.edge_colors == edge_colors
     assert instance.order == order
-    assert instance.bitmask_batch.shape == bitmask_batch.shape
-    assert np.all(instance.bitmask_batch == bitmask_batch)
-    assert instance._GraphBatch__bitmask_batch.shape == bitmask_batch.shape
-    assert np.all(instance._GraphBatch__bitmask_batch == bitmask_batch)
+    assert instance.is_directed == is_directed
+    assert instance.allow_loops == allow_loops
 
     instance = constructor()
-    assert instance.adjacency_matrix_batch.shape == adjacency_matrix_batch.shape
-    assert np.all(instance.adjacency_matrix_batch == adjacency_matrix_batch)
-    assert instance._GraphBatch__adjacency_matrix_batch.shape == adjacency_matrix_batch.shape
-    assert np.all(instance._GraphBatch__adjacency_matrix_batch == adjacency_matrix_batch)
+    np.testing.assert_array_equal(instance.bitmask_in, bitmask_in)
+    np.testing.assert_array_equal(instance._GraphBatch__bitmask_in, bitmask_in)
 
     instance = constructor()
-    assert instance.flattened_column_first_batch.shape == flattened_column_first_batch.shape
-    assert np.all(instance.flattened_column_first_batch == flattened_column_first_batch)
-    assert (
-        instance._GraphBatch__flattened_column_first_batch.shape
-        == flattened_column_first_batch.shape
-    )
-    assert np.all(
-        instance._GraphBatch__flattened_column_first_batch == flattened_column_first_batch
-    )
+    np.testing.assert_array_equal(instance.bitmask_out, bitmask_out)
+    np.testing.assert_array_equal(instance._GraphBatch__bitmask_out, bitmask_out)
 
     instance = constructor()
-    assert instance.flattened_row_first_batch.shape == flattened_row_first_batch.shape
-    assert np.all(instance.flattened_row_first_batch == flattened_row_first_batch)
-    assert instance._GraphBatch__flattened_row_first_batch.shape == flattened_row_first_batch.shape
-    assert np.all(instance._GraphBatch__flattened_row_first_batch == flattened_row_first_batch)
+    np.testing.assert_array_equal(instance.adjacency_matrix, adjacency_matrix)
+    np.testing.assert_array_equal(instance._GraphBatch__adjacency_matrix, adjacency_matrix)
+
+    instance = constructor()
+    np.testing.assert_array_equal(instance.flattened_clockwise, flattened_clockwise)
+    np.testing.assert_array_equal(instance._GraphBatch__flattened_clockwise, flattened_clockwise)
+
+    instance = constructor()
+    np.testing.assert_array_equal(instance.flattened_row_major, flattened_row_major)
+    np.testing.assert_array_equal(instance._GraphBatch__flattened_row_major, flattened_row_major)

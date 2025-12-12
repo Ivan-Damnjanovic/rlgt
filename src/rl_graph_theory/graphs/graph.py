@@ -1271,7 +1271,7 @@ class GraphBatch:
         # If the number of rows of any of the two bitmask format representation matrices matches
         # the number of proper edge colors, then this means that a standard (non-reduced) bitmask
         # format is being used.
-        if temp.shape[0] == self.__edge_colors:
+        if temp.shape[1] == self.__edge_colors:
             result = np.full(
                 (self.__batch_size, self.__order, self.__order), self.__edge_colors, dtype=int
             )
@@ -1286,7 +1286,7 @@ class GraphBatch:
             result = np.sum(temp * weights[None, :, None, None], axis=1)
 
         if self.__bitmask_out is None:
-            result = result.reshape(0, 2, 1)
+            result = result.transpose(0, 2, 1)
 
         # Update the adjacency matrix format representation to make it available for further use,
         # so that the same conversion does not have to be performed twice.
