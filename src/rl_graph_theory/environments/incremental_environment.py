@@ -8,11 +8,9 @@ import numpy as np
 
 from ..graphs.graph import FlattenedOrdering, GraphBatch
 from .environment import (
-    ActionBatch,
     EpisodeStatus,
     GraphEnvironment,
     RewardType,
-    StateBatch,
 )
 
 

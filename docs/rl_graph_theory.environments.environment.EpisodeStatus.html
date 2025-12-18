@@ -137,16 +137,6 @@
         
 
         
-            <div class="itemName"><code><a href="#COMPLETED" class="internal-link" title="rl_graph_theory.environments.environment.EpisodeStatus.COMPLETED">COMPLETED</a></code>
-            </div>
-        
-
-    </li><li class="">
-        
-        
-        
-
-        
             <div class="itemName"><code><a href="#IN_PROGRESS" class="internal-link" title="rl_graph_theory.environments.environment.EpisodeStatus.IN_PROGRESS">IN<wbr></wbr>_PROGRESS</a></code>
             </div>
         
@@ -194,17 +184,7 @@
         <div class="childrenKindTitle">Classes</div>
         <ul>
     
-    <li class="">
-        
-        
-        
-
-        
-            <div class="itemName"><code><a href="rl_graph_theory.environments.environment.ActionBatch.html" class="internal-link" title="rl_graph_theory.environments.environment.ActionBatch"><wbr></wbr>Action<wbr></wbr>Batch</a></code>
-            </div>
-        
-
-    </li><li class=" thisobject">
+    <li class=" thisobject">
         
         
         
@@ -230,27 +210,7 @@
         
 
         
-            <div class="itemName"><code><a href="rl_graph_theory.environments.environment.RewardBatch.html" class="internal-link" title="rl_graph_theory.environments.environment.RewardBatch"><wbr></wbr>Reward<wbr></wbr>Batch</a></code>
-            </div>
-        
-
-    </li><li class="">
-        
-        
-        
-
-        
             <div class="itemName"><code><a href="rl_graph_theory.environments.environment.RewardType.html" class="internal-link" title="rl_graph_theory.environments.environment.RewardType"><wbr></wbr>Reward<wbr></wbr>Type</a></code>
-            </div>
-        
-
-    </li><li class="">
-        
-        
-        
-
-        
-            <div class="itemName"><code><a href="rl_graph_theory.environments.environment.StateBatch.html" class="internal-link" title="rl_graph_theory.environments.environment.StateBatch"><wbr></wbr>State<wbr></wbr>Batch</a></code>
             </div>
         
 
@@ -304,24 +264,18 @@
 
         <div class="moduleDocstring">
           <div><p>This enumeration represents all the possible statuses that an episode could have in the context
-of a reinforcement learning environment to be used in graph theory applications.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Note</td></tr><tr><td colspan="2">This enumeration is also applicable to batches of episodes. In this case, a batch of
-episodes has the status <code><a href="#COMPLETED" class="internal-link" title="rl_graph_theory.environments.environment.EpisodeStatus.COMPLETED">EpisodeStatus.COMPLETED</a></code> if at least one of its episodes has this
-status. Otherwise, it is guaranteed that all the episodes must enter an absorbing state at
-the same time, so bearing in mind that the steps are taken in all the episodes in parallel,
-this means that all the episodes have the same status. This common status is then
-considered the status of the given batch of episodes.</td></tr></table></div>
+of an RL environment to be used in graph theory applications.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Note</td></tr><tr><td colspan="2">This enumeration is also applicable to batches of episodes. If the tasks are episodic,
+then the parallelized episodes are guaranteed to enter an absorbing state after the same
+number of performed actions. Therefore, regardless of whether the tasks are episodic or
+continuing, all the episodes must always have the same status. This common status is then
+considered to be the status of the given batch of episodes.</td></tr></table></div>
         </div>
 
         <div id="split-tables">
-          <table class="children sortable" id="id8">
+          <table class="children sortable" id="id5">
   
   
   <tr class="constant">
-    
-    <td>Constant</td>
-    <td><code><a href="#COMPLETED" class="internal-link" title="rl_graph_theory.environments.environment.EpisodeStatus.COMPLETED">COMPLETED</a></code></td>
-    <td>The episode has reached a state whose underlying graph achieves satisfactory results, hence the reinforcement learning process should be stopped and the problem can be considered solved.</td>
-  </tr><tr class="constant">
     
     <td>Constant</td>
     <td><code><a href="#IN_PROGRESS" class="internal-link" title="rl_graph_theory.environments.environment.EpisodeStatus.IN_PROGRESS">IN<wbr></wbr>_PROGRESS</a></code></td>
@@ -330,12 +284,12 @@ considered the status of the given batch of episodes.</td></tr></table></div>
     
     <td>Constant</td>
     <td><code><a href="#TERMINATED" class="internal-link" title="rl_graph_theory.environments.environment.EpisodeStatus.TERMINATED">TERMINATED</a></code></td>
-    <td>The episode has ended due to reaching an absorbing state, hence the environment cannot accept any further actions.</td>
+    <td>The episode has ended due to reaching an absorbing state, hence the environment cannot accept any further actions. This status appears only in RL environments where the tasks are episodic.</td>
   </tr><tr class="constant">
     
     <td>Constant</td>
     <td><code><a href="#TRUNCATED" class="internal-link" title="rl_graph_theory.environments.environment.EpisodeStatus.TRUNCATED">TRUNCATED</a></code></td>
-    <td>The episode has ended since the required number of steps has been taken. Although the current state is not absorbing, no further actions should be performed.</td>
+    <td>The episode has ended since the required number of steps has been taken. In this case, although the current state is not absorbing, no further actions should be performed. This status appears only in RL environments where the tasks are continuing.</td>
   </tr>
 </table>
           
@@ -345,32 +299,6 @@ considered the status of the given batch of episodes.</td></tr></table></div>
 
         <div id="child-list">
           <div class="baseconstant">
-  
-  
-  <a name="rl_graph_theory.environments.environment.EpisodeStatus.COMPLETED">
-    
-  </a>
-  <a name="COMPLETED">
-    
-  </a>
-  <div class="functionHeader">
-    
-    <span class="py-defname">COMPLETED</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
-    
-    <a class="headerLink" href="#COMPLETED" title="rl_graph_theory.environments.environment.EpisodeStatus.COMPLETED">
-      
-      
-      ¶
-    </a>
-  </div>
-  <div class="functionBody">
-    
-    <div><p>The episode has reached a state whose underlying graph achieves satisfactory
-results, hence the reinforcement learning process should be stopped and the problem can be
-considered solved.</p></div>
-    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>1</code></pre></td></tr></table>
-  </div>
-</div><div class="baseconstant">
   
   
   <a name="rl_graph_theory.environments.environment.EpisodeStatus.IN_PROGRESS">
@@ -417,8 +345,9 @@ further actions.</p></div>
   <div class="functionBody">
     
     <div><p>The episode has ended due to reaching an absorbing state, hence the
-environment cannot accept any further actions.</p></div>
-    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>2</code></pre></td></tr></table>
+environment cannot accept any further actions. This status appears only in RL environments
+where the tasks are episodic.</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>1</code></pre></td></tr></table>
   </div>
 </div><div class="baseconstant">
   
@@ -441,9 +370,10 @@ environment cannot accept any further actions.</p></div>
   </div>
   <div class="functionBody">
     
-    <div><p>The episode has ended since the required number of steps has been taken.
-Although the current state is not absorbing, no further actions should be performed.</p></div>
-    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>3</code></pre></td></tr></table>
+    <div><p>The episode has ended since the required number of steps has been taken. In
+this case, although the current state is not absorbing, no further actions should be
+performed. This status appears only in RL environments where the tasks are continuing.</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>2</code></pre></td></tr></table>
   </div>
 </div>
         </div>
@@ -457,7 +387,7 @@ Although the current state is not absorbing, no further actions should be perfor
   <div class="container-fluid">
     <a href="index.html">API Documentation</a> for rl-graph-theory,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    25.10.1 at 2025-12-12 19:26:17.
+    25.10.1 at 2025-12-18 13:23:49.
   </div>
 
   <!-- Search related scripts needs to be loaded at the end of HTML 

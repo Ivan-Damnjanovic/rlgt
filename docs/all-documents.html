@@ -123,7 +123,7 @@
             <div class="type">Module</div>
             <div class="kind">Module</div>
             <div class="privacy">PUBLIC</div>
-            <div class="summary">This <tt class="rst-docutils rst-literal">Python</tt> module contains the <code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment">GraphEnvironment</a></code> class, which encapsulates the concept of a reinforcement learning environment to be used in graph theory applications, alongside various other associated classes and enumerations.</div>
+            <div class="summary">This <tt class="rst-docutils rst-literal">Python</tt> module contains the <code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment">GraphEnvironment</a></code> abstract class, which encapsulates the concept of a reinforcement learning environment to be used in graph theory applications, alongside other associated enumerations.</div>
           </li><li id="rl_graph_theory.environments.incremental_environment">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.incremental<wbr></wbr>_environment</div>
@@ -646,102 +646,6 @@ allow_loops, graph_format, format_representation)</tt>...</div>
             <div class="kind">Property</div>
             <div class="privacy">PUBLIC</div>
             <div class="summary">This property returns the <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> that represents the given batch of graphs in the flattened clockwise format (<code><a href="rl_graph_theory.graphs.graph.GraphFormat.html#FLATTENED_CLOCKWISE" class="internal-link" title="rl_graph_theory.graphs.graph.GraphFormat.FLATTENED_CLOCKWISE">GraphFormat.FLATTENED_CLOCKWISE</a></code>).</div>
-          </li><li id="rl_graph_theory.environments.environment.StateBatch">
-            
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.environment<wbr></wbr>.<wbr></wbr>State<wbr></wbr>Batch</div>
-            <div class="url">rl_graph_theory.environments.environment.StateBatch.html</div>
-            <div class="type">Class</div>
-            <div class="kind">Class</div>
-            <div class="privacy">PUBLIC</div>
-            <div class="summary">This class encapsulates the concept of a batch of states in the context of a reinforcement learning environment to be used in graph theory applications. It essentially behaves as a wrapper around a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code>...</div>
-          </li><li id="rl_graph_theory.environments.environment.StateBatch.__state_batch">
-            
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.environment<wbr></wbr>.<wbr></wbr>State<wbr></wbr>Batch<wbr></wbr>.__state<wbr></wbr>_batch</div>
-            <div class="url">rl_graph_theory.environments.environment.StateBatch.html#__state_batch</div>
-            <div class="type">Attribute</div>
-            <div class="kind">Instance Variable</div>
-            <div class="privacy">PRIVATE</div>
-            <div class="summary">The given batch of states, represented as a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> matrix. The matrix rows correspond to the states from the batch, while the number of columns depends on the concrete state space that the states are being taken from...</div>
-          </li><li id="rl_graph_theory.environments.environment.StateBatch.__init__">
-            
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.environment<wbr></wbr>.<wbr></wbr>State<wbr></wbr>Batch<wbr></wbr>.__init__</div>
-            <div class="url">rl_graph_theory.environments.environment.StateBatch.html#__init__</div>
-            <div class="type">Function</div>
-            <div class="kind">Method</div>
-            <div class="privacy">PUBLIC</div>
-            <div class="summary">This constructor initializes a <code><a href="rl_graph_theory.environments.environment.StateBatch.html" class="internal-link" title="rl_graph_theory.environments.environment.StateBatch">StateBatch</a></code> object that corresponds to the provided batch of states, given as a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> matrix.</div>
-          </li><li id="rl_graph_theory.environments.environment.StateBatch.data">
-            
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.environment<wbr></wbr>.<wbr></wbr>State<wbr></wbr>Batch<wbr></wbr>.data</div>
-            <div class="url">rl_graph_theory.environments.environment.StateBatch.html#data</div>
-            <div class="type">Attribute</div>
-            <div class="kind">Property</div>
-            <div class="privacy">PUBLIC</div>
-            <div class="summary">This property returns the <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> matrix that represents the given batch of states. The matrix rows correspond to the states from the batch, while the number of columns depends on the concrete state space that the states are being taken from...</div>
-          </li><li id="rl_graph_theory.environments.environment.ActionBatch">
-            
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.environment<wbr></wbr>.<wbr></wbr>Action<wbr></wbr>Batch</div>
-            <div class="url">rl_graph_theory.environments.environment.ActionBatch.html</div>
-            <div class="type">Class</div>
-            <div class="kind">Class</div>
-            <div class="privacy">PUBLIC</div>
-            <div class="summary">This class encapsulates the concept of a batch of actions in the context of a reinforcement learning environment to be used in graph theory applications. It essentially behaves as a wrapper around a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code>...</div>
-          </li><li id="rl_graph_theory.environments.environment.ActionBatch.__action_batch">
-            
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.environment<wbr></wbr>.<wbr></wbr>Action<wbr></wbr>Batch<wbr></wbr>.__action<wbr></wbr>_batch</div>
-            <div class="url">rl_graph_theory.environments.environment.ActionBatch.html#__action_batch</div>
-            <div class="type">Attribute</div>
-            <div class="kind">Instance Variable</div>
-            <div class="privacy">PRIVATE</div>
-            <div class="summary">The given batch of actions, represented as a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> matrix. The matrix rows correspond to the actions from the batch, while the number of columns depends on the concrete action space that the actions are being taken from...</div>
-          </li><li id="rl_graph_theory.environments.environment.ActionBatch.__init__">
-            
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.environment<wbr></wbr>.<wbr></wbr>Action<wbr></wbr>Batch<wbr></wbr>.__init__</div>
-            <div class="url">rl_graph_theory.environments.environment.ActionBatch.html#__init__</div>
-            <div class="type">Function</div>
-            <div class="kind">Method</div>
-            <div class="privacy">PUBLIC</div>
-            <div class="summary">This constructor initializes an <code><a href="rl_graph_theory.environments.environment.ActionBatch.html" class="internal-link" title="rl_graph_theory.environments.environment.ActionBatch">ActionBatch</a></code> object that corresponds to the provided batch of actions, given as a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> matrix.</div>
-          </li><li id="rl_graph_theory.environments.environment.ActionBatch.data">
-            
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.environment<wbr></wbr>.<wbr></wbr>Action<wbr></wbr>Batch<wbr></wbr>.data</div>
-            <div class="url">rl_graph_theory.environments.environment.ActionBatch.html#data</div>
-            <div class="type">Attribute</div>
-            <div class="kind">Property</div>
-            <div class="privacy">PUBLIC</div>
-            <div class="summary">This property returns the <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> matrix that represents the given batch of actions. The matrix rows correspond to the actions from the batch, while the number of columns depends on the concrete action space that the actions are being taken from...</div>
-          </li><li id="rl_graph_theory.environments.environment.RewardBatch">
-            
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.environment<wbr></wbr>.<wbr></wbr>Reward<wbr></wbr>Batch</div>
-            <div class="url">rl_graph_theory.environments.environment.RewardBatch.html</div>
-            <div class="type">Class</div>
-            <div class="kind">Class</div>
-            <div class="privacy">PUBLIC</div>
-            <div class="summary">This class encapsulates the concept of a batch of rewards in the context of a reinforcement learning environment to be used in graph theory applications. It essentially behaves as a wrapper around a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code>...</div>
-          </li><li id="rl_graph_theory.environments.environment.RewardBatch.__reward_batch">
-            
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.environment<wbr></wbr>.<wbr></wbr>Reward<wbr></wbr>Batch<wbr></wbr>.__reward<wbr></wbr>_batch</div>
-            <div class="url">rl_graph_theory.environments.environment.RewardBatch.html#__reward_batch</div>
-            <div class="type">Attribute</div>
-            <div class="kind">Instance Variable</div>
-            <div class="privacy">PRIVATE</div>
-            <div class="summary">The given batch of rewards, represented as a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> list whose elements correspond to the rewards from the batch. This list has at least one element.</div>
-          </li><li id="rl_graph_theory.environments.environment.RewardBatch.__init__">
-            
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.environment<wbr></wbr>.<wbr></wbr>Reward<wbr></wbr>Batch<wbr></wbr>.__init__</div>
-            <div class="url">rl_graph_theory.environments.environment.RewardBatch.html#__init__</div>
-            <div class="type">Function</div>
-            <div class="kind">Method</div>
-            <div class="privacy">PUBLIC</div>
-            <div class="summary">This constructor initializes a <code><a href="rl_graph_theory.environments.environment.RewardBatch.html" class="internal-link" title="rl_graph_theory.environments.environment.RewardBatch">RewardBatch</a></code> object that corresponds to the provided batch of rewards, given as a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> list.</div>
-          </li><li id="rl_graph_theory.environments.environment.RewardBatch.data">
-            
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.environment<wbr></wbr>.<wbr></wbr>Reward<wbr></wbr>Batch<wbr></wbr>.data</div>
-            <div class="url">rl_graph_theory.environments.environment.RewardBatch.html#data</div>
-            <div class="type">Attribute</div>
-            <div class="kind">Property</div>
-            <div class="privacy">PUBLIC</div>
-            <div class="summary">This property returns the <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> list that represents the given batch of rewards. The list is nonempty and its elements correspond to the rewards from the batch.</div>
           </li><li id="rl_graph_theory.environments.environment.RewardType">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.environment<wbr></wbr>.<wbr></wbr>Reward<wbr></wbr>Type</div>
@@ -749,7 +653,7 @@ allow_loops, graph_format, format_representation)</tt>...</div>
             <div class="type">Class</div>
             <div class="kind">Class</div>
             <div class="privacy">PUBLIC</div>
-            <div class="summary">This enumeration represents all the possible types of reward systems in the context of a reinforcement learning environment to be used in graph theory applications. In these applications, multiple episodes are acted on in parallel and all of their respective rewards are, therefore, also computed in parallel.</div>
+            <div class="summary">This enumeration represents the types and subtypes of reward systems in the context of an RL environment to be used in graph theory applications. In these applications, multiple episodes are acted on in parallel, and all of their respective rewards are, therefore, also computed in parallel...</div>
           </li><li id="rl_graph_theory.environments.environment.RewardType.SPARSE">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.environment<wbr></wbr>.<wbr></wbr>Reward<wbr></wbr>Type<wbr></wbr>.SPARSE</div>
@@ -757,7 +661,7 @@ allow_loops, graph_format, format_representation)</tt>...</div>
             <div class="type">Attribute</div>
             <div class="kind">Constant</div>
             <div class="privacy">PUBLIC</div>
-            <div class="summary">A single actual reward is obtained at the end of an episode, while all the previously issued rewards are just equal to zero. The said reward is determined by the expression <tt class="rst-docutils rst-literal">graph_invariant(terminal_graph_batch)</tt>...</div>
+            <div class="summary">The sparse reward system. The batch of corresponding rewards received after every batch of actions is zero, apart from the final batch of actions, for which it is equal to <tt class="rst-docutils rst-literal">graph_invariant(terminal_graph_batch)</tt>...</div>
           </li><li id="rl_graph_theory.environments.environment.RewardType.TELESCOPIC">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.environment<wbr></wbr>.<wbr></wbr>Reward<wbr></wbr>Type<wbr></wbr>.TELESCOPIC</div>
@@ -765,7 +669,7 @@ allow_loops, graph_format, format_representation)</tt>...</div>
             <div class="type">Attribute</div>
             <div class="kind">Constant</div>
             <div class="privacy">PUBLIC</div>
-            <div class="summary">In each episode, a reward is issued after every action and it is computed by the formula <tt class="rst-docutils rst-literal">graph_invariant(new_graph_batch) - graph_invariant(old_graph_batch)</tt>, where:</div>
+            <div class="summary">The telescopic reward system. The batch of corresponding rewards received after each batch of actions is computed by the formula <tt class="rst-docutils rst-literal">graph_invariant(new_graph_batch) - graph_invariant(old_graph_batch)</tt>, where:...</div>
           </li><li id="rl_graph_theory.environments.environment.RewardType.PROPER">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.environment<wbr></wbr>.<wbr></wbr>Reward<wbr></wbr>Type<wbr></wbr>.PROPER</div>
@@ -773,7 +677,7 @@ allow_loops, graph_format, format_representation)</tt>...</div>
             <div class="type">Attribute</div>
             <div class="kind">Constant</div>
             <div class="privacy">PUBLIC</div>
-            <div class="summary">In each episode, a reward is issued after every action and it is computed by the formula <tt class="rst-docutils rst-literal">reward_function(old_graph_batch, new_graph_batch)</tt>, where:</div>
+            <div class="summary">The proper reward system. The batch of corresponding rewards received after each batch of actions is computed by the formula <tt class="rst-docutils rst-literal">reward_function(old_graph_batch, new_graph_batch)</tt>, where:</div>
           </li><li id="rl_graph_theory.environments.environment.EpisodeStatus">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.environment<wbr></wbr>.<wbr></wbr>Episode<wbr></wbr>Status</div>
@@ -781,7 +685,7 @@ allow_loops, graph_format, format_representation)</tt>...</div>
             <div class="type">Class</div>
             <div class="kind">Class</div>
             <div class="privacy">PUBLIC</div>
-            <div class="summary">This enumeration represents all the possible statuses that an episode could have in the context of a reinforcement learning environment to be used in graph theory applications.</div>
+            <div class="summary">This enumeration represents all the possible statuses that an episode could have in the context of an RL environment to be used in graph theory applications.</div>
           </li><li id="rl_graph_theory.environments.environment.EpisodeStatus.IN_PROGRESS">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.environment<wbr></wbr>.<wbr></wbr>Episode<wbr></wbr>Status<wbr></wbr>.IN<wbr></wbr>_PROGRESS</div>
@@ -790,14 +694,6 @@ allow_loops, graph_format, format_representation)</tt>...</div>
             <div class="kind">Constant</div>
             <div class="privacy">PUBLIC</div>
             <div class="summary">The episode is in progress, which means that it is in a state that accepts further actions.</div>
-          </li><li id="rl_graph_theory.environments.environment.EpisodeStatus.COMPLETED">
-            
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.environment<wbr></wbr>.<wbr></wbr>Episode<wbr></wbr>Status<wbr></wbr>.COMPLETED</div>
-            <div class="url">rl_graph_theory.environments.environment.EpisodeStatus.html#COMPLETED</div>
-            <div class="type">Attribute</div>
-            <div class="kind">Constant</div>
-            <div class="privacy">PUBLIC</div>
-            <div class="summary">The episode has reached a state whose underlying graph achieves satisfactory results, hence the reinforcement learning process should be stopped and the problem can be considered solved.</div>
           </li><li id="rl_graph_theory.environments.environment.EpisodeStatus.TERMINATED">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.environment<wbr></wbr>.<wbr></wbr>Episode<wbr></wbr>Status<wbr></wbr>.TERMINATED</div>
@@ -805,7 +701,7 @@ allow_loops, graph_format, format_representation)</tt>...</div>
             <div class="type">Attribute</div>
             <div class="kind">Constant</div>
             <div class="privacy">PUBLIC</div>
-            <div class="summary">The episode has ended due to reaching an absorbing state, hence the environment cannot accept any further actions.</div>
+            <div class="summary">The episode has ended due to reaching an absorbing state, hence the environment cannot accept any further actions. This status appears only in RL environments where the tasks are episodic.</div>
           </li><li id="rl_graph_theory.environments.environment.EpisodeStatus.TRUNCATED">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.environment<wbr></wbr>.<wbr></wbr>Episode<wbr></wbr>Status<wbr></wbr>.TRUNCATED</div>
@@ -813,7 +709,7 @@ allow_loops, graph_format, format_representation)</tt>...</div>
             <div class="type">Attribute</div>
             <div class="kind">Constant</div>
             <div class="privacy">PUBLIC</div>
-            <div class="summary">The episode has ended since the required number of steps has been taken. Although the current state is not absorbing, no further actions should be performed.</div>
+            <div class="summary">The episode has ended since the required number of steps has been taken. In this case, although the current state is not absorbing, no further actions should be performed. This status appears only in RL environments where the tasks are continuing.</div>
           </li><li id="rl_graph_theory.environments.environment.GraphEnvironment">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.environment<wbr></wbr>.<wbr></wbr>Graph<wbr></wbr>Environment</div>
@@ -821,7 +717,7 @@ allow_loops, graph_format, format_representation)</tt>...</div>
             <div class="type">Class</div>
             <div class="kind">Class</div>
             <div class="privacy">PUBLIC</div>
-            <div class="summary">This abstract class encapsulates the concept of a reinforcement learning environment to be used in graph theory applications. For the sake of efficiency, it provides support for multiple episodes to be run in parallel...</div>
+            <div class="summary">This abstract class encapsulates the concept of an RL environment to be used in graph theory applications. For the sake of efficiency, it provides support for multiple episodes to be run in parallel. This approach makes sense because it is guaranteed that all of these episodes must end at the same time, regardless of whether the RL environment has episodic or continuing tasks...</div>
           </li><li id="rl_graph_theory.environments.environment.GraphEnvironment.__reward_type">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.environment<wbr></wbr>.<wbr></wbr>Graph<wbr></wbr>Environment<wbr></wbr>.__reward<wbr></wbr>_type</div>
@@ -829,7 +725,7 @@ allow_loops, graph_format, format_representation)</tt>...</div>
             <div class="type">Attribute</div>
             <div class="kind">Instance Variable</div>
             <div class="privacy">PRIVATE</div>
-            <div class="summary">An item of the <code><a href="rl_graph_theory.environments.environment.RewardType.html" class="internal-link" title="rl_graph_theory.environments.environment.RewardType">RewardType</a></code> enumeration that determines the type of reward system that is used in the given environment.</div>
+            <div class="summary">An item of the <code><a href="rl_graph_theory.environments.environment.RewardType.html" class="internal-link" title="rl_graph_theory.environments.environment.RewardType">RewardType</a></code> enumeration that determines the (sub)type of reward system that is used in the given RL environment.</div>
           </li><li id="rl_graph_theory.environments.environment.GraphEnvironment.__reward_function">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.environment<wbr></wbr>.<wbr></wbr>Graph<wbr></wbr>Environment<wbr></wbr>.__reward<wbr></wbr>_function</div>
@@ -837,7 +733,7 @@ allow_loops, graph_format, format_representation)</tt>...</div>
             <div class="type">Attribute</div>
             <div class="kind">Instance Variable</div>
             <div class="privacy">PRIVATE</div>
-            <div class="summary">The function that helps compute the rewards in accordance with the selected type of reward system. It plays the role of either the <tt class="rst-docutils rst-literal">graph_invariant</tt> or <tt class="rst-docutils rst-literal">reward_function</tt> function from the description of the ...</div>
+            <div class="summary">The function that helps compute the rewards in accordance with the selected (sub)type of reward system. It plays the role of either the <tt class="rst-docutils rst-literal">graph_invariant</tt> or the <tt class="rst-docutils rst-literal">reward_function</tt> function from the description of the ...</div>
           </li><li id="rl_graph_theory.environments.environment.GraphEnvironment._state_batch">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.environment<wbr></wbr>.<wbr></wbr>Graph<wbr></wbr>Environment<wbr></wbr>._state<wbr></wbr>_batch</div>
@@ -845,7 +741,7 @@ allow_loops, graph_format, format_representation)</tt>...</div>
             <div class="type">Attribute</div>
             <div class="kind">Instance Variable</div>
             <div class="privacy">PRIVATE</div>
-            <div class="summary">Either <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, or a <code><a href="rl_graph_theory.environments.environment.StateBatch.html" class="internal-link" title="rl_graph_theory.environments.environment.StateBatch">StateBatch</a></code> object that determines the batch of current states corresponding to the batch of episodes that are being run in parallel. This attribute is initially set to <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, and afterwards, it is assigned the necessary ...</div>
+            <div class="summary">Either <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, or a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> matrix that determines the batch of current states corresponding to the batch of episodes that are being run in parallel. This attribute is initially set to <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, and afterwards, it is assigned the necessary ...</div>
           </li><li id="rl_graph_theory.environments.environment.GraphEnvironment._status">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.environment<wbr></wbr>.<wbr></wbr>Graph<wbr></wbr>Environment<wbr></wbr>._status</div>
@@ -861,7 +757,7 @@ allow_loops, graph_format, format_representation)</tt>...</div>
             <div class="type">Function</div>
             <div class="kind">Method</div>
             <div class="privacy">PUBLIC</div>
-            <div class="summary">This constructor initializes an instance of the <code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment">GraphEnvironment</a></code> object with a provided type of reward system and a corresponding function that helps compute the rewards.</div>
+            <div class="summary">This constructor initializes an instance of the <code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment">GraphEnvironment</a></code> object with a provided (sub)type of reward system and a corresponding function that helps compute the rewards.</div>
           </li><li id="rl_graph_theory.environments.environment.GraphEnvironment.reset_batch">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.environment<wbr></wbr>.<wbr></wbr>Graph<wbr></wbr>Environment<wbr></wbr>.reset<wbr></wbr>_batch</div>
@@ -869,7 +765,7 @@ allow_loops, graph_format, format_representation)</tt>...</div>
             <div class="type">Function</div>
             <div class="kind">Method</div>
             <div class="privacy">PUBLIC</div>
-            <div class="summary">This abstract method must be implemented in any concrete class that inherits the <code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment">GraphEnvironment</a></code> class. It should initialize a batch of episodes with a given batch size, and update the <code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html#_state_batch" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment._state_batch">_state_batch</a></code> and ...</div>
+            <div class="summary">This abstract method must be implemented in any concrete class that inherits from the <code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment">GraphEnvironment</a></code> class. It should initialize a batch of episodes with a given batch size, and update the <code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html#_state_batch" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment._state_batch">_state_batch</a></code>...</div>
           </li><li id="rl_graph_theory.environments.environment.GraphEnvironment.step_batch">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.environment<wbr></wbr>.<wbr></wbr>Graph<wbr></wbr>Environment<wbr></wbr>.step<wbr></wbr>_batch</div>
@@ -877,7 +773,7 @@ allow_loops, graph_format, format_representation)</tt>...</div>
             <div class="type">Function</div>
             <div class="kind">Method</div>
             <div class="privacy">PUBLIC</div>
-            <div class="summary">This method takes a batch of actions and applies them element-wise to the states from the batch of current states given by the <code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html#_state_batch" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment._state_batch">_state_batch</a></code> attribute. More precisely, these two batches must be of the same size, and the $i$-th action should be applied to the $i$-th state...</div>
+            <div class="summary">This method takes a batch of actions and applies them element-wise to the states in the batch of current states given by the <code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html#_state_batch" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment._state_batch">_state_batch</a></code> attribute. More precisely, these two batches must be of the same size, and the $i$-th action should be applied to the $i$-th state...</div>
           </li><li id="rl_graph_theory.environments.environment.GraphEnvironment._transition_batch">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.environment<wbr></wbr>.<wbr></wbr>Graph<wbr></wbr>Environment<wbr></wbr>._transition<wbr></wbr>_batch</div>
@@ -885,7 +781,7 @@ allow_loops, graph_format, format_representation)</tt>...</div>
             <div class="type">Function</div>
             <div class="kind">Method</div>
             <div class="privacy">PRIVATE</div>
-            <div class="summary">This abstract method must be implemented in any concrete class that inherits the <code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment">GraphEnvironment</a></code> class. It should determine which new batch of states should be entered after the provided batch of actions is applied element-wise to the states from the batch of current states given by the ...</div>
+            <div class="summary">This abstract method must be implemented in any concrete class that inherits from the <code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment">GraphEnvironment</a></code> class. It should perform the transition process by executing a batch of given actions and applying them element-wise to the states in the batch of current states given by the ...</div>
           </li><li id="rl_graph_theory.environments.environment.GraphEnvironment.state_batch_to_graph_batch">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.environment<wbr></wbr>.<wbr></wbr>Graph<wbr></wbr>Environment<wbr></wbr>.state<wbr></wbr>_batch<wbr></wbr>_to<wbr></wbr>_graph<wbr></wbr>_batch</div>
@@ -893,7 +789,7 @@ allow_loops, graph_format, format_representation)</tt>...</div>
             <div class="type">Function</div>
             <div class="kind">Method</div>
             <div class="privacy">PUBLIC</div>
-            <div class="summary">This abstract method must be implemented in any concrete class that inherits the <code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment">GraphEnvironment</a></code> class. Its goal is to extract the batch of underlying graphs from any provided batch of states. The graphs should appear in the same order as their corresponding states in the given batch of states.</div>
+            <div class="summary">This abstract method must be implemented in any concrete class that inherits from the <code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment">GraphEnvironment</a></code> class. Its goal is to extract the batch of underlying graphs from any provided batch of states. The graphs should appear in the same order as their corresponding states in the given batch of states.</div>
           </li><li id="rl_graph_theory.environments.incremental_environment.IncrementalEnvironment">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.incremental<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Incremental<wbr></wbr>Environment</div>
@@ -957,7 +853,7 @@ allow_loops, graph_format, format_representation)</tt>...</div>
             <div class="type">Function</div>
             <div class="kind">Method</div>
             <div class="privacy">PUBLIC</div>
-            <div class="summary">This abstract method must be implemented in any concrete class that inherits the <code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment">GraphEnvironment</a></code> class. It should initialize a batch of episodes with a given batch size, and update the <code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html#_state_batch" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment._state_batch">_state_batch</a></code> and ...</div>
+            <div class="summary">This abstract method must be implemented in any concrete class that inherits from the <code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment">GraphEnvironment</a></code> class. It should initialize a batch of episodes with a given batch size, and update the <code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html#_state_batch" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment._state_batch">_state_batch</a></code>...</div>
           </li><li id="rl_graph_theory.environments.incremental_environment.IncrementalEnvironment._state_batch">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.incremental<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Incremental<wbr></wbr>Environment<wbr></wbr>._state<wbr></wbr>_batch</div>
@@ -981,7 +877,7 @@ allow_loops, graph_format, format_representation)</tt>...</div>
             <div class="type">Function</div>
             <div class="kind">Method</div>
             <div class="privacy">PRIVATE</div>
-            <div class="summary">This abstract method must be implemented in any concrete class that inherits the <code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment">GraphEnvironment</a></code> class. It should determine which new batch of states should be entered after the provided batch of actions is applied element-wise to the states from the batch of current states given by the ...</div>
+            <div class="summary">This abstract method must be implemented in any concrete class that inherits from the <code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment">GraphEnvironment</a></code> class. It should perform the transition process by executing a batch of given actions and applying them element-wise to the states in the batch of current states given by the ...</div>
           </li><li id="rl_graph_theory.environments.incremental_environment.IncrementalEnvironment.state_batch_to_graph_batch">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.incremental<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Incremental<wbr></wbr>Environment<wbr></wbr>.state<wbr></wbr>_batch<wbr></wbr>_to<wbr></wbr>_graph<wbr></wbr>_batch</div>
@@ -989,7 +885,7 @@ allow_loops, graph_format, format_representation)</tt>...</div>
             <div class="type">Function</div>
             <div class="kind">Method</div>
             <div class="privacy">PUBLIC</div>
-            <div class="summary">This abstract method must be implemented in any concrete class that inherits the <code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment">GraphEnvironment</a></code> class. Its goal is to extract the batch of underlying graphs from any provided batch of states. The graphs should appear in the same order as their corresponding states in the given batch of states.</div>
+            <div class="summary">This abstract method must be implemented in any concrete class that inherits from the <code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment">GraphEnvironment</a></code> class. Its goal is to extract the batch of underlying graphs from any provided batch of states. The graphs should appear in the same order as their corresponding states in the given batch of states.</div>
           </li><li id="rl_graph_theory.environments.linear_environment.LinearEnvironment">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.linear<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Linear<wbr></wbr>Environment</div>
@@ -1005,7 +901,7 @@ allow_loops, graph_format, format_representation)</tt>...</div>
             <div class="type">Function</div>
             <div class="kind">Method</div>
             <div class="privacy">PUBLIC</div>
-            <div class="summary">This constructor initializes an instance of the <code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment">GraphEnvironment</a></code> object with a provided type of reward system and a corresponding function that helps compute the rewards.</div>
+            <div class="summary">This constructor initializes an instance of the <code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment">GraphEnvironment</a></code> object with a provided (sub)type of reward system and a corresponding function that helps compute the rewards.</div>
           </li><li id="rl_graph_theory.environments.linear_environment.LinearEnvironment._graph_order">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.linear<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Linear<wbr></wbr>Environment<wbr></wbr>._graph<wbr></wbr>_order</div>
@@ -1085,7 +981,7 @@ allow_loops, graph_format, format_representation)</tt>...</div>
             <div class="type">Function</div>
             <div class="kind">Method</div>
             <div class="privacy">PUBLIC</div>
-            <div class="summary">This abstract method must be implemented in any concrete class that inherits the <code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment">GraphEnvironment</a></code> class. It should initialize a batch of episodes with a given batch size, and update the <code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html#_state_batch" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment._state_batch">_state_batch</a></code> and ...</div>
+            <div class="summary">This abstract method must be implemented in any concrete class that inherits from the <code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment">GraphEnvironment</a></code> class. It should initialize a batch of episodes with a given batch size, and update the <code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html#_state_batch" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment._state_batch">_state_batch</a></code>...</div>
           </li><li id="rl_graph_theory.environments.linear_environment.LinearEnvironment.step_batch">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.linear<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Linear<wbr></wbr>Environment<wbr></wbr>.step<wbr></wbr>_batch</div>
@@ -1093,7 +989,7 @@ allow_loops, graph_format, format_representation)</tt>...</div>
             <div class="type">Function</div>
             <div class="kind">Method</div>
             <div class="privacy">PUBLIC</div>
-            <div class="summary">This method takes a batch of actions and applies them element-wise to the states from the batch of current states given by the <code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html#_state_batch" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment._state_batch">_state_batch</a></code> attribute. More precisely, these two batches must be of the same size, and the $i$-th action should be applied to the $i$-th state...</div>
+            <div class="summary">This method takes a batch of actions and applies them element-wise to the states in the batch of current states given by the <code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html#_state_batch" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment._state_batch">_state_batch</a></code> attribute. More precisely, these two batches must be of the same size, and the $i$-th action should be applied to the $i$-th state...</div>
           </li><li id="rl_graph_theory.graphs.special_graphs.MonochromaticGraph">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.graphs<wbr></wbr>.special<wbr></wbr>_graphs<wbr></wbr>.<wbr></wbr>Monochromatic<wbr></wbr>Graph</div>

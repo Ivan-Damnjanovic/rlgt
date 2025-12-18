@@ -128,16 +128,6 @@
         
 
         
-            <div class="itemName"><code><a href="rl_graph_theory.environments.environment.ActionBatch.html" class="internal-link" title="rl_graph_theory.environments.environment.ActionBatch"><wbr></wbr>Action<wbr></wbr>Batch</a></code>
-            </div>
-        
-
-    </li><li class="">
-        
-        
-        
-
-        
             <div class="itemName"><code><a href="rl_graph_theory.environments.environment.EpisodeStatus.html" class="internal-link" title="rl_graph_theory.environments.environment.EpisodeStatus"><wbr></wbr>Episode<wbr></wbr>Status</a></code>
             </div>
         
@@ -158,27 +148,7 @@
         
 
         
-            <div class="itemName"><code><a href="rl_graph_theory.environments.environment.RewardBatch.html" class="internal-link" title="rl_graph_theory.environments.environment.RewardBatch"><wbr></wbr>Reward<wbr></wbr>Batch</a></code>
-            </div>
-        
-
-    </li><li class="">
-        
-        
-        
-
-        
             <div class="itemName"><code><a href="rl_graph_theory.environments.environment.RewardType.html" class="internal-link" title="rl_graph_theory.environments.environment.RewardType"><wbr></wbr>Reward<wbr></wbr>Type</a></code>
-            </div>
-        
-
-    </li><li class="">
-        
-        
-        
-
-        
-            <div class="itemName"><code><a href="rl_graph_theory.environments.environment.StateBatch.html" class="internal-link" title="rl_graph_theory.environments.environment.StateBatch"><wbr></wbr>State<wbr></wbr>Batch</a></code>
             </div>
         
 
@@ -293,9 +263,9 @@
         </div>
 
         <div class="moduleDocstring">
-          <div><p>This <tt class="rst-docutils rst-literal">Python</tt> module contains the <code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment">GraphEnvironment</a></code> class, which encapsulates the concept of a
-reinforcement learning environment to be used in graph theory applications, alongside various other
-associated classes and enumerations.</p></div>
+          <div><p>This <tt class="rst-docutils rst-literal">Python</tt> module contains the <code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment">GraphEnvironment</a></code> abstract class, which encapsulates the
+concept of a reinforcement learning environment to be used in graph theory applications, alongside
+other associated enumerations.</p></div>
         </div>
 
         <div id="split-tables">
@@ -305,33 +275,18 @@ associated classes and enumerations.</p></div>
   <tr class="class">
     
     <td>Class</td>
-    <td><code><a href="rl_graph_theory.environments.environment.ActionBatch.html" class="internal-link" title="rl_graph_theory.environments.environment.ActionBatch"><wbr></wbr>Action<wbr></wbr>Batch</a></code></td>
-    <td>This class encapsulates the concept of a batch of actions in the context of a reinforcement learning environment to be used in graph theory applications. It essentially behaves as a wrapper around a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code>...</td>
-  </tr><tr class="class">
-    
-    <td>Class</td>
     <td><code><a href="rl_graph_theory.environments.environment.EpisodeStatus.html" class="internal-link" title="rl_graph_theory.environments.environment.EpisodeStatus"><wbr></wbr>Episode<wbr></wbr>Status</a></code></td>
-    <td>This enumeration represents all the possible statuses that an episode could have in the context of a reinforcement learning environment to be used in graph theory applications.</td>
+    <td>This enumeration represents all the possible statuses that an episode could have in the context of an RL environment to be used in graph theory applications.</td>
   </tr><tr class="class">
     
     <td>Class</td>
     <td><code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment"><wbr></wbr>Graph<wbr></wbr>Environment</a></code></td>
-    <td>This abstract class encapsulates the concept of a reinforcement learning environment to be used in graph theory applications. For the sake of efficiency, it provides support for multiple episodes to be run in parallel...</td>
-  </tr><tr class="class">
-    
-    <td>Class</td>
-    <td><code><a href="rl_graph_theory.environments.environment.RewardBatch.html" class="internal-link" title="rl_graph_theory.environments.environment.RewardBatch"><wbr></wbr>Reward<wbr></wbr>Batch</a></code></td>
-    <td>This class encapsulates the concept of a batch of rewards in the context of a reinforcement learning environment to be used in graph theory applications. It essentially behaves as a wrapper around a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code>...</td>
+    <td>This abstract class encapsulates the concept of an RL environment to be used in graph theory applications. For the sake of efficiency, it provides support for multiple episodes to be run in parallel. This approach makes sense because it is guaranteed that all of these episodes must end at the same time, regardless of whether the RL environment has episodic or continuing tasks...</td>
   </tr><tr class="class">
     
     <td>Class</td>
     <td><code><a href="rl_graph_theory.environments.environment.RewardType.html" class="internal-link" title="rl_graph_theory.environments.environment.RewardType"><wbr></wbr>Reward<wbr></wbr>Type</a></code></td>
-    <td>This enumeration represents all the possible types of reward systems in the context of a reinforcement learning environment to be used in graph theory applications. In these applications, multiple episodes are acted on in parallel and all of their respective rewards are, therefore, also computed in parallel.</td>
-  </tr><tr class="class">
-    
-    <td>Class</td>
-    <td><code><a href="rl_graph_theory.environments.environment.StateBatch.html" class="internal-link" title="rl_graph_theory.environments.environment.StateBatch"><wbr></wbr>State<wbr></wbr>Batch</a></code></td>
-    <td>This class encapsulates the concept of a batch of states in the context of a reinforcement learning environment to be used in graph theory applications. It essentially behaves as a wrapper around a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code>...</td>
+    <td>This enumeration represents the types and subtypes of reward systems in the context of an RL environment to be used in graph theory applications. In these applications, multiple episodes are acted on in parallel, and all of their respective rewards are, therefore, also computed in parallel...</td>
   </tr>
 </table>
           
@@ -352,7 +307,7 @@ associated classes and enumerations.</p></div>
   <div class="container-fluid">
     <a href="index.html">API Documentation</a> for rl-graph-theory,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    25.10.1 at 2025-12-12 19:26:17.
+    25.10.1 at 2025-12-18 13:23:49.
   </div>
 
   <!-- Search related scripts needs to be loaded at the end of HTML 

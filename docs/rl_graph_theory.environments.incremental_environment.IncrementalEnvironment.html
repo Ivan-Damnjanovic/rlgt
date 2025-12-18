@@ -366,7 +366,7 @@
         </div>
 
         <div id="split-tables">
-          <table class="children sortable" id="id11">
+          <table class="children sortable" id="id8">
   
   
   <tr class="method">
@@ -378,17 +378,17 @@
     
     <td>Method</td>
     <td><code><a href="#reset_batch" class="internal-link" title="rl_graph_theory.environments.incremental_environment.IncrementalEnvironment.reset_batch">reset<wbr></wbr>_batch</a></code></td>
-    <td>This abstract method must be implemented in any concrete class that inherits the <code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment">GraphEnvironment</a></code> class. It should initialize a batch of episodes with a given batch size, and update the <code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html#_state_batch" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment._state_batch">_state_batch</a></code> and ...</td>
+    <td>This abstract method must be implemented in any concrete class that inherits from the <code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment">GraphEnvironment</a></code> class. It should initialize a batch of episodes with a given batch size, and update the <code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html#_state_batch" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment._state_batch">_state_batch</a></code>...</td>
   </tr><tr class="method">
     
     <td>Method</td>
     <td><code><a href="#state_batch_to_graph_batch" class="internal-link" title="rl_graph_theory.environments.incremental_environment.IncrementalEnvironment.state_batch_to_graph_batch">state<wbr></wbr>_batch<wbr></wbr>_to<wbr></wbr>_graph<wbr></wbr>_batch</a></code></td>
-    <td>This abstract method must be implemented in any concrete class that inherits the <code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment">GraphEnvironment</a></code> class. Its goal is to extract the batch of underlying graphs from any provided batch of states. The graphs should appear in the same order as their corresponding states in the given batch of states.</td>
+    <td>This abstract method must be implemented in any concrete class that inherits from the <code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment">GraphEnvironment</a></code> class. Its goal is to extract the batch of underlying graphs from any provided batch of states. The graphs should appear in the same order as their corresponding states in the given batch of states.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
     <td><code><a href="#_transition_batch" class="internal-link" title="rl_graph_theory.environments.incremental_environment.IncrementalEnvironment._transition_batch">_transition<wbr></wbr>_batch</a></code></td>
-    <td>This abstract method must be implemented in any concrete class that inherits the <code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment">GraphEnvironment</a></code> class. It should determine which new batch of states should be entered after the provided batch of actions is applied element-wise to the states from the batch of current states given by the ...</td>
+    <td>This abstract method must be implemented in any concrete class that inherits from the <code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment">GraphEnvironment</a></code> class. It should perform the transition process by executing a batch of given actions and applying them element-wise to the states in the batch of current states given by the ...</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
@@ -430,24 +430,24 @@
             <p class="inheritedFrom">
               Inherited from <code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment">GraphEnvironment</a></code>:
             </p>
-            <table class="children sortable" id="id12">
+            <table class="children sortable" id="id9">
   
   
   <tr class="basemethod">
     
     <td>Method</td>
     <td><code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html#step_batch" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment.step_batch">step<wbr></wbr>_batch</a></code></td>
-    <td>This method takes a batch of actions and applies them element-wise to the states from the batch of current states given by the <code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html#_state_batch" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment._state_batch">_state_batch</a></code> attribute. More precisely, these two batches must be of the same size, and the $i$-th action should be applied to the $i$-th state...</td>
+    <td>This method takes a batch of actions and applies them element-wise to the states in the batch of current states given by the <code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html#_state_batch" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment._state_batch">_state_batch</a></code> attribute. More precisely, these two batches must be of the same size, and the $i$-th action should be applied to the $i$-th state...</td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
     <td><code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html#__reward_function" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment.__reward_function">__reward<wbr></wbr>_function</a></code></td>
-    <td>The function that helps compute the rewards in accordance with the selected type of reward system. It plays the role of either the <tt class="rst-docutils rst-literal">graph_invariant</tt> or <tt class="rst-docutils rst-literal">reward_function</tt> function from the description of the ...</td>
+    <td>The function that helps compute the rewards in accordance with the selected (sub)type of reward system. It plays the role of either the <tt class="rst-docutils rst-literal">graph_invariant</tt> or the <tt class="rst-docutils rst-literal">reward_function</tt> function from the description of the ...</td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
     <td><code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html#__reward_type" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment.__reward_type">__reward<wbr></wbr>_type</a></code></td>
-    <td>An item of the <code><a href="rl_graph_theory.environments.environment.RewardType.html" class="internal-link" title="rl_graph_theory.environments.environment.RewardType">RewardType</a></code> enumeration that determines the type of reward system that is used in the given environment.</td>
+    <td>An item of the <code><a href="rl_graph_theory.environments.environment.RewardType.html" class="internal-link" title="rl_graph_theory.environments.environment.RewardType">RewardType</a></code> enumeration that determines the (sub)type of reward system that is used in the given RL environment.</td>
   </tr>
 </table>
             
@@ -502,16 +502,18 @@
   </div>
   <div class="docstring functionBody">
     <div class="interfaceinfo">overrides <code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html#reset_batch" class="internal-link">rl_graph_theory.environments.environment.GraphEnvironment.reset_batch</a></code></div>
-    <div><p>This abstract method must be implemented in any concrete class that inherits the
+    <div><p>This abstract method must be implemented in any concrete class that inherits from the
 <code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment">GraphEnvironment</a></code> class. It should initialize a batch of episodes with a given batch size,
 and update the <code><a href="#_state_batch" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment._state_batch">_state_batch</a></code> and <code><a href="#_status" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment._status">_status</a></code> attributes accordingly. The function should
-return the obtained batch of corresponding states after the initialization has been done,
-i.e., the value of the <code><a href="#_state_batch" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment._state_batch">_state_batch</a></code> attribute, as well as the status corresponding to the
-initialized batch of episodes, i.e., the value of the <code><a href="#_status" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment._status">_status</a></code> attribute.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">batch<wbr></wbr>_size:</span><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></td><td class="fieldArgDesc">The batch size of the batch of episodes that should be initialized,
+return the obtained batch of corresponding states after the initialization has been
+completed, i.e., the value of the <code><a href="#_state_batch" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment._state_batch">_state_batch</a></code> attribute, as well as the status
+corresponding to the initialized batch of episodes, i.e., the value of the <code><a href="#_status" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment._status">_status</a></code>
+attribute.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">batch<wbr></wbr>_size:</span><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></td><td class="fieldArgDesc">The batch size of the batch of episodes that should be initialized,
 i.e., the number of episodes in it, given as a positive integer.</td></tr></table><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/stdtypes.html#tuple" class="intersphinx-link">tuple</a>[<wbr></wbr><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a>, <wbr></wbr><a href="rl_graph_theory.environments.environment.EpisodeStatus.html" class="internal-link" title="rl_graph_theory.environments.environment.EpisodeStatus">EpisodeStatus</a>]</code></td><td class="fieldArgDesc"><p>A tuple <tt class="rst-docutils rst-literal">(initial_state_batch, status)</tt>, where</p>
 <ul class="rst-simple">
 <li><tt class="rst-docutils rst-literal">initial_state_batch</tt> is the value of the <code><a href="#_state_batch" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment._state_batch">_state_batch</a></code> attribute after the batch
-of episodes has been initialized, given as a <code><a href="rl_graph_theory.environments.environment.StateBatch.html" class="internal-link" title="rl_graph_theory.environments.environment.StateBatch">StateBatch</a></code> object; and</li>
+of episodes has been initialized, given as a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> matrix where the rows
+corresponds to the states in the batch; and</li>
 <li><tt class="rst-docutils rst-literal">status</tt> is the value of the <code><a href="#_status" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment._status">_status</a></code> attribute after the batch of episodes has
 been initialized, given as an item of the <code><a href="rl_graph_theory.environments.environment.EpisodeStatus.html" class="internal-link" title="rl_graph_theory.environments.environment.EpisodeStatus">EpisodeStatus</a></code> enumeration.</li>
 </ul>
@@ -539,11 +541,12 @@ been initialized, given as an item of the <code><a href="rl_graph_theory.environ
   </div>
   <div class="docstring functionBody">
     <div class="interfaceinfo">overrides <code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html#state_batch_to_graph_batch" class="internal-link">rl_graph_theory.environments.environment.GraphEnvironment.state_batch_to_graph_batch</a></code></div>
-    <div><p>This abstract method must be implemented in any concrete class that inherits the
+    <div><p>This abstract method must be implemented in any concrete class that inherits from the
 <code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment">GraphEnvironment</a></code> class. Its goal is to extract the batch of underlying graphs from any
 provided batch of states. The graphs should appear in the same order as their corresponding
 states in the given batch of states.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">state<wbr></wbr>_batch:</span><code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code></td><td class="fieldArgDesc">The batch of provided states whose underlying graphs should be
-extracted, given as a <code><a href="rl_graph_theory.environments.environment.StateBatch.html" class="internal-link" title="rl_graph_theory.environments.environment.StateBatch">StateBatch</a></code> object.</td></tr></table><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="rl_graph_theory.graphs.graph.GraphBatch.html" class="internal-link" title="rl_graph_theory.graphs.graph.GraphBatch">GraphBatch</a></code></td><td class="fieldArgDesc">The extracted batch of underlying graphs, given as a <code><a href="rl_graph_theory.graphs.graph.GraphBatch.html" class="internal-link" title="rl_graph_theory.graphs.graph.GraphBatch">GraphBatch</a></code> object.</td></tr></table><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Note</td></tr><tr><td colspan="2">The implementation of this method must be a pure function, i.e., it should not
+extracted, given as a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> matrix whose rows correspond to the states in the
+batch.</td></tr></table><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="rl_graph_theory.graphs.graph.GraphBatch.html" class="internal-link" title="rl_graph_theory.graphs.graph.GraphBatch">GraphBatch</a></code></td><td class="fieldArgDesc">The extracted batch of underlying graphs, given as a <code><a href="rl_graph_theory.graphs.graph.GraphBatch.html" class="internal-link" title="rl_graph_theory.graphs.graph.GraphBatch">GraphBatch</a></code> object.</td></tr></table><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Note</td></tr><tr><td colspan="2">The implementation of this method must be a pure function, i.e., it should not
 modify any attributes of the given instance.</td></tr></table></div>
   </div>
 </div><div class="basemethod private">
@@ -568,25 +571,15 @@ modify any attributes of the given instance.</td></tr></table></div>
   </div>
   <div class="docstring functionBody">
     <div class="interfaceinfo">overrides <code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html#_transition_batch" class="internal-link">rl_graph_theory.environments.environment.GraphEnvironment._transition_batch</a></code></div>
-    <div><p>This abstract method must be implemented in any concrete class that inherits the
-<code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment">GraphEnvironment</a></code> class. It should determine which new batch of states should be entered
-after the provided batch of actions is applied element-wise to the states from the batch of
-current states given by the <code><a href="#_state_batch" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment._state_batch">_state_batch</a></code> attribute. The function should return this batch
-of obtained states, alongside the new status corresponding to the batch of episodes run in
-parallel. Here, the order of the new states in the returned batch should match the order of
-the performed actions and the original states.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">action<wbr></wbr>_batch:</span><code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code></td><td class="fieldArgDesc">The batch of actions to be applied to the states from the current
-batch of states, given as an <code><a href="rl_graph_theory.environments.environment.ActionBatch.html" class="internal-link" title="rl_graph_theory.environments.environment.ActionBatch">ActionBatch</a></code> object. The number of actions from this
-batch must be the same as the number of states from the <code><a href="#_state_batch" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment._state_batch">_state_batch</a></code> attribute.</td></tr></table><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/stdtypes.html#tuple" class="intersphinx-link">tuple</a>[<wbr></wbr><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a>, <wbr></wbr><a href="rl_graph_theory.environments.environment.EpisodeStatus.html" class="internal-link" title="rl_graph_theory.environments.environment.EpisodeStatus">EpisodeStatus</a>]</code></td><td class="fieldArgDesc"><p>A tuple <tt class="rst-docutils rst-literal">(new_state_batch, status)</tt>, where:</p>
-<ul class="rst-simple">
-<li><tt class="rst-docutils rst-literal">new_state_batch</tt> is the batch of newly obtained states, given as a <code><a href="rl_graph_theory.environments.environment.StateBatch.html" class="internal-link" title="rl_graph_theory.environments.environment.StateBatch">StateBatch</a></code>
-object; and</li>
-<li><tt class="rst-docutils rst-literal">status</tt> is an item of the <code><a href="rl_graph_theory.environments.environment.EpisodeStatus.html" class="internal-link" title="rl_graph_theory.environments.environment.EpisodeStatus">EpisodeStatus</a></code> enumeration that determines the new
-status corresponding to the batch of episodes run in parallel.</li>
-</ul>
-</td></tr></table><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Note</td></tr><tr><td colspan="2">The implementation of this method must not modify the attributes <code><a href="#_state_batch" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment._state_batch">_state_batch</a></code> and
-<code><a href="#_status" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment._status">_status</a></code>. The obtained batch of new states and the corresponding status should just be
-returned without updating these two attributes since the logic behind this is located
-in the non-abstract <code><a href="#step_batch" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment.step_batch">step_batch</a></code> method.</td></tr></table></div>
+    <div><p>This abstract method must be implemented in any concrete class that inherits from the
+<code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment">GraphEnvironment</a></code> class. It should perform the transition process by executing a batch of
+given actions and applying them element-wise to the states in the batch of current states
+given by the <code><a href="#_state_batch" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment._state_batch">_state_batch</a></code> attribute. The method should update the <code><a href="#_state_batch" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment._state_batch">_state_batch</a></code> and
+<code><a href="#_status" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment._status">_status</a></code> attributes, as well as any other potential attributes specific to the concrete
+class that inherits from the <code><a href="rl_graph_theory.environments.environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment">GraphEnvironment</a></code> class.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">action<wbr></wbr>_batch:</span><code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code></td><td class="fieldArgDesc">The batch of actions to be applied to the states from the current
+batch of states, given as a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> matrix where the rows correspond to the
+actions. The number of actions in this batch must be the same as the number of states
+in the <code><a href="#_state_batch" class="internal-link" title="rl_graph_theory.environments.environment.GraphEnvironment._state_batch">_state_batch</a></code> attribute.</td></tr></table><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/stdtypes.html#tuple" class="intersphinx-link">tuple</a>[<wbr></wbr><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a>, <wbr></wbr><a href="rl_graph_theory.environments.environment.EpisodeStatus.html" class="internal-link" title="rl_graph_theory.environments.environment.EpisodeStatus">EpisodeStatus</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -768,7 +761,7 @@ in the non-abstract <code><a href="#step_batch" class="internal-link" title="rl_
   <div class="container-fluid">
     <a href="index.html">API Documentation</a> for rl-graph-theory,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    25.10.1 at 2025-12-12 19:26:17.
+    25.10.1 at 2025-12-18 13:23:49.
   </div>
 
   <!-- Search related scripts needs to be loaded at the end of HTML 
