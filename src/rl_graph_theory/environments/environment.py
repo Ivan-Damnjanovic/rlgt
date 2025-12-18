@@ -199,6 +199,11 @@ class GraphEnvironment(ABC):
               status corresponding to the batch of episodes run in parallel.
         """
 
+        # Raise a `RuntimeError` if the user is trying to execute a batch of actions when the
+        # episodes have already ended.
+        if self._status != EpisodeStatus.IN_PROGRESS:
+            raise RuntimeError
+
         # In this case, the sparse reward system is being used.
         if self.__reward_type == RewardType.SPARSE:
             # Execute the batch of actions and transition to the batch of new states.

@@ -42,7 +42,7 @@ def test_incremental_environment(
     environment = IncrementalEnvironment(
         graph_order=graph_order,
         edge_colors=edge_colors,
-        edge_ordering=edge_ordering,
+        flattened_ordering=edge_ordering,
         reward_type=reward_type,
         reward_function=reward_function,
     )

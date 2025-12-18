@@ -1,5 +1,8 @@
 """
-#TODO
+This ``Python`` module contains the `IncrementalEnvironment` class, which inherits from the
+`GraphEnvironment` class and models a graph-building game in which the edges (resp. arcs) are all
+initially uncolored and are then colored one by one, either in the flattened row-major order or the
+flattened clockwise order.
 """
 
 from typing import Callable, Optional, Tuple
@@ -16,69 +19,99 @@ from .environment import (
 
 class IncrementalEnvironment(GraphEnvironment):
     """
+    This class inherits from the `GraphEnvironment` class and models a graph-building game in which
+    the edges (resp. arcs) are all initially uncolored and are then colored one by one, either in
+    the flattened row-major order or the flattened clockwise order. The RL tasks in this
+    environment are episodic, and the total number of actions to be performed equals the number of
+    entries in each of the two flattened graph formats. Therefore, this number depends on the
+    selected graph order, on whether the graph is directed, and on whether loops are allowed. The
+    number of proper edge colors is also configurable.
+
     #TODO
+
+    :ivar _edge_colors:
+    :ivar _is_directed:
+    :ivar _allow_loops:
+    :ivar _flattened_ordering:
+    :ivar _flattened_length:
+    :ivar _next_entry_index:
     """
 
     def __init__(
         self,
-        graph_order: int,
-        edge_colors: int,
-        edge_ordering: FlattenedOrdering,
         reward_type: RewardType,
         reward_function: Callable,
+        graph_order: int,
+        flattened_ordering: FlattenedOrdering = FlattenedOrdering.ROW_MAJOR,
+        edge_colors: int = 2,
+        is_directed: bool = False,
+        allow_loops: bool = False,
     ):
         """
+        This constructor initializes an instance of the `IncrementalEnvironment` object with a provided
+        (sub)type of reward system and a corresponding function that helps compute the rewards.
+
+        The order must be at least two.
+
         #TODO
         """
 
         super().__init__(reward_type=reward_type, reward_function=reward_function)
 
-        self._graph_size: int = graph_order * (graph_order - 1) // 2
         self._edge_colors: int = edge_colors
-        self._edge_ordering: FlattenedOrdering = edge_ordering
+        self._is_directed: bool = is_directed
+        self._allow_loops: bool = allow_loops
+        self._flattened_ordering: FlattenedOrdering = flattened_ordering
 
-        self._batch_size: Optional[int] = None
-        self._next_edge_index: Optional[int] = None
+        if is_directed:
+            if allow_loops:
+                self._flattened_length: int = graph_order * graph_order
+            else:
+                self._flattened_length: int = graph_order * (graph_order - 1)
+        else:
+            if allow_loops:
+                self._flattened_length: int = graph_order * (graph_order + 1) // 2
+            else:
+                self._flattened_length: int = graph_order * (graph_order - 1) // 2
+
+        self._next_entry_index: Optional[int] = None
 
     def reset_batch(self, batch_size: int) -> Tuple[np.ndarray, EpisodeStatus]:
-        self._state_batch = np.zeros((batch_size, self._graph_size * self._edge_colors), dtype=int)
-        self._state_batch[:, self._graph_size * (self._edge_colors - 1)] = 1
+        self._state_batch = np.zeros(
+            (batch_size, self._flattened_length * self._edge_colors), dtype=int
+        )
+        self._state_batch[:, self._flattened_length * (self._edge_colors - 1)] = 1
         self._status = EpisodeStatus.IN_PROGRESS
-
-        self._batch_size = batch_size
-        self._next_edge_index = 0
+        self._next_entry_index = 0
 
         return self._state_batch, self._status
 
-    def _transition_batch(self, action_batch: np.ndarray) -> Tuple[np.ndarray, EpisodeStatus]:
-        if self._next_edge_index >= self._graph_size:
-            raise RuntimeError
+    def _transition_batch(self, action_batch: np.ndarray) -> None:
+        rows = np.arange(self._flattened_length, dtype=int)
+        columns = (action_batch[:, 0] - 1) * self._flattened_length + self._next_entry_index
 
-        rows = np.arange(self._batch_size, dtype=int)
-        columns = (action_batch[:, 0] - 1) * self._graph_size + self._next_edge_index
+        self._state_batch[rows, columns] = 1
+        self._state_batch[
+            :, self._flattened_length * (self._edge_colors - 1) + self._next_entry_index
+        ] = 0
+        self._next_entry_index += 1
 
-        new_states = self._state_batch.copy()
-        new_states[rows, columns] = 1
-        new_states[:, self._graph_size * (self._edge_colors - 1) + self._next_edge_index] = 0
-        self._next_edge_index += 1
-
-        status = EpisodeStatus.IN_PROGRESS
-
-        if self._next_edge_index < self._graph_size:
-            new_states[:, self._graph_size * (self._edge_colors - 1) + self._next_edge_index] = 1
+        if self._next_entry_index < self._flattened_length:
+            self._state_batch[
+                :, self._flattened_length * (self._edge_colors - 1) + self._next_entry_index
+            ] = 1
         else:
-            status = EpisodeStatus.TERMINATED
-
-        return new_states, status
+            self._status = EpisodeStatus.TERMINATED
 
     def state_batch_to_graph_batch(self, state_batch: np.ndarray) -> GraphBatch:
-        batch_size = state_batch.shape[0]
-        temp = state_batch.reshape(batch_size, self._edge_colors, self._graph_size)
+        temp = state_batch.reshape(-1, self._edge_colors, self._flattened_length)
         indices = np.arange(1, self._edge_colors, dtype=int)
         result = (temp[:, :-1, :] * indices[:, None]).sum(axis=1)
 
         return GraphBatch.from_flattened(
+            flattened=result,
+            flattened_ordering=self._flattened_ordering,
             edge_colors=self._edge_colors,
-            edge_ordering=self._edge_ordering,
-            flattened_batch=result,
+            is_directed=self._is_directed,
+            allow_loops=self._allow_loops,
         )
