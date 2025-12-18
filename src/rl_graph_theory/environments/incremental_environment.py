@@ -108,6 +108,9 @@ class IncrementalEnvironment(GraphEnvironment):
         indices = np.arange(1, self._edge_colors, dtype=int)
         result = (temp[:, :-1, :] * indices[:, None]).sum(axis=1)
 
+        uncolored_mask = np.maximum.accumulate(temp[:, -1, :])
+        result[uncolored_mask.astype(bool)] = self._edge_colors
+
         return GraphBatch.from_flattened(
             flattened=result,
             flattened_ordering=self._flattened_ordering,
