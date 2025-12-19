@@ -128,7 +128,17 @@
         
 
         
-            <div class="itemName"><code><a href="rl_graph_theory.graphs.graph.EdgeOrdering.html" class="internal-link" title="rl_graph_theory.graphs.graph.EdgeOrdering"><wbr></wbr>Edge<wbr></wbr>Ordering</a></code>
+            <div class="itemName"><code><a href="rl_graph_theory.graphs.graph.BitmaskType.html" class="internal-link" title="rl_graph_theory.graphs.graph.BitmaskType"><wbr></wbr>Bitmask<wbr></wbr>Type</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="rl_graph_theory.graphs.graph.FlattenedOrdering.html" class="internal-link" title="rl_graph_theory.graphs.graph.FlattenedOrdering"><wbr></wbr>Flattened<wbr></wbr>Ordering</a></code>
             </div>
         
 
@@ -264,34 +274,41 @@
 
         <div class="moduleDocstring">
           <div><p>This <tt class="rst-docutils rst-literal">Python</tt> module contains the classes <code><a href="rl_graph_theory.graphs.graph.Graph.html" class="internal-link" title="rl_graph_theory.graphs.graph.Graph">Graph</a></code> and <code><a href="rl_graph_theory.graphs.graph.GraphBatch.html" class="internal-link" title="rl_graph_theory.graphs.graph.GraphBatch">GraphBatch</a></code>, which encapsulate the
-concept of an edge-colored complete graph and a batch of edge-colored complete graphs of the same
-order, respectively.</p></div>
+concept of a $k$-edge-colored looped complete graph and a batch of $k$-edge-colored looped complete
+graphs of the same order, respectively.</p></div>
         </div>
 
         <div id="split-tables">
-          <table class="children sortable" id="id17">
+          <table class="children sortable" id="id14">
   
   
   <tr class="class">
     
     <td>Class</td>
-    <td><code><a href="rl_graph_theory.graphs.graph.EdgeOrdering.html" class="internal-link" title="rl_graph_theory.graphs.graph.EdgeOrdering"><wbr></wbr>Edge<wbr></wbr>Ordering</a></code></td>
-    <td>This enumeration encapsulates the concept of an edge ordering in the context of the two flattened graph formats, <code><a href="rl_graph_theory.graphs.graph.GraphFormat.html#FLATTENED_COLUMN_FIRST" class="internal-link" title="rl_graph_theory.graphs.graph.GraphFormat.FLATTENED_COLUMN_FIRST">GraphFormat.FLATTENED_COLUMN_FIRST</a></code> and <code><a href="rl_graph_theory.graphs.graph.GraphFormat.html#FLATTENED_ROW_FIRST" class="internal-link" title="rl_graph_theory.graphs.graph.GraphFormat.FLATTENED_ROW_FIRST">GraphFormat.FLATTENED_ROW_FIRST</a></code>, from the <code><a href="rl_graph_theory.graphs.graph.GraphFormat.html" class="internal-link" title="rl_graph_theory.graphs.graph.GraphFormat">GraphFormat</a></code>...</td>
+    <td><code><a href="rl_graph_theory.graphs.graph.BitmaskType.html" class="internal-link" title="rl_graph_theory.graphs.graph.BitmaskType"><wbr></wbr>Bitmask<wbr></wbr>Type</a></code></td>
+    <td>This enumeration encapsulates the concept of a bitmask type in the context of the two bitmask formats, <code><a href="rl_graph_theory.graphs.graph.GraphFormat.html#BITMASK_OUT" class="internal-link" title="rl_graph_theory.graphs.graph.GraphFormat.BITMASK_OUT">GraphFormat.BITMASK_OUT</a></code> and <code><a href="rl_graph_theory.graphs.graph.GraphFormat.html#BITMASK_IN" class="internal-link" title="rl_graph_theory.graphs.graph.GraphFormat.BITMASK_IN">GraphFormat.BITMASK_IN</a></code>, from the <code><a href="rl_graph_theory.graphs.graph.GraphFormat.html" class="internal-link" title="rl_graph_theory.graphs.graph.GraphFormat">GraphFormat</a></code> enumeration.</td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="rl_graph_theory.graphs.graph.FlattenedOrdering.html" class="internal-link" title="rl_graph_theory.graphs.graph.FlattenedOrdering"><wbr></wbr>Flattened<wbr></wbr>Ordering</a></code></td>
+    <td>This enumeration encapsulates the concept of an edge (resp. arc) ordering in the context of the two flattened graph formats, <code><a href="rl_graph_theory.graphs.graph.GraphFormat.html#FLATTENED_ROW_MAJOR" class="internal-link" title="rl_graph_theory.graphs.graph.GraphFormat.FLATTENED_ROW_MAJOR">GraphFormat.FLATTENED_ROW_MAJOR</a></code> and <code><a href="rl_graph_theory.graphs.graph.GraphFormat.html#FLATTENED_CLOCKWISE" class="internal-link" title="rl_graph_theory.graphs.graph.GraphFormat.FLATTENED_CLOCKWISE">GraphFormat.FLATTENED_CLOCKWISE</a></code>, from the ...</td>
   </tr><tr class="class">
     
     <td>Class</td>
     <td><code><a href="rl_graph_theory.graphs.graph.Graph.html" class="internal-link" title="rl_graph_theory.graphs.graph.Graph"><wbr></wbr>Graph</a></code></td>
-    <td>This class encapsulates the concept of an edge-colored complete graph. The graph is of order $n$, and each of its edges can be colored in one of the colors from the set $\{ 0, 1, 2, \ldots c - 1 \}$, where $c$ is the number of available edge colors...</td>
+    <td>This class encapsulates the concept of a $k$-edge-colored looped complete graph with $k$ being at least two. The graph is essentially represented as a quintuple <tt class="rst-docutils rst-literal">(edge_colors, is_directed,
+allow_loops, graph_format, format_representation)</tt>...</td>
   </tr><tr class="class">
     
     <td>Class</td>
     <td><code><a href="rl_graph_theory.graphs.graph.GraphBatch.html" class="internal-link" title="rl_graph_theory.graphs.graph.GraphBatch"><wbr></wbr>Graph<wbr></wbr>Batch</a></code></td>
-    <td>This class encapsulates the concept of a batch of edge-colored complete graphs of the same order. The graphs are of order $n$, and each of their edges can be colored in one of the colors from the set $\{ 0, 1, 2, \ldots c - 1 \}$, where $c$ is the number of available edge colors...</td>
+    <td>This class encapsulates the concept of a batch of $k$-edge-colored looped complete graphs of the same order, with $k$ being at least two. The graphs in the batch must be consistent: they should all be directed or all be undirected, and they should either all allow loops or none...</td>
   </tr><tr class="class">
     
     <td>Class</td>
     <td><code><a href="rl_graph_theory.graphs.graph.GraphFormat.html" class="internal-link" title="rl_graph_theory.graphs.graph.GraphFormat"><wbr></wbr>Graph<wbr></wbr>Format</a></code></td>
-    <td>This enumeration encapsulates the concept of a format used to represent an edge-colored complete graph. Each of the edges can be colored in one of the colors from a given set $\{ 0, 1, 2, \ldots, c - 1 \}$, where $c$ is the number of available edge colors...</td>
+    <td>This enumeration encapsulates the concept of a format used to represent a $k$-edge-colored looped complete graph. Each graph is essentially represented as a quintuple <tt class="rst-docutils rst-literal">(edge_colors,
+is_directed, allow_loops, graph_format, format_representation)</tt>...</td>
   </tr>
 </table>
           
@@ -312,7 +329,7 @@ order, respectively.</p></div>
   <div class="container-fluid">
     <a href="index.html">API Documentation</a> for rl-graph-theory,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    25.10.1 at 2025-11-15 21:20:25.
+    25.10.1 at 2025-12-18 18:22:50.
   </div>
 
   <!-- Search related scripts needs to be loaded at the end of HTML 

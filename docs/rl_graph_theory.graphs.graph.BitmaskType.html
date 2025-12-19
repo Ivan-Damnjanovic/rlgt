@@ -6,7 +6,7 @@
 
   <head>
     
-    <title>rl_graph_theory.graphs.graph.EdgeOrdering</title>
+    <title>rl_graph_theory.graphs.graph.BitmaskType</title>
     <meta name="generator" content="pydoctor 25.10.1"> 
         
     </meta>
@@ -110,7 +110,7 @@
 
       <div class="thingTitle">
         <span>Class</span>
-        <code class="thisobject"><a href="rl_graph_theory.graphs.graph.EdgeOrdering.html" class="internal-link" title="This class"><wbr></wbr>Edge<wbr></wbr>Ordering</a></code> 
+        <code class="thisobject"><a href="rl_graph_theory.graphs.graph.BitmaskType.html" class="internal-link" title="This class"><wbr></wbr>Bitmask<wbr></wbr>Type</a></code> 
       </div>
       
       <div>
@@ -137,7 +137,7 @@
         
 
         
-            <div class="itemName"><code><a href="#COLUMN_FIRST" class="internal-link" title="rl_graph_theory.graphs.graph.EdgeOrdering.COLUMN_FIRST">COLUMN<wbr></wbr>_FIRST</a></code>
+            <div class="itemName"><code><a href="#IN_NEIGHBORS" class="internal-link" title="rl_graph_theory.graphs.graph.BitmaskType.IN_NEIGHBORS">IN<wbr></wbr>_NEIGHBORS</a></code>
             </div>
         
 
@@ -147,7 +147,7 @@
         
 
         
-            <div class="itemName"><code><a href="#ROW_FIRST" class="internal-link" title="rl_graph_theory.graphs.graph.EdgeOrdering.ROW_FIRST">ROW<wbr></wbr>_FIRST</a></code>
+            <div class="itemName"><code><a href="#OUT_NEIGHBORS" class="internal-link" title="rl_graph_theory.graphs.graph.BitmaskType.OUT_NEIGHBORS">OUT<wbr></wbr>_NEIGHBORS</a></code>
             </div>
         
 
@@ -180,7 +180,17 @@
         
 
         
-            <div class="itemName"><code><a href="rl_graph_theory.graphs.graph.EdgeOrdering.html" class="internal-link" title="rl_graph_theory.graphs.graph.EdgeOrdering"><wbr></wbr>Edge<wbr></wbr>Ordering</a></code>
+            <div class="itemName"><code><a href="rl_graph_theory.graphs.graph.BitmaskType.html" class="internal-link" title="rl_graph_theory.graphs.graph.BitmaskType"><wbr></wbr>Bitmask<wbr></wbr>Type</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="rl_graph_theory.graphs.graph.FlattenedOrdering.html" class="internal-link" title="rl_graph_theory.graphs.graph.FlattenedOrdering"><wbr></wbr>Flattened<wbr></wbr>Ordering</a></code>
             </div>
         
 
@@ -248,7 +258,7 @@
         
 
         <div class="page-header">
-          <h1 class="class"><code><code><a href="index.html" class="internal-link">rl_graph_theory</a></code><wbr></wbr>.<code><a href="rl_graph_theory.graphs.html" class="internal-link" title="rl_graph_theory.graphs">graphs</a></code><wbr></wbr>.<code><a href="rl_graph_theory.graphs.graph.html" class="internal-link" title="rl_graph_theory.graphs.graph">graph</a></code><wbr></wbr>.<code><a href="rl_graph_theory.graphs.graph.EdgeOrdering.html" class="internal-link" title="rl_graph_theory.graphs.graph.EdgeOrdering">EdgeOrdering</a></code></code></h1>
+          <h1 class="class"><code><code><a href="index.html" class="internal-link">rl_graph_theory</a></code><wbr></wbr>.<code><a href="rl_graph_theory.graphs.html" class="internal-link" title="rl_graph_theory.graphs">graphs</a></code><wbr></wbr>.<code><a href="rl_graph_theory.graphs.graph.html" class="internal-link" title="rl_graph_theory.graphs.graph">graph</a></code><wbr></wbr>.<code><a href="rl_graph_theory.graphs.graph.BitmaskType.html" class="internal-link" title="rl_graph_theory.graphs.graph.BitmaskType">BitmaskType</a></code></code></h1>
           <div id="show-private">
             <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
           </div>
@@ -259,29 +269,29 @@
         </div>
 
         <div class="extrasDocstring">
-          <p class="class-signature"><code><span class="py-keyword">class</span> <span class="py-defname">EdgeOrdering</span>(<a href="https://docs.python.org/3/library/enum.html#enum.Enum" class="intersphinx-link">Enum</a>):</code></p><p><a href="classIndex.html#rl_graph_theory.graphs.graph.EdgeOrdering">View In Hierarchy</a></p>
+          <p class="class-signature"><code><span class="py-keyword">class</span> <span class="py-defname">BitmaskType</span>(<a href="https://docs.python.org/3/library/enum.html#enum.Enum" class="intersphinx-link">Enum</a>):</code></p><p><a href="classIndex.html#rl_graph_theory.graphs.graph.BitmaskType">View In Hierarchy</a></p>
         </div>
 
         <div class="moduleDocstring">
-          <div><p>This enumeration encapsulates the concept of an edge ordering in the context of the two
-flattened graph formats, <code><a href="rl_graph_theory.graphs.graph.GraphFormat.html#FLATTENED_COLUMN_FIRST" class="internal-link" title="rl_graph_theory.graphs.graph.GraphFormat.FLATTENED_COLUMN_FIRST">GraphFormat.FLATTENED_COLUMN_FIRST</a></code> and
-<code><a href="rl_graph_theory.graphs.graph.GraphFormat.html#FLATTENED_ROW_FIRST" class="internal-link" title="rl_graph_theory.graphs.graph.GraphFormat.FLATTENED_ROW_FIRST">GraphFormat.FLATTENED_ROW_FIRST</a></code>, from the <code><a href="rl_graph_theory.graphs.graph.GraphFormat.html" class="internal-link" title="rl_graph_theory.graphs.graph.GraphFormat">GraphFormat</a></code> enumeration.</p></div>
+          <div><p>This enumeration encapsulates the concept of a bitmask type in the context of the two bitmask
+formats, <code><a href="rl_graph_theory.graphs.graph.GraphFormat.html#BITMASK_OUT" class="internal-link" title="rl_graph_theory.graphs.graph.GraphFormat.BITMASK_OUT">GraphFormat.BITMASK_OUT</a></code> and <code><a href="rl_graph_theory.graphs.graph.GraphFormat.html#BITMASK_IN" class="internal-link" title="rl_graph_theory.graphs.graph.GraphFormat.BITMASK_IN">GraphFormat.BITMASK_IN</a></code>, from the <code><a href="rl_graph_theory.graphs.graph.GraphFormat.html" class="internal-link" title="rl_graph_theory.graphs.graph.GraphFormat">GraphFormat</a></code>
+enumeration.</p></div>
         </div>
 
         <div id="split-tables">
-          <table class="children sortable" id="id19">
+          <table class="children sortable" id="id16">
   
   
   <tr class="constant">
     
     <td>Constant</td>
-    <td><code><a href="#COLUMN_FIRST" class="internal-link" title="rl_graph_theory.graphs.graph.EdgeOrdering.COLUMN_FIRST">COLUMN<wbr></wbr>_FIRST</a></code></td>
-    <td>This item corresponds to the column-first edge ordering.</td>
+    <td><code><a href="#IN_NEIGHBORS" class="internal-link" title="rl_graph_theory.graphs.graph.BitmaskType.IN_NEIGHBORS">IN<wbr></wbr>_NEIGHBORS</a></code></td>
+    <td>This item corresponds to the bitmask format for the in-neighborhoods.</td>
   </tr><tr class="constant">
     
     <td>Constant</td>
-    <td><code><a href="#ROW_FIRST" class="internal-link" title="rl_graph_theory.graphs.graph.EdgeOrdering.ROW_FIRST">ROW<wbr></wbr>_FIRST</a></code></td>
-    <td>This item corresponds to the row-first edge ordering.</td>
+    <td><code><a href="#OUT_NEIGHBORS" class="internal-link" title="rl_graph_theory.graphs.graph.BitmaskType.OUT_NEIGHBORS">OUT<wbr></wbr>_NEIGHBORS</a></code></td>
+    <td>This item corresponds to the bitmask format for the out-neighborhoods.</td>
   </tr>
 </table>
           
@@ -293,17 +303,17 @@ flattened graph formats, <code><a href="rl_graph_theory.graphs.graph.GraphFormat
           <div class="baseconstant">
   
   
-  <a name="rl_graph_theory.graphs.graph.EdgeOrdering.COLUMN_FIRST">
+  <a name="rl_graph_theory.graphs.graph.BitmaskType.IN_NEIGHBORS">
     
   </a>
-  <a name="COLUMN_FIRST">
+  <a name="IN_NEIGHBORS">
     
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">COLUMN_FIRST</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
+    <span class="py-defname">IN_NEIGHBORS</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
     
-    <a class="headerLink" href="#COLUMN_FIRST" title="rl_graph_theory.graphs.graph.EdgeOrdering.COLUMN_FIRST">
+    <a class="headerLink" href="#IN_NEIGHBORS" title="rl_graph_theory.graphs.graph.BitmaskType.IN_NEIGHBORS">
       
       
       ¶
@@ -311,23 +321,23 @@ flattened graph formats, <code><a href="rl_graph_theory.graphs.graph.GraphFormat
   </div>
   <div class="functionBody">
     
-    <div><p>This item corresponds to the column-first edge ordering.</p></div>
-    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>0</code></pre></td></tr></table>
+    <div><p>This item corresponds to the bitmask format for the in-neighborhoods.</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>1</code></pre></td></tr></table>
   </div>
 </div><div class="baseconstant">
   
   
-  <a name="rl_graph_theory.graphs.graph.EdgeOrdering.ROW_FIRST">
+  <a name="rl_graph_theory.graphs.graph.BitmaskType.OUT_NEIGHBORS">
     
   </a>
-  <a name="ROW_FIRST">
+  <a name="OUT_NEIGHBORS">
     
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">ROW_FIRST</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
+    <span class="py-defname">OUT_NEIGHBORS</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
     
-    <a class="headerLink" href="#ROW_FIRST" title="rl_graph_theory.graphs.graph.EdgeOrdering.ROW_FIRST">
+    <a class="headerLink" href="#OUT_NEIGHBORS" title="rl_graph_theory.graphs.graph.BitmaskType.OUT_NEIGHBORS">
       
       
       ¶
@@ -335,8 +345,8 @@ flattened graph formats, <code><a href="rl_graph_theory.graphs.graph.GraphFormat
   </div>
   <div class="functionBody">
     
-    <div><p>This item corresponds to the row-first edge ordering.</p></div>
-    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>1</code></pre></td></tr></table>
+    <div><p>This item corresponds to the bitmask format for the out-neighborhoods.</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>0</code></pre></td></tr></table>
   </div>
 </div>
         </div>
@@ -350,7 +360,7 @@ flattened graph formats, <code><a href="rl_graph_theory.graphs.graph.GraphFormat
   <div class="container-fluid">
     <a href="index.html">API Documentation</a> for rl-graph-theory,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    25.10.1 at 2025-11-15 21:20:25.
+    25.10.1 at 2025-12-18 18:22:50.
   </div>
 
   <!-- Search related scripts needs to be loaded at the end of HTML 

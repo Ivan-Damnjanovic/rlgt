@@ -16,6 +16,7 @@ pytest = "^8.4.2"
 black = "^25.9.0"
 isort = "^7.0.0"
 pydoctor = "^25.10.1"
+pytest-cov = "^7.0.0"
 
 [build-system]
 requires = ["poetry-core"]

@@ -6,7 +6,699 @@ module.
 import numpy as np
 
 
-GRAPH_TEST_CASES = [
+GRAPH_TEST_CASES_BASIC = [
+    (
+        2,
+        2,
+        np.array([[0, 0]], dtype=int),
+        np.array([[0, 0], [0, 0]], dtype=int),
+        np.array([0], dtype=int),
+        np.array([0], dtype=int),
+    ),
+    (
+        2,
+        2,
+        np.array([[2, 1]], dtype=int),
+        np.array([[0, 1], [1, 0]], dtype=int),
+        np.array([1], dtype=int),
+        np.array([1], dtype=int),
+    ),
+    (
+        3,
+        2,
+        np.array([[0, 0], [0, 0]], dtype=int),
+        np.array([[0, 0], [0, 0]], dtype=int),
+        np.array([0], dtype=int),
+        np.array([0], dtype=int),
+    ),
+    (
+        3,
+        2,
+        np.array([[2, 1], [0, 0]], dtype=int),
+        np.array([[0, 1], [1, 0]], dtype=int),
+        np.array([1], dtype=int),
+        np.array([1], dtype=int),
+    ),
+    (
+        3,
+        2,
+        np.array([[0, 0], [2, 1]], dtype=int),
+        np.array([[0, 2], [2, 0]], dtype=int),
+        np.array([2], dtype=int),
+        np.array([2], dtype=int),
+    ),
+    (
+        2,
+        3,
+        np.array([[0, 0, 0]], dtype=int),
+        np.array([[0, 0, 0], [0, 0, 0], [0, 0, 0]], dtype=int),
+        np.array([0, 0, 0], dtype=int),
+        np.array([0, 0, 0], dtype=int),
+    ),
+    (
+        2,
+        3,
+        np.array([[2, 1, 0]], dtype=int),
+        np.array(
+            [
+                [0, 1, 0],
+                [1, 0, 0],
+                [0, 0, 0],
+            ],
+            dtype=int,
+        ),
+        np.array([1, 0, 0], dtype=int),
+        np.array([1, 0, 0], dtype=int),
+    ),
+    (
+        2,
+        3,
+        np.array([[4, 4, 3]], dtype=int),
+        np.array(
+            [
+                [0, 0, 1],
+                [0, 0, 1],
+                [1, 1, 0],
+            ],
+            dtype=int,
+        ),
+        np.array([0, 1, 1], dtype=int),
+        np.array([0, 1, 1], dtype=int),
+    ),
+    (
+        2,
+        4,
+        np.array([[10, 1, 0, 1]], dtype=int),
+        np.array(
+            [
+                [0, 1, 0, 1],
+                [1, 0, 0, 0],
+                [0, 0, 0, 0],
+                [1, 0, 0, 0],
+            ],
+            dtype=int,
+        ),
+        np.array([1, 0, 0, 1, 0, 0], dtype=int),
+        np.array([1, 0, 1, 0, 0, 0], dtype=int),
+    ),
+    (
+        2,
+        3,
+        np.array(
+            [
+                [0, 4, 2],
+                [2, 1, 0],
+            ],
+            dtype=int,
+        ),
+        np.array(
+            [
+                [0, 1, 2],
+                [1, 0, 0],
+                [2, 0, 0],
+            ],
+            dtype=int,
+        ),
+        np.array([1, 2, 0], dtype=int),
+        np.array([1, 2, 0], dtype=int),
+    ),
+    (
+        5,
+        4,
+        np.array(
+            [
+                [2, 1, 0, 0],
+                [4, 0, 1, 0],
+                [8, 0, 0, 1],
+                [0, 4, 2, 0],
+            ],
+            dtype=int,
+        ),
+        np.array(
+            [
+                [0, 1, 2, 3],
+                [1, 0, 4, 0],
+                [2, 4, 0, 0],
+                [3, 0, 0, 0],
+            ],
+            dtype=int,
+        ),
+        np.array([1, 2, 4, 3, 0, 0], dtype=int),
+        np.array([1, 2, 3, 4, 0, 0], dtype=int),
+    ),
+    (
+        5,
+        4,
+        np.array(
+            [
+                [0, 0, 8, 4],
+                [2, 1, 0, 0],
+                [4, 0, 1, 0],
+                [8, 0, 0, 1],
+                [0, 4, 2, 0],
+            ],
+            dtype=int,
+        ),
+        np.array(
+            [
+                [0, 1, 2, 3],
+                [1, 0, 4, 5],
+                [2, 4, 0, 0],
+                [3, 5, 0, 0],
+            ],
+            dtype=int,
+        ),
+        np.array([1, 2, 4, 3, 5, 0], dtype=int),
+        np.array([1, 2, 3, 4, 5, 0], dtype=int),
+    ),
+]
+
+GRAPH_TEST_CASES_LOOPS = [
+    (
+        2,
+        2,
+        np.array([[0, 0]], dtype=int),
+        np.array([[0, 0], [0, 0]], dtype=int),
+        np.array([0, 0, 0], dtype=int),
+        np.array([0, 0, 0], dtype=int),
+    ),
+    (
+        2,
+        2,
+        np.array([[1, 0]], dtype=int),
+        np.array([[1, 0], [0, 0]], dtype=int),
+        np.array([1, 0, 0], dtype=int),
+        np.array([1, 0, 0], dtype=int),
+    ),
+    (
+        2,
+        2,
+        np.array([[1, 2]], dtype=int),
+        np.array([[1, 0], [0, 1]], dtype=int),
+        np.array([1, 0, 1], dtype=int),
+        np.array([1, 0, 1], dtype=int),
+    ),
+    (
+        2,
+        3,
+        np.array([[5, 2, 1]], dtype=int),
+        np.array(
+            [
+                [1, 0, 1],
+                [0, 1, 0],
+                [1, 0, 0],
+            ],
+            dtype=int,
+        ),
+        np.array([1, 0, 1, 1, 0, 0], dtype=int),
+        np.array([1, 0, 1, 1, 0, 0], dtype=int),
+    ),
+    (
+        2,
+        3,
+        np.array(
+            [
+                [2, 5, 6],
+                [5, 0, 1],
+            ],
+            dtype=int,
+        ),
+        np.array(
+            [
+                [1, 0, 1],
+                [0, 2, 0],
+                [1, 0, 0],
+            ],
+            dtype=int,
+        ),
+        np.array([1, 0, 2, 1, 0, 0], dtype=int),
+        np.array([1, 0, 1, 2, 0, 0], dtype=int),
+    ),
+    (
+        5,
+        4,
+        np.array(
+            [
+                [2, 1, 0, 0],
+                [4, 0, 1, 0],
+                [0, 2, 0, 0],
+                [0, 4, 2, 0],
+            ],
+            dtype=int,
+        ),
+        np.array(
+            [
+                [0, 1, 2, 0],
+                [1, 3, 4, 0],
+                [2, 4, 0, 0],
+                [0, 0, 0, 0],
+            ],
+            dtype=int,
+        ),
+        np.array([0, 1, 3, 2, 4, 0, 0, 0, 0, 0], dtype=int),
+        np.array([0, 1, 2, 0, 3, 4, 0, 0, 0, 0], dtype=int),
+    ),
+    (
+        5,
+        4,
+        np.array(
+            [
+                [9, 8, 0, 3],
+                [2, 1, 0, 0],
+                [4, 0, 1, 0],
+                [0, 2, 0, 0],
+                [0, 4, 2, 0],
+            ],
+            dtype=int,
+        ),
+        np.array(
+            [
+                [0, 1, 2, 0],
+                [1, 3, 4, 0],
+                [2, 4, 5, 5],
+                [0, 0, 5, 5],
+            ],
+            dtype=int,
+        ),
+        np.array([0, 1, 3, 2, 4, 5, 0, 0, 5, 5], dtype=int),
+        np.array([0, 1, 2, 0, 3, 4, 0, 5, 5, 5], dtype=int),
+    ),
+]
+
+GRAPH_TEST_CASES_DIRECTED = [
+    (
+        2,
+        2,
+        np.array([[0, 0]], dtype=int),
+        np.array([[0, 0]], dtype=int),
+        np.array([[0, 0], [0, 0]], dtype=int),
+        np.array([0, 0], dtype=int),
+        np.array([0, 0], dtype=int),
+    ),
+    (
+        2,
+        2,
+        np.array([[0, 1]], dtype=int),
+        np.array([[2, 0]], dtype=int),
+        np.array(
+            [
+                [0, 1],
+                [0, 0],
+            ],
+            dtype=int,
+        ),
+        np.array([1, 0], dtype=int),
+        np.array([1, 0], dtype=int),
+    ),
+    (
+        2,
+        2,
+        np.array([[2, 0]], dtype=int),
+        np.array([[0, 1]], dtype=int),
+        np.array(
+            [
+                [0, 0],
+                [1, 0],
+            ],
+            dtype=int,
+        ),
+        np.array([0, 1], dtype=int),
+        np.array([0, 1], dtype=int),
+    ),
+    (
+        2,
+        3,
+        np.array([[0, 1, 0]], dtype=int),
+        np.array([[2, 0, 0]], dtype=int),
+        np.array(
+            [
+                [0, 1, 0],
+                [0, 0, 0],
+                [0, 0, 0],
+            ],
+            dtype=int,
+        ),
+        np.array([1, 0, 0, 0, 0, 0], dtype=int),
+        np.array([1, 0, 0, 0, 0, 0], dtype=int),
+    ),
+    (
+        2,
+        3,
+        np.array([[0, 0, 2]], dtype=int),
+        np.array([[0, 4, 0]], dtype=int),
+        np.array(
+            [
+                [0, 0, 0],
+                [0, 0, 1],
+                [0, 0, 0],
+            ],
+            dtype=int,
+        ),
+        np.array([0, 0, 0, 1, 0, 0], dtype=int),
+        np.array([0, 0, 0, 1, 0, 0], dtype=int),
+    ),
+    (
+        2,
+        3,
+        np.array([[0, 4, 0]], dtype=int),
+        np.array([[0, 0, 2]], dtype=int),
+        np.array(
+            [
+                [0, 0, 0],
+                [0, 0, 0],
+                [0, 1, 0],
+            ],
+            dtype=int,
+        ),
+        np.array([0, 0, 0, 0, 1, 0], dtype=int),
+        np.array([0, 0, 0, 0, 0, 1], dtype=int),
+    ),
+    (
+        2,
+        3,
+        np.array([[0, 5, 1]], dtype=int),
+        np.array([[6, 0, 2]], dtype=int),
+        np.array(
+            [
+                [0, 1, 1],
+                [0, 0, 0],
+                [0, 1, 0],
+            ],
+            dtype=int,
+        ),
+        np.array([1, 0, 1, 0, 1, 0], dtype=int),
+        np.array([1, 1, 0, 0, 0, 1], dtype=int),
+    ),
+    (
+        3,
+        3,
+        np.array(
+            [
+                [0, 4, 1],
+                [0, 1, 0],
+            ],
+            dtype=int,
+        ),
+        np.array(
+            [
+                [4, 0, 2],
+                [2, 0, 0],
+            ],
+            dtype=int,
+        ),
+        np.array(
+            [
+                [0, 2, 1],
+                [0, 0, 0],
+                [0, 1, 0],
+            ],
+            dtype=int,
+        ),
+        np.array([2, 0, 1, 0, 1, 0], dtype=int),
+        np.array([2, 1, 0, 0, 0, 1], dtype=int),
+    ),
+    (
+        2,
+        3,
+        np.array(
+            [
+                [6, 0, 2],
+                [0, 4, 1],
+            ],
+            dtype=int,
+        ),
+        np.array(
+            [
+                [0, 5, 1],
+                [4, 0, 2],
+            ],
+            dtype=int,
+        ),
+        np.array(
+            [
+                [0, 2, 1],
+                [0, 0, 0],
+                [0, 1, 0],
+            ],
+            dtype=int,
+        ),
+        np.array([2, 0, 1, 0, 1, 0], dtype=int),
+        np.array([2, 1, 0, 0, 0, 1], dtype=int),
+    ),
+    (
+        5,
+        4,
+        np.array(
+            [
+                [0, 1, 0, 0],
+                [0, 0, 1, 0],
+                [2, 0, 0, 0],
+                [4, 0, 0, 0],
+            ],
+            dtype=int,
+        ),
+        np.array(
+            [
+                [2, 0, 0, 0],
+                [4, 0, 0, 0],
+                [0, 1, 0, 0],
+                [0, 0, 1, 0],
+            ],
+            dtype=int,
+        ),
+        np.array(
+            [
+                [0, 1, 2, 0],
+                [3, 0, 0, 0],
+                [4, 0, 0, 0],
+                [0, 0, 0, 0],
+            ],
+            dtype=int,
+        ),
+        np.array([1, 3, 2, 0, 0, 4, 0, 0, 0, 0, 0, 0], dtype=int),
+        np.array([1, 2, 0, 3, 0, 0, 4, 0, 0, 0, 0, 0], dtype=int),
+    ),
+    (
+        5,
+        4,
+        np.array(
+            [
+                [0, 12, 10, 6],
+                [0, 1, 0, 0],
+                [0, 0, 1, 0],
+                [2, 0, 0, 0],
+                [4, 0, 0, 0],
+            ],
+            dtype=int,
+        ),
+        np.array(
+            [
+                [0, 12, 10, 6],
+                [2, 0, 0, 0],
+                [4, 0, 0, 0],
+                [0, 1, 0, 0],
+                [0, 0, 1, 0],
+            ],
+            dtype=int,
+        ),
+        np.array(
+            [
+                [0, 1, 2, 5],
+                [3, 0, 0, 0],
+                [4, 0, 0, 0],
+                [5, 0, 0, 0],
+            ],
+            dtype=int,
+        ),
+        np.array([1, 3, 2, 0, 0, 4, 5, 0, 0, 0, 0, 5], dtype=int),
+        np.array([1, 2, 5, 3, 0, 0, 4, 0, 0, 5, 0, 0], dtype=int),
+    ),
+]
+
+
+GRAPH_TEST_CASES_DIRECTED_LOOPS = [
+    (
+        2,
+        2,
+        np.array([[0, 0]], dtype=int),
+        np.array([[0, 0]], dtype=int),
+        np.array([[0, 0], [0, 0]], dtype=int),
+        np.array([0, 0, 0, 0], dtype=int),
+        np.array([0, 0, 0, 0], dtype=int),
+    ),
+    (
+        2,
+        2,
+        np.array([[0, 1]], dtype=int),
+        np.array([[2, 0]], dtype=int),
+        np.array(
+            [
+                [0, 1],
+                [0, 0],
+            ],
+            dtype=int,
+        ),
+        np.array([0, 1, 0, 0], dtype=int),
+        np.array([0, 1, 0, 0], dtype=int),
+    ),
+    (
+        2,
+        2,
+        np.array([[0, 3]], dtype=int),
+        np.array([[2, 2]], dtype=int),
+        np.array(
+            [
+                [0, 1],
+                [0, 1],
+            ],
+            dtype=int,
+        ),
+        np.array([0, 1, 1, 0], dtype=int),
+        np.array([0, 1, 0, 1], dtype=int),
+    ),
+    (
+        3,
+        2,
+        np.array([[0, 1], [0, 2]], dtype=int),
+        np.array([[2, 0], [0, 2]], dtype=int),
+        np.array(
+            [
+                [0, 1],
+                [0, 2],
+            ],
+            dtype=int,
+        ),
+        np.array([0, 1, 2, 0], dtype=int),
+        np.array([0, 1, 0, 2], dtype=int),
+    ),
+    (
+        3,
+        3,
+        np.array(
+            [
+                [0, 4, 1],
+                [0, 3, 0],
+            ],
+            dtype=int,
+        ),
+        np.array(
+            [
+                [4, 0, 2],
+                [2, 2, 0],
+            ],
+            dtype=int,
+        ),
+        np.array(
+            [
+                [0, 2, 1],
+                [0, 2, 0],
+                [0, 1, 0],
+            ],
+            dtype=int,
+        ),
+        np.array([0, 2, 2, 0, 1, 0, 0, 1, 0], dtype=int),
+        np.array([0, 2, 1, 0, 2, 0, 0, 1, 0], dtype=int),
+    ),
+    (
+        2,
+        3,
+        np.array(
+            [
+                [7, 0, 6],
+                [0, 4, 1],
+            ],
+            dtype=int,
+        ),
+        np.array(
+            [
+                [1, 5, 5],
+                [4, 0, 2],
+            ],
+            dtype=int,
+        ),
+        np.array(
+            [
+                [0, 2, 1],
+                [0, 2, 0],
+                [0, 1, 0],
+            ],
+            dtype=int,
+        ),
+        np.array([0, 2, 2, 0, 1, 0, 0, 1, 0], dtype=int),
+        np.array([0, 2, 1, 0, 2, 0, 0, 1, 0], dtype=int),
+    ),
+    (
+        5,
+        4,
+        np.array(
+            [
+                [1, 1, 0, 0],
+                [0, 0, 5, 0],
+                [2, 0, 0, 0],
+                [4, 0, 0, 0],
+            ],
+            dtype=int,
+        ),
+        np.array(
+            [
+                [3, 0, 0, 0],
+                [4, 0, 4, 0],
+                [0, 1, 0, 0],
+                [0, 0, 1, 0],
+            ],
+            dtype=int,
+        ),
+        np.array(
+            [
+                [1, 1, 2, 0],
+                [3, 0, 0, 0],
+                [4, 0, 2, 0],
+                [0, 0, 0, 0],
+            ],
+            dtype=int,
+        ),
+        np.array([1, 1, 0, 3, 2, 0, 2, 0, 4, 0, 0, 0, 0, 0, 0, 0], dtype=int),
+        np.array([1, 1, 2, 0, 3, 0, 0, 0, 4, 0, 2, 0, 0, 0, 0, 0], dtype=int),
+    ),
+    (
+        5,
+        4,
+        np.array(
+            [
+                [8, 14, 2, 3],
+                [1, 1, 0, 0],
+                [0, 0, 5, 0],
+                [2, 0, 0, 0],
+                [4, 0, 0, 0],
+            ],
+            dtype=int,
+        ),
+        np.array(
+            [
+                [8, 14, 2, 3],
+                [3, 0, 0, 0],
+                [4, 0, 4, 0],
+                [0, 1, 0, 0],
+                [0, 0, 1, 0],
+            ],
+            dtype=int,
+        ),
+        np.array(
+            [
+                [1, 1, 2, 0],
+                [3, 0, 0, 0],
+                [4, 0, 2, 5],
+                [0, 0, 5, 5],
+            ],
+            dtype=int,
+        ),
+        np.array([1, 1, 0, 3, 2, 0, 2, 0, 4, 0, 0, 5, 5, 5, 0, 0], dtype=int),
+        np.array([1, 1, 2, 0, 3, 0, 0, 0, 4, 0, 2, 5, 0, 0, 5, 5], dtype=int),
+    ),
+]
+
+
+GRAPH_TEST_CASES_LARGE = [
     (
         4,
         7,
@@ -59,11 +751,69 @@ GRAPH_TEST_CASES = [
             dtype=int,
         ),
         np.array(
-            [3, 3, 3, 3, 3, 1, 1, 2, 0, 2, 0, 3, 1, 0, 2, 1, 3, 2, 1, 1, 1, 3, 1, 2, 2, 2, 3, 2],
+            [
+                3,
+                3,
+                3,
+                3,
+                3,
+                1,
+                1,
+                2,
+                0,
+                2,
+                0,
+                3,
+                1,
+                0,
+                2,
+                1,
+                3,
+                2,
+                1,
+                1,
+                1,
+                3,
+                1,
+                2,
+                2,
+                2,
+                3,
+                2,
+            ],
             dtype=int,
         ),
         np.array(
-            [3, 3, 3, 1, 0, 1, 3, 3, 3, 2, 3, 3, 1, 1, 0, 1, 2, 2, 2, 0, 1, 2, 2, 1, 2, 1, 3, 2],
+            [
+                3,
+                3,
+                3,
+                1,
+                0,
+                1,
+                3,
+                3,
+                3,
+                2,
+                3,
+                3,
+                1,
+                1,
+                0,
+                1,
+                2,
+                2,
+                2,
+                0,
+                1,
+                2,
+                2,
+                1,
+                2,
+                1,
+                3,
+                2,
+            ],
             dtype=int,
         ),
     ),
@@ -120,7 +870,91 @@ GRAPH_TEST_CASES = [
 ]
 
 
-GRAPH_BATCH_TEST_CASES = [
+def batchify(test_cases, batch_size=1):
+    return [
+        tuple(
+            [batch_size]
+            + [
+                np.stack([item] * batch_size, axis=0) if isinstance(item, np.ndarray) else item
+                for item in test_case
+            ]
+        )
+        for test_case in test_cases
+    ]
+
+
+def merge(test_cases):
+    res = []
+    batch_size = len(test_cases)
+
+    for i in range(len(test_cases[0])):
+        items = [test_case[i] for test_case in test_cases]
+        if isinstance(items[0], np.ndarray):
+            res.append(np.stack(items, axis=0))
+        else:
+            assert len(set(items)) == 1
+            res.append(items[0])
+
+    return tuple([batch_size] + res)
+
+
+GRAPH_BATCH_TEST_CASES_BASIC = [
+    *batchify(GRAPH_TEST_CASES_BASIC),
+    *batchify(GRAPH_TEST_CASES_BASIC, batch_size=2),
+    merge(GRAPH_TEST_CASES_BASIC[0:2]),  # edge_color=2, order=2
+    merge(GRAPH_TEST_CASES_BASIC[2:5]),  # edge_color=3, order=2
+    merge(GRAPH_TEST_CASES_BASIC[5:8]),  # edge_color=2, order=3
+    (  # one fully colored and one not
+        2,
+        2,
+        3,
+        np.array(
+            [
+                [[4, 4, 3], [2, 1, 0]],
+                [[4, 0, 1], [2, 1, 0]],
+            ],
+            dtype=int,
+        ),
+        np.array(
+            [
+                [
+                    [0, 1, 0],
+                    [1, 0, 0],
+                    [0, 0, 0],
+                ],
+                [
+                    [0, 1, 0],
+                    [1, 0, 2],
+                    [0, 2, 0],
+                ],
+            ],
+            dtype=int,
+        ),
+        np.array([[1, 0, 0], [1, 0, 2]], dtype=int),
+        np.array([[1, 0, 0], [1, 0, 2]], dtype=int),
+    ),
+]
+
+GRAPH_BATCH_TEST_CASES_LOOPS = [
+    *batchify(GRAPH_TEST_CASES_LOOPS),
+    *batchify(GRAPH_TEST_CASES_LOOPS, batch_size=2),
+    merge(GRAPH_TEST_CASES_LOOPS[0:3]),  # edge_color=2, order=2
+]
+
+GRAPH_BATCH_TEST_CASES_DIRECTED = [
+    *batchify(GRAPH_TEST_CASES_DIRECTED),
+    *batchify(GRAPH_TEST_CASES_DIRECTED, batch_size=2),
+    merge(GRAPH_TEST_CASES_DIRECTED[0:3]),  # edge_color=2, order=2
+    merge(GRAPH_TEST_CASES_DIRECTED[3:7]),  # edge_color=2, order=3
+]
+
+GRAPH_BATCH_TEST_CASES_DIRECTED_LOOPS = [
+    *batchify(GRAPH_TEST_CASES_DIRECTED_LOOPS),
+    *batchify(GRAPH_TEST_CASES_DIRECTED_LOOPS, batch_size=2),
+    merge(GRAPH_TEST_CASES_DIRECTED_LOOPS[0:3]),  # edge_color=2, order=2
+]
+
+GRAPH_BATCH_TEST_CASES_LARGE = [
     (
         1,
         4,
@@ -183,11 +1017,73 @@ GRAPH_BATCH_TEST_CASES = [
             dtype=int,
         ),
         np.array(
-            [[3, 3, 3, 3, 3, 1, 1, 2, 0, 2, 0, 3, 1, 0, 2, 1, 3, 2, 1, 1, 1, 3, 1, 2, 2, 2, 3, 2]],
+            [
+                [
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    1,
+                    1,
+                    2,
+                    0,
+                    2,
+                    0,
+                    3,
+                    1,
+                    0,
+                    2,
+                    1,
+                    3,
+                    2,
+                    1,
+                    1,
+                    1,
+                    3,
+                    1,
+                    2,
+                    2,
+                    2,
+                    3,
+                    2,
+                ]
+            ],
             dtype=int,
         ),
         np.array(
-            [[3, 3, 3, 1, 0, 1, 3, 3, 3, 2, 3, 3, 1, 1, 0, 1, 2, 2, 2, 0, 1, 2, 2, 1, 2, 1, 3, 2]],
+            [
+                [
+                    3,
+                    3,
+                    3,
+                    1,
+                    0,
+                    1,
+                    3,
+                    3,
+                    3,
+                    2,
+                    3,
+                    3,
+                    1,
+                    1,
+                    0,
+                    1,
+                    2,
+                    2,
+                    2,
+                    0,
+                    1,
+                    2,
+                    2,
+                    1,
+                    2,
+                    1,
+                    3,
+                    2,
+                ]
+            ],
             dtype=int,
         ),
     ),

@@ -130,6 +130,11 @@ class Graph:
     format is always used if possible, i.e., if the graph is fully colored.
 
     :ivar __edge_colors: The number of proper edge colors, i.e., $k$.
+    :ivar __is_directed: A boolean that indicates whether the given graph is a $k$-edge-colored
+        looped complete directed graph or a $k$-edge-colored looped complete undirected graph.
+    :ivar __allow_loops: A boolean that indicates whether the given graph is allowed to have loops
+        (if loops are not allowed, then all the loops are removed from the considered complete
+        graph and they simply do not exist).
     :ivar __order: The graph order, i.e., its number of vertices.
     :ivar __bitmask_out: The `np.ndarray` from the out-neighborhoods bitmask format
         (`GraphFormat.BITMASK_OUT`) representation of the given graph structure, if it was used to
@@ -285,8 +290,8 @@ class Graph:
         (`GraphFormat.BITMASK_IN`).
 
         :param bitmask: The `np.ndarray` that describes the (potentially reduced) bitmask format
-            for the in-neighborhoods (`GraphFormat.BITMASK_IN`) or the out-neighborhoods
-            (`GraphFormat.BITMASK_OUT`) of the graph that should be initialized.
+            for the out-neighborhoods (`GraphFormat.BITMASK_OUT`) or the in-neighborhoods
+            (`GraphFormat.BITMASK_IN`) of the graph that should be initialized.
         :param bitmask_type: An item of the `BitmaskType` enumeration that determines whether the
             bitmask format for the out-neighborhoods should be used or the bitmask format for the
             in-neighborhoods. The default value is `BitmaskType.OUT_NEIGHBORS`, i.e., the bitmask
@@ -742,8 +747,14 @@ class GraphBatch:
     corresponding format.
 
     :ivar __edge_colors: The number of proper edge colors, i.e., $k$.
+    :ivar __is_directed: A boolean that indicates whether each of the graphs in the given batch is
+        a $k$-edge-colored looped complete directed graph or a $k$-edge-colored looped complete
+        undirected graph.
+    :ivar __allow_loops: A boolean that indicates whether each of the graphs in the given batch is
+        allowed to have loops (if loops are not allowed, then all the loops are removed from the
+        considered complete graphs and they simply do not exist).
     :ivar __batch_size: A positive integer that determines the number of graphs in the given batch.
-    :ivar __order: The graph order, i.e., the number of vertices of each of the graphs from the
+    :ivar __order: The graph order, i.e., the number of vertices of each of the graphs in the
         batch.
     :ivar __bitmask_out: The `np.ndarray` from the out-neighborhoods bitmask format
         (`GraphFormat.BITMASK_OUT`) structural representation of the given batch of graphs, if it
@@ -910,8 +921,8 @@ class GraphBatch:
         in-neighborhoods (`GraphFormat.BITMASK_IN`).
 
         :param bitmask: The `np.ndarray` that describes the (potentially reduced) bitmask format
-            for the in-neighborhoods (`GraphFormat.BITMASK_IN`) or the out-neighborhoods
-            (`GraphFormat.BITMASK_OUT`) of the batch of graphs that should be initialized.
+            for the out-neighborhoods (`GraphFormat.BITMASK_OUT`) or the in-neighborhoods
+            (`GraphFormat.BITMASK_IN`) of the batch of graphs that should be initialized.
         :param bitmask_type: An item of the `BitmaskType` enumeration that determines whether the
             bitmask format for the out-neighborhoods should be used or the bitmask format for the
             in-neighborhoods. The default value is `BitmaskType.OUT_NEIGHBORS`, i.e., the bitmask
@@ -1271,7 +1282,7 @@ class GraphBatch:
         # If the number of rows of any of the two bitmask format representation matrices matches
         # the number of proper edge colors, then this means that a standard (non-reduced) bitmask
         # format is being used.
-        if temp.shape[0] == self.__edge_colors:
+        if temp.shape[1] == self.__edge_colors:
             result = np.full(
                 (self.__batch_size, self.__order, self.__order), self.__edge_colors, dtype=int
             )
@@ -1286,7 +1297,7 @@ class GraphBatch:
             result = np.sum(temp * weights[None, :, None, None], axis=1)
 
         if self.__bitmask_out is None:
-            result = result.reshape(0, 2, 1)
+            result = result.transpose(0, 2, 1)
 
         # Update the adjacency matrix format representation to make it available for further use,
         # so that the same conversion does not have to be performed twice.

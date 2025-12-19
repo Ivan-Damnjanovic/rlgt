@@ -147,7 +147,7 @@
         
 
         
-            <div class="itemName"><code><a href="#BITMASK" class="internal-link" title="rl_graph_theory.graphs.graph.GraphFormat.BITMASK">BITMASK</a></code>
+            <div class="itemName"><code><a href="#BITMASK_IN" class="internal-link" title="rl_graph_theory.graphs.graph.GraphFormat.BITMASK_IN">BITMASK<wbr></wbr>_IN</a></code>
             </div>
         
 
@@ -157,7 +157,7 @@
         
 
         
-            <div class="itemName"><code><a href="#FLATTENED_COLUMN_FIRST" class="internal-link" title="rl_graph_theory.graphs.graph.GraphFormat.FLATTENED_COLUMN_FIRST">FLATTENED<wbr></wbr>_COLUMN<wbr></wbr>_FIRST</a></code>
+            <div class="itemName"><code><a href="#BITMASK_OUT" class="internal-link" title="rl_graph_theory.graphs.graph.GraphFormat.BITMASK_OUT">BITMASK<wbr></wbr>_OUT</a></code>
             </div>
         
 
@@ -167,7 +167,17 @@
         
 
         
-            <div class="itemName"><code><a href="#FLATTENED_ROW_FIRST" class="internal-link" title="rl_graph_theory.graphs.graph.GraphFormat.FLATTENED_ROW_FIRST">FLATTENED<wbr></wbr>_ROW<wbr></wbr>_FIRST</a></code>
+            <div class="itemName"><code><a href="#FLATTENED_CLOCKWISE" class="internal-link" title="rl_graph_theory.graphs.graph.GraphFormat.FLATTENED_CLOCKWISE">FLATTENED<wbr></wbr>_CLOCKWISE</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#FLATTENED_ROW_MAJOR" class="internal-link" title="rl_graph_theory.graphs.graph.GraphFormat.FLATTENED_ROW_MAJOR">FLATTENED<wbr></wbr>_ROW<wbr></wbr>_MAJOR</a></code>
             </div>
         
 
@@ -200,7 +210,17 @@
         
 
         
-            <div class="itemName"><code><a href="rl_graph_theory.graphs.graph.EdgeOrdering.html" class="internal-link" title="rl_graph_theory.graphs.graph.EdgeOrdering"><wbr></wbr>Edge<wbr></wbr>Ordering</a></code>
+            <div class="itemName"><code><a href="rl_graph_theory.graphs.graph.BitmaskType.html" class="internal-link" title="rl_graph_theory.graphs.graph.BitmaskType"><wbr></wbr>Bitmask<wbr></wbr>Type</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="rl_graph_theory.graphs.graph.FlattenedOrdering.html" class="internal-link" title="rl_graph_theory.graphs.graph.FlattenedOrdering"><wbr></wbr>Flattened<wbr></wbr>Ordering</a></code>
             </div>
         
 
@@ -283,36 +303,59 @@
         </div>
 
         <div class="moduleDocstring">
-          <div><p>This enumeration encapsulates the concept of a format used to represent an edge-colored
-complete graph. Each of the edges can be colored in one of the colors from a given set $\{ 0,
-1, 2, \ldots, c - 1 \}$, where $c$ is the number of available edge colors. Each edge can also
-be uncolored. The enumeration provides support for the following four graph formats:</p></div>
+          <div><p>This enumeration encapsulates the concept of a format used to represent a $k$-edge-colored
+looped complete graph. Each graph is essentially represented as a quintuple <tt class="rst-docutils rst-literal">(edge_colors,
+is_directed, allow_loops, graph_format, format_representation)</tt>, where:</p>
+<ul class="rst-simple">
+<li><tt class="rst-docutils rst-literal">edge_colors</tt> is the number of proper edge (or arc) colors, i.e., the value $k$;</li>
+<li><tt class="rst-docutils rst-literal">is_directed</tt> is a boolean that indicates whether the considered graph is a
+$k$-edge-colored looped complete directed graph or a $k$-edge-colored looped complete
+undirected graph;</li>
+<li><tt class="rst-docutils rst-literal">allow_loops</tt> is a boolean that indicates whether the considered graph is allowed to have
+loops (if loops are not allowed, then all the loops are removed from the considered complete
+graph and they simply do not exist);</li>
+<li><tt class="rst-docutils rst-literal">graph_format</tt> is an item of this enumeration that describes the graph format that should
+be used to represent the structure of the considered graph; and</li>
+<li><tt class="rst-docutils rst-literal">format_representation</tt> is a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> that represents the structure of the considered
+graph in the chosen graph format.</li>
+</ul>
+<p>The enumeration provides support for the following five graph formats:</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Note</td></tr><tr><td colspan="2">If the graph is undirected, then the bitmask format for the out-neighborhoods and the
+bitmask format for the in-neighborhoods are the same. Also, if the graph is undirected,
+then the flattened clockwise format can be regarded as the flattened column-major format
+over the upper triangular part of the adjacency matrix (with or without the diagonal,
+depending on whether loops are allowed).</td></tr></table></div>
         </div>
 
         <div id="split-tables">
-          <table class="children sortable" id="id18">
+          <table class="children sortable" id="id15">
   
   
   <tr class="constant">
     
     <td>Constant</td>
     <td><code><a href="#ADJACENCY_MATRIX" class="internal-link" title="rl_graph_theory.graphs.graph.GraphFormat.ADJACENCY_MATRIX">ADJACENCY<wbr></wbr>_MATRIX</a></code></td>
-    <td>The adjacency matrix format. Here, the graph is represented through the number of available edge colors $c$ and its adjacency matrix, i.e., a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> integer square matrix <tt class="rst-docutils rst-literal">a</tt> with $n$ rows and columns, where $n$ is the graph order...</td>
+    <td>The adjacency matrix format. Here, the graph structure is represented through the adjacency matrix, i.e., a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> integer square matrix <tt class="rst-docutils rst-literal">a</tt> with $n$ rows and columns, where $n$ is the graph order. The value ...</td>
   </tr><tr class="constant">
     
     <td>Constant</td>
-    <td><code><a href="#BITMASK" class="internal-link" title="rl_graph_theory.graphs.graph.GraphFormat.BITMASK">BITMASK</a></code></td>
-    <td>The bitmask format. Here, the graph is represented through the number of available edge colors $c$ and a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> integer matrix <tt class="rst-docutils rst-literal">a</tt> with $c$ rows and $n$ columns, where $n$ is the graph order. The value ...</td>
+    <td><code><a href="#BITMASK_IN" class="internal-link" title="rl_graph_theory.graphs.graph.GraphFormat.BITMASK_IN">BITMASK<wbr></wbr>_IN</a></code></td>
+    <td>The bitmask format for the in-neighborhoods. Here, the graph structure is represented through a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> integer matrix <tt class="rst-docutils rst-literal">a</tt> with $k$ rows and $n$ columns, where $n$ is the graph order. The value <tt class="rst-docutils rst-literal">a[i, j]</tt>...</td>
   </tr><tr class="constant">
     
     <td>Constant</td>
-    <td><code><a href="#FLATTENED_COLUMN_FIRST" class="internal-link" title="rl_graph_theory.graphs.graph.GraphFormat.FLATTENED_COLUMN_FIRST">FLATTENED<wbr></wbr>_COLUMN<wbr></wbr>_FIRST</a></code></td>
-    <td>The flattened column-first format. Here, the graph is represented through the number of available edge colors and its adjacency matrix entries that are strictly above the diagonal. The entries are arranged column-first, i...</td>
+    <td><code><a href="#BITMASK_OUT" class="internal-link" title="rl_graph_theory.graphs.graph.GraphFormat.BITMASK_OUT">BITMASK<wbr></wbr>_OUT</a></code></td>
+    <td>The bitmask format for the out-neighborhoods. Here, the graph structure is represented through a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> integer matrix <tt class="rst-docutils rst-literal">a</tt> with $k$ rows and $n$ columns, where $n$ is the graph order. The value <tt class="rst-docutils rst-literal">a[i, j]</tt>...</td>
   </tr><tr class="constant">
     
     <td>Constant</td>
-    <td><code><a href="#FLATTENED_ROW_FIRST" class="internal-link" title="rl_graph_theory.graphs.graph.GraphFormat.FLATTENED_ROW_FIRST">FLATTENED<wbr></wbr>_ROW<wbr></wbr>_FIRST</a></code></td>
-    <td>The flattened row-first format. Here, the graph is represented through the number of available edge colors and its adjacency matrix entries that are strictly above the diagonal. The entries are arranged row-first, i...</td>
+    <td><code><a href="#FLATTENED_CLOCKWISE" class="internal-link" title="rl_graph_theory.graphs.graph.GraphFormat.FLATTENED_CLOCKWISE">FLATTENED<wbr></wbr>_CLOCKWISE</a></code></td>
+    <td>The flattened clockwise format. Here, the graph structure is represented through the adjacency matrix entries arranged in the clockwise layer order, i.e., the order $(0, 0), (0, 1), (1, 1), (1, 0), (0, 2), (1, 2), (2, 2), (2, 1), (2, 0), (0, 3), (1, 3), (2, 3), (3, 3), (3, 2), (3, 1), (3, 0), \ldots$...</td>
+  </tr><tr class="constant">
+    
+    <td>Constant</td>
+    <td><code><a href="#FLATTENED_ROW_MAJOR" class="internal-link" title="rl_graph_theory.graphs.graph.GraphFormat.FLATTENED_ROW_MAJOR">FLATTENED<wbr></wbr>_ROW<wbr></wbr>_MAJOR</a></code></td>
+    <td>The flattened row-major format. Here, the graph structure is represented through the adjacency matrix entries arranged in the row-major order. If the considered graph is directed and loops are not allowed, then the diagonal entries should be skipped when the entries are being arranged...</td>
   </tr>
 </table>
           
@@ -342,86 +385,28 @@ be uncolored. The enumeration provides support for the following four graph form
   </div>
   <div class="functionBody">
     
-    <div><p>The adjacency matrix format. Here, the graph is represented through the
-number of available edge colors $c$ and its adjacency matrix, i.e., a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> integer
-square matrix <tt class="rst-docutils rst-literal">a</tt> with $n$ rows and columns, where $n$ is the graph order. The value
-<tt class="rst-docutils rst-literal">a[i, j]</tt> represents the color of the edge between the vertices $i$ and $j$, with an
-uncolored edge being represented by the value $c$. The diagonal values of the adjacency
-matrix are all equal to zero.</p></div>
-    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>1</code></pre></td></tr></table>
-  </div>
-</div><div class="baseconstant">
-  
-  
-  <a name="rl_graph_theory.graphs.graph.GraphFormat.BITMASK">
-    
-  </a>
-  <a name="BITMASK">
-    
-  </a>
-  <div class="functionHeader">
-    
-    <span class="py-defname">BITMASK</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
-    
-    <a class="headerLink" href="#BITMASK" title="rl_graph_theory.graphs.graph.GraphFormat.BITMASK">
-      
-      
-      ¶
-    </a>
-  </div>
-  <div class="functionBody">
-    
-    <div><p>The bitmask format. Here, the graph is represented through the number of
-available edge colors $c$ and a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> integer matrix <tt class="rst-docutils rst-literal">a</tt> with $c$ rows and $n$
-columns, where $n$ is the graph order. The value <tt class="rst-docutils rst-literal">a[i, j]</tt> represents a nonnegative
-integer whose $k$-th bit indicates whether the edge between the vertices $j$ and $k$ is of
-the color $i$. Additionally, if there are no uncolored edges, then the starting row of the
-said <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> matrix can be omitted, and we refer to this format as the reduced bitmask
-format.</p></div>
-    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>0</code></pre></td></tr></table>
-  </div>
-</div><div class="baseconstant">
-  
-  
-  <a name="rl_graph_theory.graphs.graph.GraphFormat.FLATTENED_COLUMN_FIRST">
-    
-  </a>
-  <a name="FLATTENED_COLUMN_FIRST">
-    
-  </a>
-  <div class="functionHeader">
-    
-    <span class="py-defname">FLATTENED_COLUMN_FIRST</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
-    
-    <a class="headerLink" href="#FLATTENED_COLUMN_FIRST" title="rl_graph_theory.graphs.graph.GraphFormat.FLATTENED_COLUMN_FIRST">
-      
-      
-      ¶
-    </a>
-  </div>
-  <div class="functionBody">
-    
-    <div><p>The flattened column-first format. Here, the graph is represented
-through the number of available edge colors and its adjacency matrix entries that are
-strictly above the diagonal. The entries are arranged column-first, i.e., as $(0, 1),
-(0, 2), (1, 2), (0, 3), (1, 3), (2, 3), \ldots$, and they form a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> list of
-length <tt class="rst-docutils rst-literal">n(n - 1) // 2</tt>, where $n$ is the graph order.</p></div>
+    <div><p>The adjacency matrix format. Here, the graph structure is represented
+through the adjacency matrix, i.e., a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> integer square matrix <tt class="rst-docutils rst-literal">a</tt> with $n$
+rows and columns, where $n$ is the graph order. The value <tt class="rst-docutils rst-literal">a[i, j]</tt> represents the color
+of the edge (resp. arc) from the vertex $i$ to the vertex $j$, with an uncolored edge
+(resp. arc) being represented by the value $k$. If loops are not allowed, then the diagonal
+entries of the adjacency matrix are all equal to zero.</p></div>
     <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>2</code></pre></td></tr></table>
   </div>
 </div><div class="baseconstant">
   
   
-  <a name="rl_graph_theory.graphs.graph.GraphFormat.FLATTENED_ROW_FIRST">
+  <a name="rl_graph_theory.graphs.graph.GraphFormat.BITMASK_IN">
     
   </a>
-  <a name="FLATTENED_ROW_FIRST">
+  <a name="BITMASK_IN">
     
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">FLATTENED_ROW_FIRST</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
+    <span class="py-defname">BITMASK_IN</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
     
-    <a class="headerLink" href="#FLATTENED_ROW_FIRST" title="rl_graph_theory.graphs.graph.GraphFormat.FLATTENED_ROW_FIRST">
+    <a class="headerLink" href="#BITMASK_IN" title="rl_graph_theory.graphs.graph.GraphFormat.BITMASK_IN">
       
       
       ¶
@@ -429,11 +414,107 @@ length <tt class="rst-docutils rst-literal">n(n - 1) // 2</tt>, where $n$ is the
   </div>
   <div class="functionBody">
     
-    <div><p>The flattened row-first format. Here, the graph is represented
-through the number of available edge colors and its adjacency matrix entries that are
-strictly above the diagonal. The entries are arranged row-first, i.e., as $(0, 1), (0, 2),
-(0, 3), \ldots, (0, n - 1), (1, 2), (1, 3), \ldots$, and they form a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> list of
-length <tt class="rst-docutils rst-literal">n(n - 1) // 2</tt>, where $n$ is the graph order.</p></div>
+    <div><p>The bitmask format for the in-neighborhoods. Here, the graph structure is
+represented through a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> integer matrix <tt class="rst-docutils rst-literal">a</tt> with $k$ rows and $n$ columns,
+where $n$ is the graph order. The value <tt class="rst-docutils rst-literal">a[i, j]</tt> represents a nonnegative integer whose
+$k$-th bit indicates whether the edge (resp. arc) from the vertex $k$ to the vertex $j$ is
+of the color $i$. If loops are not allowed, then the $j$-bit of <tt class="rst-docutils rst-literal">a[i, j]</tt> is just zero.
+Additionally, if the graph is fully colored, then the starting row (corresponding to the
+color 0) of the said <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> matrix is omitted, and we refer to this format as a
+reduced bitmask format.</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>1</code></pre></td></tr></table>
+  </div>
+</div><div class="baseconstant">
+  
+  
+  <a name="rl_graph_theory.graphs.graph.GraphFormat.BITMASK_OUT">
+    
+  </a>
+  <a name="BITMASK_OUT">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">BITMASK_OUT</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
+    
+    <a class="headerLink" href="#BITMASK_OUT" title="rl_graph_theory.graphs.graph.GraphFormat.BITMASK_OUT">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>The bitmask format for the out-neighborhoods. Here, the graph structure is
+represented through a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> integer matrix <tt class="rst-docutils rst-literal">a</tt> with $k$ rows and $n$ columns,
+where $n$ is the graph order. The value <tt class="rst-docutils rst-literal">a[i, j]</tt> represents a nonnegative integer whose
+$k$-th bit indicates whether the edge (resp. arc) from the vertex $j$ to the vertex $k$ is
+of the color $i$. If loops are not allowed, then the $j$-bit of <tt class="rst-docutils rst-literal">a[i, j]</tt> is just zero.
+Additionally, if the graph is fully colored, then the starting row (corresponding to the
+color 0) of the said <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> matrix is omitted, and we refer to this format as a
+reduced bitmask format.</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>0</code></pre></td></tr></table>
+  </div>
+</div><div class="baseconstant">
+  
+  
+  <a name="rl_graph_theory.graphs.graph.GraphFormat.FLATTENED_CLOCKWISE">
+    
+  </a>
+  <a name="FLATTENED_CLOCKWISE">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">FLATTENED_CLOCKWISE</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
+    
+    <a class="headerLink" href="#FLATTENED_CLOCKWISE" title="rl_graph_theory.graphs.graph.GraphFormat.FLATTENED_CLOCKWISE">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>The flattened clockwise format. Here, the graph structure is
+represented through the adjacency matrix entries arranged in the clockwise layer order,
+i.e., the order $(0, 0), (0, 1), (1, 1), (1, 0), (0, 2), (1, 2), (2, 2), (2, 1), (2, 0),
+(0, 3), (1, 3), (2, 3), (3, 3), (3, 2), (3, 1), (3, 0), \ldots$. If the considered graph
+is directed and loops are not allowed, then the diagonal entries should be skipped when the
+entries are being arranged. If the considered graph is undirected, then only the entries
+from the upper triangular part of the adjacency matrix should be arranged in the clockwise
+order (with or without the diagonal, depending on whether loops are allowed). The arranged
+entries form a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> list of the required length.</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>4</code></pre></td></tr></table>
+  </div>
+</div><div class="baseconstant">
+  
+  
+  <a name="rl_graph_theory.graphs.graph.GraphFormat.FLATTENED_ROW_MAJOR">
+    
+  </a>
+  <a name="FLATTENED_ROW_MAJOR">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">FLATTENED_ROW_MAJOR</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
+    
+    <a class="headerLink" href="#FLATTENED_ROW_MAJOR" title="rl_graph_theory.graphs.graph.GraphFormat.FLATTENED_ROW_MAJOR">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>The flattened row-major format. Here, the graph structure is
+represented through the adjacency matrix entries arranged in the row-major order. If the
+considered graph is directed and loops are not allowed, then the diagonal entries should be
+skipped when the entries are being arranged. If the considered graph is undirected, then
+only the entries from the upper triangular part of the adjacency matrix should be arranged
+in the row-major order (with or without the diagonal, depending on whether loops are
+allowed). The arranged entries form a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> list of the required length.</p></div>
     <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>3</code></pre></td></tr></table>
   </div>
 </div>
@@ -448,7 +529,7 @@ length <tt class="rst-docutils rst-literal">n(n - 1) // 2</tt>, where $n$ is the
   <div class="container-fluid">
     <a href="index.html">API Documentation</a> for rl-graph-theory,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    25.10.1 at 2025-11-15 21:20:25.
+    25.10.1 at 2025-12-18 18:22:50.
   </div>
 
   <!-- Search related scripts needs to be loaded at the end of HTML 

@@ -190,16 +190,6 @@
         
 
         
-            <div class="itemName"><code><a href="rl_graph_theory.environments.environment.ActionBatch.html" class="internal-link" title="rl_graph_theory.environments.environment.ActionBatch"><wbr></wbr>Action<wbr></wbr>Batch</a></code>
-            </div>
-        
-
-    </li><li class="">
-        
-        
-        
-
-        
             <div class="itemName"><code><a href="rl_graph_theory.environments.environment.EpisodeStatus.html" class="internal-link" title="rl_graph_theory.environments.environment.EpisodeStatus"><wbr></wbr>Episode<wbr></wbr>Status</a></code>
             </div>
         
@@ -214,16 +204,6 @@
             </div>
         
 
-    </li><li class="">
-        
-        
-        
-
-        
-            <div class="itemName"><code><a href="rl_graph_theory.environments.environment.RewardBatch.html" class="internal-link" title="rl_graph_theory.environments.environment.RewardBatch"><wbr></wbr>Reward<wbr></wbr>Batch</a></code>
-            </div>
-        
-
     </li><li class=" thisobject">
         
         
@@ -231,16 +211,6 @@
 
         
             <div class="itemName"><code><a href="rl_graph_theory.environments.environment.RewardType.html" class="internal-link" title="rl_graph_theory.environments.environment.RewardType"><wbr></wbr>Reward<wbr></wbr>Type</a></code>
-            </div>
-        
-
-    </li><li class="">
-        
-        
-        
-
-        
-            <div class="itemName"><code><a href="rl_graph_theory.environments.environment.StateBatch.html" class="internal-link" title="rl_graph_theory.environments.environment.StateBatch"><wbr></wbr>State<wbr></wbr>Batch</a></code>
             </div>
         
 
@@ -293,31 +263,37 @@
         </div>
 
         <div class="moduleDocstring">
-          <div><p>This enumeration represents all the possible types of reward systems in the context of a
-reinforcement learning environment to be used in graph theory applications. In these
-applications, multiple episodes are acted on in parallel and all of their respective rewards
-are, therefore, also computed in parallel.</p></div>
+          <div><p>This enumeration represents the types and subtypes of reward systems in the context of an RL
+environment to be used in graph theory applications. In these applications, multiple episodes
+are acted on in parallel, and all of their respective rewards are, therefore, also computed in
+parallel. We recognize two types of reward systems: the sparse reward system and the dense
+reward system, which together contain three subtypes in total. The sparse reward system forms
+one of these subtypes on its own, while the dense reward system is divided into two separate
+subtypes: the telescopic reward system and the proper reward system, for implementational
+reasons.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Note</td></tr><tr><td colspan="2">The dense reward system is divided into the telescopic reward system and the proper
+reward system because, in certain cases, it can be more computationally efficient to invoke
+the <tt class="rst-docutils rst-literal">reward_function</tt> function once than invoke the <tt class="rst-docutils rst-literal">graph_invariant</tt> function twice.</td></tr></table></div>
         </div>
 
         <div id="split-tables">
-          <table class="children sortable" id="id10">
+          <table class="children sortable" id="id4">
   
   
   <tr class="constant">
     
     <td>Constant</td>
     <td><code><a href="#PROPER" class="internal-link" title="rl_graph_theory.environments.environment.RewardType.PROPER">PROPER</a></code></td>
-    <td>In each episode, a reward is issued after every action and it is computed by the formula <tt class="rst-docutils rst-literal">reward_function(old_graph_batch, new_graph_batch)</tt>, where:</td>
+    <td>The proper reward system. The batch of corresponding rewards received after each batch of actions is computed by the formula <tt class="rst-docutils rst-literal">reward_function(old_graph_batch, new_graph_batch)</tt>, where:</td>
   </tr><tr class="constant">
     
     <td>Constant</td>
     <td><code><a href="#SPARSE" class="internal-link" title="rl_graph_theory.environments.environment.RewardType.SPARSE">SPARSE</a></code></td>
-    <td>A single actual reward is obtained at the end of an episode, while all the previously issued rewards are just equal to zero. The said reward is determined by the expression <tt class="rst-docutils rst-literal">graph_invariant(terminal_graph_batch)</tt>...</td>
+    <td>The sparse reward system. The batch of corresponding rewards received after every batch of actions is zero, apart from the final batch of actions, for which it is equal to <tt class="rst-docutils rst-literal">graph_invariant(terminal_graph_batch)</tt>...</td>
   </tr><tr class="constant">
     
     <td>Constant</td>
     <td><code><a href="#TELESCOPIC" class="internal-link" title="rl_graph_theory.environments.environment.RewardType.TELESCOPIC">TELESCOPIC</a></code></td>
-    <td>In each episode, a reward is issued after every action and it is computed by the formula <tt class="rst-docutils rst-literal">graph_invariant(new_graph_batch) - graph_invariant(old_graph_batch)</tt>, where:</td>
+    <td>The telescopic reward system. The batch of corresponding rewards received after each batch of actions is computed by the formula <tt class="rst-docutils rst-literal">graph_invariant(new_graph_batch) - graph_invariant(old_graph_batch)</tt>, where:...</td>
   </tr>
 </table>
           
@@ -347,18 +323,19 @@ are, therefore, also computed in parallel.</p></div>
   </div>
   <div class="functionBody">
     
-    <div><p>In each episode, a reward is issued after every action and it is computed by
-the formula <tt class="rst-docutils rst-literal">reward_function(old_graph_batch, new_graph_batch)</tt>, where:</p>
+    <div><p>The proper reward system. The batch of corresponding rewards received after each batch of
+actions is computed by the formula <tt class="rst-docutils rst-literal">reward_function(old_graph_batch, new_graph_batch)</tt>,
+where:</p>
 <ul class="rst-simple">
-<li><tt class="rst-docutils rst-literal">new_graph_batch</tt> is the underyling batch of graphs corresponding to the batch of newly
+<li><tt class="rst-docutils rst-literal">new_graph_batch</tt> is the underlying batch of graphs corresponding to the batch of newly
 obtained states;</li>
 <li><tt class="rst-docutils rst-literal">old_graph_batch</tt> is the underlying batch of graphs corresponding to the batch of
 previous states; and</li>
-<li><tt class="rst-docutils rst-literal">reward_function</tt> is a function that accepts a batch of previous graphs and a batch of
-new graphs, and returns the corresponding values for the element-wise differences of
-the graph invariant that is supposed to get maximized (the $i$-th element equals the
-graph invariant for the $i$-th new group minus the graph invariant for the $i$-th old
-graph).</li>
+<li><tt class="rst-docutils rst-literal">reward_function</tt> is a function that accepts a batch of previous underlying graphs and
+a batch of new underlying graphs, and returns the corresponding values for the
+element-wise differences of the graph invariant that is supposed to get maximized (the
+$i$-th element equals the graph invariant for the $i$-th new underlying graph minus the
+graph invariant for the $i$-th old underlying graph).</li>
 </ul>
 </div>
     <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>2</code></pre></td></tr></table>
@@ -384,9 +361,9 @@ graph).</li>
   </div>
   <div class="functionBody">
     
-    <div><p>A single actual reward is obtained at the end of an episode, while all the
-previously issued rewards are just equal to zero. The said reward is determined by the
-expression <tt class="rst-docutils rst-literal">graph_invariant(terminal_graph_batch)</tt>, where:</p>
+    <div><p>The sparse reward system. The batch of corresponding rewards received after every batch of
+actions is zero, apart from the final batch of actions, for which it is equal to
+<tt class="rst-docutils rst-literal">graph_invariant(terminal_graph_batch)</tt>, where:</p>
 <ul class="rst-simple">
 <li><tt class="rst-docutils rst-literal">terminal_graph_batch</tt> is the underlying batch of graphs corresponding to the batch of
 terminal states; and</li>
@@ -417,10 +394,11 @@ corresponding values for the graph invariant that is supposed to get maximized.<
   </div>
   <div class="functionBody">
     
-    <div><p>In each episode, a reward is issued after every action and it is computed by
-the formula <tt class="rst-docutils rst-literal">graph_invariant(new_graph_batch) - graph_invariant(old_graph_batch)</tt>, where:</p>
+    <div><p>The telescopic reward system. The batch of corresponding rewards received after each batch
+of actions is computed by the formula
+<tt class="rst-docutils rst-literal">graph_invariant(new_graph_batch) - graph_invariant(old_graph_batch)</tt>, where:</p>
 <ul class="rst-simple">
-<li><tt class="rst-docutils rst-literal">new_graph_batch</tt> is the underyling batch of graphs corresponding to the batch of newly
+<li><tt class="rst-docutils rst-literal">new_graph_batch</tt> is the underlying batch of graphs corresponding to the batch of newly
 obtained states;</li>
 <li><tt class="rst-docutils rst-literal">old_graph_batch</tt> is the underlying batch of graphs corresponding to the batch of
 previous states; and</li>
@@ -442,7 +420,7 @@ corresponding values for the graph invariant that is supposed to get maximized.<
   <div class="container-fluid">
     <a href="index.html">API Documentation</a> for rl-graph-theory,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    25.10.1 at 2025-11-15 21:20:25.
+    25.10.1 at 2025-12-18 18:22:50.
   </div>
 
   <!-- Search related scripts needs to be loaded at the end of HTML 

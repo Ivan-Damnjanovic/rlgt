@@ -14,6 +14,30 @@ MONOCHROMATIC_GRAPH_TEST_CASES = [
         np.array(
             [
                 [0, 0, 0, 0, 0],
+                [31, 31, 31, 31, 31],
+            ],
+            dtype=int,
+        ),
+        np.array(
+            [
+                [2, 2, 2, 2, 2],
+                [2, 2, 2, 2, 2],
+                [2, 2, 2, 2, 2],
+                [2, 2, 2, 2, 2],
+                [2, 2, 2, 2, 2],
+            ],
+            dtype=int,
+        ),
+        np.array([2] * 15, dtype=int),
+        True,
+    ),
+    (
+        5,
+        3,
+        2,
+        np.array(
+            [
+                [0, 0, 0, 0, 0],
                 [30, 29, 27, 23, 15],
             ],
             dtype=int,
@@ -29,6 +53,7 @@ MONOCHROMATIC_GRAPH_TEST_CASES = [
             dtype=int,
         ),
         np.array([2, 2, 2, 2, 2, 2, 2, 2, 2, 2], dtype=int),
+        False,
     ),
     (
         4,
@@ -54,6 +79,7 @@ MONOCHROMATIC_GRAPH_TEST_CASES = [
             dtype=int,
         ),
         np.array([4, 4, 4, 4, 4, 4], dtype=int),
+        False,
     ),
     (
         3,
@@ -78,6 +104,7 @@ MONOCHROMATIC_GRAPH_TEST_CASES = [
             dtype=int,
         ),
         np.array([5, 5, 5], dtype=int),
+        False,
     ),
     (
         1,
@@ -86,6 +113,7 @@ MONOCHROMATIC_GRAPH_TEST_CASES = [
         np.zeros((2, 1), dtype=int),
         np.zeros((1, 1), dtype=int),
         np.zeros((0,), dtype=int),
+        False,
     ),
     (
         1,
@@ -94,6 +122,7 @@ MONOCHROMATIC_GRAPH_TEST_CASES = [
         np.zeros((2, 1), dtype=int),
         np.zeros((1, 1), dtype=int),
         np.zeros((0,), dtype=int),
+        False,
     ),
 ]
 
