@@ -6,11 +6,16 @@ other associated enumerations.
 
 from abc import ABC, abstractmethod
 from enum import Enum
-from typing import Callable, Optional, Tuple
+from typing import Callable, Optional, Tuple, Union
 
 import numpy as np
 
 from ..graphs.graph import GraphBatch
+
+RewardFunction = Union[
+    Callable[[GraphBatch], np.ndarray],
+    Callable[[GraphBatch, GraphBatch], np.ndarray],
+]
 
 
 class RewardType(Enum):
@@ -130,7 +135,7 @@ class GraphEnvironment(ABC):
         method.
     """
 
-    def __init__(self, reward_type: RewardType, reward_function: Callable):
+    def __init__(self, reward_type: RewardType, reward_function: RewardFunction):
         """
         This constructor initializes an instance of the `GraphEnvironment` object with a provided
         (sub)type of reward system and a corresponding function that helps compute the rewards.
@@ -145,7 +150,7 @@ class GraphEnvironment(ABC):
         """
 
         self.__reward_type: RewardType = reward_type
-        self.__reward_function: Callable = reward_function
+        self.__reward_function: RewardFunction = reward_function
 
         self._state_batch: Optional[np.ndarray] = None
         self._status: Optional[EpisodeStatus] = None

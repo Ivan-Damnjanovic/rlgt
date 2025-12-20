@@ -151,7 +151,7 @@ class IncrementalEnvironment(GraphEnvironment):
         return self._state_batch, self._status
 
     def _transition_batch(self, action_batch: np.ndarray) -> None:
-        rows = np.arange(self._flattened_length, dtype=int)
+        rows = np.arange(self._state_batch.shape[0], dtype=int)
         columns = (action_batch[:, 0] - 1) * self._flattened_length + self._next_entry_index
 
         self._state_batch[rows, columns] = 1
@@ -172,7 +172,7 @@ class IncrementalEnvironment(GraphEnvironment):
         indices = np.arange(1, self._edge_colors, dtype=int)
         result = (temp[:, :-1, :] * indices[:, None]).sum(axis=1)
 
-        uncolored_mask = np.maximum.accumulate(temp[:, -1, :])
+        uncolored_mask = np.maximum.accumulate(temp[:, -1, :], axis=1)
         result[uncolored_mask.astype(bool)] = self._edge_colors
 
         return GraphBatch.from_flattened(
