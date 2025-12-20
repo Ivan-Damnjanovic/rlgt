@@ -178,7 +178,7 @@ class GraphEnvironment(ABC):
               been initialized, given as an item of the `EpisodeStatus` enumeration.
         """
 
-        pass
+        pass  # pragma: no cover
 
     def step_batch(self, action_batch: np.ndarray) -> Tuple[np.ndarray, np.ndarray, EpisodeStatus]:
         """
@@ -262,7 +262,7 @@ class GraphEnvironment(ABC):
             in the `_state_batch` attribute.
         """
 
-        pass
+        pass  # pragma: no cover
 
     @abstractmethod
     def state_batch_to_graph_batch(self, state_batch: np.ndarray) -> GraphBatch:
@@ -282,4 +282,4 @@ class GraphEnvironment(ABC):
             modify any attributes of the given instance.
         """
 
-        pass
+        pass  # pragma: no cover
