@@ -187,7 +187,17 @@
         <div class="childrenKindTitle">Attributes</div>
         <ul>
     
-    <li class="private">
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#initial_graph_generator" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment.initial_graph_generator">initial<wbr></wbr>_graph<wbr></wbr>_generator</a></code>
+            </div>
+        
+
+    </li><li class="private">
         
         
         
@@ -233,27 +243,7 @@
         
 
         
-            <div class="itemName"><code><a href="#_initial_graph_generator" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment._initial_graph_generator">_initial<wbr></wbr>_graph<wbr></wbr>_generator</a></code>
-            </div>
-        
-
-    </li><li class="private">
-        
-        
-        
-
-        
             <div class="itemName"><code><a href="#_is_directed" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment._is_directed">_is<wbr></wbr>_directed</a></code>
-            </div>
-        
-
-    </li><li class="private">
-        
-        
-        
-
-        
-            <div class="itemName"><code><a href="#_next_entry_index" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment._next_entry_index">_next<wbr></wbr>_entry<wbr></wbr>_index</a></code>
             </div>
         
 
@@ -274,6 +264,16 @@
 
         
             <div class="itemName"><code><a href="#_status" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment._status">_status</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_step_count" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment._step_count">_step<wbr></wbr>_count</a></code>
             </div>
         
 
@@ -406,7 +406,7 @@
         </div>
 
         <div id="split-tables">
-          <table class="children sortable" id="id14">
+          <table class="children sortable" id="id16">
   
   
   <tr class="method">
@@ -424,6 +424,11 @@
     <td>Method</td>
     <td><code><a href="#state_batch_to_graph_batch" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment.state_batch_to_graph_batch">state<wbr></wbr>_batch<wbr></wbr>_to<wbr></wbr>_graph<wbr></wbr>_batch</a></code></td>
     <td>This abstract method must be implemented in any concrete class that inherits from the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code> class. Its goal is to extract the batch of underlying graphs from any provided batch of states. The graphs should appear in the same order as their corresponding states in the given batch of states.</td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#initial_graph_generator" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment.initial_graph_generator">initial<wbr></wbr>_graph<wbr></wbr>_generator</a></code></td>
+    <td><span class="rst-undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
@@ -452,17 +457,7 @@
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_initial_graph_generator" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment._initial_graph_generator">_initial<wbr></wbr>_graph<wbr></wbr>_generator</a></code></td>
-    <td><span class="rst-undocumented">Undocumented</span></td>
-  </tr><tr class="instancevariable private">
-    
-    <td>Instance Variable</td>
     <td><code><a href="#_is_directed" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment._is_directed">_is<wbr></wbr>_directed</a></code></td>
-    <td><span class="rst-undocumented">Undocumented</span></td>
-  </tr><tr class="instancevariable private">
-    
-    <td>Instance Variable</td>
-    <td><code><a href="#_next_entry_index" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment._next_entry_index">_next<wbr></wbr>_entry<wbr></wbr>_index</a></code></td>
     <td><span class="rst-undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
@@ -474,13 +469,18 @@
     <td>Instance Variable</td>
     <td><code><a href="#_status" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment._status">_status</a></code></td>
     <td><span class="rst-undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_step_count" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment._step_count">_step<wbr></wbr>_count</a></code></td>
+    <td><span class="rst-undocumented">Undocumented</span></td>
   </tr>
 </table>
           
             <p class="inheritedFrom">
               Inherited from <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code>:
             </p>
-            <table class="children sortable" id="id15">
+            <table class="children sortable" id="id17">
   
   
   <tr class="basemethod">
@@ -518,7 +518,7 @@
   <div class="functionHeader">
     
     
-    <span class="py-keyword">def</span>&#160;<span class="py-defname">__init__</span><span class="function-signature long-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">reward_type: <code><a href="rl_graph_theory.environments.graph_environment.RewardType.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.RewardType">RewardType</a></code>, </span><span class="rst-sig-param">reward_function: <code><a href="https://docs.python.org/3/library/typing.html#typing.Callable" class="intersphinx-link">Callable</a></code>, </span><span class="rst-sig-param">graph_order: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code>, </span><span class="rst-sig-param">flattened_ordering: <code><a href="rl_graph_theory.graphs.graph_format.FlattenedOrdering.html" class="internal-link" title="rl_graph_theory.graphs.graph_format.FlattenedOrdering">FlattenedOrdering</a></code> = <a href="rl_graph_theory.graphs.graph_format.FlattenedOrdering.html#ROW_MAJOR" class="internal-link" title="rl_graph_theory.graphs.graph_format.FlattenedOrdering.ROW_MAJOR">FlattenedOrdering.ROW_MAJOR</a>, </span><span class="rst-sig-param">edge_colors: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> = 2, </span><span class="rst-sig-param">is_directed: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> = <a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a>, </span><span class="rst-sig-param">allow_loops: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> = <a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a>, </span><span class="rst-sig-param">initial_graph_generator: <code><a href="rl_graph_theory.environments.graph_generators.html#GraphGenerator" class="internal-link" title="rl_graph_theory.environments.graph_generators.GraphGenerator">GraphGenerator</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> = <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></span>):</span>
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">__init__</span><span class="function-signature long-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">reward_type: <code><a href="rl_graph_theory.environments.graph_environment.RewardType.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.RewardType">RewardType</a></code>, </span><span class="rst-sig-param">reward_function: <code><a href="rl_graph_theory.environments.graph_environment.html#RewardFunction" class="internal-link" title="rl_graph_theory.environments.graph_environment.RewardFunction">RewardFunction</a></code>, </span><span class="rst-sig-param">graph_order: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code>, </span><span class="rst-sig-param">flattened_ordering: <code><a href="rl_graph_theory.graphs.graph_format.FlattenedOrdering.html" class="internal-link" title="rl_graph_theory.graphs.graph_format.FlattenedOrdering">FlattenedOrdering</a></code> = <a href="rl_graph_theory.graphs.graph_format.FlattenedOrdering.html#ROW_MAJOR" class="internal-link" title="rl_graph_theory.graphs.graph_format.FlattenedOrdering.ROW_MAJOR">FlattenedOrdering.ROW_MAJOR</a>, </span><span class="rst-sig-param">edge_colors: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> = 2, </span><span class="rst-sig-param">is_directed: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> = <a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a>, </span><span class="rst-sig-param">allow_loops: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> = <a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a>, </span><span class="rst-sig-param">initial_graph_generator: <code><a href="rl_graph_theory.environments.graph_generators.html#GraphGenerator" class="internal-link" title="rl_graph_theory.environments.graph_generators.GraphGenerator">GraphGenerator</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> = <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></span>):</span>
     
     <a class="headerLink" href="#__init__" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment.__init__">
       
@@ -598,6 +598,30 @@ states in the given batch of states.</p><table class="fieldTable"><tr class="fie
 extracted, given as a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> matrix whose rows correspond to the states in the
 batch.</td></tr></table><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="rl_graph_theory.graphs.graph_batch.GraphBatch.html" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch">GraphBatch</a></code></td><td class="fieldArgDesc">The extracted batch of underlying graphs, given as a <code><a href="rl_graph_theory.graphs.graph_batch.GraphBatch.html" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch">GraphBatch</a></code> object.</td></tr></table><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Note</td></tr><tr><td colspan="2">The implementation of this method must be a pure function, i.e., it should not
 modify any attributes of the given instance.</td></tr></table></div>
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="rl_graph_theory.environments.linear_environments.LinearSetEnvironment.initial_graph_generator">
+    
+  </a>
+  <a name="initial_graph_generator">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">initial_graph_generator</span>: <code><a href="rl_graph_theory.environments.graph_generators.html#GraphGenerator" class="internal-link" title="rl_graph_theory.environments.graph_generators.GraphGenerator">GraphGenerator</a></code> =
+    
+    <a class="headerLink" href="#initial_graph_generator" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment.initial_graph_generator">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basemethod private">
   
@@ -730,30 +754,6 @@ in the <code><a href="#_state_batch" class="internal-link" title="rl_graph_theor
 </div><div class="baseinstancevariable private">
   
   
-  <a name="rl_graph_theory.environments.linear_environments.LinearSetEnvironment._initial_graph_generator">
-    
-  </a>
-  <a name="_initial_graph_generator">
-    
-  </a>
-  <div class="functionHeader">
-    
-    <span class="py-defname">_initial_graph_generator</span>: <code><a href="rl_graph_theory.environments.graph_generators.html#GraphGenerator" class="internal-link" title="rl_graph_theory.environments.graph_generators.GraphGenerator">GraphGenerator</a></code> =
-    
-    <a class="headerLink" href="#_initial_graph_generator" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment._initial_graph_generator">
-      
-      
-      ¶
-    </a>
-  </div>
-  <div class="functionBody">
-    
-    <div><p class="undocumented">Undocumented</p></div>
-    
-  </div>
-</div><div class="baseinstancevariable private">
-  
-  
   <a name="rl_graph_theory.environments.linear_environments.LinearSetEnvironment._is_directed">
     
   </a>
@@ -765,30 +765,6 @@ in the <code><a href="#_state_batch" class="internal-link" title="rl_graph_theor
     <span class="py-defname">_is_directed</span>: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> =
     
     <a class="headerLink" href="#_is_directed" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment._is_directed">
-      
-      
-      ¶
-    </a>
-  </div>
-  <div class="functionBody">
-    
-    <div><p class="undocumented">Undocumented</p></div>
-    
-  </div>
-</div><div class="baseinstancevariable private">
-  
-  
-  <a name="rl_graph_theory.environments.linear_environments.LinearSetEnvironment._next_entry_index">
-    
-  </a>
-  <a name="_next_entry_index">
-    
-  </a>
-  <div class="functionHeader">
-    
-    <span class="py-defname">_next_entry_index</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> =
-    
-    <a class="headerLink" href="#_next_entry_index" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment._next_entry_index">
       
       
       ¶
@@ -847,6 +823,30 @@ in the <code><a href="#_state_batch" class="internal-link" title="rl_graph_theor
     <div><p class="undocumented">Undocumented</p></div>
     
   </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="rl_graph_theory.environments.linear_environments.LinearSetEnvironment._step_count">
+    
+  </a>
+  <a name="_step_count">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_step_count</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> =
+    
+    <a class="headerLink" href="#_step_count" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment._step_count">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
 </div>
         </div>
       
@@ -859,7 +859,7 @@ in the <code><a href="#_state_batch" class="internal-link" title="rl_graph_theor
   <div class="container-fluid">
     <a href="index.html">API Documentation</a> for rl-graph-theory,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    25.10.1 at 2025-12-21 15:00:11.
+    25.10.1 at 2025-12-21 20:53:06.
   </div>
 
   <!-- Search related scripts needs to be loaded at the end of HTML 

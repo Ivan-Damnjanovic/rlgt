@@ -116,6 +116,14 @@
             <div class="kind">Package</div>
             <div class="privacy">PUBLIC</div>
             <div class="summary">#TODO</div>
+          </li><li id="rl_graph_theory.environments.global_environments">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.global<wbr></wbr>_environments</div>
+            <div class="url">rl_graph_theory.environments.global_environments.html</div>
+            <div class="type">Module</div>
+            <div class="kind">Module</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">#TODO</div>
           </li><li id="rl_graph_theory.environments.graph_environment">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.graph<wbr></wbr>_environment</div>
@@ -132,14 +140,6 @@
             <div class="kind">Module</div>
             <div class="privacy">PUBLIC</div>
             <div class="summary">#TODO</div>
-          </li><li id="rl_graph_theory.environments.linear_environment">
-            
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.linear<wbr></wbr>_environment</div>
-            <div class="url">rl_graph_theory.environments.linear_environment.html</div>
-            <div class="type">Module</div>
-            <div class="kind">Module</div>
-            <div class="privacy">PUBLIC</div>
-            <div class="summary"><span class="rst-undocumented">No module docstring; 1/1 class documented</span></div>
           </li><li id="rl_graph_theory.environments.linear_environments">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.linear<wbr></wbr>_environments</div>
@@ -485,158 +485,6 @@ is_directed, allow_loops, graph_format, format_representation)</tt>...</div>
             <div class="kind">Property</div>
             <div class="privacy">PUBLIC</div>
             <div class="summary">This property returns the <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> that represents the given batch of graphs in the flattened clockwise format (<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#FLATTENED_CLOCKWISE" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.FLATTENED_CLOCKWISE">GraphFormat.FLATTENED_CLOCKWISE</a></code>).</div>
-          </li><li id="rl_graph_theory.environments.graph_environment.RewardFunction">
-            
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.graph<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Reward<wbr></wbr>Function</div>
-            <div class="url">rl_graph_theory.environments.graph_environment.html#RewardFunction</div>
-            <div class="type">Attribute</div>
-            <div class="kind">Type Alias</div>
-            <div class="privacy">PUBLIC</div>
-            <div class="summary">This is the type alias for the functions that help compute the rewards in RL environments to be used in graph theory applications. In other words, these are the functions that take on the role of either the ...</div>
-          </li><li id="rl_graph_theory.environments.graph_environment.RewardType">
-            
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.graph<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Reward<wbr></wbr>Type</div>
-            <div class="url">rl_graph_theory.environments.graph_environment.RewardType.html</div>
-            <div class="type">Class</div>
-            <div class="kind">Class</div>
-            <div class="privacy">PUBLIC</div>
-            <div class="summary">This enumeration represents the types and subtypes of reward systems in the context of an RL environment to be used in graph theory applications. In these applications, multiple episodes are acted on in parallel, and all of their respective rewards are, therefore, also computed in parallel...</div>
-          </li><li id="rl_graph_theory.environments.graph_environment.RewardType.SPARSE">
-            
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.graph<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Reward<wbr></wbr>Type<wbr></wbr>.SPARSE</div>
-            <div class="url">rl_graph_theory.environments.graph_environment.RewardType.html#SPARSE</div>
-            <div class="type">Attribute</div>
-            <div class="kind">Constant</div>
-            <div class="privacy">PUBLIC</div>
-            <div class="summary">The sparse reward system. The batch of corresponding rewards received after every batch of actions is zero, apart from the final batch of actions, for which it is equal to <tt class="rst-docutils rst-literal">graph_invariant(final_graph_batch)</tt>...</div>
-          </li><li id="rl_graph_theory.environments.graph_environment.RewardType.TELESCOPIC">
-            
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.graph<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Reward<wbr></wbr>Type<wbr></wbr>.TELESCOPIC</div>
-            <div class="url">rl_graph_theory.environments.graph_environment.RewardType.html#TELESCOPIC</div>
-            <div class="type">Attribute</div>
-            <div class="kind">Constant</div>
-            <div class="privacy">PUBLIC</div>
-            <div class="summary">The telescopic reward system. The batch of corresponding rewards received after each batch of actions is computed by the formula <tt class="rst-docutils rst-literal">graph_invariant(new_graph_batch) - graph_invariant(old_graph_batch)</tt>, where:...</div>
-          </li><li id="rl_graph_theory.environments.graph_environment.RewardType.PROPER">
-            
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.graph<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Reward<wbr></wbr>Type<wbr></wbr>.PROPER</div>
-            <div class="url">rl_graph_theory.environments.graph_environment.RewardType.html#PROPER</div>
-            <div class="type">Attribute</div>
-            <div class="kind">Constant</div>
-            <div class="privacy">PUBLIC</div>
-            <div class="summary">The proper reward system. The batch of corresponding rewards received after each batch of actions is computed by the formula <tt class="rst-docutils rst-literal">reward_function(old_graph_batch, new_graph_batch)</tt>, where:</div>
-          </li><li id="rl_graph_theory.environments.graph_environment.EpisodeStatus">
-            
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.graph<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Episode<wbr></wbr>Status</div>
-            <div class="url">rl_graph_theory.environments.graph_environment.EpisodeStatus.html</div>
-            <div class="type">Class</div>
-            <div class="kind">Class</div>
-            <div class="privacy">PUBLIC</div>
-            <div class="summary">This enumeration represents all the possible statuses that an episode can have in the context of an RL environment to be used in graph theory applications.</div>
-          </li><li id="rl_graph_theory.environments.graph_environment.EpisodeStatus.IN_PROGRESS">
-            
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.graph<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Episode<wbr></wbr>Status<wbr></wbr>.IN<wbr></wbr>_PROGRESS</div>
-            <div class="url">rl_graph_theory.environments.graph_environment.EpisodeStatus.html#IN_PROGRESS</div>
-            <div class="type">Attribute</div>
-            <div class="kind">Constant</div>
-            <div class="privacy">PUBLIC</div>
-            <div class="summary">The episode is in progress, which means that it is in a state that accepts further actions.</div>
-          </li><li id="rl_graph_theory.environments.graph_environment.EpisodeStatus.TERMINATED">
-            
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.graph<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Episode<wbr></wbr>Status<wbr></wbr>.TERMINATED</div>
-            <div class="url">rl_graph_theory.environments.graph_environment.EpisodeStatus.html#TERMINATED</div>
-            <div class="type">Attribute</div>
-            <div class="kind">Constant</div>
-            <div class="privacy">PUBLIC</div>
-            <div class="summary">The episode has ended due to reaching a terminal state, hence the environment cannot accept any further actions. This status appears only in RL environments where the tasks are episodic.</div>
-          </li><li id="rl_graph_theory.environments.graph_environment.EpisodeStatus.TRUNCATED">
-            
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.graph<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Episode<wbr></wbr>Status<wbr></wbr>.TRUNCATED</div>
-            <div class="url">rl_graph_theory.environments.graph_environment.EpisodeStatus.html#TRUNCATED</div>
-            <div class="type">Attribute</div>
-            <div class="kind">Constant</div>
-            <div class="privacy">PUBLIC</div>
-            <div class="summary">The episode has ended since the required number of steps has been taken. In this case, although the current state is not terminal, no further actions should be performed. This status appears only in RL environments where the tasks are continuing.</div>
-          </li><li id="rl_graph_theory.environments.graph_environment.GraphEnvironment">
-            
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.graph<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Graph<wbr></wbr>Environment</div>
-            <div class="url">rl_graph_theory.environments.graph_environment.GraphEnvironment.html</div>
-            <div class="type">Class</div>
-            <div class="kind">Class</div>
-            <div class="privacy">PUBLIC</div>
-            <div class="summary">This abstract class encapsulates the concept of an RL environment to be used in graph theory applications. For the sake of efficiency, it provides support for multiple episodes to be run in parallel. This approach makes sense because it is guaranteed that all of these episodes must end at the same time, regardless of whether the RL environment has episodic or continuing tasks...</div>
-          </li><li id="rl_graph_theory.environments.graph_environment.GraphEnvironment.__reward_type">
-            
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.graph<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Graph<wbr></wbr>Environment<wbr></wbr>.__reward<wbr></wbr>_type</div>
-            <div class="url">rl_graph_theory.environments.graph_environment.GraphEnvironment.html#__reward_type</div>
-            <div class="type">Attribute</div>
-            <div class="kind">Instance Variable</div>
-            <div class="privacy">PRIVATE</div>
-            <div class="summary">An item of the <code><a href="rl_graph_theory.environments.graph_environment.RewardType.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.RewardType">RewardType</a></code> enumeration that determines the (sub)type of reward system that is used in the given RL environment.</div>
-          </li><li id="rl_graph_theory.environments.graph_environment.GraphEnvironment.__reward_function">
-            
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.graph<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Graph<wbr></wbr>Environment<wbr></wbr>.__reward<wbr></wbr>_function</div>
-            <div class="url">rl_graph_theory.environments.graph_environment.GraphEnvironment.html#__reward_function</div>
-            <div class="type">Attribute</div>
-            <div class="kind">Instance Variable</div>
-            <div class="privacy">PRIVATE</div>
-            <div class="summary">The <code><a href="rl_graph_theory.environments.graph_environment.html#RewardFunction" class="internal-link" title="rl_graph_theory.environments.graph_environment.RewardFunction">RewardFunction</a></code> function that helps compute the rewards in accordance with the selected (sub)type of reward system. It plays the role of either the <tt class="rst-docutils rst-literal">graph_invariant</tt> or the <tt class="rst-docutils rst-literal">reward_function</tt> function from the description of the ...</div>
-          </li><li id="rl_graph_theory.environments.graph_environment.GraphEnvironment._state_batch">
-            
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.graph<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Graph<wbr></wbr>Environment<wbr></wbr>._state<wbr></wbr>_batch</div>
-            <div class="url">rl_graph_theory.environments.graph_environment.GraphEnvironment.html#_state_batch</div>
-            <div class="type">Attribute</div>
-            <div class="kind">Instance Variable</div>
-            <div class="privacy">PRIVATE</div>
-            <div class="summary">Either <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, or a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> matrix that determines the batch of current states corresponding to the batch of episodes that are being run in parallel. This attribute is initially set to <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, and afterwards, it is assigned the necessary ...</div>
-          </li><li id="rl_graph_theory.environments.graph_environment.GraphEnvironment._status">
-            
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.graph<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Graph<wbr></wbr>Environment<wbr></wbr>._status</div>
-            <div class="url">rl_graph_theory.environments.graph_environment.GraphEnvironment.html#_status</div>
-            <div class="type">Attribute</div>
-            <div class="kind">Instance Variable</div>
-            <div class="privacy">PRIVATE</div>
-            <div class="summary">Either <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, or an item of the <code><a href="rl_graph_theory.environments.graph_environment.EpisodeStatus.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.EpisodeStatus">EpisodeStatus</a></code> enumeration that signifies the status of the given batch of episodes, as described in the <code><a href="rl_graph_theory.environments.graph_environment.EpisodeStatus.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.EpisodeStatus">EpisodeStatus</a></code> enumeration. This attribute is initially set to <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>...</div>
-          </li><li id="rl_graph_theory.environments.graph_environment.GraphEnvironment.__init__">
-            
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.graph<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Graph<wbr></wbr>Environment<wbr></wbr>.__init__</div>
-            <div class="url">rl_graph_theory.environments.graph_environment.GraphEnvironment.html#__init__</div>
-            <div class="type">Function</div>
-            <div class="kind">Method</div>
-            <div class="privacy">PUBLIC</div>
-            <div class="summary">This constructor initializes an instance of the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code> object with a provided (sub)type of reward system and a corresponding function that helps compute the rewards.</div>
-          </li><li id="rl_graph_theory.environments.graph_environment.GraphEnvironment.reset_batch">
-            
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.graph<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Graph<wbr></wbr>Environment<wbr></wbr>.reset<wbr></wbr>_batch</div>
-            <div class="url">rl_graph_theory.environments.graph_environment.GraphEnvironment.html#reset_batch</div>
-            <div class="type">Function</div>
-            <div class="kind">Method</div>
-            <div class="privacy">PUBLIC</div>
-            <div class="summary">This abstract method must be implemented in any concrete class that inherits from the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code> class. It should initialize a batch of episodes with a given batch size, and update the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html#_state_batch" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment._state_batch">_state_batch</a></code>...</div>
-          </li><li id="rl_graph_theory.environments.graph_environment.GraphEnvironment.step_batch">
-            
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.graph<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Graph<wbr></wbr>Environment<wbr></wbr>.step<wbr></wbr>_batch</div>
-            <div class="url">rl_graph_theory.environments.graph_environment.GraphEnvironment.html#step_batch</div>
-            <div class="type">Function</div>
-            <div class="kind">Method</div>
-            <div class="privacy">PUBLIC</div>
-            <div class="summary">This method takes a batch of actions and applies them element-wise to the states in the batch of current states given by the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html#_state_batch" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment._state_batch">_state_batch</a></code> attribute. More precisely, these two batches must be of the same size, and the $i$-th action should be applied to the $i$-th state...</div>
-          </li><li id="rl_graph_theory.environments.graph_environment.GraphEnvironment._transition_batch">
-            
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.graph<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Graph<wbr></wbr>Environment<wbr></wbr>._transition<wbr></wbr>_batch</div>
-            <div class="url">rl_graph_theory.environments.graph_environment.GraphEnvironment.html#_transition_batch</div>
-            <div class="type">Function</div>
-            <div class="kind">Method</div>
-            <div class="privacy">PRIVATE</div>
-            <div class="summary">This abstract method must be implemented in any concrete class that inherits from the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code> class. It should perform the transition process by executing a batch of given actions and applying them element-wise to the states in the batch of current states given by the ...</div>
-          </li><li id="rl_graph_theory.environments.graph_environment.GraphEnvironment.state_batch_to_graph_batch">
-            
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.graph<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Graph<wbr></wbr>Environment<wbr></wbr>.state<wbr></wbr>_batch<wbr></wbr>_to<wbr></wbr>_graph<wbr></wbr>_batch</div>
-            <div class="url">rl_graph_theory.environments.graph_environment.GraphEnvironment.html#state_batch_to_graph_batch</div>
-            <div class="type">Function</div>
-            <div class="kind">Method</div>
-            <div class="privacy">PUBLIC</div>
-            <div class="summary">This abstract method must be implemented in any concrete class that inherits from the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code> class. Its goal is to extract the batch of underlying graphs from any provided batch of states. The graphs should appear in the same order as their corresponding states in the given batch of states.</div>
           </li><li id="rl_graph_theory.graphs.graph.Graph">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.graphs<wbr></wbr>.graph<wbr></wbr>.<wbr></wbr>Graph</div>
@@ -822,126 +670,6 @@ allow_loops, graph_format, format_representation)</tt>...</div>
             <div class="kind">Property</div>
             <div class="privacy">PUBLIC</div>
             <div class="summary">This property returns the <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> that represents the given graph in the flattened clockwise format (<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#FLATTENED_CLOCKWISE" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.FLATTENED_CLOCKWISE">GraphFormat.FLATTENED_CLOCKWISE</a></code>).</div>
-          </li><li id="rl_graph_theory.environments.graph_generators.GraphGenerator">
-            
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.graph<wbr></wbr>_generators<wbr></wbr>.<wbr></wbr>Graph<wbr></wbr>Generator</div>
-            <div class="url">rl_graph_theory.environments.graph_generators.html#GraphGenerator</div>
-            <div class="type">Attribute</div>
-            <div class="kind">Type Alias</div>
-            <div class="privacy">PUBLIC</div>
-            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
-          </li><li id="rl_graph_theory.environments.graph_generators.create_fixed_graph_generator">
-            
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.graph<wbr></wbr>_generators<wbr></wbr>.create<wbr></wbr>_fixed<wbr></wbr>_graph<wbr></wbr>_generator</div>
-            <div class="url">rl_graph_theory.environments.graph_generators.html#create_fixed_graph_generator</div>
-            <div class="type">Function</div>
-            <div class="kind">Function</div>
-            <div class="privacy">PUBLIC</div>
-            <div class="summary">#TODO</div>
-          </li><li id="rl_graph_theory.environments.linear_environment.LinearEnvironment">
-            
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.linear<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Linear<wbr></wbr>Environment</div>
-            <div class="url">rl_graph_theory.environments.linear_environment.LinearEnvironment.html</div>
-            <div class="type">Class</div>
-            <div class="kind">Class</div>
-            <div class="privacy">PUBLIC</div>
-            <div class="summary">#TODO</div>
-          </li><li id="rl_graph_theory.environments.linear_environment.LinearEnvironment.__init__">
-            
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.linear<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Linear<wbr></wbr>Environment<wbr></wbr>.__init__</div>
-            <div class="url">rl_graph_theory.environments.linear_environment.LinearEnvironment.html#__init__</div>
-            <div class="type">Function</div>
-            <div class="kind">Method</div>
-            <div class="privacy">PUBLIC</div>
-            <div class="summary">This constructor initializes an instance of the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code> object with a provided (sub)type of reward system and a corresponding function that helps compute the rewards.</div>
-          </li><li id="rl_graph_theory.environments.linear_environment.LinearEnvironment._graph_order">
-            
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.linear<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Linear<wbr></wbr>Environment<wbr></wbr>._graph<wbr></wbr>_order</div>
-            <div class="url">rl_graph_theory.environments.linear_environment.LinearEnvironment.html#_graph_order</div>
-            <div class="type">Attribute</div>
-            <div class="kind">Instance Variable</div>
-            <div class="privacy">PRIVATE</div>
-            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
-          </li><li id="rl_graph_theory.environments.linear_environment.LinearEnvironment._edge_colors">
-            
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.linear<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Linear<wbr></wbr>Environment<wbr></wbr>._edge<wbr></wbr>_colors</div>
-            <div class="url">rl_graph_theory.environments.linear_environment.LinearEnvironment.html#_edge_colors</div>
-            <div class="type">Attribute</div>
-            <div class="kind">Instance Variable</div>
-            <div class="privacy">PRIVATE</div>
-            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
-          </li><li id="rl_graph_theory.environments.linear_environment.LinearEnvironment._edge_ordering">
-            
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.linear<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Linear<wbr></wbr>Environment<wbr></wbr>._edge<wbr></wbr>_ordering</div>
-            <div class="url">rl_graph_theory.environments.linear_environment.LinearEnvironment.html#_edge_ordering</div>
-            <div class="type">Attribute</div>
-            <div class="kind">Instance Variable</div>
-            <div class="privacy">PRIVATE</div>
-            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
-          </li><li id="rl_graph_theory.environments.linear_environment.LinearEnvironment._special_initial_graph_probability">
-            
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.linear<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Linear<wbr></wbr>Environment<wbr></wbr>._special<wbr></wbr>_initial<wbr></wbr>_graph<wbr></wbr>_probability</div>
-            <div class="url">rl_graph_theory.environments.linear_environment.LinearEnvironment.html#_special_initial_graph_probability</div>
-            <div class="type">Attribute</div>
-            <div class="kind">Instance Variable</div>
-            <div class="privacy">PRIVATE</div>
-            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
-          </li><li id="rl_graph_theory.environments.linear_environment.LinearEnvironment._default_initial_graph">
-            
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.linear<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Linear<wbr></wbr>Environment<wbr></wbr>._default<wbr></wbr>_initial<wbr></wbr>_graph</div>
-            <div class="url">rl_graph_theory.environments.linear_environment.LinearEnvironment.html#_default_initial_graph</div>
-            <div class="type">Attribute</div>
-            <div class="kind">Instance Variable</div>
-            <div class="privacy">PRIVATE</div>
-            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
-          </li><li id="rl_graph_theory.environments.linear_environment.LinearEnvironment._special_initial_graph">
-            
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.linear<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Linear<wbr></wbr>Environment<wbr></wbr>._special<wbr></wbr>_initial<wbr></wbr>_graph</div>
-            <div class="url">rl_graph_theory.environments.linear_environment.LinearEnvironment.html#_special_initial_graph</div>
-            <div class="type">Attribute</div>
-            <div class="kind">Instance Variable</div>
-            <div class="privacy">PRIVATE</div>
-            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
-          </li><li id="rl_graph_theory.environments.linear_environment.LinearEnvironment._rng">
-            
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.linear<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Linear<wbr></wbr>Environment<wbr></wbr>._rng</div>
-            <div class="url">rl_graph_theory.environments.linear_environment.LinearEnvironment.html#_rng</div>
-            <div class="type">Attribute</div>
-            <div class="kind">Instance Variable</div>
-            <div class="privacy">PRIVATE</div>
-            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
-          </li><li id="rl_graph_theory.environments.linear_environment.LinearEnvironment.special_initial_graph">
-            
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.linear<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Linear<wbr></wbr>Environment<wbr></wbr>.special<wbr></wbr>_initial<wbr></wbr>_graph</div>
-            <div class="url">rl_graph_theory.environments.linear_environment.LinearEnvironment.html#special_initial_graph</div>
-            <div class="type">Attribute</div>
-            <div class="kind">Property</div>
-            <div class="privacy">PUBLIC</div>
-            <div class="summary">#TODO</div>
-          </li><li id="rl_graph_theory.environments.linear_environment.LinearEnvironment.special_initial_graph.setter">
-            
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.linear<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Linear<wbr></wbr>Environment<wbr></wbr>.special<wbr></wbr>_initial<wbr></wbr>_graph<wbr></wbr>.setter</div>
-            <div class="url">rl_graph_theory.environments.linear_environment.LinearEnvironment.html#special_initial_graph.setter</div>
-            <div class="type">Function</div>
-            <div class="kind">Method</div>
-            <div class="privacy">PUBLIC</div>
-            <div class="summary">#TODO</div>
-          </li><li id="rl_graph_theory.environments.linear_environment.LinearEnvironment.reset_batch">
-            
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.linear<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Linear<wbr></wbr>Environment<wbr></wbr>.reset<wbr></wbr>_batch</div>
-            <div class="url">rl_graph_theory.environments.linear_environment.LinearEnvironment.html#reset_batch</div>
-            <div class="type">Function</div>
-            <div class="kind">Method</div>
-            <div class="privacy">PUBLIC</div>
-            <div class="summary">This abstract method must be implemented in any concrete class that inherits from the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code> class. It should initialize a batch of episodes with a given batch size, and update the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html#_state_batch" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment._state_batch">_state_batch</a></code>...</div>
-          </li><li id="rl_graph_theory.environments.linear_environment.LinearEnvironment.step_batch">
-            
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.linear<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Linear<wbr></wbr>Environment<wbr></wbr>.step<wbr></wbr>_batch</div>
-            <div class="url">rl_graph_theory.environments.linear_environment.LinearEnvironment.html#step_batch</div>
-            <div class="type">Function</div>
-            <div class="kind">Method</div>
-            <div class="privacy">PUBLIC</div>
-            <div class="summary">This method takes a batch of actions and applies them element-wise to the states in the batch of current states given by the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html#_state_batch" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment._state_batch">_state_batch</a></code> attribute. More precisely, these two batches must be of the same size, and the $i$-th action should be applied to the $i$-th state...</div>
           </li><li id="rl_graph_theory.graphs.special_graphs.MonochromaticGraph">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.graphs<wbr></wbr>.special<wbr></wbr>_graphs<wbr></wbr>.<wbr></wbr>Monochromatic<wbr></wbr>Graph</div>
@@ -1134,6 +862,414 @@ allow_loops, graph_format, format_representation)</tt>...</div>
             <div class="kind">Method</div>
             <div class="privacy">PUBLIC</div>
             <div class="summary">This constructor initializes the desired friendship graph in the selected graph format.</div>
+          </li><li id="rl_graph_theory.environments.graph_environment.RewardFunction">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.graph<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Reward<wbr></wbr>Function</div>
+            <div class="url">rl_graph_theory.environments.graph_environment.html#RewardFunction</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Type Alias</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">This is the type alias for the functions that help compute the rewards in RL environments to be used in graph theory applications. In other words, these are the functions that take on the role of either the ...</div>
+          </li><li id="rl_graph_theory.environments.graph_environment.RewardType">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.graph<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Reward<wbr></wbr>Type</div>
+            <div class="url">rl_graph_theory.environments.graph_environment.RewardType.html</div>
+            <div class="type">Class</div>
+            <div class="kind">Class</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">This enumeration represents the types and subtypes of reward systems in the context of an RL environment to be used in graph theory applications. In these applications, multiple episodes are acted on in parallel, and all of their respective rewards are, therefore, also computed in parallel...</div>
+          </li><li id="rl_graph_theory.environments.graph_environment.RewardType.SPARSE">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.graph<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Reward<wbr></wbr>Type<wbr></wbr>.SPARSE</div>
+            <div class="url">rl_graph_theory.environments.graph_environment.RewardType.html#SPARSE</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Constant</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">The sparse reward system. The batch of corresponding rewards received after every batch of actions is zero, apart from the final batch of actions, for which it is equal to <tt class="rst-docutils rst-literal">graph_invariant(final_graph_batch)</tt>...</div>
+          </li><li id="rl_graph_theory.environments.graph_environment.RewardType.TELESCOPIC">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.graph<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Reward<wbr></wbr>Type<wbr></wbr>.TELESCOPIC</div>
+            <div class="url">rl_graph_theory.environments.graph_environment.RewardType.html#TELESCOPIC</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Constant</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">The telescopic reward system. The batch of corresponding rewards received after each batch of actions is computed by the formula <tt class="rst-docutils rst-literal">graph_invariant(new_graph_batch) - graph_invariant(old_graph_batch)</tt>, where:...</div>
+          </li><li id="rl_graph_theory.environments.graph_environment.RewardType.PROPER">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.graph<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Reward<wbr></wbr>Type<wbr></wbr>.PROPER</div>
+            <div class="url">rl_graph_theory.environments.graph_environment.RewardType.html#PROPER</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Constant</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">The proper reward system. The batch of corresponding rewards received after each batch of actions is computed by the formula <tt class="rst-docutils rst-literal">reward_function(old_graph_batch, new_graph_batch)</tt>, where:</div>
+          </li><li id="rl_graph_theory.environments.graph_environment.EpisodeStatus">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.graph<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Episode<wbr></wbr>Status</div>
+            <div class="url">rl_graph_theory.environments.graph_environment.EpisodeStatus.html</div>
+            <div class="type">Class</div>
+            <div class="kind">Class</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">This enumeration represents all the possible statuses that an episode can have in the context of an RL environment to be used in graph theory applications.</div>
+          </li><li id="rl_graph_theory.environments.graph_environment.EpisodeStatus.IN_PROGRESS">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.graph<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Episode<wbr></wbr>Status<wbr></wbr>.IN<wbr></wbr>_PROGRESS</div>
+            <div class="url">rl_graph_theory.environments.graph_environment.EpisodeStatus.html#IN_PROGRESS</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Constant</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">The episode is in progress, which means that it is in a state that accepts further actions.</div>
+          </li><li id="rl_graph_theory.environments.graph_environment.EpisodeStatus.TERMINATED">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.graph<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Episode<wbr></wbr>Status<wbr></wbr>.TERMINATED</div>
+            <div class="url">rl_graph_theory.environments.graph_environment.EpisodeStatus.html#TERMINATED</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Constant</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">The episode has ended due to reaching a terminal state, hence the environment cannot accept any further actions. This status appears only in RL environments where the tasks are episodic.</div>
+          </li><li id="rl_graph_theory.environments.graph_environment.EpisodeStatus.TRUNCATED">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.graph<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Episode<wbr></wbr>Status<wbr></wbr>.TRUNCATED</div>
+            <div class="url">rl_graph_theory.environments.graph_environment.EpisodeStatus.html#TRUNCATED</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Constant</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">The episode has ended since the required number of steps has been taken. In this case, although the current state is not terminal, no further actions should be performed. This status appears only in RL environments where the tasks are continuing.</div>
+          </li><li id="rl_graph_theory.environments.graph_environment.GraphEnvironment">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.graph<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Graph<wbr></wbr>Environment</div>
+            <div class="url">rl_graph_theory.environments.graph_environment.GraphEnvironment.html</div>
+            <div class="type">Class</div>
+            <div class="kind">Class</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">This abstract class encapsulates the concept of an RL environment to be used in graph theory applications. For the sake of efficiency, it provides support for multiple episodes to be run in parallel. This approach makes sense because it is guaranteed that all of these episodes must end at the same time, regardless of whether the RL environment has episodic or continuing tasks...</div>
+          </li><li id="rl_graph_theory.environments.graph_environment.GraphEnvironment.__reward_type">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.graph<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Graph<wbr></wbr>Environment<wbr></wbr>.__reward<wbr></wbr>_type</div>
+            <div class="url">rl_graph_theory.environments.graph_environment.GraphEnvironment.html#__reward_type</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Instance Variable</div>
+            <div class="privacy">PRIVATE</div>
+            <div class="summary">An item of the <code><a href="rl_graph_theory.environments.graph_environment.RewardType.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.RewardType">RewardType</a></code> enumeration that determines the (sub)type of reward system that is used in the given RL environment.</div>
+          </li><li id="rl_graph_theory.environments.graph_environment.GraphEnvironment.__reward_function">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.graph<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Graph<wbr></wbr>Environment<wbr></wbr>.__reward<wbr></wbr>_function</div>
+            <div class="url">rl_graph_theory.environments.graph_environment.GraphEnvironment.html#__reward_function</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Instance Variable</div>
+            <div class="privacy">PRIVATE</div>
+            <div class="summary">The <code><a href="rl_graph_theory.environments.graph_environment.html#RewardFunction" class="internal-link" title="rl_graph_theory.environments.graph_environment.RewardFunction">RewardFunction</a></code> function that helps compute the rewards in accordance with the selected (sub)type of reward system. It plays the role of either the <tt class="rst-docutils rst-literal">graph_invariant</tt> or the <tt class="rst-docutils rst-literal">reward_function</tt> function from the description of the ...</div>
+          </li><li id="rl_graph_theory.environments.graph_environment.GraphEnvironment._state_batch">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.graph<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Graph<wbr></wbr>Environment<wbr></wbr>._state<wbr></wbr>_batch</div>
+            <div class="url">rl_graph_theory.environments.graph_environment.GraphEnvironment.html#_state_batch</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Instance Variable</div>
+            <div class="privacy">PRIVATE</div>
+            <div class="summary">Either <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, or a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> matrix that determines the batch of current states corresponding to the batch of episodes that are being run in parallel. This attribute is initially set to <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, and afterwards, it is assigned the necessary ...</div>
+          </li><li id="rl_graph_theory.environments.graph_environment.GraphEnvironment._status">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.graph<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Graph<wbr></wbr>Environment<wbr></wbr>._status</div>
+            <div class="url">rl_graph_theory.environments.graph_environment.GraphEnvironment.html#_status</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Instance Variable</div>
+            <div class="privacy">PRIVATE</div>
+            <div class="summary">Either <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, or an item of the <code><a href="rl_graph_theory.environments.graph_environment.EpisodeStatus.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.EpisodeStatus">EpisodeStatus</a></code> enumeration that signifies the status of the given batch of episodes, as described in the <code><a href="rl_graph_theory.environments.graph_environment.EpisodeStatus.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.EpisodeStatus">EpisodeStatus</a></code> enumeration. This attribute is initially set to <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>...</div>
+          </li><li id="rl_graph_theory.environments.graph_environment.GraphEnvironment.__init__">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.graph<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Graph<wbr></wbr>Environment<wbr></wbr>.__init__</div>
+            <div class="url">rl_graph_theory.environments.graph_environment.GraphEnvironment.html#__init__</div>
+            <div class="type">Function</div>
+            <div class="kind">Method</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">This constructor initializes an instance of the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code> object with a provided (sub)type of reward system and a corresponding function that helps compute the rewards.</div>
+          </li><li id="rl_graph_theory.environments.graph_environment.GraphEnvironment.reset_batch">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.graph<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Graph<wbr></wbr>Environment<wbr></wbr>.reset<wbr></wbr>_batch</div>
+            <div class="url">rl_graph_theory.environments.graph_environment.GraphEnvironment.html#reset_batch</div>
+            <div class="type">Function</div>
+            <div class="kind">Method</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">This abstract method must be implemented in any concrete class that inherits from the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code> class. It should initialize a batch of episodes with a given batch size, and update the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html#_state_batch" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment._state_batch">_state_batch</a></code>...</div>
+          </li><li id="rl_graph_theory.environments.graph_environment.GraphEnvironment.step_batch">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.graph<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Graph<wbr></wbr>Environment<wbr></wbr>.step<wbr></wbr>_batch</div>
+            <div class="url">rl_graph_theory.environments.graph_environment.GraphEnvironment.html#step_batch</div>
+            <div class="type">Function</div>
+            <div class="kind">Method</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">This method takes a batch of actions and applies them element-wise to the states in the batch of current states given by the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html#_state_batch" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment._state_batch">_state_batch</a></code> attribute. More precisely, these two batches must be of the same size, and the $i$-th action should be applied to the $i$-th state...</div>
+          </li><li id="rl_graph_theory.environments.graph_environment.GraphEnvironment._transition_batch">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.graph<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Graph<wbr></wbr>Environment<wbr></wbr>._transition<wbr></wbr>_batch</div>
+            <div class="url">rl_graph_theory.environments.graph_environment.GraphEnvironment.html#_transition_batch</div>
+            <div class="type">Function</div>
+            <div class="kind">Method</div>
+            <div class="privacy">PRIVATE</div>
+            <div class="summary">This abstract method must be implemented in any concrete class that inherits from the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code> class. It should perform the transition process by executing a batch of given actions and applying them element-wise to the states in the batch of current states given by the ...</div>
+          </li><li id="rl_graph_theory.environments.graph_environment.GraphEnvironment.state_batch_to_graph_batch">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.graph<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Graph<wbr></wbr>Environment<wbr></wbr>.state<wbr></wbr>_batch<wbr></wbr>_to<wbr></wbr>_graph<wbr></wbr>_batch</div>
+            <div class="url">rl_graph_theory.environments.graph_environment.GraphEnvironment.html#state_batch_to_graph_batch</div>
+            <div class="type">Function</div>
+            <div class="kind">Method</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">This abstract method must be implemented in any concrete class that inherits from the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code> class. Its goal is to extract the batch of underlying graphs from any provided batch of states. The graphs should appear in the same order as their corresponding states in the given batch of states.</div>
+          </li><li id="rl_graph_theory.environments.graph_generators.GraphGenerator">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.graph<wbr></wbr>_generators<wbr></wbr>.<wbr></wbr>Graph<wbr></wbr>Generator</div>
+            <div class="url">rl_graph_theory.environments.graph_generators.html#GraphGenerator</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Type Alias</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
+          </li><li id="rl_graph_theory.environments.graph_generators.create_fixed_graph_generator">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.graph<wbr></wbr>_generators<wbr></wbr>.create<wbr></wbr>_fixed<wbr></wbr>_graph<wbr></wbr>_generator</div>
+            <div class="url">rl_graph_theory.environments.graph_generators.html#create_fixed_graph_generator</div>
+            <div class="type">Function</div>
+            <div class="kind">Function</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">#TODO</div>
+          </li><li id="rl_graph_theory.environments.global_environments.GlobalSetEnvironment">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.global<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Global<wbr></wbr>Set<wbr></wbr>Environment</div>
+            <div class="url">rl_graph_theory.environments.global_environments.GlobalSetEnvironment.html</div>
+            <div class="type">Class</div>
+            <div class="kind">Class</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">#TODO</div>
+          </li><li id="rl_graph_theory.environments.global_environments.GlobalSetEnvironment.__init__">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.global<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Global<wbr></wbr>Set<wbr></wbr>Environment<wbr></wbr>.__init__</div>
+            <div class="url">rl_graph_theory.environments.global_environments.GlobalSetEnvironment.html#__init__</div>
+            <div class="type">Function</div>
+            <div class="kind">Method</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">#TODO</div>
+          </li><li id="rl_graph_theory.environments.global_environments.GlobalSetEnvironment._edge_colors">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.global<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Global<wbr></wbr>Set<wbr></wbr>Environment<wbr></wbr>._edge<wbr></wbr>_colors</div>
+            <div class="url">rl_graph_theory.environments.global_environments.GlobalSetEnvironment.html#_edge_colors</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Instance Variable</div>
+            <div class="privacy">PRIVATE</div>
+            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
+          </li><li id="rl_graph_theory.environments.global_environments.GlobalSetEnvironment._is_directed">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.global<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Global<wbr></wbr>Set<wbr></wbr>Environment<wbr></wbr>._is<wbr></wbr>_directed</div>
+            <div class="url">rl_graph_theory.environments.global_environments.GlobalSetEnvironment.html#_is_directed</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Instance Variable</div>
+            <div class="privacy">PRIVATE</div>
+            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
+          </li><li id="rl_graph_theory.environments.global_environments.GlobalSetEnvironment._allow_loops">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.global<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Global<wbr></wbr>Set<wbr></wbr>Environment<wbr></wbr>._allow<wbr></wbr>_loops</div>
+            <div class="url">rl_graph_theory.environments.global_environments.GlobalSetEnvironment.html#_allow_loops</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Instance Variable</div>
+            <div class="privacy">PRIVATE</div>
+            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
+          </li><li id="rl_graph_theory.environments.global_environments.GlobalSetEnvironment._flattened_ordering">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.global<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Global<wbr></wbr>Set<wbr></wbr>Environment<wbr></wbr>._flattened<wbr></wbr>_ordering</div>
+            <div class="url">rl_graph_theory.environments.global_environments.GlobalSetEnvironment.html#_flattened_ordering</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Instance Variable</div>
+            <div class="privacy">PRIVATE</div>
+            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
+          </li><li id="rl_graph_theory.environments.global_environments.GlobalSetEnvironment.initial_graph_generator">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.global<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Global<wbr></wbr>Set<wbr></wbr>Environment<wbr></wbr>.initial<wbr></wbr>_graph<wbr></wbr>_generator</div>
+            <div class="url">rl_graph_theory.environments.global_environments.GlobalSetEnvironment.html#initial_graph_generator</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Instance Variable</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
+          </li><li id="rl_graph_theory.environments.global_environments.GlobalSetEnvironment._flattened_length">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.global<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Global<wbr></wbr>Set<wbr></wbr>Environment<wbr></wbr>._flattened<wbr></wbr>_length</div>
+            <div class="url">rl_graph_theory.environments.global_environments.GlobalSetEnvironment.html#_flattened_length</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Instance Variable</div>
+            <div class="privacy">PRIVATE</div>
+            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
+          </li><li id="rl_graph_theory.environments.global_environments.GlobalSetEnvironment.episode_length">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.global<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Global<wbr></wbr>Set<wbr></wbr>Environment<wbr></wbr>.episode<wbr></wbr>_length</div>
+            <div class="url">rl_graph_theory.environments.global_environments.GlobalSetEnvironment.html#episode_length</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Instance Variable</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
+          </li><li id="rl_graph_theory.environments.global_environments.GlobalSetEnvironment._step_count">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.global<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Global<wbr></wbr>Set<wbr></wbr>Environment<wbr></wbr>._step<wbr></wbr>_count</div>
+            <div class="url">rl_graph_theory.environments.global_environments.GlobalSetEnvironment.html#_step_count</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Instance Variable</div>
+            <div class="privacy">PRIVATE</div>
+            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
+          </li><li id="rl_graph_theory.environments.global_environments.GlobalSetEnvironment.reset_batch">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.global<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Global<wbr></wbr>Set<wbr></wbr>Environment<wbr></wbr>.reset<wbr></wbr>_batch</div>
+            <div class="url">rl_graph_theory.environments.global_environments.GlobalSetEnvironment.html#reset_batch</div>
+            <div class="type">Function</div>
+            <div class="kind">Method</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">This abstract method must be implemented in any concrete class that inherits from the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code> class. It should initialize a batch of episodes with a given batch size, and update the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html#_state_batch" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment._state_batch">_state_batch</a></code>...</div>
+          </li><li id="rl_graph_theory.environments.global_environments.GlobalSetEnvironment._state_batch">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.global<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Global<wbr></wbr>Set<wbr></wbr>Environment<wbr></wbr>._state<wbr></wbr>_batch</div>
+            <div class="url">rl_graph_theory.environments.global_environments.GlobalSetEnvironment.html#_state_batch</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Instance Variable</div>
+            <div class="privacy">PRIVATE</div>
+            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
+          </li><li id="rl_graph_theory.environments.global_environments.GlobalSetEnvironment._status">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.global<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Global<wbr></wbr>Set<wbr></wbr>Environment<wbr></wbr>._status</div>
+            <div class="url">rl_graph_theory.environments.global_environments.GlobalSetEnvironment.html#_status</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Instance Variable</div>
+            <div class="privacy">PRIVATE</div>
+            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
+          </li><li id="rl_graph_theory.environments.global_environments.GlobalSetEnvironment._transition_batch">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.global<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Global<wbr></wbr>Set<wbr></wbr>Environment<wbr></wbr>._transition<wbr></wbr>_batch</div>
+            <div class="url">rl_graph_theory.environments.global_environments.GlobalSetEnvironment.html#_transition_batch</div>
+            <div class="type">Function</div>
+            <div class="kind">Method</div>
+            <div class="privacy">PRIVATE</div>
+            <div class="summary">This abstract method must be implemented in any concrete class that inherits from the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code> class. It should perform the transition process by executing a batch of given actions and applying them element-wise to the states in the batch of current states given by the ...</div>
+          </li><li id="rl_graph_theory.environments.global_environments.GlobalSetEnvironment.state_batch_to_graph_batch">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.global<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Global<wbr></wbr>Set<wbr></wbr>Environment<wbr></wbr>.state<wbr></wbr>_batch<wbr></wbr>_to<wbr></wbr>_graph<wbr></wbr>_batch</div>
+            <div class="url">rl_graph_theory.environments.global_environments.GlobalSetEnvironment.html#state_batch_to_graph_batch</div>
+            <div class="type">Function</div>
+            <div class="kind">Method</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">This abstract method must be implemented in any concrete class that inherits from the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code> class. Its goal is to extract the batch of underlying graphs from any provided batch of states. The graphs should appear in the same order as their corresponding states in the given batch of states.</div>
+          </li><li id="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.global<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Global<wbr></wbr>Flip<wbr></wbr>Environment</div>
+            <div class="url">rl_graph_theory.environments.global_environments.GlobalFlipEnvironment.html</div>
+            <div class="type">Class</div>
+            <div class="kind">Class</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">#TODO</div>
+          </li><li id="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment.__init__">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.global<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Global<wbr></wbr>Flip<wbr></wbr>Environment<wbr></wbr>.__init__</div>
+            <div class="url">rl_graph_theory.environments.global_environments.GlobalFlipEnvironment.html#__init__</div>
+            <div class="type">Function</div>
+            <div class="kind">Method</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">#TODO</div>
+          </li><li id="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment._is_directed">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.global<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Global<wbr></wbr>Flip<wbr></wbr>Environment<wbr></wbr>._is<wbr></wbr>_directed</div>
+            <div class="url">rl_graph_theory.environments.global_environments.GlobalFlipEnvironment.html#_is_directed</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Instance Variable</div>
+            <div class="privacy">PRIVATE</div>
+            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
+          </li><li id="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment._allow_loops">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.global<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Global<wbr></wbr>Flip<wbr></wbr>Environment<wbr></wbr>._allow<wbr></wbr>_loops</div>
+            <div class="url">rl_graph_theory.environments.global_environments.GlobalFlipEnvironment.html#_allow_loops</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Instance Variable</div>
+            <div class="privacy">PRIVATE</div>
+            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
+          </li><li id="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment._flip_only">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.global<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Global<wbr></wbr>Flip<wbr></wbr>Environment<wbr></wbr>._flip<wbr></wbr>_only</div>
+            <div class="url">rl_graph_theory.environments.global_environments.GlobalFlipEnvironment.html#_flip_only</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Instance Variable</div>
+            <div class="privacy">PRIVATE</div>
+            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
+          </li><li id="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment._flattened_ordering">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.global<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Global<wbr></wbr>Flip<wbr></wbr>Environment<wbr></wbr>._flattened<wbr></wbr>_ordering</div>
+            <div class="url">rl_graph_theory.environments.global_environments.GlobalFlipEnvironment.html#_flattened_ordering</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Instance Variable</div>
+            <div class="privacy">PRIVATE</div>
+            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
+          </li><li id="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment.initial_graph_generator">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.global<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Global<wbr></wbr>Flip<wbr></wbr>Environment<wbr></wbr>.initial<wbr></wbr>_graph<wbr></wbr>_generator</div>
+            <div class="url">rl_graph_theory.environments.global_environments.GlobalFlipEnvironment.html#initial_graph_generator</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Instance Variable</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
+          </li><li id="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment._flattened_length">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.global<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Global<wbr></wbr>Flip<wbr></wbr>Environment<wbr></wbr>._flattened<wbr></wbr>_length</div>
+            <div class="url">rl_graph_theory.environments.global_environments.GlobalFlipEnvironment.html#_flattened_length</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Instance Variable</div>
+            <div class="privacy">PRIVATE</div>
+            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
+          </li><li id="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment.episode_length">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.global<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Global<wbr></wbr>Flip<wbr></wbr>Environment<wbr></wbr>.episode<wbr></wbr>_length</div>
+            <div class="url">rl_graph_theory.environments.global_environments.GlobalFlipEnvironment.html#episode_length</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Instance Variable</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
+          </li><li id="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment._step_count">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.global<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Global<wbr></wbr>Flip<wbr></wbr>Environment<wbr></wbr>._step<wbr></wbr>_count</div>
+            <div class="url">rl_graph_theory.environments.global_environments.GlobalFlipEnvironment.html#_step_count</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Instance Variable</div>
+            <div class="privacy">PRIVATE</div>
+            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
+          </li><li id="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment.reset_batch">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.global<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Global<wbr></wbr>Flip<wbr></wbr>Environment<wbr></wbr>.reset<wbr></wbr>_batch</div>
+            <div class="url">rl_graph_theory.environments.global_environments.GlobalFlipEnvironment.html#reset_batch</div>
+            <div class="type">Function</div>
+            <div class="kind">Method</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">This abstract method must be implemented in any concrete class that inherits from the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code> class. It should initialize a batch of episodes with a given batch size, and update the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html#_state_batch" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment._state_batch">_state_batch</a></code>...</div>
+          </li><li id="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment._state_batch">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.global<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Global<wbr></wbr>Flip<wbr></wbr>Environment<wbr></wbr>._state<wbr></wbr>_batch</div>
+            <div class="url">rl_graph_theory.environments.global_environments.GlobalFlipEnvironment.html#_state_batch</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Instance Variable</div>
+            <div class="privacy">PRIVATE</div>
+            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
+          </li><li id="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment._status">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.global<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Global<wbr></wbr>Flip<wbr></wbr>Environment<wbr></wbr>._status</div>
+            <div class="url">rl_graph_theory.environments.global_environments.GlobalFlipEnvironment.html#_status</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Instance Variable</div>
+            <div class="privacy">PRIVATE</div>
+            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
+          </li><li id="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment._transition_batch">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.global<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Global<wbr></wbr>Flip<wbr></wbr>Environment<wbr></wbr>._transition<wbr></wbr>_batch</div>
+            <div class="url">rl_graph_theory.environments.global_environments.GlobalFlipEnvironment.html#_transition_batch</div>
+            <div class="type">Function</div>
+            <div class="kind">Method</div>
+            <div class="privacy">PRIVATE</div>
+            <div class="summary">This abstract method must be implemented in any concrete class that inherits from the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code> class. It should perform the transition process by executing a batch of given actions and applying them element-wise to the states in the batch of current states given by the ...</div>
+          </li><li id="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment.state_batch_to_graph_batch">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.global<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Global<wbr></wbr>Flip<wbr></wbr>Environment<wbr></wbr>.state<wbr></wbr>_batch<wbr></wbr>_to<wbr></wbr>_graph<wbr></wbr>_batch</div>
+            <div class="url">rl_graph_theory.environments.global_environments.GlobalFlipEnvironment.html#state_batch_to_graph_batch</div>
+            <div class="type">Function</div>
+            <div class="kind">Method</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">This abstract method must be implemented in any concrete class that inherits from the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code> class. Its goal is to extract the batch of underlying graphs from any provided batch of states. The graphs should appear in the same order as their corresponding states in the given batch of states.</div>
           </li><li id="rl_graph_theory.environments.linear_environments.LinearBuildEnvironment">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.linear<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Linear<wbr></wbr>Build<wbr></wbr>Environment</div>
@@ -1198,6 +1334,14 @@ allow_loops, graph_format, format_representation)</tt>...</div>
             <div class="kind">Method</div>
             <div class="privacy">PUBLIC</div>
             <div class="summary">This constructor initializes an instance of the <code>IncrementalEnvironment</code> object.</div>
+          </li><li id="rl_graph_theory.environments.linear_environments.LinearBuildEnvironment._step_count">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.linear<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Linear<wbr></wbr>Build<wbr></wbr>Environment<wbr></wbr>._step<wbr></wbr>_count</div>
+            <div class="url">rl_graph_theory.environments.linear_environments.LinearBuildEnvironment.html#_step_count</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Instance Variable</div>
+            <div class="privacy">PRIVATE</div>
+            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
           </li><li id="rl_graph_theory.environments.linear_environments.LinearBuildEnvironment.reset_batch">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.linear<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Linear<wbr></wbr>Build<wbr></wbr>Environment<wbr></wbr>.reset<wbr></wbr>_batch</div>
@@ -1286,13 +1430,13 @@ allow_loops, graph_format, format_representation)</tt>...</div>
             <div class="kind">Instance Variable</div>
             <div class="privacy">PRIVATE</div>
             <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
-          </li><li id="rl_graph_theory.environments.linear_environments.LinearSetEnvironment._initial_graph_generator">
+          </li><li id="rl_graph_theory.environments.linear_environments.LinearSetEnvironment.initial_graph_generator">
             
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.linear<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Linear<wbr></wbr>Set<wbr></wbr>Environment<wbr></wbr>._initial<wbr></wbr>_graph<wbr></wbr>_generator</div>
-            <div class="url">rl_graph_theory.environments.linear_environments.LinearSetEnvironment.html#_initial_graph_generator</div>
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.linear<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Linear<wbr></wbr>Set<wbr></wbr>Environment<wbr></wbr>.initial<wbr></wbr>_graph<wbr></wbr>_generator</div>
+            <div class="url">rl_graph_theory.environments.linear_environments.LinearSetEnvironment.html#initial_graph_generator</div>
             <div class="type">Attribute</div>
             <div class="kind">Instance Variable</div>
-            <div class="privacy">PRIVATE</div>
+            <div class="privacy">PUBLIC</div>
             <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
           </li><li id="rl_graph_theory.environments.linear_environments.LinearSetEnvironment._flattened_length">
             
@@ -1302,10 +1446,10 @@ allow_loops, graph_format, format_representation)</tt>...</div>
             <div class="kind">Instance Variable</div>
             <div class="privacy">PRIVATE</div>
             <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
-          </li><li id="rl_graph_theory.environments.linear_environments.LinearSetEnvironment._next_entry_index">
+          </li><li id="rl_graph_theory.environments.linear_environments.LinearSetEnvironment._step_count">
             
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.linear<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Linear<wbr></wbr>Set<wbr></wbr>Environment<wbr></wbr>._next<wbr></wbr>_entry<wbr></wbr>_index</div>
-            <div class="url">rl_graph_theory.environments.linear_environments.LinearSetEnvironment.html#_next_entry_index</div>
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.linear<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Linear<wbr></wbr>Set<wbr></wbr>Environment<wbr></wbr>._step<wbr></wbr>_count</div>
+            <div class="url">rl_graph_theory.environments.linear_environments.LinearSetEnvironment.html#_step_count</div>
             <div class="type">Attribute</div>
             <div class="kind">Instance Variable</div>
             <div class="privacy">PRIVATE</div>
@@ -1390,13 +1534,13 @@ allow_loops, graph_format, format_representation)</tt>...</div>
             <div class="kind">Instance Variable</div>
             <div class="privacy">PRIVATE</div>
             <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
-          </li><li id="rl_graph_theory.environments.linear_environments.LinearFlipEnvironment._initial_graph_generator">
+          </li><li id="rl_graph_theory.environments.linear_environments.LinearFlipEnvironment.initial_graph_generator">
             
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.linear<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Linear<wbr></wbr>Flip<wbr></wbr>Environment<wbr></wbr>._initial<wbr></wbr>_graph<wbr></wbr>_generator</div>
-            <div class="url">rl_graph_theory.environments.linear_environments.LinearFlipEnvironment.html#_initial_graph_generator</div>
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.linear<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Linear<wbr></wbr>Flip<wbr></wbr>Environment<wbr></wbr>.initial<wbr></wbr>_graph<wbr></wbr>_generator</div>
+            <div class="url">rl_graph_theory.environments.linear_environments.LinearFlipEnvironment.html#initial_graph_generator</div>
             <div class="type">Attribute</div>
             <div class="kind">Instance Variable</div>
-            <div class="privacy">PRIVATE</div>
+            <div class="privacy">PUBLIC</div>
             <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
           </li><li id="rl_graph_theory.environments.linear_environments.LinearFlipEnvironment._flattened_length">
             
@@ -1406,10 +1550,10 @@ allow_loops, graph_format, format_representation)</tt>...</div>
             <div class="kind">Instance Variable</div>
             <div class="privacy">PRIVATE</div>
             <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
-          </li><li id="rl_graph_theory.environments.linear_environments.LinearFlipEnvironment._next_entry_index">
+          </li><li id="rl_graph_theory.environments.linear_environments.LinearFlipEnvironment._step_count">
             
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.linear<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Linear<wbr></wbr>Flip<wbr></wbr>Environment<wbr></wbr>._next<wbr></wbr>_entry<wbr></wbr>_index</div>
-            <div class="url">rl_graph_theory.environments.linear_environments.LinearFlipEnvironment.html#_next_entry_index</div>
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.linear<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Linear<wbr></wbr>Flip<wbr></wbr>Environment<wbr></wbr>._step<wbr></wbr>_count</div>
+            <div class="url">rl_graph_theory.environments.linear_environments.LinearFlipEnvironment.html#_step_count</div>
             <div class="type">Attribute</div>
             <div class="kind">Instance Variable</div>
             <div class="privacy">PRIVATE</div>

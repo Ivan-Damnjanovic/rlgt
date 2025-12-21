@@ -5,7 +5,7 @@ initially uncolored and are then colored one by one, either in the flattened row
 flattened clockwise order.
 """
 
-from typing import Callable, Optional, Tuple
+from typing import Optional, Tuple
 
 import numpy as np
 
@@ -15,6 +15,7 @@ from ..graphs.special_graphs import MonochromaticGraph
 from .graph_environment import (
     EpisodeStatus,
     GraphEnvironment,
+    RewardFunction,
     RewardType,
 )
 from .graph_generators import GraphGenerator, create_fixed_graph_generator
@@ -79,7 +80,7 @@ class LinearBuildEnvironment(GraphEnvironment):
     def __init__(
         self,
         reward_type: RewardType,
-        reward_function: Callable,
+        reward_function: RewardFunction,
         graph_order: int,
         flattened_ordering: FlattenedOrdering = FlattenedOrdering.ROW_MAJOR,
         edge_colors: int = 2,
@@ -141,7 +142,7 @@ class LinearBuildEnvironment(GraphEnvironment):
             else:
                 self._flattened_length: int = graph_order * (graph_order - 1) // 2
 
-        self._next_entry_index: Optional[int] = None
+        self._step_count: Optional[int] = None
 
     def reset_batch(self, batch_size: int) -> Tuple[np.ndarray, EpisodeStatus]:
         self._state_batch = np.zeros(
@@ -149,26 +150,26 @@ class LinearBuildEnvironment(GraphEnvironment):
         )
         self._state_batch[:, self._flattened_length * (self._edge_colors - 1)] = 1
         self._status = EpisodeStatus.IN_PROGRESS
-        self._next_entry_index = 0
+        self._step_count = 0
 
         return self._state_batch, self._status
 
     def _transition_batch(self, action_batch: np.ndarray) -> None:
         if self._edge_colors == 2:
-            self._state_batch[:, self._next_entry_index] = action_batch[:, 0]
+            self._state_batch[:, self._step_count] = action_batch[:, 0]
         else:
             rows = np.arange(self._state_batch.shape[0], dtype=int)
-            columns = (action_batch[:, 0] - 1) * self._flattened_length + self._next_entry_index
+            columns = (action_batch[:, 0] - 1) * self._flattened_length + self._step_count
             self._state_batch[rows, columns] = 1
 
         self._state_batch[
-            :, self._flattened_length * (self._edge_colors - 1) + self._next_entry_index
+            :, self._flattened_length * (self._edge_colors - 1) + self._step_count
         ] = 0
-        self._next_entry_index += 1
+        self._step_count += 1
 
-        if self._next_entry_index < self._flattened_length:
+        if self._step_count < self._flattened_length:
             self._state_batch[
-                :, self._flattened_length * (self._edge_colors - 1) + self._next_entry_index
+                :, self._flattened_length * (self._edge_colors - 1) + self._step_count
             ] = 1
         else:
             self._status = EpisodeStatus.TERMINATED
@@ -201,7 +202,7 @@ class LinearSetEnvironment(GraphEnvironment):
     def __init__(
         self,
         reward_type: RewardType,
-        reward_function: Callable,
+        reward_function: RewardFunction,
         graph_order: int,
         flattened_ordering: FlattenedOrdering = FlattenedOrdering.ROW_MAJOR,
         edge_colors: int = 2,
@@ -221,14 +222,14 @@ class LinearSetEnvironment(GraphEnvironment):
         self._flattened_ordering: FlattenedOrdering = flattened_ordering
 
         if initial_graph_generator is not None:
-            self._initial_graph_generator: GraphGenerator = initial_graph_generator
+            self.initial_graph_generator: GraphGenerator = initial_graph_generator
         else:
             graph_format = (
                 GraphFormat.FLATTENED_ROW_MAJOR
                 if flattened_ordering == FlattenedOrdering.ROW_MAJOR
                 else GraphFormat.FLATTENED_CLOCKWISE
             )
-            self._initial_graph_generator: GraphGenerator = create_fixed_graph_generator(
+            self.initial_graph_generator: GraphGenerator = create_fixed_graph_generator(
                 fixed_graph=MonochromaticGraph(
                     graph_format=graph_format,
                     order=graph_order,
@@ -259,49 +260,55 @@ class LinearSetEnvironment(GraphEnvironment):
             else:
                 self._flattened_length: int = graph_order * (graph_order - 1) // 2
 
-        self._next_entry_index: Optional[int] = None
+        self._step_count: Optional[int] = None
 
     def reset_batch(self, batch_size: int) -> Tuple[np.ndarray, EpisodeStatus]:
-        initial_graph_batch = self._initial_graph_generator(batch_size=batch_size)
+        initial_graph_batch = self.initial_graph_generator(batch_size=batch_size)
 
         if self._flattened_ordering == FlattenedOrdering.ROW_MAJOR:
             format_representation = initial_graph_batch.flattened_row_major
         else:
             format_representation = initial_graph_batch.flattened_clockwise
 
-        color_indices = np.arange(1, self._edge_colors + 1, dtype=int)
-        temp = (format_representation[:, None, :] == color_indices[:, None]).astype(int)
-        temp[:, self._edge_colors, :] = 0
-        temp[:, self._edge_colors, 0] = 1
+        if self._edge_colors == 2:
+            self._state_batch = np.zeros((batch_size, 2 * self._flattened_length), dtype=int)
+            self._state_batch[:, : self._flattened_length] = format_representation
+            self._state_batch[:, self._flattened_length] = 1
+        else:
+            color_indices = np.arange(1, self._edge_colors + 1, dtype=int)
+            temp = (format_representation[:, None, :] == color_indices[:, None]).astype(int)
+            temp[:, self._edge_colors, :] = 0
+            temp[:, self._edge_colors, 0] = 1
 
-        self._state_batch = temp.reshape(-1, self._flattened_length * self._edge_colors)
+            self._state_batch = temp.reshape(-1, self._flattened_length * self._edge_colors)
+
         self._status = EpisodeStatus.IN_PROGRESS
-        self._next_entry_index = 0
+        self._step_count = 0
 
         return self._state_batch, self._status
 
     def _transition_batch(self, action_batch: np.ndarray) -> None:
         if self._edge_colors == 2:
-            self._state_batch[:, self._next_entry_index] = action_batch[:, 0]
+            self._state_batch[:, self._step_count] = action_batch[:, 0]
         else:
             self._state_batch[
                 :,
                 np.arange(self._edge_colors - 1, dtype=int) * self._flattened_length
-                + self._next_entry_index,
+                + self._step_count,
             ] = 0
 
             rows = np.arange(self._state_batch.shape[0], dtype=int)
-            columns = (action_batch[:, 0] - 1) * self._flattened_length + self._next_entry_index
+            columns = (action_batch[:, 0] - 1) * self._flattened_length + self._step_count
             self._state_batch[rows, columns] = 1
 
         self._state_batch[
-            :, self._flattened_length * (self._edge_colors - 1) + self._next_entry_index
+            :, self._flattened_length * (self._edge_colors - 1) + self._step_count
         ] = 0
-        self._next_entry_index += 1
+        self._step_count += 1
 
-        if self._next_entry_index < self._flattened_length:
+        if self._step_count < self._flattened_length:
             self._state_batch[
-                :, self._flattened_length * (self._edge_colors - 1) + self._next_entry_index
+                :, self._flattened_length * (self._edge_colors - 1) + self._step_count
             ] = 1
         else:
             self._status = EpisodeStatus.TERMINATED
@@ -337,7 +344,7 @@ class LinearFlipEnvironment(GraphEnvironment):
     def __init__(
         self,
         reward_type: RewardType,
-        reward_function: Callable,
+        reward_function: RewardFunction,
         graph_order: int,
         flattened_ordering: FlattenedOrdering = FlattenedOrdering.ROW_MAJOR,
         is_directed: bool = False,
@@ -355,14 +362,14 @@ class LinearFlipEnvironment(GraphEnvironment):
         self._flattened_ordering: FlattenedOrdering = flattened_ordering
 
         if initial_graph_generator is not None:
-            self._initial_graph_generator: GraphGenerator = initial_graph_generator
+            self.initial_graph_generator: GraphGenerator = initial_graph_generator
         else:
             graph_format = (
                 GraphFormat.FLATTENED_ROW_MAJOR
                 if flattened_ordering == FlattenedOrdering.ROW_MAJOR
                 else GraphFormat.FLATTENED_CLOCKWISE
             )
-            self._initial_graph_generator: GraphGenerator = create_fixed_graph_generator(
+            self.initial_graph_generator: GraphGenerator = create_fixed_graph_generator(
                 fixed_graph=MonochromaticGraph(
                     graph_format=graph_format,
                     order=graph_order,
@@ -392,10 +399,10 @@ class LinearFlipEnvironment(GraphEnvironment):
             else:
                 self._flattened_length: int = graph_order * (graph_order - 1) // 2
 
-        self._next_entry_index: Optional[int] = None
+        self._step_count: Optional[int] = None
 
     def reset_batch(self, batch_size: int) -> Tuple[np.ndarray, EpisodeStatus]:
-        initial_graph_batch = self._initial_graph_generator(batch_size=batch_size)
+        initial_graph_batch = self.initial_graph_generator(batch_size=batch_size)
 
         if self._flattened_ordering == FlattenedOrdering.ROW_MAJOR:
             format_representation = initial_graph_batch.flattened_row_major
@@ -407,19 +414,17 @@ class LinearFlipEnvironment(GraphEnvironment):
         self._state_batch[:, self._flattened_length] = 1
 
         self._status = EpisodeStatus.IN_PROGRESS
-        self._next_entry_index = 0
+        self._step_count = 0
 
         return self._state_batch, self._status
 
     def _transition_batch(self, action_batch: np.ndarray) -> None:
-        self._state_batch[:, self._next_entry_index] = (
-            self._state_batch[:, self._next_entry_index] ^ action_batch[:, 0]
-        )
-        self._state_batch[:, self._flattened_length + self._next_entry_index] = 0
-        self._next_entry_index += 1
+        self._state_batch[:, self._step_count] ^= action_batch[:, 0]
+        self._state_batch[:, self._flattened_length + self._step_count] = 0
+        self._step_count += 1
 
-        if self._next_entry_index < self._flattened_length:
-            self._state_batch[:, self._flattened_length + self._next_entry_index] = 1
+        if self._step_count < self._flattened_length:
+            self._state_batch[:, self._flattened_length + self._step_count] = 1
         else:
             self._status = EpisodeStatus.TERMINATED
 
