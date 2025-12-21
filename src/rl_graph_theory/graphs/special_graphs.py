@@ -7,13 +7,14 @@ from typing import List
 
 import numpy as np
 
-from .graph import Graph, GraphFormat
+from .graph import Graph
+from .graph_format import GraphFormat
 
 
 class MonochromaticGraph(Graph):
     """
     This class inherits the `Graph` class and it is used to instantiate monochromatic graphs, i.e.,
-    $k$-edge-colored looped complete undirected graphs where all the edges are colored with the
+    $k$-edge-colored looped complete graphs where all the edges (resp. arcs) are colored with the
     same color (or they are all uncolored). It is also possible to configure the starting graph
     format that an instance should get initialized in.
     """
@@ -24,6 +25,7 @@ class MonochromaticGraph(Graph):
         order: int,
         edge_colors: int = 2,
         selected_edge_color: int = 0,
+        is_directed: bool = False,
         allow_loops: bool = False,
     ):
         """
@@ -38,6 +40,10 @@ class MonochromaticGraph(Graph):
             given as a nonnegative integer between 0 and ``edge_colors``. If this argument equals
             ``edge_colors``, then this means that all the edges should be uncolored. The default
             value is zero.
+        :param is_directed: A boolean that indicates whether the given monochromatic graph is a
+            $k$-edge-colored looped complete directed graph or a $k$-edge-colored looped complete
+            undirected graph. The default value is `False`, i.e., the given monochromatic graph is
+            undirected by default.
         :param allow_loops: A boolean that indicates whether the given monochromatic graph is
             allowed to have loops. The default value is `False`, i.e., the given monochromatic
             graph is not allowed to have loops by default.
@@ -70,10 +76,20 @@ class MonochromaticGraph(Graph):
                 np.fill_diagonal(adjacency_matrix, 0)
 
         else:
-            if allow_loops:
-                flattened = np.full((order * (order + 1) // 2,), selected_edge_color, dtype=int)
+            if is_directed:
+                if allow_loops:
+                    flattened = np.full((order * order,), selected_edge_color, dtype=int)
+                else:
+                    flattened = np.full((order * (order - 1),), selected_edge_color, dtype=int)
             else:
-                flattened = np.full((order * (order - 1) // 2,), selected_edge_color, dtype=int)
+                if allow_loops:
+                    flattened = np.full(
+                        (order * (order + 1) // 2,), selected_edge_color, dtype=int
+                    )
+                else:
+                    flattened = np.full(
+                        (order * (order - 1) // 2,), selected_edge_color, dtype=int
+                    )
 
         super().__init__(
             graph_format=graph_format,
@@ -83,6 +99,7 @@ class MonochromaticGraph(Graph):
             flattened_row_major=flattened,
             flattened_clockwise=flattened,
             edge_colors=edge_colors,
+            is_directed=is_directed,
             allow_loops=allow_loops,
         )
 

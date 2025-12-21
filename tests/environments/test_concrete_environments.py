@@ -7,8 +7,8 @@ from typing import Callable, List
 import numpy as np
 import pytest
 
-from rl_graph_theory.environments.incremental_environment import IncrementalEnvironment
-from rl_graph_theory.environments.environment import (
+from rl_graph_theory.environments.linear_environments import LinearBuildEnvironment
+from rl_graph_theory.environments.graph_environment import (
     ActionBatch,
     EpisodeStatus,
     RewardBatch,
@@ -39,7 +39,7 @@ def test_incremental_environment(
     final_status: EpisodeStatus,
     output_graph_batch_bitmask: np.ndarray,
 ):
-    environment = IncrementalEnvironment(
+    environment = LinearBuildEnvironment(
         graph_order=graph_order,
         edge_colors=edge_colors,
         flattened_ordering=edge_ordering,

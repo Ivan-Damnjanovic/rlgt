@@ -4,7 +4,7 @@
 
 import numpy as np
 
-from rl_graph_theory.environments.environment import (
+from rl_graph_theory.environments.graph_environment import (
     ActionBatch,
     EpisodeStatus,
     RewardBatch,
