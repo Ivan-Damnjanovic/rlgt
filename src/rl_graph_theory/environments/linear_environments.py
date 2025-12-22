@@ -175,10 +175,11 @@ class LinearBuildEnvironment(GraphEnvironment):
             self._status = EpisodeStatus.TERMINATED
 
     def state_batch_to_graph_batch(self, state_batch: np.ndarray) -> GraphBatch:
+        temp = state_batch.reshape(-1, self._edge_colors, self._flattened_length)
+
         if self._edge_colors == 2:
-            result = state_batch[:, self._flattened_length]
+            result = state_batch[:, : self._flattened_length]
         else:
-            temp = state_batch.reshape(-1, self._edge_colors, self._flattened_length)
             color_indices = np.arange(1, self._edge_colors, dtype=int)
             result = (temp[:, :-1, :] * color_indices[:, None]).sum(axis=1)
 
@@ -277,8 +278,8 @@ class LinearSetEnvironment(GraphEnvironment):
         else:
             color_indices = np.arange(1, self._edge_colors + 1, dtype=int)
             temp = (format_representation[:, None, :] == color_indices[:, None]).astype(int)
-            temp[:, self._edge_colors, :] = 0
-            temp[:, self._edge_colors, 0] = 1
+            temp[:, self._edge_colors - 1, :] = 0
+            temp[:, self._edge_colors - 1, 0] = 1
 
             self._state_batch = temp.reshape(-1, self._flattened_length * self._edge_colors)
 
