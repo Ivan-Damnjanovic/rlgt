@@ -11,13 +11,8 @@ MONOCHROMATIC_GRAPH_TEST_CASES = [
         5,
         3,
         2,
-        np.array(
-            [
-                [0, 0, 0, 0, 0],
-                [31, 31, 31, 31, 31],
-            ],
-            dtype=int,
-        ),
+        np.array([[0, 0, 0, 0, 0], [31, 31, 31, 31, 31]], dtype=int),
+        np.array([[0, 0, 0, 0, 0], [31, 31, 31, 31, 31]], dtype=int),
         np.array(
             [
                 [2, 2, 2, 2, 2],
@@ -28,13 +23,21 @@ MONOCHROMATIC_GRAPH_TEST_CASES = [
             ],
             dtype=int,
         ),
-        np.array([2] * 15, dtype=int),
+        np.array([2] * 25, dtype=int),
+        True,
         True,
     ),
     (
         5,
         3,
         2,
+        np.array(
+            [
+                [0, 0, 0, 0, 0],
+                [30, 29, 27, 23, 15],
+            ],
+            dtype=int,
+        ),
         np.array(
             [
                 [0, 0, 0, 0, 0],
@@ -52,13 +55,64 @@ MONOCHROMATIC_GRAPH_TEST_CASES = [
             ],
             dtype=int,
         ),
+        np.array([2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2], dtype=int),
+        True,
+        False,
+    ),
+    (
+        5,
+        3,
+        2,
+        np.array([[0, 0, 0, 0, 0], [31, 31, 31, 31, 31]], dtype=int),
+        np.array([[0, 0, 0, 0, 0], [31, 31, 31, 31, 31]], dtype=int),
+        np.array(
+            [
+                [2, 2, 2, 2, 2],
+                [2, 2, 2, 2, 2],
+                [2, 2, 2, 2, 2],
+                [2, 2, 2, 2, 2],
+                [2, 2, 2, 2, 2],
+            ],
+            dtype=int,
+        ),
+        np.array([2] * 15, dtype=int),
+        False,
+        True,
+    ),
+    (
+        5,
+        3,
+        2,
+        np.array([[0, 0, 0, 0, 0], [30, 29, 27, 23, 15]], dtype=int),
+        np.array([[0, 0, 0, 0, 0], [30, 29, 27, 23, 15]], dtype=int),
+        np.array(
+            [
+                [0, 2, 2, 2, 2],
+                [2, 0, 2, 2, 2],
+                [2, 2, 0, 2, 2],
+                [2, 2, 2, 0, 2],
+                [2, 2, 2, 2, 0],
+            ],
+            dtype=int,
+        ),
         np.array([2, 2, 2, 2, 2, 2, 2, 2, 2, 2], dtype=int),
+        False,
         False,
     ),
     (
         4,
         6,
         4,
+        np.array(
+            [
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [14, 13, 11, 7],
+                [0, 0, 0, 0],
+            ],
+            dtype=int,
+        ),
         np.array(
             [
                 [0, 0, 0, 0],
@@ -80,11 +134,22 @@ MONOCHROMATIC_GRAPH_TEST_CASES = [
         ),
         np.array([4, 4, 4, 4, 4, 4], dtype=int),
         False,
+        False,
     ),
     (
         3,
         5,
         5,
+        np.array(
+            [
+                [0, 0, 0],
+                [0, 0, 0],
+                [0, 0, 0],
+                [0, 0, 0],
+                [0, 0, 0],
+            ],
+            dtype=int,
+        ),
         np.array(
             [
                 [0, 0, 0],
@@ -105,14 +170,17 @@ MONOCHROMATIC_GRAPH_TEST_CASES = [
         ),
         np.array([5, 5, 5], dtype=int),
         False,
+        False,
     ),
     (
         1,
         3,
         2,
         np.zeros((2, 1), dtype=int),
+        np.zeros((2, 1), dtype=int),
         np.zeros((1, 1), dtype=int),
         np.zeros((0,), dtype=int),
+        False,
         False,
     ),
     (
@@ -120,8 +188,10 @@ MONOCHROMATIC_GRAPH_TEST_CASES = [
         3,
         3,
         np.zeros((2, 1), dtype=int),
+        np.zeros((2, 1), dtype=int),
         np.zeros((1, 1), dtype=int),
         np.zeros((0,), dtype=int),
+        False,
         False,
     ),
 ]
