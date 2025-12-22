@@ -5,24 +5,21 @@ This file is used for testing the functionalities from the `rl_graph_theory.grap
 import numpy as np
 import pytest
 
-from rl_graph_theory.graphs.graph import (
-    FlattenedOrdering,
-    Graph,
-    GraphBatch,
-    BitmaskType,
-)
+from rl_graph_theory.graphs.graph import Graph
+from rl_graph_theory.graphs.graph_batch import GraphBatch
+from rl_graph_theory.graphs.graph_format import BitmaskType, FlattenedOrdering
 
 from .graph_test_cases import (
     GRAPH_BATCH_TEST_CASES_BASIC,
-    GRAPH_BATCH_TEST_CASES_LOOPS,
     GRAPH_BATCH_TEST_CASES_DIRECTED,
     GRAPH_BATCH_TEST_CASES_DIRECTED_LOOPS,
     GRAPH_BATCH_TEST_CASES_LARGE,
-    GRAPH_TEST_CASES_LARGE,
+    GRAPH_BATCH_TEST_CASES_LOOPS,
     GRAPH_TEST_CASES_BASIC,
-    GRAPH_TEST_CASES_LOOPS,
     GRAPH_TEST_CASES_DIRECTED,
     GRAPH_TEST_CASES_DIRECTED_LOOPS,
+    GRAPH_TEST_CASES_LARGE,
+    GRAPH_TEST_CASES_LOOPS,
 )
 from .utils import verify_instantiated_graph, verify_instantiated_graph_batch
 

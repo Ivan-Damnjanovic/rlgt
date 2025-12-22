@@ -42,30 +42,38 @@ from .utils import verify_instantiated_graph
 
 
 @pytest.mark.parametrize(
-    "order, edge_colors, selected_edge_color, bitmask, adjacency_matrix, flattened, allow_loops",
+    "order, edge_colors, selected_edge_color, bitmask_in, bitmask_out, adjacency_matrix, flattened, is_directed, allow_loops",
     MONOCHROMATIC_GRAPH_TEST_CASES,
 )
 def test_monochromatic_graph(
     order: int,
     edge_colors: int,
     selected_edge_color: int,
-    bitmask: np.ndarray,
+    bitmask_in: np.ndarray,
+    bitmask_out: np.ndarray,
     adjacency_matrix: np.ndarray,
     flattened: np.ndarray,
+    is_directed: bool,
     allow_loops: bool,
 ):
     for graph_format in GraphFormat:
         verify_instantiated_graph(
             constructor=lambda: MonochromaticGraph(
-                graph_format, order, edge_colors, selected_edge_color, allow_loops
+                graph_format=graph_format,
+                order=order,
+                edge_colors=edge_colors,
+                selected_edge_color=selected_edge_color,
+                is_directed=is_directed,
+                allow_loops=allow_loops,
             ),
             edge_colors=edge_colors,
             order=order,
-            bitmask_in=bitmask,
-            bitmask_out=bitmask,
+            bitmask_in=bitmask_in,
+            bitmask_out=bitmask_out,
             adjacency_matrix=adjacency_matrix,
             flattened_clockwise=flattened,
             flattened_row_major=flattened,
+            is_directed=is_directed,
             allow_loops=allow_loops,
         )
 

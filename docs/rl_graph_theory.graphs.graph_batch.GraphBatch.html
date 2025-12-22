@@ -1,0 +1,1298 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "DTD/xhtml1-strict.dtd">
+<html>
+  
+
+  <head>
+    
+    <title>rl_graph_theory.graphs.graph_batch.GraphBatch</title>
+    <meta name="generator" content="pydoctor 25.10.1"> 
+        
+    </meta>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1" />
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="apidocs.css" />
+    <link rel="stylesheet" type="text/css" href="extra.css" />
+    
+</head>
+
+  <body>
+
+    
+
+    <nav class="navbar navbar-default mainnavbar">
+      
+  
+  <div class="container-fluid">
+
+
+    <div class="navbar-header">
+      
+      <div class="navlinks">
+        <span class="navbar-brand">
+          rl-graph-theory <a href="index.html">API Documentation</a>
+        </span>
+
+        <a href="moduleIndex.html">
+          Modules
+        </a>
+
+        <a href="classIndex.html">
+          Classes
+        </a>
+
+        <a href="nameIndex.html">
+          Names
+        </a>
+
+        <div id="search-box-container">
+          <div class="input-group">
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
+            <span class="input-group-btn">
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="apidocs-help-button" title="Help" href="apidocs-help.html"><img src="fonts/info.svg" alt="Help" /></a>
+            </span>
+          </div>
+        </div>
+
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        
+        <div id="search-buttons">
+          <span class="label label-default" id="search-docstrings-button">
+          <label class="checkbox-inline">
+            <input type="checkbox" id="toggle-search-in-docstrings-checkbox" value="false" onclick="toggleSearchInDocstrings()">
+              search in docstrings
+            </input>
+          </label>
+          </span>
+          
+        </div>
+        
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div id="search-status"> </div>
+
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
+
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 10px;">
+          <p>For more information on the search, visit the <a href="apidocs-help.html#rst-search">help page</a>.</p>
+        </div>
+      </div>
+
+    </div>
+
+
+  </div>
+</nav>
+    
+    <div class="container-fluid">
+
+      <!-- Side navigation -->
+      <div class="sidebarcontainer" style="display: none;">
+        
+        <div class="sidebar"><nav class="sidebar">
+  
+
+  <div>
+
+      <div class="thingTitle">
+        <span>Class</span>
+        <code class="thisobject"><a href="rl_graph_theory.graphs.graph_batch.GraphBatch.html" class="internal-link" title="This class"><wbr></wbr>Graph<wbr></wbr>Batch</a></code> 
+      </div>
+      
+      <div>
+        
+
+        
+         
+
+        
+        
+
+        <div class="childrenKindTitle">Methods</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#from_adjacency_matrix" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch.from_adjacency_matrix">from<wbr></wbr>_adjacency<wbr></wbr>_matrix</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#from_bitmask" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch.from_bitmask">from<wbr></wbr>_bitmask</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#from_flattened" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch.from_flattened">from<wbr></wbr>_flattened</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#__init__" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch.__init__">__init__</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        
+         
+
+        <div class="childrenKindTitle">Attributes</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#adjacency_matrix" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch.adjacency_matrix">adjacency<wbr></wbr>_matrix</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#allow_loops" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch.allow_loops">allow<wbr></wbr>_loops</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#batch_size" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch.batch_size">batch<wbr></wbr>_size</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#bitmask_in" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch.bitmask_in">bitmask<wbr></wbr>_in</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#bitmask_out" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch.bitmask_out">bitmask<wbr></wbr>_out</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#edge_colors" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch.edge_colors">edge<wbr></wbr>_colors</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#flattened_clockwise" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch.flattened_clockwise">flattened<wbr></wbr>_clockwise</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#flattened_row_major" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch.flattened_row_major">flattened<wbr></wbr>_row<wbr></wbr>_major</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#is_directed" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch.is_directed">is<wbr></wbr>_directed</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#order" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch.order">order</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#__adjacency_matrix" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch.__adjacency_matrix">__adjacency<wbr></wbr>_matrix</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#__allow_loops" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch.__allow_loops">__allow<wbr></wbr>_loops</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#__batch_size" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch.__batch_size">__batch<wbr></wbr>_size</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#__bitmask_in" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch.__bitmask_in">__bitmask<wbr></wbr>_in</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#__bitmask_out" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch.__bitmask_out">__bitmask<wbr></wbr>_out</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#__edge_colors" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch.__edge_colors">__edge<wbr></wbr>_colors</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#__flattened_clockwise" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch.__flattened_clockwise">__flattened<wbr></wbr>_clockwise</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#__flattened_row_major" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch.__flattened_row_major">__flattened<wbr></wbr>_row<wbr></wbr>_major</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#__is_directed" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch.__is_directed">__is<wbr></wbr>_directed</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#__order" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch.__order">__order</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        
+         
+        
+      </div>
+  </div><div>
+
+      <div class="thingTitle">
+        <span>Module</span>
+        <code><a href="rl_graph_theory.graphs.graph_batch.html" class="internal-link" title="The parent of this class">graph<wbr></wbr>_batch</a></code> 
+      </div>
+      
+      <div>
+        
+
+        
+         
+
+        <div class="childrenKindTitle">Classes</div>
+        <ul>
+    
+    <li class=" thisobject">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="rl_graph_theory.graphs.graph_batch.GraphBatch.html" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch"><wbr></wbr>Graph<wbr></wbr>Batch</a></code>
+            </div>
+        
+
+    </li>
+</ul>
+
+        
+         
+
+        
+         
+
+        
+         
+
+        
+         
+        
+      </div>
+  </div>
+
+</nav>
+        </div>
+        <div id="collapse-sidebar">
+          <a class="btn btn-link" onclick="toggleSideBarCollapse()" title="Toggle Sidebar Collapse">
+          </a>
+        </div> 
+        <script src="sidebartoggle.js" type="text/javascript"></script>
+       
+      </div>
+
+      <main class="">
+        
+
+        
+
+        <div class="page-header">
+          <h1 class="class"><code><code><a href="index.html" class="internal-link">rl_graph_theory</a></code><wbr></wbr>.<code><a href="rl_graph_theory.graphs.html" class="internal-link" title="rl_graph_theory.graphs">graphs</a></code><wbr></wbr>.<code><a href="rl_graph_theory.graphs.graph_batch.html" class="internal-link" title="rl_graph_theory.graphs.graph_batch">graph_batch</a></code><wbr></wbr>.<code><a href="rl_graph_theory.graphs.graph_batch.GraphBatch.html" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch">GraphBatch</a></code></code></h1>
+          <div id="show-private">
+            <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
+          </div>
+        </div>
+
+        <div class="categoryHeader">
+          class documentation
+        </div>
+
+        <div class="extrasDocstring">
+          <p class="class-signature"><code><span class="py-keyword">class</span> <span class="py-defname">GraphBatch</span>:</code></p><p>Constructors: <code><a href="#from_adjacency_matrix" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch.from_adjacency_matrix">GraphBatch.from_adjacency_matrix(adjacency_matrix, edge_colors, is_directed, allow_loops)</a></code>, <code><a href="#from_bitmask" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch.from_bitmask">GraphBatch.from_bitmask(bitmask, bitmask_type, edge_colors, is_directed, ...)</a></code>, <code><a href="#from_flattened" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch.from_flattened">GraphBatch.from_flattened(flattened, flattened_ordering, edge_colors, is_directed, ...)</a></code>, <code><a href="#__init__" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch.__init__">GraphBatch(graph_format, bitmask_out, bitmask_in, adjacency_matrix, ...)</a></code></p><p><a href="classIndex.html#rl_graph_theory.graphs.graph_batch.GraphBatch">View In Hierarchy</a></p>
+        </div>
+
+        <div class="moduleDocstring">
+          <div><p>This class encapsulates the concept of a batch of $k$-edge-colored looped complete graphs of
+the same order, with $k$ being at least two. The graphs in the batch must be consistent: they
+should all be directed or all be undirected, and they should either all allow loops or none.
+Therefore, the batch of graphs can be represented as a quintuple <tt class="rst-docutils rst-literal">(edge_colors, is_directed,
+allow_loops, graph_format, format_representation)</tt>, analogously to the <code><a href="rl_graph_theory.graphs.graph.Graph.html" class="internal-link" title="rl_graph_theory.graphs.graph.Graph">Graph</a></code> class. The
+representation and initialization is done in the same way as in the <code><a href="rl_graph_theory.graphs.graph.Graph.html" class="internal-link" title="rl_graph_theory.graphs.graph.Graph">Graph</a></code> class, the only
+difference being that all the <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> objects used are of one dimension higher. More
+precisely, if <tt class="rst-docutils rst-literal">a</tt> is the <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> used to describe the structure of a given batch of
+graphs, then <tt class="rst-docutils rst-literal">a[i]</tt> is the structural representation of the $i$-th graph in the batch in the
+corresponding format.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Note</td></tr><tr><td colspan="2">Although available, the constructor of this class is not intended to be directly used.
+Instead, the instances should be initialized by using the three class methods
+<code><a href="#from_bitmask" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch.from_bitmask">from_bitmask</a></code>, <code><a href="#from_adjacency_matrix" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch.from_adjacency_matrix">from_adjacency_matrix</a></code> and <code><a href="#from_flattened" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch.from_flattened">from_flattened</a></code>.</td></tr></table></div>
+        </div>
+
+        <div id="split-tables">
+          <table class="children sortable" id="id24">
+  
+  
+  <tr class="classmethod">
+    
+    <td>Class Method</td>
+    <td><code><a href="#from_adjacency_matrix" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch.from_adjacency_matrix">from<wbr></wbr>_adjacency<wbr></wbr>_matrix</a></code></td>
+    <td>This class method initializes a <code><a href="rl_graph_theory.graphs.graph_batch.GraphBatch.html" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch">GraphBatch</a></code> object by using the adjacency matrix format (<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#ADJACENCY_MATRIX" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.ADJACENCY_MATRIX">GraphFormat.ADJACENCY_MATRIX</a></code>).</td>
+  </tr><tr class="classmethod">
+    
+    <td>Class Method</td>
+    <td><code><a href="#from_bitmask" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch.from_bitmask">from<wbr></wbr>_bitmask</a></code></td>
+    <td>This class method initializes a <code><a href="rl_graph_theory.graphs.graph_batch.GraphBatch.html" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch">GraphBatch</a></code> object by using the (potentially reduced) bitmask format for the out-neighborhoods (<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#BITMASK_OUT" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.BITMASK_OUT">GraphFormat.BITMASK_OUT</a></code>) or the in-neighborhoods (<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#BITMASK_IN" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.BITMASK_IN">GraphFormat.BITMASK_IN</a></code>).</td>
+  </tr><tr class="classmethod">
+    
+    <td>Class Method</td>
+    <td><code><a href="#from_flattened" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch.from_flattened">from<wbr></wbr>_flattened</a></code></td>
+    <td>This class method initializes a <code><a href="rl_graph_theory.graphs.graph_batch.GraphBatch.html" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch">GraphBatch</a></code> object by using either the flattened row-major format (<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#FLATTENED_ROW_MAJOR" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.FLATTENED_ROW_MAJOR">GraphFormat.FLATTENED_ROW_MAJOR</a></code>) or the flattened clockwise format (<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#FLATTENED_CLOCKWISE" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.FLATTENED_CLOCKWISE">GraphFormat.FLATTENED_CLOCKWISE</a></code>).</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#__init__" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch.__init__">__init__</a></code></td>
+    <td>This constructor initializes an instance using the chosen graph format. In other words, one of the five graph formats is selected, and then the corresponding <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> is used to initialize a batch of graphs with respect to this format.</td>
+  </tr><tr class="property">
+    
+    <td>Property</td>
+    <td><code><a href="#adjacency_matrix" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch.adjacency_matrix">adjacency<wbr></wbr>_matrix</a></code></td>
+    <td>This property returns the <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> that represents the given batch of graphs in the adjacency matrix format (<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#ADJACENCY_MATRIX" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.ADJACENCY_MATRIX">GraphFormat.ADJACENCY_MATRIX</a></code>).</td>
+  </tr><tr class="property">
+    
+    <td>Property</td>
+    <td><code><a href="#allow_loops" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch.allow_loops">allow<wbr></wbr>_loops</a></code></td>
+    <td>This property returns the <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> that determines whether loops are allowed in each of the graphs in the given batch. The value <code><a href="https://docs.python.org/3/library/constants.html#True" class="intersphinx-link">True</a></code> indicates that loops are allowed.</td>
+  </tr><tr class="property">
+    
+    <td>Property</td>
+    <td><code><a href="#batch_size" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch.batch_size">batch<wbr></wbr>_size</a></code></td>
+    <td>This property returns the batch size of the given batch of graphs, i.e., the number of graphs in the batch.</td>
+  </tr><tr class="property">
+    
+    <td>Property</td>
+    <td><code><a href="#bitmask_in" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch.bitmask_in">bitmask<wbr></wbr>_in</a></code></td>
+    <td>This property returns the <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> that represents the given batch of graphs in the bitmask format for the in-neighborhoods (<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#BITMASK_IN" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.BITMASK_IN">GraphFormat.BITMASK_IN</a></code>).</td>
+  </tr><tr class="property">
+    
+    <td>Property</td>
+    <td><code><a href="#bitmask_out" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch.bitmask_out">bitmask<wbr></wbr>_out</a></code></td>
+    <td>This property returns the <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> that represents the given batch of graphs in the bitmask format for the out-neighborhoods (<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#BITMASK_OUT" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.BITMASK_OUT">GraphFormat.BITMASK_OUT</a></code>).</td>
+  </tr><tr class="property">
+    
+    <td>Property</td>
+    <td><code><a href="#edge_colors" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch.edge_colors">edge<wbr></wbr>_colors</a></code></td>
+    <td>This property returns the number of proper edge colors for the given batch of graphs, i.e., $k$, as an <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code>.</td>
+  </tr><tr class="property">
+    
+    <td>Property</td>
+    <td><code><a href="#flattened_clockwise" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch.flattened_clockwise">flattened<wbr></wbr>_clockwise</a></code></td>
+    <td>This property returns the <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> that represents the given batch of graphs in the flattened clockwise format (<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#FLATTENED_CLOCKWISE" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.FLATTENED_CLOCKWISE">GraphFormat.FLATTENED_CLOCKWISE</a></code>).</td>
+  </tr><tr class="property">
+    
+    <td>Property</td>
+    <td><code><a href="#flattened_row_major" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch.flattened_row_major">flattened<wbr></wbr>_row<wbr></wbr>_major</a></code></td>
+    <td>This property returns the <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> that represents the given batch of graphs in the flattened row-major format (<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#FLATTENED_ROW_MAJOR" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.FLATTENED_ROW_MAJOR">GraphFormat.FLATTENED_ROW_MAJOR</a></code>).</td>
+  </tr><tr class="property">
+    
+    <td>Property</td>
+    <td><code><a href="#is_directed" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch.is_directed">is<wbr></wbr>_directed</a></code></td>
+    <td>This property returns the <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> that determines whether each of the graphs in the given batch is directed. The value <code><a href="https://docs.python.org/3/library/constants.html#True" class="intersphinx-link">True</a></code> indicates that the graphs are directed.</td>
+  </tr><tr class="property">
+    
+    <td>Property</td>
+    <td><code><a href="#order" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch.order">order</a></code></td>
+    <td>This property returns the order of all the graphs in the given batch, as an <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code>.</td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#__adjacency_matrix" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch.__adjacency_matrix">__adjacency<wbr></wbr>_matrix</a></code></td>
+    <td>The <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> from the adjacency matrix format (<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#ADJACENCY_MATRIX" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.ADJACENCY_MATRIX">GraphFormat.ADJACENCY_MATRIX</a></code>) structural representation of the given batch of graphs, if it was used to initialize the batch of graphs or computed afterwards, and otherwise, ...</td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#__allow_loops" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch.__allow_loops">__allow<wbr></wbr>_loops</a></code></td>
+    <td>A boolean that indicates whether each of the graphs in the given batch is allowed to have loops (if loops are not allowed, then all the loops are removed from the considered complete graphs and they simply do not exist).</td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#__batch_size" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch.__batch_size">__batch<wbr></wbr>_size</a></code></td>
+    <td>A positive integer that determines the number of graphs in the given batch.</td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#__bitmask_in" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch.__bitmask_in">__bitmask<wbr></wbr>_in</a></code></td>
+    <td>The <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> from the in-neighborhoods bitmask format (<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#BITMASK_IN" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.BITMASK_IN">GraphFormat.BITMASK_IN</a></code>) structural representation of the given batch of graphs, if it was used to initialize the batch of graphs or computed afterwards, and otherwise, ...</td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#__bitmask_out" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch.__bitmask_out">__bitmask<wbr></wbr>_out</a></code></td>
+    <td>The <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> from the out-neighborhoods bitmask format (<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#BITMASK_OUT" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.BITMASK_OUT">GraphFormat.BITMASK_OUT</a></code>) structural representation of the given batch of graphs, if it was used to initialize the batch of graphs or computed afterwards, and otherwise, ...</td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#__edge_colors" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch.__edge_colors">__edge<wbr></wbr>_colors</a></code></td>
+    <td>The number of proper edge colors, i.e., $k$.</td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#__flattened_clockwise" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch.__flattened_clockwise">__flattened<wbr></wbr>_clockwise</a></code></td>
+    <td>The <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> from the flattened clockwise format (<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#FLATTENED_CLOCKWISE" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.FLATTENED_CLOCKWISE">GraphFormat.FLATTENED_CLOCKWISE</a></code>) structural representation of the given batch of graphs, if it was used to initialize the batch of graphs or computed afterwards, and otherwise, ...</td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#__flattened_row_major" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch.__flattened_row_major">__flattened<wbr></wbr>_row<wbr></wbr>_major</a></code></td>
+    <td>The <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> from the flattened row-major format (<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#FLATTENED_ROW_MAJOR" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.FLATTENED_ROW_MAJOR">GraphFormat.FLATTENED_ROW_MAJOR</a></code>) structural representation of the given batch of graphs, if it was used to initialize the batch of graphs or computed afterwards, and otherwise, ...</td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#__is_directed" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch.__is_directed">__is<wbr></wbr>_directed</a></code></td>
+    <td>A boolean that indicates whether each of the graphs in the given batch is a $k$-edge-colored looped complete directed graph or a $k$-edge-colored looped complete undirected graph.</td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#__order" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch.__order">__order</a></code></td>
+    <td>The graph order, i.e., the number of vertices of each of the graphs in the batch.</td>
+  </tr>
+</table>
+          
+
+            
+        </div>
+
+        <div id="child-list">
+          <div class="baseclassmethod">
+  
+  
+  <a name="rl_graph_theory.graphs.graph_batch.GraphBatch.from_adjacency_matrix">
+    
+  </a>
+  <a name="from_adjacency_matrix">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <div><span class="decorator">@<a href="https://docs.python.org/3/library/functions.html#classmethod" class="intersphinx-link">classmethod</a><br /></span></div>
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">from_adjacency_matrix</span><span class="function-signature long-signature">(<span class="rst-sig-param"><span class="rst-undocumented">cls</span>, </span><span class="rst-sig-param">adjacency_matrix: <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code>, </span><span class="rst-sig-param">edge_colors: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> = 2, </span><span class="rst-sig-param">is_directed: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> = <a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a>, </span><span class="rst-sig-param">allow_loops: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> = <a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a></span>) -&gt; <code><a href="rl_graph_theory.graphs.graph_batch.GraphBatch.html" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch">GraphBatch</a></code>:</span>
+    
+    <a class="headerLink" href="#from_adjacency_matrix" title="rl_graph_theory.graphs.graph_batch.GraphBatch.from_adjacency_matrix">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>This class method initializes a <code><a href="rl_graph_theory.graphs.graph_batch.GraphBatch.html" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch">GraphBatch</a></code> object by using the adjacency matrix format
+(<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#ADJACENCY_MATRIX" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.ADJACENCY_MATRIX">GraphFormat.ADJACENCY_MATRIX</a></code>).</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">adjacency<wbr></wbr>_matrix:</span><code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code></td><td class="fieldArgDesc">The <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> that describes the adjacency matrix format
+(<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#ADJACENCY_MATRIX" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.ADJACENCY_MATRIX">GraphFormat.ADJACENCY_MATRIX</a></code>) of the batch of graphs that should be initialized.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">edge<wbr></wbr>_colors:</span><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></td><td class="fieldArgDesc">A positive integer (not below two) that represents the number of proper
+edge colors, i.e., $k$. The default value is two.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">is<wbr></wbr>_directed:</span><code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code></td><td class="fieldArgDesc">A boolean that indicates whether each of the graphs in the given batch
+is a $k$-edge-colored looped complete directed graph or a $k$-edge-colored looped
+complete undirected graph. The default value is <code><a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a></code>, i.e., the graphs are
+undirected by default.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">allow<wbr></wbr>_loops:</span><code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code></td><td class="fieldArgDesc">A boolean that indicates whether each of the graphs in the given batch
+is allowed to have loops (if loops are not allowed, then all the loops are removed from
+the considered complete graphs and they simply do not exist). The default value is
+<code><a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a></code>, i.e., the graphs are not allowed to have loops by default.</td></tr></table><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="rl_graph_theory.graphs.graph_batch.GraphBatch.html" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch">GraphBatch</a></code></td><td class="fieldArgDesc">The initialized <code><a href="rl_graph_theory.graphs.graph_batch.GraphBatch.html" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch">GraphBatch</a></code> object.</td></tr></table></div>
+  </div>
+</div><div class="baseclassmethod">
+  
+  
+  <a name="rl_graph_theory.graphs.graph_batch.GraphBatch.from_bitmask">
+    
+  </a>
+  <a name="from_bitmask">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <div><span class="decorator">@<a href="https://docs.python.org/3/library/functions.html#classmethod" class="intersphinx-link">classmethod</a><br /></span></div>
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">from_bitmask</span><span class="function-signature long-signature">(<span class="rst-sig-param"><span class="rst-undocumented">cls</span>, </span><span class="rst-sig-param">bitmask: <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code>, </span><span class="rst-sig-param">bitmask_type: <code><a href="rl_graph_theory.graphs.graph_format.BitmaskType.html" class="internal-link" title="rl_graph_theory.graphs.graph_format.BitmaskType">BitmaskType</a></code> = <a href="rl_graph_theory.graphs.graph_format.BitmaskType.html#OUT_NEIGHBORS" class="internal-link" title="rl_graph_theory.graphs.graph_format.BitmaskType.OUT_NEIGHBORS">BitmaskType.OUT_NEIGHBORS</a>, </span><span class="rst-sig-param">edge_colors: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> = 2, </span><span class="rst-sig-param">is_directed: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> = <a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a>, </span><span class="rst-sig-param">allow_loops: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> = <a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a></span>) -&gt; <code><a href="rl_graph_theory.graphs.graph_batch.GraphBatch.html" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch">GraphBatch</a></code>:</span>
+    
+    <a class="headerLink" href="#from_bitmask" title="rl_graph_theory.graphs.graph_batch.GraphBatch.from_bitmask">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>This class method initializes a <code><a href="rl_graph_theory.graphs.graph_batch.GraphBatch.html" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch">GraphBatch</a></code> object by using the (potentially reduced)
+bitmask format for the out-neighborhoods (<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#BITMASK_OUT" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.BITMASK_OUT">GraphFormat.BITMASK_OUT</a></code>) or the
+in-neighborhoods (<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#BITMASK_IN" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.BITMASK_IN">GraphFormat.BITMASK_IN</a></code>).</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">bitmask:</span><code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code></td><td class="fieldArgDesc">The <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> that describes the (potentially reduced) bitmask format
+for the out-neighborhoods (<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#BITMASK_OUT" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.BITMASK_OUT">GraphFormat.BITMASK_OUT</a></code>) or the in-neighborhoods
+(<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#BITMASK_IN" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.BITMASK_IN">GraphFormat.BITMASK_IN</a></code>) of the batch of graphs that should be initialized.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">bitmask<wbr></wbr>_type:</span><code><a href="rl_graph_theory.graphs.graph_format.BitmaskType.html" class="internal-link" title="rl_graph_theory.graphs.graph_format.BitmaskType">BitmaskType</a></code></td><td class="fieldArgDesc">An item of the <code><a href="rl_graph_theory.graphs.graph_format.BitmaskType.html" class="internal-link" title="rl_graph_theory.graphs.graph_format.BitmaskType">BitmaskType</a></code> enumeration that determines whether the
+bitmask format for the out-neighborhoods should be used or the bitmask format for the
+in-neighborhoods. The default value is <code><a href="rl_graph_theory.graphs.graph_format.BitmaskType.html#OUT_NEIGHBORS" class="internal-link" title="rl_graph_theory.graphs.graph_format.BitmaskType.OUT_NEIGHBORS">BitmaskType.OUT_NEIGHBORS</a></code>, i.e., the bitmask
+format for the out-neighborhoods is used by default.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">edge<wbr></wbr>_colors:</span><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></td><td class="fieldArgDesc">A positive integer (not below two) that represents the number of proper
+edge colors, i.e., $k$. The default value is two.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">is<wbr></wbr>_directed:</span><code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code></td><td class="fieldArgDesc">A boolean that indicates whether each of the graphs in the given batch
+is a $k$-edge-colored looped complete directed graph or a $k$-edge-colored looped
+complete undirected graph. The default value is <code><a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a></code>, i.e., the graphs are
+undirected by default.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">allow<wbr></wbr>_loops:</span><code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code></td><td class="fieldArgDesc">A boolean that indicates whether each of the graphs in the given batch
+is allowed to have loops (if loops are not allowed, then all the loops are removed from
+the considered complete graphs and they simply do not exist). The default value is
+<code><a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a></code>, i.e., the graphs are not allowed to have loops by default.</td></tr></table><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="rl_graph_theory.graphs.graph_batch.GraphBatch.html" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch">GraphBatch</a></code></td><td class="fieldArgDesc">The initialized <code><a href="rl_graph_theory.graphs.graph_batch.GraphBatch.html" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch">GraphBatch</a></code> object.</td></tr></table></div>
+  </div>
+</div><div class="baseclassmethod">
+  
+  
+  <a name="rl_graph_theory.graphs.graph_batch.GraphBatch.from_flattened">
+    
+  </a>
+  <a name="from_flattened">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <div><span class="decorator">@<a href="https://docs.python.org/3/library/functions.html#classmethod" class="intersphinx-link">classmethod</a><br /></span></div>
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">from_flattened</span><span class="function-signature long-signature">(<span class="rst-sig-param"><span class="rst-undocumented">cls</span>, </span><span class="rst-sig-param">flattened: <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code>, </span><span class="rst-sig-param">flattened_ordering: <code><a href="rl_graph_theory.graphs.graph_format.FlattenedOrdering.html" class="internal-link" title="rl_graph_theory.graphs.graph_format.FlattenedOrdering">FlattenedOrdering</a></code> = <a href="rl_graph_theory.graphs.graph_format.FlattenedOrdering.html#ROW_MAJOR" class="internal-link" title="rl_graph_theory.graphs.graph_format.FlattenedOrdering.ROW_MAJOR">FlattenedOrdering.ROW_MAJOR</a>, </span><span class="rst-sig-param">edge_colors: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> = 2, </span><span class="rst-sig-param">is_directed: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> = <a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a>, </span><span class="rst-sig-param">allow_loops: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> = <a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a></span>) -&gt; <code><a href="rl_graph_theory.graphs.graph_batch.GraphBatch.html" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch">GraphBatch</a></code>:</span>
+    
+    <a class="headerLink" href="#from_flattened" title="rl_graph_theory.graphs.graph_batch.GraphBatch.from_flattened">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>This class method initializes a <code><a href="rl_graph_theory.graphs.graph_batch.GraphBatch.html" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch">GraphBatch</a></code> object by using either the flattened row-major
+format (<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#FLATTENED_ROW_MAJOR" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.FLATTENED_ROW_MAJOR">GraphFormat.FLATTENED_ROW_MAJOR</a></code>) or the flattened clockwise format
+(<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#FLATTENED_CLOCKWISE" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.FLATTENED_CLOCKWISE">GraphFormat.FLATTENED_CLOCKWISE</a></code>).</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">flattened:</span><code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code></td><td class="fieldArgDesc">The <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> that describes the flattened row-major format
+(<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#FLATTENED_ROW_MAJOR" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.FLATTENED_ROW_MAJOR">GraphFormat.FLATTENED_ROW_MAJOR</a></code>) or the flattened clockwise format
+(<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#FLATTENED_CLOCKWISE" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.FLATTENED_CLOCKWISE">GraphFormat.FLATTENED_CLOCKWISE</a></code>) of the batch of graphs that should be initialized.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">flattened<wbr></wbr>_ordering:</span><code><a href="rl_graph_theory.graphs.graph_format.FlattenedOrdering.html" class="internal-link" title="rl_graph_theory.graphs.graph_format.FlattenedOrdering">FlattenedOrdering</a></code></td><td class="fieldArgDesc">An item of the <code><a href="rl_graph_theory.graphs.graph_format.FlattenedOrdering.html" class="internal-link" title="rl_graph_theory.graphs.graph_format.FlattenedOrdering">FlattenedOrdering</a></code> enumeration that determines
+whether the flattened row-major format should be used or the flattened clockwise
+format. The default value is <code><a href="rl_graph_theory.graphs.graph_format.FlattenedOrdering.html#ROW_MAJOR" class="internal-link" title="rl_graph_theory.graphs.graph_format.FlattenedOrdering.ROW_MAJOR">FlattenedOrdering.ROW_MAJOR</a></code>, i.e., the flattened
+row-major format is used by default.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">edge<wbr></wbr>_colors:</span><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></td><td class="fieldArgDesc">A positive integer (not below two) that represents the number of proper
+edge colors, i.e., $k$. The default value is two.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">is<wbr></wbr>_directed:</span><code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code></td><td class="fieldArgDesc">A boolean that indicates whether each of the graphs in the given batch
+is a $k$-edge-colored looped complete directed graph or a $k$-edge-colored looped
+complete undirected graph. The default value is <code><a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a></code>, i.e., the graphs are
+undirected by default.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">allow<wbr></wbr>_loops:</span><code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code></td><td class="fieldArgDesc">A boolean that indicates whether each of the graphs in the given batch
+is allowed to have loops (if loops are not allowed, then all the loops are removed from
+the considered complete graphs and they simply do not exist). The default value is
+<code><a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a></code>, i.e., the graphs are not allowed to have loops by default.</td></tr></table><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="rl_graph_theory.graphs.graph_batch.GraphBatch.html" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch">GraphBatch</a></code></td><td class="fieldArgDesc">The initialized <code><a href="rl_graph_theory.graphs.graph_batch.GraphBatch.html" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch">GraphBatch</a></code> object.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="rl_graph_theory.graphs.graph_batch.GraphBatch.__init__">
+    
+  </a>
+  <a name="__init__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">__init__</span><span class="function-signature long-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">graph_format: <code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat">GraphFormat</a></code>, </span><span class="rst-sig-param">bitmask_out: <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> = <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>, </span><span class="rst-sig-param">bitmask_in: <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> = <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>, </span><span class="rst-sig-param">adjacency_matrix: <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> = <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>, </span><span class="rst-sig-param">flattened_row_major: <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> = <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>, </span><span class="rst-sig-param">flattened_clockwise: <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> = <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>, </span><span class="rst-sig-param">edge_colors: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> = 2, </span><span class="rst-sig-param">is_directed: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> = <a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a>, </span><span class="rst-sig-param">allow_loops: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> = <a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a></span>):</span>
+    
+    <a class="headerLink" href="#__init__" title="rl_graph_theory.graphs.graph_batch.GraphBatch.__init__">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>This constructor initializes an instance using the chosen graph format. In other words,
+one of the five graph formats is selected, and then the corresponding <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> is used
+to initialize a batch of graphs with respect to this format.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">graph<wbr></wbr>_format:</span><code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat">GraphFormat</a></code></td><td class="fieldArgDesc">The selected graph format that is used to initialize the batch of
+graphs, given as an item of the <code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat">GraphFormat</a></code> enumeration.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">bitmask<wbr></wbr>_out:</span><code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code></td><td class="fieldArgDesc">Either <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, or the <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> that describes the given batch of
+graphs in the bitmask format for the out-neighborhoods (<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#BITMASK_OUT" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.BITMASK_OUT">GraphFormat.BITMASK_OUT</a></code>). If
+the argument <tt class="rst-docutils rst-literal">graph_format</tt> equals <code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#BITMASK_OUT" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.BITMASK_OUT">GraphFormat.BITMASK_OUT</a></code>, then this argument
+cannot be <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, and otherwise, it is ignored.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">bitmask<wbr></wbr>_in:</span><code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code></td><td class="fieldArgDesc">Either <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, or the <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> that describes the given batch of
+graphs in the bitmask format for the in-neighborhoods (<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#BITMASK_IN" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.BITMASK_IN">GraphFormat.BITMASK_IN</a></code>). If
+the argument <tt class="rst-docutils rst-literal">graph_format</tt> equals <code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#BITMASK_IN" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.BITMASK_IN">GraphFormat.BITMASK_IN</a></code>, then this argument
+cannot be <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, and otherwise, it is ignored.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">adjacency<wbr></wbr>_matrix:</span><code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code></td><td class="fieldArgDesc">Either <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, or the <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> that describes the given batch
+of graphs in the adjacency matrix format (<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#ADJACENCY_MATRIX" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.ADJACENCY_MATRIX">GraphFormat.ADJACENCY_MATRIX</a></code>). If the
+argument <tt class="rst-docutils rst-literal">graph_format</tt> equals <code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#ADJACENCY_MATRIX" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.ADJACENCY_MATRIX">GraphFormat.ADJACENCY_MATRIX</a></code>, then this argument
+cannot be <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, and otherwise, it is ignored.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">flattened<wbr></wbr>_row<wbr></wbr>_major:</span><code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code></td><td class="fieldArgDesc">Either <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, or the <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> that describes the given
+batch of graphs in the flattened row-major format (<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#FLATTENED_ROW_MAJOR" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.FLATTENED_ROW_MAJOR">GraphFormat.FLATTENED_ROW_MAJOR</a></code>).
+If the argument <tt class="rst-docutils rst-literal">graph_format</tt> equals <code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#FLATTENED_ROW_MAJOR" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.FLATTENED_ROW_MAJOR">GraphFormat.FLATTENED_ROW_MAJOR</a></code>, then this
+argument cannot be <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, and otherwise, it is ignored.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">flattened<wbr></wbr>_clockwise:</span><code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code></td><td class="fieldArgDesc">Either <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, or the <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> that describes the given
+batch of graphs in the flattened clockwise format (<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#FLATTENED_CLOCKWISE" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.FLATTENED_CLOCKWISE">GraphFormat.FLATTENED_CLOCKWISE</a></code>).
+If the argument <tt class="rst-docutils rst-literal">graph_format</tt> equals <code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#FLATTENED_CLOCKWISE" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.FLATTENED_CLOCKWISE">GraphFormat.FLATTENED_CLOCKWISE</a></code>, then this
+argument cannot be <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, and otherwise, it is ignored.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">edge<wbr></wbr>_colors:</span><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></td><td class="fieldArgDesc">A positive integer (not below two) that represents the number of
+proper edge colors, i.e., $k$. The default value is two.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">is<wbr></wbr>_directed:</span><code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code></td><td class="fieldArgDesc">A boolean that indicates whether each of the graphs in the given batch
+is a $k$-edge-colored looped complete directed graph or a $k$-edge-colored looped
+complete undirected graph. The default value is <code><a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a></code>, i.e., the graphs are
+undirected by default.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">allow<wbr></wbr>_loops:</span><code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code></td><td class="fieldArgDesc">A boolean that indicates whether each of the graphs in the given batch
+is allowed to have loops (if loops are not allowed, then all the loops are removed from
+the considered complete graphs and they simply do not exist). The default value is
+<code><a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a></code>, i.e., the graphs are not allowed to have loops by default.</td></tr></table><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Note</td></tr><tr><td colspan="2">This constructor is not intended to be directly used. The class methods
+<code><a href="#from_bitmask" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch.from_bitmask">from_bitmask</a></code>, <code><a href="#from_adjacency_matrix" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch.from_adjacency_matrix">from_adjacency_matrix</a></code> and <code><a href="#from_flattened" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch.from_flattened">from_flattened</a></code> should be used to
+initialize the instances of the <code><a href="rl_graph_theory.graphs.graph_batch.GraphBatch.html" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch">GraphBatch</a></code> class.</td></tr></table></div>
+  </div>
+</div><div class="baseproperty">
+  
+  
+  <a name="rl_graph_theory.graphs.graph_batch.GraphBatch.adjacency_matrix">
+    
+  </a>
+  <a name="adjacency_matrix">
+    
+  </a>
+  <div class="functionHeader">
+    <div><span class="decorator">@<a href="https://docs.python.org/3/library/functions.html#property" class="intersphinx-link">property</a><br /></span></div>
+    <span class="py-defname">adjacency_matrix</span>: <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> =
+    
+    <a class="headerLink" href="#adjacency_matrix" title="rl_graph_theory.graphs.graph_batch.GraphBatch.adjacency_matrix">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>This property returns the <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> that represents the given batch of graphs in the
+adjacency matrix format (<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#ADJACENCY_MATRIX" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.ADJACENCY_MATRIX">GraphFormat.ADJACENCY_MATRIX</a></code>).</p></div>
+    
+  </div>
+</div><div class="baseproperty">
+  
+  
+  <a name="rl_graph_theory.graphs.graph_batch.GraphBatch.allow_loops">
+    
+  </a>
+  <a name="allow_loops">
+    
+  </a>
+  <div class="functionHeader">
+    <div><span class="decorator">@<a href="https://docs.python.org/3/library/functions.html#property" class="intersphinx-link">property</a><br /></span></div>
+    <span class="py-defname">allow_loops</span>: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> =
+    
+    <a class="headerLink" href="#allow_loops" title="rl_graph_theory.graphs.graph_batch.GraphBatch.allow_loops">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>This property returns the <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> that determines whether loops are allowed in each of the
+graphs in the given batch. The value <code><a href="https://docs.python.org/3/library/constants.html#True" class="intersphinx-link">True</a></code> indicates that loops are allowed.</p></div>
+    
+  </div>
+</div><div class="baseproperty">
+  
+  
+  <a name="rl_graph_theory.graphs.graph_batch.GraphBatch.batch_size">
+    
+  </a>
+  <a name="batch_size">
+    
+  </a>
+  <div class="functionHeader">
+    <div><span class="decorator">@<a href="https://docs.python.org/3/library/functions.html#property" class="intersphinx-link">property</a><br /></span></div>
+    <span class="py-defname">batch_size</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
+    
+    <a class="headerLink" href="#batch_size" title="rl_graph_theory.graphs.graph_batch.GraphBatch.batch_size">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>This property returns the batch size of the given batch of graphs, i.e., the number of
+graphs in the batch.</p></div>
+    
+  </div>
+</div><div class="baseproperty">
+  
+  
+  <a name="rl_graph_theory.graphs.graph_batch.GraphBatch.bitmask_in">
+    
+  </a>
+  <a name="bitmask_in">
+    
+  </a>
+  <div class="functionHeader">
+    <div><span class="decorator">@<a href="https://docs.python.org/3/library/functions.html#property" class="intersphinx-link">property</a><br /></span></div>
+    <span class="py-defname">bitmask_in</span>: <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> =
+    
+    <a class="headerLink" href="#bitmask_in" title="rl_graph_theory.graphs.graph_batch.GraphBatch.bitmask_in">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>This property returns the <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> that represents the given batch of graphs in the
+bitmask format for the in-neighborhoods (<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#BITMASK_IN" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.BITMASK_IN">GraphFormat.BITMASK_IN</a></code>).</p></div>
+    
+  </div>
+</div><div class="baseproperty">
+  
+  
+  <a name="rl_graph_theory.graphs.graph_batch.GraphBatch.bitmask_out">
+    
+  </a>
+  <a name="bitmask_out">
+    
+  </a>
+  <div class="functionHeader">
+    <div><span class="decorator">@<a href="https://docs.python.org/3/library/functions.html#property" class="intersphinx-link">property</a><br /></span></div>
+    <span class="py-defname">bitmask_out</span>: <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> =
+    
+    <a class="headerLink" href="#bitmask_out" title="rl_graph_theory.graphs.graph_batch.GraphBatch.bitmask_out">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>This property returns the <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> that represents the given batch of graphs in the
+bitmask format for the out-neighborhoods (<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#BITMASK_OUT" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.BITMASK_OUT">GraphFormat.BITMASK_OUT</a></code>).</p></div>
+    
+  </div>
+</div><div class="baseproperty">
+  
+  
+  <a name="rl_graph_theory.graphs.graph_batch.GraphBatch.edge_colors">
+    
+  </a>
+  <a name="edge_colors">
+    
+  </a>
+  <div class="functionHeader">
+    <div><span class="decorator">@<a href="https://docs.python.org/3/library/functions.html#property" class="intersphinx-link">property</a><br /></span></div>
+    <span class="py-defname">edge_colors</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
+    
+    <a class="headerLink" href="#edge_colors" title="rl_graph_theory.graphs.graph_batch.GraphBatch.edge_colors">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>This property returns the number of proper edge colors for the given batch of graphs, i.e.,
+$k$, as an <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code>.</p></div>
+    
+  </div>
+</div><div class="baseproperty">
+  
+  
+  <a name="rl_graph_theory.graphs.graph_batch.GraphBatch.flattened_clockwise">
+    
+  </a>
+  <a name="flattened_clockwise">
+    
+  </a>
+  <div class="functionHeader">
+    <div><span class="decorator">@<a href="https://docs.python.org/3/library/functions.html#property" class="intersphinx-link">property</a><br /></span></div>
+    <span class="py-defname">flattened_clockwise</span>: <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> =
+    
+    <a class="headerLink" href="#flattened_clockwise" title="rl_graph_theory.graphs.graph_batch.GraphBatch.flattened_clockwise">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>This property returns the <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> that represents the given batch of graphs in the
+flattened clockwise format (<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#FLATTENED_CLOCKWISE" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.FLATTENED_CLOCKWISE">GraphFormat.FLATTENED_CLOCKWISE</a></code>).</p></div>
+    
+  </div>
+</div><div class="baseproperty">
+  
+  
+  <a name="rl_graph_theory.graphs.graph_batch.GraphBatch.flattened_row_major">
+    
+  </a>
+  <a name="flattened_row_major">
+    
+  </a>
+  <div class="functionHeader">
+    <div><span class="decorator">@<a href="https://docs.python.org/3/library/functions.html#property" class="intersphinx-link">property</a><br /></span></div>
+    <span class="py-defname">flattened_row_major</span>: <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> =
+    
+    <a class="headerLink" href="#flattened_row_major" title="rl_graph_theory.graphs.graph_batch.GraphBatch.flattened_row_major">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>This property returns the <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> that represents the given batch of graphs in the
+flattened row-major format (<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#FLATTENED_ROW_MAJOR" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.FLATTENED_ROW_MAJOR">GraphFormat.FLATTENED_ROW_MAJOR</a></code>).</p></div>
+    
+  </div>
+</div><div class="baseproperty">
+  
+  
+  <a name="rl_graph_theory.graphs.graph_batch.GraphBatch.is_directed">
+    
+  </a>
+  <a name="is_directed">
+    
+  </a>
+  <div class="functionHeader">
+    <div><span class="decorator">@<a href="https://docs.python.org/3/library/functions.html#property" class="intersphinx-link">property</a><br /></span></div>
+    <span class="py-defname">is_directed</span>: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> =
+    
+    <a class="headerLink" href="#is_directed" title="rl_graph_theory.graphs.graph_batch.GraphBatch.is_directed">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>This property returns the <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> that determines whether each of the graphs in the given
+batch is directed. The value <code><a href="https://docs.python.org/3/library/constants.html#True" class="intersphinx-link">True</a></code> indicates that the graphs are directed.</p></div>
+    
+  </div>
+</div><div class="baseproperty">
+  
+  
+  <a name="rl_graph_theory.graphs.graph_batch.GraphBatch.order">
+    
+  </a>
+  <a name="order">
+    
+  </a>
+  <div class="functionHeader">
+    <div><span class="decorator">@<a href="https://docs.python.org/3/library/functions.html#property" class="intersphinx-link">property</a><br /></span></div>
+    <span class="py-defname">order</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
+    
+    <a class="headerLink" href="#order" title="rl_graph_theory.graphs.graph_batch.GraphBatch.order">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>This property returns the order of all the graphs in the given batch, as an <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code>.</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="rl_graph_theory.graphs.graph_batch.GraphBatch.__adjacency_matrix">
+    
+  </a>
+  <a name="__adjacency_matrix">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">__adjacency_matrix</span>: <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> =
+    
+    <a class="headerLink" href="#__adjacency_matrix" title="rl_graph_theory.graphs.graph_batch.GraphBatch.__adjacency_matrix">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>The <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> from the adjacency matrix format
+(<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#ADJACENCY_MATRIX" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.ADJACENCY_MATRIX">GraphFormat.ADJACENCY_MATRIX</a></code>) structural representation of the given batch of graphs, if
+it was used to initialize the batch of graphs or computed afterwards, and otherwise,
+<code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>.</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="rl_graph_theory.graphs.graph_batch.GraphBatch.__allow_loops">
+    
+  </a>
+  <a name="__allow_loops">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">__allow_loops</span>: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> =
+    
+    <a class="headerLink" href="#__allow_loops" title="rl_graph_theory.graphs.graph_batch.GraphBatch.__allow_loops">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>A boolean that indicates whether each of the graphs in the given batch is
+allowed to have loops (if loops are not allowed, then all the loops are removed from the
+considered complete graphs and they simply do not exist).</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="rl_graph_theory.graphs.graph_batch.GraphBatch.__batch_size">
+    
+  </a>
+  <a name="__batch_size">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">__batch_size</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
+    
+    <a class="headerLink" href="#__batch_size" title="rl_graph_theory.graphs.graph_batch.GraphBatch.__batch_size">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>A positive integer that determines the number of graphs in the given batch.</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="rl_graph_theory.graphs.graph_batch.GraphBatch.__bitmask_in">
+    
+  </a>
+  <a name="__bitmask_in">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">__bitmask_in</span>: <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> =
+    
+    <a class="headerLink" href="#__bitmask_in" title="rl_graph_theory.graphs.graph_batch.GraphBatch.__bitmask_in">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>The <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> from the in-neighborhoods bitmask format
+(<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#BITMASK_IN" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.BITMASK_IN">GraphFormat.BITMASK_IN</a></code>) structural representation of the given batch of graphs, if it
+was used to initialize the batch of graphs or computed afterwards, and otherwise, <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>.</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="rl_graph_theory.graphs.graph_batch.GraphBatch.__bitmask_out">
+    
+  </a>
+  <a name="__bitmask_out">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">__bitmask_out</span>: <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> =
+    
+    <a class="headerLink" href="#__bitmask_out" title="rl_graph_theory.graphs.graph_batch.GraphBatch.__bitmask_out">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>The <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> from the out-neighborhoods bitmask format
+(<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#BITMASK_OUT" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.BITMASK_OUT">GraphFormat.BITMASK_OUT</a></code>) structural representation of the given batch of graphs, if it
+was used to initialize the batch of graphs or computed afterwards, and otherwise, <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>.</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="rl_graph_theory.graphs.graph_batch.GraphBatch.__edge_colors">
+    
+  </a>
+  <a name="__edge_colors">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">__edge_colors</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
+    
+    <a class="headerLink" href="#__edge_colors" title="rl_graph_theory.graphs.graph_batch.GraphBatch.__edge_colors">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>The number of proper edge colors, i.e., $k$.</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="rl_graph_theory.graphs.graph_batch.GraphBatch.__flattened_clockwise">
+    
+  </a>
+  <a name="__flattened_clockwise">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">__flattened_clockwise</span>: <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> =
+    
+    <a class="headerLink" href="#__flattened_clockwise" title="rl_graph_theory.graphs.graph_batch.GraphBatch.__flattened_clockwise">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>The <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> from the flattened clockwise format
+(<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#FLATTENED_CLOCKWISE" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.FLATTENED_CLOCKWISE">GraphFormat.FLATTENED_CLOCKWISE</a></code>) structural representation of the given batch of graphs,
+if it was used to initialize the batch of graphs or computed afterwards, and otherwise,
+<code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>.</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="rl_graph_theory.graphs.graph_batch.GraphBatch.__flattened_row_major">
+    
+  </a>
+  <a name="__flattened_row_major">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">__flattened_row_major</span>: <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> =
+    
+    <a class="headerLink" href="#__flattened_row_major" title="rl_graph_theory.graphs.graph_batch.GraphBatch.__flattened_row_major">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>The <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> from the flattened row-major format
+(<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#FLATTENED_ROW_MAJOR" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.FLATTENED_ROW_MAJOR">GraphFormat.FLATTENED_ROW_MAJOR</a></code>) structural representation of the given batch of graphs,
+if it was used to initialize the batch of graphs or computed afterwards, and otherwise,
+<code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>.</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="rl_graph_theory.graphs.graph_batch.GraphBatch.__is_directed">
+    
+  </a>
+  <a name="__is_directed">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">__is_directed</span>: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> =
+    
+    <a class="headerLink" href="#__is_directed" title="rl_graph_theory.graphs.graph_batch.GraphBatch.__is_directed">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>A boolean that indicates whether each of the graphs in the given batch is
+a $k$-edge-colored looped complete directed graph or a $k$-edge-colored looped complete
+undirected graph.</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="rl_graph_theory.graphs.graph_batch.GraphBatch.__order">
+    
+  </a>
+  <a name="__order">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">__order</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
+    
+    <a class="headerLink" href="#__order" title="rl_graph_theory.graphs.graph_batch.GraphBatch.__order">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>The graph order, i.e., the number of vertices of each of the graphs in the
+batch.</p></div>
+    
+  </div>
+</div>
+        </div>
+      
+      </main>
+    </div>
+
+    <footer class="navbar navbar-default">
+
+  
+  <div class="container-fluid">
+    <a href="index.html">API Documentation</a> for rl-graph-theory,
+  generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
+    25.10.1 at 2025-12-21 20:53:06.
+  </div>
+
+  <!-- Search related scripts needs to be loaded at the end of HTML 
+    parsing not to introduce overhead and display HTML data asap -->
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="searchlib.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
+
+</footer>
+  
+    <script src="pydoctor.js" type="text/javascript"></script>
+
+  </body>
+</html>

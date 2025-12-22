@@ -1,7 +1,7 @@
 """
 This ``Python`` module contains the `GraphEnvironment` abstract class, which encapsulates the
 concept of a reinforcement learning environment to be used in graph theory applications, alongside
-other associated enumerations.
+two associated enumerations concerning the types of reward systems and the episode statuses.
 """
 
 from abc import ABC, abstractmethod
@@ -10,12 +10,19 @@ from typing import Callable, Optional, Tuple, Union
 
 import numpy as np
 
-from ..graphs.graph import GraphBatch
+from ..graphs.graph_batch import GraphBatch
+
 
 RewardFunction = Union[
     Callable[[GraphBatch], np.ndarray],
     Callable[[GraphBatch, GraphBatch], np.ndarray],
 ]
+"""
+This is the type alias for the functions that help compute the rewards in RL environments to be
+used in graph theory applications. In other words, these are the functions that take on the role of
+either the ``graph_invariant`` or the ``reward_function`` function from the description of the
+`RewardType` enumeration.
+"""
 
 
 class RewardType(Enum):
@@ -32,10 +39,10 @@ class RewardType(Enum):
     :cvar SPARSE:
         The sparse reward system. The batch of corresponding rewards received after every batch of
         actions is zero, apart from the final batch of actions, for which it is equal to
-        ``graph_invariant(terminal_graph_batch)``, where:
+        ``graph_invariant(final_graph_batch)``, where:
 
-        * ``terminal_graph_batch`` is the underlying batch of graphs corresponding to the batch of
-          terminal states; and
+        * ``final_graph_batch`` is the underlying batch of graphs corresponding to the batch of
+          final states; and
         * ``graph_invariant`` is a function that accepts a batch of graphs and returns the
           corresponding values for the graph invariant that is supposed to get maximized.
 
@@ -78,20 +85,20 @@ class RewardType(Enum):
 
 class EpisodeStatus(Enum):
     """
-    This enumeration represents all the possible statuses that an episode could have in the context
+    This enumeration represents all the possible statuses that an episode can have in the context
     of an RL environment to be used in graph theory applications.
 
     :cvar IN_PROGRESS: The episode is in progress, which means that it is in a state that accepts
         further actions.
-    :cvar TERMINATED: The episode has ended due to reaching an absorbing state, hence the
-        environment cannot accept any further actions. This status appears only in RL environments
-        where the tasks are episodic.
+    :cvar TERMINATED: The episode has ended due to reaching a terminal state, hence the environment
+        cannot accept any further actions. This status appears only in RL environments where the
+        tasks are episodic.
     :cvar TRUNCATED: The episode has ended since the required number of steps has been taken. In
-        this case, although the current state is not absorbing, no further actions should be
+        this case, although the current state is not terminal, no further actions should be
         performed. This status appears only in RL environments where the tasks are continuing.
 
     :note: This enumeration is also applicable to batches of episodes. If the tasks are episodic,
-        then the parallelized episodes are guaranteed to enter an absorbing state after the same
+        then the parallelized episodes are guaranteed to enter a terminal state after the same
         number of performed actions. Therefore, regardless of whether the tasks are episodic or
         continuing, all the episodes must always have the same status. This common status is then
         considered to be the status of the given batch of episodes.
@@ -119,10 +126,11 @@ class GraphEnvironment(ABC):
 
     :ivar __reward_type: An item of the `RewardType` enumeration that determines the (sub)type of
         reward system that is used in the given RL environment.
-    :ivar __reward_function: The function that helps compute the rewards in accordance with the
-        selected (sub)type of reward system. It plays the role of either the ``graph_invariant`` or
-        the ``reward_function`` function from the description of the `RewardType` enumeration, and
-        its expected signature varies depending on the selected (sub)type of reward system.
+    :ivar __reward_function: The `RewardFunction` function that helps compute the rewards in
+        accordance with the selected (sub)type of reward system. It plays the role of either the
+        ``graph_invariant`` or the ``reward_function`` function from the description of the
+        `RewardType` enumeration, and its expected signature varies depending on the selected
+        (sub)type of reward system.
     :ivar _state_batch: Either `None`, or a `np.ndarray` matrix that determines the batch of
         current states corresponding to the batch of episodes that are being run in parallel. This
         attribute is initially set to `None`, and afterwards, it is assigned the necessary
@@ -142,11 +150,11 @@ class GraphEnvironment(ABC):
 
         :param reward_type: An item of the `RewardType` enumeration that determines the (sub)type
             of reward system to be used in the instantiated environment.
-        :param reward_function: The function whose goal is to help compute the rewards in
-            accordance with the selected (sub)type of reward system. It plays the role of either
-            the ``graph_invariant`` or the ``reward_function`` function from the description of the
-            `RewardType` enumeration, and its expected signature varies depending on the
-            ``reward_type`` argument.
+        :param reward_function: The `RewardFunction` function whose goal is to help compute the
+            rewards in accordance with the selected (sub)type of reward system. It plays the role
+            of either the ``graph_invariant`` or the ``reward_function`` function from the
+            description of the `RewardType` enumeration, and its expected signature varies
+            depending on the ``reward_type`` argument.
         """
 
         self.__reward_type: RewardType = reward_type
@@ -221,28 +229,26 @@ class GraphEnvironment(ABC):
             # that is supposed to get maximized. In other words, invoke the ``graph_invariant``
             # function.
             else:
-                new_underlying_graph_batch = self.state_batch_to_graph_batch(self._state_batch)
-                reward_batch = self.__reward_function(new_underlying_graph_batch)
+                final_graph_batch = self.state_batch_to_graph_batch(self._state_batch)
+                reward_batch = self.__reward_function(final_graph_batch)
 
         # In this case, the dense reward system is being used.
         else:
-            old_underlying_graph_batch = self.state_batch_to_graph_batch(self._state_batch)
+            old_graph_batch = self.state_batch_to_graph_batch(self._state_batch)
             # Execute the batch of actions and transition to the batch of new states.
             self._transition_batch(action_batch)
-            new_underlying_graph_batch = self.state_batch_to_graph_batch(self._state_batch)
+            new_graph_batch = self.state_batch_to_graph_batch(self._state_batch)
 
             # If the telescopic reward system is being used, then the rewards should be computed by
             # invoking the ``graph_invariant`` function twice.
             if self.__reward_type == RewardType.TELESCOPIC:
-                reward_batch = self.__reward_function(
-                    new_underlying_graph_batch
-                ) - self.__reward_function(old_underlying_graph_batch)
+                reward_batch = self.__reward_function(new_graph_batch) - self.__reward_function(
+                    old_graph_batch
+                )
             # Otherwise, the proper reward system is being used, so the rewards should be computed
             # by invoking the ``reward_function`` function once.
             else:
-                reward_batch = self.__reward_function(
-                    old_underlying_graph_batch, new_underlying_graph_batch
-                )
+                reward_batch = self.__reward_function(old_graph_batch, new_graph_batch)
 
         return self._state_batch, reward_batch, self._status
 
@@ -256,8 +262,8 @@ class GraphEnvironment(ABC):
         `_status` attributes, as well as any other potential attributes specific to the concrete
         class that inherits from the `GraphEnvironment` class.
 
-        :param action_batch: The batch of actions to be applied to the states from the current
-            batch of states, given as a `np.ndarray` matrix where the rows correspond to the
+        :param action_batch: The batch of actions to be applied to the states in the batch of
+            current states, given as a `np.ndarray` matrix where the rows correspond to the
             actions. The number of actions in this batch must be the same as the number of states
             in the `_state_batch` attribute.
         """
