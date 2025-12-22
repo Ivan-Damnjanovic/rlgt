@@ -108,11 +108,11 @@ def verify_instantiated_graph_batch(
     """
 
     instance = constructor()
-    assert instance.batch_size == batch_size
-    assert instance.edge_colors == edge_colors
-    assert instance.order == order
-    assert instance.is_directed == is_directed
-    assert instance.allow_loops == allow_loops
+    assert instance.batch_size == batch_size, f"{instance.batch_size}, {batch_size}"
+    assert instance.edge_colors == edge_colors, f"{instance.edge_colors}, {edge_colors}"
+    assert instance.order == order, f"{instance.order}, {order}"
+    assert instance.is_directed == is_directed, f"{instance.is_directed}, {is_directed}"
+    assert instance.allow_loops == allow_loops, f"{instance.allow_loops}, {allow_loops}"
 
     instance = constructor()
     np.testing.assert_array_equal(instance.bitmask_in, bitmask_in)

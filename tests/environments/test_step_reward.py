@@ -1,6 +1,10 @@
 import numpy as np
 import pytest
-from rl_graph_theory.environments.environment import GraphEnvironment, RewardType, EpisodeStatus
+from rl_graph_theory.environments.graph_environment import (
+    GraphEnvironment,
+    RewardType,
+    EpisodeStatus,
+)
 
 
 class StepRewardTestingEnvironment(GraphEnvironment):

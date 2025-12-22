@@ -1,7 +1,9 @@
 import numpy as np
 
-from rl_graph_theory.environments.environment import RewardType, EpisodeStatus
+from rl_graph_theory.environments.graph_environment import EpisodeStatus, RewardType
 from rl_graph_theory.graphs.graph import FlattenedOrdering
+
+from ..utils import batchify
 
 TEST_CASES_CONSTRUCTOR = [
     (
@@ -138,67 +140,75 @@ TEST_CASES_CONSTRUCTOR = [
 
 TEST_CASES_RESET_BATCH_ROW_MAJOR = [
     (
+        1,
         2,
         FlattenedOrdering.ROW_MAJOR,
         2,
         False,
         False,
-        1,
         [[0, 1]],
     ),
     (
+        1,
         2,
         FlattenedOrdering.ROW_MAJOR,
         3,
         False,
         False,
-        1,
         [[0, 0, 1]],
     ),
     (
+        1,
         3,
         FlattenedOrdering.ROW_MAJOR,
         2,
         False,
         False,
-        1,
         [[0, 0, 0, 1, 0, 0]],
     ),
     (
+        2,
         2,
         FlattenedOrdering.ROW_MAJOR,
         2,
         False,
         False,
-        2,
         [[0, 1], [0, 1]],
     ),
     (
+        1,
         2,
         FlattenedOrdering.ROW_MAJOR,
         2,
         True,
         False,
-        1,
         [[0, 0, 1, 0]],
     ),
     (
+        1,
         2,
         FlattenedOrdering.ROW_MAJOR,
         2,
         False,
         True,
-        1,
         [[0, 0, 0, 1, 0, 0]],
     ),
     (
+        1,
         2,
         FlattenedOrdering.ROW_MAJOR,
         2,
         True,
         True,
-        1,
         [[0, 0, 0, 0, 1, 0, 0, 0]],
+    ),
+]
+
+TEST_CASES_RESET_BATCH_ROW_MAJOR += [
+    *batchify(
+        [test_case for test_case in TEST_CASES_RESET_BATCH_ROW_MAJOR if test_case[0] == 1],
+        batch_size=2,
+        expand_dims=False,
     ),
 ]
 
@@ -211,12 +221,12 @@ TEST_CASES_RESET_BATCH = TEST_CASES_RESET_BATCH_ROW_MAJOR + TEST_CASES_RESET_BAT
 
 TEST_CASES_TRANSITION_BATCH_ROW_MAJOR = [
     (
+        1,
         2,
         FlattenedOrdering.ROW_MAJOR,
         2,
         False,
         False,
-        1,
         0,
         np.asarray([[0, 1]], dtype=int),
         np.asarray([[0]], dtype=int),
@@ -224,12 +234,12 @@ TEST_CASES_TRANSITION_BATCH_ROW_MAJOR = [
         EpisodeStatus.TERMINATED,
     ),
     (
+        1,
         2,
         FlattenedOrdering.ROW_MAJOR,
         2,
         False,
         False,
-        1,
         0,
         np.asarray([[0, 1]], dtype=int),
         np.asarray([[1]], dtype=int),
@@ -237,12 +247,12 @@ TEST_CASES_TRANSITION_BATCH_ROW_MAJOR = [
         EpisodeStatus.TERMINATED,
     ),
     (
+        1,
         2,
         FlattenedOrdering.ROW_MAJOR,
         3,
         False,
         False,
-        1,
         0,
         np.asarray([[0, 0, 1]], dtype=int),
         np.asarray([[2]], dtype=int),
@@ -250,12 +260,12 @@ TEST_CASES_TRANSITION_BATCH_ROW_MAJOR = [
         EpisodeStatus.TERMINATED,
     ),
     (
+        1,
         3,
         FlattenedOrdering.ROW_MAJOR,
         2,
         False,
         False,
-        1,
         0,
         np.asarray([[0, 0, 0, 1, 0, 0]], dtype=int),
         np.asarray([[0]], dtype=int),
@@ -263,12 +273,12 @@ TEST_CASES_TRANSITION_BATCH_ROW_MAJOR = [
         EpisodeStatus.IN_PROGRESS,
     ),
     (
+        1,
         3,
         FlattenedOrdering.ROW_MAJOR,
         2,
         False,
         False,
-        1,
         0,
         np.asarray([[0, 0, 0, 1, 0, 0]], dtype=int),
         np.asarray([[1]], dtype=int),
@@ -276,12 +286,12 @@ TEST_CASES_TRANSITION_BATCH_ROW_MAJOR = [
         EpisodeStatus.IN_PROGRESS,
     ),
     (
+        1,
         3,
         FlattenedOrdering.ROW_MAJOR,
         2,
         False,
         False,
-        1,
         1,
         np.asarray([[0, 0, 0, 0, 1, 0]], dtype=int),
         np.asarray([[1]], dtype=int),
@@ -289,12 +299,12 @@ TEST_CASES_TRANSITION_BATCH_ROW_MAJOR = [
         EpisodeStatus.IN_PROGRESS,
     ),
     (
+        1,
         3,
         FlattenedOrdering.ROW_MAJOR,
         2,
         False,
         False,
-        1,
         2,
         np.asarray([[0, 0, 0, 0, 0, 1]], dtype=int),
         np.asarray([[1]], dtype=int),
@@ -302,12 +312,12 @@ TEST_CASES_TRANSITION_BATCH_ROW_MAJOR = [
         EpisodeStatus.TERMINATED,
     ),
     (
+        1,
         2,
         FlattenedOrdering.ROW_MAJOR,
         2,
         True,
         False,
-        1,
         0,
         np.asarray([[0, 0, 1, 0]], dtype=int),
         np.asarray([[1]], dtype=int),
@@ -315,12 +325,12 @@ TEST_CASES_TRANSITION_BATCH_ROW_MAJOR = [
         EpisodeStatus.IN_PROGRESS,
     ),
     (
+        1,
         2,
         FlattenedOrdering.ROW_MAJOR,
         2,
         False,
         True,
-        1,
         0,
         np.asarray([[0, 0, 0, 1, 0, 0]], dtype=int),
         np.asarray([[1]], dtype=int),
@@ -328,17 +338,25 @@ TEST_CASES_TRANSITION_BATCH_ROW_MAJOR = [
         EpisodeStatus.IN_PROGRESS,
     ),
     (
+        1,
         2,
         FlattenedOrdering.ROW_MAJOR,
         2,
         True,
         True,
-        1,
         0,
         np.asarray([[0, 0, 0, 0, 1, 0, 0, 0]], dtype=int),
         np.asarray([[1]], dtype=int),
         np.asarray([[1, 0, 0, 0, 0, 1, 0, 0]], dtype=int),
         EpisodeStatus.IN_PROGRESS,
+    ),
+]
+
+TEST_CASES_TRANSITION_BATCH_ROW_MAJOR += [
+    *batchify(
+        [test_case for test_case in TEST_CASES_TRANSITION_BATCH_ROW_MAJOR if test_case[0] == 1],
+        batch_size=2,
+        expand_dims=False,
     ),
 ]
 
@@ -353,74 +371,86 @@ TEST_CASES_TRANSITION_BATCH = (
 
 TEST_CASES_STATE_BATCH_TO_GRAPH_BATCH_ROW_MAJOR = [
     (
+        1,
         2,
         FlattenedOrdering.ROW_MAJOR,
         2,
         False,
         False,
-        1,
         np.asarray([[0, 0]], dtype=int),
         np.asarray([[0]], dtype=int),
     ),
     (
+        1,
         3,
         FlattenedOrdering.ROW_MAJOR,
         2,
         False,
         False,
-        1,
         np.asarray([[0, 0, 0, 0, 0, 0]], dtype=int),
         np.asarray([[0, 0, 0]], dtype=int),
     ),
     (
+        1,
         3,
         FlattenedOrdering.ROW_MAJOR,
         2,
         False,
         False,
-        1,
         np.asarray([[1, 0, 1, 0, 0, 0]], dtype=int),
         np.asarray([[1, 0, 1]], dtype=int),
     ),
     (
+        1,
         2,
         FlattenedOrdering.ROW_MAJOR,
         2,
         False,
         False,
-        1,
         np.asarray([[0, 1]], dtype=int),
         np.asarray([[2]], dtype=int),
     ),
     (
+        1,
         3,
         FlattenedOrdering.ROW_MAJOR,
         2,
         False,
         False,
-        1,
         np.asarray([[0, 0, 0, 0, 1, 0]], dtype=int),
         np.asarray([[0, 2, 2]], dtype=int),
     ),
     (
+        1,
         3,
         FlattenedOrdering.ROW_MAJOR,
         2,
         False,
         False,
-        1,
         np.asarray([[1, 0, 1, 0, 0, 1]], dtype=int),
         np.asarray([[1, 0, 2]], dtype=int),
     ),
     (
+        1,
         3,
         FlattenedOrdering.ROW_MAJOR,
         3,
         False,
         False,
-        1,
         np.asarray([[1, 0, 1, 0, 1, 0, 0, 0, 1]], dtype=int),
         np.asarray([[1, 2, 3]], dtype=int),
+    ),
+]
+
+TEST_CASES_STATE_BATCH_TO_GRAPH_BATCH_ROW_MAJOR += [
+    *batchify(
+        [
+            test_case
+            for test_case in TEST_CASES_STATE_BATCH_TO_GRAPH_BATCH_ROW_MAJOR
+            if test_case[0] == 1
+        ],
+        batch_size=2,
+        expand_dims=False,
     ),
 ]
 

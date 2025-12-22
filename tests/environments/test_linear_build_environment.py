@@ -1,14 +1,14 @@
 import numpy as np
 import pytest
 
-from rl_graph_theory.environments.incremental_environment import (
+from rl_graph_theory.environments.linear_environments import (
     EpisodeStatus,
-    IncrementalEnvironment,
     RewardType,
+    LinearBuildEnvironment,
 )
 from rl_graph_theory.graphs.graph import FlattenedOrdering
 
-from .incremental_test_cases import (
+from .linear_build_test_cases import (
     TEST_CASES_CONSTRUCTOR,
     TEST_CASES_RESET_BATCH,
     TEST_CASES_STATE_BATCH_TO_GRAPH_BATCH,
@@ -31,7 +31,7 @@ def test_constructor(
     allow_loops,
     expected_flattened_length,
 ):
-    env = IncrementalEnvironment(
+    env = LinearBuildEnvironment(
         reward_type,
         reward_function,
         graph_order,
@@ -54,23 +54,23 @@ def test_constructor(
 
     assert env._flattened_length == expected_flattened_length
 
-    assert env._next_entry_index is None
+    assert env._step_count is None
 
 
 @pytest.mark.parametrize(
-    "graph_order, flattened_ordering, edge_colors, is_directed, allow_loops, batch_size, expected_state",
+    "batch_size, graph_order, flattened_ordering, edge_colors, is_directed, allow_loops, expected_state",
     TEST_CASES_RESET_BATCH,
 )
 def test_reset_batch(
+    batch_size,
     graph_order,
     flattened_ordering,
     edge_colors,
     is_directed,
     allow_loops,
-    batch_size,
     expected_state,
 ):
-    env = IncrementalEnvironment(
+    env = LinearBuildEnvironment(
         RewardType.PROPER,
         lambda _: np.empty(0),
         graph_order,
@@ -82,7 +82,7 @@ def test_reset_batch(
 
     state_batch, status = env.reset_batch(batch_size)
 
-    assert env._next_entry_index == 0
+    assert env._step_count == 0
     assert status is env._status is EpisodeStatus.IN_PROGRESS
 
     np.testing.assert_array_equal(state_batch, env._state_batch)
@@ -90,24 +90,24 @@ def test_reset_batch(
 
 
 @pytest.mark.parametrize(
-    "graph_order, flattened_ordering, edge_colors, is_directed, allow_loops, batch_size, "
+    "batch_size, graph_order, flattened_ordering, edge_colors, is_directed, allow_loops, "
     "next_index, init_state, action_batch, state_batch, status",
     TEST_CASES_TRANSITION_BATCH,
 )
 def test_transition_batch(
+    batch_size,
     graph_order,
     flattened_ordering,
     edge_colors,
     is_directed,
     allow_loops,
-    batch_size,
     next_index,
     init_state,
     action_batch,
     state_batch,
     status,
 ):
-    env = IncrementalEnvironment(
+    env = LinearBuildEnvironment(
         RewardType.PROPER,
         lambda _: np.empty(0),
         graph_order,
@@ -120,7 +120,7 @@ def test_transition_batch(
     _ = env.reset_batch(batch_size)
 
     env._state_batch = init_state
-    env._next_entry_index = next_index
+    env._step_count = next_index
 
     env._transition_batch(action_batch)
 
@@ -130,20 +130,20 @@ def test_transition_batch(
 
 
 @pytest.mark.parametrize(
-    "graph_order, flattened_ordering, edge_colors, is_directed, allow_loops, batch_size, state_batch, flattened",
+    "batch_size, graph_order, flattened_ordering, edge_colors, is_directed, allow_loops, state_batch, flattened",
     TEST_CASES_STATE_BATCH_TO_GRAPH_BATCH,
 )
 def test_state_batch_to_graph_batch(
+    batch_size,
     graph_order,
     flattened_ordering,
     edge_colors,
     is_directed,
     allow_loops,
-    batch_size,
     state_batch,
     flattened,
 ):
-    env = IncrementalEnvironment(
+    env = LinearBuildEnvironment(
         RewardType.PROPER,
         lambda _: np.empty(0),
         graph_order,
