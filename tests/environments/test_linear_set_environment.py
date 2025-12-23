@@ -1,13 +1,19 @@
-import pytest
 import numpy as np
+import pytest
 
 from rl_graph_theory.environments.linear_environments import (
-    LinearSetEnvironment,
-    GraphGenerator,
-    RewardType,
     EpisodeStatus,
+    FlattenedOrdering,
+    LinearSetEnvironment,
+    RewardType,
 )
-from .linear_set_test_cases import TEST_CASES_CONSTRUCTOR, TEST_CASES_RESET_BATCH
+
+from .linear_set_test_cases import (
+    TEST_CASES_CONSTRUCTOR,
+    TEST_CASES_RESET_BATCH,
+    TEST_CASES_STATE_BATCH_TO_GRAPH_BATCH,
+    TEST_CASES_TRANSITION_BATCH,
+)
 
 
 @pytest.mark.parametrize(
@@ -86,3 +92,78 @@ def test_reset_batch(
 
     np.testing.assert_array_equal(state_batch, env._state_batch)
     np.testing.assert_array_equal(state_batch, expected_state)
+
+
+@pytest.mark.parametrize(
+    "batch_size, graph_order, flattened_ordering, edge_colors, is_directed, allow_loops, "
+    "next_index, init_state, action_batch, state_batch, status",
+    TEST_CASES_TRANSITION_BATCH,
+)
+def test_transition_batch(
+    batch_size,
+    graph_order,
+    flattened_ordering,
+    edge_colors,
+    is_directed,
+    allow_loops,
+    next_index,
+    init_state,
+    action_batch,
+    state_batch,
+    status,
+):
+    env = LinearSetEnvironment(
+        RewardType.PROPER,
+        lambda _: np.empty(0),
+        graph_order,
+        flattened_ordering,
+        edge_colors,
+        is_directed,
+        allow_loops,
+    )
+
+    _ = env.reset_batch(batch_size)
+
+    env._state_batch = init_state
+    env._step_count = next_index
+
+    env._transition_batch(action_batch)
+
+    np.testing.assert_array_equal(env._state_batch, state_batch)
+
+    assert env._status is status
+
+
+@pytest.mark.parametrize(
+    "batch_size, graph_order, flattened_ordering, edge_colors, is_directed, allow_loops, state_batch, flattened",
+    TEST_CASES_STATE_BATCH_TO_GRAPH_BATCH,
+)
+def test_state_batch_to_graph_batch(
+    batch_size,
+    graph_order,
+    flattened_ordering,
+    edge_colors,
+    is_directed,
+    allow_loops,
+    state_batch,
+    flattened,
+):
+    env = LinearSetEnvironment(
+        RewardType.PROPER,
+        lambda _: np.empty(0),
+        graph_order,
+        flattened_ordering,
+        edge_colors,
+        is_directed,
+        allow_loops,
+    )
+
+    graph_batch = env.state_batch_to_graph_batch(state_batch)
+    np.testing.assert_array_equal(
+        flattened,
+        (
+            graph_batch.flattened_clockwise
+            if flattened_ordering is FlattenedOrdering.CLOCKWISE
+            else graph_batch.flattened_row_major
+        ),
+    )
