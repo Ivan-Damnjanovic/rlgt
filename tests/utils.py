@@ -1,4 +1,26 @@
 import numpy as np
+from copy import deepcopy
+
+
+def replace(test_cases, old_value, new_value):
+    new_test_cases = []
+
+    for test_case in test_cases:
+        new_test_case = []
+
+        for item in test_case:
+            try:
+                if item == old_value:
+                    new_test_case.append(deepcopy(new_value))
+                    continue
+            except ValueError:
+                pass
+
+            new_test_case.append(deepcopy(item))
+
+        new_test_cases.append(tuple(new_test_case))
+
+    return new_test_cases
 
 
 def batchify(test_cases, batch_size=2, expand_dims=True):

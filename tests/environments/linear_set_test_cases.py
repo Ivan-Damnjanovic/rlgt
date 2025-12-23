@@ -3,7 +3,7 @@ import numpy as np
 from rl_graph_theory.graphs.graph import FlattenedOrdering
 from rl_graph_theory.environments.graph_environment import EpisodeStatus
 
-from ..utils import batchify
+from ..utils import batchify, replace
 from .linear_build_test_cases import TEST_CASES_CONSTRUCTOR as lbtc_constructor
 from .linear_build_test_cases import TEST_CASES_RESET_BATCH as lbtc_reset_batch
 from .linear_build_test_cases import TEST_CASES_TRANSITION_BATCH as lbtc_transition_batch
@@ -100,10 +100,11 @@ TEST_CASES_STATE_BATCH_TO_GRAPH_BATCH_ROW_MAJOR += [
     ),
 ]
 
-TEST_CASES_STATE_BATCH_TO_GRAPH_BATCH_CLOCKWISE = [
-    (test_case[0], FlattenedOrdering.CLOCKWISE) + test_case[2:]
-    for test_case in TEST_CASES_STATE_BATCH_TO_GRAPH_BATCH_ROW_MAJOR
-]
+TEST_CASES_STATE_BATCH_TO_GRAPH_BATCH_CLOCKWISE = replace(
+    TEST_CASES_STATE_BATCH_TO_GRAPH_BATCH_ROW_MAJOR,
+    FlattenedOrdering.ROW_MAJOR,
+    FlattenedOrdering.CLOCKWISE,
+)
 
 TEST_CASES_STATE_BATCH_TO_GRAPH_BATCH = (
     TEST_CASES_STATE_BATCH_TO_GRAPH_BATCH_ROW_MAJOR
@@ -190,10 +191,11 @@ TEST_CASES_TRANSITION_BATCH_ROW_MAJOR += [
     ),
 ]
 
-TEST_CASES_TRANSITION_BATCH_CLOCKWISE = [
-    (test_case[0], FlattenedOrdering.CLOCKWISE) + test_case[2:]
-    for test_case in TEST_CASES_TRANSITION_BATCH_ROW_MAJOR
-]
+TEST_CASES_TRANSITION_BATCH_CLOCKWISE = replace(
+    TEST_CASES_TRANSITION_BATCH_ROW_MAJOR,
+    FlattenedOrdering.ROW_MAJOR,
+    FlattenedOrdering.CLOCKWISE,
+)
 
 TEST_CASES_TRANSITION_BATCH = (
     lbtc_transition_batch
