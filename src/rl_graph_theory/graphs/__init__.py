@@ -1,11 +1,15 @@
 """
 The `rl_graph_theory.graphs` package contains the two core classes `Graph` and `GraphBatch`, which
 encapsulate the concept of a $k$-edge-colored looped complete graph and a batch of $k$-edge-colored
-looped complete graphs of the same order, respectively, alongside various other classes that are
-used to construct $k$-edge-colored looped complete graphs with some particular structure.
+looped complete graphs of the same order, respectively. The package also contains the `GraphFormat`
+enumeration, which encapsulates the concept of a format used to represent a $k$-edge-colored looped
+complete graph, alongside various classes that are used to construct $k$-edge-colored looped
+complete graphs with some particular structure.
 """
 
-# from .graph import EdgeOrdering, Graph, GraphBatch, GraphFormat
+# from .graph import Graph
+# from .graph_batch import GraphBatch
+# from .graph_format import BitmaskType, FlattenedOrdering, GraphFormat
 # from .special_graphs import (
 #     AlmostCompleteGraph,
 #     BookGraph,
@@ -23,9 +27,10 @@ used to construct $k$-edge-colored looped complete graphs with some particular s
 
 
 __all__ = [
-    "EdgeOrdering",
     "Graph",
     "GraphBatch",
+    "BitmaskType",
+    "FlattenedOrdering",
     "GraphFormat",
     "AlmostCompleteGraph",
     "BookGraph",

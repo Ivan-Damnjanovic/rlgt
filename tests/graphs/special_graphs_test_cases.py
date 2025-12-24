@@ -11,8 +11,8 @@ MONOCHROMATIC_GRAPH_TEST_CASES = [
         5,
         3,
         2,
-        np.array([[0, 0, 0, 0, 0], [31, 31, 31, 31, 31]], dtype=int),
-        np.array([[0, 0, 0, 0, 0], [31, 31, 31, 31, 31]], dtype=int),
+        np.array([[0, 0, 0, 0, 0], [31, 31, 31, 31, 31]], dtype=np.uint64),
+        np.array([[0, 0, 0, 0, 0], [31, 31, 31, 31, 31]], dtype=np.uint64),
         np.array(
             [
                 [2, 2, 2, 2, 2],
@@ -21,9 +21,9 @@ MONOCHROMATIC_GRAPH_TEST_CASES = [
                 [2, 2, 2, 2, 2],
                 [2, 2, 2, 2, 2],
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
-        np.array([2] * 25, dtype=int),
+        np.array([2] * 25, dtype=np.uint8),
         True,
         True,
     ),
@@ -36,14 +36,14 @@ MONOCHROMATIC_GRAPH_TEST_CASES = [
                 [0, 0, 0, 0, 0],
                 [30, 29, 27, 23, 15],
             ],
-            dtype=int,
+            dtype=np.uint64,
         ),
         np.array(
             [
                 [0, 0, 0, 0, 0],
                 [30, 29, 27, 23, 15],
             ],
-            dtype=int,
+            dtype=np.uint64,
         ),
         np.array(
             [
@@ -53,9 +53,9 @@ MONOCHROMATIC_GRAPH_TEST_CASES = [
                 [2, 2, 2, 0, 2],
                 [2, 2, 2, 2, 0],
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
-        np.array([2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2], dtype=int),
+        np.array([2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2], dtype=np.uint8),
         True,
         False,
     ),
@@ -63,8 +63,8 @@ MONOCHROMATIC_GRAPH_TEST_CASES = [
         5,
         3,
         2,
-        np.array([[0, 0, 0, 0, 0], [31, 31, 31, 31, 31]], dtype=int),
-        np.array([[0, 0, 0, 0, 0], [31, 31, 31, 31, 31]], dtype=int),
+        np.array([[0, 0, 0, 0, 0], [31, 31, 31, 31, 31]], dtype=np.uint64),
+        np.array([[0, 0, 0, 0, 0], [31, 31, 31, 31, 31]], dtype=np.uint64),
         np.array(
             [
                 [2, 2, 2, 2, 2],
@@ -73,9 +73,9 @@ MONOCHROMATIC_GRAPH_TEST_CASES = [
                 [2, 2, 2, 2, 2],
                 [2, 2, 2, 2, 2],
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
-        np.array([2] * 15, dtype=int),
+        np.array([2] * 15, dtype=np.uint8),
         False,
         True,
     ),
@@ -83,8 +83,8 @@ MONOCHROMATIC_GRAPH_TEST_CASES = [
         5,
         3,
         2,
-        np.array([[0, 0, 0, 0, 0], [30, 29, 27, 23, 15]], dtype=int),
-        np.array([[0, 0, 0, 0, 0], [30, 29, 27, 23, 15]], dtype=int),
+        np.array([[0, 0, 0, 0, 0], [30, 29, 27, 23, 15]], dtype=np.uint64),
+        np.array([[0, 0, 0, 0, 0], [30, 29, 27, 23, 15]], dtype=np.uint64),
         np.array(
             [
                 [0, 2, 2, 2, 2],
@@ -93,9 +93,9 @@ MONOCHROMATIC_GRAPH_TEST_CASES = [
                 [2, 2, 2, 0, 2],
                 [2, 2, 2, 2, 0],
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
-        np.array([2, 2, 2, 2, 2, 2, 2, 2, 2, 2], dtype=int),
+        np.array([2, 2, 2, 2, 2, 2, 2, 2, 2, 2], dtype=np.uint8),
         False,
         False,
     ),
@@ -111,7 +111,7 @@ MONOCHROMATIC_GRAPH_TEST_CASES = [
                 [14, 13, 11, 7],
                 [0, 0, 0, 0],
             ],
-            dtype=int,
+            dtype=np.uint64,
         ),
         np.array(
             [
@@ -121,7 +121,7 @@ MONOCHROMATIC_GRAPH_TEST_CASES = [
                 [14, 13, 11, 7],
                 [0, 0, 0, 0],
             ],
-            dtype=int,
+            dtype=np.uint64,
         ),
         np.array(
             [
@@ -130,9 +130,9 @@ MONOCHROMATIC_GRAPH_TEST_CASES = [
                 [4, 4, 0, 4],
                 [4, 4, 4, 0],
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
-        np.array([4, 4, 4, 4, 4, 4], dtype=int),
+        np.array([4, 4, 4, 4, 4, 4], dtype=np.uint8),
         False,
         False,
     ),
@@ -148,7 +148,7 @@ MONOCHROMATIC_GRAPH_TEST_CASES = [
                 [0, 0, 0],
                 [0, 0, 0],
             ],
-            dtype=int,
+            dtype=np.uint64,
         ),
         np.array(
             [
@@ -158,7 +158,7 @@ MONOCHROMATIC_GRAPH_TEST_CASES = [
                 [0, 0, 0],
                 [0, 0, 0],
             ],
-            dtype=int,
+            dtype=np.uint64,
         ),
         np.array(
             [
@@ -166,9 +166,9 @@ MONOCHROMATIC_GRAPH_TEST_CASES = [
                 [5, 0, 5],
                 [5, 5, 0],
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
-        np.array([5, 5, 5], dtype=int),
+        np.array([5, 5, 5], dtype=np.uint8),
         False,
         False,
     ),
@@ -176,10 +176,10 @@ MONOCHROMATIC_GRAPH_TEST_CASES = [
         1,
         3,
         2,
-        np.zeros((2, 1), dtype=int),
-        np.zeros((2, 1), dtype=int),
-        np.zeros((1, 1), dtype=int),
-        np.zeros((0,), dtype=int),
+        np.zeros((2, 1), dtype=np.uint64),
+        np.zeros((2, 1), dtype=np.uint64),
+        np.zeros((1, 1), dtype=np.uint8),
+        np.zeros((0,), dtype=np.uint8),
         False,
         False,
     ),
@@ -187,10 +187,10 @@ MONOCHROMATIC_GRAPH_TEST_CASES = [
         1,
         3,
         3,
-        np.zeros((2, 1), dtype=int),
-        np.zeros((2, 1), dtype=int),
-        np.zeros((1, 1), dtype=int),
-        np.zeros((0,), dtype=int),
+        np.zeros((2, 1), dtype=np.uint64),
+        np.zeros((2, 1), dtype=np.uint64),
+        np.zeros((1, 1), dtype=np.uint8),
+        np.zeros((0,), dtype=np.uint8),
         False,
         False,
     ),
@@ -200,33 +200,33 @@ MONOCHROMATIC_GRAPH_TEST_CASES = [
 EMPTY_GRAPH_TEST_CASES = [
     (
         1,
-        np.zeros((1, 1), dtype=int),
-        np.zeros((1, 1), dtype=int),
-        np.zeros((0,), dtype=int),
+        np.zeros((1, 1), dtype=np.uint64),
+        np.zeros((1, 1), dtype=np.uint8),
+        np.zeros((0,), dtype=np.uint8),
     ),
     (
         2,
-        np.zeros((1, 2), dtype=int),
-        np.zeros((2, 2), dtype=int),
-        np.zeros((1,), dtype=int),
+        np.zeros((1, 2), dtype=np.uint64),
+        np.zeros((2, 2), dtype=np.uint8),
+        np.zeros((1,), dtype=np.uint8),
     ),
     (
         3,
-        np.zeros((1, 3), dtype=int),
-        np.zeros((3, 3), dtype=int),
-        np.zeros((3,), dtype=int),
+        np.zeros((1, 3), dtype=np.uint64),
+        np.zeros((3, 3), dtype=np.uint8),
+        np.zeros((3,), dtype=np.uint8),
     ),
     (
         4,
-        np.zeros((1, 4), dtype=int),
-        np.zeros((4, 4), dtype=int),
-        np.zeros((6,), dtype=int),
+        np.zeros((1, 4), dtype=np.uint64),
+        np.zeros((4, 4), dtype=np.uint8),
+        np.zeros((6,), dtype=np.uint8),
     ),
     (
         5,
-        np.zeros((1, 5), dtype=int),
-        np.zeros((5, 5), dtype=int),
-        np.zeros((10,), dtype=int),
+        np.zeros((1, 5), dtype=np.uint64),
+        np.zeros((5, 5), dtype=np.uint8),
+        np.zeros((10,), dtype=np.uint8),
     ),
 ]
 
@@ -234,38 +234,38 @@ EMPTY_GRAPH_TEST_CASES = [
 COMPLETE_GRAPH_TEST_CASES = [
     (
         1,
-        np.zeros((1, 1), dtype=int),
-        np.zeros((1, 1), dtype=int),
-        np.zeros((0,), dtype=int),
+        np.zeros((1, 1), dtype=np.uint64),
+        np.zeros((1, 1), dtype=np.uint8),
+        np.zeros((0,), dtype=np.uint8),
     ),
     (
         2,
-        np.array([[2, 1]], dtype=int),
+        np.array([[2, 1]], dtype=np.uint64),
         np.array(
             [
                 [0, 1],
                 [1, 0],
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
-        np.ones((1,), dtype=int),
+        np.ones((1,), dtype=np.uint8),
     ),
     (
         3,
-        np.array([[6, 5, 3]], dtype=int),
+        np.array([[6, 5, 3]], dtype=np.uint64),
         np.array(
             [
                 [0, 1, 1],
                 [1, 0, 1],
                 [1, 1, 0],
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
-        np.ones((3,), dtype=int),
+        np.ones((3,), dtype=np.uint8),
     ),
     (
         4,
-        np.array([[14, 13, 11, 7]], dtype=int),
+        np.array([[14, 13, 11, 7]], dtype=np.uint64),
         np.array(
             [
                 [0, 1, 1, 1],
@@ -273,13 +273,13 @@ COMPLETE_GRAPH_TEST_CASES = [
                 [1, 1, 0, 1],
                 [1, 1, 1, 0],
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
-        np.ones((6,), dtype=int),
+        np.ones((6,), dtype=np.uint8),
     ),
     (
         6,
-        np.array([[62, 61, 59, 55, 47, 31]], dtype=int),
+        np.array([[62, 61, 59, 55, 47, 31]], dtype=np.uint64),
         np.array(
             [
                 [0, 1, 1, 1, 1, 1],
@@ -289,9 +289,9 @@ COMPLETE_GRAPH_TEST_CASES = [
                 [1, 1, 1, 1, 0, 1],
                 [1, 1, 1, 1, 1, 0],
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
-        np.ones((15,), dtype=int),
+        np.ones((15,), dtype=np.uint8),
     ),
 ]
 
@@ -299,26 +299,26 @@ COMPLETE_GRAPH_TEST_CASES = [
 ALMOST_COMPLETE_GRAPH_TEST_CASES = [
     (
         2,
-        np.zeros((1, 2), dtype=int),
-        np.zeros((2, 2), dtype=int),
-        np.zeros((1,), dtype=int),
+        np.zeros((1, 2), dtype=np.uint64),
+        np.zeros((2, 2), dtype=np.uint8),
+        np.zeros((1,), dtype=np.uint8),
     ),
     (
         3,
-        np.array([[6, 1, 1]], dtype=int),
+        np.array([[6, 1, 1]], dtype=np.uint64),
         np.array(
             [
                 [0, 1, 1],
                 [1, 0, 0],
                 [1, 0, 0],
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
-        np.array([1, 1, 0], dtype=int),
+        np.array([1, 1, 0], dtype=np.uint8),
     ),
     (
         4,
-        np.array([[14, 13, 3, 3]], dtype=int),
+        np.array([[14, 13, 3, 3]], dtype=np.uint64),
         np.array(
             [
                 [0, 1, 1, 1],
@@ -326,13 +326,13 @@ ALMOST_COMPLETE_GRAPH_TEST_CASES = [
                 [1, 1, 0, 0],
                 [1, 1, 0, 0],
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
-        np.array([1, 1, 1, 1, 1, 0], dtype=int),
+        np.array([1, 1, 1, 1, 1, 0], dtype=np.uint8),
     ),
     (
         5,
-        np.array([[30, 29, 27, 7, 7]], dtype=int),
+        np.array([[30, 29, 27, 7, 7]], dtype=np.uint64),
         np.array(
             [
                 [0, 1, 1, 1, 1],
@@ -341,13 +341,13 @@ ALMOST_COMPLETE_GRAPH_TEST_CASES = [
                 [1, 1, 1, 0, 0],
                 [1, 1, 1, 0, 0],
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
-        np.array([1, 1, 1, 1, 1, 1, 1, 1, 1, 0], dtype=int),
+        np.array([1, 1, 1, 1, 1, 1, 1, 1, 1, 0], dtype=np.uint8),
     ),
     (
         6,
-        np.array([[62, 61, 59, 55, 15, 15]], dtype=int),
+        np.array([[62, 61, 59, 55, 15, 15]], dtype=np.uint64),
         np.array(
             [
                 [0, 1, 1, 1, 1, 1],
@@ -357,9 +357,9 @@ ALMOST_COMPLETE_GRAPH_TEST_CASES = [
                 [1, 1, 1, 1, 0, 0],
                 [1, 1, 1, 1, 0, 0],
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
-        np.array([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0], dtype=int),
+        np.array([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0], dtype=np.uint8),
     ),
 ]
 
@@ -369,7 +369,7 @@ COMPLETE_BIPARTITE_GRAPH_TEST_CASES = [
         3,
         5,
         8,
-        np.array([[248, 248, 248, 7, 7, 7, 7, 7]], dtype=int),
+        np.array([[248, 248, 248, 7, 7, 7, 7, 7]], dtype=np.uint64),
         np.array(
             [
                 [0, 0, 0, 1, 1, 1, 1, 1],
@@ -381,22 +381,22 @@ COMPLETE_BIPARTITE_GRAPH_TEST_CASES = [
                 [1, 1, 1, 0, 0, 0, 0, 0],
                 [1, 1, 1, 0, 0, 0, 0, 0],
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
         np.array(
             [0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0],
-            dtype=int,
+            dtype=np.uint8,
         ),
         np.array(
             [0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            dtype=int,
+            dtype=np.uint8,
         ),
     ),
     (
         7,
         2,
         9,
-        np.array([[384, 384, 384, 384, 384, 384, 384, 127, 127]], dtype=int),
+        np.array([[384, 384, 384, 384, 384, 384, 384, 127, 127]], dtype=np.uint64),
         np.array(
             [
                 [0, 0, 0, 0, 0, 0, 0, 1, 1],
@@ -409,7 +409,7 @@ COMPLETE_BIPARTITE_GRAPH_TEST_CASES = [
                 [1, 1, 1, 1, 1, 1, 1, 0, 0],
                 [1, 1, 1, 1, 1, 1, 1, 0, 0],
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
         np.array(
             [
@@ -450,7 +450,7 @@ COMPLETE_BIPARTITE_GRAPH_TEST_CASES = [
                 1,
                 0,
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
         np.array(
             [
@@ -491,14 +491,14 @@ COMPLETE_BIPARTITE_GRAPH_TEST_CASES = [
                 1,
                 0,
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
     ),
     (
         4,
         0,
         4,
-        np.array([[0, 0, 0, 0]], dtype=int),
+        np.array([[0, 0, 0, 0]], dtype=np.uint64),
         np.array(
             [
                 [0, 0, 0, 0],
@@ -506,41 +506,41 @@ COMPLETE_BIPARTITE_GRAPH_TEST_CASES = [
                 [0, 0, 0, 0],
                 [0, 0, 0, 0],
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
-        np.array([0, 0, 0, 0, 0, 0], dtype=int),
-        np.array([0, 0, 0, 0, 0, 0], dtype=int),
+        np.array([0, 0, 0, 0, 0, 0], dtype=np.uint8),
+        np.array([0, 0, 0, 0, 0, 0], dtype=np.uint8),
     ),
     (
         0,
         3,
         3,
-        np.array([[0, 0, 0]], dtype=int),
+        np.array([[0, 0, 0]], dtype=np.uint64),
         np.array(
             [
                 [0, 0, 0],
                 [0, 0, 0],
                 [0, 0, 0],
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
-        np.array([0, 0, 0], dtype=int),
-        np.array([0, 0, 0], dtype=int),
+        np.array([0, 0, 0], dtype=np.uint8),
+        np.array([0, 0, 0], dtype=np.uint8),
     ),
     (
         1,
         1,
         2,
-        np.array([[2, 1]], dtype=int),
+        np.array([[2, 1]], dtype=np.uint64),
         np.array(
             [
                 [0, 1],
                 [1, 0],
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
-        np.array([1], dtype=int),
-        np.array([1], dtype=int),
+        np.array([1], dtype=np.uint8),
+        np.array([1], dtype=np.uint8),
     ),
 ]
 
@@ -549,7 +549,7 @@ COMPLETE_K_PARTITE_GRAPH_TEST_CASES = [
     (
         [3, 5],
         8,
-        np.array([[248, 248, 248, 7, 7, 7, 7, 7]], dtype=int),
+        np.array([[248, 248, 248, 7, 7, 7, 7, 7]], dtype=np.uint64),
         np.array(
             [
                 [0, 0, 0, 1, 1, 1, 1, 1],
@@ -561,21 +561,21 @@ COMPLETE_K_PARTITE_GRAPH_TEST_CASES = [
                 [1, 1, 1, 0, 0, 0, 0, 0],
                 [1, 1, 1, 0, 0, 0, 0, 0],
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
         np.array(
             [0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0],
-            dtype=int,
+            dtype=np.uint8,
         ),
         np.array(
             [0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            dtype=int,
+            dtype=np.uint8,
         ),
     ),
     (
         [7, 2],
         9,
-        np.array([[384, 384, 384, 384, 384, 384, 384, 127, 127]], dtype=int),
+        np.array([[384, 384, 384, 384, 384, 384, 384, 127, 127]], dtype=np.uint64),
         np.array(
             [
                 [0, 0, 0, 0, 0, 0, 0, 1, 1],
@@ -588,7 +588,7 @@ COMPLETE_K_PARTITE_GRAPH_TEST_CASES = [
                 [1, 1, 1, 1, 1, 1, 1, 0, 0],
                 [1, 1, 1, 1, 1, 1, 1, 0, 0],
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
         np.array(
             [
@@ -629,7 +629,7 @@ COMPLETE_K_PARTITE_GRAPH_TEST_CASES = [
                 1,
                 0,
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
         np.array(
             [
@@ -670,13 +670,13 @@ COMPLETE_K_PARTITE_GRAPH_TEST_CASES = [
                 1,
                 0,
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
     ),
     (
         [4, 0],
         4,
-        np.array([[0, 0, 0, 0]], dtype=int),
+        np.array([[0, 0, 0, 0]], dtype=np.uint64),
         np.array(
             [
                 [0, 0, 0, 0],
@@ -684,44 +684,44 @@ COMPLETE_K_PARTITE_GRAPH_TEST_CASES = [
                 [0, 0, 0, 0],
                 [0, 0, 0, 0],
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
-        np.array([0, 0, 0, 0, 0, 0], dtype=int),
-        np.array([0, 0, 0, 0, 0, 0], dtype=int),
+        np.array([0, 0, 0, 0, 0, 0], dtype=np.uint8),
+        np.array([0, 0, 0, 0, 0, 0], dtype=np.uint8),
     ),
     (
         [0, 3],
         3,
-        np.array([[0, 0, 0]], dtype=int),
+        np.array([[0, 0, 0]], dtype=np.uint64),
         np.array(
             [
                 [0, 0, 0],
                 [0, 0, 0],
                 [0, 0, 0],
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
-        np.array([0, 0, 0], dtype=int),
-        np.array([0, 0, 0], dtype=int),
+        np.array([0, 0, 0], dtype=np.uint8),
+        np.array([0, 0, 0], dtype=np.uint8),
     ),
     (
         [1, 1],
         2,
-        np.array([[2, 1]], dtype=int),
+        np.array([[2, 1]], dtype=np.uint64),
         np.array(
             [
                 [0, 1],
                 [1, 0],
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
-        np.array([1], dtype=int),
-        np.array([1], dtype=int),
+        np.array([1], dtype=np.uint8),
+        np.array([1], dtype=np.uint8),
     ),
     (
         [4, 2, 3],
         9,
-        np.array([[496, 496, 496, 496, 463, 463, 63, 63, 63]], dtype=int),
+        np.array([[496, 496, 496, 496, 463, 463, 63, 63, 63]], dtype=np.uint64),
         np.array(
             [
                 [0, 0, 0, 0, 1, 1, 1, 1, 1],
@@ -734,7 +734,7 @@ COMPLETE_K_PARTITE_GRAPH_TEST_CASES = [
                 [1, 1, 1, 1, 1, 1, 0, 0, 0],
                 [1, 1, 1, 1, 1, 1, 0, 0, 0],
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
         np.array(
             [
@@ -775,7 +775,7 @@ COMPLETE_K_PARTITE_GRAPH_TEST_CASES = [
                 0,
                 0,
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
         np.array(
             [
@@ -816,13 +816,13 @@ COMPLETE_K_PARTITE_GRAPH_TEST_CASES = [
                 0,
                 0,
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
     ),
     (
         [2, 2, 1, 2],
         7,
-        np.array([[124, 124, 115, 115, 111, 31, 31]], dtype=int),
+        np.array([[124, 124, 115, 115, 111, 31, 31]], dtype=np.uint64),
         np.array(
             [
                 [0, 0, 1, 1, 1, 1, 1],
@@ -833,15 +833,15 @@ COMPLETE_K_PARTITE_GRAPH_TEST_CASES = [
                 [1, 1, 1, 1, 1, 0, 0],
                 [1, 1, 1, 1, 1, 0, 0],
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
-        np.array([0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0], dtype=int),
-        np.array([0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0], dtype=int),
+        np.array([0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0], dtype=np.uint8),
+        np.array([0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0], dtype=np.uint8),
     ),
     (
         [0, 4, 2, 0, 3, 0],
         9,
-        np.array([[496, 496, 496, 496, 463, 463, 63, 63, 63]], dtype=int),
+        np.array([[496, 496, 496, 496, 463, 463, 63, 63, 63]], dtype=np.uint64),
         np.array(
             [
                 [0, 0, 0, 0, 1, 1, 1, 1, 1],
@@ -854,7 +854,7 @@ COMPLETE_K_PARTITE_GRAPH_TEST_CASES = [
                 [1, 1, 1, 1, 1, 1, 0, 0, 0],
                 [1, 1, 1, 1, 1, 1, 0, 0, 0],
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
         np.array(
             [
@@ -895,7 +895,7 @@ COMPLETE_K_PARTITE_GRAPH_TEST_CASES = [
                 0,
                 0,
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
         np.array(
             [
@@ -936,7 +936,7 @@ COMPLETE_K_PARTITE_GRAPH_TEST_CASES = [
                 0,
                 0,
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
     ),
 ]
@@ -946,88 +946,88 @@ STAR_GRAPH_TEST_CASES = [
     (
         1,
         0,
-        np.array([[0]], dtype=int),
-        np.array([[0]], dtype=int),
-        np.zeros((0,), dtype=int),
-        np.zeros((0,), dtype=int),
+        np.array([[0]], dtype=np.uint64),
+        np.array([[0]], dtype=np.uint8),
+        np.zeros((0,), dtype=np.uint8),
+        np.zeros((0,), dtype=np.uint8),
     ),
     (
         2,
         0,
-        np.array([[2, 1]], dtype=int),
+        np.array([[2, 1]], dtype=np.uint64),
         np.array(
             [
                 [0, 1],
                 [1, 0],
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
-        np.ones((1,), dtype=int),
-        np.ones((1,), dtype=int),
+        np.ones((1,), dtype=np.uint8),
+        np.ones((1,), dtype=np.uint8),
     ),
     (
         2,
         1,
-        np.array([[2, 1]], dtype=int),
+        np.array([[2, 1]], dtype=np.uint64),
         np.array(
             [
                 [0, 1],
                 [1, 0],
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
-        np.ones((1,), dtype=int),
-        np.ones((1,), dtype=int),
+        np.ones((1,), dtype=np.uint8),
+        np.ones((1,), dtype=np.uint8),
     ),
     (
         3,
         0,
-        np.array([[6, 1, 1]], dtype=int),
+        np.array([[6, 1, 1]], dtype=np.uint64),
         np.array(
             [
                 [0, 1, 1],
                 [1, 0, 0],
                 [1, 0, 0],
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
-        np.array([1, 1, 0], dtype=int),
-        np.array([1, 1, 0], dtype=int),
+        np.array([1, 1, 0], dtype=np.uint8),
+        np.array([1, 1, 0], dtype=np.uint8),
     ),
     (
         3,
         1,
-        np.array([[2, 5, 2]], dtype=int),
+        np.array([[2, 5, 2]], dtype=np.uint64),
         np.array(
             [
                 [0, 1, 0],
                 [1, 0, 1],
                 [0, 1, 0],
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
-        np.array([1, 0, 1], dtype=int),
-        np.array([1, 0, 1], dtype=int),
+        np.array([1, 0, 1], dtype=np.uint8),
+        np.array([1, 0, 1], dtype=np.uint8),
     ),
     (
         3,
         2,
-        np.array([[4, 4, 3]], dtype=int),
+        np.array([[4, 4, 3]], dtype=np.uint64),
         np.array(
             [
                 [0, 0, 1],
                 [0, 0, 1],
                 [1, 1, 0],
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
-        np.array([0, 1, 1], dtype=int),
-        np.array([0, 1, 1], dtype=int),
+        np.array([0, 1, 1], dtype=np.uint8),
+        np.array([0, 1, 1], dtype=np.uint8),
     ),
     (
         4,
         0,
-        np.array([[14, 1, 1, 1]], dtype=int),
+        np.array([[14, 1, 1, 1]], dtype=np.uint64),
         np.array(
             [
                 [0, 1, 1, 1],
@@ -1035,15 +1035,15 @@ STAR_GRAPH_TEST_CASES = [
                 [1, 0, 0, 0],
                 [1, 0, 0, 0],
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
-        np.array([1, 1, 0, 1, 0, 0], dtype=int),
-        np.array([1, 1, 1, 0, 0, 0], dtype=int),
+        np.array([1, 1, 0, 1, 0, 0], dtype=np.uint8),
+        np.array([1, 1, 1, 0, 0, 0], dtype=np.uint8),
     ),
     (
         4,
         1,
-        np.array([[2, 13, 2, 2]], dtype=int),
+        np.array([[2, 13, 2, 2]], dtype=np.uint64),
         np.array(
             [
                 [0, 1, 0, 0],
@@ -1051,15 +1051,15 @@ STAR_GRAPH_TEST_CASES = [
                 [0, 1, 0, 0],
                 [0, 1, 0, 0],
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
-        np.array([1, 0, 1, 0, 1, 0], dtype=int),
-        np.array([1, 0, 0, 1, 1, 0], dtype=int),
+        np.array([1, 0, 1, 0, 1, 0], dtype=np.uint8),
+        np.array([1, 0, 0, 1, 1, 0], dtype=np.uint8),
     ),
     (
         4,
         2,
-        np.array([[4, 4, 11, 4]], dtype=int),
+        np.array([[4, 4, 11, 4]], dtype=np.uint64),
         np.array(
             [
                 [0, 0, 1, 0],
@@ -1067,15 +1067,15 @@ STAR_GRAPH_TEST_CASES = [
                 [1, 1, 0, 1],
                 [0, 0, 1, 0],
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
-        np.array([0, 1, 1, 0, 0, 1], dtype=int),
-        np.array([0, 1, 0, 1, 0, 1], dtype=int),
+        np.array([0, 1, 1, 0, 0, 1], dtype=np.uint8),
+        np.array([0, 1, 0, 1, 0, 1], dtype=np.uint8),
     ),
     (
         4,
         3,
-        np.array([[8, 8, 8, 7]], dtype=int),
+        np.array([[8, 8, 8, 7]], dtype=np.uint64),
         np.array(
             [
                 [0, 0, 0, 1],
@@ -1083,15 +1083,15 @@ STAR_GRAPH_TEST_CASES = [
                 [0, 0, 0, 1],
                 [1, 1, 1, 0],
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
-        np.array([0, 0, 0, 1, 1, 1], dtype=int),
-        np.array([0, 0, 1, 0, 1, 1], dtype=int),
+        np.array([0, 0, 0, 1, 1, 1], dtype=np.uint8),
+        np.array([0, 0, 1, 0, 1, 1], dtype=np.uint8),
     ),
     (
         7,
         2,
-        np.array([[4, 4, 123, 4, 4, 4, 4]], dtype=int),
+        np.array([[4, 4, 123, 4, 4, 4, 4]], dtype=np.uint64),
         np.array(
             [
                 [0, 0, 1, 0, 0, 0, 0],
@@ -1102,15 +1102,15 @@ STAR_GRAPH_TEST_CASES = [
                 [0, 0, 1, 0, 0, 0, 0],
                 [0, 0, 1, 0, 0, 0, 0],
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
-        np.array([0, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0], dtype=int),
-        np.array([0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0], dtype=int),
+        np.array([0, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0], dtype=np.uint8),
+        np.array([0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0], dtype=np.uint8),
     ),
     (
         8,
         4,
-        np.array([[16, 16, 16, 16, 239, 16, 16, 16]], dtype=int),
+        np.array([[16, 16, 16, 16, 239, 16, 16, 16]], dtype=np.uint64),
         np.array(
             [
                 [0, 0, 0, 0, 1, 0, 0, 0],
@@ -1122,15 +1122,15 @@ STAR_GRAPH_TEST_CASES = [
                 [0, 0, 0, 0, 1, 0, 0, 0],
                 [0, 0, 0, 0, 1, 0, 0, 0],
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
         np.array(
             [0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0],
-            dtype=int,
+            dtype=np.uint8,
         ),
         np.array(
             [0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0],
-            dtype=int,
+            dtype=np.uint8,
         ),
     ),
 ]
@@ -1139,41 +1139,41 @@ STAR_GRAPH_TEST_CASES = [
 PATH_GRAPH_TEST_CASES = [
     (
         1,
-        np.array([[0]], dtype=int),
-        np.array([[0]], dtype=int),
-        np.zeros((0,), dtype=int),
-        np.zeros((0,), dtype=int),
+        np.array([[0]], dtype=np.uint64),
+        np.array([[0]], dtype=np.uint8),
+        np.zeros((0,), dtype=np.uint8),
+        np.zeros((0,), dtype=np.uint8),
     ),
     (
         2,
-        np.array([[2, 1]], dtype=int),
+        np.array([[2, 1]], dtype=np.uint64),
         np.array(
             [
                 [0, 1],
                 [1, 0],
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
-        np.ones((1,), dtype=int),
-        np.ones((1,), dtype=int),
+        np.ones((1,), dtype=np.uint8),
+        np.ones((1,), dtype=np.uint8),
     ),
     (
         3,
-        np.array([[2, 5, 2]], dtype=int),
+        np.array([[2, 5, 2]], dtype=np.uint64),
         np.array(
             [
                 [0, 1, 0],
                 [1, 0, 1],
                 [0, 1, 0],
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
-        np.array([1, 0, 1], dtype=int),
-        np.array([1, 0, 1], dtype=int),
+        np.array([1, 0, 1], dtype=np.uint8),
+        np.array([1, 0, 1], dtype=np.uint8),
     ),
     (
         4,
-        np.array([[2, 5, 10, 4]], dtype=int),
+        np.array([[2, 5, 10, 4]], dtype=np.uint64),
         np.array(
             [
                 [0, 1, 0, 0],
@@ -1181,14 +1181,14 @@ PATH_GRAPH_TEST_CASES = [
                 [0, 1, 0, 1],
                 [0, 0, 1, 0],
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
-        np.array([1, 0, 1, 0, 0, 1], dtype=int),
-        np.array([1, 0, 0, 1, 0, 1], dtype=int),
+        np.array([1, 0, 1, 0, 0, 1], dtype=np.uint8),
+        np.array([1, 0, 0, 1, 0, 1], dtype=np.uint8),
     ),
     (
         5,
-        np.array([[2, 5, 10, 20, 8]], dtype=int),
+        np.array([[2, 5, 10, 20, 8]], dtype=np.uint64),
         np.array(
             [
                 [0, 1, 0, 0, 0],
@@ -1197,14 +1197,14 @@ PATH_GRAPH_TEST_CASES = [
                 [0, 0, 1, 0, 1],
                 [0, 0, 0, 1, 0],
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
-        np.array([1, 0, 1, 0, 0, 1, 0, 0, 0, 1], dtype=int),
-        np.array([1, 0, 0, 0, 1, 0, 0, 1, 0, 1], dtype=int),
+        np.array([1, 0, 1, 0, 0, 1, 0, 0, 0, 1], dtype=np.uint8),
+        np.array([1, 0, 0, 0, 1, 0, 0, 1, 0, 1], dtype=np.uint8),
     ),
     (
         6,
-        np.array([[2, 5, 10, 20, 40, 16]], dtype=int),
+        np.array([[2, 5, 10, 20, 40, 16]], dtype=np.uint64),
         np.array(
             [
                 [0, 1, 0, 0, 0, 0],
@@ -1214,10 +1214,10 @@ PATH_GRAPH_TEST_CASES = [
                 [0, 0, 0, 1, 0, 1],
                 [0, 0, 0, 0, 1, 0],
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
-        np.array([1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1], dtype=int),
-        np.array([1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1], dtype=int),
+        np.array([1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1], dtype=np.uint8),
+        np.array([1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1], dtype=np.uint8),
     ),
 ]
 
@@ -1225,21 +1225,21 @@ PATH_GRAPH_TEST_CASES = [
 CYCLE_GRAPH_TEST_CASES = [
     (
         3,
-        np.array([[6, 5, 3]], dtype=int),
+        np.array([[6, 5, 3]], dtype=np.uint64),
         np.array(
             [
                 [0, 1, 1],
                 [1, 0, 1],
                 [1, 1, 0],
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
-        np.array([1, 1, 1], dtype=int),
-        np.array([1, 1, 1], dtype=int),
+        np.array([1, 1, 1], dtype=np.uint8),
+        np.array([1, 1, 1], dtype=np.uint8),
     ),
     (
         4,
-        np.array([[10, 5, 10, 5]], dtype=int),
+        np.array([[10, 5, 10, 5]], dtype=np.uint64),
         np.array(
             [
                 [0, 1, 0, 1],
@@ -1247,14 +1247,14 @@ CYCLE_GRAPH_TEST_CASES = [
                 [0, 1, 0, 1],
                 [1, 0, 1, 0],
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
-        np.array([1, 0, 1, 1, 0, 1], dtype=int),
-        np.array([1, 0, 1, 1, 0, 1], dtype=int),
+        np.array([1, 0, 1, 1, 0, 1], dtype=np.uint8),
+        np.array([1, 0, 1, 1, 0, 1], dtype=np.uint8),
     ),
     (
         5,
-        np.array([[18, 5, 10, 20, 9]], dtype=int),
+        np.array([[18, 5, 10, 20, 9]], dtype=np.uint64),
         np.array(
             [
                 [0, 1, 0, 0, 1],
@@ -1263,14 +1263,14 @@ CYCLE_GRAPH_TEST_CASES = [
                 [0, 0, 1, 0, 1],
                 [1, 0, 0, 1, 0],
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
-        np.array([1, 0, 1, 0, 0, 1, 1, 0, 0, 1], dtype=int),
-        np.array([1, 0, 0, 1, 1, 0, 0, 1, 0, 1], dtype=int),
+        np.array([1, 0, 1, 0, 0, 1, 1, 0, 0, 1], dtype=np.uint8),
+        np.array([1, 0, 0, 1, 1, 0, 0, 1, 0, 1], dtype=np.uint8),
     ),
     (
         6,
-        np.array([[34, 5, 10, 20, 40, 17]], dtype=int),
+        np.array([[34, 5, 10, 20, 40, 17]], dtype=np.uint64),
         np.array(
             [
                 [0, 1, 0, 0, 0, 1],
@@ -1280,14 +1280,14 @@ CYCLE_GRAPH_TEST_CASES = [
                 [0, 0, 0, 1, 0, 1],
                 [1, 0, 0, 0, 1, 0],
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
-        np.array([1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1], dtype=int),
-        np.array([1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1], dtype=int),
+        np.array([1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1], dtype=np.uint8),
+        np.array([1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1], dtype=np.uint8),
     ),
     (
         7,
-        np.array([[66, 5, 10, 20, 40, 80, 33]], dtype=int),
+        np.array([[66, 5, 10, 20, 40, 80, 33]], dtype=np.uint64),
         np.array(
             [
                 [0, 1, 0, 0, 0, 0, 1],
@@ -1298,10 +1298,10 @@ CYCLE_GRAPH_TEST_CASES = [
                 [0, 0, 0, 0, 1, 0, 1],
                 [1, 0, 0, 0, 0, 1, 0],
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
-        np.array([1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1], dtype=int),
-        np.array([1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1], dtype=int),
+        np.array([1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1], dtype=np.uint8),
+        np.array([1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1], dtype=np.uint8),
     ),
 ]
 
@@ -1309,7 +1309,7 @@ CYCLE_GRAPH_TEST_CASES = [
 WHEEL_GRAPH_TEST_CASES = [
     (
         4,
-        np.array([[14, 13, 11, 7]], dtype=int),
+        np.array([[14, 13, 11, 7]], dtype=np.uint64),
         np.array(
             [
                 [0, 1, 1, 1],
@@ -1317,14 +1317,14 @@ WHEEL_GRAPH_TEST_CASES = [
                 [1, 1, 0, 1],
                 [1, 1, 1, 0],
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
-        np.ones((6,), dtype=int),
-        np.ones((6,), dtype=int),
+        np.ones((6,), dtype=np.uint8),
+        np.ones((6,), dtype=np.uint8),
     ),
     (
         5,
-        np.array([[30, 21, 11, 21, 11]], dtype=int),
+        np.array([[30, 21, 11, 21, 11]], dtype=np.uint64),
         np.array(
             [
                 [0, 1, 1, 1, 1],
@@ -1333,14 +1333,14 @@ WHEEL_GRAPH_TEST_CASES = [
                 [1, 0, 1, 0, 1],
                 [1, 1, 0, 1, 0],
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
-        np.array([1, 1, 1, 1, 0, 1, 1, 1, 0, 1], dtype=int),
-        np.array([1, 1, 1, 1, 1, 0, 1, 1, 0, 1], dtype=int),
+        np.array([1, 1, 1, 1, 0, 1, 1, 1, 0, 1], dtype=np.uint8),
+        np.array([1, 1, 1, 1, 1, 0, 1, 1, 0, 1], dtype=np.uint8),
     ),
     (
         6,
-        np.array([[62, 37, 11, 21, 41, 19]], dtype=int),
+        np.array([[62, 37, 11, 21, 41, 19]], dtype=np.uint64),
         np.array(
             [
                 [0, 1, 1, 1, 1, 1],
@@ -1350,14 +1350,14 @@ WHEEL_GRAPH_TEST_CASES = [
                 [1, 0, 0, 1, 0, 1],
                 [1, 1, 0, 0, 1, 0],
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
-        np.array([1, 1, 1, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1], dtype=int),
-        np.array([1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1], dtype=int),
+        np.array([1, 1, 1, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1], dtype=np.uint8),
+        np.array([1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1], dtype=np.uint8),
     ),
     (
         8,
-        np.array([[254, 133, 11, 21, 41, 81, 161, 67]], dtype=int),
+        np.array([[254, 133, 11, 21, 41, 81, 161, 67]], dtype=np.uint64),
         np.array(
             [
                 [0, 1, 1, 1, 1, 1, 1, 1],
@@ -1369,15 +1369,15 @@ WHEEL_GRAPH_TEST_CASES = [
                 [1, 0, 0, 0, 0, 1, 0, 1],
                 [1, 1, 0, 0, 0, 0, 1, 0],
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
         np.array(
             [1, 1, 1, 1, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 1],
-            dtype=int,
+            dtype=np.uint8,
         ),
         np.array(
             [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1],
-            dtype=int,
+            dtype=np.uint8,
         ),
     ),
 ]
@@ -1386,21 +1386,21 @@ WHEEL_GRAPH_TEST_CASES = [
 BOOK_GRAPH_TEST_CASES = [
     (
         1,
-        np.array([[6, 5, 3]], dtype=int),
+        np.array([[6, 5, 3]], dtype=np.uint64),
         np.array(
             [
                 [0, 1, 1],
                 [1, 0, 1],
                 [1, 1, 0],
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
-        np.ones((3,), dtype=int),
-        np.ones((3,), dtype=int),
+        np.ones((3,), dtype=np.uint8),
+        np.ones((3,), dtype=np.uint8),
     ),
     (
         2,
-        np.array([[14, 13, 3, 3]], dtype=int),
+        np.array([[14, 13, 3, 3]], dtype=np.uint64),
         np.array(
             [
                 [0, 1, 1, 1],
@@ -1408,14 +1408,14 @@ BOOK_GRAPH_TEST_CASES = [
                 [1, 1, 0, 0],
                 [1, 1, 0, 0],
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
-        np.array([1, 1, 1, 1, 1, 0], dtype=int),
-        np.array([1, 1, 1, 1, 1, 0], dtype=int),
+        np.array([1, 1, 1, 1, 1, 0], dtype=np.uint8),
+        np.array([1, 1, 1, 1, 1, 0], dtype=np.uint8),
     ),
     (
         3,
-        np.array([[30, 29, 3, 3, 3]], dtype=int),
+        np.array([[30, 29, 3, 3, 3]], dtype=np.uint64),
         np.array(
             [
                 [0, 1, 1, 1, 1],
@@ -1424,14 +1424,14 @@ BOOK_GRAPH_TEST_CASES = [
                 [1, 1, 0, 0, 0],
                 [1, 1, 0, 0, 0],
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
-        np.array([1, 1, 1, 1, 1, 0, 1, 1, 0, 0], dtype=int),
-        np.array([1, 1, 1, 1, 1, 1, 1, 0, 0, 0], dtype=int),
+        np.array([1, 1, 1, 1, 1, 0, 1, 1, 0, 0], dtype=np.uint8),
+        np.array([1, 1, 1, 1, 1, 1, 1, 0, 0, 0], dtype=np.uint8),
     ),
     (
         5,
-        np.array([[126, 125, 3, 3, 3, 3, 3]], dtype=int),
+        np.array([[126, 125, 3, 3, 3, 3, 3]], dtype=np.uint64),
         np.array(
             [
                 [0, 1, 1, 1, 1, 1, 1],
@@ -1442,10 +1442,10 @@ BOOK_GRAPH_TEST_CASES = [
                 [1, 1, 0, 0, 0, 0, 0],
                 [1, 1, 0, 0, 0, 0, 0],
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
-        np.array([1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0], dtype=int),
-        np.array([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], dtype=int),
+        np.array([1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0], dtype=np.uint8),
+        np.array([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], dtype=np.uint8),
     ),
 ]
 
@@ -1453,21 +1453,21 @@ BOOK_GRAPH_TEST_CASES = [
 FRIENDSHIP_GRAPH_TEST_CASES = [
     (
         1,
-        np.array([[6, 5, 3]], dtype=int),
+        np.array([[6, 5, 3]], dtype=np.uint64),
         np.array(
             [
                 [0, 1, 1],
                 [1, 0, 1],
                 [1, 1, 0],
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
-        np.ones((3,), dtype=int),
-        np.ones((3,), dtype=int),
+        np.ones((3,), dtype=np.uint8),
+        np.ones((3,), dtype=np.uint8),
     ),
     (
         2,
-        np.array([[30, 5, 3, 17, 9]], dtype=int),
+        np.array([[30, 5, 3, 17, 9]], dtype=np.uint64),
         np.array(
             [
                 [0, 1, 1, 1, 1],
@@ -1476,14 +1476,14 @@ FRIENDSHIP_GRAPH_TEST_CASES = [
                 [1, 0, 0, 0, 1],
                 [1, 0, 0, 1, 0],
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
-        np.array([1, 1, 1, 1, 0, 0, 1, 0, 0, 1], dtype=int),
-        np.array([1, 1, 1, 1, 1, 0, 0, 0, 0, 1], dtype=int),
+        np.array([1, 1, 1, 1, 0, 0, 1, 0, 0, 1], dtype=np.uint8),
+        np.array([1, 1, 1, 1, 1, 0, 0, 0, 0, 1], dtype=np.uint8),
     ),
     (
         3,
-        np.array([[126, 5, 3, 17, 9, 65, 33]], dtype=int),
+        np.array([[126, 5, 3, 17, 9, 65, 33]], dtype=np.uint64),
         np.array(
             [
                 [0, 1, 1, 1, 1, 1, 1],
@@ -1494,14 +1494,14 @@ FRIENDSHIP_GRAPH_TEST_CASES = [
                 [1, 0, 0, 0, 0, 0, 1],
                 [1, 0, 0, 0, 0, 1, 0],
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
-        np.array([1, 1, 1, 1, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1], dtype=int),
-        np.array([1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1], dtype=int),
+        np.array([1, 1, 1, 1, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1], dtype=np.uint8),
+        np.array([1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1], dtype=np.uint8),
     ),
     (
         4,
-        np.array([[510, 5, 3, 17, 9, 65, 33, 257, 129]], dtype=int),
+        np.array([[510, 5, 3, 17, 9, 65, 33, 257, 129]], dtype=np.uint64),
         np.array(
             [
                 [0, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -1514,7 +1514,7 @@ FRIENDSHIP_GRAPH_TEST_CASES = [
                 [1, 0, 0, 0, 0, 0, 0, 0, 1],
                 [1, 0, 0, 0, 0, 0, 0, 1, 0],
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
         np.array(
             [
@@ -1555,7 +1555,7 @@ FRIENDSHIP_GRAPH_TEST_CASES = [
                 0,
                 1,
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
         np.array(
             [
@@ -1596,7 +1596,7 @@ FRIENDSHIP_GRAPH_TEST_CASES = [
                 0,
                 1,
             ],
-            dtype=int,
+            dtype=np.uint8,
         ),
     ),
 ]

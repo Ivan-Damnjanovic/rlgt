@@ -549,15 +549,15 @@
         </div>
 
         <div class="moduleDocstring">
-          <div><p>This class inherits the <code><a href="rl_graph_theory.graphs.graph.Graph.html" class="internal-link" title="rl_graph_theory.graphs.graph.Graph">Graph</a></code> class and it is used to instantiate almost-complete graphs. In
-other words, it produces a $2$-edge-colored loopless complete undirected graph of a given order
-$n$ such that all of its edges are colored with the color 1, except for the edge between the
-vertices $n - 2$ and $n - 1$, which is colored with the color 0. It is also possible to
-configure the starting graph format that an instance should get initialized in.</p></div>
+          <div><p>This class inherits from the <code><a href="rl_graph_theory.graphs.graph.Graph.html" class="internal-link" title="rl_graph_theory.graphs.graph.Graph">Graph</a></code> class and it is used to instantiate almost-complete
+graphs. In other words, it produces a $2$-edge-colored loopless complete undirected graph of a
+given order $n$ such that all of its edges are colored with the color 1, except for the edge
+between the vertices $n - 2$ and $n - 1$, which is colored with the color 0. It is also
+possible to configure the starting graph format that an instance should get initialized in.</p></div>
         </div>
 
         <div id="split-tables">
-          <table class="children sortable" id="id36">
+          <table class="children sortable" id="id41">
   
   
   <tr class="method">
@@ -571,7 +571,7 @@ configure the starting graph format that an instance should get initialized in.<
             <p class="inheritedFrom">
               Inherited from <code><a href="rl_graph_theory.graphs.graph.Graph.html" class="internal-link" title="rl_graph_theory.graphs.graph.Graph">Graph</a></code>:
             </p>
-            <table class="children sortable" id="id37">
+            <table class="children sortable" id="id42">
   
   
   <tr class="baseclassmethod">
@@ -593,7 +593,7 @@ configure the starting graph format that an instance should get initialized in.<
     
     <td>Property</td>
     <td><code><a href="rl_graph_theory.graphs.graph.Graph.html#adjacency_matrix" class="internal-link" title="rl_graph_theory.graphs.graph.Graph.adjacency_matrix">adjacency<wbr></wbr>_matrix</a></code></td>
-    <td>This property returns the <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> that represents the given graph in the adjacency matrix format (<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#ADJACENCY_MATRIX" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.ADJACENCY_MATRIX">GraphFormat.ADJACENCY_MATRIX</a></code>).</td>
+    <td>This property returns the <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> of type <code><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.uint8" class="intersphinx-link">numpy.uint8</a></code> that represents the given graph in the adjacency matrix format (<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#ADJACENCY_MATRIX" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.ADJACENCY_MATRIX">GraphFormat.ADJACENCY_MATRIX</a></code>).</td>
   </tr><tr class="baseproperty">
     
     <td>Property</td>
@@ -603,12 +603,12 @@ configure the starting graph format that an instance should get initialized in.<
     
     <td>Property</td>
     <td><code><a href="rl_graph_theory.graphs.graph.Graph.html#bitmask_in" class="internal-link" title="rl_graph_theory.graphs.graph.Graph.bitmask_in">bitmask<wbr></wbr>_in</a></code></td>
-    <td>This property returns the <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> that represents the given graph in the bitmask format for the in-neighborhoods (<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#BITMASK_IN" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.BITMASK_IN">GraphFormat.BITMASK_IN</a></code>).</td>
+    <td>This property returns the <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> of type <code><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.uint64" class="intersphinx-link">numpy.uint64</a></code> that represents the given graph in the bitmask format for the in-neighborhoods (<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#BITMASK_IN" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.BITMASK_IN">GraphFormat.BITMASK_IN</a></code>).</td>
   </tr><tr class="baseproperty">
     
     <td>Property</td>
     <td><code><a href="rl_graph_theory.graphs.graph.Graph.html#bitmask_out" class="internal-link" title="rl_graph_theory.graphs.graph.Graph.bitmask_out">bitmask<wbr></wbr>_out</a></code></td>
-    <td>This property returns the <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> that represents the given graph in the bitmask format for the out-neighborhoods (<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#BITMASK_OUT" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.BITMASK_OUT">GraphFormat.BITMASK_OUT</a></code>).</td>
+    <td>This property returns the <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> of type <code><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.uint64" class="intersphinx-link">numpy.uint64</a></code> that represents the given graph in the bitmask format for the out-neighborhoods (<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#BITMASK_OUT" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.BITMASK_OUT">GraphFormat.BITMASK_OUT</a></code>).</td>
   </tr><tr class="baseproperty">
     
     <td>Property</td>
@@ -618,12 +618,12 @@ configure the starting graph format that an instance should get initialized in.<
     
     <td>Property</td>
     <td><code><a href="rl_graph_theory.graphs.graph.Graph.html#flattened_clockwise" class="internal-link" title="rl_graph_theory.graphs.graph.Graph.flattened_clockwise">flattened<wbr></wbr>_clockwise</a></code></td>
-    <td>This property returns the <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> that represents the given graph in the flattened clockwise format (<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#FLATTENED_CLOCKWISE" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.FLATTENED_CLOCKWISE">GraphFormat.FLATTENED_CLOCKWISE</a></code>).</td>
+    <td>This property returns the <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> of type <code><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.uint8" class="intersphinx-link">numpy.uint8</a></code> that represents the given graph in the flattened clockwise format (<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#FLATTENED_CLOCKWISE" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.FLATTENED_CLOCKWISE">GraphFormat.FLATTENED_CLOCKWISE</a></code>).</td>
   </tr><tr class="baseproperty">
     
     <td>Property</td>
     <td><code><a href="rl_graph_theory.graphs.graph.Graph.html#flattened_row_major" class="internal-link" title="rl_graph_theory.graphs.graph.Graph.flattened_row_major">flattened<wbr></wbr>_row<wbr></wbr>_major</a></code></td>
-    <td>This property returns the <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> that represents the given graph in the flattened row-major format (<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#FLATTENED_ROW_MAJOR" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.FLATTENED_ROW_MAJOR">GraphFormat.FLATTENED_ROW_MAJOR</a></code>).</td>
+    <td>This property returns the <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> of type <code><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.uint8" class="intersphinx-link">numpy.uint8</a></code> that represents the given graph in the flattened row-major format (<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#FLATTENED_ROW_MAJOR" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.FLATTENED_ROW_MAJOR">GraphFormat.FLATTENED_ROW_MAJOR</a></code>).</td>
   </tr><tr class="baseproperty">
     
     <td>Property</td>
@@ -638,37 +638,37 @@ configure the starting graph format that an instance should get initialized in.<
     
     <td>Instance Variable</td>
     <td><code><a href="rl_graph_theory.graphs.graph.Graph.html#__adjacency_matrix" class="internal-link" title="rl_graph_theory.graphs.graph.Graph.__adjacency_matrix">__adjacency<wbr></wbr>_matrix</a></code></td>
-    <td>The <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> from the adjacency matrix format (<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#ADJACENCY_MATRIX" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.ADJACENCY_MATRIX">GraphFormat.ADJACENCY_MATRIX</a></code>) representation of the given graph structure, if it was used to initialize the graph or computed afterwards, and otherwise, ...</td>
+    <td>The <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> of type <code><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.uint8" class="intersphinx-link">numpy.uint8</a></code> from the adjacency matrix format (<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#ADJACENCY_MATRIX" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.ADJACENCY_MATRIX">GraphFormat.ADJACENCY_MATRIX</a></code>) representation of the given graph structure, if it was used to initialize the graph or computed afterwards, and otherwise, ...</td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
     <td><code><a href="rl_graph_theory.graphs.graph.Graph.html#__allow_loops" class="internal-link" title="rl_graph_theory.graphs.graph.Graph.__allow_loops">__allow<wbr></wbr>_loops</a></code></td>
-    <td>A boolean that indicates whether the given graph is allowed to have loops (if loops are not allowed, then all the loops are removed from the considered complete graph and they simply do not exist).</td>
+    <td>A boolean that indicates whether the given graph is allowed to have loops (if loops are not allowed, then all the loops are removed from the considered looped complete graph and they simply do not exist).</td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
     <td><code><a href="rl_graph_theory.graphs.graph.Graph.html#__bitmask_in" class="internal-link" title="rl_graph_theory.graphs.graph.Graph.__bitmask_in">__bitmask<wbr></wbr>_in</a></code></td>
-    <td>The <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> from the in-neighborhoods bitmask format (<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#BITMASK_IN" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.BITMASK_IN">GraphFormat.BITMASK_IN</a></code>) representation of the given graph structure, if it was used to initialize the graph or computed afterwards, and otherwise, ...</td>
+    <td>The <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> of type <code><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.uint64" class="intersphinx-link">numpy.uint64</a></code> from the in-neighborhoods bitmask format (<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#BITMASK_IN" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.BITMASK_IN">GraphFormat.BITMASK_IN</a></code>) representation of the given graph structure, if it was used to initialize the graph or computed afterwards, and otherwise, ...</td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
     <td><code><a href="rl_graph_theory.graphs.graph.Graph.html#__bitmask_out" class="internal-link" title="rl_graph_theory.graphs.graph.Graph.__bitmask_out">__bitmask<wbr></wbr>_out</a></code></td>
-    <td>The <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> from the out-neighborhoods bitmask format (<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#BITMASK_OUT" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.BITMASK_OUT">GraphFormat.BITMASK_OUT</a></code>) representation of the given graph structure, if it was used to initialize the graph or computed afterwards, and otherwise, ...</td>
+    <td>The <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> of type <code><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.uint64" class="intersphinx-link">numpy.uint64</a></code> from the out-neighborhoods bitmask format (<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#BITMASK_OUT" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.BITMASK_OUT">GraphFormat.BITMASK_OUT</a></code>) representation of the given graph structure, if it was used to initialize the graph or computed afterwards, and otherwise, ...</td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
     <td><code><a href="rl_graph_theory.graphs.graph.Graph.html#__edge_colors" class="internal-link" title="rl_graph_theory.graphs.graph.Graph.__edge_colors">__edge<wbr></wbr>_colors</a></code></td>
-    <td>The number of proper edge colors, i.e., $k$.</td>
+    <td>The number of proper edge colors, i.e., $k$, which is at least two.</td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
     <td><code><a href="rl_graph_theory.graphs.graph.Graph.html#__flattened_clockwise" class="internal-link" title="rl_graph_theory.graphs.graph.Graph.__flattened_clockwise">__flattened<wbr></wbr>_clockwise</a></code></td>
-    <td>The <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> from the flattened clockwise format (<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#FLATTENED_CLOCKWISE" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.FLATTENED_CLOCKWISE">GraphFormat.FLATTENED_CLOCKWISE</a></code>) representation of the given graph, if it was used to initialize the graph or computed afterwards, and otherwise, <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>...</td>
+    <td>The <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> of type <code><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.uint8" class="intersphinx-link">numpy.uint8</a></code> from the flattened clockwise format (<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#FLATTENED_CLOCKWISE" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.FLATTENED_CLOCKWISE">GraphFormat.FLATTENED_CLOCKWISE</a></code>) representation of the given graph, if it was used to initialize the graph or computed afterwards, and otherwise, ...</td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
     <td><code><a href="rl_graph_theory.graphs.graph.Graph.html#__flattened_row_major" class="internal-link" title="rl_graph_theory.graphs.graph.Graph.__flattened_row_major">__flattened<wbr></wbr>_row<wbr></wbr>_major</a></code></td>
-    <td>The <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> from the flattened row-major format (<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#FLATTENED_ROW_MAJOR" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.FLATTENED_ROW_MAJOR">GraphFormat.FLATTENED_ROW_MAJOR</a></code>) representation of the given graph, if it was used to initialize the graph or computed afterwards, and otherwise, <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>...</td>
+    <td>The <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> of type <code><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.uint8" class="intersphinx-link">numpy.uint8</a></code> from the flattened row-major format (<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#FLATTENED_ROW_MAJOR" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.FLATTENED_ROW_MAJOR">GraphFormat.FLATTENED_ROW_MAJOR</a></code>) representation of the given graph, if it was used to initialize the graph or computed afterwards, and otherwise, ...</td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
@@ -725,7 +725,7 @@ as an item of the <code><a href="rl_graph_theory.graphs.graph_format.GraphFormat
   <div class="container-fluid">
     <a href="index.html">API Documentation</a> for rl-graph-theory,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    25.10.1 at 2025-12-21 20:53:06.
+    25.10.1 at 2025-12-25 00:54:25.
   </div>
 
   <!-- Search related scripts needs to be loaded at the end of HTML 

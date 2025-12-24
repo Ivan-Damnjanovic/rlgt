@@ -1,7 +1,6 @@
 """
-This ``Python`` module contains the classes `Graph` and `GraphBatch`, which encapsulate the
-concept of a $k$-edge-colored looped complete graph and a batch of $k$-edge-colored looped complete
-graphs of the same order, respectively. #TODO
+This ``Python`` module contains the `Graph` class, which encapsulates the concept of a
+$k$-edge-colored looped complete graph.
 """
 
 from __future__ import annotations
@@ -21,36 +20,36 @@ class Graph:
     allow_loops, graph_format, format_representation)``, as explained in the `GraphFormat`
     enumeration. The graph structure can be represented in any of the five graph formats from the
     `GraphFormat` enumeration. It is initialized in exactly one of these five formats so that the
-    ``format_representation`` `np.ndarray` representing the graph structure is internally stored.
-    Afterwards, the graph can be accessed in any of the five formats, with all the required graph
-    format conversions being performed automatically. With each performed conversion, the obtained
-    `np.ndarray` object corresponding to the output graph format is internally stored. The class
-    provides support for the reduced bitmask formats, and while performing a conversion to a
-    bitmask format (`GraphFormat.BITMASK_OUT` or `GraphFormat.BITMASK_IN`), the reduced bitmask
-    format is always used if possible, i.e., if the graph is fully colored.
+    ``format_representation`` `numpy.ndarray` representing the graph structure is internally
+    stored. Afterwards, the graph can be accessed in any of the five formats, with all the required
+    graph format conversions being performed automatically. With each performed conversion, the
+    obtained `numpy.ndarray` object corresponding to the output graph format is internally stored.
+    The class provides support for the reduced bitmask formats, and while performing a conversion
+    to a bitmask format (`GraphFormat.BITMASK_OUT` or `GraphFormat.BITMASK_IN`), the reduced
+    bitmask format is always used if possible, i.e., if the graph is fully colored.
 
-    :ivar __edge_colors: The number of proper edge colors, i.e., $k$.
+    :ivar __edge_colors: The number of proper edge colors, i.e., $k$, which is at least two.
     :ivar __is_directed: A boolean that indicates whether the given graph is a $k$-edge-colored
         looped complete directed graph or a $k$-edge-colored looped complete undirected graph.
     :ivar __allow_loops: A boolean that indicates whether the given graph is allowed to have loops
-        (if loops are not allowed, then all the loops are removed from the considered complete
-        graph and they simply do not exist).
+        (if loops are not allowed, then all the loops are removed from the considered looped
+        complete graph and they simply do not exist).
     :ivar __order: The graph order, i.e., its number of vertices.
-    :ivar __bitmask_out: The `np.ndarray` from the out-neighborhoods bitmask format
-        (`GraphFormat.BITMASK_OUT`) representation of the given graph structure, if it was used to
-        initialize the graph or computed afterwards, and otherwise, `None`.
-    :ivar __bitmask_in: The `np.ndarray` from the in-neighborhoods bitmask format
-        (`GraphFormat.BITMASK_IN`) representation of the given graph structure, if it was used to
-        initialize the graph or computed afterwards, and otherwise, `None`.
-    :ivar __adjacency_matrix: The `np.ndarray` from the adjacency matrix format
-        (`GraphFormat.ADJACENCY_MATRIX`) representation of the given graph structure, if it was
-        used to initialize the graph or computed afterwards, and otherwise, `None`.
-    :ivar __flattened_row_major: The `np.ndarray` from the flattened row-major format
-        (`GraphFormat.FLATTENED_ROW_MAJOR`) representation of the given graph, if it was used to
-        initialize the graph or computed afterwards, and otherwise, `None`.
-    :ivar __flattened_clockwise: The `np.ndarray` from the flattened clockwise format
-        (`GraphFormat.FLATTENED_CLOCKWISE`) representation of the given graph, if it was used to
-        initialize the graph or computed afterwards, and otherwise, `None`.
+    :ivar __bitmask_out: The `numpy.ndarray` of type `numpy.uint64` from the out-neighborhoods
+        bitmask format (`GraphFormat.BITMASK_OUT`) representation of the given graph structure, if
+        it was used to initialize the graph or computed afterwards, and otherwise, `None`.
+    :ivar __bitmask_in: The `numpy.ndarray` of type `numpy.uint64` from the in-neighborhoods
+        bitmask format (`GraphFormat.BITMASK_IN`) representation of the given graph structure, if
+        it was used to initialize the graph or computed afterwards, and otherwise, `None`.
+    :ivar __adjacency_matrix: The `numpy.ndarray` of type `numpy.uint8` from the adjacency matrix
+        format (`GraphFormat.ADJACENCY_MATRIX`) representation of the given graph structure, if it
+        was used to initialize the graph or computed afterwards, and otherwise, `None`.
+    :ivar __flattened_row_major: The `numpy.ndarray` of type `numpy.uint8` from the flattened
+        row-major format (`GraphFormat.FLATTENED_ROW_MAJOR`) representation of the given graph, if
+        it was used to initialize the graph or computed afterwards, and otherwise, `None`.
+    :ivar __flattened_clockwise: The `numpy.ndarray` of type `numpy.uint8` from the flattened
+        clockwise format (`GraphFormat.FLATTENED_CLOCKWISE`) representation of the given graph, if
+        it was used to initialize the graph or computed afterwards, and otherwise, `None`.
 
     :note: Although available, the constructor of this class is not intended to be directly used.
         Instead, the instances should be initialized by using the three class methods
@@ -71,31 +70,36 @@ class Graph:
     ):
         """
         This constructor initializes an instance using the chosen graph format. In other words, one
-        of the five graph formats is selected, and then the corresponding `np.ndarray` is used to
-        initialize a graph with respect to this format.
+        of the five graph formats is selected, and then the corresponding `numpy.ndarray` is used
+        to initialize a graph with respect to this format.
 
         :param graph_format: The selected graph format that is used to initialize the graph, given
             as an item of the `GraphFormat` enumeration.
-        :param bitmask_out: Either `None`, or the `np.ndarray` that describes the given graph in
-            the bitmask format for the out-neighborhoods (`GraphFormat.BITMASK_OUT`). If the
-            argument ``graph_format`` equals `GraphFormat.BITMASK_OUT`, then this argument cannot
-            be `None`, and otherwise, it is ignored.
-        :param bitmask_in: Either `None`, or the `np.ndarray` that describes the given graph in the
-            bitmask format for the in-neighborhoods (`GraphFormat.BITMASK_IN`). If the argument
-            ``graph_format`` equals `GraphFormat.BITMASK_IN`, then this argument cannot be `None`,
-            and otherwise, it is ignored.
-        :param adjacency_matrix: Either `None`, or the `np.ndarray` that describes the given graph
-            in the adjacency matrix format (`GraphFormat.ADJACENCY_MATRIX`). If the argument
-            ``graph_format`` equals `GraphFormat.ADJACENCY_MATRIX`, then this argument cannot be
-            `None`, and otherwise, it is ignored.
-        :param flattened_row_major: Either `None`, or the `np.ndarray` that describes the given
-            graph in the flattened row-major format (`GraphFormat.FLATTENED_ROW_MAJOR`). If the
-            argument ``graph_format`` equals `GraphFormat.FLATTENED_ROW_MAJOR`, then this argument
-            cannot be `None`, and otherwise, it is ignored.
-        :param flattened_clockwise: Either `None`, or the `np.ndarray` that describes the given
-            graph in the flattened clockwise format (`GraphFormat.FLATTENED_CLOCKWISE`). If the
-            argument ``graph_format`` equals `GraphFormat.FLATTENED_CLOCKWISE`, then this argument
-            cannot be `None`, and otherwise, it is ignored.
+        :param bitmask_out: Either `None`, or the `numpy.ndarray` of type `numpy.uint64` that
+            describes the given graph in the bitmask format for the out-neighborhoods
+            (`GraphFormat.BITMASK_OUT`). If the argument ``graph_format`` equals
+            `GraphFormat.BITMASK_OUT`, then this argument cannot be `None`, and otherwise, it is
+            ignored.
+        :param bitmask_in: Either `None`, or the `numpy.ndarray` of type `numpy.uint64` that
+            describes the given graph in the bitmask format for the in-neighborhoods
+            (`GraphFormat.BITMASK_IN`). If the argument ``graph_format`` equals
+            `GraphFormat.BITMASK_IN`, then this argument cannot be `None`, and otherwise, it is
+            ignored.
+        :param adjacency_matrix: Either `None`, or the `numpy.ndarray` of type `numpy.uint8` that
+            describes the given graph in the adjacency matrix format
+            (`GraphFormat.ADJACENCY_MATRIX`). If the argument ``graph_format`` equals
+            `GraphFormat.ADJACENCY_MATRIX`, then this argument cannot be `None`, and otherwise, it
+            is ignored.
+        :param flattened_row_major: Either `None`, or the `numpy.ndarray` of type `numpy.uint8`
+            that describes the given graph in the flattened row-major format
+            (`GraphFormat.FLATTENED_ROW_MAJOR`). If the argument ``graph_format`` equals
+            `GraphFormat.FLATTENED_ROW_MAJOR`, then this argument cannot be `None`, and otherwise,
+            it is ignored.
+        :param flattened_clockwise: Either `None`, or the `numpy.ndarray` of type `numpy.uint8`
+            that describes the given graph in the flattened clockwise format
+            (`GraphFormat.FLATTENED_CLOCKWISE`). If the argument ``graph_format`` equals
+            `GraphFormat.FLATTENED_CLOCKWISE`, then this argument cannot be `None`, and otherwise,
+            it is ignored.
         :param edge_colors: A positive integer (not below two) that represents the number of
             proper edge colors, i.e., $k$. The default value is two.
         :param is_directed: A boolean that indicates whether the given graph is a $k$-edge-colored
@@ -103,8 +107,8 @@ class Graph:
             The default value is `False`, i.e., the given graph is undirected by default.
         :param allow_loops: A boolean that indicates whether the given graph is allowed to have
             loops (if loops are not allowed, then all the loops are removed from the considered
-            complete graph and they simply do not exist). The default value is `False`, i.e., the
-            given graph is not allowed to have loops by default.
+            looped complete graph and they simply do not exist). The default value is `False`,
+            i.e., the given graph is not allowed to have loops by default.
 
         :note: This constructor is not intended to be directly used. The class methods
             `from_bitmask`, `from_adjacency_matrix` and `from_flattened` should be used to
@@ -189,9 +193,9 @@ class Graph:
         format for the out-neighborhoods (`GraphFormat.BITMASK_OUT`) or the in-neighborhoods
         (`GraphFormat.BITMASK_IN`).
 
-        :param bitmask: The `np.ndarray` that describes the (potentially reduced) bitmask format
-            for the out-neighborhoods (`GraphFormat.BITMASK_OUT`) or the in-neighborhoods
-            (`GraphFormat.BITMASK_IN`) of the graph that should be initialized.
+        :param bitmask: The `numpy.ndarray` of type `numpy.uint64` that describes the (potentially
+            reduced) bitmask format for the out-neighborhoods (`GraphFormat.BITMASK_OUT`) or the
+            in-neighborhoods (`GraphFormat.BITMASK_IN`) of the graph that should be initialized.
         :param bitmask_type: An item of the `BitmaskType` enumeration that determines whether the
             bitmask format for the out-neighborhoods should be used or the bitmask format for the
             in-neighborhoods. The default value is `BitmaskType.OUT_NEIGHBORS`, i.e., the bitmask
@@ -203,8 +207,8 @@ class Graph:
             The default value is `False`, i.e., the given graph is undirected by default.
         :param allow_loops: A boolean that indicates whether the given graph is allowed to have
             loops (if loops are not allowed, then all the loops are removed from the considered
-            complete graph and they simply do not exist). The default value is `False`, i.e., the
-            given graph is not allowed to have loops by default.
+            looped complete graph and they simply do not exist). The default value is `False`,
+            i.e., the given graph is not allowed to have loops by default.
 
         :return: The initialized `Graph` object.
         """
@@ -238,8 +242,9 @@ class Graph:
         This class method initializes a `Graph` object by using the adjacency matrix format
         (`GraphFormat.ADJACENCY_MATRIX`).
 
-        :param adjacency_matrix: The `np.ndarray` that describes the adjacency matrix format
-            (`GraphFormat.ADJACENCY_MATRIX`) of the graph that should be initialized.
+        :param adjacency_matrix: The `numpy.ndarray` of type `numpy.uint8` that describes the
+            adjacency matrix format (`GraphFormat.ADJACENCY_MATRIX`) of the graph that should be
+            initialized.
         :param edge_colors: A positive integer (not below two) that represents the number of proper
             edge colors, i.e., $k$. The default value is two.
         :param is_directed: A boolean that indicates whether the given graph is a $k$-edge-colored
@@ -247,8 +252,8 @@ class Graph:
             The default value is `False`, i.e., the given graph is undirected by default.
         :param allow_loops: A boolean that indicates whether the given graph is allowed to have
             loops (if loops are not allowed, then all the loops are removed from the considered
-            complete graph and they simply do not exist). The default value is `False`, i.e., the
-            given graph is not allowed to have loops by default.
+            looped complete graph and they simply do not exist). The default value is `False`,
+            i.e., the given graph is not allowed to have loops by default.
 
         :return: The initialized `Graph` object.
         """
@@ -275,8 +280,8 @@ class Graph:
         format (`GraphFormat.FLATTENED_ROW_MAJOR`) or the flattened clockwise format
         (`GraphFormat.FLATTENED_CLOCKWISE`).
 
-        :param flattened: The `np.ndarray` that describes the flattened row-major format
-            (`GraphFormat.FLATTENED_ROW_MAJOR`) or the flattened clockwise format
+        :param flattened: The `numpy.ndarray` of type `numpy.uint8` that describes the flattened
+            row-major format (`GraphFormat.FLATTENED_ROW_MAJOR`) or the flattened clockwise format
             (`GraphFormat.FLATTENED_CLOCKWISE`) of the graph that should be initialized.
         :param flattened_ordering: An item of the `FlattenedOrdering` enumeration that determines
             whether the flattened row-major format should be used or the flattened clockwise
@@ -289,8 +294,8 @@ class Graph:
             The default value is `False`, i.e., the given graph is undirected by default.
         :param allow_loops: A boolean that indicates whether the given graph is allowed to have
             loops (if loops are not allowed, then all the loops are removed from the considered
-            complete graph and they simply do not exist). The default value is `False`, i.e., the
-            given graph is not allowed to have loops by default.
+            looped complete graph and they simply do not exist). The default value is `False`,
+            i.e., the given graph is not allowed to have loops by default.
 
         :return: The initialized `Graph` object.
         """
@@ -350,8 +355,8 @@ class Graph:
     @property
     def bitmask_out(self) -> np.ndarray:
         """
-        This property returns the `np.ndarray` that represents the given graph in the bitmask
-        format for the out-neighborhoods (`GraphFormat.BITMASK_OUT`).
+        This property returns the `numpy.ndarray` of type `numpy.uint64` that represents the given
+        graph in the bitmask format for the out-neighborhoods (`GraphFormat.BITMASK_OUT`).
         """
 
         # If the output `np.ndarray` is already known, then just return it.
@@ -362,18 +367,18 @@ class Graph:
         # representation. If the adjacency matrix format representation is also unknown, then it
         # will first get computed by using one of the remaining three format representations, which
         # is surely known.
-        color_indices = np.arange(self.__edge_colors, dtype=int)
-        masks = 1 << np.arange(self.__order, dtype=int)
+        color_indices = np.arange(self.__edge_colors, dtype=np.uint8)
+        masks = 1 << np.arange(self.__order, dtype=np.uint64)
 
         # If the graph is not fully colored, then the reduced bitmask format cannot be used.
         if np.max(self.adjacency_matrix) == self.__edge_colors:
-            temp = (self.adjacency_matrix == color_indices[:, None, None]).astype(int)
+            temp = (self.adjacency_matrix == color_indices[:, None, None]).astype(np.uint64)
             if not self.__allow_loops:
                 np.fill_diagonal(temp[0], 0)
             result = temp @ masks
         # Otherwise, we use the reduced bitmask format.
         else:
-            temp = (self.adjacency_matrix == color_indices[1:, None, None]).astype(int)
+            temp = (self.adjacency_matrix == color_indices[1:, None, None]).astype(np.uint64)
             result = temp @ masks
 
         # Update the out-neighborhoods bitmask format representation to make it available for
@@ -385,8 +390,8 @@ class Graph:
     @property
     def bitmask_in(self) -> np.ndarray:
         """
-        This property returns the `np.ndarray` that represents the given graph in the bitmask
-        format for the in-neighborhoods (`GraphFormat.BITMASK_IN`).
+        This property returns the `numpy.ndarray` of type `numpy.uint64` that represents the given
+        graph in the bitmask format for the in-neighborhoods (`GraphFormat.BITMASK_IN`).
         """
 
         # If the output `np.ndarray` is already known, then just return it.
@@ -405,18 +410,18 @@ class Graph:
         # representation. If the adjacency matrix format representation is also unknown, then it
         # will first get computed by using one of the remaining three format representations, which
         # is surely known.
-        color_indices = np.arange(self.__edge_colors, dtype=int)
-        masks = 1 << np.arange(self.__order, dtype=int)
+        color_indices = np.arange(self.__edge_colors, dtype=np.uint8)
+        masks = 1 << np.arange(self.__order, dtype=np.uint64)
 
         # If the graph is not fully colored, then the reduced bitmask format cannot be used.
         if np.max(self.adjacency_matrix) == self.__edge_colors:
-            temp = (self.adjacency_matrix.T == color_indices[:, None, None]).astype(int)
+            temp = (self.adjacency_matrix.T == color_indices[:, None, None]).astype(np.uint64)
             if not self.__allow_loops:
                 np.fill_diagonal(temp[0], 0)
             result = temp @ masks
         # Otherwise, we use the reduced bitmask format.
         else:
-            temp = (self.adjacency_matrix.T == color_indices[1:, None, None]).astype(int)
+            temp = (self.adjacency_matrix.T == color_indices[1:, None, None]).astype(np.uint64)
             result = temp @ masks
 
         # Update the in-neighborhoods bitmask format representation to make it available for
@@ -428,8 +433,8 @@ class Graph:
     @property
     def adjacency_matrix(self) -> np.ndarray:
         """
-        This property returns the `np.ndarray` that represents the given graph in the adjacency
-        matrix format (`GraphFormat.ADJACENCY_MATRIX`).
+        This property returns the `numpy.ndarray` of type `numpy.uint8` that represents the given
+        graph in the adjacency matrix format (`GraphFormat.ADJACENCY_MATRIX`).
         """
 
         # If the output `np.ndarray` is already known, then just return it.
@@ -439,15 +444,18 @@ class Graph:
         # If the flattened row-major format representation is known, use it to obtain the adjacency
         # matrix format representation.
         if self.__flattened_row_major is not None:
+            # Settle the case when the graph is directed, with two subcases depending on whether
+            # loops are allowed.
             if self.__is_directed:
                 if self.__allow_loops:
                     result = self.__flattened_row_major.reshape(self.__order, self.__order)
                 else:
-                    result = np.zeros((self.__order, self.__order), dtype=int)
+                    result = np.zeros((self.__order, self.__order), dtype=np.uint8)
                     result[~np.eye(self.__order, dtype=bool)] = self.__flattened_row_major
 
+            # Settle the case when the graph is undirected.
             else:
-                result = np.zeros((self.__order, self.__order), dtype=int)
+                result = np.zeros((self.__order, self.__order), dtype=np.uint8)
 
                 if self.__allow_loops:
                     triu_rows, triu_columns = np.triu_indices(self.__order, k=0)
@@ -466,8 +474,10 @@ class Graph:
         # If the flattened clockwise format representation is known, use it to obtain the adjacency
         # matrix format representation.
         if self.__flattened_clockwise is not None:
-            result = np.zeros((self.__order, self.__order), dtype=int)
+            result = np.zeros((self.__order, self.__order), dtype=np.uint8)
 
+            # Settle the case when the graph is directed, with two subcases depending on whether
+            # loops are allowed.
             if self.__is_directed:
                 if self.__allow_loops:
                     result[0, 0] = self.__flattened_clockwise[0]
@@ -495,6 +505,7 @@ class Graph:
                         ]
                         start += layer
 
+            # Settle the case when the graph is undirected.
             else:
                 if self.__allow_loops:
                     tril_rows, tril_columns = np.tril_indices(self.__order, k=0)
@@ -512,29 +523,31 @@ class Graph:
 
         # Otherwise, at least one of the two bitmask format representations must be known, hence it
         # can be used to find the adjacency matrix representation.
-        masks = 1 << np.arange(self.__order, dtype=int)
+        masks = 1 << np.arange(self.__order, dtype=np.uint64)
         if self.__bitmask_out is not None:
             temp = self.__bitmask_out[:, :, None] & masks
         else:
             temp = self.__bitmask_in[:, :, None] & masks
 
-        temp = (temp != 0).astype(int)
+        temp = (temp != 0).astype(np.uint8)
 
         # If the number of rows of any of the two bitmask format representation matrices matches
         # the number of proper edge colors, then this means that a standard (non-reduced) bitmask
         # format is being used.
         if temp.shape[0] == self.__edge_colors:
-            result = np.full((self.__order, self.__order), self.__edge_colors, dtype=int)
+            result = np.full((self.__order, self.__order), self.__edge_colors, dtype=np.uint8)
             if not self.__allow_loops:
                 np.fill_diagonal(result, 0)
-            weights = np.arange(-self.__edge_colors, 0, dtype=int)
-            result += np.sum(temp * weights[:, None, None], axis=0)
+            weights = np.arange(self.__edge_colors, 0, -1, dtype=np.uint8)
+            result -= np.sum(temp * weights[:, None, None], axis=0)
 
         # Otherwise, a reduced bitmask format is being used.
         else:
-            weights = np.arange(1, self.__edge_colors, dtype=int)
+            weights = np.arange(1, self.__edge_colors, dtype=np.uint8)
             result = np.sum(temp * weights[:, None, None], axis=0)
 
+        # If the bitmask format for the in-neighborhoods was used, then the resulting matrix needs
+        # to be transposed.
         if self.__bitmask_out is None:
             result = result.T
 
@@ -547,8 +560,8 @@ class Graph:
     @property
     def flattened_row_major(self) -> np.ndarray:
         """
-        This property returns the `np.ndarray` that represents the given graph in the flattened
-        row-major format (`GraphFormat.FLATTENED_ROW_MAJOR`).
+        This property returns the `numpy.ndarray` of type `numpy.uint8` that represents the given
+        graph in the flattened row-major format (`GraphFormat.FLATTENED_ROW_MAJOR`).
         """
 
         # If the output `np.ndarray` is already known, then just return it.
@@ -582,8 +595,8 @@ class Graph:
     @property
     def flattened_clockwise(self) -> np.ndarray:
         """
-        This property returns the `np.ndarray` that represents the given graph in the flattened
-        clockwise format (`GraphFormat.FLATTENED_CLOCKWISE`).
+        This property returns the `numpy.ndarray` of type `numpy.uint8` that represents the given
+        graph in the flattened clockwise format (`GraphFormat.FLATTENED_CLOCKWISE`).
         """
 
         # If the output `np.ndarray` is already known, then just return it.
@@ -595,8 +608,10 @@ class Graph:
         # will first get computed by using one of the remaining three format representations, which
         # is surely known.
         if self.__is_directed:
+            # If the graph is directed, divide the case into two subcases depending on whether
+            # loops are allowed.
             if self.__allow_loops:
-                result = np.zeros((self.__order * self.__order,), dtype=int)
+                result = np.zeros((self.__order * self.__order,), dtype=np.uint8)
                 result[0] = self.adjacency_matrix[0, 0]
 
                 start = 1
@@ -608,7 +623,7 @@ class Graph:
                     start += layer
 
             else:
-                result = np.zeros((self.__order * (self.__order - 1),), dtype=int)
+                result = np.zeros((self.__order * (self.__order - 1),), dtype=np.uint8)
 
                 start = 0
                 for layer in range(1, self.__order):
@@ -618,6 +633,7 @@ class Graph:
                     result[start : start + layer] = self.adjacency_matrix[layer, layer - 1 :: -1]
                     start += layer
 
+        # Settle the case when the graph is undirected.
         else:
             if self.__allow_loops:
                 tril_indices = np.tril_indices(self.__order, k=0)

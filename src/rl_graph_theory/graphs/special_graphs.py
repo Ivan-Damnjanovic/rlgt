@@ -1,6 +1,6 @@
 """
-This ``Python`` module contains various classes that inherit the `Graph` class and are used to
-construct edge-colored complete graphs with some particular structure.
+This ``Python`` module contains various classes that inherit from the `Graph` class and are used to
+construct $k$-edge-colored looped complete graphs with some particular structure.
 """
 
 from typing import List
@@ -13,9 +13,9 @@ from .graph_format import GraphFormat
 
 class MonochromaticGraph(Graph):
     """
-    This class inherits the `Graph` class and it is used to instantiate monochromatic graphs, i.e.,
-    $k$-edge-colored looped complete graphs where all the edges (resp. arcs) are colored with the
-    same color (or they are all uncolored). It is also possible to configure the starting graph
+    This class inherits from the `Graph` class and it is used to instantiate monochromatic graphs,
+    i.e., $k$-edge-colored looped complete graphs where all the edges (resp. arcs) are colored with
+    the same color (or they are all uncolored). It is also possible to configure the starting graph
     format that an instance should get initialized in.
     """
 
@@ -56,39 +56,44 @@ class MonochromaticGraph(Graph):
         if graph_format == GraphFormat.BITMASK_OUT or graph_format == GraphFormat.BITMASK_IN:
             if selected_edge_color == edge_colors:
                 # If loops are allowed, or the graph order is at least two, then the graph contains
-                # at least one edge, hence it is not fully colored.
+                # at least one edge (resp. arc), hence it is not fully colored.
                 if allow_loops or order >= 2:
-                    bitmask = np.zeros((edge_colors, order), dtype=int)
-                # Otherwise, the graph contains no edges, which means that it is fully colored.
+                    bitmask = np.zeros((edge_colors, order), dtype=np.uint64)
+                # Otherwise, the graph contains no edges (resp. arcs), which means that it is fully
+                # colored.
                 else:
-                    bitmask = np.zeros((edge_colors - 1, order), dtype=int)
+                    bitmask = np.zeros((edge_colors - 1, order), dtype=np.uint64)
             else:
-                bitmask = np.zeros((edge_colors - 1, order), dtype=int)
+                bitmask = np.zeros((edge_colors - 1, order), dtype=np.uint64)
                 if selected_edge_color != 0:
                     bitmask[selected_edge_color - 1, :] = (1 << order) - 1
                     # Remove the loops if they are not allowed.
                     if not allow_loops:
-                        bitmask[selected_edge_color - 1, :] -= 1 << np.arange(order, dtype=int)
+                        bitmask[selected_edge_color - 1, :] -= 1 << np.arange(
+                            order, dtype=np.uint64
+                        )
 
         elif graph_format == GraphFormat.ADJACENCY_MATRIX:
-            adjacency_matrix = np.full((order, order), selected_edge_color, dtype=int)
+            adjacency_matrix = np.full((order, order), selected_edge_color, dtype=np.uint8)
             if not allow_loops and selected_edge_color != 0:
                 np.fill_diagonal(adjacency_matrix, 0)
 
         else:
             if is_directed:
                 if allow_loops:
-                    flattened = np.full((order * order,), selected_edge_color, dtype=int)
+                    flattened = np.full((order * order,), selected_edge_color, dtype=np.uint8)
                 else:
-                    flattened = np.full((order * (order - 1),), selected_edge_color, dtype=int)
+                    flattened = np.full(
+                        (order * (order - 1),), selected_edge_color, dtype=np.uint8
+                    )
             else:
                 if allow_loops:
                     flattened = np.full(
-                        (order * (order + 1) // 2,), selected_edge_color, dtype=int
+                        (order * (order + 1) // 2,), selected_edge_color, dtype=np.uint8
                     )
                 else:
                     flattened = np.full(
-                        (order * (order - 1) // 2,), selected_edge_color, dtype=int
+                        (order * (order - 1) // 2,), selected_edge_color, dtype=np.uint8
                     )
 
         super().__init__(
@@ -105,11 +110,11 @@ class MonochromaticGraph(Graph):
 
 
 # Although an empty graph can conceptually be regarded as a monochromatic graph, this class
-# directly inherits the `Graph` class instead of the `MonochromaticGraph` class for
+# directly inherits from the `Graph` class instead of the `MonochromaticGraph` class for
 # implementational reasons.
 class EmptyGraph(Graph):
     """
-    This class inherits the `Graph` class and it is used to instantiate empty graphs. In other
+    This class inherits from the `Graph` class and it is used to instantiate empty graphs. In other
     words, it produces a $2$-edge-colored loopless complete undirected graph of a given order such
     that all of its edges are colored with the color 0. It is also possible to configure the
     starting graph format that an instance should get initialized in.
@@ -129,11 +134,11 @@ class EmptyGraph(Graph):
         flattened = None
 
         if graph_format == GraphFormat.BITMASK_OUT or graph_format == GraphFormat.BITMASK_IN:
-            bitmask = np.zeros((1, order), dtype=int)
+            bitmask = np.zeros((1, order), dtype=np.uint64)
         elif graph_format == GraphFormat.ADJACENCY_MATRIX:
-            adjacency_matrix = np.zeros((order, order), dtype=int)
+            adjacency_matrix = np.zeros((order, order), dtype=np.uint8)
         else:
-            flattened = np.zeros((order * (order - 1) // 2,), dtype=int)
+            flattened = np.zeros((order * (order - 1) // 2,), dtype=np.uint8)
 
         super().__init__(
             graph_format=graph_format,
@@ -146,13 +151,13 @@ class EmptyGraph(Graph):
 
 
 # Although a complete graph can conceptually be regarded as a monochromatic graph, this class
-# directly inherits the `Graph` class instead of the `MonochromaticGraph` class for
+# directly inherits from the `Graph` class instead of the `MonochromaticGraph` class for
 # implementational reasons.
 class CompleteGraph(Graph):
     """
-    This class inherits the `Graph` class and it is used to instantiate complete graphs. In other
-    words, it produces a $2$-edge-colored loopless complete undirected graph of a given order such
-    that all of its edges are colored with the color 1. It is also possible to configure the
+    This class inherits from the `Graph` class and it is used to instantiate complete graphs. In
+    other words, it produces a $2$-edge-colored loopless complete undirected graph of a given order
+    such that all of its edges are colored with the color 1. It is also possible to configure the
     starting graph format that an instance should get initialized in.
     """
 
@@ -170,13 +175,13 @@ class CompleteGraph(Graph):
         flattened = None
 
         if graph_format == GraphFormat.BITMASK_OUT or graph_format == GraphFormat.BITMASK_IN:
-            bitmask = np.full((1, order), (1 << order) - 1, dtype=int)
-            bitmask[0, :] -= 1 << np.arange(order, dtype=int)
+            bitmask = np.full((1, order), (1 << order) - 1, dtype=np.uint64)
+            bitmask[0, :] -= 1 << np.arange(order, dtype=np.uint64)
         elif graph_format == GraphFormat.ADJACENCY_MATRIX:
-            adjacency_matrix = np.ones((order, order), dtype=int)
+            adjacency_matrix = np.ones((order, order), dtype=np.uint8)
             np.fill_diagonal(adjacency_matrix, 0)
         else:
-            flattened = np.ones((order * (order - 1) // 2,), dtype=int)
+            flattened = np.ones((order * (order - 1) // 2,), dtype=np.uint8)
 
         super().__init__(
             graph_format=graph_format,
@@ -190,11 +195,11 @@ class CompleteGraph(Graph):
 
 class AlmostCompleteGraph(Graph):
     r"""
-    This class inherits the `Graph` class and it is used to instantiate almost-complete graphs. In
-    other words, it produces a $2$-edge-colored loopless complete undirected graph of a given order
-    $n$ such that all of its edges are colored with the color 1, except for the edge between the
-    vertices $n - 2$ and $n - 1$, which is colored with the color 0. It is also possible to
-    configure the starting graph format that an instance should get initialized in.
+    This class inherits from the `Graph` class and it is used to instantiate almost-complete
+    graphs. In other words, it produces a $2$-edge-colored loopless complete undirected graph of a
+    given order $n$ such that all of its edges are colored with the color 1, except for the edge
+    between the vertices $n - 2$ and $n - 1$, which is colored with the color 0. It is also
+    possible to configure the starting graph format that an instance should get initialized in.
     """
 
     def __init__(self, graph_format: GraphFormat, order: int):
@@ -212,21 +217,21 @@ class AlmostCompleteGraph(Graph):
         flattened = None
 
         if graph_format == GraphFormat.BITMASK_OUT or graph_format == GraphFormat.BITMASK_IN:
-            bitmask = np.full((1, order), (1 << order) - 1, dtype=int)
-            bitmask[0, :] -= 1 << np.arange(order, dtype=int)
+            bitmask = np.full((1, order), (1 << order) - 1, dtype=np.uint64)
+            bitmask[0, :] -= 1 << np.arange(order, dtype=np.uint64)
             # Remove the edge between the vertices $n - 2$ and $n - 1$.
             bitmask[0, -1] -= 1 << (order - 2)
             bitmask[0, -2] -= 1 << (order - 1)
 
         elif graph_format == GraphFormat.ADJACENCY_MATRIX:
-            adjacency_matrix = np.ones((order, order), dtype=int)
+            adjacency_matrix = np.ones((order, order), dtype=np.uint8)
             np.fill_diagonal(adjacency_matrix, 0)
             # Remove the edge between the vertices $n - 2$ and $n - 1$.
             adjacency_matrix[-1, -2] = 0
             adjacency_matrix[-2, -1] = 0
 
         else:
-            flattened = np.ones((order * (order - 1) // 2,), dtype=int)
+            flattened = np.ones((order * (order - 1) // 2,), dtype=np.uint8)
             # Remove the edge between the vertices $n - 2$ and $n - 1$.
             flattened[-1] = 0
 
@@ -241,15 +246,15 @@ class AlmostCompleteGraph(Graph):
 
 
 # Although a complete bipartite graph is actually a complete $k$-partite graph for the case
-# $k = 2$, this class directly inherits the `Graph` class instead of the `CompleteKPartiteGraph`
-# class for implementational efficiency and clarity.
+# $k = 2$, this class directly inherits from the `Graph` class instead of the
+# `CompleteKPartiteGraph` class for implementational efficiency and clarity.
 class CompleteBipartiteGraph(Graph):
     r"""
-    This class inherits the `Graph` class and it is used to initialize complete bipartite graphs.
-    In other words, it produces a $2$-edge-colored loopless complete undirected graph such that its
-    edges colored with the color 1 form a complete bipartite graph, while all the other edges are
-    colored with the color 0. Here, the vertices $0, 1, 2, \\ldots, a_1 - 1$ form the first
-    bipartition set, while the vertices $a_1, a_1 + 1, \\ldots, a_1 + a_2$ form the second
+    This class inherits from the `Graph` class and it is used to initialize complete bipartite
+    graphs. In other words, it produces a $2$-edge-colored loopless complete undirected graph such
+    that its edges colored with the color 1 form a complete bipartite graph, while all the other
+    edges are colored with the color 0. Here, the vertices $0, 1, 2, \\ldots, a_1 - 1$ form the
+    first bipartition set, while the vertices $a_1, a_1 + 1, \\ldots, a_1 + a_2$ form the second
     bipartition set, where $a_1$ and $a_2$ represent the sizes of the two bipartition sets. It is
     also possible to configure the starting graph format that an instance should get initialized
     in, with the three possible formats being the two bitmask formats (which are the same) and the
@@ -276,11 +281,11 @@ class CompleteBipartiteGraph(Graph):
         adjacency_matrix = None
 
         if graph_format == GraphFormat.BITMASK_OUT or graph_format == GraphFormat.BITMASK_IN:
-            bitmask = np.full((1, order), (1 << partition_size_1) - 1, dtype=int)
+            bitmask = np.full((1, order), (1 << partition_size_1) - 1, dtype=np.uint64)
             bitmask[0, :partition_size_1] = (1 << (order)) - (1 << partition_size_1)
 
         elif graph_format == GraphFormat.ADJACENCY_MATRIX:
-            adjacency_matrix = np.zeros((order, order), dtype=int)
+            adjacency_matrix = np.zeros((order, order), dtype=np.uint8)
             adjacency_matrix[:partition_size_1, partition_size_1:] = 1
             adjacency_matrix[partition_size_1:, :partition_size_1] = 1
 
@@ -297,15 +302,15 @@ class CompleteBipartiteGraph(Graph):
 
 class CompleteKPartiteGraph(Graph):
     r"""
-    This class inherits the `Graph` class and it is used to initialize complete $k$-partite graphs.
-    In other words, it produces a $2$-edge-colored loopless complete undirected graph such that its
-    edges colored with the color 1 form a complete $k$-partite graph, while all the other edges are
-    colored with the color 0. Here, the first $a_1$ vertices form the first $k$-partition set, the
-    subsequent $a_2$ vertices form the second $k$-partition set, etc., and the last $a_k$ vertices
-    form the $k$-th $k$-partition set, with the parameters $k$ and $a_1, a_2, \\ldots, a_k$ being
-    configurable. It is also possible to configure the starting graph format that an instance
-    should get initialized in, with the three possible formats being the two bitmask formats (which
-    are the same) and the adjacency matrix format.
+    This class inherits from the `Graph` class and it is used to initialize complete $k$-partite
+    graphs. In other words, it produces a $2$-edge-colored loopless complete undirected graph such
+    that its edges colored with the color 1 form a complete $k$-partite graph, while all the other
+    edges are colored with the color 0. Here, the first $a_1$ vertices form the first $k$-partition
+    set, the subsequent $a_2$ vertices form the second $k$-partition set, etc., and the last $a_k$
+    vertices form the $k$-th $k$-partition set, with the parameters $k$ and $a_1, a_2, \\ldots,
+    a_k$ being configurable. It is also possible to configure the starting graph format that an
+    instance should get initialized in, with the three possible formats being the two bitmask
+    formats (which are the same) and the adjacency matrix format.
     """
 
     def __init__(self, graph_format: GraphFormat, partition_sizes: List[int]):
@@ -327,7 +332,7 @@ class CompleteKPartiteGraph(Graph):
 
         if graph_format == GraphFormat.BITMASK_OUT or graph_format == GraphFormat.BITMASK_IN:
             # First, make all the vertices adjacent to all the other vertices, including loops.
-            bitmask = np.full((1, order), (1 << order) - 1, dtype=int)
+            bitmask = np.full((1, order), (1 << order) - 1, dtype=np.uint64)
 
             # Then, iterate over the $k$-partition sets, and for each set, remove the edges between
             # these vertices, including loops.
@@ -339,7 +344,7 @@ class CompleteKPartiteGraph(Graph):
         elif graph_format == GraphFormat.ADJACENCY_MATRIX:
             # The same idea is used to construct the adjacency matrix. First make all the vertices
             # adjacent to each other, including loops, and then remove the unnecessary edges.
-            adjacency_matrix = np.ones((order, order), dtype=int)
+            adjacency_matrix = np.ones((order, order), dtype=np.uint8)
 
             start = 0
             for item in partition_sizes:
@@ -359,7 +364,7 @@ class CompleteKPartiteGraph(Graph):
 
 class StarGraph(Graph):
     """
-    This class inherits the `Graph` class and it is used to instantiate star graphs. In other
+    This class inherits from the `Graph` class and it is used to instantiate star graphs. In other
     words, it produces a $2$-edge-colored loopless complete undirected graph such that its edges
     colored with the color 1 form a star graph, while all the other edges are colored with the
     color 0. Recall that a star graph is a tree such that there is a vertex, called the central
@@ -384,34 +389,34 @@ class StarGraph(Graph):
         flattened_clockwise = None
 
         if graph_format == GraphFormat.BITMASK_OUT or graph_format == GraphFormat.BITMASK_IN:
-            bitmask = np.full((1, order), 1 << central_vertex, dtype=int)
+            bitmask = np.full((1, order), 1 << central_vertex, dtype=np.uint64)
             bitmask[0, central_vertex] = (1 << order) - (1 << central_vertex) - 1
 
         elif graph_format == GraphFormat.ADJACENCY_MATRIX:
-            adjacency_matrix = np.zeros((order, order), dtype=int)
+            adjacency_matrix = np.zeros((order, order), dtype=np.uint8)
             adjacency_matrix[central_vertex, :] = 1
             adjacency_matrix[:, central_vertex] = 1
             adjacency_matrix[central_vertex, central_vertex] = 0
 
         elif graph_format == GraphFormat.FLATTENED_ROW_MAJOR:
-            flattened_row_major = np.zeros((order * (order - 1) // 2,), dtype=int)
+            flattened_row_major = np.zeros((order * (order - 1) // 2,), dtype=np.uint8)
             # Add the edges between the central vertex and the vertices that follow it.
             start = central_vertex * (2 * order - 1 - central_vertex) // 2
             flattened_row_major[start : start + order - central_vertex - 1] = 1
 
             # Add the edges between the central vertex and the vertices that precede it.
-            indices = np.arange(central_vertex, dtype=int)
+            indices = np.arange(central_vertex, dtype=np.int16)
             indices = indices * (2 * order - 3 - indices) // 2 + central_vertex - 1
             flattened_row_major[indices] = 1
 
         else:
-            flattened_clockwise = np.zeros((order * (order - 1) // 2,), dtype=int)
+            flattened_clockwise = np.zeros((order * (order - 1) // 2,), dtype=np.uint8)
             # Add the edges between the central vertex and the vertices that precede it.
             start = central_vertex * (central_vertex - 1) // 2
             flattened_clockwise[start : start + central_vertex] = 1
 
             # Add the edges between the central vertex and the vertices that follow it.
-            indices = np.arange(central_vertex + 1, order, dtype=int)
+            indices = np.arange(central_vertex + 1, order, dtype=np.int16)
             indices = indices * (indices - 1) // 2 + central_vertex
             flattened_clockwise[indices] = 1
 
@@ -427,13 +432,15 @@ class StarGraph(Graph):
 
 class PathGraph(Graph):
     r"""
-    This class inherits the `Graph` class and it is used to instantiate path graphs. In other
+    This class inherits from the `Graph` class and it is used to instantiate path graphs. In other
     words, it produces a $2$-edge-colored loopless complete undirected graph such that its edges
     colored with the color 1 form a path graph, while all the other edges are colored with the
     color 0. In the said path graph, the vertices are $0, 1, 2, \\ldots, n - 1$, where $n$ is the
     graph order, with two vertices being adjacent if and only if they represent consecutive
     integers. It is also possible to configure the starting graph format that an instance should
     get initialized in.
+
+    :note: The two bitmask formats can only be used if the path graph order is at most 63.
     """
 
     def __init__(self, graph_format: GraphFormat, order: int):
@@ -452,28 +459,28 @@ class PathGraph(Graph):
 
         if graph_format == GraphFormat.BITMASK_OUT or graph_format == GraphFormat.BITMASK_IN:
             if order >= 2:
-                bitmask = ((1 << np.arange(order, dtype=int)) * 5 // 2).reshape(1, -1)
+                bitmask = ((1 << np.arange(order, dtype=np.uint64)) * 5 // 2).reshape(1, -1)
                 bitmask[0, 0] = 2
                 bitmask[0, -1] = 1 << (order - 2)
             # The trivial path needs to be settled separately.
             else:
-                bitmask = np.zeros((1, 1), dtype=int)
+                bitmask = np.zeros((1, 1), dtype=np.uint64)
 
         elif graph_format == GraphFormat.ADJACENCY_MATRIX:
-            adjacency_matrix = np.zeros((order, order), dtype=int)
-            rows = np.arange(order - 1, dtype=int)
+            adjacency_matrix = np.zeros((order, order), dtype=np.uint8)
+            rows = np.arange(order - 1, dtype=np.uint8)
             adjacency_matrix[rows, rows + 1] = 1
             adjacency_matrix[rows + 1, rows] = 1
 
         elif graph_format == GraphFormat.FLATTENED_ROW_MAJOR:
-            flattened_row_major = np.zeros((order * (order - 1) // 2,), dtype=int)
-            indices = np.arange(order - 1, dtype=int)
+            flattened_row_major = np.zeros((order * (order - 1) // 2,), dtype=np.uint8)
+            indices = np.arange(order - 1, dtype=np.int16)
             indices = indices * (2 * order - 1 - indices) // 2
             flattened_row_major[indices] = 1
 
         else:
-            flattened_clockwise = np.zeros((order * (order - 1) // 2,), dtype=int)
-            indices = np.arange(2, order + 1, dtype=int)
+            flattened_clockwise = np.zeros((order * (order - 1) // 2,), dtype=np.uint8)
+            indices = np.arange(2, order + 1, dtype=np.int16)
             indices = indices * (indices - 1) // 2 - 1
             flattened_clockwise[indices] = 1
 
@@ -489,13 +496,15 @@ class PathGraph(Graph):
 
 class CycleGraph(Graph):
     r"""
-    This class inherits the `Graph` class and it is used to instantiate cycle graphs. In other
+    This class inherits from the `Graph` class and it is used to instantiate cycle graphs. In other
     words, it produces a $2$-edge-colored loopless complete undirected graph such that its edges
     colored with the color 1 form a cycle graph, while all the other edges are colored with the
     color 0. In the said cycle graph, the vertices are $0, 1, 2, \\ldots, n - 1$, where $n$ is the
     graph order, with two vertices being adjacent if and only if they represent consecutive
     integers or they are 0 and $n - 1$. The positive integer $n$ must be at least three. It is also
     possible to configure the starting graph format that an instance should get initialized in.
+
+    :note: The two bitmask formats can only be used if the cycle graph order is at most 63.
     """
 
     def __init__(self, graph_format: GraphFormat, order: int):
@@ -513,14 +522,14 @@ class CycleGraph(Graph):
         flattened_clockwise = None
 
         if graph_format == GraphFormat.BITMASK_OUT or graph_format == GraphFormat.BITMASK_IN:
-            bitmask = ((1 << np.arange(order, dtype=int)) * 5 // 2).reshape(1, -1)
+            bitmask = ((1 << np.arange(order, dtype=np.uint64)) * 5 // 2).reshape(1, -1)
             bitmask[0, 0] = (1 << (order - 1)) + 2
             bitmask[0, -1] = (1 << (order - 2)) + 1
 
         elif graph_format == GraphFormat.ADJACENCY_MATRIX:
-            adjacency_matrix = np.zeros((order, order), dtype=int)
+            adjacency_matrix = np.zeros((order, order), dtype=np.uint8)
             # Add the edges from the path $0, 1, 2, \ldots, n - 1$.
-            rows = np.arange(order - 1, dtype=int)
+            rows = np.arange(order - 1, dtype=np.uint8)
             adjacency_matrix[rows, rows + 1] = 1
             adjacency_matrix[rows + 1, rows] = 1
             # Add the edge between the vertices 0 and $n - 1$.
@@ -528,18 +537,18 @@ class CycleGraph(Graph):
             adjacency_matrix[-1, 0] = 1
 
         elif graph_format == GraphFormat.FLATTENED_ROW_MAJOR:
-            flattened_row_major = np.zeros((order * (order - 1) // 2,), dtype=int)
+            flattened_row_major = np.zeros((order * (order - 1) // 2,), dtype=np.uint8)
             # Add the edges from the path $0, 1, 2, \ldots, n - 1$.
-            indices = np.arange(order - 1, dtype=int)
+            indices = np.arange(order - 1, dtype=np.int16)
             indices = indices * (2 * order - 1 - indices) // 2
             flattened_row_major[indices] = 1
             # Add the edge between the vertices 0 and $n - 1$.
             flattened_row_major[order - 2] = 1
 
         else:
-            flattened_clockwise = np.zeros((order * (order - 1) // 2,), dtype=int)
+            flattened_clockwise = np.zeros((order * (order - 1) // 2,), dtype=np.uint8)
             # Add the edges from the path $0, 1, 2, \ldots, n - 1$.
-            indices = np.arange(2, order + 1, dtype=int)
+            indices = np.arange(2, order + 1, dtype=np.int16)
             indices = indices * (indices - 1) // 2 - 1
             flattened_clockwise[indices] = 1
             # Add the edge between the vertices 0 and $n - 1$.
@@ -557,7 +566,7 @@ class CycleGraph(Graph):
 
 class WheelGraph(Graph):
     r"""
-    This class inherits the `Graph` class and it is used to instantiate wheel graphs. In other
+    This class inherits from the `Graph` class and it is used to instantiate wheel graphs. In other
     words, it produces a $2$-edge-colored loopless complete undirected graph such that its edges
     colored with the color 1 form a wheel graph, while all the other edges are colored with the
     color 0. In the said wheel graph, the vertices are $0, 1, 2, \\ldots, n - 1$, where $n$ is the
@@ -565,6 +574,8 @@ class WheelGraph(Graph):
     the remaining vertices forms the cycle $1, 2, 3, \\ldots, n - 1, 1$. The positive integer $n$
     must be at least four. It is also possible to configure the starting graph format that an
     instance should get initialized in.
+
+    :note: The two bitmask formats can only be used if the wheel graph order is at most 63.
     """
 
     def __init__(self, graph_format: GraphFormat, order: int):
@@ -582,18 +593,18 @@ class WheelGraph(Graph):
         flattened_clockwise = None
 
         if graph_format == GraphFormat.BITMASK_OUT or graph_format == GraphFormat.BITMASK_IN:
-            bitmask = ((1 << np.arange(order, dtype=int)) * 5 // 2 + 1).reshape(1, -1)
+            bitmask = ((1 << np.arange(order, dtype=np.uint64)) * 5 // 2 + 1).reshape(1, -1)
             bitmask[0, 0] = (1 << order) - 2
             bitmask[0, 1] = (1 << (order - 1)) + 5
             bitmask[0, -1] = (1 << (order - 2)) + 3
 
         elif graph_format == GraphFormat.ADJACENCY_MATRIX:
-            adjacency_matrix = np.zeros((order, order), dtype=int)
+            adjacency_matrix = np.zeros((order, order), dtype=np.uint8)
             # Add the edges from 0 to all the other vertices.
             adjacency_matrix[0, 1:] = 1
             adjacency_matrix[1:, 0] = 1
             # Add the edges from the path $1, 2, 3, \ldots, n - 1$.
-            rows = np.arange(1, order - 1, dtype=int)
+            rows = np.arange(1, order - 1, dtype=np.uint8)
             adjacency_matrix[rows, rows + 1] = 1
             adjacency_matrix[rows + 1, rows] = 1
             # Add the edge between the vertices 1 and $n - 1$.
@@ -601,24 +612,24 @@ class WheelGraph(Graph):
             adjacency_matrix[-1, 1] = 1
 
         elif graph_format == GraphFormat.FLATTENED_ROW_MAJOR:
-            flattened_row_major = np.zeros((order * (order - 1) // 2,), dtype=int)
+            flattened_row_major = np.zeros((order * (order - 1) // 2,), dtype=np.uint8)
             # Add the edges from 0 to all the other vertices.
             flattened_row_major[: order - 1] = 1
             # Add the edges from the path $1, 2, 3, \ldots, n - 1$.
-            indices = np.arange(1, order - 1, dtype=int)
+            indices = np.arange(1, order - 1, dtype=np.int16)
             indices = indices * (2 * order - 1 - indices) // 2
             flattened_row_major[indices] = 1
             # Add the edge between the vertices 1 and $n - 1$.
             flattened_row_major[2 * order - 4] = 1
 
         else:
-            flattened_clockwise = np.zeros((order * (order - 1) // 2,), dtype=int)
+            flattened_clockwise = np.zeros((order * (order - 1) // 2,), dtype=np.uint8)
             # Add the edges from 0 to all the other vertices.
-            indices = np.arange(1, order, dtype=int)
+            indices = np.arange(1, order, dtype=np.int16)
             indices = indices * (indices - 1) // 2
             flattened_clockwise[indices] = 1
             # Add the edges from the path $1, 2, 3, \ldots, n - 1$.
-            indices = np.arange(3, order + 1, dtype=int)
+            indices = np.arange(3, order + 1, dtype=np.int16)
             indices = indices * (indices - 1) // 2 - 1
             flattened_clockwise[indices] = 1
             # Add the edge between the vertices 1 and $n - 1$.
@@ -636,7 +647,7 @@ class WheelGraph(Graph):
 
 class BookGraph(Graph):
     r"""
-    This class inherits the `Graph` class and it is used to instantiate book graphs. In other
+    This class inherits from the `Graph` class and it is used to instantiate book graphs. In other
     words, it produces a $2$-edge-colored loopless complete undirected graph such that its edges
     colored with the color 1 form a book graph, while all the other edges are colored with the
     color 0. In the said book graph, the vertices are $0, 1, 2, \\ldots, m + 1$, where $m$ is the
@@ -661,12 +672,12 @@ class BookGraph(Graph):
         flattened_clockwise = None
 
         if graph_format == GraphFormat.BITMASK_OUT or graph_format == GraphFormat.BITMASK_IN:
-            bitmask = np.full((1, index + 2), 3, dtype=int)
+            bitmask = np.full((1, index + 2), 3, dtype=np.uint64)
             bitmask[0, 0] = (1 << (index + 2)) - 2
             bitmask[0, 1] = (1 << (index + 2)) - 3
 
         elif graph_format == GraphFormat.ADJACENCY_MATRIX:
-            adjacency_matrix = np.zeros((index + 2, index + 2), dtype=int)
+            adjacency_matrix = np.zeros((index + 2, index + 2), dtype=np.uint8)
             # Add all the possible edges with one endpoint from \{ 0, 1 \} and the other from
             # \{ 2, 3, \ldots, m + 1 \}.
             adjacency_matrix[:2, 2:] = 1
@@ -676,15 +687,15 @@ class BookGraph(Graph):
             adjacency_matrix[1, 0] = 1
 
         elif graph_format == GraphFormat.FLATTENED_ROW_MAJOR:
-            flattened_row_major = np.zeros(((index + 2) * (index + 1) // 2,), dtype=int)
+            flattened_row_major = np.zeros(((index + 2) * (index + 1) // 2,), dtype=np.uint8)
             flattened_row_major[: 2 * index + 1] = 1
 
         else:
-            flattened_clockwise = np.zeros(((index + 2) * (index + 1) // 2,), dtype=int)
+            flattened_clockwise = np.zeros(((index + 2) * (index + 1) // 2,), dtype=np.uint8)
             # Add the edge between the vertices 0 and 1.
             flattened_clockwise[0] = 1
 
-            indices = np.arange(2, index + 2, dtype=int)
+            indices = np.arange(2, index + 2, dtype=np.int16)
             indices = indices * (indices - 1) // 2
             # Add all the possible edges with one endpoint from \{ 0, 1 \} and the other from
             # \{ 2, 3, \ldots, m + 1 \}.
@@ -703,13 +714,13 @@ class BookGraph(Graph):
 
 class FriendshipGraph(Graph):
     r"""
-    This class inherits the `Graph` class and it is used to instantiate friendship graphs. In other
-    words, it produces a $2$-edge-colored loopless complete undirected graph such that its edges
-    colored with the color 1 form a friendship graph, while all the other edges are colored with
-    the color 0. In the said friendship graph, the vertices are $0, 1, 2, \\ldots, 2m - 1, 2m$,
-    where $m$ is the friendship graph index, and vertex 0 is adjacent to all the other vertices,
-    while the remaining $2m$ vertices have exactly one neighbor among themselves, determined in the
-    following manner:
+    This class inherits from the `Graph` class and it is used to instantiate friendship graphs. In
+    other words, it produces a $2$-edge-colored loopless complete undirected graph such that its
+    edges colored with the color 1 form a friendship graph, while all the other edges are colored
+    with the color 0. In the said friendship graph, the vertices are $0, 1, 2, \\ldots, 2m - 1,
+    2m$, where $m$ is the friendship graph index, and vertex 0 is adjacent to all the other
+    vertices, while the remaining $2m$ vertices have exactly one neighbor among themselves,
+    determined in the following manner:
 
     * if $i$ is odd, then vertex $i$ is adjacent only to $i + 1$; and
     * if $i$ is even, then vertex $i$ is adjacent only to $i - 1$.
@@ -734,41 +745,41 @@ class FriendshipGraph(Graph):
         flattened_clockwise = None
 
         if graph_format == GraphFormat.BITMASK_OUT or graph_format == GraphFormat.BITMASK_IN:
-            bitmask = np.full((1, 2 * index + 1), 1, dtype=int)
+            bitmask = np.full((1, 2 * index + 1), 1, dtype=np.uint64)
             bitmask[0, 0] = (1 << (2 * index + 1)) - 2
-            bitmask[0, 1::2] += 1 << np.arange(2, 2 * index + 2, 2, dtype=int)
-            bitmask[0, 2::2] += 1 << np.arange(1, 2 * index + 1, 2, dtype=int)
+            bitmask[0, 1::2] += 1 << np.arange(2, 2 * index + 2, 2, dtype=np.uint64)
+            bitmask[0, 2::2] += 1 << np.arange(1, 2 * index + 1, 2, dtype=np.uint64)
 
         elif graph_format == GraphFormat.ADJACENCY_MATRIX:
-            adjacency_matrix = np.zeros((2 * index + 1, 2 * index + 1), dtype=int)
+            adjacency_matrix = np.zeros((2 * index + 1, 2 * index + 1), dtype=np.uint8)
             # Add the edges from 0 to all the other vertices.
             adjacency_matrix[0, 1:] = 1
             adjacency_matrix[1:, 0] = 1
             # Add the remaining edges, i.e., the edges of the form $\{ i, i + 1 \}$, where $i \in
             # \{ 1, 3, 5, 7, \ldots, 2m - 1 \}$.
-            rows = np.arange(1, 2 * index + 1, 2)
+            rows = np.arange(1, 2 * index + 1, 2, dtype=np.uint8)
             adjacency_matrix[rows, rows + 1] = 1
             adjacency_matrix[rows + 1, rows] = 1
 
         elif graph_format == GraphFormat.FLATTENED_ROW_MAJOR:
-            flattened_row_major = np.zeros(((2 * index + 1) * index,), dtype=int)
+            flattened_row_major = np.zeros(((2 * index + 1) * index,), dtype=np.uint8)
             # Add the edges from 0 to all the other vertices.
             flattened_row_major[: 2 * index] = 1
             # Add the remaining edges, i.e., the edges of the form $\{ i, i + 1 \}$, where $i \in
             # \{ 1, 3, 5, 7, \ldots, 2m - 1 \}$.
-            indices = np.arange(1, 2 * index + 1, 2, dtype=int)
+            indices = np.arange(1, 2 * index + 1, 2, dtype=np.int16)
             indices = indices * (4 * index + 1 - indices) // 2
             flattened_row_major[indices] = 1
 
         else:
-            flattened_clockwise = np.zeros(((2 * index + 1) * index,), dtype=int)
+            flattened_clockwise = np.zeros(((2 * index + 1) * index,), dtype=np.uint8)
             # Add the edges from 0 to all the other vertices.
-            indices = np.arange(1, 2 * index + 1, dtype=int)
+            indices = np.arange(1, 2 * index + 1, dtype=np.int16)
             indices = indices * (indices - 1) // 2
             flattened_clockwise[indices] = 1
             # Add the remaining edges, i.e., the edges of the form $\{ i, i + 1 \}$, where $i \in
             # \{ 1, 3, 5, 7, \ldots, 2m - 1 \}$.
-            indices = np.arange(3, 2 * index + 3, 2, dtype=int)
+            indices = np.arange(3, 2 * index + 3, 2, dtype=np.int16)
             indices = indices * (indices - 1) // 2 - 1
             flattened_clockwise[indices] = 1
 
