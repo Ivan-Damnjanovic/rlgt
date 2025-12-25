@@ -2,7 +2,32 @@ import numpy as np
 from copy import deepcopy
 
 
+def insert(test_cases, index, value):
+    """
+    Insert a new value into a set of test cases at the given index.
+    """
+
+    new_test_cases = []
+
+    for test_case in test_cases:
+        new_test_case = []
+
+        for i, item in enumerate(test_case):
+            if i == index:
+                new_test_case.append(deepcopy(value))
+
+            new_test_case.append(deepcopy(item))
+
+        new_test_cases.append(tuple(new_test_case))
+
+    return new_test_cases
+
+
 def replace(test_cases, old_value, new_value):
+    """
+    Replace all instances of a value within a set of test cases.
+    """
+
     new_test_cases = []
 
     for test_case in test_cases:
