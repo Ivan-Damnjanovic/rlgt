@@ -17,14 +17,14 @@ class GraphBatch:
     r"""
     This class encapsulates the concept of a batch of $k$-edge-colored looped complete graphs of
     the same order, with $k$ being at least two. The graphs in the batch must be consistent: they
-    should all be directed or all be undirected, and they should either all allow loops or none.
-    Therefore, the batch of graphs can be represented as a quintuple ``(edge_colors, is_directed,
-    allow_loops, graph_format, format_representation)``, analogously to the `Graph` class. The
-    representation and initialization is done in the same way as in the `Graph` class, the only
-    difference being that all the `numpy.ndarray` objects used are of one dimension higher. More
-    precisely, if ``a`` is the `numpy.ndarray` used to describe the structure of a given batch of
-    graphs, then ``a[i]`` is the structural representation of the $i$-th graph in the batch in the
-    corresponding format.
+    should all be directed or all be undirected, and they should all either allow loops or not
+    allow loops. Therefore, the batch of graphs can be represented as a quintuple ``(edge_colors,
+    is_directed, allow_loops, graph_format, format_representation)``, analogously to the `Graph`
+    class. The representation and initialization is done in the same way as in the `Graph` class,
+    the only difference being that all the `numpy.ndarray` objects used are of one dimension
+    higher. More precisely, if ``a`` is the `numpy.ndarray` used to describe the structure of a
+    given batch of graphs, then ``a[i]`` is the structural representation of the $i$-th graph in
+    the batch in the corresponding format.
 
     :ivar __edge_colors: The number of proper edge colors, i.e., $k$, which is at least two.
     :ivar __is_directed: A boolean that indicates whether each of the graphs in the given batch is

@@ -139,7 +139,7 @@
             <div class="type">Module</div>
             <div class="kind">Module</div>
             <div class="privacy">PUBLIC</div>
-            <div class="summary">#TODO</div>
+            <div class="summary">This <tt class="rst-docutils rst-literal">Python</tt> module contains several functions that create graph generator functions, which rely on various mechanisms to construct batches of fully colored $k$-edge-colored looped complete graphs of a given batch size.</div>
           </li><li id="rl_graph_theory.environments.linear_environments">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.linear<wbr></wbr>_environments</div>
@@ -300,7 +300,7 @@ is_directed, allow_loops, graph_format, format_representation)</tt>...</div>
             <div class="type">Class</div>
             <div class="kind">Class</div>
             <div class="privacy">PUBLIC</div>
-            <div class="summary">This class encapsulates the concept of a batch of $k$-edge-colored looped complete graphs of the same order, with $k$ being at least two. The graphs in the batch must be consistent: they should all be directed or all be undirected, and they should either all allow loops or none...</div>
+            <div class="summary">This class encapsulates the concept of a batch of $k$-edge-colored looped complete graphs of the same order, with $k$ being at least two. The graphs in the batch must be consistent: they should all be directed or all be undirected, and they should all either allow loops or not allow loops...</div>
           </li><li id="rl_graph_theory.graphs.graph_batch.GraphBatch.__edge_colors">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.graphs<wbr></wbr>.graph<wbr></wbr>_batch<wbr></wbr>.<wbr></wbr>Graph<wbr></wbr>Batch<wbr></wbr>.__edge<wbr></wbr>_colors</div>
@@ -1029,7 +1029,7 @@ allow_loops, graph_format, format_representation)</tt>...</div>
             <div class="type">Attribute</div>
             <div class="kind">Type Alias</div>
             <div class="privacy">PUBLIC</div>
-            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
+            <div class="summary">This is the type alias for the graph generator functions, which accept one integer argument that represents the batch size, and output a <code><a href="rl_graph_theory.graphs.graph_batch.GraphBatch.html" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch">GraphBatch</a></code> object that represents the generated batch of fully colored $k$-edge-colored looped complete graphs of the given batch size...</div>
           </li><li id="rl_graph_theory.environments.graph_generators.create_fixed_graph_generator">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.graph<wbr></wbr>_generators<wbr></wbr>.create<wbr></wbr>_fixed<wbr></wbr>_graph<wbr></wbr>_generator</div>
@@ -1037,7 +1037,31 @@ allow_loops, graph_format, format_representation)</tt>...</div>
             <div class="type">Function</div>
             <div class="kind">Function</div>
             <div class="privacy">PUBLIC</div>
-            <div class="summary">#TODO</div>
+            <div class="summary">This function creates a <code><a href="rl_graph_theory.environments.graph_generators.html#GraphGenerator" class="internal-link" title="rl_graph_theory.environments.graph_generators.GraphGenerator">GraphGenerator</a></code> function that outputs batches of fully colored $k$-edge-colored looped complete graphs where all the graphs are equal to some provided graph. This provided graph is selectable and the user can also configure the starting graph format that the output batch of graphs should get initialized in.</div>
+          </li><li id="rl_graph_theory.environments.graph_generators.create_choose_two_graph_generator">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.graph<wbr></wbr>_generators<wbr></wbr>.create<wbr></wbr>_choose<wbr></wbr>_two<wbr></wbr>_graph<wbr></wbr>_generator</div>
+            <div class="url">rl_graph_theory.environments.graph_generators.html#create_choose_two_graph_generator</div>
+            <div class="type">Function</div>
+            <div class="kind">Function</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">This function creates a <code><a href="rl_graph_theory.environments.graph_generators.html#GraphGenerator" class="internal-link" title="rl_graph_theory.environments.graph_generators.GraphGenerator">GraphGenerator</a></code> function that outputs batches of fully colored $k$-edge-colored looped complete graphs where all the graphs are equal to one of the two provided graphs. These two provided graphs are selectable and each of the graphs in the output batch is assigned to be equal to one of these two graphs with respect to a given probability...</div>
+          </li><li id="rl_graph_theory.environments.graph_generators.create_edge_perturbation_graph_generator">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.graph<wbr></wbr>_generators<wbr></wbr>.create<wbr></wbr>_edge<wbr></wbr>_perturbation<wbr></wbr>_graph<wbr></wbr>_generator</div>
+            <div class="url">rl_graph_theory.environments.graph_generators.html#create_edge_perturbation_graph_generator</div>
+            <div class="type">Function</div>
+            <div class="kind">Function</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">This function creates a <code><a href="rl_graph_theory.environments.graph_generators.html#GraphGenerator" class="internal-link" title="rl_graph_theory.environments.graph_generators.GraphGenerator">GraphGenerator</a></code> function that outputs batches of fully colored $k$-edge-colored looped complete graphs where all the graphs are initially equal to some provided graph, and then an edge (resp...</div>
+          </li><li id="rl_graph_theory.environments.graph_generators.create_random_graph_generator">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.graph<wbr></wbr>_generators<wbr></wbr>.create<wbr></wbr>_random<wbr></wbr>_graph<wbr></wbr>_generator</div>
+            <div class="url">rl_graph_theory.environments.graph_generators.html#create_random_graph_generator</div>
+            <div class="type">Function</div>
+            <div class="kind">Function</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">This function creates a <code><a href="rl_graph_theory.environments.graph_generators.html#GraphGenerator" class="internal-link" title="rl_graph_theory.environments.graph_generators.GraphGenerator">GraphGenerator</a></code> function that outputs batches of fully colored $k$-edge-colored looped complete graphs where all the graphs are randomly generated. More precisely, each edge (resp...</div>
           </li><li id="rl_graph_theory.environments.global_environments.GlobalSetEnvironment">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.global<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Global<wbr></wbr>Set<wbr></wbr>Environment</div>
