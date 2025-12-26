@@ -255,3 +255,96 @@ TEST_CASES_TRANSITION_BATCH_CLOCKWISE = replace(
 TEST_CASES_TRANSITION_BATCH = (
     TEST_CASES_TRANSITION_BATCH_ROW_MAJOR + TEST_CASES_TRANSITION_BATCH_CLOCKWISE
 )
+
+
+TEST_CASES_STATE_BATCH_TO_GRAPH_BATCH_ROW_MAJOR = [
+    (
+        1,
+        2,
+        FlattenedOrdering.ROW_MAJOR,
+        2,
+        False,
+        False,
+        np.asarray([[0, 1, 0]], dtype=int),
+        np.asarray([[0]], dtype=int),
+    ),
+    (
+        1,
+        3,
+        FlattenedOrdering.ROW_MAJOR,
+        2,
+        False,
+        False,
+        np.asarray([[0, 0, 0, 1, 0, 0]], dtype=int),
+        np.asarray([[0, 0, 0]], dtype=int),
+    ),
+    (
+        1,
+        3,
+        FlattenedOrdering.ROW_MAJOR,
+        2,
+        False,
+        False,
+        np.asarray([[1, 0, 1, 0, 1, 0]], dtype=int),
+        np.asarray([[1, 0, 1]], dtype=int),
+    ),
+    (
+        1,
+        2,
+        FlattenedOrdering.ROW_MAJOR,
+        2,
+        False,
+        False,
+        np.asarray([[0, 0, 1]], dtype=int),
+        np.asarray([[0]], dtype=int),
+    ),
+    (
+        1,
+        3,
+        FlattenedOrdering.ROW_MAJOR,
+        2,
+        False,
+        False,
+        np.asarray([[0, 0, 0, 0, 1, 0]], dtype=int),
+        np.asarray([[0, 0, 0]], dtype=int),
+    ),
+    (
+        1,
+        3,
+        FlattenedOrdering.ROW_MAJOR,
+        2,
+        False,
+        False,
+        np.asarray([[1, 0, 1, 1, 0, 0]], dtype=int),
+        np.asarray([[1, 0, 1]], dtype=int),
+    ),
+    (
+        1,
+        3,
+        FlattenedOrdering.ROW_MAJOR,
+        3,
+        False,
+        False,
+        np.asarray([[1, 0, 1, 0, 1, 0]], dtype=int),
+        np.asarray([[1, 2, 1]], dtype=int),
+    ),
+]
+
+TEST_CASES_STATE_BATCH_TO_GRAPH_BATCH_ROW_MAJOR += [
+    *batchify(
+        TEST_CASES_STATE_BATCH_TO_GRAPH_BATCH_ROW_MAJOR,
+        batch_size=2,
+        expand_dims=False,
+    ),
+]
+
+TEST_CASES_STATE_BATCH_TO_GRAPH_BATCH_CLOCKWISE = replace(
+    TEST_CASES_STATE_BATCH_TO_GRAPH_BATCH_ROW_MAJOR,
+    FlattenedOrdering.ROW_MAJOR,
+    FlattenedOrdering.CLOCKWISE,
+)
+
+TEST_CASES_STATE_BATCH_TO_GRAPH_BATCH = (
+    TEST_CASES_STATE_BATCH_TO_GRAPH_BATCH_ROW_MAJOR
+    + TEST_CASES_STATE_BATCH_TO_GRAPH_BATCH_CLOCKWISE
+)

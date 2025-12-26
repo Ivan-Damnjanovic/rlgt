@@ -11,7 +11,7 @@ from rl_graph_theory.environments.local_environments import (
 from .local_set_test_cases import (
     TEST_CASES_CONSTRUCTOR,
     TEST_CASES_RESET_BATCH,
-    # TEST_CASES_STATE_BATCH_TO_GRAPH_BATCH,
+    TEST_CASES_STATE_BATCH_TO_GRAPH_BATCH,
     TEST_CASES_TRANSITION_BATCH,
 )
 
@@ -143,3 +143,57 @@ def test_transition_batch(
     np.testing.assert_array_equal(env._state_batch, state_batch)
 
     assert env._status is status
+
+
+def test_transition_batch_runtime_error():
+    env = LocalSetEnvironment(
+        RewardType.PROPER,
+        lambda _: np.empty(0),
+        graph_order=2,
+        episode_length=None,
+        flattened_ordering=FlattenedOrdering.ROW_MAJOR,
+        edge_colors=2,
+        is_directed=False,
+        allow_loops=False,
+    )
+
+    _ = env.reset_batch(1)
+
+    with pytest.raises(RuntimeError):
+        env._transition_batch(np.asarray([[0, 1]], dtype=int))
+
+
+@pytest.mark.parametrize(
+    "batch_size, graph_order, flattened_ordering, edge_colors, is_directed, allow_loops, state_batch, flattened",
+    TEST_CASES_STATE_BATCH_TO_GRAPH_BATCH,
+)
+def test_state_batch_to_graph_batch(
+    batch_size,
+    graph_order,
+    flattened_ordering,
+    edge_colors,
+    is_directed,
+    allow_loops,
+    state_batch,
+    flattened,
+):
+    env = LocalSetEnvironment(
+        RewardType.PROPER,
+        lambda _: np.empty(0),
+        graph_order,
+        None,
+        flattened_ordering,
+        edge_colors,
+        is_directed,
+        allow_loops,
+    )
+
+    graph_batch = env.state_batch_to_graph_batch(state_batch)
+    np.testing.assert_array_equal(
+        flattened,
+        (
+            graph_batch.flattened_clockwise
+            if flattened_ordering is FlattenedOrdering.CLOCKWISE
+            else graph_batch.flattened_row_major
+        ),
+    )
