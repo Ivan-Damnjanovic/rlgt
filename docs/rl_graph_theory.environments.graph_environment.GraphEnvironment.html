@@ -342,11 +342,15 @@
           <div><p>This abstract class encapsulates the concept of an RL environment to be used in graph theory
 applications. The goal of such an environment is to tackle extremal problems where a given
 graph invariant should be maximized over some finite set of fully colored $k$-edge-colored
-looped complete graphs. For the sake of efficiency, the environment provides support for
-multiple episodes to be run in parallel. This approach makes sense because it is guaranteed
-that all of these episodes must end at the same time, regardless of whether the RL environment
-has episodic or continuing tasks. The concrete classes that inherit from this abstract class
-must implement the following three abstract methods:</p>
+looped complete graphs. Both the states and the actions are represented as <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code>
+lists, i.e., vectors. For the sake of efficiency, the environment provides support for multiple
+episodes to be run in parallel. This approach makes sense because it is guaranteed that all of
+these episodes must end at the same time, regardless of whether the RL environment has episodic
+or continuing tasks. In this situation, batches of states and batches of actions are naturally
+represented as <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> matrices whose rows correspond to the states and actions,
+respectively.</p>
+<p>The concrete classes that inherit from this abstract class must implement the following three
+abstract methods:</p>
 <ul class="rst-simple">
 <li><code><a href="#reset_batch" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment.reset_batch">reset_batch</a></code>, which serves to initialize a batch of episodes with a given batch size;</li>
 <li><code><a href="#_transition_batch" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment._transition_batch">_transition_batch</a></code>, which determines the transition process between states depending on the
@@ -390,7 +394,7 @@ states, i.e., how a batch of underlying graphs is extracted from a given batch o
     
     <td>Instance Variable</td>
     <td><code><a href="#__reward_function" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment.__reward_function">__reward<wbr></wbr>_function</a></code></td>
-    <td>The <code><a href="rl_graph_theory.environments.graph_environment.html#RewardFunction" class="internal-link" title="rl_graph_theory.environments.graph_environment.RewardFunction">RewardFunction</a></code> function that helps compute the rewards in accordance with the selected (sub)type of reward system. It plays the role of either the <tt class="rst-docutils rst-literal">graph_invariant</tt> or the <tt class="rst-docutils rst-literal">reward_function</tt> function from the description of the ...</td>
+    <td>The <code><a href="rl_graph_theory.environments.graph_environment.html#RewardFunction" class="internal-link" title="rl_graph_theory.environments.graph_environment.RewardFunction">RewardFunction</a></code> function that helps compute the rewards in accordance with the selected (sub)type of reward system. It plays the role of either the <tt class="rst-docutils rst-literal">graph_invariant</tt> or the <tt class="rst-docutils rst-literal">graph_invariant_difference</tt> function from the description of the ...</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
@@ -440,8 +444,8 @@ states, i.e., how a batch of underlying graphs is extracted from a given batch o
 (sub)type of reward system and a corresponding function that helps compute the rewards.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">reward<wbr></wbr>_type:</span><code><a href="rl_graph_theory.environments.graph_environment.RewardType.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.RewardType">RewardType</a></code></td><td class="fieldArgDesc">An item of the <code><a href="rl_graph_theory.environments.graph_environment.RewardType.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.RewardType">RewardType</a></code> enumeration that determines the (sub)type
 of reward system to be used in the instantiated environment.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">reward<wbr></wbr>_function:</span><code><a href="rl_graph_theory.environments.graph_environment.html#RewardFunction" class="internal-link" title="rl_graph_theory.environments.graph_environment.RewardFunction">RewardFunction</a></code></td><td class="fieldArgDesc">The <code><a href="rl_graph_theory.environments.graph_environment.html#RewardFunction" class="internal-link" title="rl_graph_theory.environments.graph_environment.RewardFunction">RewardFunction</a></code> function whose goal is to help compute the
 rewards in accordance with the selected (sub)type of reward system. It plays the role
-of either the <tt class="rst-docutils rst-literal">graph_invariant</tt> or the <tt class="rst-docutils rst-literal">reward_function</tt> function from the
-description of the <code><a href="rl_graph_theory.environments.graph_environment.RewardType.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.RewardType">RewardType</a></code> enumeration, and its expected signature varies
+of either the <tt class="rst-docutils rst-literal">graph_invariant</tt> or the <tt class="rst-docutils rst-literal">graph_invariant_difference</tt> function from
+the description of the <code><a href="rl_graph_theory.environments.graph_environment.RewardType.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.RewardType">RewardType</a></code> enumeration, and its expected signature varies
 depending on the <tt class="rst-docutils rst-literal">reward_type</tt> argument.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
@@ -610,8 +614,8 @@ in the <code><a href="#_state_batch" class="internal-link" title="rl_graph_theor
     
     <div><p>The <code><a href="rl_graph_theory.environments.graph_environment.html#RewardFunction" class="internal-link" title="rl_graph_theory.environments.graph_environment.RewardFunction">RewardFunction</a></code> function that helps compute the rewards in
 accordance with the selected (sub)type of reward system. It plays the role of either the
-<tt class="rst-docutils rst-literal">graph_invariant</tt> or the <tt class="rst-docutils rst-literal">reward_function</tt> function from the description of the
-<code><a href="rl_graph_theory.environments.graph_environment.RewardType.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.RewardType">RewardType</a></code> enumeration, and its expected signature varies depending on the selected
+<tt class="rst-docutils rst-literal">graph_invariant</tt> or the <tt class="rst-docutils rst-literal">graph_invariant_difference</tt> function from the description of
+the <code><a href="rl_graph_theory.environments.graph_environment.RewardType.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.RewardType">RewardType</a></code> enumeration, and its expected signature varies depending on the selected
 (sub)type of reward system.</p></div>
     
   </div>
@@ -708,7 +712,7 @@ method.</p></div>
   <div class="container-fluid">
     <a href="index.html">API Documentation</a> for rl-graph-theory,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    25.10.1 at 2025-12-26 01:30:56.
+    25.10.1 at 2025-12-26 21:16:28.
   </div>
 
   <!-- Search related scripts needs to be loaded at the end of HTML 

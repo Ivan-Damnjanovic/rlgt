@@ -20,8 +20,8 @@ RewardFunction = Union[
 """
 This is the type alias for the functions that help compute the rewards in RL environments to be
 used in graph theory applications. In other words, these are the functions that take on the role of
-either the ``graph_invariant`` or the ``reward_function`` function from the description of the
-`RewardType` enumeration.
+either the ``graph_invariant`` or the ``graph_invariant_difference`` function from the description
+of the `RewardType` enumeration.
 """
 
 
@@ -60,23 +60,23 @@ class RewardType(Enum):
 
     :cvar PROPER:
         The proper reward system. The batch of corresponding rewards received after each batch of
-        actions is computed by the formula ``reward_function(old_graph_batch, new_graph_batch)``,
-        where:
+        actions is computed by the formula
+        ``graph_invariant_difference(old_graph_batch, new_graph_batch)``, where:
 
         * ``new_graph_batch`` is the underlying batch of graphs corresponding to the batch of newly
           obtained states;
         * ``old_graph_batch`` is the underlying batch of graphs corresponding to the batch of
           previous states; and
-        * ``reward_function`` is a function that accepts a batch of previous underlying graphs and
-          a batch of new underlying graphs, and returns the corresponding values for the
+        * ``graph_invariant_difference`` is a function that accepts a batch of previous underlying
+          graphs and a batch of new underlying graphs, and returns the corresponding values for the
           element-wise differences of the graph invariant that is supposed to get maximized (the
           $i$-th element equals the graph invariant for the $i$-th new underlying graph minus the
           graph invariant for the $i$-th old underlying graph).
 
     :note: The dense reward system is divided into the telescopic reward system and the proper
         reward system because, in certain cases, it can be more computationally efficient to invoke
-        the ``reward_function`` function once than invoke the ``graph_invariant`` function twice.
-        Therefore, these two subtypes of reward systems are separated purely due to
+        the ``graph_invariant_difference`` function once than invoke the ``graph_invariant``
+        function twice. Therefore, these two subtypes of reward systems are separated purely due to
         implementational reasons.
     """
 
@@ -123,7 +123,7 @@ class GraphEnvironment(ABC):
     or continuing tasks. In this situation, batches of states and batches of actions are naturally
     represented as `numpy.ndarray` matrices whose rows correspond to the states and actions,
     respectively.
-    
+
     The concrete classes that inherit from this abstract class must implement the following three
     abstract methods:
 
@@ -137,8 +137,8 @@ class GraphEnvironment(ABC):
         reward system that is used in the given RL environment.
     :ivar __reward_function: The `RewardFunction` function that helps compute the rewards in
         accordance with the selected (sub)type of reward system. It plays the role of either the
-        ``graph_invariant`` or the ``reward_function`` function from the description of the
-        `RewardType` enumeration, and its expected signature varies depending on the selected
+        ``graph_invariant`` or the ``graph_invariant_difference`` function from the description of
+        the `RewardType` enumeration, and its expected signature varies depending on the selected
         (sub)type of reward system.
     :ivar _state_batch: Either `None`, or a `numpy.ndarray` matrix that determines the batch of
         current states corresponding to the batch of episodes that are being run in parallel. This
@@ -161,8 +161,8 @@ class GraphEnvironment(ABC):
             of reward system to be used in the instantiated environment.
         :param reward_function: The `RewardFunction` function whose goal is to help compute the
             rewards in accordance with the selected (sub)type of reward system. It plays the role
-            of either the ``graph_invariant`` or the ``reward_function`` function from the
-            description of the `RewardType` enumeration, and its expected signature varies
+            of either the ``graph_invariant`` or the ``graph_invariant_difference`` function from
+            the description of the `RewardType` enumeration, and its expected signature varies
             depending on the ``reward_type`` argument.
         """
 
@@ -256,7 +256,7 @@ class GraphEnvironment(ABC):
                     old_graph_batch
                 )
             # Otherwise, the proper reward system is being used, so the rewards should be computed
-            # by invoking the ``reward_function`` function once.
+            # by invoking the ``graph_invariant_difference`` function once.
             else:
                 reward_batch = self.__reward_function(old_graph_batch, new_graph_batch)
 
