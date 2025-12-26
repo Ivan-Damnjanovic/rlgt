@@ -1,0 +1,3 @@
+from .global_set_test_cases import TEST_CASES_CONSTRUCTOR as gstc_constructor
+
+TEST_CASES_CONSTRUCTOR = gstc_constructor
