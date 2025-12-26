@@ -2,10 +2,6 @@
 #TODO
 """
 
-"""
-#TODO
-"""
-
 from typing import Optional, Tuple
 
 import numpy as np
@@ -22,7 +18,7 @@ from .graph_environment import (
 from .graph_generators import GraphGenerator, create_fixed_graph_generator
 
 
-def __compute_edge_indices(
+def compute_edge_indices(
     graph_order: int,
     starting_vertices: np.ndarray,
     ending_vertices: np.ndarray,
@@ -173,7 +169,10 @@ class LocalSetEnvironment(GraphEnvironment):
             format_representation = initial_graph_batch.flattened_clockwise
 
         self._state_batch = np.zeros(
-            (batch_size, (self._edge_colors - 1) * self._flattened_length + self._graph_order),
+            (
+                batch_size,
+                (self._edge_colors - 1) * self._flattened_length + self._graph_order,
+            ),
             dtype=int,
         )
         self._state_batch[:, (self._edge_colors - 1) * self._flattened_length] = 1
@@ -182,7 +181,9 @@ class LocalSetEnvironment(GraphEnvironment):
             self._state_batch[:, : self._flattened_length] = format_representation
         else:
             color_indices = np.arange(1, self._edge_colors, dtype=int)
-            temp = (format_representation[:, None, :] == color_indices[:, None]).astype(int)
+            temp = (format_representation[:, None, :] == color_indices[:, None]).astype(
+                int
+            )
             self._state_batch[:, : (self._edge_colors - 1) * self._flattened_length] = (
                 temp.reshape(-1, (self._edge_colors - 1) * self._flattened_length)
             )
@@ -198,7 +199,7 @@ class LocalSetEnvironment(GraphEnvironment):
             if np.any(self._current_vertices == action_batch[:, 0]):
                 raise RuntimeError
 
-        edge_indices = __compute_edge_indices(
+        edge_indices = compute_edge_indices(
             graph_order=self._graph_order,
             starting_vertices=self._current_vertices,
             ending_vertices=action_batch[:, 0],
@@ -219,7 +220,8 @@ class LocalSetEnvironment(GraphEnvironment):
             temp[rows, action_batch[:, 1] - 1, edge_indices] = action_batch[:, 1] != 0
 
         self._state_batch[
-            rows, self._flattened_length * (self._edge_colors - 1) + self._current_vertices
+            rows,
+            self._flattened_length * (self._edge_colors - 1) + self._current_vertices,
         ] = 0
         self._state_batch[
             rows, self._flattened_length * (self._edge_colors - 1) + action_batch[:, 0]
@@ -239,9 +241,9 @@ class LocalSetEnvironment(GraphEnvironment):
                 allow_loops=self._allow_loops,
             )
 
-        temp = state_batch[:, : (self._edge_colors - 1) * self._flattened_length].reshape(
-            -1, self._edge_colors - 1, self._flattened_length
-        )
+        temp = state_batch[
+            :, : (self._edge_colors - 1) * self._flattened_length
+        ].reshape(-1, self._edge_colors - 1, self._flattened_length)
         color_indices = np.arange(1, self._edge_colors, dtype=int)
         result = (temp * color_indices[:, None]).sum(axis=1)
 
@@ -254,7 +256,7 @@ class LocalSetEnvironment(GraphEnvironment):
         )
 
 
-class GlobalFlipEnvironment(GraphEnvironment):
+class LocalFlipEnvironment(GraphEnvironment):
     """
     #TODO
     """
@@ -354,7 +356,7 @@ class GlobalFlipEnvironment(GraphEnvironment):
             if np.any(self._current_vertices == action_batch[:, 0]):
                 raise RuntimeError
 
-        edge_indices = __compute_edge_indices(
+        edge_indices = compute_edge_indices(
             graph_order=self._graph_order,
             starting_vertices=self._current_vertices,
             ending_vertices=action_batch[:, 0],
