@@ -37,7 +37,7 @@ class RewardType(Enum):
     reasons.
 
     :cvar SPARSE:
-        The sparse reward system. The batch of corresponding rewards received after every batch of
+        The sparse reward system. The batch of corresponding rewards received after each batch of
         actions is zero, apart from the final batch of actions, for which it is equal to
         ``graph_invariant(final_graph_batch)``, where:
 
@@ -76,6 +76,8 @@ class RewardType(Enum):
     :note: The dense reward system is divided into the telescopic reward system and the proper
         reward system because, in certain cases, it can be more computationally efficient to invoke
         the ``reward_function`` function once than invoke the ``graph_invariant`` function twice.
+        Therefore, these two subtypes of reward systems are separated purely due to
+        implementational reasons.
     """
 
     SPARSE = 0
@@ -112,11 +114,13 @@ class EpisodeStatus(Enum):
 class GraphEnvironment(ABC):
     """
     This abstract class encapsulates the concept of an RL environment to be used in graph theory
-    applications. For the sake of efficiency, it provides support for multiple episodes to be run
-    in parallel. This approach makes sense because it is guaranteed that all of these episodes must
-    end at the same time, regardless of whether the RL environment has episodic or continuing
-    tasks. Concrete classes that inherit from this abstract class must implement the following
-    three abstract methods:
+    applications. The goal of such an environment is to tackle extremal problems where a given
+    graph invariant should be maximized over some finite set of fully colored $k$-edge-colored
+    looped complete graphs. For the sake of efficiency, the environment provides support for
+    multiple episodes to be run in parallel. This approach makes sense because it is guaranteed
+    that all of these episodes must end at the same time, regardless of whether the RL environment
+    has episodic or continuing tasks. The concrete classes that inherit from this abstract class
+    must implement the following three abstract methods:
 
     * `reset_batch`, which serves to initialize a batch of episodes with a given batch size;
     * `_transition_batch`, which determines the transition process between states depending on the
@@ -131,11 +135,11 @@ class GraphEnvironment(ABC):
         ``graph_invariant`` or the ``reward_function`` function from the description of the
         `RewardType` enumeration, and its expected signature varies depending on the selected
         (sub)type of reward system.
-    :ivar _state_batch: Either `None`, or a `np.ndarray` matrix that determines the batch of
+    :ivar _state_batch: Either `None`, or a `numpy.ndarray` matrix that determines the batch of
         current states corresponding to the batch of episodes that are being run in parallel. This
         attribute is initially set to `None`, and afterwards, it is assigned the necessary
-        `np.ndarray` matrix after each invocation of the `reset_batch` or `step_batch` method. The
-        rows of the said `np.ndarray` matrix correspond to the states in the batch.
+        `numpy.ndarray` matrix after each invocation of the `reset_batch` or `step_batch` method.
+        The rows of the said `numpy.ndarray` matrix correspond to the states in the batch.
     :ivar _status: Either `None`, or an item of the `EpisodeStatus` enumeration that signifies the
         status of the given batch of episodes, as described in the `EpisodeStatus` enumeration.
         This attribute is initially set to `None`, and afterwards, it is assigned the necessary
@@ -180,7 +184,7 @@ class GraphEnvironment(ABC):
         :return: A tuple ``(initial_state_batch, status)``, where
 
             * ``initial_state_batch`` is the value of the `_state_batch` attribute after the batch
-              of episodes has been initialized, given as a `np.ndarray` matrix where the rows
+              of episodes has been initialized, given as a `numpy.ndarray` matrix where the rows
               corresponds to the states in the batch; and
             * ``status`` is the value of the `_status` attribute after the batch of episodes has
               been initialized, given as an item of the `EpisodeStatus` enumeration.
@@ -199,15 +203,16 @@ class GraphEnvironment(ABC):
         respective batches matches the order of the performed actions and the original states.
 
         :param action_batch: The batch of actions to be applied to the states in the batch of
-            current states, given as a `np.ndarray` matrix where the rows correspond to the
+            current states, given as a `numpy.ndarray` matrix where the rows correspond to the
             actions. The number of actions in this batch must be the same as the number of states
             in the `_state_batch` attribute.
 
         :return: A tuple ``(new_state_batch, reward_batch, status)``, where:
 
-            * ``new_state_batch`` is the batch of newly obtained states, given as a `np.ndarray`
+            * ``new_state_batch`` is the batch of newly obtained states, given as a `numpy.ndarray`
               matrix where the rows correspond to the states;
-            * ``reward_batch`` is the batch of computed rewards, given as a `np.ndarray` list; and
+            * ``reward_batch`` is the batch of computed rewards, given as a `numpy.ndarray` list;
+              and
             * ``status`` is an item of the `EpisodeStatus` enumeration that determines the new
               status corresponding to the batch of episodes run in parallel.
         """
@@ -222,9 +227,9 @@ class GraphEnvironment(ABC):
             # Execute the batch of actions and transition to the batch of new states.
             self._transition_batch(action_batch)
 
-            # If the terminal states have not been reached, then just set all the rewards to zero.
+            # If the final states have not been reached, then just set all the rewards to zero.
             if self._status == EpisodeStatus.IN_PROGRESS:
-                reward_batch = np.zeros((self._state_batch.shape[0],), dtype=float)
+                reward_batch = np.zeros((self._state_batch.shape[0],), dtype=np.float32)
             # Otherwise, compute the rewards as the corresponding values for the graph invariant
             # that is supposed to get maximized. In other words, invoke the ``graph_invariant``
             # function.
@@ -263,7 +268,7 @@ class GraphEnvironment(ABC):
         class that inherits from the `GraphEnvironment` class.
 
         :param action_batch: The batch of actions to be applied to the states in the batch of
-            current states, given as a `np.ndarray` matrix where the rows correspond to the
+            current states, given as a `numpy.ndarray` matrix where the rows correspond to the
             actions. The number of actions in this batch must be the same as the number of states
             in the `_state_batch` attribute.
         """
@@ -279,7 +284,7 @@ class GraphEnvironment(ABC):
         states in the given batch of states.
 
         :param state_batch: The batch of provided states whose underlying graphs should be
-            extracted, given as a `np.ndarray` matrix whose rows correspond to the states in the
+            extracted, given as a `numpy.ndarray` matrix whose rows correspond to the states in the
             batch.
 
         :return: The extracted batch of underlying graphs, given as a `GraphBatch` object.

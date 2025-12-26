@@ -893,7 +893,7 @@ allow_loops, graph_format, format_representation)</tt>...</div>
             <div class="type">Attribute</div>
             <div class="kind">Constant</div>
             <div class="privacy">PUBLIC</div>
-            <div class="summary">The sparse reward system. The batch of corresponding rewards received after every batch of actions is zero, apart from the final batch of actions, for which it is equal to <tt class="rst-docutils rst-literal">graph_invariant(final_graph_batch)</tt>...</div>
+            <div class="summary">The sparse reward system. The batch of corresponding rewards received after each batch of actions is zero, apart from the final batch of actions, for which it is equal to <tt class="rst-docutils rst-literal">graph_invariant(final_graph_batch)</tt>...</div>
           </li><li id="rl_graph_theory.environments.graph_environment.RewardType.TELESCOPIC">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.graph<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Reward<wbr></wbr>Type<wbr></wbr>.TELESCOPIC</div>
@@ -949,7 +949,7 @@ allow_loops, graph_format, format_representation)</tt>...</div>
             <div class="type">Class</div>
             <div class="kind">Class</div>
             <div class="privacy">PUBLIC</div>
-            <div class="summary">This abstract class encapsulates the concept of an RL environment to be used in graph theory applications. For the sake of efficiency, it provides support for multiple episodes to be run in parallel. This approach makes sense because it is guaranteed that all of these episodes must end at the same time, regardless of whether the RL environment has episodic or continuing tasks...</div>
+            <div class="summary">This abstract class encapsulates the concept of an RL environment to be used in graph theory applications. The goal of such an environment is to tackle extremal problems where a given graph invariant should be maximized over some finite set of fully colored $k$-edge-colored looped complete graphs...</div>
           </li><li id="rl_graph_theory.environments.graph_environment.GraphEnvironment.__reward_type">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.graph<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Graph<wbr></wbr>Environment<wbr></wbr>.__reward<wbr></wbr>_type</div>
@@ -973,7 +973,7 @@ allow_loops, graph_format, format_representation)</tt>...</div>
             <div class="type">Attribute</div>
             <div class="kind">Instance Variable</div>
             <div class="privacy">PRIVATE</div>
-            <div class="summary">Either <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, or a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> matrix that determines the batch of current states corresponding to the batch of episodes that are being run in parallel. This attribute is initially set to <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, and afterwards, it is assigned the necessary ...</div>
+            <div class="summary">Either <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, or a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> matrix that determines the batch of current states corresponding to the batch of episodes that are being run in parallel. This attribute is initially set to <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, and afterwards, it is assigned the necessary ...</div>
           </li><li id="rl_graph_theory.environments.graph_environment.GraphEnvironment._status">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.graph<wbr></wbr>_environment<wbr></wbr>.<wbr></wbr>Graph<wbr></wbr>Environment<wbr></wbr>._status</div>

@@ -610,7 +610,7 @@ attribute.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldN
 i.e., the number of episodes in it, given as a positive integer.</td></tr></table><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/stdtypes.html#tuple" class="intersphinx-link">tuple</a>[<wbr></wbr><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a>, <wbr></wbr><a href="rl_graph_theory.environments.graph_environment.EpisodeStatus.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.EpisodeStatus">EpisodeStatus</a>]</code></td><td class="fieldArgDesc"><p>A tuple <tt class="rst-docutils rst-literal">(initial_state_batch, status)</tt>, where</p>
 <ul class="rst-simple">
 <li><tt class="rst-docutils rst-literal">initial_state_batch</tt> is the value of the <code><a href="#_state_batch" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment._state_batch">_state_batch</a></code> attribute after the batch
-of episodes has been initialized, given as a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> matrix where the rows
+of episodes has been initialized, given as a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> matrix where the rows
 corresponds to the states in the batch; and</li>
 <li><tt class="rst-docutils rst-literal">status</tt> is the value of the <code><a href="#_status" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment._status">_status</a></code> attribute after the batch of episodes has
 been initialized, given as an item of the <code><a href="rl_graph_theory.environments.graph_environment.EpisodeStatus.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.EpisodeStatus">EpisodeStatus</a></code> enumeration.</li>
@@ -643,7 +643,7 @@ been initialized, given as an item of the <code><a href="rl_graph_theory.environ
 <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code> class. Its goal is to extract the batch of underlying graphs from any
 provided batch of states. The graphs should appear in the same order as their corresponding
 states in the given batch of states.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">state<wbr></wbr>_batch:</span><code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code></td><td class="fieldArgDesc">The batch of provided states whose underlying graphs should be
-extracted, given as a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> matrix whose rows correspond to the states in the
+extracted, given as a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> matrix whose rows correspond to the states in the
 batch.</td></tr></table><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="rl_graph_theory.graphs.graph_batch.GraphBatch.html" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch">GraphBatch</a></code></td><td class="fieldArgDesc">The extracted batch of underlying graphs, given as a <code><a href="rl_graph_theory.graphs.graph_batch.GraphBatch.html" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch">GraphBatch</a></code> object.</td></tr></table><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Note</td></tr><tr><td colspan="2">The implementation of this method must be a pure function, i.e., it should not
 modify any attributes of the given instance.</td></tr></table></div>
   </div>
@@ -723,7 +723,7 @@ given actions and applying them element-wise to the states in the batch of curre
 given by the <code><a href="#_state_batch" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment._state_batch">_state_batch</a></code> attribute. The method should update the <code><a href="#_state_batch" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment._state_batch">_state_batch</a></code> and
 <code><a href="#_status" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment._status">_status</a></code> attributes, as well as any other potential attributes specific to the concrete
 class that inherits from the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code> class.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">action<wbr></wbr>_batch:</span><code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code></td><td class="fieldArgDesc">The batch of actions to be applied to the states in the batch of
-current states, given as a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code> matrix where the rows correspond to the
+current states, given as a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> matrix where the rows correspond to the
 actions. The number of actions in this batch must be the same as the number of states
 in the <code><a href="#_state_batch" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment._state_batch">_state_batch</a></code> attribute.</td></tr></table></div>
   </div>
@@ -979,7 +979,7 @@ in the <code><a href="#_state_batch" class="internal-link" title="rl_graph_theor
   <div class="container-fluid">
     <a href="index.html">API Documentation</a> for rl-graph-theory,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    25.10.1 at 2025-12-25 20:21:15.
+    25.10.1 at 2025-12-26 01:30:56.
   </div>
 
   <!-- Search related scripts needs to be loaded at the end of HTML 
