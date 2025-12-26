@@ -8,9 +8,9 @@ from rl_graph_theory.environments.local_environments import (
     RewardType,
 )
 
-from .global_set_test_cases import (
+from .local_set_test_cases import (
     TEST_CASES_CONSTRUCTOR,
-    # TEST_CASES_RESET_BATCH,
+    TEST_CASES_RESET_BATCH,
     # TEST_CASES_STATE_BATCH_TO_GRAPH_BATCH,
     # TEST_CASES_TRANSITION_BATCH,
 )
@@ -66,3 +66,37 @@ def test_constructor(
         if episode_length is None
         else episode_length
     )
+
+
+@pytest.mark.parametrize(
+    "batch_size, graph_order, flattened_ordering, edge_colors, is_directed, allow_loops, "
+    "expected_state",
+    TEST_CASES_RESET_BATCH,
+)
+def test_reset_batch(
+    batch_size,
+    graph_order,
+    flattened_ordering,
+    edge_colors,
+    is_directed,
+    allow_loops,
+    expected_state,
+):
+    env = LocalSetEnvironment(
+        RewardType.PROPER,
+        lambda _: np.empty(0),
+        graph_order,
+        None,
+        flattened_ordering,
+        edge_colors,
+        is_directed,
+        allow_loops,
+    )
+
+    state_batch, status = env.reset_batch(batch_size)
+
+    assert env._step_count == 0
+    assert status is env._status is EpisodeStatus.IN_PROGRESS
+
+    np.testing.assert_array_equal(state_batch, env._state_batch)
+    np.testing.assert_array_equal(state_batch, expected_state)
