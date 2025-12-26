@@ -116,11 +116,16 @@ class GraphEnvironment(ABC):
     This abstract class encapsulates the concept of an RL environment to be used in graph theory
     applications. The goal of such an environment is to tackle extremal problems where a given
     graph invariant should be maximized over some finite set of fully colored $k$-edge-colored
-    looped complete graphs. For the sake of efficiency, the environment provides support for
-    multiple episodes to be run in parallel. This approach makes sense because it is guaranteed
-    that all of these episodes must end at the same time, regardless of whether the RL environment
-    has episodic or continuing tasks. The concrete classes that inherit from this abstract class
-    must implement the following three abstract methods:
+    looped complete graphs. Both the states and the actions are represented as `numpy.ndarray`
+    lists, i.e., vectors. For the sake of efficiency, the environment provides support for multiple
+    episodes to be run in parallel. This approach makes sense because it is guaranteed that all of
+    these episodes must end at the same time, regardless of whether the RL environment has episodic
+    or continuing tasks. In this situation, batches of states and batches of actions are naturally
+    represented as `numpy.ndarray` matrices whose rows correspond to the states and actions,
+    respectively.
+    
+    The concrete classes that inherit from this abstract class must implement the following three
+    abstract methods:
 
     * `reset_batch`, which serves to initialize a batch of episodes with a given batch size;
     * `_transition_batch`, which determines the transition process between states depending on the

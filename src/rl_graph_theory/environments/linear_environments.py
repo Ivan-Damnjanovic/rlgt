@@ -54,9 +54,11 @@ class LinearBuildEnvironment(GraphEnvironment):
     encoding of the position that determines the next edge (resp. arc) to be colored. In other
     words, there is either one value of 1 whose index determines which edge (resp. arc) should be
     colored next, or all the values are 0 and this signifies a terminal state, i.e., a state where
-    all the edges (resp. arcs) have been colored. Each action is represented by an integer value
-    between 0 and ``edge_colors - 1`` that determines which color the next edge (resp. arc) should
-    be colored with.
+    all the edges (resp. arcs) have been colored.
+    
+    Each action is represented by a single-entry `numpy.ndarray` list of type `numpy.int8`
+    containing a value between 0 and ``edge_colors - 1`` that determines which color the next edge
+    (resp. arc) should be colored with.
 
     :ivar _edge_colors: The number of proper edge colors in the graphs to be constructed.
     :ivar _is_directed: A boolean that indicates whether the graphs to be constructed are a
@@ -157,7 +159,7 @@ class LinearBuildEnvironment(GraphEnvironment):
         `_state_batch` attribute.
 
         :param action_batch: The batch of actions to be applied to the states in the batch of
-            current states, given as a `numpy.ndarray` matrix of type `numpy.uint8` where the rows
+            current states, given as a `numpy.ndarray` matrix of type `numpy.int8` where the rows
             correspond to the actions. The number of actions in this batch must be the same as the
             number of states in the `_state_batch` attribute.
         """
@@ -165,19 +167,15 @@ class LinearBuildEnvironment(GraphEnvironment):
         if self._edge_colors == 2:
             self._state_batch[:, self._step_count] = action_batch[:, 0]
         else:
+            view = self._state_batch.reshape(-1, self._edge_colors, self._flattened_length)
             rows = np.arange(self._state_batch.shape[0], dtype=np.int32)
-            columns = (action_batch[:, 0] - 1) * self._flattened_length + self._step_count
-            self._state_batch[rows, columns] = 1
+            view[rows, action_batch[:, 0] - 1, self._step_count] = 1
 
-        self._state_batch[
-            :, self._flattened_length * (self._edge_colors - 1) + self._step_count
-        ] = 0
+        self._state_batch[:, -self._flattened_length + self._step_count] = 0
         self._step_count += 1
 
         if self._step_count < self._flattened_length:
-            self._state_batch[
-                :, self._flattened_length * (self._edge_colors - 1) + self._step_count
-            ] = 1
+            self._state_batch[:, -self._flattened_length + self._step_count] = 1
         else:
             self._status = EpisodeStatus.TERMINATED
 
@@ -187,7 +185,7 @@ class LinearBuildEnvironment(GraphEnvironment):
         if self._edge_colors == 2:
             result = state_batch[:, : self._flattened_length]
         else:
-            color_indices = np.arange(1, self._edge_colors, dtype=int)
+            color_indices = np.arange(1, self._edge_colors, dtype=np.uint8)
             result = (temp[:, :-1, :] * color_indices[:, None]).sum(axis=1)
 
         uncolored_mask = np.maximum.accumulate(temp[:, -1, :], axis=1)
