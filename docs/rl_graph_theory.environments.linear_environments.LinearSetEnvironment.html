@@ -418,8 +418,8 @@ one by one, either in the flattened row-major order or the flattened clockwise o
 can select the graph order and the number of proper edge colors, as well as choose whether the
 graphs should be directed or undirected, and whether loops should be allowed. Additionally, the
 user can configure the mechanism that controls how the initial fully colored graphs are
-colored, which could be both deterministic or nondeterministic. The edges (resp. arcs) are then
-recolored in the same way that a graph is reconstructed from a flattened format. In other
+colored, which could be either deterministic or nondeterministic. The edges (resp. arcs) are
+then recolored in the same way that a graph is reconstructed from a flattened format. In other
 words, if loops are not allowed, then these edges (resp. arcs) are just deleted and completely
 ignored, and if the graphs are undirected, then only the upper triangular part of an adjacency
 matrix is considered (with or without the diagonal, depending on whether loops are allowed) and
@@ -435,10 +435,10 @@ whether loops are allowed.</p>
 edge colors, while <tt class="rst-docutils rst-literal">flattened_length</tt> is the length of the <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> list from any of
 the two flattened graph formats of the graphs to be constructed. In the state vector, in the
 first <tt class="rst-docutils rst-literal">flattened_length</tt> bits, the value 1 indicates which of the <tt class="rst-docutils rst-literal">flattened_length</tt> edges
-(resp. arcs) is currently of the color 1; in the second <tt class="rst-docutils rst-literal">flattened_length</tt> bits, the value 1
-indicates which of the <tt class="rst-docutils rst-literal">flattened_length</tt> edges (resp. arcs) is currently of the color 2; and
-so on until the <tt class="rst-docutils rst-literal">(edge_colors - 1)</tt>-th <tt class="rst-docutils rst-literal">flattened_length</tt> bits, where the value 1 indicates
-which of the <tt class="rst-docutils rst-literal">flattened_length</tt> edges (resp. arcs) is currently of the color
+(resp. arcs) are currently of the color 1; in the second <tt class="rst-docutils rst-literal">flattened_length</tt> bits, the value 1
+indicates which of the <tt class="rst-docutils rst-literal">flattened_length</tt> edges (resp. arcs) are currently of the color 2;
+and so on until the <tt class="rst-docutils rst-literal">(edge_colors - 1)</tt>-th <tt class="rst-docutils rst-literal">flattened_length</tt> bits, where the value 1
+indicates which of the <tt class="rst-docutils rst-literal">flattened_length</tt> edges (resp. arcs) are currently of the color
 <tt class="rst-docutils rst-literal">edge_colors - 1</tt>. The final <tt class="rst-docutils rst-literal">flattened_length</tt> bits represent a one-hot encoding of the
 position that determines the next edge (resp. arc) to be recolored. In other words, there is
 either one value of 1 whose index determines which edge (resp. arc) should be recolored next,
@@ -473,7 +473,7 @@ containing a value between 0 and <tt class="rst-docutils rst-literal">edge_color
     
     <td>Instance Variable</td>
     <td><code><a href="#initial_graph_generator" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment.initial_graph_generator">initial<wbr></wbr>_graph<wbr></wbr>_generator</a></code></td>
-    <td>A <code><a href="rl_graph_theory.environments.graph_generators.html#GraphGenerator" class="internal-link" title="rl_graph_theory.environments.graph_generators.GraphGenerator">GraphGenerator</a></code> function that describes the mechanism for generating the underlying fully colored graphs for the states in the batch of initial states.</td>
+    <td>A <code><a href="rl_graph_theory.environments.graph_generators.html#GraphGenerator" class="internal-link" title="rl_graph_theory.environments.graph_generators.GraphGenerator">GraphGenerator</a></code> function that describes the mechanism for generating the underlying fully colored graphs for the states in the batch of initial states. It is possible to re-configure this attribute between two independent batches of episodes run in parallel.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
@@ -508,7 +508,7 @@ containing a value between 0 and <tt class="rst-docutils rst-literal">edge_color
     
     <td>Instance Variable</td>
     <td><code><a href="#_state_batch" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment._state_batch">_state<wbr></wbr>_batch</a></code></td>
-    <td><span class="rst-undocumented">Undocumented</span></td>
+    <td>See the description of the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html#_state_batch" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment._state_batch">GraphEnvironment._state_batch</a></code> attribute.</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
@@ -518,12 +518,12 @@ containing a value between 0 and <tt class="rst-docutils rst-literal">edge_color
     
     <td>Instance Variable</td>
     <td><code><a href="#_status" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment._status">_status</a></code></td>
-    <td><span class="rst-undocumented">Undocumented</span></td>
+    <td>See the description of the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html#_status" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment._status">GraphEnvironment._status</a></code> attribute.</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
     <td><code><a href="#_step_count" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment._step_count">_step<wbr></wbr>_count</a></code></td>
-    <td>An integer between 0 and <tt class="rst-docutils rst-literal">_flattened_length</tt> that signifies the index of the next edge (resp. arc) to be recolored, in the order determined by the <tt class="rst-docutils rst-literal">_flattened_ordering</tt> attribute. The value of <tt class="rst-docutils rst-literal">_flattened_length</tt>...</td>
+    <td>An integer between 0 and <code><a href="rl_graph_theory.environments.linear_environments.LinearSetEnvironment.html#_flattened_length" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment._flattened_length">_flattened_length</a></code> that signifies the index of the next edge (resp. arc) to be recolored, in the order determined by the <code><a href="rl_graph_theory.environments.linear_environments.LinearSetEnvironment.html#_flattened_ordering" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment._flattened_ordering">_flattened_ordering</a></code> attribute. The value of <code><a href="rl_graph_theory.environments.linear_environments.LinearSetEnvironment.html#_flattened_length" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment._flattened_length">_flattened_length</a></code>...</td>
   </tr>
 </table>
           
@@ -692,7 +692,8 @@ modify any attributes of the given instance.</td></tr></table></div>
     
     <div><p>A <code><a href="rl_graph_theory.environments.graph_generators.html#GraphGenerator" class="internal-link" title="rl_graph_theory.environments.graph_generators.GraphGenerator">GraphGenerator</a></code> function that describes the mechanism for
 generating the underlying fully colored graphs for the states in the batch of initial
-states.</p></div>
+states. It is possible to re-configure this attribute between two independent batches of
+episodes run in parallel.</p></div>
     
   </div>
 </div><div class="basemethod private">
@@ -873,7 +874,7 @@ undirected graph.</p></div>
   </div>
   <div class="functionBody">
     <div class="interfaceinfo">overrides <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html#_state_batch" class="internal-link">rl_graph_theory.environments.graph_environment.GraphEnvironment._state_batch</a></code></div>
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p>See the description of the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html#_state_batch" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment._state_batch">GraphEnvironment._state_batch</a></code> attribute.</p></div>
     
   </div>
 </div><div class="baseinstancevariable private">
@@ -922,7 +923,7 @@ vectors, i.e., the number <tt class="rst-docutils rst-literal">_edge_colors * _f
   </div>
   <div class="functionBody">
     <div class="interfaceinfo">overrides <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html#_status" class="internal-link">rl_graph_theory.environments.graph_environment.GraphEnvironment._status</a></code></div>
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p>See the description of the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html#_status" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment._status">GraphEnvironment._status</a></code> attribute.</p></div>
     
   </div>
 </div><div class="baseinstancevariable private">
@@ -946,11 +947,11 @@ vectors, i.e., the number <tt class="rst-docutils rst-literal">_edge_colors * _f
   </div>
   <div class="functionBody">
     
-    <div><p>An integer between 0 and <tt class="rst-docutils rst-literal">_flattened_length</tt> that signifies the index of
-the next edge (resp. arc) to be recolored, in the order determined by the
-<tt class="rst-docutils rst-literal">_flattened_ordering</tt> attribute. The value of <tt class="rst-docutils rst-literal">_flattened_length</tt> indicates that all
-the edges (resp. arcs) have been recolored and that no edge (resp. arc) should be colored
-next, i.e., a terminal state has been reached.</p></div>
+    <div><p>An integer between 0 and <code><a href="#_flattened_length" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment._flattened_length">_flattened_length</a></code> that signifies the index of the
+next edge (resp. arc) to be recolored, in the order determined by the <code><a href="#_flattened_ordering" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment._flattened_ordering">_flattened_ordering</a></code>
+attribute. The value of <code><a href="#_flattened_length" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment._flattened_length">_flattened_length</a></code> indicates that all the edges (resp. arcs) have
+been recolored and that no edge (resp. arc) should be colored next, i.e., a terminal state
+has been reached.</p></div>
     
   </div>
 </div>
@@ -965,7 +966,7 @@ next, i.e., a terminal state has been reached.</p></div>
   <div class="container-fluid">
     <a href="index.html">API Documentation</a> for rl-graph-theory,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    25.10.1 at 2025-12-26 21:16:28.
+    25.10.1 at 2025-12-27 18:01:13.
   </div>
 
   <!-- Search related scripts needs to be loaded at the end of HTML 
