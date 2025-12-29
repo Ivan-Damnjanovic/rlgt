@@ -6,7 +6,7 @@
 
   <head>
     
-    <title>rl_graph_theory.environments.global_environments.GlobalFlipEnvironment</title>
+    <title>rl_graph_theory.environments.local_environments.LocalFlipEnvironment</title>
     <meta name="generator" content="pydoctor 25.10.1"> 
         
     </meta>
@@ -110,7 +110,7 @@
 
       <div class="thingTitle">
         <span>Class</span>
-        <code class="thisobject"><a href="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment.html" class="internal-link" title="This class"><wbr></wbr>Global<wbr></wbr>Flip<wbr></wbr>Environment</a></code> 
+        <code class="thisobject"><a href="rl_graph_theory.environments.local_environments.LocalFlipEnvironment.html" class="internal-link" title="This class"><wbr></wbr>Local<wbr></wbr>Flip<wbr></wbr>Environment</a></code> 
       </div>
       
       <div>
@@ -131,7 +131,7 @@
         
 
         
-            <div class="itemName"><code><a href="#__init__" class="internal-link" title="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment.__init__">__init__</a></code>
+            <div class="itemName"><code><a href="#__init__" class="internal-link" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment.__init__">__init__</a></code>
             </div>
         
 
@@ -141,7 +141,7 @@
         
 
         
-            <div class="itemName"><code><a href="#reset_batch" class="internal-link" title="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment.reset_batch">reset<wbr></wbr>_batch</a></code>
+            <div class="itemName"><code><a href="#reset_batch" class="internal-link" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment.reset_batch">reset<wbr></wbr>_batch</a></code>
             </div>
         
 
@@ -151,7 +151,7 @@
         
 
         
-            <div class="itemName"><code><a href="#state_batch_to_graph_batch" class="internal-link" title="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment.state_batch_to_graph_batch">state<wbr></wbr>_batch<wbr></wbr>_to<wbr></wbr>_graph<wbr></wbr>_batch</a></code>
+            <div class="itemName"><code><a href="#state_batch_to_graph_batch" class="internal-link" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment.state_batch_to_graph_batch">state<wbr></wbr>_batch<wbr></wbr>_to<wbr></wbr>_graph<wbr></wbr>_batch</a></code>
             </div>
         
 
@@ -161,7 +161,7 @@
         
 
         
-            <div class="itemName"><code><a href="#_transition_batch" class="internal-link" title="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment._transition_batch">_transition<wbr></wbr>_batch</a></code>
+            <div class="itemName"><code><a href="#_transition_batch" class="internal-link" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment._transition_batch">_transition<wbr></wbr>_batch</a></code>
             </div>
         
 
@@ -193,7 +193,7 @@
         
 
         
-            <div class="itemName"><code><a href="#episode_length" class="internal-link" title="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment.episode_length">episode<wbr></wbr>_length</a></code>
+            <div class="itemName"><code><a href="#episode_length" class="internal-link" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment.episode_length">episode<wbr></wbr>_length</a></code>
             </div>
         
 
@@ -203,7 +203,17 @@
         
 
         
-            <div class="itemName"><code><a href="#initial_graph_generator" class="internal-link" title="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment.initial_graph_generator">initial<wbr></wbr>_graph<wbr></wbr>_generator</a></code>
+            <div class="itemName"><code><a href="#initial_graph_generator" class="internal-link" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment.initial_graph_generator">initial<wbr></wbr>_graph<wbr></wbr>_generator</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#starting_vertex" class="internal-link" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment.starting_vertex">starting<wbr></wbr>_vertex</a></code>
             </div>
         
 
@@ -213,7 +223,7 @@
         
 
         
-            <div class="itemName"><code><a href="#_allow_loops" class="internal-link" title="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment._allow_loops">_allow<wbr></wbr>_loops</a></code>
+            <div class="itemName"><code><a href="#_allow_loops" class="internal-link" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment._allow_loops">_allow<wbr></wbr>_loops</a></code>
             </div>
         
 
@@ -223,7 +233,7 @@
         
 
         
-            <div class="itemName"><code><a href="#_flattened_length" class="internal-link" title="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment._flattened_length">_flattened<wbr></wbr>_length</a></code>
+            <div class="itemName"><code><a href="#_current_vertices" class="internal-link" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment._current_vertices">_current<wbr></wbr>_vertices</a></code>
             </div>
         
 
@@ -233,7 +243,7 @@
         
 
         
-            <div class="itemName"><code><a href="#_flattened_ordering" class="internal-link" title="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment._flattened_ordering">_flattened<wbr></wbr>_ordering</a></code>
+            <div class="itemName"><code><a href="#_flattened_length" class="internal-link" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment._flattened_length">_flattened<wbr></wbr>_length</a></code>
             </div>
         
 
@@ -243,7 +253,7 @@
         
 
         
-            <div class="itemName"><code><a href="#_flip_only" class="internal-link" title="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment._flip_only">_flip<wbr></wbr>_only</a></code>
+            <div class="itemName"><code><a href="#_flattened_ordering" class="internal-link" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment._flattened_ordering">_flattened<wbr></wbr>_ordering</a></code>
             </div>
         
 
@@ -253,7 +263,7 @@
         
 
         
-            <div class="itemName"><code><a href="#_is_directed" class="internal-link" title="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment._is_directed">_is<wbr></wbr>_directed</a></code>
+            <div class="itemName"><code><a href="#_flip_only" class="internal-link" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment._flip_only">_flip<wbr></wbr>_only</a></code>
             </div>
         
 
@@ -263,7 +273,7 @@
         
 
         
-            <div class="itemName"><code><a href="#_state_batch" class="internal-link" title="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment._state_batch">_state<wbr></wbr>_batch</a></code>
+            <div class="itemName"><code><a href="#_graph_order" class="internal-link" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment._graph_order">_graph<wbr></wbr>_order</a></code>
             </div>
         
 
@@ -273,7 +283,7 @@
         
 
         
-            <div class="itemName"><code><a href="#_status" class="internal-link" title="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment._status">_status</a></code>
+            <div class="itemName"><code><a href="#_is_directed" class="internal-link" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment._is_directed">_is<wbr></wbr>_directed</a></code>
             </div>
         
 
@@ -283,7 +293,27 @@
         
 
         
-            <div class="itemName"><code><a href="#_step_count" class="internal-link" title="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment._step_count">_step<wbr></wbr>_count</a></code>
+            <div class="itemName"><code><a href="#_state_batch" class="internal-link" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment._state_batch">_state<wbr></wbr>_batch</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_status" class="internal-link" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment._status">_status</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_step_count" class="internal-link" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment._step_count">_step<wbr></wbr>_count</a></code>
             </div>
         
 
@@ -321,7 +351,7 @@
 
       <div class="thingTitle">
         <span>Module</span>
-        <code><a href="rl_graph_theory.environments.global_environments.html" class="internal-link" title="The parent of this class">global<wbr></wbr>_environments</a></code> 
+        <code><a href="rl_graph_theory.environments.local_environments.html" class="internal-link" title="The parent of this class">local<wbr></wbr>_environments</a></code> 
       </div>
       
       <div>
@@ -339,7 +369,7 @@
         
 
         
-            <div class="itemName"><code><a href="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment.html" class="internal-link" title="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment"><wbr></wbr>Global<wbr></wbr>Flip<wbr></wbr>Environment</a></code>
+            <div class="itemName"><code><a href="rl_graph_theory.environments.local_environments.LocalFlipEnvironment.html" class="internal-link" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment"><wbr></wbr>Local<wbr></wbr>Flip<wbr></wbr>Environment</a></code>
             </div>
         
 
@@ -349,15 +379,28 @@
         
 
         
-            <div class="itemName"><code><a href="rl_graph_theory.environments.global_environments.GlobalSetEnvironment.html" class="internal-link" title="rl_graph_theory.environments.global_environments.GlobalSetEnvironment"><wbr></wbr>Global<wbr></wbr>Set<wbr></wbr>Environment</a></code>
+            <div class="itemName"><code><a href="rl_graph_theory.environments.local_environments.LocalSetEnvironment.html" class="internal-link" title="rl_graph_theory.environments.local_environments.LocalSetEnvironment"><wbr></wbr>Local<wbr></wbr>Set<wbr></wbr>Environment</a></code>
             </div>
         
 
     </li>
 </ul>
 
+        <div class="childrenKindTitle">Functions</div>
+        <ul>
+    
+    <li class="private">
         
-         
+        
+        
+
+        
+            <div class="itemName"><code><a href="rl_graph_theory.environments.local_environments.html#__compute_edge_indices" class="internal-link" title="rl_graph_theory.environments.local_environments.__compute_edge_indices">__compute<wbr></wbr>_edge<wbr></wbr>_indices</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
 
         
          
@@ -387,7 +430,7 @@
         
 
         <div class="page-header">
-          <h1 class="class"><code><code><a href="index.html" class="internal-link">rl_graph_theory</a></code><wbr></wbr>.<code><a href="rl_graph_theory.environments.html" class="internal-link" title="rl_graph_theory.environments">environments</a></code><wbr></wbr>.<code><a href="rl_graph_theory.environments.global_environments.html" class="internal-link" title="rl_graph_theory.environments.global_environments">global_environments</a></code><wbr></wbr>.<code><a href="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment.html" class="internal-link" title="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment">GlobalFlipEnvironment</a></code></code></h1>
+          <h1 class="class"><code><code><a href="index.html" class="internal-link">rl_graph_theory</a></code><wbr></wbr>.<code><a href="rl_graph_theory.environments.html" class="internal-link" title="rl_graph_theory.environments">environments</a></code><wbr></wbr>.<code><a href="rl_graph_theory.environments.local_environments.html" class="internal-link" title="rl_graph_theory.environments.local_environments">local_environments</a></code><wbr></wbr>.<code><a href="rl_graph_theory.environments.local_environments.LocalFlipEnvironment.html" class="internal-link" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment">LocalFlipEnvironment</a></code></code></h1>
           <div id="show-private">
             <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
           </div>
@@ -398,111 +441,141 @@
         </div>
 
         <div class="extrasDocstring">
-          <p class="class-signature"><code><span class="py-keyword">class</span> <span class="py-defname">GlobalFlipEnvironment</span>(<a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a>):</code></p><p>Constructor: <code><a href="#__init__" class="internal-link" title="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment.__init__">GlobalFlipEnvironment(reward_type, reward_function, graph_order, episode_length, ...)</a></code></p><p><a href="classIndex.html#rl_graph_theory.environments.global_environments.GlobalFlipEnvironment">View In Hierarchy</a></p>
+          <p class="class-signature"><code><span class="py-keyword">class</span> <span class="py-defname">LocalFlipEnvironment</span>(<a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a>):</code></p><p>Constructor: <code><a href="#__init__" class="internal-link" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment.__init__">LocalFlipEnvironment(reward_type, reward_function, graph_order, episode_length, ...)</a></code></p><p><a href="classIndex.html#rl_graph_theory.environments.local_environments.LocalFlipEnvironment">View In Hierarchy</a></p>
         </div>
 
         <div class="moduleDocstring">
           <div><p>This class inherits from the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code> class and models a graph-building game used for
 constructing 2-edge-colored looped complete graphs where the edges (resp. arcs) are all
-initially fully colored in some manner, and then in each step, any edge (resp. arc) can be
-potentially flipped. The user can select the graph order, as well as choose whether the graphs
-should be directed or undirected, and whether loops should be allowed. Additionally, the user
-can configure the mechanism that controls how the initial fully colored graphs are colored,
-which could be either deterministic or nondeterministic.</p>
+initially fully colored in some manner, and the agent moves from one vertex to another in some
+way, thereby traversing the existing edges (resp. arcs) and potentially flipping them. More
+precisely, in each step, the agent is located at some vertex and needs to select an edge
+incident to this vertex (resp. an arc starting at this vertex), then traverse it and move to
+the other endpoint of the traversed edge (resp. arc). While traversing an edge (resp. arc), the
+agent also potentially flip it. The user can select the graph order, as well as choose whether
+the graphs should be directed or undirected, and whether loops should be allowed. Additionally,
+the user can configure the mechanism that controls how the initial fully colored graphs are
+colored, which could be either deterministic or nondeterministic. The user can also select the
+vertex at which the agent should start the potential flipping procedure.</p>
 <p>The RL tasks in this environment are continuing, and the total number of actions to be
 performed, i.e., the episode length, is given as a configurable parameter.</p>
-<p>Each state is represented by a binary <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> list of type <code><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.uint8" class="intersphinx-link">numpy.uint8</a></code> that describes
-the current graph in one of the two flattened graph formats. The user can select which of these
-two formats should be applied throughout the entire construction procedure, i.e., how the edges
-(resp. arcs) should be arranged, and this parameter cannot be re-configured.</p>
+<p>Each state is represented by a binary <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> list of type <code><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.uint8" class="intersphinx-link">numpy.uint8</a></code> and length
+<tt class="rst-docutils rst-literal">flattened_length + graph_order</tt>, where <tt class="rst-docutils rst-literal">graph_order</tt> is the configured graph order, while
+<tt class="rst-docutils rst-literal">flattened_length</tt> is the length of the <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> list from any of the two flattened
+graph formats of the graphs to be constructed. In the state vector, in the first
+<tt class="rst-docutils rst-literal">flattened_length</tt> bits, the value 1 indicates which of the <tt class="rst-docutils rst-literal">flattened_length</tt> edges (resp.
+arcs) are currently of the color 1. Here, the edges (resp. arcs) are considered to be ordered
+in the flattened row-major order or the flattened clockwise order, as explained in the
+<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat">GraphFormat</a></code> enumeration. The user can select which of these two orderings should be applied.
+The final <tt class="rst-docutils rst-literal">graph_order</tt> bits from the state vector represent a one-hot encoding of the
+position that determines the vertex where the agent is currently located. In other words, there
+is exactly one value of 1 whose index determines the vertex where the agent is currently
+located.</p>
 <p>The RL environment has two modes of operations that affect how the actions are handled. If the
 <tt class="rst-docutils rst-literal">flip_only</tt> parameter is set to <code><a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a></code>, which is the default value, then each action is
-represented by a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> list of type <code><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.int32" class="intersphinx-link">numpy.int32</a></code> and length two. In this case, the
-first entry signifies the index of the edge (resp. arc) that should be potentially flipped,
-while the second entry is a binary value that determines whether the selected edge (resp. arc)
+represented by a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> list of type <code><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.int8" class="intersphinx-link">numpy.int8</a></code> and length two. In this case, the
+first entry signifies the vertex that the agent should move to from the current vertex, while
+the second entry is a binary value that determines whether the traversed edge (resp. arc)
 should be flipped. In other words, the number 1 indicates that the proper edge color of the
-selected edge (resp. arc) should be changed, while the number 0 indicates that the proper edge
-color of the selected edge (resp. arc) should stay the same. On the other hand, if the
-<tt class="rst-docutils rst-literal">flip_only</tt> parameter is set to <code><a href="https://docs.python.org/3/library/constants.html#True" class="intersphinx-link">True</a></code>, then any selected edge (resp. arc) must be flipped.
+traversed edge (resp. arc) should be changed, while the number 0 indicates that the proper edge
+color of the traversed edge (resp. arc) should stay the same. On the other hand, if the
+<tt class="rst-docutils rst-literal">flip_only</tt> parameter is set to <code><a href="https://docs.python.org/3/library/constants.html#True" class="intersphinx-link">True</a></code>, then any traversed edge (resp. arc) must be flipped.
 In this case, each action is represented by a single-entry <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> list of type
-<code><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.int32" class="intersphinx-link">numpy.int32</a></code> containing the index of the edge (resp. arc) that should be flipped, i.e., whose
-proper edge color should be changed.</p>
+<code><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.int8" class="intersphinx-link">numpy.int8</a></code> containing the vertex that the agent should move to from the current vertex, with
+the traversed edge (resp. arc) being necessarily flipped. If loops are not allowed, then the
+first (and potentially only) entry of the action vector must be distinct from the vertex where
+the agent is currently located.</p>
 </div>
         </div>
 
         <div id="split-tables">
-          <table class="children sortable" id="id6">
+          <table class="children sortable" id="id23">
   
   
   <tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__init__" class="internal-link" title="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment.__init__">__init__</a></code></td>
-    <td>This constructor initializes an instance of the <code><a href="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment.html" class="internal-link" title="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment">GlobalFlipEnvironment</a></code> object.</td>
+    <td><code><a href="#__init__" class="internal-link" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment.__init__">__init__</a></code></td>
+    <td>This constructor initializes an instance of the <code><a href="rl_graph_theory.environments.local_environments.LocalFlipEnvironment.html" class="internal-link" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment">LocalFlipEnvironment</a></code> object.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#reset_batch" class="internal-link" title="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment.reset_batch">reset<wbr></wbr>_batch</a></code></td>
+    <td><code><a href="#reset_batch" class="internal-link" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment.reset_batch">reset<wbr></wbr>_batch</a></code></td>
     <td>This abstract method must be implemented in any concrete class that inherits from the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code> class. It should initialize a batch of episodes with a given batch size, and update the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html#_state_batch" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment._state_batch">_state_batch</a></code>...</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#state_batch_to_graph_batch" class="internal-link" title="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment.state_batch_to_graph_batch">state<wbr></wbr>_batch<wbr></wbr>_to<wbr></wbr>_graph<wbr></wbr>_batch</a></code></td>
+    <td><code><a href="#state_batch_to_graph_batch" class="internal-link" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment.state_batch_to_graph_batch">state<wbr></wbr>_batch<wbr></wbr>_to<wbr></wbr>_graph<wbr></wbr>_batch</a></code></td>
     <td>This abstract method must be implemented in any concrete class that inherits from the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code> class. Its goal is to extract the batch of underlying graphs from any provided batch of states. The graphs should appear in the same order as their corresponding states in the given batch of states.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#episode_length" class="internal-link" title="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment.episode_length">episode<wbr></wbr>_length</a></code></td>
+    <td><code><a href="#episode_length" class="internal-link" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment.episode_length">episode<wbr></wbr>_length</a></code></td>
     <td>A positive integer that determines the episode length of each of the episodes. It is possible to re-configure this attribute between two independent batches of episodes run in parallel.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#initial_graph_generator" class="internal-link" title="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment.initial_graph_generator">initial<wbr></wbr>_graph<wbr></wbr>_generator</a></code></td>
+    <td><code><a href="#initial_graph_generator" class="internal-link" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment.initial_graph_generator">initial<wbr></wbr>_graph<wbr></wbr>_generator</a></code></td>
     <td>A <code><a href="rl_graph_theory.environments.graph_generators.html#GraphGenerator" class="internal-link" title="rl_graph_theory.environments.graph_generators.GraphGenerator">GraphGenerator</a></code> function that describes the mechanism for generating the underlying fully colored graphs for the states in the batch of initial states. It is possible to re-configure this attribute between two independent batches of episodes run in parallel.</td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#starting_vertex" class="internal-link" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment.starting_vertex">starting<wbr></wbr>_vertex</a></code></td>
+    <td>A nonnegative integer below the configured graph order that determines the vertex at which the agent should start the (potential) flipping procedure. It is possible to re-configure this attribute between two independent batches of episodes run in parallel.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_transition_batch" class="internal-link" title="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment._transition_batch">_transition<wbr></wbr>_batch</a></code></td>
-    <td>This method performs the transition process by executing a batch of given actions and applying them element-wise to the states in the batch of current states given by the <code><a href="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment.html#_state_batch" class="internal-link" title="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment._state_batch">_state_batch</a></code> attribute.</td>
+    <td><code><a href="#_transition_batch" class="internal-link" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment._transition_batch">_transition<wbr></wbr>_batch</a></code></td>
+    <td>This method performs the transition process by executing a batch of given actions and applying them element-wise to the states in the batch of current states given by the <code><a href="rl_graph_theory.environments.local_environments.LocalFlipEnvironment.html#_state_batch" class="internal-link" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment._state_batch">_state_batch</a></code> attribute.</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_allow_loops" class="internal-link" title="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment._allow_loops">_allow<wbr></wbr>_loops</a></code></td>
+    <td><code><a href="#_allow_loops" class="internal-link" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment._allow_loops">_allow<wbr></wbr>_loops</a></code></td>
     <td>A boolean that indicates whether the graphs to be constructed are allowed to have loops.</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_flattened_length" class="internal-link" title="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment._flattened_length">_flattened<wbr></wbr>_length</a></code></td>
+    <td><code><a href="#_current_vertices" class="internal-link" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment._current_vertices">_current<wbr></wbr>_vertices</a></code></td>
+    <td>Either <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, or a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> list of type <code><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.int8" class="intersphinx-link">numpy.int8</a></code> that determines the vertex where the agent is currently located in each of the episodes run in parallel, in the natural order. This attribute is initially set to ...</td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_flattened_length" class="internal-link" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment._flattened_length">_flattened<wbr></wbr>_length</a></code></td>
     <td>A positive integer that determines the length of the <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> list from any of the two flattened graph formats of the graphs to be constructed.</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_flattened_ordering" class="internal-link" title="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment._flattened_ordering">_flattened<wbr></wbr>_ordering</a></code></td>
+    <td><code><a href="#_flattened_ordering" class="internal-link" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment._flattened_ordering">_flattened<wbr></wbr>_ordering</a></code></td>
     <td>An item of the <code><a href="rl_graph_theory.graphs.graph_format.FlattenedOrdering.html" class="internal-link" title="rl_graph_theory.graphs.graph_format.FlattenedOrdering">FlattenedOrdering</a></code> enumeration that determines whether the edges (resp. arcs) should be arranged in the flattened row-major order or the flattened clockwise order.</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_flip_only" class="internal-link" title="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment._flip_only">_flip<wbr></wbr>_only</a></code></td>
-    <td>A boolean that indicates whether all the selected edges (resp. arcs) should only be allowed to be flipped, i.e., the value of the <tt class="rst-docutils rst-literal">flip_only</tt> parameter.</td>
+    <td><code><a href="#_flip_only" class="internal-link" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment._flip_only">_flip<wbr></wbr>_only</a></code></td>
+    <td>A boolean that indicates whether all the traversed edges (resp. arcs) should only be allowed to be flipped, i.e., the value of the <tt class="rst-docutils rst-literal">flip_only</tt> parameter.</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_is_directed" class="internal-link" title="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment._is_directed">_is<wbr></wbr>_directed</a></code></td>
-    <td>A boolean that indicates whether the graphs to be constructed are a $k$-edge-colored looped complete directed graph or a $k$-edge-colored looped complete undirected graph.</td>
+    <td><code><a href="#_graph_order" class="internal-link" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment._graph_order">_graph<wbr></wbr>_order</a></code></td>
+    <td>A positive integer that describes the order of the graphs to be constructed.</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_state_batch" class="internal-link" title="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment._state_batch">_state<wbr></wbr>_batch</a></code></td>
+    <td><code><a href="#_is_directed" class="internal-link" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment._is_directed">_is<wbr></wbr>_directed</a></code></td>
+    <td>A boolean that indicates whether the graphs to be constructed are a 2-edge-colored looped complete directed graph or a 2-edge-colored looped complete undirected graph.</td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_state_batch" class="internal-link" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment._state_batch">_state<wbr></wbr>_batch</a></code></td>
     <td>See the description of the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html#_state_batch" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment._state_batch">GraphEnvironment._state_batch</a></code> attribute.</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_status" class="internal-link" title="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment._status">_status</a></code></td>
+    <td><code><a href="#_status" class="internal-link" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment._status">_status</a></code></td>
     <td>See the description of the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html#_status" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment._status">GraphEnvironment._status</a></code> attribute.</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_step_count" class="internal-link" title="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment._step_count">_step<wbr></wbr>_count</a></code></td>
+    <td><code><a href="#_step_count" class="internal-link" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment._step_count">_step<wbr></wbr>_count</a></code></td>
     <td>Either <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, or a nonnegative integer that signifies how many steps have been taken, i.e., how many times an action has been executed, in each of the episodes from the current batch. When this number becomes ...</td>
   </tr>
 </table>
@@ -510,7 +583,7 @@ proper edge color should be changed.</p>
             <p class="inheritedFrom">
               Inherited from <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code>:
             </p>
-            <table class="children sortable" id="id7">
+            <table class="children sortable" id="id24">
   
   
   <tr class="basemethod">
@@ -539,7 +612,7 @@ proper edge color should be changed.</p>
           <div class="basemethod">
   
   
-  <a name="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment.__init__">
+  <a name="rl_graph_theory.environments.local_environments.LocalFlipEnvironment.__init__">
     
   </a>
   <a name="__init__">
@@ -548,9 +621,9 @@ proper edge color should be changed.</p>
   <div class="functionHeader">
     
     
-    <span class="py-keyword">def</span>&#160;<span class="py-defname">__init__</span><span class="function-signature long-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">reward_type: <code><a href="rl_graph_theory.environments.graph_environment.RewardType.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.RewardType">RewardType</a></code>, </span><span class="rst-sig-param">reward_function: <code><a href="rl_graph_theory.environments.graph_environment.html#RewardFunction" class="internal-link" title="rl_graph_theory.environments.graph_environment.RewardFunction">RewardFunction</a></code>, </span><span class="rst-sig-param">graph_order: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code>, </span><span class="rst-sig-param">episode_length: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> = <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>, </span><span class="rst-sig-param">flip_only: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> = <a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a>, </span><span class="rst-sig-param">flattened_ordering: <code><a href="rl_graph_theory.graphs.graph_format.FlattenedOrdering.html" class="internal-link" title="rl_graph_theory.graphs.graph_format.FlattenedOrdering">FlattenedOrdering</a></code> = <a href="rl_graph_theory.graphs.graph_format.FlattenedOrdering.html#ROW_MAJOR" class="internal-link" title="rl_graph_theory.graphs.graph_format.FlattenedOrdering.ROW_MAJOR">FlattenedOrdering.ROW_MAJOR</a>, </span><span class="rst-sig-param">is_directed: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> = <a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a>, </span><span class="rst-sig-param">allow_loops: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> = <a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a>, </span><span class="rst-sig-param">initial_graph_generator: <code><a href="rl_graph_theory.environments.graph_generators.html#GraphGenerator" class="internal-link" title="rl_graph_theory.environments.graph_generators.GraphGenerator">GraphGenerator</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> = <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></span>):</span>
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">__init__</span><span class="function-signature long-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">reward_type: <code><a href="rl_graph_theory.environments.graph_environment.RewardType.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.RewardType">RewardType</a></code>, </span><span class="rst-sig-param">reward_function: <code><a href="rl_graph_theory.environments.graph_environment.html#RewardFunction" class="internal-link" title="rl_graph_theory.environments.graph_environment.RewardFunction">RewardFunction</a></code>, </span><span class="rst-sig-param">graph_order: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code>, </span><span class="rst-sig-param">episode_length: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> = <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>, </span><span class="rst-sig-param">flip_only: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> = <a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a>, </span><span class="rst-sig-param">flattened_ordering: <code><a href="rl_graph_theory.graphs.graph_format.FlattenedOrdering.html" class="internal-link" title="rl_graph_theory.graphs.graph_format.FlattenedOrdering">FlattenedOrdering</a></code> = <a href="rl_graph_theory.graphs.graph_format.FlattenedOrdering.html#ROW_MAJOR" class="internal-link" title="rl_graph_theory.graphs.graph_format.FlattenedOrdering.ROW_MAJOR">FlattenedOrdering.ROW_MAJOR</a>, </span><span class="rst-sig-param">is_directed: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> = <a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a>, </span><span class="rst-sig-param">allow_loops: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> = <a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a>, </span><span class="rst-sig-param">initial_graph_generator: <code><a href="rl_graph_theory.environments.graph_generators.html#GraphGenerator" class="internal-link" title="rl_graph_theory.environments.graph_generators.GraphGenerator">GraphGenerator</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> = <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>, </span><span class="rst-sig-param">starting_vertex: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> = 0</span>):</span>
     
-    <a class="headerLink" href="#__init__" title="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment.__init__">
+    <a class="headerLink" href="#__init__" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment.__init__">
       
       
       ¶
@@ -558,7 +631,7 @@ proper edge color should be changed.</p>
   </div>
   <div class="docstring functionBody">
     <div class="interfaceinfo">overrides <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html#__init__" class="internal-link">rl_graph_theory.environments.graph_environment.GraphEnvironment.__init__</a></code></div>
-    <div><p>This constructor initializes an instance of the <code><a href="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment.html" class="internal-link" title="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment">GlobalFlipEnvironment</a></code> object.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">reward<wbr></wbr>_type:</span><code><a href="rl_graph_theory.environments.graph_environment.RewardType.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.RewardType">RewardType</a></code></td><td class="fieldArgDesc">An item of the <code><a href="rl_graph_theory.environments.graph_environment.RewardType.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.RewardType">RewardType</a></code> enumeration that determines the (sub)type
+    <div><p>This constructor initializes an instance of the <code><a href="rl_graph_theory.environments.local_environments.LocalFlipEnvironment.html" class="internal-link" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment">LocalFlipEnvironment</a></code> object.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">reward<wbr></wbr>_type:</span><code><a href="rl_graph_theory.environments.graph_environment.RewardType.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.RewardType">RewardType</a></code></td><td class="fieldArgDesc">An item of the <code><a href="rl_graph_theory.environments.graph_environment.RewardType.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.RewardType">RewardType</a></code> enumeration that determines the (sub)type
 of reward system to be used in the instantiated environment.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">reward<wbr></wbr>_function:</span><code><a href="rl_graph_theory.environments.graph_environment.html#RewardFunction" class="internal-link" title="rl_graph_theory.environments.graph_environment.RewardFunction">RewardFunction</a></code></td><td class="fieldArgDesc">The <code><a href="rl_graph_theory.environments.graph_environment.html#RewardFunction" class="internal-link" title="rl_graph_theory.environments.graph_environment.RewardFunction">RewardFunction</a></code> function whose goal is to help compute the
 rewards in accordance with the selected (sub)type of reward system. It plays the role
 of either the <tt class="rst-docutils rst-literal">graph_invariant</tt> or the <tt class="rst-docutils rst-literal">graph_invariant_difference</tt> function from
@@ -567,7 +640,7 @@ depending on the <tt class="rst-docutils rst-literal">reward_type</tt> argument.
 the graphs to be constructed.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">episode<wbr></wbr>_length:</span><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code></td><td class="fieldArgDesc">Either <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, or a positive integer that determines the episode
 length of each of the episodes. If the argument is <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, then this means that the
 episode length should match the number of entries in any of the two flattened graph
-formats of the graphs to be constructed. The default value is <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">flip<wbr></wbr>_only:</span><code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code></td><td class="fieldArgDesc">A boolean that indicates whether all the selected edges (resp. arcs)
+formats of the graphs to be constructed. The default value is <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">flip<wbr></wbr>_only:</span><code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code></td><td class="fieldArgDesc">A boolean that indicates whether all the traversed edges (resp. arcs)
 should only be allowed to be flipped. The default value is <code><a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a></code>.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">flattened<wbr></wbr>_ordering:</span><code><a href="rl_graph_theory.graphs.graph_format.FlattenedOrdering.html" class="internal-link" title="rl_graph_theory.graphs.graph_format.FlattenedOrdering">FlattenedOrdering</a></code></td><td class="fieldArgDesc">An item of the <code><a href="rl_graph_theory.graphs.graph_format.FlattenedOrdering.html" class="internal-link" title="rl_graph_theory.graphs.graph_format.FlattenedOrdering">FlattenedOrdering</a></code> enumeration that determines
 whether the edges (resp. arcs) should be arranged in the flattened row-major order or
 the flattened clockwise order. The default value is <code><a href="rl_graph_theory.graphs.graph_format.FlattenedOrdering.html#ROW_MAJOR" class="internal-link" title="rl_graph_theory.graphs.graph_format.FlattenedOrdering.ROW_MAJOR">FlattenedOrdering.ROW_MAJOR</a></code>,
@@ -581,12 +654,14 @@ are not allowed to have loops by default.</td></tr><tr><td class="fieldArgContai
 describes the mechanism for generating the underlying fully colored graphs for the
 states in the batch of initial states. If the argument is <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, then this means that
 all the edges (resp. arcs) from all the graphs should initially be colored with the
-color 0. The default value is <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>.</td></tr></table></div>
+color 0. The default value is <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">starting<wbr></wbr>_vertex:</span><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></td><td class="fieldArgDesc">A nonnegative integer between 0 and <tt class="rst-docutils rst-literal">graph_order - 1</tt> that
+determines the vertex at which the agent should start the (potential) flipping
+procedure. The default value is 0.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
   
-  <a name="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment.reset_batch">
+  <a name="rl_graph_theory.environments.local_environments.LocalFlipEnvironment.reset_batch">
     
   </a>
   <a name="reset_batch">
@@ -597,7 +672,7 @@ color 0. The default value is <code><a href="https://docs.python.org/3/library/c
     
     <span class="py-keyword">def</span>&#160;<span class="py-defname">reset_batch</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">batch_size: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></span>) -&gt; <code><a href="https://docs.python.org/3/library/stdtypes.html#tuple" class="intersphinx-link">tuple</a>[<wbr></wbr><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a>, <wbr></wbr><a href="rl_graph_theory.environments.graph_environment.EpisodeStatus.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.EpisodeStatus">EpisodeStatus</a>]</code>:</span>
     
-    <a class="headerLink" href="#reset_batch" title="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment.reset_batch">
+    <a class="headerLink" href="#reset_batch" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment.reset_batch">
       
       
       ¶
@@ -625,7 +700,7 @@ been initialized, given as an item of the <code><a href="rl_graph_theory.environ
 </div><div class="basemethod">
   
   
-  <a name="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment.state_batch_to_graph_batch">
+  <a name="rl_graph_theory.environments.local_environments.LocalFlipEnvironment.state_batch_to_graph_batch">
     
   </a>
   <a name="state_batch_to_graph_batch">
@@ -636,7 +711,7 @@ been initialized, given as an item of the <code><a href="rl_graph_theory.environ
     
     <span class="py-keyword">def</span>&#160;<span class="py-defname">state_batch_to_graph_batch</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">state_batch: <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code></span>) -&gt; <code><a href="rl_graph_theory.graphs.graph_batch.GraphBatch.html" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch">GraphBatch</a></code>:</span>
     
-    <a class="headerLink" href="#state_batch_to_graph_batch" title="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment.state_batch_to_graph_batch">
+    <a class="headerLink" href="#state_batch_to_graph_batch" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment.state_batch_to_graph_batch">
       
       
       ¶
@@ -655,7 +730,7 @@ modify any attributes of the given instance.</td></tr></table></div>
 </div><div class="baseinstancevariable">
   
   
-  <a name="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment.episode_length">
+  <a name="rl_graph_theory.environments.local_environments.LocalFlipEnvironment.episode_length">
     
   </a>
   <a name="episode_length">
@@ -665,7 +740,7 @@ modify any attributes of the given instance.</td></tr></table></div>
     
     <span class="py-defname">episode_length</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
     
-    <a class="headerLink" href="#episode_length" title="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment.episode_length">
+    <a class="headerLink" href="#episode_length" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment.episode_length">
       
       
       ¶
@@ -681,7 +756,7 @@ episodes run in parallel.</p></div>
 </div><div class="baseinstancevariable">
   
   
-  <a name="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment.initial_graph_generator">
+  <a name="rl_graph_theory.environments.local_environments.LocalFlipEnvironment.initial_graph_generator">
     
   </a>
   <a name="initial_graph_generator">
@@ -691,7 +766,7 @@ episodes run in parallel.</p></div>
     
     <span class="py-defname">initial_graph_generator</span>: <code><a href="rl_graph_theory.environments.graph_generators.html#GraphGenerator" class="internal-link" title="rl_graph_theory.environments.graph_generators.GraphGenerator">GraphGenerator</a></code> =
     
-    <a class="headerLink" href="#initial_graph_generator" title="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment.initial_graph_generator">
+    <a class="headerLink" href="#initial_graph_generator" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment.initial_graph_generator">
       
       
       ¶
@@ -705,10 +780,37 @@ states. It is possible to re-configure this attribute between two independent ba
 episodes run in parallel.</p></div>
     
   </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="rl_graph_theory.environments.local_environments.LocalFlipEnvironment.starting_vertex">
+    
+  </a>
+  <a name="starting_vertex">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">starting_vertex</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
+    
+    <a class="headerLink" href="#starting_vertex" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment.starting_vertex">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>A nonnegative integer below the configured graph order that determines
+the vertex at which the agent should start the (potential) flipping procedure. It is
+possible to re-configure this attribute between two independent batches of episodes run in
+parallel.</p></div>
+    
+  </div>
 </div><div class="basemethod private">
   
   
-  <a name="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment._transition_batch">
+  <a name="rl_graph_theory.environments.local_environments.LocalFlipEnvironment._transition_batch">
     
   </a>
   <a name="_transition_batch">
@@ -719,7 +821,7 @@ episodes run in parallel.</p></div>
     
     <span class="py-keyword">def</span>&#160;<span class="py-defname">_transition_batch</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">action_batch: <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code></span>):</span>
     
-    <a class="headerLink" href="#_transition_batch" title="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment._transition_batch">
+    <a class="headerLink" href="#_transition_batch" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment._transition_batch">
       
       
       ¶
@@ -729,15 +831,16 @@ episodes run in parallel.</p></div>
     <div class="interfaceinfo">overrides <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html#_transition_batch" class="internal-link">rl_graph_theory.environments.graph_environment.GraphEnvironment._transition_batch</a></code></div>
     <div><p>This method performs the transition process by executing a batch of given actions and
 applying them element-wise to the states in the batch of current states given by the
-<code><a href="#_state_batch" class="internal-link" title="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment._state_batch">_state_batch</a></code> attribute.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">action<wbr></wbr>_batch:</span><code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code></td><td class="fieldArgDesc">The batch of actions to be applied to the states in the batch of
-current states, given as a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> matrix of type <code><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.int32" class="intersphinx-link">numpy.int32</a></code> where the rows
+<code><a href="#_state_batch" class="internal-link" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment._state_batch">_state_batch</a></code> attribute.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">action<wbr></wbr>_batch:</span><code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code></td><td class="fieldArgDesc">The batch of actions to be applied to the states in the batch of
+current states, given as a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> matrix of type <code><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.int8" class="intersphinx-link">numpy.int8</a></code> where the rows
 correspond to the actions. The number of actions in this batch must be the same as the
-number of states in the <code><a href="#_state_batch" class="internal-link" title="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment._state_batch">_state_batch</a></code> attribute.</td></tr></table></div>
+number of states in the <code><a href="#_state_batch" class="internal-link" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment._state_batch">_state_batch</a></code> attribute.</td></tr></table><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Note</td></tr><tr><td colspan="2">If loops are not allowed and the agent attempts to traverse a loop, a <code><a href="https://docs.python.org/3/library/exceptions.html#RuntimeError" class="intersphinx-link">RuntimeError</a></code>
+will be raised.</td></tr></table></div>
   </div>
 </div><div class="baseinstancevariable private">
   
   
-  <a name="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment._allow_loops">
+  <a name="rl_graph_theory.environments.local_environments.LocalFlipEnvironment._allow_loops">
     
   </a>
   <a name="_allow_loops">
@@ -747,7 +850,7 @@ number of states in the <code><a href="#_state_batch" class="internal-link" titl
     
     <span class="py-defname">_allow_loops</span>: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> =
     
-    <a class="headerLink" href="#_allow_loops" title="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment._allow_loops">
+    <a class="headerLink" href="#_allow_loops" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment._allow_loops">
       
       
       ¶
@@ -762,7 +865,35 @@ to have loops.</p></div>
 </div><div class="baseinstancevariable private">
   
   
-  <a name="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment._flattened_length">
+  <a name="rl_graph_theory.environments.local_environments.LocalFlipEnvironment._current_vertices">
+    
+  </a>
+  <a name="_current_vertices">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_current_vertices</span>: <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> =
+    
+    <a class="headerLink" href="#_current_vertices" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment._current_vertices">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>Either <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, or a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> list of type <code><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.int8" class="intersphinx-link">numpy.int8</a></code> that
+determines the vertex where the agent is currently located in each of the episodes run in
+parallel, in the natural order. This attribute is initially set to <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, and afterwards,
+it is assigned the necessary <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> list after each invocation of the
+<code><a href="#reset_batch" class="internal-link" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment.reset_batch">reset_batch</a></code> or <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html#step_batch" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment.step_batch">GraphEnvironment.step_batch</a></code> method.</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="rl_graph_theory.environments.local_environments.LocalFlipEnvironment._flattened_length">
     
   </a>
   <a name="_flattened_length">
@@ -772,7 +903,7 @@ to have loops.</p></div>
     
     <span class="py-defname">_flattened_length</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
     
-    <a class="headerLink" href="#_flattened_length" title="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment._flattened_length">
+    <a class="headerLink" href="#_flattened_length" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment._flattened_length">
       
       
       ¶
@@ -787,7 +918,7 @@ list from any of the two flattened graph formats of the graphs to be constructed
 </div><div class="baseinstancevariable private">
   
   
-  <a name="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment._flattened_ordering">
+  <a name="rl_graph_theory.environments.local_environments.LocalFlipEnvironment._flattened_ordering">
     
   </a>
   <a name="_flattened_ordering">
@@ -797,7 +928,7 @@ list from any of the two flattened graph formats of the graphs to be constructed
     
     <span class="py-defname">_flattened_ordering</span>: <code><a href="rl_graph_theory.graphs.graph_format.FlattenedOrdering.html" class="internal-link" title="rl_graph_theory.graphs.graph_format.FlattenedOrdering">FlattenedOrdering</a></code> =
     
-    <a class="headerLink" href="#_flattened_ordering" title="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment._flattened_ordering">
+    <a class="headerLink" href="#_flattened_ordering" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment._flattened_ordering">
       
       
       ¶
@@ -813,7 +944,7 @@ flattened clockwise order.</p></div>
 </div><div class="baseinstancevariable private">
   
   
-  <a name="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment._flip_only">
+  <a name="rl_graph_theory.environments.local_environments.LocalFlipEnvironment._flip_only">
     
   </a>
   <a name="_flip_only">
@@ -823,7 +954,7 @@ flattened clockwise order.</p></div>
     
     <span class="py-defname">_flip_only</span>: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> =
     
-    <a class="headerLink" href="#_flip_only" title="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment._flip_only">
+    <a class="headerLink" href="#_flip_only" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment._flip_only">
       
       
       ¶
@@ -831,14 +962,39 @@ flattened clockwise order.</p></div>
   </div>
   <div class="functionBody">
     
-    <div><p>A boolean that indicates whether all the selected edges (resp. arcs) should
+    <div><p>A boolean that indicates whether all the traversed edges (resp. arcs) should
 only be allowed to be flipped, i.e., the value of the <tt class="rst-docutils rst-literal">flip_only</tt> parameter.</p></div>
     
   </div>
 </div><div class="baseinstancevariable private">
   
   
-  <a name="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment._is_directed">
+  <a name="rl_graph_theory.environments.local_environments.LocalFlipEnvironment._graph_order">
+    
+  </a>
+  <a name="_graph_order">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_graph_order</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
+    
+    <a class="headerLink" href="#_graph_order" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment._graph_order">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>A positive integer that describes the order of the graphs to be
+constructed.</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="rl_graph_theory.environments.local_environments.LocalFlipEnvironment._is_directed">
     
   </a>
   <a name="_is_directed">
@@ -848,7 +1004,7 @@ only be allowed to be flipped, i.e., the value of the <tt class="rst-docutils rs
     
     <span class="py-defname">_is_directed</span>: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> =
     
-    <a class="headerLink" href="#_is_directed" title="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment._is_directed">
+    <a class="headerLink" href="#_is_directed" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment._is_directed">
       
       
       ¶
@@ -857,14 +1013,14 @@ only be allowed to be flipped, i.e., the value of the <tt class="rst-docutils rs
   <div class="functionBody">
     
     <div><p>A boolean that indicates whether the graphs to be constructed are a
-$k$-edge-colored looped complete directed graph or a $k$-edge-colored looped complete
+2-edge-colored looped complete directed graph or a 2-edge-colored looped complete
 undirected graph.</p></div>
     
   </div>
 </div><div class="baseinstancevariable private">
   
   
-  <a name="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment._state_batch">
+  <a name="rl_graph_theory.environments.local_environments.LocalFlipEnvironment._state_batch">
     
   </a>
   <a name="_state_batch">
@@ -874,7 +1030,7 @@ undirected graph.</p></div>
     
     <span class="py-defname">_state_batch</span> =
     
-    <a class="headerLink" href="#_state_batch" title="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment._state_batch">
+    <a class="headerLink" href="#_state_batch" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment._state_batch">
       
       
       ¶
@@ -888,7 +1044,7 @@ undirected graph.</p></div>
 </div><div class="baseinstancevariable private">
   
   
-  <a name="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment._status">
+  <a name="rl_graph_theory.environments.local_environments.LocalFlipEnvironment._status">
     
   </a>
   <a name="_status">
@@ -898,7 +1054,7 @@ undirected graph.</p></div>
     
     <span class="py-defname">_status</span> =
     
-    <a class="headerLink" href="#_status" title="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment._status">
+    <a class="headerLink" href="#_status" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment._status">
       
       
       ¶
@@ -912,7 +1068,7 @@ undirected graph.</p></div>
 </div><div class="baseinstancevariable private">
   
   
-  <a name="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment._step_count">
+  <a name="rl_graph_theory.environments.local_environments.LocalFlipEnvironment._step_count">
     
   </a>
   <a name="_step_count">
@@ -922,7 +1078,7 @@ undirected graph.</p></div>
     
     <span class="py-defname">_step_count</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> =
     
-    <a class="headerLink" href="#_step_count" title="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment._step_count">
+    <a class="headerLink" href="#_step_count" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment._step_count">
       
       
       ¶
@@ -932,10 +1088,10 @@ undirected graph.</p></div>
     
     <div><p>Either <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, or a nonnegative integer that signifies how many steps have
 been taken, i.e., how many times an action has been executed, in each of the episodes from
-the current batch. When this number becomes <code><a href="#episode_length" class="internal-link" title="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment.episode_length">episode_length</a></code>, this indicates that a final
+the current batch. When this number becomes <code><a href="#episode_length" class="internal-link" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment.episode_length">episode_length</a></code>, this indicates that a final
 state has been reached and that the episode has been truncated. This attribute is initially
 set to <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, and afterwards, it is assigned the necessary <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> value after each
-invocation of the <code><a href="#reset_batch" class="internal-link" title="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment.reset_batch">reset_batch</a></code> or <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html#step_batch" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment.step_batch">GraphEnvironment.step_batch</a></code> method.</p></div>
+invocation of the <code><a href="#reset_batch" class="internal-link" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment.reset_batch">reset_batch</a></code> or <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html#step_batch" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment.step_batch">GraphEnvironment.step_batch</a></code> method.</p></div>
     
   </div>
 </div>

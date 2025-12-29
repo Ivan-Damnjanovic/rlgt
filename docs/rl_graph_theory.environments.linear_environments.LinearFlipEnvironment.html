@@ -492,7 +492,7 @@ should be changed, while the number 0 indicates that the proper edge color of th
     
     <td>Instance Variable</td>
     <td><code><a href="#_step_count" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearFlipEnvironment._step_count">_step<wbr></wbr>_count</a></code></td>
-    <td>An integer between 0 and <code><a href="rl_graph_theory.environments.linear_environments.LinearFlipEnvironment.html#_flattened_length" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearFlipEnvironment._flattened_length">_flattened_length</a></code> that signifies the index of the next edge (resp. arc) to be potentially flipped, in the order determined by the <code><a href="rl_graph_theory.environments.linear_environments.LinearFlipEnvironment.html#_flattened_ordering" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearFlipEnvironment._flattened_ordering">_flattened_ordering</a></code> attribute. The value of <code><a href="rl_graph_theory.environments.linear_environments.LinearFlipEnvironment.html#_flattened_length" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearFlipEnvironment._flattened_length">_flattened_length</a></code>...</td>
+    <td>Either <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, or an integer between 0 and <code><a href="rl_graph_theory.environments.linear_environments.LinearFlipEnvironment.html#_flattened_length" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearFlipEnvironment._flattened_length">_flattened_length</a></code> that signifies the index of the next edge (resp. arc) to be potentially flipped, in the order determined by the <code><a href="rl_graph_theory.environments.linear_environments.LinearFlipEnvironment.html#_flattened_ordering" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearFlipEnvironment._flattened_ordering">_flattened_ordering</a></code> attribute. ...</td>
   </tr>
 </table>
           
@@ -866,11 +866,13 @@ undirected graph.</p></div>
   </div>
   <div class="functionBody">
     
-    <div><p>An integer between 0 and <code><a href="#_flattened_length" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearFlipEnvironment._flattened_length">_flattened_length</a></code> that signifies the index of the
-next edge (resp. arc) to be potentially flipped, in the order determined by the
-<code><a href="#_flattened_ordering" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearFlipEnvironment._flattened_ordering">_flattened_ordering</a></code> attribute. The value of <code><a href="#_flattened_length" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearFlipEnvironment._flattened_length">_flattened_length</a></code> indicates that all the
-edges (resp. arcs) have been traversed and that no edge (resp. arc) should be potentially
-flipped next, i.e., a terminal state has been reached.</p></div>
+    <div><p>Either <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, or an integer between 0 and <code><a href="#_flattened_length" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearFlipEnvironment._flattened_length">_flattened_length</a></code> that
+signifies the index of the next edge (resp. arc) to be potentially flipped, in the order
+determined by the <code><a href="#_flattened_ordering" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearFlipEnvironment._flattened_ordering">_flattened_ordering</a></code> attribute. The value of <code><a href="#_flattened_length" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearFlipEnvironment._flattened_length">_flattened_length</a></code>
+indicates that all the edges (resp. arcs) have been traversed and that no edge (resp. arc)
+should be potentially flipped next, i.e., a terminal state has been reached. This attribute
+is initially set to <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, and afterwards, it is assigned the necessary <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> value after
+each invocation of the <code><a href="#reset_batch" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearFlipEnvironment.reset_batch">reset_batch</a></code> or <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html#step_batch" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment.step_batch">GraphEnvironment.step_batch</a></code> method.</p></div>
     
   </div>
 </div>
@@ -885,7 +887,7 @@ flipped next, i.e., a terminal state has been reached.</p></div>
   <div class="container-fluid">
     <a href="index.html">API Documentation</a> for rl-graph-theory,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    25.10.1 at 2025-12-27 18:01:13.
+    25.10.1 at 2025-12-29 22:09:07.
   </div>
 
   <!-- Search related scripts needs to be loaded at the end of HTML 

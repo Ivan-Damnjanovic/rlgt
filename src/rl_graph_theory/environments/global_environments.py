@@ -2,7 +2,7 @@
 This ``Python`` module contains two global reinforcement learning environments, which inherit from
 the `GraphEnvironment` class and model graph-building games where the edges (resp. arcs) are all
 initially fully colored in some predetermined manner, and then in each step, any edge (resp. arc)
-can be recolored with any color.
+can be properly recolored with any color.
 """
 
 from typing import Optional, Tuple
@@ -25,11 +25,11 @@ class GlobalSetEnvironment(GraphEnvironment):
     """
     This class inherits from the `GraphEnvironment` class and models a graph-building game in which
     the edges (resp. arcs) are all initially fully colored in some manner, and then in each step,
-    any edge (resp. arc) can be recolored with any color. The user can select the graph order and
-    the number of proper edge colors, as well as choose whether the graphs should be directed or
-    undirected, and whether loops should be allowed. Additionally, the user can configure the
-    mechanism that controls how the initial fully colored graphs are colored, which could be either
-    deterministic or nondeterministic.
+    any edge (resp. arc) can be properly recolored with any color. The user can select the graph
+    order and the number of proper edge colors, as well as choose whether the graphs should be
+    directed or undirected, and whether loops should be allowed. Additionally, the user can
+    configure the mechanism that controls how the initial fully colored graphs are colored, which
+    could be either deterministic or nondeterministic.
 
     The RL tasks in this environment are continuing, and the total number of actions to be
     performed, i.e., the episode length, is given as a configurable parameter.
@@ -48,9 +48,9 @@ class GlobalSetEnvironment(GraphEnvironment):
     enumeration. The user can select which of these two orderings should be applied.
 
     Each action is represented by a `numpy.ndarray` list of type `numpy.int32` and length two.
-    Here, the first entry signifies the index of the edge (resp. arc) that should be recolored,
-    while the second entry is a value between 0 and ``edge_colors - 1`` that determines which color
-    the chosen edge (resp. arc) should be recolored with.
+    Here, the first entry signifies the index of the edge (resp. arc) that should be properly
+    recolored, while the second entry is a value between 0 and ``edge_colors - 1`` that determines
+    which color the chosen edge (resp. arc) should be properly recolored with.
 
     :ivar _state_batch: See the description of the `GraphEnvironment._state_batch` attribute.
     :ivar _status: See the description of the `GraphEnvironment._status` attribute.
@@ -74,10 +74,12 @@ class GlobalSetEnvironment(GraphEnvironment):
     :ivar episode_length: A positive integer that determines the episode length of each of the
         episodes. It is possible to re-configure this attribute between two independent batches of
         episodes run in parallel.
-    :ivar _step_count: A nonnegative integer that signifies how many steps have been taken, i.e.,
-        how many times an action has been executed, in each of the episodes from the current batch.
-        When this number becomes `episode_length`, this indicates that a final state has been
-        reached and that the episode has been truncated.
+    :ivar _step_count: Either `None`, or a nonnegative integer that signifies how many steps have
+        been taken, i.e., how many times an action has been executed, in each of the episodes from
+        the current batch. When this number becomes `episode_length`, this indicates that a final
+        state has been reached and that the episode has been truncated. This attribute is initially
+        set to `None`, and afterwards, it is assigned the necessary `int` value after each
+        invocation of the `reset_batch` or `GraphEnvironment.step_batch` method.
     """
 
     def __init__(
@@ -233,6 +235,7 @@ class GlobalSetEnvironment(GraphEnvironment):
             self._status = EpisodeStatus.TRUNCATED
 
     def state_batch_to_graph_batch(self, state_batch: np.ndarray) -> GraphBatch:
+        # If the graphs have only two proper edge colors, then the conversion follows immediately.
         if self._edge_colors == 2:
             return GraphBatch.from_flattened(
                 flattened=state_batch,
@@ -241,6 +244,7 @@ class GlobalSetEnvironment(GraphEnvironment):
                 allow_loops=self._allow_loops,
             )
 
+        # Otherwise, we reconstruct the flattened format for the underlying graphs from the states.
         temp = state_batch.reshape(-1, self._edge_colors - 1, self._flattened_length)
         color_indices = np.arange(1, self._edge_colors, dtype=np.uint8)
         result = (temp * color_indices[:, None]).sum(axis=1)
@@ -282,7 +286,8 @@ class GlobalFlipEnvironment(GraphEnvironment):
     color of the selected edge (resp. arc) should stay the same. On the other hand, if the
     ``flip_only`` parameter is set to `True`, then any selected edge (resp. arc) must be flipped.
     In this case, each action is represented by a single-entry `numpy.ndarray` list of type
-    `numpy.int32` containing the index of the edge (resp. arc) that should be flipped.
+    `numpy.int32` containing the index of the edge (resp. arc) that should be flipped, i.e., whose
+    proper edge color should be changed.
 
     :ivar _state_batch: See the description of the `GraphEnvironment._state_batch` attribute.
     :ivar _status: See the description of the `GraphEnvironment._status` attribute.
@@ -305,10 +310,12 @@ class GlobalFlipEnvironment(GraphEnvironment):
     :ivar episode_length: A positive integer that determines the episode length of each of the
         episodes. It is possible to re-configure this attribute between two independent batches of
         episodes run in parallel.
-    :ivar _step_count: A nonnegative integer that signifies how many steps have been taken, i.e.,
-        how many times an action has been executed, in each of the episodes from the current batch.
-        When this number becomes `episode_length`, this indicates that a final state has been
-        reached and that the episode has been truncated.
+    :ivar _step_count: Either `None`, or a nonnegative integer that signifies how many steps have
+        been taken, i.e., how many times an action has been executed, in each of the episodes from
+        the current batch. When this number becomes `episode_length`, this indicates that a final
+        state has been reached and that the episode has been truncated. This attribute is initially
+        set to `None`, and afterwards, it is assigned the necessary `int` value after each
+        invocation of the `reset_batch` or `GraphEnvironment.step_batch` method.
     """
 
     def __init__(

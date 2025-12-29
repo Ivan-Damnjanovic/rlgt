@@ -403,17 +403,17 @@
 
         <div class="moduleDocstring">
           <div><p>This class inherits from the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code> class and models a graph-building game in which
-the edges (resp. arcs) are all initially uncolored and are then colored one by one, either in
-the flattened row-major order or the flattened clockwise order. The user can select the graph
-order and the number of proper edge colors, as well as choose whether the graphs should be
-directed or undirected, and whether loops should be allowed. The edges (resp. arcs) are colored
-in the same way that a graph is reconstructed from a flattened format. In other words, if loops
-are not allowed, then these edges (resp. arcs) are just deleted and completely ignored, and if
-the graphs are undirected, then only the upper triangular part of an adjacency matrix is
-considered (with or without the diagonal, depending on whether loops are allowed) and each edge
-is essentially colored in both directions at the same time. The user can choose whether the
-edges (resp. arcs) should be colored in the flattened row-major order or the flattened
-clockwise order.</p>
+the edges (resp. arcs) are all initially uncolored and are then properly colored one by one,
+either in the flattened row-major order or the flattened clockwise order. The user can select
+the graph order and the number of proper edge colors, as well as choose whether the graphs
+should be directed or undirected, and whether loops should be allowed. The edges (resp. arcs)
+are properly colored in the same way that a graph is reconstructed from a flattened format. In
+other words, if loops are not allowed, then these edges (resp. arcs) are just deleted and
+completely ignored, and if the graphs are undirected, then only the upper triangular part of an
+adjacency matrix is considered (with or without the diagonal, depending on whether loops are
+allowed) and each edge is essentially colored in both directions at the same time. The user can
+choose whether the edges (resp. arcs) should be properly colored in the flattened row-major
+order or the flattened clockwise order.</p>
 <p>The RL tasks in this environment are episodic, and the total number of actions to be performed
 equals the number of entries in each of the two flattened graph formats. Therefore, this number
 depends on the selected graph order, on whether the constructed graphs are directed, and on
@@ -428,13 +428,13 @@ value 1 indicates which of the <tt class="rst-docutils rst-literal">flattened_le
 the color 2; and so on until the <tt class="rst-docutils rst-literal">(edge_colors - 1)</tt>-th <tt class="rst-docutils rst-literal">flattened_length</tt> bits, where the
 value 1 indicates which of the <tt class="rst-docutils rst-literal">flattened_length</tt> edges (resp. arcs) have been colored with
 the color <tt class="rst-docutils rst-literal">edge_colors - 1</tt>. The final <tt class="rst-docutils rst-literal">flattened_length</tt> bits represent a one-hot encoding
-of the position that determines the next edge (resp. arc) to be colored. In other words, there
-is either one value of 1 whose index determines which edge (resp. arc) should be colored next,
-or all the values are 0 and this signifies a terminal state, i.e., a state where all the edges
-(resp. arcs) have been colored.</p>
+of the position that determines the next edge (resp. arc) to be properly colored. In other
+words, there is either one value of 1 whose index determines which edge (resp. arc) should be
+properly colored next, or all the values are 0 and this signifies a terminal state, i.e., a
+state where all the edges (resp. arcs) have been properly colored.</p>
 <p>Each action is represented by a single-entry <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> list of type <code><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.int8" class="intersphinx-link">numpy.int8</a></code>
 containing a value between 0 and <tt class="rst-docutils rst-literal">edge_colors - 1</tt> that determines which color the next edge
-(resp. arc) should be colored with.</p>
+(resp. arc) should be properly colored with.</p>
 </div>
         </div>
 
@@ -481,7 +481,7 @@ containing a value between 0 and <tt class="rst-docutils rst-literal">edge_color
     
     <td>Instance Variable</td>
     <td><code><a href="#_flattened_ordering" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearBuildEnvironment._flattened_ordering">_flattened<wbr></wbr>_ordering</a></code></td>
-    <td>An item of the <code><a href="rl_graph_theory.graphs.graph_format.FlattenedOrdering.html" class="internal-link" title="rl_graph_theory.graphs.graph_format.FlattenedOrdering">FlattenedOrdering</a></code> enumeration that determines whether the edges (resp. arcs) should be colored in the flattened row-major order or the flattened clockwise order.</td>
+    <td>An item of the <code><a href="rl_graph_theory.graphs.graph_format.FlattenedOrdering.html" class="internal-link" title="rl_graph_theory.graphs.graph_format.FlattenedOrdering">FlattenedOrdering</a></code> enumeration that determines whether the edges (resp. arcs) should be properly colored in the flattened row-major order or the flattened clockwise order.</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
@@ -506,7 +506,7 @@ containing a value between 0 and <tt class="rst-docutils rst-literal">edge_color
     
     <td>Instance Variable</td>
     <td><code><a href="#_step_count" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearBuildEnvironment._step_count">_step<wbr></wbr>_count</a></code></td>
-    <td>An integer between 0 and <code><a href="rl_graph_theory.environments.linear_environments.LinearBuildEnvironment.html#_flattened_length" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearBuildEnvironment._flattened_length">_flattened_length</a></code> that signifies the index of the next edge (resp. arc) to be colored, in the order determined by the <code><a href="rl_graph_theory.environments.linear_environments.LinearBuildEnvironment.html#_flattened_ordering" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearBuildEnvironment._flattened_ordering">_flattened_ordering</a></code> attribute. The value of <code><a href="rl_graph_theory.environments.linear_environments.LinearBuildEnvironment.html#_flattened_length" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearBuildEnvironment._flattened_length">_flattened_length</a></code>...</td>
+    <td>Either <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, or an integer between 0 and <code><a href="rl_graph_theory.environments.linear_environments.LinearBuildEnvironment.html#_flattened_length" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearBuildEnvironment._flattened_length">_flattened_length</a></code> that signifies the index of the next edge (resp. arc) to be properly colored, in the order determined by the <code><a href="rl_graph_theory.environments.linear_environments.LinearBuildEnvironment.html#_flattened_ordering" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearBuildEnvironment._flattened_ordering">_flattened_ordering</a></code> attribute. The value of ...</td>
   </tr>
 </table>
           
@@ -568,10 +568,10 @@ of either the <tt class="rst-docutils rst-literal">graph_invariant</tt> or the <
 the description of the <code><a href="rl_graph_theory.environments.graph_environment.RewardType.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.RewardType">RewardType</a></code> enumeration, and its expected signature varies
 depending on the <tt class="rst-docutils rst-literal">reward_type</tt> argument.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">graph<wbr></wbr>_order:</span><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></td><td class="fieldArgDesc">A positive integer (not below two) that represents the graph order of
 the graphs to be constructed.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">flattened<wbr></wbr>_ordering:</span><code><a href="rl_graph_theory.graphs.graph_format.FlattenedOrdering.html" class="internal-link" title="rl_graph_theory.graphs.graph_format.FlattenedOrdering">FlattenedOrdering</a></code></td><td class="fieldArgDesc">An item of the <code><a href="rl_graph_theory.graphs.graph_format.FlattenedOrdering.html" class="internal-link" title="rl_graph_theory.graphs.graph_format.FlattenedOrdering">FlattenedOrdering</a></code> enumeration that determines
-whether the edges (resp. arcs) should be colored in the flattened row-major order or
-the flattened clockwise order. The default value is <code><a href="rl_graph_theory.graphs.graph_format.FlattenedOrdering.html#ROW_MAJOR" class="internal-link" title="rl_graph_theory.graphs.graph_format.FlattenedOrdering.ROW_MAJOR">FlattenedOrdering.ROW_MAJOR</a></code>,
-i.e., the edges (resp. arcs) should be colored in the flattened row-major order by
-default.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">edge<wbr></wbr>_colors:</span><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></td><td class="fieldArgDesc">A positive integer (not below two) that represents the number of proper
+whether the edges (resp. arcs) should be properly colored in the flattened row-major
+order or the flattened clockwise order. The default value is
+<code><a href="rl_graph_theory.graphs.graph_format.FlattenedOrdering.html#ROW_MAJOR" class="internal-link" title="rl_graph_theory.graphs.graph_format.FlattenedOrdering.ROW_MAJOR">FlattenedOrdering.ROW_MAJOR</a></code>, i.e., the edges (resp. arcs) should be properly colored
+in the flattened row-major order by default.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">edge<wbr></wbr>_colors:</span><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></td><td class="fieldArgDesc">A positive integer (not below two) that represents the number of proper
 edge colors in the graphs to be constructed. The default value is two.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">is<wbr></wbr>_directed:</span><code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code></td><td class="fieldArgDesc">A boolean that indicates whether the graphs to be constructed are a
 $k$-edge-colored looped complete directed graph or a $k$-edge-colored looped complete
 undirected graph. The default value is <code><a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a></code>, i.e., the graphs to be constructed are
@@ -775,8 +775,8 @@ an initial state.</p></div>
   <div class="functionBody">
     
     <div><p>An item of the <code><a href="rl_graph_theory.graphs.graph_format.FlattenedOrdering.html" class="internal-link" title="rl_graph_theory.graphs.graph_format.FlattenedOrdering">FlattenedOrdering</a></code> enumeration that determines
-whether the edges (resp. arcs) should be colored in the flattened row-major order or the
-flattened clockwise order.</p></div>
+whether the edges (resp. arcs) should be properly colored in the flattened row-major order
+or the flattened clockwise order.</p></div>
     
   </div>
 </div><div class="baseinstancevariable private">
@@ -899,11 +899,13 @@ vectors, i.e., the number <tt class="rst-docutils rst-literal">_edge_colors * _f
   </div>
   <div class="functionBody">
     
-    <div><p>An integer between 0 and <code><a href="#_flattened_length" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearBuildEnvironment._flattened_length">_flattened_length</a></code> that signifies the index of the
-next edge (resp. arc) to be colored, in the order determined by the <code><a href="#_flattened_ordering" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearBuildEnvironment._flattened_ordering">_flattened_ordering</a></code>
-attribute. The value of <code><a href="#_flattened_length" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearBuildEnvironment._flattened_length">_flattened_length</a></code> indicates that all the edges (resp. arcs) have
-been colored and that no edge (resp. arc) should be colored next, i.e., a terminal state
-has been reached.</p></div>
+    <div><p>Either <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, or an integer between 0 and <code><a href="#_flattened_length" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearBuildEnvironment._flattened_length">_flattened_length</a></code> that
+signifies the index of the next edge (resp. arc) to be properly colored, in the order
+determined by the <code><a href="#_flattened_ordering" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearBuildEnvironment._flattened_ordering">_flattened_ordering</a></code> attribute. The value of <code><a href="#_flattened_length" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearBuildEnvironment._flattened_length">_flattened_length</a></code>
+indicates that all the edges (resp. arcs) have been properly colored and that no edge
+(resp. arc) should be colored next, i.e., a terminal state has been reached. This attribute
+is initially set to <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, and afterwards, it is assigned the necessary <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> value after
+each invocation of the <code><a href="#reset_batch" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearBuildEnvironment.reset_batch">reset_batch</a></code> or <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html#step_batch" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment.step_batch">GraphEnvironment.step_batch</a></code> method.</p></div>
     
   </div>
 </div>
@@ -918,7 +920,7 @@ has been reached.</p></div>
   <div class="container-fluid">
     <a href="index.html">API Documentation</a> for rl-graph-theory,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    25.10.1 at 2025-12-27 18:01:13.
+    25.10.1 at 2025-12-29 22:09:07.
   </div>
 
   <!-- Search related scripts needs to be loaded at the end of HTML 

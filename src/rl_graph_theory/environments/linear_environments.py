@@ -2,7 +2,8 @@
 This ``Python`` module contains three linear reinforcement learning environments, which inherit
 from the `GraphEnvironment` class and model graph-building games where the edges (resp. arcs) are
 all initially either uncolored, or fully colored in some predetermined manner, and are then
-(re)colored one by one, either in the flattened row-major order or the flattened clockwise order.
+properly (re)colored one by one, either in the flattened row-major order or the flattened clockwise
+order.
 """
 
 from typing import Optional, Tuple
@@ -24,17 +25,17 @@ from .graph_generators import GraphGenerator, create_fixed_graph_generator
 class LinearBuildEnvironment(GraphEnvironment):
     """
     This class inherits from the `GraphEnvironment` class and models a graph-building game in which
-    the edges (resp. arcs) are all initially uncolored and are then colored one by one, either in
-    the flattened row-major order or the flattened clockwise order. The user can select the graph
-    order and the number of proper edge colors, as well as choose whether the graphs should be
-    directed or undirected, and whether loops should be allowed. The edges (resp. arcs) are colored
-    in the same way that a graph is reconstructed from a flattened format. In other words, if loops
-    are not allowed, then these edges (resp. arcs) are just deleted and completely ignored, and if
-    the graphs are undirected, then only the upper triangular part of an adjacency matrix is
-    considered (with or without the diagonal, depending on whether loops are allowed) and each edge
-    is essentially colored in both directions at the same time. The user can choose whether the
-    edges (resp. arcs) should be colored in the flattened row-major order or the flattened
-    clockwise order.
+    the edges (resp. arcs) are all initially uncolored and are then properly colored one by one,
+    either in the flattened row-major order or the flattened clockwise order. The user can select
+    the graph order and the number of proper edge colors, as well as choose whether the graphs
+    should be directed or undirected, and whether loops should be allowed. The edges (resp. arcs)
+    are properly colored in the same way that a graph is reconstructed from a flattened format. In
+    other words, if loops are not allowed, then these edges (resp. arcs) are just deleted and
+    completely ignored, and if the graphs are undirected, then only the upper triangular part of an
+    adjacency matrix is considered (with or without the diagonal, depending on whether loops are
+    allowed) and each edge is essentially colored in both directions at the same time. The user can
+    choose whether the edges (resp. arcs) should be properly colored in the flattened row-major
+    order or the flattened clockwise order.
 
     The RL tasks in this environment are episodic, and the total number of actions to be performed
     equals the number of entries in each of the two flattened graph formats. Therefore, this number
@@ -51,14 +52,14 @@ class LinearBuildEnvironment(GraphEnvironment):
     the color 2; and so on until the ``(edge_colors - 1)``-th ``flattened_length`` bits, where the
     value 1 indicates which of the ``flattened_length`` edges (resp. arcs) have been colored with
     the color ``edge_colors - 1``. The final ``flattened_length`` bits represent a one-hot encoding
-    of the position that determines the next edge (resp. arc) to be colored. In other words, there
-    is either one value of 1 whose index determines which edge (resp. arc) should be colored next,
-    or all the values are 0 and this signifies a terminal state, i.e., a state where all the edges
-    (resp. arcs) have been colored.
+    of the position that determines the next edge (resp. arc) to be properly colored. In other
+    words, there is either one value of 1 whose index determines which edge (resp. arc) should be
+    properly colored next, or all the values are 0 and this signifies a terminal state, i.e., a
+    state where all the edges (resp. arcs) have been properly colored.
 
     Each action is represented by a single-entry `numpy.ndarray` list of type `numpy.int8`
     containing a value between 0 and ``edge_colors - 1`` that determines which color the next edge
-    (resp. arc) should be colored with.
+    (resp. arc) should be properly colored with.
 
     :ivar _state_batch: See the description of the `GraphEnvironment._state_batch` attribute.
     :ivar _status: See the description of the `GraphEnvironment._status` attribute.
@@ -69,19 +70,21 @@ class LinearBuildEnvironment(GraphEnvironment):
     :ivar _allow_loops: A boolean that indicates whether the graphs to be constructed are allowed
         to have loops.
     :ivar _flattened_ordering: An item of the `FlattenedOrdering` enumeration that determines
-        whether the edges (resp. arcs) should be colored in the flattened row-major order or the
-        flattened clockwise order.
+        whether the edges (resp. arcs) should be properly colored in the flattened row-major order
+        or the flattened clockwise order.
     :ivar _flattened_length: A positive integer that determines the length of the `numpy.ndarray`
         list from any of the two flattened graph formats of the graphs to be constructed. This
         number also represents how many actions are needed in total to reach a terminal state from
         an initial state.
     :ivar _state_length: A positive integer that determines the length of each of the state
         vectors, i.e., the number ``_edge_colors * _flattened_length``.
-    :ivar _step_count: An integer between 0 and `_flattened_length` that signifies the index of the
-        next edge (resp. arc) to be colored, in the order determined by the `_flattened_ordering`
-        attribute. The value of `_flattened_length` indicates that all the edges (resp. arcs) have
-        been colored and that no edge (resp. arc) should be colored next, i.e., a terminal state
-        has been reached.
+    :ivar _step_count: Either `None`, or an integer between 0 and `_flattened_length` that
+        signifies the index of the next edge (resp. arc) to be properly colored, in the order
+        determined by the `_flattened_ordering` attribute. The value of `_flattened_length`
+        indicates that all the edges (resp. arcs) have been properly colored and that no edge
+        (resp. arc) should be colored next, i.e., a terminal state has been reached. This attribute
+        is initially set to `None`, and afterwards, it is assigned the necessary `int` value after
+        each invocation of the `reset_batch` or `GraphEnvironment.step_batch` method.
     """
 
     def __init__(
@@ -107,10 +110,10 @@ class LinearBuildEnvironment(GraphEnvironment):
         :param graph_order: A positive integer (not below two) that represents the graph order of
             the graphs to be constructed.
         :param flattened_ordering: An item of the `FlattenedOrdering` enumeration that determines
-            whether the edges (resp. arcs) should be colored in the flattened row-major order or
-            the flattened clockwise order. The default value is `FlattenedOrdering.ROW_MAJOR`,
-            i.e., the edges (resp. arcs) should be colored in the flattened row-major order by
-            default.
+            whether the edges (resp. arcs) should be properly colored in the flattened row-major
+            order or the flattened clockwise order. The default value is
+            `FlattenedOrdering.ROW_MAJOR`, i.e., the edges (resp. arcs) should be properly colored
+            in the flattened row-major order by default.
         :param edge_colors: A positive integer (not below two) that represents the number of proper
             edge colors in the graphs to be constructed. The default value is two.
         :param is_directed: A boolean that indicates whether the graphs to be constructed are a
@@ -148,7 +151,7 @@ class LinearBuildEnvironment(GraphEnvironment):
 
     def reset_batch(self, batch_size: int) -> Tuple[np.ndarray, EpisodeStatus]:
         self._state_batch = np.zeros((batch_size, self._state_length), dtype=np.uint8)
-        # The zeroth edge (resp. arc) should be colored first.
+        # The zeroth edge (resp. arc) should be properly colored first.
         self._state_batch[:, -self._flattened_length] = 1
         self._status = EpisodeStatus.IN_PROGRESS
         self._step_count = 0
@@ -216,19 +219,19 @@ class LinearBuildEnvironment(GraphEnvironment):
 class LinearSetEnvironment(GraphEnvironment):
     """
     This class inherits from the `GraphEnvironment` class and models a graph-building game in which
-    the edges (resp. arcs) are all initially fully colored in some manner and are then recolored
-    one by one, either in the flattened row-major order or the flattened clockwise order. The user
-    can select the graph order and the number of proper edge colors, as well as choose whether the
-    graphs should be directed or undirected, and whether loops should be allowed. Additionally, the
-    user can configure the mechanism that controls how the initial fully colored graphs are
-    colored, which could be either deterministic or nondeterministic. The edges (resp. arcs) are
-    then recolored in the same way that a graph is reconstructed from a flattened format. In other
-    words, if loops are not allowed, then these edges (resp. arcs) are just deleted and completely
-    ignored, and if the graphs are undirected, then only the upper triangular part of an adjacency
-    matrix is considered (with or without the diagonal, depending on whether loops are allowed) and
-    each edge is essentially recolored in both directions at the same time. The user can choose
-    whether the edges (resp. arcs) should be recolored in the flattened row-major order or the
-    flattened clockwise order.
+    the edges (resp. arcs) are all initially fully colored in some manner and are then properly
+    recolored one by one, either in the flattened row-major order or the flattened clockwise order.
+    The user can select the graph order and the number of proper edge colors, as well as choose
+    whether the graphs should be directed or undirected, and whether loops should be allowed.
+    Additionally, the user can configure the mechanism that controls how the initial fully colored
+    graphs are colored, which could be either deterministic or nondeterministic. The edges
+    (resp. arcs) are then properly recolored in the same way that a graph is reconstructed from a
+    flattened format. In other words, if loops are not allowed, then these edges (resp. arcs) are
+    just deleted and completely ignored, and if the graphs are undirected, then only the upper
+    triangular part of an adjacency matrix is considered (with or without the diagonal, depending
+    on whether loops are allowed) and each edge is essentially recolored in both directions at the
+    same time. The user can choose whether the edges (resp. arcs) should be properly recolored in
+    the flattened row-major order or the flattened clockwise order.
 
     The RL tasks in this environment are episodic, and the total number of actions to be performed
     equals the number of entries in each of the two flattened graph formats. Therefore, this number
@@ -245,14 +248,14 @@ class LinearSetEnvironment(GraphEnvironment):
     and so on until the ``(edge_colors - 1)``-th ``flattened_length`` bits, where the value 1
     indicates which of the ``flattened_length`` edges (resp. arcs) are currently of the color
     ``edge_colors - 1``. The final ``flattened_length`` bits represent a one-hot encoding of the
-    position that determines the next edge (resp. arc) to be recolored. In other words, there is
-    either one value of 1 whose index determines which edge (resp. arc) should be recolored next,
-    or all the values are 0 and this signifies a terminal state, i.e., a state where all the edges
-    (resp. arcs) have been recolored.
+    position that determines the next edge (resp. arc) to be properly recolored. In other words,
+    there is either one value of 1 whose index determines which edge (resp. arc) should be properly
+    recolored next, or all the values are 0 and this signifies a terminal state, i.e., a state
+    where all the edges (resp. arcs) have been recolored.
 
     Each action is represented by a single-entry `numpy.ndarray` list of type `numpy.int8`
     containing a value between 0 and ``edge_colors - 1`` that determines which color the next edge
-    (resp. arc) should be recolored with.
+    (resp. arc) should be properly recolored with.
 
     :ivar _state_batch: See the description of the `GraphEnvironment._state_batch` attribute.
     :ivar _status: See the description of the `GraphEnvironment._status` attribute.
@@ -263,8 +266,8 @@ class LinearSetEnvironment(GraphEnvironment):
     :ivar _allow_loops: A boolean that indicates whether the graphs to be constructed are allowed
         to have loops.
     :ivar _flattened_ordering: An item of the `FlattenedOrdering` enumeration that determines
-        whether the edges (resp. arcs) should be recolored in the flattened row-major order or the
-        flattened clockwise order.
+        whether the edges (resp. arcs) should be properly recolored in the flattened row-major
+        order or the flattened clockwise order.
     :ivar initial_graph_generator: A `GraphGenerator` function that describes the mechanism for
         generating the underlying fully colored graphs for the states in the batch of initial
         states. It is possible to re-configure this attribute between two independent batches of
@@ -275,11 +278,13 @@ class LinearSetEnvironment(GraphEnvironment):
         an initial state.
     :ivar _state_length: A positive integer that determines the length of each of the state
         vectors, i.e., the number ``_edge_colors * _flattened_length``.
-    :ivar _step_count: An integer between 0 and `_flattened_length` that signifies the index of the
-        next edge (resp. arc) to be recolored, in the order determined by the `_flattened_ordering`
-        attribute. The value of `_flattened_length` indicates that all the edges (resp. arcs) have
-        been recolored and that no edge (resp. arc) should be colored next, i.e., a terminal state
-        has been reached.
+    :ivar _step_count: Either `None`, or an integer between 0 and `_flattened_length` that
+        signifies the index of the next edge (resp. arc) to be properly recolored, in the order
+        determined by the `_flattened_ordering` attribute. The value of `_flattened_length`
+        indicates that all the edges (resp. arcs) have been properly recolored and that no edge
+        (resp. arc) should be colored next, i.e., a terminal state has been reached. This attribute
+        is initially set to `None`, and afterwards, it is assigned the necessary `int` value after
+        each invocation of the `reset_batch` or `GraphEnvironment.step_batch` method.
     """
 
     def __init__(
@@ -306,10 +311,10 @@ class LinearSetEnvironment(GraphEnvironment):
         :param graph_order: A positive integer (not below two) that represents the graph order of
             the graphs to be constructed.
         :param flattened_ordering: An item of the `FlattenedOrdering` enumeration that determines
-            whether the edges (resp. arcs) should be recolored in the flattened row-major order or
-            the flattened clockwise order. The default value is `FlattenedOrdering.ROW_MAJOR`,
-            i.e., the edges (resp. arcs) should be recolored in the flattened row-major order by
-            default.
+            whether the edges (resp. arcs) should be properly recolored in the flattened row-major
+            order or the flattened clockwise order. The default value is
+            `FlattenedOrdering.ROW_MAJOR`, i.e., the edges (resp. arcs) should be properly
+            recolored in the flattened row-major order by default.
         :param edge_colors: A positive integer (not below two) that represents the number of proper
             edge colors in the graphs to be constructed. The default value is two.
         :param is_directed: A boolean that indicates whether the graphs to be constructed are a
@@ -434,6 +439,7 @@ class LinearSetEnvironment(GraphEnvironment):
             self._status = EpisodeStatus.TERMINATED
 
     def state_batch_to_graph_batch(self, state_batch: np.ndarray) -> GraphBatch:
+        # If the graphs have only two proper edge colors, then the conversion follows immediately.
         if self._edge_colors == 2:
             return GraphBatch.from_flattened(
                 flattened=state_batch[:, : self._flattened_length],
@@ -442,6 +448,7 @@ class LinearSetEnvironment(GraphEnvironment):
                 allow_loops=self._allow_loops,
             )
 
+        # Otherwise, we reconstruct the flattened format for the underlying graphs from the states.
         temp = state_batch.reshape(-1, self._edge_colors, self._flattened_length)
         color_indices = np.arange(1, self._edge_colors, dtype=np.uint8)
         result = (temp[:, :-1, :] * color_indices[:, None]).sum(axis=1)
@@ -513,11 +520,13 @@ class LinearFlipEnvironment(GraphEnvironment):
         list from any of the two flattened graph formats of the graphs to be constructed. This
         number also represents how many actions are needed in total to reach a terminal state from
         an initial state.
-    :ivar _step_count: An integer between 0 and `_flattened_length` that signifies the index of the
-        next edge (resp. arc) to be potentially flipped, in the order determined by the
-        `_flattened_ordering` attribute. The value of `_flattened_length` indicates that all the
-        edges (resp. arcs) have been traversed and that no edge (resp. arc) should be potentially
-        flipped next, i.e., a terminal state has been reached.
+    :ivar _step_count: Either `None`, or an integer between 0 and `_flattened_length` that
+        signifies the index of the next edge (resp. arc) to be potentially flipped, in the order
+        determined by the `_flattened_ordering` attribute. The value of `_flattened_length`
+        indicates that all the edges (resp. arcs) have been traversed and that no edge (resp. arc)
+        should be potentially flipped next, i.e., a terminal state has been reached. This attribute
+        is initially set to `None`, and afterwards, it is assigned the necessary `int` value after
+        each invocation of the `reset_batch` or `GraphEnvironment.step_batch` method.
     """
 
     def __init__(
@@ -614,7 +623,7 @@ class LinearFlipEnvironment(GraphEnvironment):
 
         self._state_batch = np.zeros((batch_size, 2 * self._flattened_length), dtype=np.uint8)
         self._state_batch[:, : self._flattened_length] = format_representation
-        # The zeroth edge (resp. arc) should be colored first.
+        # The zeroth edge (resp. arc) should be potentially flipped first.
         self._state_batch[:, self._flattened_length] = 1
 
         self._status = EpisodeStatus.IN_PROGRESS

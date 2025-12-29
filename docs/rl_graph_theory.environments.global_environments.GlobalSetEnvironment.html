@@ -414,11 +414,11 @@
         <div class="moduleDocstring">
           <div><p>This class inherits from the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code> class and models a graph-building game in which
 the edges (resp. arcs) are all initially fully colored in some manner, and then in each step,
-any edge (resp. arc) can be recolored with any color. The user can select the graph order and
-the number of proper edge colors, as well as choose whether the graphs should be directed or
-undirected, and whether loops should be allowed. Additionally, the user can configure the
-mechanism that controls how the initial fully colored graphs are colored, which could be either
-deterministic or nondeterministic.</p>
+any edge (resp. arc) can be properly recolored with any color. The user can select the graph
+order and the number of proper edge colors, as well as choose whether the graphs should be
+directed or undirected, and whether loops should be allowed. Additionally, the user can
+configure the mechanism that controls how the initial fully colored graphs are colored, which
+could be either deterministic or nondeterministic.</p>
 <p>The RL tasks in this environment are continuing, and the total number of actions to be
 performed, i.e., the episode length, is given as a configurable parameter.</p>
 <p>Each state is represented by a binary <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> list of type <code><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.uint8" class="intersphinx-link">numpy.uint8</a></code> and length
@@ -434,9 +434,9 @@ color <tt class="rst-docutils rst-literal">edge_colors - 1</tt>. Here, the edges
 flattened row-major order or the flattened clockwise order, as explained in the <code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat">GraphFormat</a></code>
 enumeration. The user can select which of these two orderings should be applied.</p>
 <p>Each action is represented by a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> list of type <code><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.int32" class="intersphinx-link">numpy.int32</a></code> and length two.
-Here, the first entry signifies the index of the edge (resp. arc) that should be recolored,
-while the second entry is a value between 0 and <tt class="rst-docutils rst-literal">edge_colors - 1</tt> that determines which color
-the chosen edge (resp. arc) should be recolored with.</p>
+Here, the first entry signifies the index of the edge (resp. arc) that should be properly
+recolored, while the second entry is a value between 0 and <tt class="rst-docutils rst-literal">edge_colors - 1</tt> that determines
+which color the chosen edge (resp. arc) should be properly recolored with.</p>
 </div>
         </div>
 
@@ -518,7 +518,7 @@ the chosen edge (resp. arc) should be recolored with.</p>
     
     <td>Instance Variable</td>
     <td><code><a href="#_step_count" class="internal-link" title="rl_graph_theory.environments.global_environments.GlobalSetEnvironment._step_count">_step<wbr></wbr>_count</a></code></td>
-    <td>A nonnegative integer that signifies how many steps have been taken, i.e., how many times an action has been executed, in each of the episodes from the current batch. When this number becomes <code><a href="rl_graph_theory.environments.global_environments.GlobalSetEnvironment.html#episode_length" class="internal-link" title="rl_graph_theory.environments.global_environments.GlobalSetEnvironment.episode_length">episode_length</a></code>...</td>
+    <td>Either <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, or a nonnegative integer that signifies how many steps have been taken, i.e., how many times an action has been executed, in each of the episodes from the current batch. When this number becomes ...</td>
   </tr>
 </table>
           
@@ -969,10 +969,12 @@ vectors, i.e., the number <tt class="rst-docutils rst-literal">(_edge_colors - 1
   </div>
   <div class="functionBody">
     
-    <div><p>A nonnegative integer that signifies how many steps have been taken, i.e.,
-how many times an action has been executed, in each of the episodes from the current batch.
-When this number becomes <code><a href="#episode_length" class="internal-link" title="rl_graph_theory.environments.global_environments.GlobalSetEnvironment.episode_length">episode_length</a></code>, this indicates that a final state has been
-reached and that the episode has been truncated.</p></div>
+    <div><p>Either <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, or a nonnegative integer that signifies how many steps have
+been taken, i.e., how many times an action has been executed, in each of the episodes from
+the current batch. When this number becomes <code><a href="#episode_length" class="internal-link" title="rl_graph_theory.environments.global_environments.GlobalSetEnvironment.episode_length">episode_length</a></code>, this indicates that a final
+state has been reached and that the episode has been truncated. This attribute is initially
+set to <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, and afterwards, it is assigned the necessary <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> value after each
+invocation of the <code><a href="#reset_batch" class="internal-link" title="rl_graph_theory.environments.global_environments.GlobalSetEnvironment.reset_batch">reset_batch</a></code> or <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html#step_batch" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment.step_batch">GraphEnvironment.step_batch</a></code> method.</p></div>
     
   </div>
 </div>
@@ -987,7 +989,7 @@ reached and that the episode has been truncated.</p></div>
   <div class="container-fluid">
     <a href="index.html">API Documentation</a> for rl-graph-theory,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    25.10.1 at 2025-12-27 18:01:13.
+    25.10.1 at 2025-12-29 22:09:07.
   </div>
 
   <!-- Search related scripts needs to be loaded at the end of HTML 
