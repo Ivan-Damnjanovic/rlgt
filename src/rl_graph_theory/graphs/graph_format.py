@@ -1,5 +1,9 @@
 """
-#TODO
+This ``Python`` module contains the `GraphFormat` enumeration, which encapsulates the concept of a
+format used to represent a $k$-edge-colored looped complete graph. The module additionally contains
+the `BitmaskType` enumeration, which encapsulates the concept of a bitmask type in the context of
+the two bitmask formats, and the `FlattenedOrdering` enumeration, which encapsulates the concept of
+an edge (resp. arc) ordering in the context of the two flattened graph formats.
 """
 
 from enum import Enum
@@ -11,49 +15,59 @@ class GraphFormat(Enum):
     looped complete graph. Each graph is essentially represented as a quintuple ``(edge_colors,
     is_directed, allow_loops, graph_format, format_representation)``, where:
 
-    * ``edge_colors`` is the number of proper edge (or arc) colors, i.e., the value $k$;
+    * ``edge_colors`` is the number of proper edge colors, i.e., the value $k$;
     * ``is_directed`` is a boolean that indicates whether the considered graph is a
       $k$-edge-colored looped complete directed graph or a $k$-edge-colored looped complete
       undirected graph;
     * ``allow_loops`` is a boolean that indicates whether the considered graph is allowed to have
-      loops (if loops are not allowed, then all the loops are removed from the considered complete
-      graph and they simply do not exist);
+      loops (if loops are not allowed, then all the loops are removed from the considered looped
+      complete graph and they simply do not exist);
     * ``graph_format`` is an item of this enumeration that describes the graph format that should
       be used to represent the structure of the considered graph; and
-    * ``format_representation`` is a `np.ndarray` that represents the structure of the considered
-      graph in the chosen graph format.
+    * ``format_representation`` is a `numpy.ndarray` that represents the structure of the
+      considered graph in the chosen graph format.
 
     The enumeration provides support for the following five graph formats:
 
+    1. the bitmask format for the out-neighborhoods;
+    2. the bitmask format for the in-neighborhoods;
+    3. the adjacency matrix format;
+    4. the flattened row-major format; and
+    5. the flattened clockwise format.
+
+    All of these formats require that the value $k$ be at most 255. Additionally, the two bitmask
+    formats can only be used if the graph order is at most 64.
+
     :cvar BITMASK_OUT: The bitmask format for the out-neighborhoods. Here, the graph structure is
-        represented through a `np.ndarray` integer matrix ``a`` with $k$ rows and $n$ columns,
-        where $n$ is the graph order. The value ``a[i, j]`` represents a nonnegative integer whose
-        $k$-th bit indicates whether the edge (resp. arc) from the vertex $j$ to the vertex $k$ is
-        of the color $i$. If loops are not allowed, then the $j$-bit of ``a[i, j]`` is just zero.
-        Additionally, if the graph is fully colored, then the starting row (corresponding to the
-        color 0) of the said `np.ndarray` matrix is omitted, and we refer to this format as a
-        reduced bitmask format.
+        represented through a `numpy.ndarray` matrix ``a`` of type `numpy.uint64` with $k$ rows and
+        $n$ columns, where $n$ is the graph order. The value ``a[i, j]`` represents a nonnegative
+        integer whose $k$-th bit indicates whether the edge (resp. arc) from the vertex $j$ to the
+        vertex $k$ is of the color $i$. If loops are not allowed, then the $j$-bit of ``a[i, j]``
+        is just zero. Additionally, if the graph is fully colored, then the starting row
+        (corresponding to the color 0) of the said `numpy.ndarray` matrix is omitted, and we refer
+        to this format as a reduced bitmask format.
     :cvar BITMASK_IN: The bitmask format for the in-neighborhoods. Here, the graph structure is
-        represented through a `np.ndarray` integer matrix ``a`` with $k$ rows and $n$ columns,
-        where $n$ is the graph order. The value ``a[i, j]`` represents a nonnegative integer whose
-        $k$-th bit indicates whether the edge (resp. arc) from the vertex $k$ to the vertex $j$ is
-        of the color $i$. If loops are not allowed, then the $j$-bit of ``a[i, j]`` is just zero.
-        Additionally, if the graph is fully colored, then the starting row (corresponding to the
-        color 0) of the said `np.ndarray` matrix is omitted, and we refer to this format as a
-        reduced bitmask format.
+        represented through a `numpy.ndarray` matrix ``a`` of type `numpy.uint64` with $k$ rows and
+        $n$ columns, where $n$ is the graph order. The value ``a[i, j]`` represents a nonnegative
+        integer whose $k$-th bit indicates whether the edge (resp. arc) from the vertex $k$ to the
+        vertex $j$ is of the color $i$. If loops are not allowed, then the $j$-bit of ``a[i, j]``
+        is just zero. Additionally, if the graph is fully colored, then the starting row
+        (corresponding to the color 0) of the said `numpy.ndarray` matrix is omitted, and we refer
+        to this format as a reduced bitmask format.
     :cvar ADJACENCY_MATRIX: The adjacency matrix format. Here, the graph structure is represented
-        through the adjacency matrix, i.e., a `np.ndarray` integer square matrix ``a`` with $n$
-        rows and columns, where $n$ is the graph order. The value ``a[i, j]`` represents the color
-        of the edge (resp. arc) from the vertex $i$ to the vertex $j$, with an uncolored edge
-        (resp. arc) being represented by the value $k$. If loops are not allowed, then the diagonal
-        entries of the adjacency matrix are all equal to zero.
+        through the adjacency matrix, i.e., a `numpy.ndarray` square matrix ``a`` of type
+        `numpy.uint8` with $n$ rows and columns, where $n$ is the graph order. The value
+        ``a[i, j]`` represents the color of the edge (resp. arc) from the vertex $i$ to the vertex
+        $j$, with an uncolored edge (resp. arc) being represented by the value $k$. If loops are
+        not allowed, then the diagonal entries of the adjacency matrix are all equal to zero.
     :cvar FLATTENED_ROW_MAJOR: The flattened row-major format. Here, the graph structure is
         represented through the adjacency matrix entries arranged in the row-major order. If the
         considered graph is directed and loops are not allowed, then the diagonal entries should be
         skipped when the entries are being arranged. If the considered graph is undirected, then
         only the entries from the upper triangular part of the adjacency matrix should be arranged
         in the row-major order (with or without the diagonal, depending on whether loops are
-        allowed). The arranged entries form a `np.ndarray` list of the required length.
+        allowed). The arranged entries form a `numpy.ndarray` list of type `numpy.uint8` of the
+        required length.
     :cvar FLATTENED_CLOCKWISE: The flattened clockwise format. Here, the graph structure is
         represented through the adjacency matrix entries arranged in the clockwise layer order,
         i.e., the order $(0, 0), (0, 1), (1, 1), (1, 0), (0, 2), (1, 2), (2, 2), (2, 1), (2, 0),
@@ -62,7 +76,7 @@ class GraphFormat(Enum):
         entries are being arranged. If the considered graph is undirected, then only the entries
         from the upper triangular part of the adjacency matrix should be arranged in the clockwise
         order (with or without the diagonal, depending on whether loops are allowed). The arranged
-        entries form a `np.ndarray` list of the required length.
+        entries form a `numpy.ndarray` list of type `numpy.uint8` of the required length.
 
     :note: If the graph is undirected, then the bitmask format for the out-neighborhoods and the
         bitmask format for the in-neighborhoods are the same. Also, if the graph is undirected,

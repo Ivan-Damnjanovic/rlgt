@@ -131,7 +131,37 @@
         
 
         
+            <div class="itemName"><code><a href="#create_choose_two_graph_generator" class="internal-link" title="rl_graph_theory.environments.graph_generators.create_choose_two_graph_generator">create<wbr></wbr>_choose<wbr></wbr>_two<wbr></wbr>_graph<wbr></wbr>_generator</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#create_edge_perturbation_graph_generator" class="internal-link" title="rl_graph_theory.environments.graph_generators.create_edge_perturbation_graph_generator">create<wbr></wbr>_edge<wbr></wbr>_perturbation<wbr></wbr>_graph<wbr></wbr>_generator</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
             <div class="itemName"><code><a href="#create_fixed_graph_generator" class="internal-link" title="rl_graph_theory.environments.graph_generators.create_fixed_graph_generator">create<wbr></wbr>_fixed<wbr></wbr>_graph<wbr></wbr>_generator</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#create_random_graph_generator" class="internal-link" title="rl_graph_theory.environments.graph_generators.create_random_graph_generator">create<wbr></wbr>_random<wbr></wbr>_graph<wbr></wbr>_generator</a></code>
             </div>
         
 
@@ -214,6 +244,16 @@
             </div>
         
 
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="rl_graph_theory.environments.local_environments.html" class="internal-link" title="rl_graph_theory.environments.local_environments">local<wbr></wbr>_environments</a></code>
+            </div>
+        
+
     </li>
 </ul> 
 
@@ -266,7 +306,9 @@
         </div>
 
         <div class="moduleDocstring">
-          <div><p>#TODO</p></div>
+          <div><p>This <tt class="rst-docutils rst-literal">Python</tt> module contains several functions that create graph generator functions, which rely
+on various mechanisms to construct batches of fully colored $k$-edge-colored looped complete graphs
+of a given batch size.</p></div>
         </div>
 
         <div id="split-tables">
@@ -276,13 +318,28 @@
   <tr class="function">
     
     <td>Function</td>
+    <td><code><a href="#create_choose_two_graph_generator" class="internal-link" title="rl_graph_theory.environments.graph_generators.create_choose_two_graph_generator">create<wbr></wbr>_choose<wbr></wbr>_two<wbr></wbr>_graph<wbr></wbr>_generator</a></code></td>
+    <td>This function creates a <code><a href="rl_graph_theory.environments.graph_generators.html#GraphGenerator" class="internal-link" title="rl_graph_theory.environments.graph_generators.GraphGenerator">GraphGenerator</a></code> function that outputs batches of fully colored $k$-edge-colored looped complete graphs where all the graphs are equal to one of the two provided graphs. These two provided graphs are selectable and each of the graphs in the output batch is assigned to be equal to one of these two graphs with respect to a given probability...</td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#create_edge_perturbation_graph_generator" class="internal-link" title="rl_graph_theory.environments.graph_generators.create_edge_perturbation_graph_generator">create<wbr></wbr>_edge<wbr></wbr>_perturbation<wbr></wbr>_graph<wbr></wbr>_generator</a></code></td>
+    <td>This function creates a <code><a href="rl_graph_theory.environments.graph_generators.html#GraphGenerator" class="internal-link" title="rl_graph_theory.environments.graph_generators.GraphGenerator">GraphGenerator</a></code> function that outputs batches of fully colored $k$-edge-colored looped complete graphs where all the graphs are initially equal to some provided graph, and then an edge (resp...</td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
     <td><code><a href="#create_fixed_graph_generator" class="internal-link" title="rl_graph_theory.environments.graph_generators.create_fixed_graph_generator">create<wbr></wbr>_fixed<wbr></wbr>_graph<wbr></wbr>_generator</a></code></td>
-    <td>#TODO</td>
+    <td>This function creates a <code><a href="rl_graph_theory.environments.graph_generators.html#GraphGenerator" class="internal-link" title="rl_graph_theory.environments.graph_generators.GraphGenerator">GraphGenerator</a></code> function that outputs batches of fully colored $k$-edge-colored looped complete graphs where all the graphs are equal to some provided graph. This provided graph is selectable and the user can also configure the starting graph format that the output batch of graphs should get initialized in.</td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#create_random_graph_generator" class="internal-link" title="rl_graph_theory.environments.graph_generators.create_random_graph_generator">create<wbr></wbr>_random<wbr></wbr>_graph<wbr></wbr>_generator</a></code></td>
+    <td>This function creates a <code><a href="rl_graph_theory.environments.graph_generators.html#GraphGenerator" class="internal-link" title="rl_graph_theory.environments.graph_generators.GraphGenerator">GraphGenerator</a></code> function that outputs batches of fully colored $k$-edge-colored looped complete graphs where all the graphs are randomly generated. More precisely, each edge (resp...</td>
   </tr><tr class="typealias">
     
     <td>Type Alias</td>
     <td><code><a href="#GraphGenerator" class="internal-link" title="rl_graph_theory.environments.graph_generators.GraphGenerator"><wbr></wbr>Graph<wbr></wbr>Generator</a></code></td>
-    <td><span class="rst-undocumented">Undocumented</span></td>
+    <td>This is the type alias for the graph generator functions, which accept one integer argument that represents the batch size, and output a <code><a href="rl_graph_theory.graphs.graph_batch.GraphBatch.html" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch">GraphBatch</a></code> object that represents the generated batch of fully colored $k$-edge-colored looped complete graphs of the given batch size...</td>
   </tr>
 </table>
           
@@ -292,6 +349,97 @@
 
         <div id="child-list">
           <div class="basefunction">
+  
+  
+  <a name="rl_graph_theory.environments.graph_generators.create_choose_two_graph_generator">
+    
+  </a>
+  <a name="create_choose_two_graph_generator">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">create_choose_two_graph_generator</span><span class="function-signature long-signature">(<span class="rst-sig-param">first_graph: <code><a href="rl_graph_theory.graphs.graph.Graph.html" class="internal-link" title="rl_graph_theory.graphs.graph.Graph">Graph</a></code>, </span><span class="rst-sig-param">second_graph: <code><a href="rl_graph_theory.graphs.graph.Graph.html" class="internal-link" title="rl_graph_theory.graphs.graph.Graph">Graph</a></code>, </span><span class="rst-sig-param">second_graph_probability: <code><a href="https://docs.python.org/3/library/functions.html#float" class="intersphinx-link">float</a></code>, </span><span class="rst-sig-param">graph_format=<a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#FLATTENED_ROW_MAJOR" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.FLATTENED_ROW_MAJOR">GraphFormat.FLATTENED_ROW_MAJOR</a>, </span><span class="rst-sig-param">rng: <code><a href="https://numpy.org/doc/stable/reference/random/generator.html#numpy.random.Generator" class="intersphinx-link">np.random.Generator</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> = <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></span>) -&gt; <code><a href="#GraphGenerator" class="internal-link" title="rl_graph_theory.environments.graph_generators.GraphGenerator">GraphGenerator</a></code>:</span>
+    
+    <a class="headerLink" href="#create_choose_two_graph_generator" title="rl_graph_theory.environments.graph_generators.create_choose_two_graph_generator">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>This function creates a <code><a href="#GraphGenerator" class="internal-link" title="rl_graph_theory.environments.graph_generators.GraphGenerator">GraphGenerator</a></code> function that outputs batches of fully colored
+$k$-edge-colored looped complete graphs where all the graphs are equal to one of the two
+provided graphs. These two provided graphs are selectable and each of the graphs in the output
+batch is assigned to be equal to one of these two graphs with respect to a given probability.
+The two provided graphs must have the same number of proper edges colors, the same order and
+the same type: they should both be directed or both be undirected, and they should both either
+all allow loops or not allow loops. The user can also configure the starting graph format that
+the output batch of graphs should get initialized in.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">first<wbr></wbr>_graph:</span><code><a href="rl_graph_theory.graphs.graph.Graph.html" class="internal-link" title="rl_graph_theory.graphs.graph.Graph">Graph</a></code></td><td class="fieldArgDesc">A <code><a href="rl_graph_theory.graphs.graph.Graph.html" class="internal-link" title="rl_graph_theory.graphs.graph.Graph">Graph</a></code> object that represents the first provided graph that the graphs
+in the output batch could be equal to. This graph must be fully colored.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">second<wbr></wbr>_graph:</span><code><a href="rl_graph_theory.graphs.graph.Graph.html" class="internal-link" title="rl_graph_theory.graphs.graph.Graph">Graph</a></code></td><td class="fieldArgDesc">A <code><a href="rl_graph_theory.graphs.graph.Graph.html" class="internal-link" title="rl_graph_theory.graphs.graph.Graph">Graph</a></code> object that represents the second provided graph that the graphs
+in the output batch could be equal to. This graph must be fully colored.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">second<wbr></wbr>_graph<wbr></wbr>_probability:</span><code><a href="https://docs.python.org/3/library/functions.html#float" class="intersphinx-link">float</a></code></td><td class="fieldArgDesc">A <code><a href="https://docs.python.org/3/library/functions.html#float" class="intersphinx-link">float</a></code> from the interval $[0, 1]$ that describes the
+probability of each graph from the output batch to be assigned to be equal to the second
+provided graph.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">graph<wbr></wbr>_format</span></td><td class="fieldArgDesc">The starting graph format that the output batch of graphs should get
+initialized in, given as an item of the <code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat">GraphFormat</a></code> enumeration. The default value is
+<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#FLATTENED_ROW_MAJOR" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.FLATTENED_ROW_MAJOR">GraphFormat.FLATTENED_ROW_MAJOR</a></code>, i.e., the output batch should get initialized in the
+flattened row-major format by default.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">rng:</span><code><a href="https://numpy.org/doc/stable/reference/random/generator.html#numpy.random.Generator" class="intersphinx-link">np.random.Generator</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code></td><td class="fieldArgDesc">Either <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, or the <code><a href="https://numpy.org/doc/stable/reference/random/generator.html#numpy.random.Generator" class="intersphinx-link">numpy.random.Generator</a></code> object that represents the random
+number generator used for all the probabilistic decisions. If this argument is <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, then
+a default <code><a href="https://numpy.org/doc/stable/reference/random/generator.html#numpy.random.Generator" class="intersphinx-link">numpy.random.Generator</a></code> object will be used. The default value is <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>.</td></tr></table><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="#GraphGenerator" class="internal-link" title="rl_graph_theory.environments.graph_generators.GraphGenerator">GraphGenerator</a></code></td><td class="fieldArgDesc">The created <code><a href="#GraphGenerator" class="internal-link" title="rl_graph_theory.environments.graph_generators.GraphGenerator">GraphGenerator</a></code> function.</td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="rl_graph_theory.environments.graph_generators.create_edge_perturbation_graph_generator">
+    
+  </a>
+  <a name="create_edge_perturbation_graph_generator">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">create_edge_perturbation_graph_generator</span><span class="function-signature long-signature">(<span class="rst-sig-param">initial_graph: <code><a href="rl_graph_theory.graphs.graph.Graph.html" class="internal-link" title="rl_graph_theory.graphs.graph.Graph">Graph</a></code>, </span><span class="rst-sig-param">edge_perturbation_probability: <code><a href="https://docs.python.org/3/library/functions.html#float" class="intersphinx-link">float</a></code>, </span><span class="rst-sig-param">color_selection_probabilities: <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a> | <a href="https://docs.python.org/3/library/functions.html#float" class="intersphinx-link">float</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> = <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>, </span><span class="rst-sig-param">flattened_ordering: <code><a href="rl_graph_theory.graphs.graph_format.FlattenedOrdering.html" class="internal-link" title="rl_graph_theory.graphs.graph_format.FlattenedOrdering">FlattenedOrdering</a></code> = <a href="rl_graph_theory.graphs.graph_format.FlattenedOrdering.html#ROW_MAJOR" class="internal-link" title="rl_graph_theory.graphs.graph_format.FlattenedOrdering.ROW_MAJOR">FlattenedOrdering.ROW_MAJOR</a>, </span><span class="rst-sig-param">rng: <code><a href="https://numpy.org/doc/stable/reference/random/generator.html#numpy.random.Generator" class="intersphinx-link">np.random.Generator</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> = <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></span>) -&gt; <code><a href="#GraphGenerator" class="internal-link" title="rl_graph_theory.environments.graph_generators.GraphGenerator">GraphGenerator</a></code>:</span>
+    
+    <a class="headerLink" href="#create_edge_perturbation_graph_generator" title="rl_graph_theory.environments.graph_generators.create_edge_perturbation_graph_generator">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>This function creates a <code><a href="#GraphGenerator" class="internal-link" title="rl_graph_theory.environments.graph_generators.GraphGenerator">GraphGenerator</a></code> function that outputs batches of fully colored
+$k$-edge-colored looped complete graphs where all the graphs are initially equal to some
+provided graph, and then an edge (resp. arc) perturbation is performed with a given
+probability. The edge (resp. arc) perturbation consists of recoloring the edge (resp. arc) with
+a randomly chosen color between 0 and $k - 1$ with respect to a given discrete probability
+distribution. Here, the value $k$ is extracted from the provided initial graph. The output
+batch of graphs is initialized in one of the two flattened graph formats, and the user can
+configure which of these two formats should get used.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">initial<wbr></wbr>_graph:</span><code><a href="rl_graph_theory.graphs.graph.Graph.html" class="internal-link" title="rl_graph_theory.graphs.graph.Graph">Graph</a></code></td><td class="fieldArgDesc">A <code><a href="rl_graph_theory.graphs.graph.Graph.html" class="internal-link" title="rl_graph_theory.graphs.graph.Graph">Graph</a></code> object that represents the provided graph that all the graphs
+in the output batch should get initialized to, before the edge (resp. arc) perturbation is
+performed. This graph must be fully colored.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">edge<wbr></wbr>_perturbation<wbr></wbr>_probability:</span><code><a href="https://docs.python.org/3/library/functions.html#float" class="intersphinx-link">float</a></code></td><td class="fieldArgDesc">A <code><a href="https://docs.python.org/3/library/functions.html#float" class="intersphinx-link">float</a></code> from the interval $[0, 1]$ that describes the
+probability of each edge (resp. arc) from each of the graphs in the output batch to be
+subjected to an edge (resp. arc) perturbation.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">color<wbr></wbr>_selection<wbr></wbr>_probabilities:</span><code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a> | <a href="https://docs.python.org/3/library/functions.html#float" class="intersphinx-link">float</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code></td><td class="fieldArgDesc">Either a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> list of type <code><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.floating" class="intersphinx-link">numpy.floating</a></code>, a
+<code><a href="https://docs.python.org/3/library/functions.html#float" class="intersphinx-link">float</a></code> value, or <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>. This argument is used to describe the discrete probability
+distribution for coloring the edges (resp. arcs) that are subjected to a perturbation. If
+the argument is a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> list, then the length of this list must be the same as
+the number of proper edge colors in the <tt class="rst-docutils rst-literal">initial_graph</tt> object, and the list entries must
+be nonnegative numbers that sum up to 1. These entries are then used as the probabilities
+for each of the edge colors to be selected, in the ascending order. Alternatively, if the
+<tt class="rst-docutils rst-literal">initial_graph</tt> object has two proper edge colors, then this argument can also be a
+<code><a href="https://docs.python.org/3/library/functions.html#float" class="intersphinx-link">float</a></code> that represents the probability for the color 1 to be selected. Finally, the
+argument can also be <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, in which case, the uniform probability distribution is used,
+regardless of the number of proper edge colors in the <tt class="rst-docutils rst-literal">initial_graph</tt> object. The default
+value is <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">flattened<wbr></wbr>_ordering:</span><code><a href="rl_graph_theory.graphs.graph_format.FlattenedOrdering.html" class="internal-link" title="rl_graph_theory.graphs.graph_format.FlattenedOrdering">FlattenedOrdering</a></code></td><td class="fieldArgDesc">An item of the <code><a href="rl_graph_theory.graphs.graph_format.FlattenedOrdering.html" class="internal-link" title="rl_graph_theory.graphs.graph_format.FlattenedOrdering">FlattenedOrdering</a></code> enumeration that describes which
+of the two flattened graph formats should be used to initialize the output batch of graphs.
+The default value is <code><a href="rl_graph_theory.graphs.graph_format.FlattenedOrdering.html#ROW_MAJOR" class="internal-link" title="rl_graph_theory.graphs.graph_format.FlattenedOrdering.ROW_MAJOR">FlattenedOrdering.ROW_MAJOR</a></code>, i.e., the output batch should get
+initialized in the flattened row-major format by default.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">rng:</span><code><a href="https://numpy.org/doc/stable/reference/random/generator.html#numpy.random.Generator" class="intersphinx-link">np.random.Generator</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code></td><td class="fieldArgDesc">Either <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, or the <code><a href="https://numpy.org/doc/stable/reference/random/generator.html#numpy.random.Generator" class="intersphinx-link">numpy.random.Generator</a></code> object that represents the random
+number generator used for all the probabilistic decisions. If this argument is <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, then
+a default <code><a href="https://numpy.org/doc/stable/reference/random/generator.html#numpy.random.Generator" class="intersphinx-link">numpy.random.Generator</a></code> object will be used. The default value is <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>.</td></tr></table><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="#GraphGenerator" class="internal-link" title="rl_graph_theory.environments.graph_generators.GraphGenerator">GraphGenerator</a></code></td><td class="fieldArgDesc">The created <code><a href="#GraphGenerator" class="internal-link" title="rl_graph_theory.environments.graph_generators.GraphGenerator">GraphGenerator</a></code> function.</td></tr></table></div>
+  </div>
+</div><div class="basefunction">
   
   
   <a name="rl_graph_theory.environments.graph_generators.create_fixed_graph_generator">
@@ -313,7 +461,69 @@
   </div>
   <div class="docstring functionBody">
     
-    <div><p>#TODO</p></div>
+    <div><p>This function creates a <code><a href="#GraphGenerator" class="internal-link" title="rl_graph_theory.environments.graph_generators.GraphGenerator">GraphGenerator</a></code> function that outputs batches of fully colored
+$k$-edge-colored looped complete graphs where all the graphs are equal to some provided graph.
+This provided graph is selectable and the user can also configure the starting graph format
+that the output batch of graphs should get initialized in.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">fixed<wbr></wbr>_graph:</span><code><a href="rl_graph_theory.graphs.graph.Graph.html" class="internal-link" title="rl_graph_theory.graphs.graph.Graph">Graph</a></code></td><td class="fieldArgDesc">A <code><a href="rl_graph_theory.graphs.graph.Graph.html" class="internal-link" title="rl_graph_theory.graphs.graph.Graph">Graph</a></code> object that represents the provided graph that all the graphs in
+the output batch should be equal to. This graph must be fully colored.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">graph<wbr></wbr>_format:</span><code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat">GraphFormat</a></code></td><td class="fieldArgDesc">The starting graph format that the output batch of graphs should get
+initialized in, given as an item of the <code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat">GraphFormat</a></code> enumeration. The default value is
+<code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html#FLATTENED_ROW_MAJOR" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat.FLATTENED_ROW_MAJOR">GraphFormat.FLATTENED_ROW_MAJOR</a></code>, i.e., the output batch should get initialized in the
+flattened row-major format by default.</td></tr></table><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="#GraphGenerator" class="internal-link" title="rl_graph_theory.environments.graph_generators.GraphGenerator">GraphGenerator</a></code></td><td class="fieldArgDesc">The created <code><a href="#GraphGenerator" class="internal-link" title="rl_graph_theory.environments.graph_generators.GraphGenerator">GraphGenerator</a></code> function.</td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="rl_graph_theory.environments.graph_generators.create_random_graph_generator">
+    
+  </a>
+  <a name="create_random_graph_generator">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">create_random_graph_generator</span><span class="function-signature long-signature">(<span class="rst-sig-param">graph_order: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code>, </span><span class="rst-sig-param">color_selection_probabilities: <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a> | <a href="https://docs.python.org/3/library/functions.html#float" class="intersphinx-link">float</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> = <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>, </span><span class="rst-sig-param">flattened_ordering: <code><a href="rl_graph_theory.graphs.graph_format.FlattenedOrdering.html" class="internal-link" title="rl_graph_theory.graphs.graph_format.FlattenedOrdering">FlattenedOrdering</a></code> = <a href="rl_graph_theory.graphs.graph_format.FlattenedOrdering.html#ROW_MAJOR" class="internal-link" title="rl_graph_theory.graphs.graph_format.FlattenedOrdering.ROW_MAJOR">FlattenedOrdering.ROW_MAJOR</a>, </span><span class="rst-sig-param">edge_colors: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> = 2, </span><span class="rst-sig-param">is_directed: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> = <a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a>, </span><span class="rst-sig-param">allow_loops: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> = <a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a>, </span><span class="rst-sig-param">rng: <code><a href="https://numpy.org/doc/stable/reference/random/generator.html#numpy.random.Generator" class="intersphinx-link">np.random.Generator</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> = <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></span>):</span>
+    
+    <a class="headerLink" href="#create_random_graph_generator" title="rl_graph_theory.environments.graph_generators.create_random_graph_generator">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>This function creates a <code><a href="#GraphGenerator" class="internal-link" title="rl_graph_theory.environments.graph_generators.GraphGenerator">GraphGenerator</a></code> function that outputs batches of fully colored
+$k$-edge-colored looped complete graphs where all the graphs are randomly generated. More
+precisely, each edge (resp. arc) from each graph is colored with a randomly chosen color
+between 0 and $k - 1$ with respect to a given discrete probability distribution. The graph
+order of all the graphs in the batch is configurable, as well as the number of proper edge
+colors in the generated batch. The user can also select whether the graphs in the batch should
+be directed or undirected, and whether they should be allowed to have loops. The output batch
+of graphs is initialized in one of the two flattened graph formats, and the user can also
+configure which of these two formats should get used.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">graph<wbr></wbr>_order:</span><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></td><td class="fieldArgDesc">An <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> that represents the graph order of all the graphs in the batch
+that should be generated.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">color<wbr></wbr>_selection<wbr></wbr>_probabilities:</span><code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a> | <a href="https://docs.python.org/3/library/functions.html#float" class="intersphinx-link">float</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code></td><td class="fieldArgDesc">Either a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> list of type <code><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.floating" class="intersphinx-link">numpy.floating</a></code>, a
+<code><a href="https://docs.python.org/3/library/functions.html#float" class="intersphinx-link">float</a></code> value, or <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>. This argument is used to describe the discrete probability
+distribution for coloring each of the edges (resp. arcs) from the graphs in the output
+batch. If the argument is a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> list, then the length of this list must be the
+same as the number of proper edge colors in the generated batch, i.e., the <tt class="rst-docutils rst-literal">edge_colors</tt>
+argument, and the list entries must be nonnegative numbers that sum up to 1. These entries
+are then used as the probabilities for each of the edge colors to be selected, in the
+ascending order. Alternatively, if the <tt class="rst-docutils rst-literal">edge_colors</tt> argument is two, then this argument
+can also be a <code><a href="https://docs.python.org/3/library/functions.html#float" class="intersphinx-link">float</a></code> that represents the probability for the color 1 to be selected.
+Finally, the argument can also be <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, in which case, the uniform probability
+distribution is used, regardless of the value of the <tt class="rst-docutils rst-literal">edge_colors</tt> argument. The default
+value is <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">flattened<wbr></wbr>_ordering:</span><code><a href="rl_graph_theory.graphs.graph_format.FlattenedOrdering.html" class="internal-link" title="rl_graph_theory.graphs.graph_format.FlattenedOrdering">FlattenedOrdering</a></code></td><td class="fieldArgDesc">An item of the <code><a href="rl_graph_theory.graphs.graph_format.FlattenedOrdering.html" class="internal-link" title="rl_graph_theory.graphs.graph_format.FlattenedOrdering">FlattenedOrdering</a></code> enumeration that describes which
+of the two flattened graph formats should be used to initialize the output batch of graphs.
+The default value is <code><a href="rl_graph_theory.graphs.graph_format.FlattenedOrdering.html#ROW_MAJOR" class="internal-link" title="rl_graph_theory.graphs.graph_format.FlattenedOrdering.ROW_MAJOR">FlattenedOrdering.ROW_MAJOR</a></code>, i.e., the output batch should get
+initialized in the flattened row-major format by default.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">edge<wbr></wbr>_colors:</span><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></td><td class="fieldArgDesc">A positive integer (not below two) that represents the number of proper
+edge colors, i.e., $k$, in the output batch of graphs. The default value is two.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">is<wbr></wbr>_directed:</span><code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code></td><td class="fieldArgDesc">A boolean that indicates whether each of the graphs in the generated batch
+should be a $k$-edge-colored looped complete directed graph or a $k$-edge-colored looped
+complete undirected graph. The default value is <code><a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a></code>, i.e., the graphs are undirected by
+default.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">allow<wbr></wbr>_loops:</span><code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code></td><td class="fieldArgDesc">A boolean that indicates whether each of the graphs in the generated batch
+should be allowed to have loops. The default value is <code><a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a></code>, i.e., the graphs are not
+allowed to have loops by default.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">rng:</span><code><a href="https://numpy.org/doc/stable/reference/random/generator.html#numpy.random.Generator" class="intersphinx-link">np.random.Generator</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code></td><td class="fieldArgDesc">Either <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, or the <code><a href="https://numpy.org/doc/stable/reference/random/generator.html#numpy.random.Generator" class="intersphinx-link">numpy.random.Generator</a></code> object that represents the random
+number generator used for all the probabilistic decisions. If this argument is <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, then
+a default <code><a href="https://numpy.org/doc/stable/reference/random/generator.html#numpy.random.Generator" class="intersphinx-link">numpy.random.Generator</a></code> object will be used. The default value is <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>.</td></tr></table><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2">The created <code><a href="#GraphGenerator" class="internal-link" title="rl_graph_theory.environments.graph_generators.GraphGenerator">GraphGenerator</a></code> function.</td></tr></table></div>
   </div>
 </div><div class="basetypealias">
   
@@ -336,7 +546,11 @@
   </div>
   <div class="functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p>This is the type alias for the graph generator functions, which accept one integer argument that
+represents the batch size, and output a <code><a href="rl_graph_theory.graphs.graph_batch.GraphBatch.html" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch">GraphBatch</a></code> object that represents the generated batch of
+fully colored $k$-edge-colored looped complete graphs of the given batch size. The graphs in the
+batch are generated through some internal mechanism defined by the generator function. The
+generation process need not be deterministic.</p></div>
     <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="https://docs.python.org/3/library/typing.html#typing.Callable" class="intersphinx-link">Callable</a>[<wbr></wbr>[<wbr></wbr><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a>], <wbr></wbr><a href="rl_graph_theory.graphs.graph_batch.GraphBatch.html" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch">GraphBatch</a>]</code></pre></td></tr></table>
   </div>
 </div>
@@ -351,7 +565,7 @@
   <div class="container-fluid">
     <a href="index.html">API Documentation</a> for rl-graph-theory,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    25.10.1 at 2025-12-21 20:53:06.
+    25.10.1 at 2025-12-27 18:01:13.
   </div>
 
   <!-- Search related scripts needs to be loaded at the end of HTML 
