@@ -147,7 +147,7 @@
             <div class="type">Module</div>
             <div class="kind">Module</div>
             <div class="privacy">PUBLIC</div>
-            <div class="summary">This <tt class="rst-docutils rst-literal">Python</tt> module contains three linear reinforcement learning environments, which inherit from the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code> class and model graph-building games where the edges (resp. arcs) are all initially either uncolored, or fully colored in some predetermined manner, and are then (re)colored one by one, either in the flattened row-major order or the flattened clockwise order.</div>
+            <div class="summary">This <tt class="rst-docutils rst-literal">Python</tt> module contains three linear reinforcement learning environments, which inherit from the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code> class and model graph-building games where the edges (resp. arcs) are all initially either uncolored, or fully colored in some predetermined manner, and are then properly (re)colored one by one, either in the flattened row-major order or the flattened clockwise order.</div>
           </li><li id="rl_graph_theory.environments.local_environments">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.local<wbr></wbr>_environments</div>
@@ -155,7 +155,7 @@
             <div class="type">Module</div>
             <div class="kind">Module</div>
             <div class="privacy">PUBLIC</div>
-            <div class="summary">#TODO</div>
+            <div class="summary">This <tt class="rst-docutils rst-literal">Python</tt> module contains two local reinforcement learning environments, which inherit from the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code> class and model graph-building games where the edges (resp. arcs) are all initially fully colored in some predetermined manner, and the agent moves from one vertex to another in some way, thereby traversing the existing edges (resp...</div>
           </li><li id="rl_graph_theory.graphs">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.graphs</div>
@@ -1157,7 +1157,7 @@ allow_loops, graph_format, format_representation)</tt>...</div>
             <div class="type">Attribute</div>
             <div class="kind">Instance Variable</div>
             <div class="privacy">PRIVATE</div>
-            <div class="summary">A nonnegative integer that signifies how many steps have been taken, i.e., how many times an action has been executed, in each of the episodes from the current batch. When this number becomes <code><a href="rl_graph_theory.environments.global_environments.GlobalSetEnvironment.html#episode_length" class="internal-link" title="rl_graph_theory.environments.global_environments.GlobalSetEnvironment.episode_length">episode_length</a></code>...</div>
+            <div class="summary">Either <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, or a nonnegative integer that signifies how many steps have been taken, i.e., how many times an action has been executed, in each of the episodes from the current batch. When this number becomes ...</div>
           </li><li id="rl_graph_theory.environments.global_environments.GlobalSetEnvironment.__init__">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.global<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Global<wbr></wbr>Set<wbr></wbr>Environment<wbr></wbr>.__init__</div>
@@ -1277,7 +1277,7 @@ allow_loops, graph_format, format_representation)</tt>...</div>
             <div class="type">Attribute</div>
             <div class="kind">Instance Variable</div>
             <div class="privacy">PRIVATE</div>
-            <div class="summary">A nonnegative integer that signifies how many steps have been taken, i.e., how many times an action has been executed, in each of the episodes from the current batch. When this number becomes <code><a href="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment.html#episode_length" class="internal-link" title="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment.episode_length">episode_length</a></code>...</div>
+            <div class="summary">Either <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, or a nonnegative integer that signifies how many steps have been taken, i.e., how many times an action has been executed, in each of the episodes from the current batch. When this number becomes ...</div>
           </li><li id="rl_graph_theory.environments.global_environments.GlobalFlipEnvironment.__init__">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.global<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Global<wbr></wbr>Flip<wbr></wbr>Environment<wbr></wbr>.__init__</div>
@@ -1317,7 +1317,7 @@ allow_loops, graph_format, format_representation)</tt>...</div>
             <div class="type">Class</div>
             <div class="kind">Class</div>
             <div class="privacy">PUBLIC</div>
-            <div class="summary">This class inherits from the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code> class and models a graph-building game in which the edges (resp. arcs) are all initially uncolored and are then colored one by one, either in the flattened row-major order or the flattened clockwise order...</div>
+            <div class="summary">This class inherits from the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code> class and models a graph-building game in which the edges (resp. arcs) are all initially uncolored and are then properly colored one by one, either in the flattened row-major order or the flattened clockwise order...</div>
           </li><li id="rl_graph_theory.environments.linear_environments.LinearBuildEnvironment._state_batch">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.linear<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Linear<wbr></wbr>Build<wbr></wbr>Environment<wbr></wbr>._state<wbr></wbr>_batch</div>
@@ -1365,7 +1365,7 @@ allow_loops, graph_format, format_representation)</tt>...</div>
             <div class="type">Attribute</div>
             <div class="kind">Instance Variable</div>
             <div class="privacy">PRIVATE</div>
-            <div class="summary">An item of the <code><a href="rl_graph_theory.graphs.graph_format.FlattenedOrdering.html" class="internal-link" title="rl_graph_theory.graphs.graph_format.FlattenedOrdering">FlattenedOrdering</a></code> enumeration that determines whether the edges (resp. arcs) should be colored in the flattened row-major order or the flattened clockwise order.</div>
+            <div class="summary">An item of the <code><a href="rl_graph_theory.graphs.graph_format.FlattenedOrdering.html" class="internal-link" title="rl_graph_theory.graphs.graph_format.FlattenedOrdering">FlattenedOrdering</a></code> enumeration that determines whether the edges (resp. arcs) should be properly colored in the flattened row-major order or the flattened clockwise order.</div>
           </li><li id="rl_graph_theory.environments.linear_environments.LinearBuildEnvironment._flattened_length">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.linear<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Linear<wbr></wbr>Build<wbr></wbr>Environment<wbr></wbr>._flattened<wbr></wbr>_length</div>
@@ -1389,7 +1389,7 @@ allow_loops, graph_format, format_representation)</tt>...</div>
             <div class="type">Attribute</div>
             <div class="kind">Instance Variable</div>
             <div class="privacy">PRIVATE</div>
-            <div class="summary">An integer between 0 and <code><a href="rl_graph_theory.environments.linear_environments.LinearBuildEnvironment.html#_flattened_length" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearBuildEnvironment._flattened_length">_flattened_length</a></code> that signifies the index of the next edge (resp. arc) to be colored, in the order determined by the <code><a href="rl_graph_theory.environments.linear_environments.LinearBuildEnvironment.html#_flattened_ordering" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearBuildEnvironment._flattened_ordering">_flattened_ordering</a></code> attribute. The value of <code><a href="rl_graph_theory.environments.linear_environments.LinearBuildEnvironment.html#_flattened_length" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearBuildEnvironment._flattened_length">_flattened_length</a></code>...</div>
+            <div class="summary">Either <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, or an integer between 0 and <code><a href="rl_graph_theory.environments.linear_environments.LinearBuildEnvironment.html#_flattened_length" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearBuildEnvironment._flattened_length">_flattened_length</a></code> that signifies the index of the next edge (resp. arc) to be properly colored, in the order determined by the <code><a href="rl_graph_theory.environments.linear_environments.LinearBuildEnvironment.html#_flattened_ordering" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearBuildEnvironment._flattened_ordering">_flattened_ordering</a></code> attribute. The value of ...</div>
           </li><li id="rl_graph_theory.environments.linear_environments.LinearBuildEnvironment.__init__">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.linear<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Linear<wbr></wbr>Build<wbr></wbr>Environment<wbr></wbr>.__init__</div>
@@ -1429,7 +1429,7 @@ allow_loops, graph_format, format_representation)</tt>...</div>
             <div class="type">Class</div>
             <div class="kind">Class</div>
             <div class="privacy">PUBLIC</div>
-            <div class="summary">This class inherits from the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code> class and models a graph-building game in which the edges (resp. arcs) are all initially fully colored in some manner and are then recolored one by one, either in the flattened row-major order or the flattened clockwise order...</div>
+            <div class="summary">This class inherits from the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code> class and models a graph-building game in which the edges (resp. arcs) are all initially fully colored in some manner and are then properly recolored one by one, either in the flattened row-major order or the flattened clockwise order...</div>
           </li><li id="rl_graph_theory.environments.linear_environments.LinearSetEnvironment._state_batch">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.linear<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Linear<wbr></wbr>Set<wbr></wbr>Environment<wbr></wbr>._state<wbr></wbr>_batch</div>
@@ -1477,7 +1477,7 @@ allow_loops, graph_format, format_representation)</tt>...</div>
             <div class="type">Attribute</div>
             <div class="kind">Instance Variable</div>
             <div class="privacy">PRIVATE</div>
-            <div class="summary">An item of the <code><a href="rl_graph_theory.graphs.graph_format.FlattenedOrdering.html" class="internal-link" title="rl_graph_theory.graphs.graph_format.FlattenedOrdering">FlattenedOrdering</a></code> enumeration that determines whether the edges (resp. arcs) should be recolored in the flattened row-major order or the flattened clockwise order.</div>
+            <div class="summary">An item of the <code><a href="rl_graph_theory.graphs.graph_format.FlattenedOrdering.html" class="internal-link" title="rl_graph_theory.graphs.graph_format.FlattenedOrdering">FlattenedOrdering</a></code> enumeration that determines whether the edges (resp. arcs) should be properly recolored in the flattened row-major order or the flattened clockwise order.</div>
           </li><li id="rl_graph_theory.environments.linear_environments.LinearSetEnvironment.initial_graph_generator">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.linear<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Linear<wbr></wbr>Set<wbr></wbr>Environment<wbr></wbr>.initial<wbr></wbr>_graph<wbr></wbr>_generator</div>
@@ -1509,7 +1509,7 @@ allow_loops, graph_format, format_representation)</tt>...</div>
             <div class="type">Attribute</div>
             <div class="kind">Instance Variable</div>
             <div class="privacy">PRIVATE</div>
-            <div class="summary">An integer between 0 and <code><a href="rl_graph_theory.environments.linear_environments.LinearSetEnvironment.html#_flattened_length" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment._flattened_length">_flattened_length</a></code> that signifies the index of the next edge (resp. arc) to be recolored, in the order determined by the <code><a href="rl_graph_theory.environments.linear_environments.LinearSetEnvironment.html#_flattened_ordering" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment._flattened_ordering">_flattened_ordering</a></code> attribute. The value of <code><a href="rl_graph_theory.environments.linear_environments.LinearSetEnvironment.html#_flattened_length" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment._flattened_length">_flattened_length</a></code>...</div>
+            <div class="summary">Either <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, or an integer between 0 and <code><a href="rl_graph_theory.environments.linear_environments.LinearSetEnvironment.html#_flattened_length" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment._flattened_length">_flattened_length</a></code> that signifies the index of the next edge (resp. arc) to be properly recolored, in the order determined by the <code><a href="rl_graph_theory.environments.linear_environments.LinearSetEnvironment.html#_flattened_ordering" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment._flattened_ordering">_flattened_ordering</a></code> attribute. ...</div>
           </li><li id="rl_graph_theory.environments.linear_environments.LinearSetEnvironment.__init__">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.linear<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Linear<wbr></wbr>Set<wbr></wbr>Environment<wbr></wbr>.__init__</div>
@@ -1613,7 +1613,7 @@ allow_loops, graph_format, format_representation)</tt>...</div>
             <div class="type">Attribute</div>
             <div class="kind">Instance Variable</div>
             <div class="privacy">PRIVATE</div>
-            <div class="summary">An integer between 0 and <code><a href="rl_graph_theory.environments.linear_environments.LinearFlipEnvironment.html#_flattened_length" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearFlipEnvironment._flattened_length">_flattened_length</a></code> that signifies the index of the next edge (resp. arc) to be potentially flipped, in the order determined by the <code><a href="rl_graph_theory.environments.linear_environments.LinearFlipEnvironment.html#_flattened_ordering" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearFlipEnvironment._flattened_ordering">_flattened_ordering</a></code> attribute. The value of <code><a href="rl_graph_theory.environments.linear_environments.LinearFlipEnvironment.html#_flattened_length" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearFlipEnvironment._flattened_length">_flattened_length</a></code>...</div>
+            <div class="summary">Either <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, or an integer between 0 and <code><a href="rl_graph_theory.environments.linear_environments.LinearFlipEnvironment.html#_flattened_length" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearFlipEnvironment._flattened_length">_flattened_length</a></code> that signifies the index of the next edge (resp. arc) to be potentially flipped, in the order determined by the <code><a href="rl_graph_theory.environments.linear_environments.LinearFlipEnvironment.html#_flattened_ordering" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearFlipEnvironment._flattened_ordering">_flattened_ordering</a></code> attribute. ...</div>
           </li><li id="rl_graph_theory.environments.linear_environments.LinearFlipEnvironment.__init__">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.linear<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Linear<wbr></wbr>Flip<wbr></wbr>Environment<wbr></wbr>.__init__</div>
@@ -1653,7 +1653,7 @@ allow_loops, graph_format, format_representation)</tt>...</div>
             <div class="type">Function</div>
             <div class="kind">Function</div>
             <div class="privacy">PRIVATE</div>
-            <div class="summary">Docstring for compute_edge_indices</div>
+            <div class="summary">This auxiliary function considers a $k$-edge-colored looped complete graph, and computes the index of each of the edges (resp. arcs) from a given list, with respect to the flattened row-major format or the flattened clockwise format, as described in the ...</div>
           </li><li id="rl_graph_theory.environments.local_environments.LocalSetEnvironment">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.local<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Local<wbr></wbr>Set<wbr></wbr>Environment</div>
@@ -1661,15 +1661,23 @@ allow_loops, graph_format, format_representation)</tt>...</div>
             <div class="type">Class</div>
             <div class="kind">Class</div>
             <div class="privacy">PUBLIC</div>
-            <div class="summary">#TODO</div>
-          </li><li id="rl_graph_theory.environments.local_environments.LocalSetEnvironment.__init__">
+            <div class="summary">This class inherits from the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code> class and models a graph-building game where the edges (resp. arcs) are all initially fully colored in some manner, and the agent moves from one vertex to another in some way, thereby traversing the existing edges (resp...</div>
+          </li><li id="rl_graph_theory.environments.local_environments.LocalSetEnvironment._state_batch">
             
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.local<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Local<wbr></wbr>Set<wbr></wbr>Environment<wbr></wbr>.__init__</div>
-            <div class="url">rl_graph_theory.environments.local_environments.LocalSetEnvironment.html#__init__</div>
-            <div class="type">Function</div>
-            <div class="kind">Method</div>
-            <div class="privacy">PUBLIC</div>
-            <div class="summary">#TODO</div>
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.local<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Local<wbr></wbr>Set<wbr></wbr>Environment<wbr></wbr>._state<wbr></wbr>_batch</div>
+            <div class="url">rl_graph_theory.environments.local_environments.LocalSetEnvironment.html#_state_batch</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Instance Variable</div>
+            <div class="privacy">PRIVATE</div>
+            <div class="summary">See the description of the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html#_state_batch" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment._state_batch">GraphEnvironment._state_batch</a></code> attribute.</div>
+          </li><li id="rl_graph_theory.environments.local_environments.LocalSetEnvironment._status">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.local<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Local<wbr></wbr>Set<wbr></wbr>Environment<wbr></wbr>._status</div>
+            <div class="url">rl_graph_theory.environments.local_environments.LocalSetEnvironment.html#_status</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Instance Variable</div>
+            <div class="privacy">PRIVATE</div>
+            <div class="summary">See the description of the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html#_status" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment._status">GraphEnvironment._status</a></code> attribute.</div>
           </li><li id="rl_graph_theory.environments.local_environments.LocalSetEnvironment._edge_colors">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.local<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Local<wbr></wbr>Set<wbr></wbr>Environment<wbr></wbr>._edge<wbr></wbr>_colors</div>
@@ -1677,7 +1685,7 @@ allow_loops, graph_format, format_representation)</tt>...</div>
             <div class="type">Attribute</div>
             <div class="kind">Instance Variable</div>
             <div class="privacy">PRIVATE</div>
-            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
+            <div class="summary">The number of proper edge colors in the graphs to be constructed.</div>
           </li><li id="rl_graph_theory.environments.local_environments.LocalSetEnvironment._is_directed">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.local<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Local<wbr></wbr>Set<wbr></wbr>Environment<wbr></wbr>._is<wbr></wbr>_directed</div>
@@ -1685,7 +1693,7 @@ allow_loops, graph_format, format_representation)</tt>...</div>
             <div class="type">Attribute</div>
             <div class="kind">Instance Variable</div>
             <div class="privacy">PRIVATE</div>
-            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
+            <div class="summary">A boolean that indicates whether the graphs to be constructed are a $k$-edge-colored looped complete directed graph or a $k$-edge-colored looped complete undirected graph.</div>
           </li><li id="rl_graph_theory.environments.local_environments.LocalSetEnvironment._allow_loops">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.local<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Local<wbr></wbr>Set<wbr></wbr>Environment<wbr></wbr>._allow<wbr></wbr>_loops</div>
@@ -1693,7 +1701,7 @@ allow_loops, graph_format, format_representation)</tt>...</div>
             <div class="type">Attribute</div>
             <div class="kind">Instance Variable</div>
             <div class="privacy">PRIVATE</div>
-            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
+            <div class="summary">A boolean that indicates whether the graphs to be constructed are allowed to have loops.</div>
           </li><li id="rl_graph_theory.environments.local_environments.LocalSetEnvironment._graph_order">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.local<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Local<wbr></wbr>Set<wbr></wbr>Environment<wbr></wbr>._graph<wbr></wbr>_order</div>
@@ -1701,7 +1709,7 @@ allow_loops, graph_format, format_representation)</tt>...</div>
             <div class="type">Attribute</div>
             <div class="kind">Instance Variable</div>
             <div class="privacy">PRIVATE</div>
-            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
+            <div class="summary">A positive integer that describes the order of the graphs to be constructed.</div>
           </li><li id="rl_graph_theory.environments.local_environments.LocalSetEnvironment._flattened_ordering">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.local<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Local<wbr></wbr>Set<wbr></wbr>Environment<wbr></wbr>._flattened<wbr></wbr>_ordering</div>
@@ -1709,7 +1717,7 @@ allow_loops, graph_format, format_representation)</tt>...</div>
             <div class="type">Attribute</div>
             <div class="kind">Instance Variable</div>
             <div class="privacy">PRIVATE</div>
-            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
+            <div class="summary">An item of the <code><a href="rl_graph_theory.graphs.graph_format.FlattenedOrdering.html" class="internal-link" title="rl_graph_theory.graphs.graph_format.FlattenedOrdering">FlattenedOrdering</a></code> enumeration that determines whether the edges (resp. arcs) should be arranged in the flattened row-major order or the flattened clockwise order.</div>
           </li><li id="rl_graph_theory.environments.local_environments.LocalSetEnvironment.initial_graph_generator">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.local<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Local<wbr></wbr>Set<wbr></wbr>Environment<wbr></wbr>.initial<wbr></wbr>_graph<wbr></wbr>_generator</div>
@@ -1717,7 +1725,15 @@ allow_loops, graph_format, format_representation)</tt>...</div>
             <div class="type">Attribute</div>
             <div class="kind">Instance Variable</div>
             <div class="privacy">PUBLIC</div>
-            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
+            <div class="summary">A <code><a href="rl_graph_theory.environments.graph_generators.html#GraphGenerator" class="internal-link" title="rl_graph_theory.environments.graph_generators.GraphGenerator">GraphGenerator</a></code> function that describes the mechanism for generating the underlying fully colored graphs for the states in the batch of initial states. It is possible to re-configure this attribute between two independent batches of episodes run in parallel.</div>
+          </li><li id="rl_graph_theory.environments.local_environments.LocalSetEnvironment.starting_vertex">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.local<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Local<wbr></wbr>Set<wbr></wbr>Environment<wbr></wbr>.starting<wbr></wbr>_vertex</div>
+            <div class="url">rl_graph_theory.environments.local_environments.LocalSetEnvironment.html#starting_vertex</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Instance Variable</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">A nonnegative integer below the configured graph order that determines the vertex at which the agent should start the recoloring procedure. It is possible to re-configure this attribute between two independent batches of episodes run in parallel.</div>
           </li><li id="rl_graph_theory.environments.local_environments.LocalSetEnvironment._flattened_length">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.local<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Local<wbr></wbr>Set<wbr></wbr>Environment<wbr></wbr>._flattened<wbr></wbr>_length</div>
@@ -1725,7 +1741,15 @@ allow_loops, graph_format, format_representation)</tt>...</div>
             <div class="type">Attribute</div>
             <div class="kind">Instance Variable</div>
             <div class="privacy">PRIVATE</div>
-            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
+            <div class="summary">A positive integer that determines the length of the <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> list from any of the two flattened graph formats of the graphs to be constructed.</div>
+          </li><li id="rl_graph_theory.environments.local_environments.LocalSetEnvironment._state_length">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.local<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Local<wbr></wbr>Set<wbr></wbr>Environment<wbr></wbr>._state<wbr></wbr>_length</div>
+            <div class="url">rl_graph_theory.environments.local_environments.LocalSetEnvironment.html#_state_length</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Instance Variable</div>
+            <div class="privacy">PRIVATE</div>
+            <div class="summary">A positive integer that determines the length of each of the state vectors, i.e., the number <tt class="rst-docutils rst-literal">(_edge_colors - 1) * _flattened_length + _graph_order</tt>.</div>
           </li><li id="rl_graph_theory.environments.local_environments.LocalSetEnvironment.episode_length">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.local<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Local<wbr></wbr>Set<wbr></wbr>Environment<wbr></wbr>.episode<wbr></wbr>_length</div>
@@ -1733,7 +1757,7 @@ allow_loops, graph_format, format_representation)</tt>...</div>
             <div class="type">Attribute</div>
             <div class="kind">Instance Variable</div>
             <div class="privacy">PUBLIC</div>
-            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
+            <div class="summary">A positive integer that determines the episode length of each of the episodes. It is possible to re-configure this attribute between two independent batches of episodes run in parallel.</div>
           </li><li id="rl_graph_theory.environments.local_environments.LocalSetEnvironment._current_vertices">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.local<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Local<wbr></wbr>Set<wbr></wbr>Environment<wbr></wbr>._current<wbr></wbr>_vertices</div>
@@ -1741,7 +1765,7 @@ allow_loops, graph_format, format_representation)</tt>...</div>
             <div class="type">Attribute</div>
             <div class="kind">Instance Variable</div>
             <div class="privacy">PRIVATE</div>
-            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
+            <div class="summary">Either <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, or a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> list of type <code><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.int8" class="intersphinx-link">numpy.int8</a></code> that determines the vertex where the agent is currently located in each of the episodes run in parallel, in the natural order. This attribute is initially set to ...</div>
           </li><li id="rl_graph_theory.environments.local_environments.LocalSetEnvironment._step_count">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.local<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Local<wbr></wbr>Set<wbr></wbr>Environment<wbr></wbr>._step<wbr></wbr>_count</div>
@@ -1749,7 +1773,15 @@ allow_loops, graph_format, format_representation)</tt>...</div>
             <div class="type">Attribute</div>
             <div class="kind">Instance Variable</div>
             <div class="privacy">PRIVATE</div>
-            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
+            <div class="summary">Either <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, or a nonnegative integer that signifies how many steps have been taken, i.e., how many times an action has been executed, in each of the episodes from the current batch. When this number becomes ...</div>
+          </li><li id="rl_graph_theory.environments.local_environments.LocalSetEnvironment.__init__">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.local<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Local<wbr></wbr>Set<wbr></wbr>Environment<wbr></wbr>.__init__</div>
+            <div class="url">rl_graph_theory.environments.local_environments.LocalSetEnvironment.html#__init__</div>
+            <div class="type">Function</div>
+            <div class="kind">Method</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">This constructor initializes an instance of the <code><a href="rl_graph_theory.environments.local_environments.LocalSetEnvironment.html" class="internal-link" title="rl_graph_theory.environments.local_environments.LocalSetEnvironment">LocalSetEnvironment</a></code> object.</div>
           </li><li id="rl_graph_theory.environments.local_environments.LocalSetEnvironment.reset_batch">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.local<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Local<wbr></wbr>Set<wbr></wbr>Environment<wbr></wbr>.reset<wbr></wbr>_batch</div>
@@ -1758,22 +1790,6 @@ allow_loops, graph_format, format_representation)</tt>...</div>
             <div class="kind">Method</div>
             <div class="privacy">PUBLIC</div>
             <div class="summary">This abstract method must be implemented in any concrete class that inherits from the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code> class. It should initialize a batch of episodes with a given batch size, and update the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html#_state_batch" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment._state_batch">_state_batch</a></code>...</div>
-          </li><li id="rl_graph_theory.environments.local_environments.LocalSetEnvironment._state_batch">
-            
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.local<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Local<wbr></wbr>Set<wbr></wbr>Environment<wbr></wbr>._state<wbr></wbr>_batch</div>
-            <div class="url">rl_graph_theory.environments.local_environments.LocalSetEnvironment.html#_state_batch</div>
-            <div class="type">Attribute</div>
-            <div class="kind">Instance Variable</div>
-            <div class="privacy">PRIVATE</div>
-            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
-          </li><li id="rl_graph_theory.environments.local_environments.LocalSetEnvironment._status">
-            
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.local<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Local<wbr></wbr>Set<wbr></wbr>Environment<wbr></wbr>._status</div>
-            <div class="url">rl_graph_theory.environments.local_environments.LocalSetEnvironment.html#_status</div>
-            <div class="type">Attribute</div>
-            <div class="kind">Instance Variable</div>
-            <div class="privacy">PRIVATE</div>
-            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
           </li><li id="rl_graph_theory.environments.local_environments.LocalSetEnvironment._transition_batch">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.local<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Local<wbr></wbr>Set<wbr></wbr>Environment<wbr></wbr>._transition<wbr></wbr>_batch</div>
@@ -1781,7 +1797,7 @@ allow_loops, graph_format, format_representation)</tt>...</div>
             <div class="type">Function</div>
             <div class="kind">Method</div>
             <div class="privacy">PRIVATE</div>
-            <div class="summary">This abstract method must be implemented in any concrete class that inherits from the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code> class. It should perform the transition process by executing a batch of given actions and applying them element-wise to the states in the batch of current states given by the ...</div>
+            <div class="summary">This method performs the transition process by executing a batch of given actions and applying them element-wise to the states in the batch of current states given by the <code><a href="rl_graph_theory.environments.local_environments.LocalSetEnvironment.html#_state_batch" class="internal-link" title="rl_graph_theory.environments.local_environments.LocalSetEnvironment._state_batch">_state_batch</a></code> attribute.</div>
           </li><li id="rl_graph_theory.environments.local_environments.LocalSetEnvironment.state_batch_to_graph_batch">
             
             <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.local<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Local<wbr></wbr>Set<wbr></wbr>Environment<wbr></wbr>.state<wbr></wbr>_batch<wbr></wbr>_to<wbr></wbr>_graph<wbr></wbr>_batch</div>
@@ -1790,138 +1806,146 @@ allow_loops, graph_format, format_representation)</tt>...</div>
             <div class="kind">Method</div>
             <div class="privacy">PUBLIC</div>
             <div class="summary">This abstract method must be implemented in any concrete class that inherits from the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code> class. Its goal is to extract the batch of underlying graphs from any provided batch of states. The graphs should appear in the same order as their corresponding states in the given batch of states.</div>
-          </li><li id="rl_graph_theory.environments.local_environments.GlobalFlipEnvironment">
+          </li><li id="rl_graph_theory.environments.local_environments.LocalFlipEnvironment">
             
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.local<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Global<wbr></wbr>Flip<wbr></wbr>Environment</div>
-            <div class="url">rl_graph_theory.environments.local_environments.GlobalFlipEnvironment.html</div>
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.local<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Local<wbr></wbr>Flip<wbr></wbr>Environment</div>
+            <div class="url">rl_graph_theory.environments.local_environments.LocalFlipEnvironment.html</div>
             <div class="type">Class</div>
             <div class="kind">Class</div>
             <div class="privacy">PUBLIC</div>
-            <div class="summary">#TODO</div>
-          </li><li id="rl_graph_theory.environments.local_environments.GlobalFlipEnvironment.__init__">
+            <div class="summary">This class inherits from the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code> class and models a graph-building game used for constructing 2-edge-colored looped complete graphs where the edges (resp. arcs) are all initially fully colored in some manner, and the agent moves from one vertex to another in some way, thereby traversing the existing edges (resp...</div>
+          </li><li id="rl_graph_theory.environments.local_environments.LocalFlipEnvironment._state_batch">
             
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.local<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Global<wbr></wbr>Flip<wbr></wbr>Environment<wbr></wbr>.__init__</div>
-            <div class="url">rl_graph_theory.environments.local_environments.GlobalFlipEnvironment.html#__init__</div>
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.local<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Local<wbr></wbr>Flip<wbr></wbr>Environment<wbr></wbr>._state<wbr></wbr>_batch</div>
+            <div class="url">rl_graph_theory.environments.local_environments.LocalFlipEnvironment.html#_state_batch</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Instance Variable</div>
+            <div class="privacy">PRIVATE</div>
+            <div class="summary">See the description of the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html#_state_batch" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment._state_batch">GraphEnvironment._state_batch</a></code> attribute.</div>
+          </li><li id="rl_graph_theory.environments.local_environments.LocalFlipEnvironment._status">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.local<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Local<wbr></wbr>Flip<wbr></wbr>Environment<wbr></wbr>._status</div>
+            <div class="url">rl_graph_theory.environments.local_environments.LocalFlipEnvironment.html#_status</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Instance Variable</div>
+            <div class="privacy">PRIVATE</div>
+            <div class="summary">See the description of the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html#_status" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment._status">GraphEnvironment._status</a></code> attribute.</div>
+          </li><li id="rl_graph_theory.environments.local_environments.LocalFlipEnvironment._is_directed">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.local<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Local<wbr></wbr>Flip<wbr></wbr>Environment<wbr></wbr>._is<wbr></wbr>_directed</div>
+            <div class="url">rl_graph_theory.environments.local_environments.LocalFlipEnvironment.html#_is_directed</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Instance Variable</div>
+            <div class="privacy">PRIVATE</div>
+            <div class="summary">A boolean that indicates whether the graphs to be constructed are a 2-edge-colored looped complete directed graph or a 2-edge-colored looped complete undirected graph.</div>
+          </li><li id="rl_graph_theory.environments.local_environments.LocalFlipEnvironment._allow_loops">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.local<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Local<wbr></wbr>Flip<wbr></wbr>Environment<wbr></wbr>._allow<wbr></wbr>_loops</div>
+            <div class="url">rl_graph_theory.environments.local_environments.LocalFlipEnvironment.html#_allow_loops</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Instance Variable</div>
+            <div class="privacy">PRIVATE</div>
+            <div class="summary">A boolean that indicates whether the graphs to be constructed are allowed to have loops.</div>
+          </li><li id="rl_graph_theory.environments.local_environments.LocalFlipEnvironment._graph_order">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.local<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Local<wbr></wbr>Flip<wbr></wbr>Environment<wbr></wbr>._graph<wbr></wbr>_order</div>
+            <div class="url">rl_graph_theory.environments.local_environments.LocalFlipEnvironment.html#_graph_order</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Instance Variable</div>
+            <div class="privacy">PRIVATE</div>
+            <div class="summary">A positive integer that describes the order of the graphs to be constructed.</div>
+          </li><li id="rl_graph_theory.environments.local_environments.LocalFlipEnvironment._flip_only">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.local<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Local<wbr></wbr>Flip<wbr></wbr>Environment<wbr></wbr>._flip<wbr></wbr>_only</div>
+            <div class="url">rl_graph_theory.environments.local_environments.LocalFlipEnvironment.html#_flip_only</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Instance Variable</div>
+            <div class="privacy">PRIVATE</div>
+            <div class="summary">A boolean that indicates whether all the traversed edges (resp. arcs) should only be allowed to be flipped, i.e., the value of the <tt class="rst-docutils rst-literal">flip_only</tt> parameter.</div>
+          </li><li id="rl_graph_theory.environments.local_environments.LocalFlipEnvironment._flattened_ordering">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.local<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Local<wbr></wbr>Flip<wbr></wbr>Environment<wbr></wbr>._flattened<wbr></wbr>_ordering</div>
+            <div class="url">rl_graph_theory.environments.local_environments.LocalFlipEnvironment.html#_flattened_ordering</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Instance Variable</div>
+            <div class="privacy">PRIVATE</div>
+            <div class="summary">An item of the <code><a href="rl_graph_theory.graphs.graph_format.FlattenedOrdering.html" class="internal-link" title="rl_graph_theory.graphs.graph_format.FlattenedOrdering">FlattenedOrdering</a></code> enumeration that determines whether the edges (resp. arcs) should be arranged in the flattened row-major order or the flattened clockwise order.</div>
+          </li><li id="rl_graph_theory.environments.local_environments.LocalFlipEnvironment.initial_graph_generator">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.local<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Local<wbr></wbr>Flip<wbr></wbr>Environment<wbr></wbr>.initial<wbr></wbr>_graph<wbr></wbr>_generator</div>
+            <div class="url">rl_graph_theory.environments.local_environments.LocalFlipEnvironment.html#initial_graph_generator</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Instance Variable</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">A <code><a href="rl_graph_theory.environments.graph_generators.html#GraphGenerator" class="internal-link" title="rl_graph_theory.environments.graph_generators.GraphGenerator">GraphGenerator</a></code> function that describes the mechanism for generating the underlying fully colored graphs for the states in the batch of initial states. It is possible to re-configure this attribute between two independent batches of episodes run in parallel.</div>
+          </li><li id="rl_graph_theory.environments.local_environments.LocalFlipEnvironment.starting_vertex">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.local<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Local<wbr></wbr>Flip<wbr></wbr>Environment<wbr></wbr>.starting<wbr></wbr>_vertex</div>
+            <div class="url">rl_graph_theory.environments.local_environments.LocalFlipEnvironment.html#starting_vertex</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Instance Variable</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">A nonnegative integer below the configured graph order that determines the vertex at which the agent should start the (potential) flipping procedure. It is possible to re-configure this attribute between two independent batches of episodes run in parallel.</div>
+          </li><li id="rl_graph_theory.environments.local_environments.LocalFlipEnvironment._flattened_length">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.local<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Local<wbr></wbr>Flip<wbr></wbr>Environment<wbr></wbr>._flattened<wbr></wbr>_length</div>
+            <div class="url">rl_graph_theory.environments.local_environments.LocalFlipEnvironment.html#_flattened_length</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Instance Variable</div>
+            <div class="privacy">PRIVATE</div>
+            <div class="summary">A positive integer that determines the length of the <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> list from any of the two flattened graph formats of the graphs to be constructed.</div>
+          </li><li id="rl_graph_theory.environments.local_environments.LocalFlipEnvironment.episode_length">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.local<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Local<wbr></wbr>Flip<wbr></wbr>Environment<wbr></wbr>.episode<wbr></wbr>_length</div>
+            <div class="url">rl_graph_theory.environments.local_environments.LocalFlipEnvironment.html#episode_length</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Instance Variable</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">A positive integer that determines the episode length of each of the episodes. It is possible to re-configure this attribute between two independent batches of episodes run in parallel.</div>
+          </li><li id="rl_graph_theory.environments.local_environments.LocalFlipEnvironment._current_vertices">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.local<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Local<wbr></wbr>Flip<wbr></wbr>Environment<wbr></wbr>._current<wbr></wbr>_vertices</div>
+            <div class="url">rl_graph_theory.environments.local_environments.LocalFlipEnvironment.html#_current_vertices</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Instance Variable</div>
+            <div class="privacy">PRIVATE</div>
+            <div class="summary">Either <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, or a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> list of type <code><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.int8" class="intersphinx-link">numpy.int8</a></code> that determines the vertex where the agent is currently located in each of the episodes run in parallel, in the natural order. This attribute is initially set to ...</div>
+          </li><li id="rl_graph_theory.environments.local_environments.LocalFlipEnvironment._step_count">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.local<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Local<wbr></wbr>Flip<wbr></wbr>Environment<wbr></wbr>._step<wbr></wbr>_count</div>
+            <div class="url">rl_graph_theory.environments.local_environments.LocalFlipEnvironment.html#_step_count</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Instance Variable</div>
+            <div class="privacy">PRIVATE</div>
+            <div class="summary">Either <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, or a nonnegative integer that signifies how many steps have been taken, i.e., how many times an action has been executed, in each of the episodes from the current batch. When this number becomes ...</div>
+          </li><li id="rl_graph_theory.environments.local_environments.LocalFlipEnvironment.__init__">
+            
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.local<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Local<wbr></wbr>Flip<wbr></wbr>Environment<wbr></wbr>.__init__</div>
+            <div class="url">rl_graph_theory.environments.local_environments.LocalFlipEnvironment.html#__init__</div>
             <div class="type">Function</div>
             <div class="kind">Method</div>
             <div class="privacy">PUBLIC</div>
-            <div class="summary">#TODO</div>
-          </li><li id="rl_graph_theory.environments.local_environments.GlobalFlipEnvironment._is_directed">
+            <div class="summary">This constructor initializes an instance of the <code><a href="rl_graph_theory.environments.local_environments.LocalFlipEnvironment.html" class="internal-link" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment">LocalFlipEnvironment</a></code> object.</div>
+          </li><li id="rl_graph_theory.environments.local_environments.LocalFlipEnvironment.reset_batch">
             
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.local<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Global<wbr></wbr>Flip<wbr></wbr>Environment<wbr></wbr>._is<wbr></wbr>_directed</div>
-            <div class="url">rl_graph_theory.environments.local_environments.GlobalFlipEnvironment.html#_is_directed</div>
-            <div class="type">Attribute</div>
-            <div class="kind">Instance Variable</div>
-            <div class="privacy">PRIVATE</div>
-            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
-          </li><li id="rl_graph_theory.environments.local_environments.GlobalFlipEnvironment._allow_loops">
-            
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.local<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Global<wbr></wbr>Flip<wbr></wbr>Environment<wbr></wbr>._allow<wbr></wbr>_loops</div>
-            <div class="url">rl_graph_theory.environments.local_environments.GlobalFlipEnvironment.html#_allow_loops</div>
-            <div class="type">Attribute</div>
-            <div class="kind">Instance Variable</div>
-            <div class="privacy">PRIVATE</div>
-            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
-          </li><li id="rl_graph_theory.environments.local_environments.GlobalFlipEnvironment._graph_order">
-            
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.local<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Global<wbr></wbr>Flip<wbr></wbr>Environment<wbr></wbr>._graph<wbr></wbr>_order</div>
-            <div class="url">rl_graph_theory.environments.local_environments.GlobalFlipEnvironment.html#_graph_order</div>
-            <div class="type">Attribute</div>
-            <div class="kind">Instance Variable</div>
-            <div class="privacy">PRIVATE</div>
-            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
-          </li><li id="rl_graph_theory.environments.local_environments.GlobalFlipEnvironment._flip_only">
-            
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.local<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Global<wbr></wbr>Flip<wbr></wbr>Environment<wbr></wbr>._flip<wbr></wbr>_only</div>
-            <div class="url">rl_graph_theory.environments.local_environments.GlobalFlipEnvironment.html#_flip_only</div>
-            <div class="type">Attribute</div>
-            <div class="kind">Instance Variable</div>
-            <div class="privacy">PRIVATE</div>
-            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
-          </li><li id="rl_graph_theory.environments.local_environments.GlobalFlipEnvironment._flattened_ordering">
-            
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.local<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Global<wbr></wbr>Flip<wbr></wbr>Environment<wbr></wbr>._flattened<wbr></wbr>_ordering</div>
-            <div class="url">rl_graph_theory.environments.local_environments.GlobalFlipEnvironment.html#_flattened_ordering</div>
-            <div class="type">Attribute</div>
-            <div class="kind">Instance Variable</div>
-            <div class="privacy">PRIVATE</div>
-            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
-          </li><li id="rl_graph_theory.environments.local_environments.GlobalFlipEnvironment.initial_graph_generator">
-            
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.local<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Global<wbr></wbr>Flip<wbr></wbr>Environment<wbr></wbr>.initial<wbr></wbr>_graph<wbr></wbr>_generator</div>
-            <div class="url">rl_graph_theory.environments.local_environments.GlobalFlipEnvironment.html#initial_graph_generator</div>
-            <div class="type">Attribute</div>
-            <div class="kind">Instance Variable</div>
-            <div class="privacy">PUBLIC</div>
-            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
-          </li><li id="rl_graph_theory.environments.local_environments.GlobalFlipEnvironment._flattened_length">
-            
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.local<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Global<wbr></wbr>Flip<wbr></wbr>Environment<wbr></wbr>._flattened<wbr></wbr>_length</div>
-            <div class="url">rl_graph_theory.environments.local_environments.GlobalFlipEnvironment.html#_flattened_length</div>
-            <div class="type">Attribute</div>
-            <div class="kind">Instance Variable</div>
-            <div class="privacy">PRIVATE</div>
-            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
-          </li><li id="rl_graph_theory.environments.local_environments.GlobalFlipEnvironment.episode_length">
-            
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.local<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Global<wbr></wbr>Flip<wbr></wbr>Environment<wbr></wbr>.episode<wbr></wbr>_length</div>
-            <div class="url">rl_graph_theory.environments.local_environments.GlobalFlipEnvironment.html#episode_length</div>
-            <div class="type">Attribute</div>
-            <div class="kind">Instance Variable</div>
-            <div class="privacy">PUBLIC</div>
-            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
-          </li><li id="rl_graph_theory.environments.local_environments.GlobalFlipEnvironment._current_vertices">
-            
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.local<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Global<wbr></wbr>Flip<wbr></wbr>Environment<wbr></wbr>._current<wbr></wbr>_vertices</div>
-            <div class="url">rl_graph_theory.environments.local_environments.GlobalFlipEnvironment.html#_current_vertices</div>
-            <div class="type">Attribute</div>
-            <div class="kind">Instance Variable</div>
-            <div class="privacy">PRIVATE</div>
-            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
-          </li><li id="rl_graph_theory.environments.local_environments.GlobalFlipEnvironment._step_count">
-            
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.local<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Global<wbr></wbr>Flip<wbr></wbr>Environment<wbr></wbr>._step<wbr></wbr>_count</div>
-            <div class="url">rl_graph_theory.environments.local_environments.GlobalFlipEnvironment.html#_step_count</div>
-            <div class="type">Attribute</div>
-            <div class="kind">Instance Variable</div>
-            <div class="privacy">PRIVATE</div>
-            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
-          </li><li id="rl_graph_theory.environments.local_environments.GlobalFlipEnvironment.reset_batch">
-            
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.local<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Global<wbr></wbr>Flip<wbr></wbr>Environment<wbr></wbr>.reset<wbr></wbr>_batch</div>
-            <div class="url">rl_graph_theory.environments.local_environments.GlobalFlipEnvironment.html#reset_batch</div>
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.local<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Local<wbr></wbr>Flip<wbr></wbr>Environment<wbr></wbr>.reset<wbr></wbr>_batch</div>
+            <div class="url">rl_graph_theory.environments.local_environments.LocalFlipEnvironment.html#reset_batch</div>
             <div class="type">Function</div>
             <div class="kind">Method</div>
             <div class="privacy">PUBLIC</div>
             <div class="summary">This abstract method must be implemented in any concrete class that inherits from the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code> class. It should initialize a batch of episodes with a given batch size, and update the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html#_state_batch" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment._state_batch">_state_batch</a></code>...</div>
-          </li><li id="rl_graph_theory.environments.local_environments.GlobalFlipEnvironment._state_batch">
+          </li><li id="rl_graph_theory.environments.local_environments.LocalFlipEnvironment._transition_batch">
             
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.local<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Global<wbr></wbr>Flip<wbr></wbr>Environment<wbr></wbr>._state<wbr></wbr>_batch</div>
-            <div class="url">rl_graph_theory.environments.local_environments.GlobalFlipEnvironment.html#_state_batch</div>
-            <div class="type">Attribute</div>
-            <div class="kind">Instance Variable</div>
-            <div class="privacy">PRIVATE</div>
-            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
-          </li><li id="rl_graph_theory.environments.local_environments.GlobalFlipEnvironment._status">
-            
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.local<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Global<wbr></wbr>Flip<wbr></wbr>Environment<wbr></wbr>._status</div>
-            <div class="url">rl_graph_theory.environments.local_environments.GlobalFlipEnvironment.html#_status</div>
-            <div class="type">Attribute</div>
-            <div class="kind">Instance Variable</div>
-            <div class="privacy">PRIVATE</div>
-            <div class="summary"><span class="rst-undocumented">Undocumented</span></div>
-          </li><li id="rl_graph_theory.environments.local_environments.GlobalFlipEnvironment._transition_batch">
-            
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.local<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Global<wbr></wbr>Flip<wbr></wbr>Environment<wbr></wbr>._transition<wbr></wbr>_batch</div>
-            <div class="url">rl_graph_theory.environments.local_environments.GlobalFlipEnvironment.html#_transition_batch</div>
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.local<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Local<wbr></wbr>Flip<wbr></wbr>Environment<wbr></wbr>._transition<wbr></wbr>_batch</div>
+            <div class="url">rl_graph_theory.environments.local_environments.LocalFlipEnvironment.html#_transition_batch</div>
             <div class="type">Function</div>
             <div class="kind">Method</div>
             <div class="privacy">PRIVATE</div>
-            <div class="summary">This abstract method must be implemented in any concrete class that inherits from the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code> class. It should perform the transition process by executing a batch of given actions and applying them element-wise to the states in the batch of current states given by the ...</div>
-          </li><li id="rl_graph_theory.environments.local_environments.GlobalFlipEnvironment.state_batch_to_graph_batch">
+            <div class="summary">This method performs the transition process by executing a batch of given actions and applying them element-wise to the states in the batch of current states given by the <code><a href="rl_graph_theory.environments.local_environments.LocalFlipEnvironment.html#_state_batch" class="internal-link" title="rl_graph_theory.environments.local_environments.LocalFlipEnvironment._state_batch">_state_batch</a></code> attribute.</div>
+          </li><li id="rl_graph_theory.environments.local_environments.LocalFlipEnvironment.state_batch_to_graph_batch">
             
-            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.local<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Global<wbr></wbr>Flip<wbr></wbr>Environment<wbr></wbr>.state<wbr></wbr>_batch<wbr></wbr>_to<wbr></wbr>_graph<wbr></wbr>_batch</div>
-            <div class="url">rl_graph_theory.environments.local_environments.GlobalFlipEnvironment.html#state_batch_to_graph_batch</div>
+            <div class="fullName">rl<wbr></wbr>_graph<wbr></wbr>_theory<wbr></wbr>.environments<wbr></wbr>.local<wbr></wbr>_environments<wbr></wbr>.<wbr></wbr>Local<wbr></wbr>Flip<wbr></wbr>Environment<wbr></wbr>.state<wbr></wbr>_batch<wbr></wbr>_to<wbr></wbr>_graph<wbr></wbr>_batch</div>
+            <div class="url">rl_graph_theory.environments.local_environments.LocalFlipEnvironment.html#state_batch_to_graph_batch</div>
             <div class="type">Function</div>
             <div class="kind">Method</div>
             <div class="privacy">PUBLIC</div>
