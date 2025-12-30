@@ -22,7 +22,7 @@ from .graph_environment import (
 from .graph_generators import GraphGenerator, create_fixed_graph_generator
 
 
-def compute_edge_indices(
+def _compute_edge_indices(
     graph_order: int,
     starting_vertices: np.ndarray,
     ending_vertices: np.ndarray,
@@ -350,7 +350,7 @@ class LocalSetEnvironment(GraphEnvironment):
 
         # Use the ``__compute_edge_indices`` auxiliary function to compute the index of the edge
         # (resp. arc) that should be traversed in each of the episodes run in parallel.
-        edge_indices = __compute_edge_indices(
+        edge_indices = _compute_edge_indices(
             graph_order=self._graph_order,
             starting_vertices=self._current_vertices,
             ending_vertices=action_batch[:, 0],
@@ -648,7 +648,7 @@ class LocalFlipEnvironment(GraphEnvironment):
 
         # Use the ``__compute_edge_indices`` auxiliary function to compute the index of the edge
         # (resp. arc) that should be traversed in each of the episodes run in parallel.
-        edge_indices = __compute_edge_indices(
+        edge_indices = _compute_edge_indices(
             graph_order=self._graph_order,
             starting_vertices=self._current_vertices,
             ending_vertices=action_batch[:, 0],

@@ -190,10 +190,10 @@ def test_state_batch_to_graph_batch(
 
     graph_batch = env.state_batch_to_graph_batch(state_batch)
     np.testing.assert_array_equal(
-        flattened,
         (
             graph_batch.flattened_clockwise
             if flattened_ordering is FlattenedOrdering.CLOCKWISE
             else graph_batch.flattened_row_major
         ),
+        flattened,
     )

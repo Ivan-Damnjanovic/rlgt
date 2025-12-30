@@ -118,9 +118,7 @@ TEST_CASES_RESET_BATCH_CLOCKWISE = replace(
     FlattenedOrdering.CLOCKWISE,
 )
 
-TEST_CASES_RESET_BATCH = (
-    TEST_CASES_RESET_BATCH_ROW_MAJOR + TEST_CASES_RESET_BATCH_CLOCKWISE
-)
+TEST_CASES_RESET_BATCH = TEST_CASES_RESET_BATCH_ROW_MAJOR + TEST_CASES_RESET_BATCH_CLOCKWISE
 
 
 TEST_CASES_TRANSITION_BATCH_ROW_MAJOR = [
@@ -325,7 +323,7 @@ TEST_CASES_STATE_BATCH_TO_GRAPH_BATCH_ROW_MAJOR = [
         3,
         False,
         False,
-        np.asarray([[1, 0, 1, 0, 1, 0]], dtype=int),
+        np.asarray([[1, 0, 1, 0, 1, 0, 0, 0, 1]], dtype=int),
         np.asarray([[1, 2, 1]], dtype=int),
     ),
 ]

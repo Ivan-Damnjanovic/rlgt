@@ -82,6 +82,7 @@ def batchify(test_cases, batch_size=2, expand_dims=True):
         new_test_case = list(test_case)
         for i, item in enumerate(test_case):
             if not isinstance(item, (np.ndarray, list)):
+                new_test_case[i] = deepcopy(item)
                 continue
 
             if expand_dims:
