@@ -172,6 +172,51 @@ class GraphEnvironment(ABC):
         self._state_batch: Optional[np.ndarray] = None
         self._status: Optional[EpisodeStatus] = None
 
+    @property
+    @abstractmethod
+    def state_length(self) -> int:
+        """
+        #TODO
+        """
+
+        pass
+
+    @property
+    @abstractmethod
+    def state_dtype(self) -> np.dtype:
+        """
+        #TODO
+        """
+
+        pass
+
+    @property
+    @abstractmethod
+    def action_number(self) -> int:
+        """
+        #TODO
+        """
+
+        pass
+
+    @property
+    @abstractmethod
+    def action_mask(self) -> Optional[np.ndarray]:
+        """
+        #TODO
+        """
+
+        pass
+
+    @property
+    @abstractmethod
+    def episode_length(self) -> int:
+        """
+        #TODO
+        """
+
+        pass
+
     @abstractmethod
     def reset_batch(self, batch_size: int) -> Tuple[np.ndarray, EpisodeStatus]:
         """

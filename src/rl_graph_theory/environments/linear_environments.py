@@ -149,6 +149,26 @@ class LinearBuildEnvironment(GraphEnvironment):
         self._state_length: int = self._edge_colors * self._flattened_length
         self._step_count: Optional[int] = None
 
+    @property
+    def state_length(self) -> int:
+        return self._state_length
+
+    @property
+    def state_dtype(self) -> np.dtype:
+        return np.uint8
+
+    @property
+    def action_number(self) -> int:
+        return self._edge_colors
+
+    @property
+    def action_mask(self) -> Optional[np.ndarray]:
+        return None
+
+    @property
+    def episode_length(self) -> int:
+        return self._flattened_length
+
     def reset_batch(self, batch_size: int) -> Tuple[np.ndarray, EpisodeStatus]:
         self._state_batch = np.zeros((batch_size, self._state_length), dtype=np.uint8)
         # The zeroth edge (resp. arc) should be properly colored first.
@@ -173,12 +193,12 @@ class LinearBuildEnvironment(GraphEnvironment):
         # If the graphs have only two proper edge colors, then the transition can easily be done as
         # follows.
         if self._edge_colors == 2:
-            self._state_batch[:, self._step_count] = action_batch[:, 0]
+            self._state_batch[:, self._step_count] = action_batch
         # Otherwise, the next trick should be used.
         else:
             view = self._state_batch.reshape(-1, self._edge_colors, self._flattened_length)
             rows = np.arange(self._state_batch.shape[0], dtype=np.int32)
-            view[rows, action_batch[:, 0] - 1, self._step_count] = 1
+            view[rows, action_batch - 1, self._step_count] = 1
 
         # Set the current edge (resp. arc) position flags to zero and increment the ``_step_count``
         # attribute.
