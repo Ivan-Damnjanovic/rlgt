@@ -5,6 +5,7 @@ from rl_graph_theory.environments.graph_generators import (
     create_choose_two_graph_generator,
     create_edge_perturbation_graph_generator,
     create_fixed_graph_generator,
+    create_random_graph_generator,
 )
 from rl_graph_theory.graphs.graph import FlattenedOrdering, Graph, GraphFormat
 
@@ -311,6 +312,116 @@ def test_edge_pertrubation(
         edge_perturbation_probability=edge_prob,
         color_selection_probabilities=color_prob,
         flattened_ordering=ordering,
+        rng=rng,
+    )(batch_size)
+
+    np.testing.assert_array_equal(out.flattened_row_major, result)
+
+
+@pytest.mark.parametrize(
+    "order, color_prob, ordering, edge_colors, is_directed, allow_loops, batch_size, result",
+    [
+        (
+            2,
+            None,
+            FlattenedOrdering.ROW_MAJOR,
+            2,
+            False,
+            False,
+            3,
+            np.asarray([[1], [0], [1]], np.uint8),
+        ),
+        (
+            2,
+            None,
+            FlattenedOrdering.ROW_MAJOR,
+            2,
+            True,
+            False,
+            3,
+            np.asarray([[1, 0], [1, 0], [1, 1]], np.uint8),
+        ),
+        (
+            2,
+            None,
+            FlattenedOrdering.ROW_MAJOR,
+            2,
+            False,
+            True,
+            3,
+            np.asarray([[1, 0, 1], [0, 1, 1], [0, 1, 1]], np.uint8),
+        ),
+        (
+            2,
+            None,
+            FlattenedOrdering.ROW_MAJOR,
+            2,
+            True,
+            True,
+            3,
+            np.asarray([[1, 0, 1, 0], [1, 1, 0, 1], [1, 1, 1, 1]], np.uint8),
+        ),
+        (
+            2,
+            None,
+            FlattenedOrdering.CLOCKWISE,
+            2,
+            True,
+            True,
+            3,
+            np.asarray([[1, 0, 0, 1], [1, 1, 1, 0], [1, 1, 1, 1]], np.uint8),
+        ),
+        (
+            3,
+            None,
+            FlattenedOrdering.ROW_MAJOR,
+            2,
+            False,
+            False,
+            3,
+            np.asarray([[1, 0, 1], [0, 1, 1], [0, 1, 1]], np.uint8),
+        ),
+        (
+            3,
+            None,
+            FlattenedOrdering.ROW_MAJOR,
+            4,
+            False,
+            False,
+            3,
+            np.asarray([[2, 0, 3], [0, 3, 3], [0, 3, 3]], np.uint8),
+        ),
+        (
+            3,
+            np.asarray([0.0, 0.5, 0.0, 0.5]),
+            FlattenedOrdering.ROW_MAJOR,
+            4,
+            False,
+            False,
+            3,
+            np.asarray([[3, 1, 3], [3, 1, 3], [3, 3, 1]], np.uint8),
+        ),
+    ],
+)
+def test_random_graph(
+    order: int,
+    color_prob: np.ndarray | float | None,
+    ordering: FlattenedOrdering,
+    edge_colors: int,
+    is_directed: bool,
+    allow_loops: bool,
+    batch_size: int,
+    result: np.ndarray,
+):
+    rng = np.random.default_rng(42)
+
+    out = create_random_graph_generator(
+        graph_order=order,
+        color_selection_probabilities=color_prob,
+        flattened_ordering=ordering,
+        edge_colors=edge_colors,
+        is_directed=is_directed,
+        allow_loops=allow_loops,
         rng=rng,
     )(batch_size)
 
