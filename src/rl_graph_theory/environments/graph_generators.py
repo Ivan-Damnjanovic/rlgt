@@ -310,7 +310,7 @@ def create_random_graph_generator(
 
     # If the ``rng`` argument is `None`, then use a default `np.random.Generator`.
     if rng is None:
-        rng = np.random.default_rng()
+        rng = np.random.default_rng()  # pragma: no cover
 
     # Compute the number of entries in any of the two flattened graph formats depending on the
     # selected graph order, on whether the graphs should be directed, and on whether loops should

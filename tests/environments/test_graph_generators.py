@@ -333,6 +333,16 @@ def test_edge_pertrubation(
         ),
         (
             2,
+            1.0,
+            FlattenedOrdering.ROW_MAJOR,
+            2,
+            False,
+            False,
+            3,
+            np.asarray([[1], [1], [1]], np.uint8),
+        ),
+        (
+            2,
             None,
             FlattenedOrdering.ROW_MAJOR,
             2,
