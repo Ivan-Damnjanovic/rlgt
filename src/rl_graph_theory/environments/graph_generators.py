@@ -4,14 +4,13 @@ on various mechanisms to construct batches of fully colored $k$-edge-colored loo
 of a given batch size.
 """
 
-from typing import Callable, List, Optional, Union
+from typing import Callable, Optional, Union
 
 import numpy as np
 
 from ..graphs.graph import Graph
 from ..graphs.graph_batch import GraphBatch
 from ..graphs.graph_format import FlattenedOrdering, GraphFormat
-
 
 GraphGenerator = Callable[[int], GraphBatch]
 """
@@ -113,7 +112,7 @@ def create_choose_two_graph_generator(
 
     # If the ``rng`` argument is `None`, then use a default `np.random.Generator`.
     if rng is None:
-        rng = np.random.default_rng()
+        rng = np.random.default_rng()  # pragma: no cover
 
     if graph_format == GraphFormat.FLATTENED_ROW_MAJOR:
         input_representation_1 = first_graph.flattened_row_major
@@ -207,7 +206,7 @@ def create_edge_perturbation_graph_generator(
 
     # If the ``rng`` argument is `None`, then use a default `np.random.Generator`.
     if rng is None:
-        rng = np.random.default_rng()
+        rng = np.random.default_rng()  # pragma: no cover
 
     if flattened_ordering == FlattenedOrdering.ROW_MAJOR:
         input_representation = initial_graph.flattened_row_major

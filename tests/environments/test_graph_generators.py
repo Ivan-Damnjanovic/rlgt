@@ -1,12 +1,12 @@
-import pytest
 import numpy as np
+import pytest
 
-from rl_graph_theory.graphs.graph import Graph, GraphFormat, FlattenedOrdering
 from rl_graph_theory.environments.graph_generators import (
-    create_fixed_graph_generator,
     create_choose_two_graph_generator,
+    create_edge_perturbation_graph_generator,
+    create_fixed_graph_generator,
 )
-
+from rl_graph_theory.graphs.graph import FlattenedOrdering, Graph, GraphFormat
 
 GRAPHS = [
     Graph.from_flattened(
@@ -31,13 +31,6 @@ GRAPHS = [
         allow_loops=False,
     ),
     Graph.from_flattened(
-        np.asarray([1, 2, 1], dtype=np.uint8),
-        FlattenedOrdering.ROW_MAJOR,
-        edge_colors=3,
-        is_directed=False,
-        allow_loops=False,
-    ),
-    Graph.from_flattened(
         np.asarray([1, 0, 1, 0, 1, 0], dtype=np.uint8),
         FlattenedOrdering.ROW_MAJOR,
         edge_colors=2,
@@ -57,6 +50,13 @@ GRAPHS = [
         edge_colors=2,
         is_directed=True,
         allow_loops=True,
+    ),
+    Graph.from_flattened(
+        np.asarray([1, 2, 1], dtype=np.uint8),
+        FlattenedOrdering.ROW_MAJOR,
+        edge_colors=3,
+        is_directed=False,
+        allow_loops=False,
     ),
 ]
 
@@ -121,3 +121,197 @@ def test_choose_two(graph: tuple[Graph, GraphFormat], prob: float):
             for t in np.random.default_rng(42).random(size=(10,)) < prob
         ],
     )
+
+
+@pytest.mark.parametrize(
+    "graph, edge_prob, color_prob, ordering, batch_size, result",
+    [
+        (
+            Graph.from_flattened(
+                np.asarray([0, 0, 0, 0, 0, 1, 1, 1, 1], dtype=np.uint8),
+                FlattenedOrdering.ROW_MAJOR,
+                edge_colors=2,
+                is_directed=True,
+                allow_loops=True,
+            ),
+            0.0,
+            None,
+            FlattenedOrdering.CLOCKWISE,
+            3,
+            np.asarray(
+                [
+                    [0, 0, 0, 0, 0, 1, 1, 1, 1],
+                    [0, 0, 0, 0, 0, 1, 1, 1, 1],
+                    [0, 0, 0, 0, 0, 1, 1, 1, 1],
+                ],
+                np.uint8,
+            ),
+        ),
+        (
+            Graph.from_flattened(
+                np.asarray([0, 0, 0, 0, 0, 1, 1, 1, 1], dtype=np.uint8),
+                FlattenedOrdering.ROW_MAJOR,
+                edge_colors=2,
+                is_directed=True,
+                allow_loops=True,
+            ),
+            0.0,
+            None,
+            FlattenedOrdering.ROW_MAJOR,
+            3,
+            np.asarray(
+                [
+                    [0, 0, 0, 0, 0, 1, 1, 1, 1],
+                    [0, 0, 0, 0, 0, 1, 1, 1, 1],
+                    [0, 0, 0, 0, 0, 1, 1, 1, 1],
+                ],
+                np.uint8,
+            ),
+        ),
+        (
+            Graph.from_flattened(
+                np.asarray([0, 0, 0, 0, 0, 1, 1, 1, 1], dtype=np.uint8),
+                FlattenedOrdering.ROW_MAJOR,
+                edge_colors=2,
+                is_directed=True,
+                allow_loops=True,
+            ),
+            0.5,
+            None,
+            FlattenedOrdering.ROW_MAJOR,
+            3,
+            np.asarray(
+                [
+                    [0, 0, 0, 0, 0, 1, 1, 1, 0],
+                    [0, 0, 0, 0, 0, 1, 0, 1, 0],
+                    [0, 0, 0, 1, 0, 1, 1, 1, 1],
+                ],
+                np.uint8,
+            ),
+        ),
+        (
+            Graph.from_flattened(
+                np.asarray([0, 0, 0, 0, 0, 1, 1, 1, 1], dtype=np.uint8),
+                FlattenedOrdering.ROW_MAJOR,
+                edge_colors=2,
+                is_directed=True,
+                allow_loops=True,
+            ),
+            1.0,
+            None,
+            FlattenedOrdering.ROW_MAJOR,
+            3,
+            np.asarray(
+                [
+                    [0, 0, 0, 0, 0, 1, 0, 0, 1],
+                    [1, 1, 1, 0, 1, 0, 0, 0, 1],
+                    [0, 1, 1, 0, 1, 1, 1, 1, 0],
+                ],
+                np.uint8,
+            ),
+        ),
+        (
+            Graph.from_flattened(
+                np.asarray([0, 0, 0, 0, 0, 1, 1, 1, 1], dtype=np.uint8),
+                FlattenedOrdering.ROW_MAJOR,
+                edge_colors=2,
+                is_directed=True,
+                allow_loops=True,
+            ),
+            1.0,
+            1.0,
+            FlattenedOrdering.ROW_MAJOR,
+            3,
+            np.asarray(
+                [
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1],
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1],
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1],
+                ],
+                np.uint8,
+            ),
+        ),
+        (
+            Graph.from_flattened(
+                np.asarray([0, 0, 0, 0, 0, 1, 1, 1, 1], dtype=np.uint8),
+                FlattenedOrdering.ROW_MAJOR,
+                edge_colors=2,
+                is_directed=True,
+                allow_loops=True,
+            ),
+            1.0,
+            0.0,
+            FlattenedOrdering.ROW_MAJOR,
+            3,
+            np.asarray(
+                [
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                ],
+                np.uint8,
+            ),
+        ),
+        (
+            Graph.from_flattened(
+                np.asarray([0, 0, 0, 1, 1, 1, 2, 2, 2], dtype=np.uint8),
+                FlattenedOrdering.ROW_MAJOR,
+                edge_colors=3,
+                is_directed=True,
+                allow_loops=True,
+            ),
+            0.5,
+            None,
+            FlattenedOrdering.ROW_MAJOR,
+            3,
+            np.asarray(
+                [
+                    [0, 0, 0, 1, 0, 1, 2, 2, 1],
+                    [1, 0, 0, 1, 1, 2, 0, 2, 0],
+                    [0, 0, 0, 1, 1, 1, 2, 2, 2],
+                ],
+                np.uint8,
+            ),
+        ),
+        (
+            Graph.from_flattened(
+                np.asarray([0, 0, 0, 1, 1, 1, 2, 2, 2], dtype=np.uint8),
+                FlattenedOrdering.ROW_MAJOR,
+                edge_colors=3,
+                is_directed=True,
+                allow_loops=True,
+            ),
+            1.0,
+            np.asarray([0.0, 0.0, 1.0]),
+            FlattenedOrdering.ROW_MAJOR,
+            3,
+            np.asarray(
+                [
+                    [2, 2, 2, 2, 2, 2, 2, 2, 2],
+                    [2, 2, 2, 2, 2, 2, 2, 2, 2],
+                    [2, 2, 2, 2, 2, 2, 2, 2, 2],
+                ],
+                np.uint8,
+            ),
+        ),
+    ],
+)
+def test_edge_pertrubation(
+    graph: Graph,
+    edge_prob: float,
+    color_prob: np.ndarray | float | None,
+    ordering: FlattenedOrdering,
+    batch_size: int,
+    result: np.ndarray,
+):
+    rng = np.random.default_rng(42)
+
+    out = create_edge_perturbation_graph_generator(
+        initial_graph=graph,
+        edge_perturbation_probability=edge_prob,
+        color_selection_probabilities=color_prob,
+        flattened_ordering=ordering,
+        rng=rng,
+    )(batch_size)
+
+    np.testing.assert_array_equal(out.flattened_row_major, result)
