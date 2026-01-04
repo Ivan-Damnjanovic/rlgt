@@ -440,7 +440,7 @@ class GlobalFlipEnvironment(GraphEnvironment):
         `_state_batch` attribute.
 
         :param action_batch: The batch of actions to be applied to the states in the batch of
-            current states, given as a `numpy.ndarray` matrix of type `numpy.int32` where the rows
+            current states, given as a `numpy.ndarray` matrix of type `numpy.uint8` where the rows
             correspond to the actions. The number of actions in this batch must be the same as the
             number of states in the `_state_batch` attribute.
         """
