@@ -375,9 +375,9 @@ class LocalSetEnvironment(GraphEnvironment):
             self._state_batch[:, : -self._graph_order] = temp.reshape(temp.shape[0], -1)
 
         # Update the current vertex position flags.
-        self._state_batch[rows, -self._graph_order + self._current_vertices] = 0
+        self._state_batch[rows, self._current_vertices - self._graph_order] = 0
         self._current_vertices = action_batch[:, 0]
-        self._state_batch[rows, -self._graph_order + self._current_vertices] = 1
+        self._state_batch[rows, self._current_vertices - self._graph_order] = 1
 
         self._step_count += 1
         if self._step_count >= self.episode_length:

@@ -177,3 +177,24 @@ def test_state_batch_to_graph_batch(
             else graph_batch.flattened_row_major
         ),
     )
+
+
+def test_limit():
+    env = GlobalSetEnvironment(
+        RewardType.TELESCOPIC,
+        lambda a: np.sum(a.flattened_row_major, axis=1),
+        graph_order=2,
+        flattened_ordering=FlattenedOrdering.ROW_MAJOR,
+        edge_colors=255,
+        is_directed=False,
+        allow_loops=False,
+    )
+
+    env.reset_batch(1)
+    state, reward, status = env.step_batch(np.asarray([[0, 254]], np.uint8))
+
+    print(state, reward, status)
+
+    np.testing.assert_array_equal(state, [[0] * 253 + [1]])
+    np.testing.assert_array_equal(reward, [254])
+    assert status is EpisodeStatus.TRUNCATED
