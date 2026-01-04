@@ -10,6 +10,9 @@ from .linear_set_test_cases import (
 )
 from ..utils import batchify, replace
 
+DTYPE_STATE = np.uint8
+DTYPE_ACTION = np.uint8
+
 TEST_CASES_CONSTRUCTOR = [
     test_case[:4] + test_case[5:] for test_case in lstc_constructor if test_case[4] == 2
 ]
@@ -26,9 +29,9 @@ TEST_CASES_TRANSITION_BATCH_ROW_MAJOR = [
         False,
         False,
         0,
-        np.asarray([[0, 1]], dtype=int),
-        np.asarray([[0]], dtype=int),
-        np.asarray([[0, 0]], dtype=int),
+        np.asarray([[0, 1]], dtype=DTYPE_STATE),
+        np.asarray([[0]], dtype=DTYPE_ACTION),
+        np.asarray([[0, 0]], dtype=DTYPE_STATE),
         EpisodeStatus.TERMINATED,
     ),
     (
@@ -38,9 +41,9 @@ TEST_CASES_TRANSITION_BATCH_ROW_MAJOR = [
         False,
         False,
         0,
-        np.asarray([[0, 1]], dtype=int),
-        np.asarray([[1]], dtype=int),
-        np.asarray([[1, 0]], dtype=int),
+        np.asarray([[0, 1]], dtype=DTYPE_STATE),
+        np.asarray([[1]], dtype=DTYPE_ACTION),
+        np.asarray([[1, 0]], dtype=DTYPE_STATE),
         EpisodeStatus.TERMINATED,
     ),
     (
@@ -50,9 +53,9 @@ TEST_CASES_TRANSITION_BATCH_ROW_MAJOR = [
         False,
         False,
         0,
-        np.asarray([[1, 1]], dtype=int),
-        np.asarray([[1]], dtype=int),
-        np.asarray([[0, 0]], dtype=int),
+        np.asarray([[1, 1]], dtype=DTYPE_STATE),
+        np.asarray([[1]], dtype=DTYPE_ACTION),
+        np.asarray([[0, 0]], dtype=DTYPE_STATE),
         EpisodeStatus.TERMINATED,
     ),
     (
@@ -62,9 +65,9 @@ TEST_CASES_TRANSITION_BATCH_ROW_MAJOR = [
         False,
         False,
         0,
-        np.asarray([[1, 1]], dtype=int),
-        np.asarray([[0]], dtype=int),
-        np.asarray([[1, 0]], dtype=int),
+        np.asarray([[1, 1]], dtype=DTYPE_STATE),
+        np.asarray([[0]], dtype=DTYPE_ACTION),
+        np.asarray([[1, 0]], dtype=DTYPE_STATE),
         EpisodeStatus.TERMINATED,
     ),
     (
@@ -74,9 +77,9 @@ TEST_CASES_TRANSITION_BATCH_ROW_MAJOR = [
         False,
         False,
         0,
-        np.asarray([[1, 0, 0, 1, 0, 0]], dtype=int),
-        np.asarray([[0]], dtype=int),
-        np.asarray([[1, 0, 0, 0, 1, 0]], dtype=int),
+        np.asarray([[1, 0, 0, 1, 0, 0]], dtype=DTYPE_STATE),
+        np.asarray([[0]], dtype=DTYPE_ACTION),
+        np.asarray([[1, 0, 0, 0, 1, 0]], dtype=DTYPE_STATE),
         EpisodeStatus.IN_PROGRESS,
     ),
 ]

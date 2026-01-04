@@ -10,6 +10,9 @@ from .local_set_test_cases import (
     TEST_CASES_STATE_BATCH_TO_GRAPH_BATCH as lstc_state_batch_to_graph_batch,
 )
 
+DTYPE_STATE = np.uint8
+DTYPE_ACTION = np.uint8
+
 TEST_CASES_CONSTRUCTOR = insert(
     remove_at([tc for tc in lstc_constructor if tc[5] == 2], 5), 4, False
 ) + insert(remove_at([tc for tc in lstc_constructor if tc[5] == 2], 5), 4, True)
@@ -26,9 +29,9 @@ TEST_CASES_TRANSITION_BATCH_ROW_MAJOR = [
         False,
         False,
         0,
-        np.asarray([[1, 1, 0]], dtype=int),
-        np.asarray([[1]], dtype=int),
-        np.asarray([[0, 0, 1]], dtype=int),
+        np.asarray([[1, 1, 0]], dtype=DTYPE_STATE),
+        np.asarray([[1]], dtype=DTYPE_ACTION),
+        np.asarray([[0, 0, 1]], dtype=DTYPE_STATE),
         EpisodeStatus.IN_PROGRESS,
     ),
     (
@@ -40,9 +43,9 @@ TEST_CASES_TRANSITION_BATCH_ROW_MAJOR = [
         False,
         False,
         0,
-        np.asarray([[0, 1, 0]], dtype=int),
-        np.asarray([[1]], dtype=int),
-        np.asarray([[1, 0, 1]], dtype=int),
+        np.asarray([[0, 1, 0]], dtype=DTYPE_STATE),
+        np.asarray([[1]], dtype=DTYPE_ACTION),
+        np.asarray([[1, 0, 1]], dtype=DTYPE_STATE),
         EpisodeStatus.IN_PROGRESS,
     ),
     (
@@ -54,9 +57,9 @@ TEST_CASES_TRANSITION_BATCH_ROW_MAJOR = [
         False,
         False,
         0,
-        np.asarray([[0, 1, 0]], dtype=int),
-        np.asarray([[1, 1]], dtype=int),
-        np.asarray([[1, 0, 1]], dtype=int),
+        np.asarray([[0, 1, 0]], dtype=DTYPE_STATE),
+        np.asarray([[1, 1]], dtype=DTYPE_ACTION),
+        np.asarray([[1, 0, 1]], dtype=DTYPE_STATE),
         EpisodeStatus.IN_PROGRESS,
     ),
     (
@@ -68,9 +71,9 @@ TEST_CASES_TRANSITION_BATCH_ROW_MAJOR = [
         False,
         False,
         1,
-        np.asarray([[0, 1, 0]], dtype=int),
-        np.asarray([[1, 1]], dtype=int),
-        np.asarray([[1, 0, 1]], dtype=int),
+        np.asarray([[0, 1, 0]], dtype=DTYPE_STATE),
+        np.asarray([[1, 1]], dtype=DTYPE_ACTION),
+        np.asarray([[1, 0, 1]], dtype=DTYPE_STATE),
         EpisodeStatus.TRUNCATED,
     ),
     (
@@ -82,9 +85,9 @@ TEST_CASES_TRANSITION_BATCH_ROW_MAJOR = [
         False,
         False,
         0,
-        np.asarray([[1, 1, 0]], dtype=int),
-        np.asarray([[1, 1]], dtype=int),
-        np.asarray([[0, 0, 1]], dtype=int),
+        np.asarray([[1, 1, 0]], dtype=DTYPE_STATE),
+        np.asarray([[1, 1]], dtype=DTYPE_ACTION),
+        np.asarray([[0, 0, 1]], dtype=DTYPE_STATE),
         EpisodeStatus.IN_PROGRESS,
     ),
     (
@@ -96,9 +99,9 @@ TEST_CASES_TRANSITION_BATCH_ROW_MAJOR = [
         True,
         False,
         0,
-        np.asarray([[1, 0, 1, 0]], dtype=int),
-        np.asarray([[1, 1]], dtype=int),
-        np.asarray([[0, 0, 0, 1]], dtype=int),
+        np.asarray([[1, 0, 1, 0]], dtype=DTYPE_STATE),
+        np.asarray([[1, 1]], dtype=DTYPE_ACTION),
+        np.asarray([[0, 0, 0, 1]], dtype=DTYPE_STATE),
         EpisodeStatus.IN_PROGRESS,
     ),
     (
@@ -110,9 +113,9 @@ TEST_CASES_TRANSITION_BATCH_ROW_MAJOR = [
         False,
         True,
         0,
-        np.asarray([[1, 0, 0, 1, 0]], dtype=int),
-        np.asarray([[1, 1]], dtype=int),
-        np.asarray([[1, 1, 0, 0, 1]], dtype=int),
+        np.asarray([[1, 0, 0, 1, 0]], dtype=DTYPE_STATE),
+        np.asarray([[1, 1]], dtype=DTYPE_ACTION),
+        np.asarray([[1, 1, 0, 0, 1]], dtype=DTYPE_STATE),
         EpisodeStatus.IN_PROGRESS,
     ),
     (
@@ -124,9 +127,9 @@ TEST_CASES_TRANSITION_BATCH_ROW_MAJOR = [
         True,
         True,
         0,
-        np.asarray([[1, 0, 0, 0, 1, 0]], dtype=int),
-        np.asarray([[1, 1]], dtype=int),
-        np.asarray([[1, 1, 0, 0, 0, 1]], dtype=int),
+        np.asarray([[1, 0, 0, 0, 1, 0]], dtype=DTYPE_STATE),
+        np.asarray([[1, 1]], dtype=DTYPE_ACTION),
+        np.asarray([[1, 1, 0, 0, 0, 1]], dtype=DTYPE_STATE),
         EpisodeStatus.IN_PROGRESS,
     ),
     (
@@ -138,9 +141,9 @@ TEST_CASES_TRANSITION_BATCH_ROW_MAJOR = [
         False,
         False,
         0,
-        np.asarray([[1, 0, 0, 1, 0, 0]], dtype=int),
-        np.asarray([[1, 1]], dtype=int),
-        np.asarray([[0, 0, 0, 0, 1, 0]], dtype=int),
+        np.asarray([[1, 0, 0, 1, 0, 0]], dtype=DTYPE_STATE),
+        np.asarray([[1, 1]], dtype=DTYPE_ACTION),
+        np.asarray([[0, 0, 0, 0, 1, 0]], dtype=DTYPE_STATE),
         EpisodeStatus.IN_PROGRESS,
     ),
 ]
