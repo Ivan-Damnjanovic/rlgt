@@ -1,12 +1,13 @@
-from typing import Optional, Callable
+from typing import Callable, Optional
 
 import numpy as np
 import torch
 import torch.nn as nn
 from torch.distributions import Categorical
 
+from ..environments.graph_environment import EpisodeStatus, GraphEnvironment
 from ..graphs.graph import Graph
-from ..environments.graph_environment import GraphEnvironment, EpisodeStatus
+from .random_action_mechanisms import RandomActionMechanism
 
 
 class DeepCrossEntropyMethod:
@@ -20,6 +21,8 @@ class DeepCrossEntropyMethod:
         new_candidates_count: int,
         elite_count: int,
         survivors_count: int,
+        random_action_mechanism: RandomActionMechanism,
+        rng: Optional[np.random.Generator] = None,
     ):
         self._environment: GraphEnvironment = environment
 
@@ -31,14 +34,23 @@ class DeepCrossEntropyMethod:
         self._new_candidates_count: int = new_candidates_count
         self._elite_count: int = elite_count
         self._survivors_count: int = survivors_count
+        self._random_action_mechanism: RandomActionMechanism = random_action_mechanism
+
+        if rng is None:
+            rng = np.random.default_rng()
+        self._rng: np.random.Generator = rng
 
         self._step_count: Optional[int] = None
+        self._best_score: Optional[float] = None
+        self._is_best_score_improved: Optional[bool] = None
         self._population_states: Optional[np.ndarray] = None
         self._population_actions: Optional[np.ndarray] = None
         self._population_rewards: Optional[np.ndarray] = None
 
     def reset(self):
         self._step_count = 0
+        self._best_score = None
+        self._is_best_score_improved = True
 
         total_population = self._survivors_count + self._new_candidates_count
         self._population_states = np.zeros(
@@ -60,6 +72,8 @@ class DeepCrossEntropyMethod:
         self._population_rewards[self._survivors_count :] = 0
 
         action_count = 0
+        random_action_probability = self._random_action_mechanism(self._is_best_score_improved)
+
         while status == EpisodeStatus.IN_PROGRESS:
             state_batch_torch = torch.from_numpy(state_batch.astype(np.float32)).to(self._device)
             logits_batch_torch = self._policy_network(state_batch_torch)
@@ -73,6 +87,14 @@ class DeepCrossEntropyMethod:
 
             action_batch_torch = Categorical(logits=logits_batch_torch).sample()
             action_batch = action_batch_torch.cpu().numpy()
+
+            # random_mask = (
+            #     self._rng.random(size=(action_batch.shape[0],)) < random_action_probability
+            # )
+            # entry_count = np.count_nonzero(random_mask)
+            # action_batch[random_mask] = self._rng.integers(
+            #     low=0, high=self._environment.action_number, size=entry_count, dtype=np.int32
+            # )
 
             self._population_actions[action_count, self._survivors_count :] = action_batch
             state_batch, reward_batch, status = self._environment.step_batch(action_batch)
@@ -130,6 +152,13 @@ class DeepCrossEntropyMethod:
             survivors_mask
         ]
 
+        new_best_score = np.max(self._population_rewards[: self._survivors_count]).item()
+        if self._best_score is not None:
+            self._is_best_score_improved = not np.isclose(self._best_score, new_best_score)
+        else:
+            self._is_best_score_improved = True
+        self._best_score = new_best_score
+
         self._step_count += 1
 
     @property
@@ -137,19 +166,16 @@ class DeepCrossEntropyMethod:
         return self._step_count
 
     @property
-    def best_score(self) -> float:
-        if self._step_count == 0:
-            raise RuntimeError
-        
-        return np.max(self._population_rewards[: self._survivors_count]).item()
+    def best_score(self) -> Optional[float]:
+        return self._best_score
 
     @property
-    def best_graph(self):
-        if self._step_count == 0:
-            raise RuntimeError
+    def best_graph(self) -> Optional[Graph]:
+        if self._best_score is None:
+            return None
 
         best_index = np.argmax(self._population_rewards[: self._survivors_count])
         best_state = self._population_states[self._environment.episode_length, best_index, :]
-        best_graph_batch = self._environment.state_batch_to_graph_batch(best_state[None, :])
+        best_graph = self._environment.state_to_graph(best_state)
 
-        return best_graph_batch.adjacency_matrix[0]
+        return best_graph

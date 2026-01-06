@@ -3,29 +3,32 @@ import numpy as np
 import torch.nn as nn
 import torch.optim as optim
 
-from rl_graph_theory.graphs.graph_batch import GraphBatch
+from rl_graph_theory.graphs.graph import Graph
 from rl_graph_theory.agents.cross_entropy_method import DeepCrossEntropyMethod
-from rl_graph_theory.environments.linear_environments import LinearBuildEnvironment
+from rl_graph_theory.environments.linear_environments import LinearBuildEnvironment, LinearFlipEnvironment, LinearSetEnvironment
+from rl_graph_theory.environments.global_environments import GlobalSetEnvironment, GlobalFlipEnvironment
+from rl_graph_theory.environments.local_environments import LocalFlipEnvironment, LocalSetEnvironment
 from rl_graph_theory.environments.graph_environment import RewardType
-from rl_graph_theory.graphs.graph_format import FlattenedOrdering
+from rl_graph_theory.graphs.graph_formats import FlattenedOrdering
+from rl_graph_theory.agents.random_action_mechanisms import create_multiplication_factor_random_action_mechanism
 
 
-def graph_invariant(graph_batch: GraphBatch):
+def graph_invariant(graph_batch: Graph):
     result = np.zeros((graph_batch.batch_size,), dtype=np.float32)
 
     for index in range(graph_batch.batch_size):
         nx_graph = nx.Graph()
-        nx_graph.add_nodes_from(list(range(graph_batch.order)))
+        nx_graph.add_nodes_from(list(range(graph_batch.graph_order)))
 
         count = 0
-        for i in range(graph_batch.order):
-            for j in range(i + 1, graph_batch.order):
-                if graph_batch.flattened_row_major[index, count] == 1:
+        for i in range(graph_batch.graph_order):
+            for j in range(i + 1, graph_batch.graph_order):
+                if graph_batch.flattened_row_major_colors[index, count] == 1:
                     nx_graph.add_edge(i,j)
                 count += 1
         
         if not nx.is_connected(nx_graph):
-            return -100000
+            return -1000
 
         evals = np.linalg.eigvalsh(nx.adjacency_matrix(nx_graph).todense())
         evalsRealAbs = np.zeros_like(evals)
@@ -36,7 +39,7 @@ def graph_invariant(graph_batch: GraphBatch):
         maxMatch = nx.max_weight_matching(nx_graph)
         mu = len(maxMatch)
             
-        result[index] = np.sqrt(graph_batch.order - 1) + 1 - lambda1 - mu
+        result[index] = np.sqrt(graph_batch.graph_order - 1) + 1 - lambda1 - mu
 
     return result
 
@@ -65,40 +68,48 @@ def graph_invariant(graph_batch: GraphBatch):
 
 
 policy_network = nn.Sequential(
-    nn.Linear(342, 256),
+    nn.Linear(171 + 19, 256),
     nn.ReLU(),
-    nn.Linear(256, 256),
+    nn.Dropout(0.1),
+    nn.Linear(256, 128),
     nn.ReLU(),
-    nn.Linear(256, 2),
+    nn.Dropout(0.1),
+    nn.Linear(128, 38),
 )
 
 
 dcem = DeepCrossEntropyMethod(
-    environment=LinearBuildEnvironment(
+    environment=LocalSetEnvironment(
         reward_type=RewardType.SPARSE,
         reward_function=graph_invariant,
         graph_order=19,
         flattened_ordering=FlattenedOrdering.ROW_MAJOR,
+        episode_length=1000,
     ),
     policy_network=policy_network,
     optimizer=optim.Adam(policy_network.parameters(), lr=0.001),
     loss_function=nn.CrossEntropyLoss(),
     new_candidates_count=200,
     elite_count=20,
-    survivors_count=5,
+    survivors_count=10,
+    random_action_mechanism=create_multiplication_factor_random_action_mechanism(
+        initial_random_action_probability=0.005,
+        waiting_period=30,
+        multiplication_factor=1.1,
+        maximum_random_action_probability=0.05,
+    ),
 )
 
 dcem.reset()
-generation_number = 0
 
 while True:
     dcem.step()
-    generation_number += 1
 
-    if generation_number % 100 == 0:
-        best_score = dcem.best_score
-        print(f"Generations: {generation_number}. Best score: {best_score}.")
+    if dcem.step_count % 1 == 0:
+        print(f"Generations: {dcem.step_count}. Best score: {dcem.best_score}.")
 
-        if best_score > 0:
-            print(dcem.best_graph)
+        # print(dcem.best_graph.adjacency_matrix_colors)
+
+        if dcem.best_score > 0:
+            print(dcem.best_graph.adjacency_matrix_colors)
             break

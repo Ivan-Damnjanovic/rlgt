@@ -10,13 +10,10 @@ from typing import Callable, Optional, Tuple, Union
 
 import numpy as np
 
-from ..graphs.graph_batch import GraphBatch
+from ..graphs.graph import Graph
 
 
-RewardFunction = Union[
-    Callable[[GraphBatch], np.ndarray],
-    Callable[[GraphBatch, GraphBatch], np.ndarray],
-]
+RewardFunction = Union[Callable[[Graph], np.ndarray], Callable[[Graph, Graph], np.ndarray]]
 """
 This is the type alias for the functions that help compute the rewards in RL environments to be
 used in graph theory applications. In other words, these are the functions that take on the role of
@@ -41,7 +38,7 @@ class RewardType(Enum):
         actions is zero, apart from the final batch of actions, for which it is equal to
         ``graph_invariant(final_graph_batch)``, where:
 
-        * ``final_graph_batch`` is the underlying batch of graphs corresponding to the batch of
+        * ``final_graph_batch`` is the batch of underlying graphs corresponding to the batch of
           final states; and
         * ``graph_invariant`` is a function that accepts a batch of graphs and returns the
           corresponding values for the graph invariant that is supposed to get maximized.
@@ -51,9 +48,9 @@ class RewardType(Enum):
         of actions is computed by the formula
         ``graph_invariant(new_graph_batch) - graph_invariant(old_graph_batch)``, where:
 
-        * ``new_graph_batch`` is the underlying batch of graphs corresponding to the batch of newly
+        * ``new_graph_batch`` is the batch of underlying graphs corresponding to the batch of newly
           obtained states;
-        * ``old_graph_batch`` is the underlying batch of graphs corresponding to the batch of
+        * ``old_graph_batch`` is the batch of underlying graphs corresponding to the batch of
           previous states; and
         * ``graph_invariant`` is a function that accepts a batch of graphs and returns the
           corresponding values for the graph invariant that is supposed to get maximized.
@@ -63,9 +60,9 @@ class RewardType(Enum):
         actions is computed by the formula
         ``graph_invariant_difference(old_graph_batch, new_graph_batch)``, where:
 
-        * ``new_graph_batch`` is the underlying batch of graphs corresponding to the batch of newly
+        * ``new_graph_batch`` is the batch of underlying graphs corresponding to the batch of newly
           obtained states;
-        * ``old_graph_batch`` is the underlying batch of graphs corresponding to the batch of
+        * ``old_graph_batch`` is the batch of underlying graphs corresponding to the batch of
           previous states; and
         * ``graph_invariant_difference`` is a function that accepts a batch of previous underlying
           graphs and a batch of new underlying graphs, and returns the corresponding values for the
@@ -116,22 +113,39 @@ class GraphEnvironment(ABC):
     This abstract class encapsulates the concept of an RL environment to be used in graph theory
     applications. The goal of such an environment is to tackle extremal problems where a given
     graph invariant should be maximized over some finite set of fully colored $k$-edge-colored
-    looped complete graphs. Both the states and the actions are represented as `numpy.ndarray`
-    lists, i.e., vectors. For the sake of efficiency, the environment provides support for multiple
-    episodes to be run in parallel. This approach makes sense because it is guaranteed that all of
-    these episodes must end at the same time, regardless of whether the RL environment has episodic
-    or continuing tasks. In this situation, batches of states and batches of actions are naturally
-    represented as `numpy.ndarray` matrices whose rows correspond to the states and actions,
-    respectively.
+    looped complete graphs. The states should be represented as `numpy.ndarray` lists, i.e.,
+    vectors, of a fixed length, while the actions should be represented as `numpy.int32` integers
+    between 0 and ``action_number - 1``, where ``action_number`` is the total number of actions
+    that can be executed (which must be finite). In each step, it is possible for certain actions
+    to not be available for execution, with the constraint that at least one action is always
+    available for execution. For the sake of efficiency, the environment provides support for
+    multiple episodes to be run in parallel. This approach makes sense because it is guaranteed
+    that all of these episodes must end at the same time after a predetermined number of steps,
+    regardless of whether the RL environment has episodic or continuing tasks. In this situation,
+    batches of states are naturally represented as `numpy.ndarray` matrices whose rows correspond
+    to the states in the batch, while batches of actions are represented as `numpy.ndarray` lists
+    of type `numpy.int32` whose entries correspond to the actions in the batch.
 
-    The concrete classes that inherit from this abstract class must implement the following three
-    abstract methods:
+    The concrete classes that inherit from this abstract class must implement the following five
+    abstract properties:
 
-    * `reset_batch`, which serves to initialize a batch of episodes with a given batch size;
-    * `_transition_batch`, which determines the transition process between states depending on the
-      action taken; and
-    * `state_batch_to_graph_batch`, which determines how the underlying graphs are extracted from
-      states, i.e., how a batch of underlying graphs is extracted from a given batch of states.
+    1. `state_length`, which returns the length of the `numpy.ndarray` lists that represent the
+       states;
+    2. `state_dtype`, which returns the type of the `numpy.ndarray` lists that represent the
+       states;
+    3. `action_number`, which returns the total number of actions that can be executed;
+    4. `action_mask`, which determines what actions are currently available for execution in each
+       of the episodes that are being run in parallel; and
+    5. `episode_length`, which returns the predetermined common length of all of the episodes to be
+       run in parallel or that are currently being run in parallel;
+
+    as well as the following three abstract methods:
+
+    1. `reset_batch`, which serves to initialize a batch of episodes with a given batch size;
+    2. `_transition_batch`, which determines the transition process between states depending on the
+       action taken; and
+    3. `state_batch_to_graph_batch`, which determines how the underlying graphs are extracted from
+       states, i.e., how a batch of underlying graphs is extracted from a given batch of states.
 
     :ivar __reward_type: An item of the `RewardType` enumeration that determines the (sub)type of
         reward system that is used in the given RL environment.
@@ -176,7 +190,10 @@ class GraphEnvironment(ABC):
     @abstractmethod
     def state_length(self) -> int:
         """
-        #TODO
+        This abstract property must be implemented in any concrete class that inherits from the
+        `GraphEnvironment` class. It should return the number of entries in each of the state
+        vectors, i.e., the length of the `numpy.ndarray` lists that represent the states, as a
+        positive `int`.
         """
 
         pass
@@ -185,7 +202,9 @@ class GraphEnvironment(ABC):
     @abstractmethod
     def state_dtype(self) -> np.dtype:
         """
-        #TODO
+        This abstract property must be implemented in any concrete class that inherits from the
+        `GraphEnvironment` class. It should return the type of the `numpy.ndarray` lists that
+        represent the states, as a `numpy.dtype` object.
         """
 
         pass
@@ -194,7 +213,9 @@ class GraphEnvironment(ABC):
     @abstractmethod
     def action_number(self) -> int:
         """
-        #TODO
+        This abstract property must be implemented in any concrete class that inherits from the
+        `GraphEnvironment` class. It should return the total number of actions that can be
+        executed, as a positive `int`.
         """
 
         pass
@@ -203,7 +224,13 @@ class GraphEnvironment(ABC):
     @abstractmethod
     def action_mask(self) -> Optional[np.ndarray]:
         """
-        #TODO
+        This abstract property must be implemented in any concrete class that inherits from the
+        `GraphEnvironment` class. It should return `None` provided no episodes are currently being
+        run in parallel, or if the episodes currently being run in parallel are such that any
+        action is available for execution in any of the current states. Otherwise, the property
+        should return a `numpy.ndarray` matrix ``a`` of type `bool` such that ``a[i, j]`` indicates
+        whether action $j$ is available for execution in the current state of the $i$-th episode in
+        the batch of episodes.
         """
 
         pass
@@ -212,7 +239,10 @@ class GraphEnvironment(ABC):
     @abstractmethod
     def episode_length(self) -> int:
         """
-        #TODO
+        This abstract property must be implemented in any concrete class that inherits from the
+        `GraphEnvironment` class. It should return the predetermined common length of all of the
+        episodes to be run in parallel or that are currently being run in parallel, i.e., the total
+        number of actions to be executed in each of these episodes, as a positive `int`.
         """
 
         pass
@@ -229,7 +259,7 @@ class GraphEnvironment(ABC):
         attribute.
 
         :param batch_size: The batch size of the batch of episodes that should be initialized,
-            i.e., the number of episodes in it, given as a positive integer.
+            i.e., the number of episodes in it, given as a positive `int`.
 
         :return: A tuple ``(initial_state_batch, status)``, where
 
@@ -253,16 +283,16 @@ class GraphEnvironment(ABC):
         respective batches matches the order of the performed actions and the original states.
 
         :param action_batch: The batch of actions to be applied to the states in the batch of
-            current states, given as a `numpy.ndarray` matrix where the rows correspond to the
-            actions. The number of actions in this batch must be the same as the number of states
-            in the `_state_batch` attribute.
+            current states, given as a `numpy.ndarray` list of type `numpy.int32` whose entries
+            correspond to the actions. The number of actions in this batch must be the same as the
+            number of states in the `_state_batch` attribute.
 
         :return: A tuple ``(new_state_batch, reward_batch, status)``, where:
 
             * ``new_state_batch`` is the batch of newly obtained states, given as a `numpy.ndarray`
               matrix where the rows correspond to the states;
-            * ``reward_batch`` is the batch of computed rewards, given as a `numpy.ndarray` list;
-              and
+            * ``reward_batch`` is the batch of computed rewards, given as a `numpy.ndarray` list of
+              type `numpy.float32`; and
             * ``status`` is an item of the `EpisodeStatus` enumeration that determines the new
               status corresponding to the batch of episodes run in parallel.
         """
@@ -318,15 +348,15 @@ class GraphEnvironment(ABC):
         class that inherits from the `GraphEnvironment` class.
 
         :param action_batch: The batch of actions to be applied to the states in the batch of
-            current states, given as a `numpy.ndarray` matrix where the rows correspond to the
-            actions. The number of actions in this batch must be the same as the number of states
-            in the `_state_batch` attribute.
+            current states, given as a `numpy.ndarray` list of type `numpy.int32` whose entries
+            correspond to the actions. The number of actions in this batch must be the same as the
+            number of states in the `_state_batch` attribute.
         """
 
         pass
 
     @abstractmethod
-    def state_batch_to_graph_batch(self, state_batch: np.ndarray) -> GraphBatch:
+    def state_batch_to_graph_batch(self, state_batch: np.ndarray) -> Graph:
         """
         This abstract method must be implemented in any concrete class that inherits from the
         `GraphEnvironment` class. Its goal is to extract the batch of underlying graphs from any
@@ -337,10 +367,27 @@ class GraphEnvironment(ABC):
             extracted, given as a `numpy.ndarray` matrix whose rows correspond to the states in the
             batch.
 
-        :return: The extracted batch of underlying graphs, given as a `GraphBatch` object.
+        :return: The extracted batch of underlying graphs, given as a `Graph` object.
 
         :note: The implementation of this method must be a pure function, i.e., it should not
             modify any attributes of the given instance.
         """
 
         pass
+
+    def state_to_graph(self, state: np.ndarray) -> Graph:
+        """
+        This method extracts the underlying graph from a provided state.
+
+        :param state: The provided state whose underlying graph should be extracted, given as
+            `numpy.ndarray` list, i.e., vector.
+
+        :return: The extracted underlying graph, given as a `Graph` object.
+
+        :note: This method is a pure function, i.e., it does not modify any attributes of the given
+            instance.
+        """
+
+        graph_batch = self.state_batch_to_graph_batch(state.reshape(1, -1))
+
+        return graph_batch[0]
