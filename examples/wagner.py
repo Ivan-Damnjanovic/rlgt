@@ -68,33 +68,35 @@ def graph_invariant(graph_batch: Graph):
 
 
 policy_network = nn.Sequential(
-    nn.Linear(171 + 19, 256),
+    nn.Linear(342, 128),
     nn.ReLU(),
-    nn.Dropout(0.1),
-    nn.Linear(256, 128),
+    # nn.Dropout(0.1),
+    nn.Linear(128, 64),
     nn.ReLU(),
-    nn.Dropout(0.1),
-    nn.Linear(128, 38),
+    # nn.Dropout(0.1),
+    nn.Linear(64, 4),
+    nn.ReLU(),
+    # nn.Dropout(0.1),
+    nn.Linear(4, 2),
 )
 
 
 dcem = DeepCrossEntropyMethod(
-    environment=LocalSetEnvironment(
+    environment=LinearSetEnvironment(
         reward_type=RewardType.SPARSE,
         reward_function=graph_invariant,
         graph_order=19,
         flattened_ordering=FlattenedOrdering.ROW_MAJOR,
-        episode_length=1000,
     ),
     policy_network=policy_network,
-    optimizer=optim.Adam(policy_network.parameters(), lr=0.001),
+    optimizer=optim.SGD(policy_network.parameters(), lr=0.001),
     loss_function=nn.CrossEntropyLoss(),
-    new_candidates_count=200,
-    elite_count=20,
-    survivors_count=10,
+    new_candidates_count=1000,
+    elite_count=70,
+    survivors_count=60,
     random_action_mechanism=create_multiplication_factor_random_action_mechanism(
-        initial_random_action_probability=0.005,
-        waiting_period=30,
+        initial_random_action_probability=0.001,
+        waiting_period=10,
         multiplication_factor=1.1,
         maximum_random_action_probability=0.05,
     ),

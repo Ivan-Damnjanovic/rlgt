@@ -7,7 +7,9 @@ from torch.distributions import Categorical
 
 from ..environments.graph_environment import EpisodeStatus, GraphEnvironment
 from ..graphs.graph import Graph
+from ..graphs.graph_formats import GraphFormat
 from .random_action_mechanisms import RandomActionMechanism
+from ..environments.graph_generators import create_fixed_graph_generator
 
 
 class DeepCrossEntropyMethod:
@@ -67,6 +69,12 @@ class DeepCrossEntropyMethod:
         self._population_rewards = np.zeros((total_population,), dtype=np.float32)
 
     def step(self):
+        # if self._step_count >= 1:
+        #     self._environment.initial_graph_generator = create_fixed_graph_generator(
+        #         fixed_graph=self.best_graph,
+        #         graph_format=GraphFormat.FLATTENED_ROW_MAJOR_BINARY,
+        #     )
+
         state_batch, status = self._environment.reset_batch(batch_size=self._new_candidates_count)
         self._population_states[0, self._survivors_count :, :] = state_batch
         self._population_rewards[self._survivors_count :] = 0
