@@ -2,6 +2,8 @@ import numpy as np
 from rl_graph_theory.environments.graph_generators import create_fixed_graph_generator, create_choose_two_graph_generator, create_edge_perturbation_graph_generator, create_random_graph_generator
 from rl_graph_theory.graphs.graph import Graph
 from rl_graph_theory.graphs.graph_formats import FlattenedOrdering
+from rl_graph_theory.environments.linear_environments import LinearBuildEnvironment
+from rl_graph_theory.environments.graph_environment import RewardType
 
 # gb = GraphBatch()
 
@@ -20,11 +22,11 @@ from rl_graph_theory.graphs.graph_formats import FlattenedOrdering
 
 
 
-generator = create_fixed_graph_generator(
-    Graph.from_flattened(np.array([1, 0, 1, 1, 1, 0, 0, 1, 0, 0], dtype=np.uint8))
-)
+# generator = create_fixed_graph_generator(
+#     Graph.from_flattened(np.array([1, 0, 1, 1, 1, 0, 0, 1, 0, 0], dtype=np.uint8))
+# )
 
-print(generator(7).bitmask_out)
+# print(generator(7).bitmask_out)
 
 
 
@@ -66,3 +68,27 @@ print(generator(7).bitmask_out)
 # print((result == 0).sum() / 150000)
 # print((result == 1).sum() / 150000)
 # print((result == 2).sum() / 150000)
+
+
+lbe = LinearBuildEnvironment(
+    reward_type=RewardType.SPARSE,
+    reward_function=lambda item: np.ones((item.batch_size,), dtype=np.float32),
+    graph_order=3,
+    edge_colors=3,
+)
+
+state_batch, status = lbe.reset_batch(4)
+print(state_batch, status)
+print(lbe.state_batch_to_graph_batch(state_batch).flattened_row_major_colors)
+
+state_batch, reward_batch, status = lbe.step_batch(np.array([1, 2, 0, 1], dtype=np.int32))
+print(state_batch, reward_batch, status)
+print(lbe.state_batch_to_graph_batch(state_batch).flattened_row_major_colors)
+
+state_batch, reward_batch, status = lbe.step_batch(np.array([2, 0, 1, 1], dtype=np.int32))
+print(state_batch, reward_batch, status)
+print(lbe.state_batch_to_graph_batch(state_batch).flattened_row_major_colors)
+
+state_batch, reward_batch, status = lbe.step_batch(np.array([1, 1, 0, 2], dtype=np.int32))
+print(state_batch, reward_batch, status)
+print(lbe.state_batch_to_graph_batch(state_batch).flattened_row_major_colors)

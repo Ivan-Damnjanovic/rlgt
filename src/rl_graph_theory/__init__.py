@@ -2,4 +2,4 @@
 #TODO
 """
 
-from . import environments, graphs
+from . import environments, graphs, agents

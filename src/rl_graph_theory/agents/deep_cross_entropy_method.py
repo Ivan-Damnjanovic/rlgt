@@ -6,10 +6,10 @@ import torch.nn as nn
 from torch.distributions import Categorical
 
 from ..environments.graph_environment import EpisodeStatus, GraphEnvironment
+from ..environments.graph_generators import create_fixed_graph_generator
 from ..graphs.graph import Graph
 from ..graphs.graph_formats import GraphFormat
 from .random_action_mechanisms import RandomActionMechanism
-from ..environments.graph_generators import create_fixed_graph_generator
 
 
 class DeepCrossEntropyMethod:
