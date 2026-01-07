@@ -462,7 +462,7 @@ class GlobalFlipEnvironment(GraphEnvironment):
     def _transition_batch(self, action_batch: np.ndarray) -> None:
         rows = np.arange(self._state_batch.shape[0])
 
-        recolored_edges = action_batch % self._flattened_length
+        recolored_edges = action_batch[:, 0] % self._flattened_length
 
         # If the ``_flip_only`` attribute is `True`, then all the selected edges (resp. arcs) must
         # be flipped.
@@ -471,7 +471,7 @@ class GlobalFlipEnvironment(GraphEnvironment):
         # Otherwise, each selected edge (resp. arc) is either flipped or not flipped, depending on
         # the value ``a // flattened_length``.
         else:
-            to_flip_or_not_to_flip = action_batch // self._flattened_length
+            to_flip_or_not_to_flip = action_batch[:, 1]  # // self._flattened_length
             self._state_batch[rows, recolored_edges] ^= to_flip_or_not_to_flip.astype(np.uint8)
 
         self._step_count += 1
