@@ -171,7 +171,7 @@ class LinearBuildEnvironment(GraphEnvironment):
         # If the graphs have only two proper edge colors, then the transition can easily be done as
         # follows.
         if self._edge_colors == 2:
-            self._state_batch[:, self._step_count] = action_batch
+            self._state_batch[:, self._step_count] = action_batch[:, 0]
         # Otherwise, the next trick should be used.
         else:
             view = self._state_batch.reshape(-1, self._edge_colors, self._flattened_length)
@@ -419,7 +419,7 @@ class LinearSetEnvironment(GraphEnvironment):
         # If the graphs have only two proper edge colors, then the transition can easily be done as
         # follows.
         if self._edge_colors == 2:
-            self._state_batch[:, self._step_count] = action_batch
+            self._state_batch[:, self._step_count] = action_batch[:, 0]
         # Otherwise, the next trick should be used.
         else:
             view = self._state_batch.reshape(-1, self._edge_colors, self._flattened_length)
@@ -641,7 +641,7 @@ class LinearFlipEnvironment(GraphEnvironment):
             number of states in the `_state_batch` attribute.
         """
 
-        self._state_batch[:, self._step_count] ^= action_batch.astype(np.uint8)
+        self._state_batch[:, self._step_count] ^= action_batch[:, 0].astype(np.uint8)
         # Set the current edge (resp. arc) position flags to zero and increment the ``_step_count``
         # attribute.
         self._state_batch[:, self._flattened_length + self._step_count] = 0

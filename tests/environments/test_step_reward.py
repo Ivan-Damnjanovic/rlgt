@@ -22,6 +22,21 @@ class StepRewardTestingEnvironment(GraphEnvironment):
     def state_batch_to_graph_batch(self, state_batch):
         return state_batch
 
+    def action_mask():
+        return
+
+    def action_number():
+        return
+
+    def episode_length():
+        return
+
+    def state_dtype():
+        return
+
+    def state_length():
+        return
+
 
 def test_not_in_progress():
     env = StepRewardTestingEnvironment(RewardType.SPARSE, lambda _: None)

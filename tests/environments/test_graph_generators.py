@@ -71,7 +71,8 @@ def combinations(a, b):
 def verify_generator(generator, graphs):
     gb = generator(len(graphs))
     np.testing.assert_array_equal(
-        gb.flattened_row_major, np.stack([g.flattened_row_major for g in graphs], axis=0)
+        gb.flattened_row_major_colors,
+        np.stack([g.flattened_row_major_colors for g in graphs], axis=0),
     )
 
     assert gb.edge_colors == graphs[0].edge_colors
@@ -100,7 +101,7 @@ def test_choose_two(graph: tuple[Graph, GraphFormat], prob: float):
     first_graph, graph_format = graph
 
     second_graph = Graph.from_flattened(
-        first_graph.flattened_row_major,
+        first_graph.flattened_row_major_colors,
         FlattenedOrdering.ROW_MAJOR,
         first_graph.edge_colors,
         first_graph.is_directed,
@@ -315,7 +316,7 @@ def test_edge_pertrubation(
         rng=rng,
     )(batch_size)
 
-    np.testing.assert_array_equal(out.flattened_row_major, result)
+    np.testing.assert_array_equal(out.flattened_row_major_colors, result)
 
 
 @pytest.mark.parametrize(
@@ -435,4 +436,4 @@ def test_random_graph(
         rng=rng,
     )(batch_size)
 
-    np.testing.assert_array_equal(out.flattened_row_major, result)
+    np.testing.assert_array_equal(out.flattened_row_major_colors, result)

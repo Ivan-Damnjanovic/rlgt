@@ -156,8 +156,8 @@ def test_state_batch_to_graph_batch(
     np.testing.assert_array_equal(
         flattened,
         (
-            graph_batch.flattened_clockwise
+            graph_batch.flattened_clockwise_colors
             if flattened_ordering is FlattenedOrdering.CLOCKWISE
-            else graph_batch.flattened_row_major
+            else graph_batch.flattened_row_major_colors
         ),
     )

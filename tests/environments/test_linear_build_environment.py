@@ -157,9 +157,9 @@ def test_state_batch_to_graph_batch(
     np.testing.assert_array_equal(
         flattened,
         (
-            graph_batch.flattened_clockwise
+            graph_batch.flattened_clockwise_colors
             if flattened_ordering is FlattenedOrdering.CLOCKWISE
-            else graph_batch.flattened_row_major
+            else graph_batch.flattened_row_major_colors
         ),
     )
 
@@ -167,7 +167,7 @@ def test_state_batch_to_graph_batch(
 def test_limit():
     env = LinearBuildEnvironment(
         RewardType.TELESCOPIC,
-        lambda a: np.sum(a.flattened_row_major, axis=1, dtype=np.int32),
+        lambda a: np.sum(a.flattened_row_major_colors, axis=1, dtype=np.int32),
         graph_order=2,
         flattened_ordering=FlattenedOrdering.ROW_MAJOR,
         edge_colors=255,
