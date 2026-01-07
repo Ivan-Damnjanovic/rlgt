@@ -248,7 +248,9 @@ class GlobalSetEnvironment(GraphEnvironment):
 
     def state_batch_to_graph_batch(self, state_batch: np.ndarray) -> Graph:
         return Graph.from_flattened(
-            flattened=state_batch.reshape(-1, self._edge_colors - 1, self._flattened_length),
+            flattened=state_batch.reshape(
+                -1, self._edge_colors - 1, self._flattened_length
+            ).copy(),
             flattened_ordering=self._flattened_ordering,
             color_representation=ColorRepresentation.BINARY_SLICES,
             edge_colors=self._edge_colors,
@@ -480,7 +482,7 @@ class GlobalFlipEnvironment(GraphEnvironment):
 
     def state_batch_to_graph_batch(self, state_batch: np.ndarray) -> Graph:
         return Graph.from_flattened(
-            flattened=state_batch.reshape(-1, 1, self._flattened_length),
+            flattened=state_batch.reshape(-1, 1, self._flattened_length).copy(),
             flattened_ordering=self._flattened_ordering,
             color_representation=ColorRepresentation.BINARY_SLICES,
             is_directed=self._is_directed,

@@ -190,7 +190,7 @@ class LinearBuildEnvironment(GraphEnvironment):
             self._status = EpisodeStatus.TERMINATED
 
     def state_batch_to_graph_batch(self, state_batch: np.ndarray) -> Graph:
-        temp = state_batch.reshape(-1, self._edge_colors, self._flattened_length)
+        temp = state_batch.reshape(-1, self._edge_colors, self._flattened_length).copy()
 
         # If all the underlying graphs are fully colored, then extract them in a reduced flattened
         # format with binary slices.
@@ -439,7 +439,7 @@ class LinearSetEnvironment(GraphEnvironment):
             self._status = EpisodeStatus.TERMINATED
 
     def state_batch_to_graph_batch(self, state_batch: np.ndarray) -> Graph:
-        temp = state_batch.reshape(-1, self._edge_colors, self._flattened_length)
+        temp = state_batch.reshape(-1, self._edge_colors, self._flattened_length).copy()
 
         return Graph.from_flattened(
             flattened=temp[:, :-1, :],
@@ -654,7 +654,7 @@ class LinearFlipEnvironment(GraphEnvironment):
             self._status = EpisodeStatus.TERMINATED
 
     def state_batch_to_graph_batch(self, state_batch: np.ndarray) -> Graph:
-        temp = state_batch.reshape(-1, 2, self._flattened_length)
+        temp = state_batch.reshape(-1, 2, self._flattened_length).copy()
 
         return Graph.from_flattened(
             flattened=temp[:, :-1, :],

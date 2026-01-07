@@ -330,10 +330,14 @@ class LocalSetEnvironment(GraphEnvironment):
             self._status = EpisodeStatus.TRUNCATED
 
     def state_batch_to_graph_batch(self, state_batch: np.ndarray) -> Graph:
-        temp = state_batch[:, : -self._graph_order]
+        temp = (
+            state_batch[:, : -self._graph_order]
+            .reshape(-1, self._edge_colors - 1, self._flattened_length)
+            .copy()
+        )
 
         return Graph.from_flattened(
-            flattened=temp.reshape(-1, self._edge_colors - 1, self._flattened_length),
+            flattened=temp,
             flattened_ordering=self._flattened_ordering,
             color_representation=ColorRepresentation.BINARY_SLICES,
             edge_colors=self._edge_colors,
@@ -651,10 +655,12 @@ class LocalFlipEnvironment(GraphEnvironment):
             self._status = EpisodeStatus.TRUNCATED
 
     def state_batch_to_graph_batch(self, state_batch: np.ndarray) -> Graph:
-        temp = state_batch[:, : self._flattened_length]
+        temp = (
+            state_batch[:, : self._flattened_length].reshape(-1, 1, self._flattened_length).copy()
+        )
 
         return Graph.from_flattened(
-            flattened=temp.reshape(-1, 1, self._flattened_length),
+            flattened=temp,
             flattened_ordering=self._flattened_ordering,
             color_representation=ColorRepresentation.BINARY_SLICES,
             is_directed=self._is_directed,
