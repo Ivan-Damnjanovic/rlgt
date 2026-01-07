@@ -60,9 +60,9 @@ def test_monochromatic_graph(
         verify_instantiated_graph(
             constructor=lambda: MonochromaticGraph(
                 graph_format=graph_format,
-                order=order,
+                graph_order=order,
                 edge_colors=edge_colors,
-                selected_edge_color=selected_edge_color,
+                selected_color=selected_edge_color,
                 is_directed=is_directed,
                 allow_loops=allow_loops,
             ),
@@ -159,7 +159,7 @@ def test_complete_bipartite_graph(
         if graph_format not in [
             GraphFormat.BITMASK_IN,
             GraphFormat.BITMASK_OUT,
-            GraphFormat.ADJACENCY_MATRIX,
+            GraphFormat.ADJACENCY_MATRIX_COLORS,
         ]:
             with pytest.raises(ValueError):
                 CompleteBipartiteGraph(graph_format, partition_size_1, partition_size_2)
@@ -197,7 +197,7 @@ def test_complete_k_partite_graph(
         if graph_format not in [
             GraphFormat.BITMASK_IN,
             GraphFormat.BITMASK_OUT,
-            GraphFormat.ADJACENCY_MATRIX,
+            GraphFormat.ADJACENCY_MATRIX_COLORS,
         ]:
             with pytest.raises(ValueError):
                 CompleteKPartiteGraph(graph_format, partition_sizes)

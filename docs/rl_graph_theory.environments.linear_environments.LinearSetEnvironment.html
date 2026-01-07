@@ -177,6 +177,16 @@
         
 
         
+            <div class="itemName"><code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html#state_to_graph" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment.state_to_graph">state<wbr></wbr>_to<wbr></wbr>_graph</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
             <div class="itemName"><code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html#step_batch" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment.step_batch">step<wbr></wbr>_batch</a></code>
             </div>
         
@@ -194,6 +204,56 @@
 
         
             <div class="itemName"><code><a href="#initial_graph_generator" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment.initial_graph_generator">initial<wbr></wbr>_graph<wbr></wbr>_generator</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#action_mask" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment.action_mask">action<wbr></wbr>_mask</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#action_number" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment.action_number">action<wbr></wbr>_number</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#episode_length" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment.episode_length">episode<wbr></wbr>_length</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#state_dtype" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment.state_dtype">state<wbr></wbr>_dtype</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#state_length" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment.state_length">state<wbr></wbr>_length</a></code>
             </div>
         
 
@@ -414,39 +474,37 @@
         <div class="moduleDocstring">
           <div><p>This class inherits from the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code> class and models a graph-building game in which
 the edges (resp. arcs) are all initially fully colored in some manner and are then properly
-recolored one by one, either in the flattened row-major order or the flattened clockwise order.
-The user can select the graph order and the number of proper edge colors, as well as choose
-whether the graphs should be directed or undirected, and whether loops should be allowed.
-Additionally, the user can configure the mechanism that controls how the initial fully colored
-graphs are colored, which could be either deterministic or nondeterministic. The edges
-(resp. arcs) are then properly recolored in the same way that a graph is reconstructed from a
-flattened format. In other words, if loops are not allowed, then these edges (resp. arcs) are
-just deleted and completely ignored, and if the graphs are undirected, then only the upper
-triangular part of an adjacency matrix is considered (with or without the diagonal, depending
-on whether loops are allowed) and each edge is essentially recolored in both directions at the
-same time. The user can choose whether the edges (resp. arcs) should be properly recolored in
-the flattened row-major order or the flattened clockwise order.</p>
-<p>The RL tasks in this environment are episodic, and the total number of actions to be performed
-equals the number of entries in each of the two flattened graph formats. Therefore, this number
-depends on the selected graph order, on whether the constructed graphs are directed, and on
-whether loops are allowed.</p>
+recolored one by one, either in the row-major order or the clockwise order. The user can select
+the graph order and the number of proper edge colors, as well as choose whether the graphs
+should be directed or undirected, and whether loops should be allowed. Additionally, the user
+can configure the mechanism that controls how the initial fully colored graphs are colored,
+which could be either deterministic or nondeterministic. The edges (resp. arcs) are then
+properly recolored in the same way that a graph is reconstructed from a flattened format. In
+other words, if loops are not allowed, then these edges (resp. arcs) are just deleted and
+completely ignored, and if the graphs are undirected, then only the upper triangular part of an
+adjacency matrix is considered (with or without the diagonal, depending on whether loops are
+allowed) and each edge is essentially recolored in both directions at the same time. The user
+can choose whether the edges (resp. arcs) should be properly recolored in the row-major order
+or the clockwise order.</p>
+<p>The RL tasks in this environment are episodic, and the episode length equals the flattened
+length, i.e., the number of entries in each of the two flattened formats with color numbers.
+Therefore, this number depends on the selected graph order, on whether the constructed graphs
+are directed, and on whether loops are allowed.</p>
 <p>Each state is represented by a binary <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> list of type <code><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.uint8" class="intersphinx-link">numpy.uint8</a></code> and length
 <tt class="rst-docutils rst-literal">edge_colors * flattened_length</tt>, where <tt class="rst-docutils rst-literal">edge_colors</tt> is the configured number of proper
-edge colors, while <tt class="rst-docutils rst-literal">flattened_length</tt> is the length of the <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> list from any of
-the two flattened graph formats of the graphs to be constructed. In the state vector, in the
-first <tt class="rst-docutils rst-literal">flattened_length</tt> bits, the value 1 indicates which of the <tt class="rst-docutils rst-literal">flattened_length</tt> edges
-(resp. arcs) are currently of the color 1; in the second <tt class="rst-docutils rst-literal">flattened_length</tt> bits, the value 1
-indicates which of the <tt class="rst-docutils rst-literal">flattened_length</tt> edges (resp. arcs) are currently of the color 2;
-and so on until the <tt class="rst-docutils rst-literal">(edge_colors - 1)</tt>-th <tt class="rst-docutils rst-literal">flattened_length</tt> bits, where the value 1
-indicates which of the <tt class="rst-docutils rst-literal">flattened_length</tt> edges (resp. arcs) are currently of the color
-<tt class="rst-docutils rst-literal">edge_colors - 1</tt>. The final <tt class="rst-docutils rst-literal">flattened_length</tt> bits represent a one-hot encoding of the
-position that determines the next edge (resp. arc) to be properly recolored. In other words,
-there is either one value of 1 whose index determines which edge (resp. arc) should be properly
-recolored next, or all the values are 0 and this signifies a terminal state, i.e., a state
-where all the edges (resp. arcs) have been recolored.</p>
-<p>Each action is represented by a single-entry <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> list of type <code><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.int8" class="intersphinx-link">numpy.int8</a></code>
-containing a value between 0 and <tt class="rst-docutils rst-literal">edge_colors - 1</tt> that determines which color the next edge
-(resp. arc) should be properly recolored with.</p>
+edge colors, while <tt class="rst-docutils rst-literal">flattened_length</tt> is the flattened length of the graphs to be
+constructed. In the state vector, in the first <tt class="rst-docutils rst-literal">flattened_length</tt> bits, the value 1 indicates
+which of the <tt class="rst-docutils rst-literal">flattened_length</tt> edges (resp. arcs) are currently of the color 1; in the
+second <tt class="rst-docutils rst-literal">flattened_length</tt> bits, the value 1 indicates which of the <tt class="rst-docutils rst-literal">flattened_length</tt> edges
+(resp. arcs) are currently of the color 2; and so on until the <tt class="rst-docutils rst-literal">(edge_colors - 1)</tt>-th
+<tt class="rst-docutils rst-literal">flattened_length</tt> bits, where the value 1 indicates which of the <tt class="rst-docutils rst-literal">flattened_length</tt> edges
+(resp. arcs) are currently of the color <tt class="rst-docutils rst-literal">edge_colors - 1</tt>. The final <tt class="rst-docutils rst-literal">flattened_length</tt>
+bits represent a one-hot encoding of the position that determines the next edge (resp. arc) to
+be properly recolored. In other words, there is either one value of 1 whose index determines
+which edge (resp. arc) should be properly recolored next, or all the values are 0 and this
+signifies a terminal state, i.e., a state where all the edges (resp. arcs) have been recolored.</p>
+<p>Each action is represented by a <code><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.int32" class="intersphinx-link">numpy.int32</a></code> integer between 0 and <tt class="rst-docutils rst-literal">edge_colors - 1</tt> that
+determines which color the next edge (resp. arc) should be properly recolored with.</p>
 </div>
         </div>
 
@@ -474,36 +532,61 @@ containing a value between 0 and <tt class="rst-docutils rst-literal">edge_color
     <td>Instance Variable</td>
     <td><code><a href="#initial_graph_generator" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment.initial_graph_generator">initial<wbr></wbr>_graph<wbr></wbr>_generator</a></code></td>
     <td>A <code><a href="rl_graph_theory.environments.graph_generators.html#GraphGenerator" class="internal-link" title="rl_graph_theory.environments.graph_generators.GraphGenerator">GraphGenerator</a></code> function that describes the mechanism for generating the underlying fully colored graphs for the states in the batch of initial states. It is possible to re-configure this attribute between two independent batches of episodes run in parallel.</td>
+  </tr><tr class="property">
+    
+    <td>Property</td>
+    <td><code><a href="#action_mask" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment.action_mask">action<wbr></wbr>_mask</a></code></td>
+    <td>This abstract property must be implemented in any concrete class that inherits from the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code> class. It should return <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> provided no episodes are currently being run in parallel, or if the episodes currently being run in parallel are such that any action is available for execution in any of the current states...</td>
+  </tr><tr class="property">
+    
+    <td>Property</td>
+    <td><code><a href="#action_number" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment.action_number">action<wbr></wbr>_number</a></code></td>
+    <td>This abstract property must be implemented in any concrete class that inherits from the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code> class. It should return the total number of actions that can be executed, as a positive <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code>.</td>
+  </tr><tr class="property">
+    
+    <td>Property</td>
+    <td><code><a href="#episode_length" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment.episode_length">episode<wbr></wbr>_length</a></code></td>
+    <td>This abstract property must be implemented in any concrete class that inherits from the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code> class. It should return the predetermined common length of all of the episodes to be run in parallel or that are currently being run in parallel, i...</td>
+  </tr><tr class="property">
+    
+    <td>Property</td>
+    <td><code><a href="#state_dtype" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment.state_dtype">state<wbr></wbr>_dtype</a></code></td>
+    <td>This abstract property must be implemented in any concrete class that inherits from the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code> class. It should return the type of the <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> lists that represent the states, as a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" class="intersphinx-link">numpy.dtype</a></code>...</td>
+  </tr><tr class="property">
+    
+    <td>Property</td>
+    <td><code><a href="#state_length" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment.state_length">state<wbr></wbr>_length</a></code></td>
+    <td>This abstract property must be implemented in any concrete class that inherits from the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code> class. It should return the number of entries in each of the state vectors, i.e., the length of the ...</td>
   </tr><tr class="method private">
     
     <td>Method</td>
     <td><code><a href="#_transition_batch" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment._transition_batch">_transition<wbr></wbr>_batch</a></code></td>
-    <td>This method performs the transition process by executing a batch of given actions and applying them element-wise to the states in the batch of current states given by the <code><a href="rl_graph_theory.environments.linear_environments.LinearSetEnvironment.html#_state_batch" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment._state_batch">_state_batch</a></code> attribute.</td>
+    <td>This abstract method must be implemented in any concrete class that inherits from the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code> class. It should perform the transition process by executing a batch of given actions and applying them element-wise to the states in the batch of current states given by the ...</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
     <td><code><a href="#_allow_loops" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment._allow_loops">_allow<wbr></wbr>_loops</a></code></td>
-    <td>A boolean that indicates whether the graphs to be constructed are allowed to have loops.</td>
+    <td>A <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> that indicates whether the graphs to be constructed are allowed to have loops.</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
     <td><code><a href="#_edge_colors" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment._edge_colors">_edge<wbr></wbr>_colors</a></code></td>
-    <td>The number of proper edge colors in the graphs to be constructed.</td>
+    <td>The number of proper edge colors in the graphs to be constructed, given as a positive <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> that is at least 2.</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
     <td><code><a href="#_flattened_length" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment._flattened_length">_flattened<wbr></wbr>_length</a></code></td>
-    <td>A positive integer that determines the length of the <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> list from any of the two flattened graph formats of the graphs to be constructed. This number also represents how many actions are needed in total to reach a terminal state from an initial state.</td>
+    <td>A positive <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> that determines the length of the <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> list from any of the two flattened formats with color numbers of the graphs to be constructed. This number also represents how many actions are needed in total to reach a terminal state from an initial state, i...</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
     <td><code><a href="#_flattened_ordering" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment._flattened_ordering">_flattened<wbr></wbr>_ordering</a></code></td>
-    <td>An item of the <code><a href="rl_graph_theory.graphs.graph_format.FlattenedOrdering.html" class="internal-link" title="rl_graph_theory.graphs.graph_format.FlattenedOrdering">FlattenedOrdering</a></code> enumeration that determines whether the edges (resp. arcs) should be properly recolored in the flattened row-major order or the flattened clockwise order.</td>
+    <td>An item of the <code><a href="rl_graph_theory.graphs.graph_formats.FlattenedOrdering.html" class="internal-link" title="rl_graph_theory.graphs.graph_formats.FlattenedOrdering">FlattenedOrdering</a></code> enumeration that determines whether the edges (resp. arcs) should be properly recolored in the row-major order or the clockwise order.</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
     <td><code><a href="#_is_directed" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment._is_directed">_is<wbr></wbr>_directed</a></code></td>
-    <td>A boolean that indicates whether the graphs to be constructed are a $k$-edge-colored looped complete directed graph or a $k$-edge-colored looped complete undirected graph.</td>
+    <td>A <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> that indicates whether the graphs to be constructed are a $k$-edge-colored looped complete directed graph or a $k$-edge-colored looped complete undirected graph.</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
@@ -513,7 +596,7 @@ containing a value between 0 and <tt class="rst-docutils rst-literal">edge_color
     
     <td>Instance Variable</td>
     <td><code><a href="#_state_length" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment._state_length">_state<wbr></wbr>_length</a></code></td>
-    <td>A positive integer that determines the length of each of the state vectors, i.e., the number <tt class="rst-docutils rst-literal">_edge_colors * _flattened_length</tt>.</td>
+    <td>A positive <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> that determines the length of each of the state vectors, i.e., the number <tt class="rst-docutils rst-literal">_edge_colors * _flattened_length</tt>.</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
@@ -523,7 +606,7 @@ containing a value between 0 and <tt class="rst-docutils rst-literal">edge_color
     
     <td>Instance Variable</td>
     <td><code><a href="#_step_count" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment._step_count">_step<wbr></wbr>_count</a></code></td>
-    <td>Either <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, or an integer between 0 and <code><a href="rl_graph_theory.environments.linear_environments.LinearSetEnvironment.html#_flattened_length" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment._flattened_length">_flattened_length</a></code> that signifies the index of the next edge (resp. arc) to be properly recolored, in the order determined by the <code><a href="rl_graph_theory.environments.linear_environments.LinearSetEnvironment.html#_flattened_ordering" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment._flattened_ordering">_flattened_ordering</a></code> attribute. ...</td>
+    <td>Either <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, or a nonnegative <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> between 0 and <code><a href="rl_graph_theory.environments.linear_environments.LinearSetEnvironment.html#_flattened_length" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment._flattened_length">_flattened_length</a></code> that signifies the index of the next edge (resp. arc) to be properly recolored, in the order determined by the <code><a href="rl_graph_theory.environments.linear_environments.LinearSetEnvironment.html#_flattened_ordering" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment._flattened_ordering">_flattened_ordering</a></code> attribute...</td>
   </tr>
 </table>
           
@@ -534,6 +617,11 @@ containing a value between 0 and <tt class="rst-docutils rst-literal">edge_color
   
   
   <tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html#state_to_graph" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment.state_to_graph">state<wbr></wbr>_to<wbr></wbr>_graph</a></code></td>
+    <td>This method extracts the underlying graph from a provided state.</td>
+  </tr><tr class="basemethod">
     
     <td>Method</td>
     <td><code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html#step_batch" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment.step_batch">step<wbr></wbr>_batch</a></code></td>
@@ -568,7 +656,7 @@ containing a value between 0 and <tt class="rst-docutils rst-literal">edge_color
   <div class="functionHeader">
     
     
-    <span class="py-keyword">def</span>&#160;<span class="py-defname">__init__</span><span class="function-signature long-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">reward_type: <code><a href="rl_graph_theory.environments.graph_environment.RewardType.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.RewardType">RewardType</a></code>, </span><span class="rst-sig-param">reward_function: <code><a href="rl_graph_theory.environments.graph_environment.html#RewardFunction" class="internal-link" title="rl_graph_theory.environments.graph_environment.RewardFunction">RewardFunction</a></code>, </span><span class="rst-sig-param">graph_order: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code>, </span><span class="rst-sig-param">flattened_ordering: <code><a href="rl_graph_theory.graphs.graph_format.FlattenedOrdering.html" class="internal-link" title="rl_graph_theory.graphs.graph_format.FlattenedOrdering">FlattenedOrdering</a></code> = <a href="rl_graph_theory.graphs.graph_format.FlattenedOrdering.html#ROW_MAJOR" class="internal-link" title="rl_graph_theory.graphs.graph_format.FlattenedOrdering.ROW_MAJOR">FlattenedOrdering.ROW_MAJOR</a>, </span><span class="rst-sig-param">edge_colors: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> = 2, </span><span class="rst-sig-param">is_directed: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> = <a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a>, </span><span class="rst-sig-param">allow_loops: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> = <a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a>, </span><span class="rst-sig-param">initial_graph_generator: <code><a href="rl_graph_theory.environments.graph_generators.html#GraphGenerator" class="internal-link" title="rl_graph_theory.environments.graph_generators.GraphGenerator">GraphGenerator</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> = <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></span>):</span>
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">__init__</span><span class="function-signature long-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">reward_type: <code><a href="rl_graph_theory.environments.graph_environment.RewardType.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.RewardType">RewardType</a></code>, </span><span class="rst-sig-param">reward_function: <code><a href="rl_graph_theory.environments.graph_environment.html#RewardFunction" class="internal-link" title="rl_graph_theory.environments.graph_environment.RewardFunction">RewardFunction</a></code>, </span><span class="rst-sig-param">graph_order: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code>, </span><span class="rst-sig-param">flattened_ordering: <code><a href="rl_graph_theory.graphs.graph_formats.FlattenedOrdering.html" class="internal-link" title="rl_graph_theory.graphs.graph_formats.FlattenedOrdering">FlattenedOrdering</a></code> = <a href="rl_graph_theory.graphs.graph_formats.FlattenedOrdering.html#ROW_MAJOR" class="internal-link" title="rl_graph_theory.graphs.graph_formats.FlattenedOrdering.ROW_MAJOR">FlattenedOrdering.ROW_MAJOR</a>, </span><span class="rst-sig-param">edge_colors: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> = 2, </span><span class="rst-sig-param">is_directed: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> = <a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a>, </span><span class="rst-sig-param">allow_loops: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> = <a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a>, </span><span class="rst-sig-param">initial_graph_generator: <code><a href="rl_graph_theory.environments.graph_generators.html#GraphGenerator" class="internal-link" title="rl_graph_theory.environments.graph_generators.GraphGenerator">GraphGenerator</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> = <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></span>):</span>
     
     <a class="headerLink" href="#__init__" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment.__init__">
       
@@ -583,16 +671,15 @@ of reward system to be used in the instantiated environment.</td></tr><tr><td cl
 rewards in accordance with the selected (sub)type of reward system. It plays the role
 of either the <tt class="rst-docutils rst-literal">graph_invariant</tt> or the <tt class="rst-docutils rst-literal">graph_invariant_difference</tt> function from
 the description of the <code><a href="rl_graph_theory.environments.graph_environment.RewardType.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.RewardType">RewardType</a></code> enumeration, and its expected signature varies
-depending on the <tt class="rst-docutils rst-literal">reward_type</tt> argument.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">graph<wbr></wbr>_order:</span><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></td><td class="fieldArgDesc">A positive integer (not below two) that represents the graph order of
-the graphs to be constructed.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">flattened<wbr></wbr>_ordering:</span><code><a href="rl_graph_theory.graphs.graph_format.FlattenedOrdering.html" class="internal-link" title="rl_graph_theory.graphs.graph_format.FlattenedOrdering">FlattenedOrdering</a></code></td><td class="fieldArgDesc">An item of the <code><a href="rl_graph_theory.graphs.graph_format.FlattenedOrdering.html" class="internal-link" title="rl_graph_theory.graphs.graph_format.FlattenedOrdering">FlattenedOrdering</a></code> enumeration that determines
-whether the edges (resp. arcs) should be properly recolored in the flattened row-major
-order or the flattened clockwise order. The default value is
-<code><a href="rl_graph_theory.graphs.graph_format.FlattenedOrdering.html#ROW_MAJOR" class="internal-link" title="rl_graph_theory.graphs.graph_format.FlattenedOrdering.ROW_MAJOR">FlattenedOrdering.ROW_MAJOR</a></code>, i.e., the edges (resp. arcs) should be properly
-recolored in the flattened row-major order by default.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">edge<wbr></wbr>_colors:</span><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></td><td class="fieldArgDesc">A positive integer (not below two) that represents the number of proper
-edge colors in the graphs to be constructed. The default value is two.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">is<wbr></wbr>_directed:</span><code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code></td><td class="fieldArgDesc">A boolean that indicates whether the graphs to be constructed are a
+depending on the <tt class="rst-docutils rst-literal">reward_type</tt> argument.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">graph<wbr></wbr>_order:</span><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></td><td class="fieldArgDesc">A positive <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> (not below 2) that represents the graph order of the
+graphs to be constructed.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">flattened<wbr></wbr>_ordering:</span><code><a href="rl_graph_theory.graphs.graph_formats.FlattenedOrdering.html" class="internal-link" title="rl_graph_theory.graphs.graph_formats.FlattenedOrdering">FlattenedOrdering</a></code></td><td class="fieldArgDesc">An item of the <code><a href="rl_graph_theory.graphs.graph_formats.FlattenedOrdering.html" class="internal-link" title="rl_graph_theory.graphs.graph_formats.FlattenedOrdering">FlattenedOrdering</a></code> enumeration that determines
+whether the edges (resp. arcs) should be properly recolored in the row-major order or
+the clockwise order. The default value is <code><a href="rl_graph_theory.graphs.graph_formats.FlattenedOrdering.html#ROW_MAJOR" class="internal-link" title="rl_graph_theory.graphs.graph_formats.FlattenedOrdering.ROW_MAJOR">FlattenedOrdering.ROW_MAJOR</a></code>, i.e., the
+edges (resp. arcs) should be properly recolored in the row-major order by default.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">edge<wbr></wbr>_colors:</span><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></td><td class="fieldArgDesc">A positive <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> (not below 2) that represents the number of proper
+edge colors in the graphs to be constructed. The default value is 2.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">is<wbr></wbr>_directed:</span><code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code></td><td class="fieldArgDesc">A <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> that indicates whether the graphs to be constructed are a
 $k$-edge-colored looped complete directed graph or a $k$-edge-colored looped complete
 undirected graph. The default value is <code><a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a></code>, i.e., the graphs to be constructed are
-undirected by default.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">allow<wbr></wbr>_loops:</span><code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code></td><td class="fieldArgDesc">A boolean that indicates whether the graphs to be constructed are
+undirected by default.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">allow<wbr></wbr>_loops:</span><code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code></td><td class="fieldArgDesc">A <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> that indicates whether the graphs to be constructed are
 allowed to have loops. The default value is <code><a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a></code>, i.e., the graphs to be constructed
 are not allowed to have loops by default.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">initial<wbr></wbr>_graph<wbr></wbr>_generator:</span><code><a href="rl_graph_theory.environments.graph_generators.html#GraphGenerator" class="internal-link" title="rl_graph_theory.environments.graph_generators.GraphGenerator">GraphGenerator</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code></td><td class="fieldArgDesc">Either <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, or a <code><a href="rl_graph_theory.environments.graph_generators.html#GraphGenerator" class="internal-link" title="rl_graph_theory.environments.graph_generators.GraphGenerator">GraphGenerator</a></code> function that
 describes the mechanism for generating the underlying fully colored graphs for the
@@ -629,7 +716,7 @@ return the obtained batch of corresponding states after the initialization has b
 completed, i.e., the value of the <code><a href="#_state_batch" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment._state_batch">_state_batch</a></code> attribute, as well as the status
 corresponding to the initialized batch of episodes, i.e., the value of the <code><a href="#_status" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment._status">_status</a></code>
 attribute.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">batch<wbr></wbr>_size:</span><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></td><td class="fieldArgDesc">The batch size of the batch of episodes that should be initialized,
-i.e., the number of episodes in it, given as a positive integer.</td></tr></table><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/stdtypes.html#tuple" class="intersphinx-link">tuple</a>[<wbr></wbr><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a>, <wbr></wbr><a href="rl_graph_theory.environments.graph_environment.EpisodeStatus.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.EpisodeStatus">EpisodeStatus</a>]</code></td><td class="fieldArgDesc"><p>A tuple <tt class="rst-docutils rst-literal">(initial_state_batch, status)</tt>, where</p>
+i.e., the number of episodes in it, given as a positive <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code>.</td></tr></table><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/stdtypes.html#tuple" class="intersphinx-link">tuple</a>[<wbr></wbr><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a>, <wbr></wbr><a href="rl_graph_theory.environments.graph_environment.EpisodeStatus.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.EpisodeStatus">EpisodeStatus</a>]</code></td><td class="fieldArgDesc"><p>A tuple <tt class="rst-docutils rst-literal">(initial_state_batch, status)</tt>, where</p>
 <ul class="rst-simple">
 <li><tt class="rst-docutils rst-literal">initial_state_batch</tt> is the value of the <code><a href="#_state_batch" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment._state_batch">_state_batch</a></code> attribute after the batch
 of episodes has been initialized, given as a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> matrix where the rows
@@ -651,7 +738,7 @@ been initialized, given as an item of the <code><a href="rl_graph_theory.environ
   <div class="functionHeader">
     
     
-    <span class="py-keyword">def</span>&#160;<span class="py-defname">state_batch_to_graph_batch</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">state_batch: <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code></span>) -&gt; <code><a href="rl_graph_theory.graphs.graph_batch.GraphBatch.html" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch">GraphBatch</a></code>:</span>
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">state_batch_to_graph_batch</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">state_batch: <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code></span>) -&gt; <code><a href="rl_graph_theory.graphs.graph.Graph.html" class="internal-link" title="rl_graph_theory.graphs.graph.Graph">Graph</a></code>:</span>
     
     <a class="headerLink" href="#state_batch_to_graph_batch" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment.state_batch_to_graph_batch">
       
@@ -666,7 +753,7 @@ been initialized, given as an item of the <code><a href="rl_graph_theory.environ
 provided batch of states. The graphs should appear in the same order as their corresponding
 states in the given batch of states.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">state<wbr></wbr>_batch:</span><code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code></td><td class="fieldArgDesc">The batch of provided states whose underlying graphs should be
 extracted, given as a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> matrix whose rows correspond to the states in the
-batch.</td></tr></table><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="rl_graph_theory.graphs.graph_batch.GraphBatch.html" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch">GraphBatch</a></code></td><td class="fieldArgDesc">The extracted batch of underlying graphs, given as a <code><a href="rl_graph_theory.graphs.graph_batch.GraphBatch.html" class="internal-link" title="rl_graph_theory.graphs.graph_batch.GraphBatch">GraphBatch</a></code> object.</td></tr></table><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Note</td></tr><tr><td colspan="2">The implementation of this method must be a pure function, i.e., it should not
+batch.</td></tr></table><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="rl_graph_theory.graphs.graph.Graph.html" class="internal-link" title="rl_graph_theory.graphs.graph.Graph">Graph</a></code></td><td class="fieldArgDesc">The extracted batch of underlying graphs, given as a <code><a href="rl_graph_theory.graphs.graph.Graph.html" class="internal-link" title="rl_graph_theory.graphs.graph.Graph">Graph</a></code> object.</td></tr></table><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Note</td></tr><tr><td colspan="2">The implementation of this method must be a pure function, i.e., it should not
 modify any attributes of the given instance.</td></tr></table></div>
   </div>
 </div><div class="baseinstancevariable">
@@ -696,6 +783,142 @@ states. It is possible to re-configure this attribute between two independent ba
 episodes run in parallel.</p></div>
     
   </div>
+</div><div class="baseproperty">
+  
+  
+  <a name="rl_graph_theory.environments.linear_environments.LinearSetEnvironment.action_mask">
+    
+  </a>
+  <a name="action_mask">
+    
+  </a>
+  <div class="functionHeader">
+    <div><span class="decorator">@<a href="https://docs.python.org/3/library/functions.html#property" class="intersphinx-link">property</a><br /></span></div>
+    <span class="py-defname">action_mask</span>: <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> =
+    
+    <a class="headerLink" href="#action_mask" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment.action_mask">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html#action_mask" class="internal-link">rl_graph_theory.environments.graph_environment.GraphEnvironment.action_mask</a></code></div>
+    <div><p>This abstract property must be implemented in any concrete class that inherits from the
+<code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code> class. It should return <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> provided no episodes are currently being
+run in parallel, or if the episodes currently being run in parallel are such that any
+action is available for execution in any of the current states. Otherwise, the property
+should return a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> matrix <tt class="rst-docutils rst-literal">a</tt> of type <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> such that <tt class="rst-docutils rst-literal">a[i, j]</tt> indicates
+whether action $j$ is available for execution in the current state of the $i$-th episode in
+the batch of episodes.</p></div>
+    
+  </div>
+</div><div class="baseproperty">
+  
+  
+  <a name="rl_graph_theory.environments.linear_environments.LinearSetEnvironment.action_number">
+    
+  </a>
+  <a name="action_number">
+    
+  </a>
+  <div class="functionHeader">
+    <div><span class="decorator">@<a href="https://docs.python.org/3/library/functions.html#property" class="intersphinx-link">property</a><br /></span></div>
+    <span class="py-defname">action_number</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
+    
+    <a class="headerLink" href="#action_number" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment.action_number">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html#action_number" class="internal-link">rl_graph_theory.environments.graph_environment.GraphEnvironment.action_number</a></code></div>
+    <div><p>This abstract property must be implemented in any concrete class that inherits from the
+<code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code> class. It should return the total number of actions that can be
+executed, as a positive <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code>.</p></div>
+    
+  </div>
+</div><div class="baseproperty">
+  
+  
+  <a name="rl_graph_theory.environments.linear_environments.LinearSetEnvironment.episode_length">
+    
+  </a>
+  <a name="episode_length">
+    
+  </a>
+  <div class="functionHeader">
+    <div><span class="decorator">@<a href="https://docs.python.org/3/library/functions.html#property" class="intersphinx-link">property</a><br /></span></div>
+    <span class="py-defname">episode_length</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
+    
+    <a class="headerLink" href="#episode_length" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment.episode_length">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html#episode_length" class="internal-link">rl_graph_theory.environments.graph_environment.GraphEnvironment.episode_length</a></code></div>
+    <div><p>This abstract property must be implemented in any concrete class that inherits from the
+<code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code> class. It should return the predetermined common length of all of the
+episodes to be run in parallel or that are currently being run in parallel, i.e., the total
+number of actions to be executed in each of these episodes, as a positive <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code>.</p></div>
+    
+  </div>
+</div><div class="baseproperty">
+  
+  
+  <a name="rl_graph_theory.environments.linear_environments.LinearSetEnvironment.state_dtype">
+    
+  </a>
+  <a name="state_dtype">
+    
+  </a>
+  <div class="functionHeader">
+    <div><span class="decorator">@<a href="https://docs.python.org/3/library/functions.html#property" class="intersphinx-link">property</a><br /></span></div>
+    <span class="py-defname">state_dtype</span>: <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" class="intersphinx-link">np.dtype</a></code> =
+    
+    <a class="headerLink" href="#state_dtype" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment.state_dtype">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html#state_dtype" class="internal-link">rl_graph_theory.environments.graph_environment.GraphEnvironment.state_dtype</a></code></div>
+    <div><p>This abstract property must be implemented in any concrete class that inherits from the
+<code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code> class. It should return the type of the <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> lists that
+represent the states, as a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" class="intersphinx-link">numpy.dtype</a></code> object.</p></div>
+    
+  </div>
+</div><div class="baseproperty">
+  
+  
+  <a name="rl_graph_theory.environments.linear_environments.LinearSetEnvironment.state_length">
+    
+  </a>
+  <a name="state_length">
+    
+  </a>
+  <div class="functionHeader">
+    <div><span class="decorator">@<a href="https://docs.python.org/3/library/functions.html#property" class="intersphinx-link">property</a><br /></span></div>
+    <span class="py-defname">state_length</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
+    
+    <a class="headerLink" href="#state_length" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment.state_length">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html#state_length" class="internal-link">rl_graph_theory.environments.graph_environment.GraphEnvironment.state_length</a></code></div>
+    <div><p>This abstract property must be implemented in any concrete class that inherits from the
+<code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code> class. It should return the number of entries in each of the state
+vectors, i.e., the length of the <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> lists that represent the states, as a
+positive <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code>.</p></div>
+    
+  </div>
 </div><div class="basemethod private">
   
   
@@ -718,12 +941,15 @@ episodes run in parallel.</p></div>
   </div>
   <div class="docstring functionBody">
     <div class="interfaceinfo">overrides <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html#_transition_batch" class="internal-link">rl_graph_theory.environments.graph_environment.GraphEnvironment._transition_batch</a></code></div>
-    <div><p>This method performs the transition process by executing a batch of given actions and
-applying them element-wise to the states in the batch of current states given by the
-<code><a href="#_state_batch" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment._state_batch">_state_batch</a></code> attribute.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">action<wbr></wbr>_batch:</span><code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code></td><td class="fieldArgDesc">The batch of actions to be applied to the states in the batch of
-current states, given as a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> matrix of type <code><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.int8" class="intersphinx-link">numpy.int8</a></code> where the rows
+    <div><p>This abstract method must be implemented in any concrete class that inherits from the
+<code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code> class. It should perform the transition process by executing a batch of
+given actions and applying them element-wise to the states in the batch of current states
+given by the <code><a href="#_state_batch" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment._state_batch">_state_batch</a></code> attribute. The method should update the <code><a href="#_state_batch" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment._state_batch">_state_batch</a></code> and
+<code><a href="#_status" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment._status">_status</a></code> attributes, as well as any other potential attributes specific to the concrete
+class that inherits from the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code> class.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">action<wbr></wbr>_batch:</span><code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code></td><td class="fieldArgDesc">The batch of actions to be applied to the states in the batch of
+current states, given as a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> list of type <code><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.int32" class="intersphinx-link">numpy.int32</a></code> whose entries
 correspond to the actions. The number of actions in this batch must be the same as the
-number of states in the <code><a href="#_state_batch" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment._state_batch">_state_batch</a></code> attribute.</td></tr></table></div>
+number of states in the <code><a href="#_state_batch" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment._state_batch">_state_batch</a></code> attribute.</td></tr></table></div>
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -746,8 +972,8 @@ number of states in the <code><a href="#_state_batch" class="internal-link" titl
   </div>
   <div class="functionBody">
     
-    <div><p>A boolean that indicates whether the graphs to be constructed are allowed
-to have loops.</p></div>
+    <div><p>A <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> that indicates whether the graphs to be constructed are allowed to
+have loops.</p></div>
     
   </div>
 </div><div class="baseinstancevariable private">
@@ -771,7 +997,8 @@ to have loops.</p></div>
   </div>
   <div class="functionBody">
     
-    <div><p>The number of proper edge colors in the graphs to be constructed.</p></div>
+    <div><p>The number of proper edge colors in the graphs to be constructed, given as
+a positive <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> that is at least 2.</p></div>
     
   </div>
 </div><div class="baseinstancevariable private">
@@ -795,10 +1022,10 @@ to have loops.</p></div>
   </div>
   <div class="functionBody">
     
-    <div><p>A positive integer that determines the length of the <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code>
-list from any of the two flattened graph formats of the graphs to be constructed. This
-number also represents how many actions are needed in total to reach a terminal state from
-an initial state.</p></div>
+    <div><p>A positive <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> that determines the length of the <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code>
+list from any of the two flattened formats with color numbers of the graphs to be
+constructed. This number also represents how many actions are needed in total to reach a
+terminal state from an initial state, i.e., the episode length.</p></div>
     
   </div>
 </div><div class="baseinstancevariable private">
@@ -812,7 +1039,7 @@ an initial state.</p></div>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">_flattened_ordering</span>: <code><a href="rl_graph_theory.graphs.graph_format.FlattenedOrdering.html" class="internal-link" title="rl_graph_theory.graphs.graph_format.FlattenedOrdering">FlattenedOrdering</a></code> =
+    <span class="py-defname">_flattened_ordering</span>: <code><a href="rl_graph_theory.graphs.graph_formats.FlattenedOrdering.html" class="internal-link" title="rl_graph_theory.graphs.graph_formats.FlattenedOrdering">FlattenedOrdering</a></code> =
     
     <a class="headerLink" href="#_flattened_ordering" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment._flattened_ordering">
       
@@ -822,9 +1049,9 @@ an initial state.</p></div>
   </div>
   <div class="functionBody">
     
-    <div><p>An item of the <code><a href="rl_graph_theory.graphs.graph_format.FlattenedOrdering.html" class="internal-link" title="rl_graph_theory.graphs.graph_format.FlattenedOrdering">FlattenedOrdering</a></code> enumeration that determines
-whether the edges (resp. arcs) should be properly recolored in the flattened row-major
-order or the flattened clockwise order.</p></div>
+    <div><p>An item of the <code><a href="rl_graph_theory.graphs.graph_formats.FlattenedOrdering.html" class="internal-link" title="rl_graph_theory.graphs.graph_formats.FlattenedOrdering">FlattenedOrdering</a></code> enumeration that determines
+whether the edges (resp. arcs) should be properly recolored in the row-major order or the
+clockwise order.</p></div>
     
   </div>
 </div><div class="baseinstancevariable private">
@@ -848,7 +1075,7 @@ order or the flattened clockwise order.</p></div>
   </div>
   <div class="functionBody">
     
-    <div><p>A boolean that indicates whether the graphs to be constructed are a
+    <div><p>A <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> that indicates whether the graphs to be constructed are a
 $k$-edge-colored looped complete directed graph or a $k$-edge-colored looped complete
 undirected graph.</p></div>
     
@@ -898,8 +1125,8 @@ undirected graph.</p></div>
   </div>
   <div class="functionBody">
     
-    <div><p>A positive integer that determines the length of each of the state
-vectors, i.e., the number <tt class="rst-docutils rst-literal">_edge_colors * _flattened_length</tt>.</p></div>
+    <div><p>A positive <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> that determines the length of each of the state vectors,
+i.e., the number <tt class="rst-docutils rst-literal">_edge_colors * _flattened_length</tt>.</p></div>
     
   </div>
 </div><div class="baseinstancevariable private">
@@ -947,7 +1174,7 @@ vectors, i.e., the number <tt class="rst-docutils rst-literal">_edge_colors * _f
   </div>
   <div class="functionBody">
     
-    <div><p>Either <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, or an integer between 0 and <code><a href="#_flattened_length" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment._flattened_length">_flattened_length</a></code> that
+    <div><p>Either <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, or a nonnegative <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> between 0 and <code><a href="#_flattened_length" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment._flattened_length">_flattened_length</a></code> that
 signifies the index of the next edge (resp. arc) to be properly recolored, in the order
 determined by the <code><a href="#_flattened_ordering" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment._flattened_ordering">_flattened_ordering</a></code> attribute. The value of <code><a href="#_flattened_length" class="internal-link" title="rl_graph_theory.environments.linear_environments.LinearSetEnvironment._flattened_length">_flattened_length</a></code>
 indicates that all the edges (resp. arcs) have been properly recolored and that no edge
@@ -968,7 +1195,7 @@ each invocation of the <code><a href="#reset_batch" class="internal-link" title=
   <div class="container-fluid">
     <a href="index.html">API Documentation</a> for rl-graph-theory,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    25.10.1 at 2025-12-29 22:09:07.
+    25.10.1 at 2026-01-06 02:23:37.
   </div>
 
   <!-- Search related scripts needs to be loaded at the end of HTML 

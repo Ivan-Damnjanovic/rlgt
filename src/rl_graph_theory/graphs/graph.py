@@ -1,183 +1,285 @@
 """
 This ``Python`` module contains the `Graph` class, which encapsulates the concept of a
-$k$-edge-colored looped complete graph.
+$k$-edge-colored looped complete graph or a batch of $k$-edge-colored looped complete graphs of the
+same order.
 """
 
 from __future__ import annotations
 
-from math import isqrt
 from typing import Optional
 
 import numpy as np
 
-from .graph_format import BitmaskType, FlattenedOrdering, GraphFormat
+from .graph_formats import (
+    BitmaskType,
+    ColorRepresentation,
+    FlattenedOrdering,
+    GraphFormat,
+)
+from .utils import (
+    binary_slices_to_color_numbers,
+    color_numbers_to_binary_slices,
+    flatten_from_adjacency_matrix,
+    flattened_length_to_graph_order,
+    unflatten_to_adjacency_matrix,
+)
 
 
 class Graph:
     r"""
-    This class encapsulates the concept of a $k$-edge-colored looped complete graph with $k$ being
-    at least two. The graph is essentially represented as a quintuple ``(edge_colors, is_directed,
-    allow_loops, graph_format, format_representation)``, as explained in the `GraphFormat`
-    enumeration. The graph structure can be represented in any of the five graph formats from the
-    `GraphFormat` enumeration. It is initialized in exactly one of these five formats so that the
-    ``format_representation`` `numpy.ndarray` representing the graph structure is internally
-    stored. Afterwards, the graph can be accessed in any of the five formats, with all the required
-    graph format conversions being performed automatically. With each performed conversion, the
-    obtained `numpy.ndarray` object corresponding to the output graph format is internally stored.
-    The class provides support for the reduced bitmask formats, and while performing a conversion
-    to a bitmask format (`GraphFormat.BITMASK_OUT` or `GraphFormat.BITMASK_IN`), the reduced
-    bitmask format is always used if possible, i.e., if the graph is fully colored.
+    This class encapsulates the concept of a $k$-edge-colored looped complete graph, or a batch of
+    $k$-edge-colored looped complete graphs of the same order, with $k$ being at least 2. If a
+    single graph is being modeled, then it is represented as a quintuple ``(edge_colors,
+    is_directed, allow_loops, graph_format, format_representation)``, as explained in the
+    `GraphFormat` enumeration. If a batch of graphs is being modeled, then the graphs in the batch
+    must be consistent: they should all have the same number of proper edge colors and the same
+    order, they should all be directed or all be undirected, and they should all either allow loops
+    or not allow loops. Therefore, a batch of graphs can be analogously represented through a
+    quintuple ``(edge_colors, is_directed, allow_loops, graph_format, format_representation)``. In
+    this case, the only difference is that all of the `numpy.ndarray` objects to be used as format
+    representations should be of one dimension higher. More precisely, if ``a`` is the
+    `numpy.ndarray` used to describe the structure of a given batch of graphs in some graph format,
+    then ``a[i]`` is the structural representation of the $i$-th graph in the batch in the
+    corresponding format.
 
-    :ivar __edge_colors: The number of proper edge colors, i.e., $k$, which is at least two.
-    :ivar __is_directed: A boolean that indicates whether the given graph is a $k$-edge-colored
-        looped complete directed graph or a $k$-edge-colored looped complete undirected graph.
-    :ivar __allow_loops: A boolean that indicates whether the given graph is allowed to have loops
-        (if loops are not allowed, then all the loops are removed from the considered looped
-        complete graph and they simply do not exist).
-    :ivar __order: The graph order, i.e., its number of vertices.
-    :ivar __bitmask_out: The `numpy.ndarray` of type `numpy.uint64` from the out-neighborhoods
-        bitmask format (`GraphFormat.BITMASK_OUT`) representation of the given graph structure, if
-        it was used to initialize the graph or computed afterwards, and otherwise, `None`.
-    :ivar __bitmask_in: The `numpy.ndarray` of type `numpy.uint64` from the in-neighborhoods
-        bitmask format (`GraphFormat.BITMASK_IN`) representation of the given graph structure, if
-        it was used to initialize the graph or computed afterwards, and otherwise, `None`.
-    :ivar __adjacency_matrix: The `numpy.ndarray` of type `numpy.uint8` from the adjacency matrix
-        format (`GraphFormat.ADJACENCY_MATRIX`) representation of the given graph structure, if it
-        was used to initialize the graph or computed afterwards, and otherwise, `None`.
-    :ivar __flattened_row_major: The `numpy.ndarray` of type `numpy.uint8` from the flattened
-        row-major format (`GraphFormat.FLATTENED_ROW_MAJOR`) representation of the given graph, if
-        it was used to initialize the graph or computed afterwards, and otherwise, `None`.
-    :ivar __flattened_clockwise: The `numpy.ndarray` of type `numpy.uint8` from the flattened
-        clockwise format (`GraphFormat.FLATTENED_CLOCKWISE`) representation of the given graph, if
-        it was used to initialize the graph or computed afterwards, and otherwise, `None`.
+    The structure of the graph (resp. batch of graphs) can be represented in any of the 8 graph
+    formats from the `GraphFormat` enumeration. It is initialized in at least one of these 8
+    formats so that the ``format_representation`` `numpy.ndarray` objects representing the graph
+    structure are internally stored. Afterwards, the graph (resp. batch of graphs) can be accessed
+    in any of the 8 formats, with all the required graph format conversions being performed
+    automatically. With each performed conversion, the obtained `numpy.ndarray` object
+    corresponding to the output graph format is internally stored. The class provides support for
+    all the reduced formats, and while performing a conversion to a bitmask format or one of the
+    formats with binary slices, the corresponding reduced format is always used if possible, i.e.,
+    if the graph (resp. batch of graphs) is fully colored.
 
-    :note: Although available, the constructor of this class is not intended to be directly used.
-        Instead, the instances should be initialized by using the three class methods
-        `from_bitmask`, `from_adjacency_matrix` and `from_flattened`.
+    :ivar __edge_colors: The number of proper edge colors, i.e., $k$, given as a positive `int`
+        that is at least 2.
+    :ivar __is_directed: A `bool` that indicates whether the given graph (resp. each graph in the
+        given batch) is a $k$-edge-colored looped complete directed graph or a $k$-edge-colored
+        looped complete undirected graph.
+    :ivar __allow_loops: A `bool` that indicates whether the given graph (resp. each graph in the
+        given batch) is allowed to have loops. If loops are not allowed, then all the loops are
+        removed from the considered looped complete graph(s) and they simply do not exist.
+    :ivar __batch_size: If the object models a single graph, then `None`, and if the object models
+        a batch of graphs, then a positive `int` that determines the batch size, i.e., the number
+        of graphs in the batch.
+    :ivar __graph_order: The graph order (resp. the common order of each of the graphs in the
+        batch), given as a positve `int`.
+    :ivar __bitmask_out: The `numpy.ndarray` of type `numpy.uint64` that represents the graph
+        structure in the bitmask format for the out-neighborhoods, if it was used while
+        initializing the graph (resp. batch of graphs) or computed afterwards, and otherwise,
+        `None`.
+    :ivar __bitmask_in: The `numpy.ndarray` of type `numpy.uint64` that represents the graph
+        structure in the bitmask format for the in-neighborhoods, if it was used while initializing
+        the graph (resp. batch of graphs) or computed afterwards, and otherwise, `None`.
+    :ivar __adjacency_matrix_colors: The `numpy.ndarray` of type `numpy.uint8` that represents the
+        graph structure in the adjacency matrix format with color numbers, if it was used while
+        initializing the graph (resp. batch of graphs) or computed afterwards, and otherwise,
+        `None`.
+    :ivar __adjacency_matrix_binary: The `numpy.ndarray` of type `numpy.uint8` that represents the
+        graph structure in the adjacency matrix format with binary slices, if it was used while
+        initializing the graph (resp. batch of graphs) or computed afterwards, and otherwise,
+        `None`.
+    :ivar __flattened_row_major_colors: The `numpy.ndarray` of type `numpy.uint8` that represents
+        the graph structure in the flattened row-major format with color numbers, if it was used
+        while initializing the graph (resp. batch of graphs) or computed afterwards, and otherwise,
+        `None`.
+    :ivar __flattened_row_major_binary: The `numpy.ndarray` of type `numpy.uint8` that represents
+        the graph structure in the flattened row-major format with binary slices, if it was used
+        while initializing the graph (resp. batch of graphs) or computed afterwards, and otherwise,
+        `None`.
+    :ivar __flattened_clockwise_colors: The `numpy.ndarray` of type `numpy.uint8` that represents
+        the graph structure in the flattened clockwise format with color numbers, if it was used
+        while initializing the graph (resp. batch of graphs) or computed afterwards, and otherwise,
+        `None`.
+    :ivar __flattened_clockwise_binary: The `numpy.ndarray` of type `numpy.uint8` that represents
+        the graph structure in the flattened clockwise format with binary slices, if it was used
+        while initializing the graph (resp. batch of graphs) or computed afterwards, and otherwise,
+        `None`.
     """
 
     def __init__(
         self,
-        graph_format: GraphFormat,
-        bitmask_out: Optional[np.ndarray] = None,
-        bitmask_in: Optional[np.ndarray] = None,
-        adjacency_matrix: Optional[np.ndarray] = None,
-        flattened_row_major: Optional[np.ndarray] = None,
-        flattened_clockwise: Optional[np.ndarray] = None,
         edge_colors: int = 2,
         is_directed: bool = False,
         allow_loops: bool = False,
+        bitmask_out: Optional[np.ndarray] = None,
+        bitmask_in: Optional[np.ndarray] = None,
+        adjacency_matrix_colors: Optional[np.ndarray] = None,
+        adjacency_matrix_binary: Optional[np.ndarray] = None,
+        flattened_row_major_colors: Optional[np.ndarray] = None,
+        flattened_row_major_binary: Optional[np.ndarray] = None,
+        flattened_clockwise_colors: Optional[np.ndarray] = None,
+        flattened_clockwise_binary: Optional[np.ndarray] = None,
     ):
         """
-        This constructor initializes an instance using the chosen graph format. In other words, one
-        of the five graph formats is selected, and then the corresponding `numpy.ndarray` is used
-        to initialize a graph with respect to this format.
+        This constructor initializes an instance, which models either a graph or a batch of graphs,
+        in at least one of the 8 graph formats from the `GraphFormat` enumeration. In other words,
+        at least one of the 8 graph formats is selected, and then the graph (resp. batch of graphs)
+        is initialized in each of the selected formats using the corresponding provided
+        `numpy.ndarray` objects. If the instance is initialized in more than one graph format, then
+        the provided `numpy.ndarray` objects must be consistent with one another, i.e., they must
+        all represent the same graph or batch of graphs.
 
-        :param graph_format: The selected graph format that is used to initialize the graph, given
-            as an item of the `GraphFormat` enumeration.
-        :param bitmask_out: Either `None`, or the `numpy.ndarray` of type `numpy.uint64` that
-            describes the given graph in the bitmask format for the out-neighborhoods
-            (`GraphFormat.BITMASK_OUT`). If the argument ``graph_format`` equals
-            `GraphFormat.BITMASK_OUT`, then this argument cannot be `None`, and otherwise, it is
-            ignored.
-        :param bitmask_in: Either `None`, or the `numpy.ndarray` of type `numpy.uint64` that
-            describes the given graph in the bitmask format for the in-neighborhoods
-            (`GraphFormat.BITMASK_IN`). If the argument ``graph_format`` equals
-            `GraphFormat.BITMASK_IN`, then this argument cannot be `None`, and otherwise, it is
-            ignored.
-        :param adjacency_matrix: Either `None`, or the `numpy.ndarray` of type `numpy.uint8` that
-            describes the given graph in the adjacency matrix format
-            (`GraphFormat.ADJACENCY_MATRIX`). If the argument ``graph_format`` equals
-            `GraphFormat.ADJACENCY_MATRIX`, then this argument cannot be `None`, and otherwise, it
-            is ignored.
-        :param flattened_row_major: Either `None`, or the `numpy.ndarray` of type `numpy.uint8`
-            that describes the given graph in the flattened row-major format
-            (`GraphFormat.FLATTENED_ROW_MAJOR`). If the argument ``graph_format`` equals
-            `GraphFormat.FLATTENED_ROW_MAJOR`, then this argument cannot be `None`, and otherwise,
-            it is ignored.
-        :param flattened_clockwise: Either `None`, or the `numpy.ndarray` of type `numpy.uint8`
-            that describes the given graph in the flattened clockwise format
-            (`GraphFormat.FLATTENED_CLOCKWISE`). If the argument ``graph_format`` equals
-            `GraphFormat.FLATTENED_CLOCKWISE`, then this argument cannot be `None`, and otherwise,
-            it is ignored.
-        :param edge_colors: A positive integer (not below two) that represents the number of
-            proper edge colors, i.e., $k$. The default value is two.
-        :param is_directed: A boolean that indicates whether the given graph is a $k$-edge-colored
-            looped complete directed graph or a $k$-edge-colored looped complete undirected graph.
-            The default value is `False`, i.e., the given graph is undirected by default.
-        :param allow_loops: A boolean that indicates whether the given graph is allowed to have
-            loops (if loops are not allowed, then all the loops are removed from the considered
-            looped complete graph and they simply do not exist). The default value is `False`,
-            i.e., the given graph is not allowed to have loops by default.
-
-        :note: This constructor is not intended to be directly used. The class methods
-            `from_bitmask`, `from_adjacency_matrix` and `from_flattened` should be used to
-            initialize the instances of the `Graph` class.
+        :param edge_colors: A positive `int` (not below 2) that represents the number of proper
+            edge colors, i.e., $k$. The default value is 2.
+        :param is_directed: A `bool` that indicates whether the given graph (resp. each graph in
+            the given batch) is a $k$-edge-colored looped complete directed graph or a
+            $k$-edge-colored looped complete undirected graph. The default value is `False`, i.e.,
+            the given graph (resp. each graph in the given batch) is undirected by default.
+        :param allow_loops: A `bool` that indicates whether the given graph (resp. each graph in
+            the given batch) is allowed to have loops. If loops are not allowed, then all the loops
+            are removed from the considered looped complete graph(s) and they simply do not exist.
+            The default value is `False`, i.e., the given graph (resp. each graph in the given
+            batch) is not allowed to have loops by default.
+        :param bitmask_out: If the graph (resp. batch of graphs) should be initialized in the
+            bitmask format for the out-neighborhoods, then this argument should be the
+            `numpy.ndarray` of type `numpy.uint64` that describes the format representation in this
+            graph format, and otherwise, it should be `None`.
+        :param bitmask_in: If the graph (resp. batch of graphs) should be initialized in the
+            bitmask format for the in-neighborhoods, then this argument should be the
+            `numpy.ndarray` of type `numpy.uint64` that describes the format representation in this
+            graph format, and otherwise, it should be `None`.
+        :param adjacency_matrix_colors: If the graph (resp. batch of graphs) should be initialized
+            in the adjacency matrix format with color numbers, then this argument should be the
+            `numpy.ndarray` of type `numpy.uint8` that describes the format representation in this
+            graph format, and otherwise, it should be `None`.
+        :param adjacency_matrix_binary: If the graph (resp. batch of graphs) should be initialized
+            in the adjacency matrix format with binary slices, then this argument should be the
+            `numpy.ndarray` of type `numpy.uint8` that describes the format representation in this
+            graph format, and otherwise, it should be `None`.
+        :param flattened_row_major_colors: If the graph (resp. batch of graphs) should be
+            initialized in the flattened row-major format with color numbers, then this argument
+            should be the `numpy.ndarray` of type `numpy.uint8` that describes the format
+            representation in this graph format, and otherwise, it should be `None`.
+        :param flattened_row_major_binary: If the graph (resp. batch of graphs) should be
+            initialized in the flattened row-major format with binary slices, then this argument
+            should be the `numpy.ndarray` of type `numpy.uint8` that describes the format
+            representation in this graph format, and otherwise, it should be `None`.
+        :param flattened_clockwise_colors: If the graph (resp. batch of graphs) should be
+            initialized in the flattened clockwise format with color numbers, then this argument
+            should be the `numpy.ndarray` of type `numpy.uint8` that describes the format
+            representation in this graph format, and otherwise, it should be `None`.
+        :param flattened_clockwise_binary: If the graph (resp. batch of graphs) should be
+            initialized in the flattened clockwise format with binary slices, then this argument
+            should be the `numpy.ndarray` of type `numpy.uint8` that describes the format
+            representation in this graph format, and otherwise, it should be `None`.
         """
 
         self.__edge_colors: int = edge_colors
         self.__is_directed: bool = is_directed
         self.__allow_loops: bool = allow_loops
 
-        self.__bitmask_out: Optional[np.ndarray] = None
-        self.__bitmask_in: Optional[np.ndarray] = None
-        self.__adjacency_matrix: Optional[np.ndarray] = None
-        self.__flattened_row_major: Optional[np.ndarray] = None
-        self.__flattened_clockwise: Optional[np.ndarray] = None
+        # Initialize the graph (resp. batch of graphs) in all the selected graph formats.
+        self.__bitmask_out: Optional[np.ndarray] = bitmask_out
+        self.__bitmask_in: Optional[np.ndarray] = bitmask_in
+        self.__adjacency_matrix_colors: Optional[np.ndarray] = adjacency_matrix_colors
+        self.__adjacency_matrix_binary: Optional[np.ndarray] = adjacency_matrix_binary
+        self.__flattened_row_major_colors: Optional[np.ndarray] = flattened_row_major_colors
+        self.__flattened_row_major_binary: Optional[np.ndarray] = flattened_row_major_binary
+        self.__flattened_clockwise_colors: Optional[np.ndarray] = flattened_clockwise_colors
+        self.__flattened_clockwise_binary: Optional[np.ndarray] = flattened_clockwise_binary
 
-        if graph_format == GraphFormat.BITMASK_OUT:
-            self.__order: int = bitmask_out.shape[1]
-            self.__bitmask_out = bitmask_out
-            # If the graph is undirected, then the two bitmask formats are the same.
-            if not self.__is_directed:
+        # If the graph (resp. each graph from the batch) is undirected, then the two bitmask
+        # formats are the same.
+        if not is_directed:
+            if bitmask_out is not None:
                 self.__bitmask_in = bitmask_out
-
-        elif graph_format == GraphFormat.BITMASK_IN:
-            self.__order: int = bitmask_in.shape[1]
-            self.__bitmask_in = bitmask_in
-            # If the graph is undirected, then the two bitmask formats are the same.
-            if not self.__is_directed:
+            elif bitmask_in is not None:
                 self.__bitmask_out = bitmask_in
 
-        elif graph_format == GraphFormat.ADJACENCY_MATRIX:
-            self.__order: int = adjacency_matrix.shape[0]
-            self.__adjacency_matrix = adjacency_matrix
+        # Determine the batch size (potentially `None`) and the graph order using the bitmask
+        # format for the out-neighborhoods, if possible.
+        if bitmask_out is not None:
+            self.__batch_size: Optional[int] = (
+                None if len(bitmask_out.shape) == 2 else bitmask_out.shape[0]
+            )
+            self.__graph_order: int = bitmask_out.shape[-1]
 
-        elif graph_format == GraphFormat.FLATTENED_ROW_MAJOR:
-            if self.__is_directed:
-                if self.__allow_loops:
-                    # Given $n^2$, find $n$.
-                    self.__order: int = isqrt(flattened_row_major.shape[0])
-                else:
-                    # Given $n^2 - n$, find $n$.
-                    self.__order: int = (isqrt(4 * flattened_row_major.shape[0] + 1) + 1) // 2
-            else:
-                if self.__allow_loops:
-                    # Given \binom{n + 1}{2}$, find $n$.
-                    self.__order: int = (isqrt(8 * flattened_row_major.shape[0] + 1) - 1) // 2
-                else:
-                    # Given $\binom{n}{2}$, find $n$.
-                    self.__order: int = (isqrt(8 * flattened_row_major.shape[0] + 1) + 1) // 2
+        # Otherwise, determine the batch size (potentially `None`) and the graph order using the
+        # bitmask format for the in-neighborhoods, if possible.
+        elif bitmask_in is not None:
+            self.__batch_size: Optional[int] = (
+                None if len(bitmask_in.shape) == 2 else bitmask_in.shape[0]
+            )
+            self.__graph_order: int = bitmask_in.shape[-1]
 
-            self.__flattened_row_major = flattened_row_major
+        # Otherwise, determine the batch size (potentially `None`) and the graph order using the
+        # adjacency matrix format with color numbers, if possible.
+        elif adjacency_matrix_colors is not None:
+            self.__batch_size: Optional[int] = (
+                None
+                if len(adjacency_matrix_colors.shape) == 2
+                else adjacency_matrix_colors.shape[0]
+            )
+            self.__graph_order: int = adjacency_matrix_colors.shape[-1]
 
+        # Otherwise, determine the batch size (potentially `None`) and the graph order using the
+        # adjacency matrix format with binary slices, if possible.
+        elif adjacency_matrix_binary is not None:
+            self.__batch_size: Optional[int] = (
+                None
+                if len(adjacency_matrix_binary.shape) == 3
+                else adjacency_matrix_binary.shape[0]
+            )
+            self.__graph_order: int = adjacency_matrix_binary.shape[-1]
+
+        # Otherwise, determine the batch size (potentially `None`) and the graph order using the
+        # flattened row-major format with color numbers, if possible.
+        elif flattened_row_major_colors is not None:
+            self.__batch_size: Optional[int] = (
+                None
+                if len(flattened_row_major_colors.shape) == 1
+                else flattened_row_major_colors.shape[0]
+            )
+            self.__graph_order: int = flattened_length_to_graph_order(
+                flattened_length=flattened_row_major_colors.shape[-1],
+                is_directed=is_directed,
+                allow_loops=allow_loops,
+            )
+
+        # Otherwise, determine the batch size (potentially `None`) and the graph order using the
+        # flattened row-major format with binary slices, if possible.
+        elif flattened_row_major_binary is not None:
+            self.__batch_size: Optional[int] = (
+                None
+                if len(flattened_row_major_binary.shape) == 2
+                else flattened_row_major_binary.shape[0]
+            )
+            self.__graph_order: int = flattened_length_to_graph_order(
+                flattened_length=flattened_row_major_binary.shape[-1],
+                is_directed=is_directed,
+                allow_loops=allow_loops,
+            )
+
+        # Otherwise, determine the batch size (potentially `None`) and the graph order using the
+        # flattened clockwise format with color numbers, if possible.
+        elif flattened_clockwise_colors is not None:
+            self.__batch_size: Optional[int] = (
+                None
+                if len(flattened_clockwise_colors.shape) == 1
+                else flattened_clockwise_colors.shape[0]
+            )
+            self.__graph_order: int = flattened_length_to_graph_order(
+                flattened_length=flattened_clockwise_colors.shape[-1],
+                is_directed=is_directed,
+                allow_loops=allow_loops,
+            )
+
+        # Otherwise, determine the batch size (potentially `None`) and the graph order using the
+        # flattened clockwise format with binary slices.
         else:
-            if self.__is_directed:
-                if self.__allow_loops:
-                    # Given $n^2$, find $n$.
-                    self.__order: int = isqrt(flattened_clockwise.shape[0])
-                else:
-                    # Given $n^2 - n$, find $n$.
-                    self.__order: int = (isqrt(4 * flattened_clockwise.shape[0] + 1) + 1) // 2
-            else:
-                if self.__allow_loops:
-                    # Given \binom{n + 1}{2}$, find $n$.
-                    self.__order: int = (isqrt(8 * flattened_clockwise.shape[0] + 1) - 1) // 2
-                else:
-                    # Given $\binom{n}{2}$, find $n$.
-                    self.__order: int = (isqrt(8 * flattened_clockwise.shape[0] + 1) + 1) // 2
-
-            self.__flattened_clockwise = flattened_clockwise
+            self.__batch_size: Optional[int] = (
+                None
+                if len(flattened_clockwise_binary.shape) == 2
+                else flattened_clockwise_binary.shape[0]
+            )
+            self.__graph_order: int = flattened_length_to_graph_order(
+                flattened_length=flattened_clockwise_binary.shape[-1],
+                is_directed=is_directed,
+                allow_loops=allow_loops,
+            )
 
     @classmethod
     def from_bitmask(
@@ -189,139 +291,189 @@ class Graph:
         allow_loops: bool = False,
     ) -> Graph:
         """
-        This class method initializes a `Graph` object by using the (potentially reduced) bitmask
-        format for the out-neighborhoods (`GraphFormat.BITMASK_OUT`) or the in-neighborhoods
-        (`GraphFormat.BITMASK_IN`).
+        This class method initializes a `Graph` object in either the bitmask format for the
+        out-neighborhoods or the bitmask format for the in-neighborhoods.
 
-        :param bitmask: The `numpy.ndarray` of type `numpy.uint64` that describes the (potentially
-            reduced) bitmask format for the out-neighborhoods (`GraphFormat.BITMASK_OUT`) or the
-            in-neighborhoods (`GraphFormat.BITMASK_IN`) of the graph that should be initialized.
+        :param bitmask: A `numpy.ndarray` of type `numpy.uint64` that describes the format
+            representation of the graph (resp. batch of graphs) that should be initialized, either
+            in the bitmask format for the out-neighborhoods or the bitmask format for the
+            in-neighborhoods.
         :param bitmask_type: An item of the `BitmaskType` enumeration that determines whether the
-            bitmask format for the out-neighborhoods should be used or the bitmask format for the
-            in-neighborhoods. The default value is `BitmaskType.OUT_NEIGHBORS`, i.e., the bitmask
-            format for the out-neighborhoods is used by default.
-        :param edge_colors: A positive integer (not below two) that represents the number of proper
-            edge colors, i.e., $k$. The default value is two.
-        :param is_directed: A boolean that indicates whether the given graph is a $k$-edge-colored
-            looped complete directed graph or a $k$-edge-colored looped complete undirected graph.
-            The default value is `False`, i.e., the given graph is undirected by default.
-        :param allow_loops: A boolean that indicates whether the given graph is allowed to have
-            loops (if loops are not allowed, then all the loops are removed from the considered
-            looped complete graph and they simply do not exist). The default value is `False`,
-            i.e., the given graph is not allowed to have loops by default.
+            graph should be initialized in the bitmask format for the out-neighborhoods or the
+            bitmask format for the in-neighborhoods. The default value is
+            `BitmaskType.OUT_NEIGHBORS`, i.e., the graph should be initialized in the bitmask
+            format for the out-neighborhoods by default.
+        :param edge_colors: A positive `int` (not below 2) that represents the number of proper
+            edge colors, i.e., $k$. The default value is 2.
+        :param is_directed: A `bool` that indicates whether the given graph (resp. each graph in
+            the given batch) is a $k$-edge-colored looped complete directed graph or a
+            $k$-edge-colored looped complete undirected graph. The default value is `False`, i.e.,
+            the given graph (resp. each graph in the given batch) is undirected by default.
+        :param allow_loops: A `bool` that indicates whether the given graph (resp. each graph in
+            the given batch) is allowed to have loops. If loops are not allowed, then all the loops
+            are removed from the considered looped complete graph(s) and they simply do not exist.
+            The default value is `False`, i.e., the given graph (resp. each graph in the given
+            batch) is not allowed to have loops by default.
 
         :return: The initialized `Graph` object.
+
+        :note: The class method provides support for the reduced bitmask formats, i.e., the graph
+            (resp. batch of graphs) can also be initialized in any of the two reduced bitmask
+            formats.
         """
 
         if bitmask_type == BitmaskType.OUT_NEIGHBORS:
             return cls(
-                graph_format=GraphFormat.BITMASK_OUT,
-                bitmask_out=bitmask,
                 edge_colors=edge_colors,
                 is_directed=is_directed,
                 allow_loops=allow_loops,
+                bitmask_out=bitmask,
             )
         else:
             return cls(
-                graph_format=GraphFormat.BITMASK_IN,
-                bitmask_in=bitmask,
                 edge_colors=edge_colors,
                 is_directed=is_directed,
                 allow_loops=allow_loops,
+                bitmask_in=bitmask,
             )
 
     @classmethod
     def from_adjacency_matrix(
         cls,
         adjacency_matrix: np.ndarray,
+        color_representation: ColorRepresentation = ColorRepresentation.COLOR_NUMBERS,
         edge_colors: int = 2,
         is_directed: bool = False,
         allow_loops: bool = False,
     ) -> Graph:
         """
-        This class method initializes a `Graph` object by using the adjacency matrix format
-        (`GraphFormat.ADJACENCY_MATRIX`).
+        This class method initializes a `Graph` object in either the adjacency matrix format with
+        color numbers or the adjacency matrix format with binary slices.
 
-        :param adjacency_matrix: The `numpy.ndarray` of type `numpy.uint8` that describes the
-            adjacency matrix format (`GraphFormat.ADJACENCY_MATRIX`) of the graph that should be
-            initialized.
-        :param edge_colors: A positive integer (not below two) that represents the number of proper
-            edge colors, i.e., $k$. The default value is two.
-        :param is_directed: A boolean that indicates whether the given graph is a $k$-edge-colored
-            looped complete directed graph or a $k$-edge-colored looped complete undirected graph.
-            The default value is `False`, i.e., the given graph is undirected by default.
-        :param allow_loops: A boolean that indicates whether the given graph is allowed to have
-            loops (if loops are not allowed, then all the loops are removed from the considered
-            looped complete graph and they simply do not exist). The default value is `False`,
-            i.e., the given graph is not allowed to have loops by default.
+        :param adjacency_matrix: A `numpy.ndarray` of type `numpy.uint8` that describes the format
+            representation of the graph (resp. batch of graphs) that should be initialized, either
+            in the adjacency matrix format with color numbers or the adjacency matrix format with
+            binary slices.
+        :param color_representation: An item of the `ColorRepresentation` enumeration that
+            determines whether the graph should be initialized in the adjacency matrix format with
+            color numbers or the adjacency matrix format with binary slices. The default value is
+            `ColorRepresentation.COLOR_NUMBERS`, i.e., the graph should be initialized in the
+            adjacency matrix format with color numbers by default.
+        :param edge_colors: A positive `int` (not below 2) that represents the number of proper
+            edge colors, i.e., $k$. The default value is 2.
+        :param is_directed: A `bool` that indicates whether the given graph (resp. each graph in
+            the given batch) is a $k$-edge-colored looped complete directed graph or a
+            $k$-edge-colored looped complete undirected graph. The default value is `False`, i.e.,
+            the given graph (resp. each graph in the given batch) is undirected by default.
+        :param allow_loops: A `bool` that indicates whether the given graph (resp. each graph in
+            the given batch) is allowed to have loops. If loops are not allowed, then all the loops
+            are removed from the considered looped complete graph(s) and they simply do not exist.
+            The default value is `False`, i.e., the given graph (resp. each graph in the given
+            batch) is not allowed to have loops by default.
 
         :return: The initialized `Graph` object.
+
+        :note: The class method provides support for the reduced adjacency matrix format with
+            binary slices, i.e., if the graph (resp. batch of graphs) should be initialized in this
+            format, then the reduced variant is also accepted.
         """
 
-        return cls(
-            graph_format=GraphFormat.ADJACENCY_MATRIX,
-            adjacency_matrix=adjacency_matrix,
-            edge_colors=edge_colors,
-            is_directed=is_directed,
-            allow_loops=allow_loops,
-        )
+        if color_representation == ColorRepresentation.COLOR_NUMBERS:
+            return cls(
+                edge_colors=edge_colors,
+                is_directed=is_directed,
+                allow_loops=allow_loops,
+                adjacency_matrix_colors=adjacency_matrix,
+            )
+        else:
+            return cls(
+                edge_colors=edge_colors,
+                is_directed=is_directed,
+                allow_loops=allow_loops,
+                adjacency_matrix_binary=adjacency_matrix,
+            )
 
     @classmethod
     def from_flattened(
         cls,
         flattened: np.ndarray,
         flattened_ordering: FlattenedOrdering = FlattenedOrdering.ROW_MAJOR,
+        color_representation: ColorRepresentation = ColorRepresentation.COLOR_NUMBERS,
         edge_colors: int = 2,
         is_directed: bool = False,
         allow_loops: bool = False,
     ) -> Graph:
         """
-        This class method initializes a `Graph` object by using either the flattened row-major
-        format (`GraphFormat.FLATTENED_ROW_MAJOR`) or the flattened clockwise format
-        (`GraphFormat.FLATTENED_CLOCKWISE`).
+        This class method initializes a `Graph` object in exactly one of the four possible
+        flattened formats.
 
-        :param flattened: The `numpy.ndarray` of type `numpy.uint8` that describes the flattened
-            row-major format (`GraphFormat.FLATTENED_ROW_MAJOR`) or the flattened clockwise format
-            (`GraphFormat.FLATTENED_CLOCKWISE`) of the graph that should be initialized.
+        :param flattened: A `numpy.ndarray` of type `numpy.uint8` that describes the format
+            representation of the graph (resp. batch of graphs) that should be initialized, in one
+            of the four possible flattened formats.
         :param flattened_ordering: An item of the `FlattenedOrdering` enumeration that determines
-            whether the flattened row-major format should be used or the flattened clockwise
-            format. The default value is `FlattenedOrdering.ROW_MAJOR`, i.e., the flattened
-            row-major format is used by default.
-        :param edge_colors: A positive integer (not below two) that represents the number of proper
-            edge colors, i.e., $k$. The default value is two.
-        :param is_directed: A boolean that indicates whether the given graph is a $k$-edge-colored
-            looped complete directed graph or a $k$-edge-colored looped complete undirected graph.
-            The default value is `False`, i.e., the given graph is undirected by default.
-        :param allow_loops: A boolean that indicates whether the given graph is allowed to have
-            loops (if loops are not allowed, then all the loops are removed from the considered
-            looped complete graph and they simply do not exist). The default value is `False`,
-            i.e., the given graph is not allowed to have loops by default.
+            whether the graph should be initialized in a flattened row-major format or a flattened
+            clockwise format. The default value is `FlattenedOrdering.ROW_MAJOR`, i.e., the graph
+            should be initialized in a flattened row-major format by default.
+        :param color_representation: An item of the `ColorRepresentation` enumeration that
+            determines whether the graph should be initialized in a flattened format with color
+            numbers or a flattened format with binary slices. The default value is
+            `ColorRepresentation.COLOR_NUMBERS`, i.e., the graph should be initialized in a
+            flattened format with color numbers by default.
+        :param edge_colors: A positive `int` (not below 2) that represents the number of proper
+            edge colors, i.e., $k$. The default value is 2.
+        :param is_directed: A `bool` that indicates whether the given graph (resp. each graph in
+            the given batch) is a $k$-edge-colored looped complete directed graph or a
+            $k$-edge-colored looped complete undirected graph. The default value is `False`, i.e.,
+            the given graph (resp. each graph in the given batch) is undirected by default.
+        :param allow_loops: A `bool` that indicates whether the given graph (resp. each graph in
+            the given batch) is allowed to have loops. If loops are not allowed, then all the loops
+            are removed from the considered looped complete graph(s) and they simply do not exist.
+            The default value is `False`, i.e., the given graph (resp. each graph in the given
+            batch) is not allowed to have loops by default.
 
         :return: The initialized `Graph` object.
+
+        :note: The class method provides support for the reduced flattened formats with binary
+            slices, i.e., if the graph (resp. batch of graphs) should be initialized in one of
+            these two formats, then the reduced variants are also accepted.
         """
 
         if flattened_ordering == FlattenedOrdering.ROW_MAJOR:
-            return cls(
-                graph_format=GraphFormat.FLATTENED_ROW_MAJOR,
-                flattened_row_major=flattened,
-                edge_colors=edge_colors,
-                is_directed=is_directed,
-                allow_loops=allow_loops,
-            )
+            if color_representation == ColorRepresentation.COLOR_NUMBERS:
+                return cls(
+                    edge_colors=edge_colors,
+                    is_directed=is_directed,
+                    allow_loops=allow_loops,
+                    flattened_row_major_colors=flattened,
+                )
+            else:
+                return cls(
+                    edge_colors=edge_colors,
+                    is_directed=is_directed,
+                    allow_loops=allow_loops,
+                    flattened_row_major_binary=flattened,
+                )
         else:
-            return cls(
-                graph_format=GraphFormat.FLATTENED_CLOCKWISE,
-                flattened_clockwise=flattened,
-                edge_colors=edge_colors,
-                is_directed=is_directed,
-                allow_loops=allow_loops,
-            )
+            if color_representation == ColorRepresentation.COLOR_NUMBERS:
+                return cls(
+                    edge_colors=edge_colors,
+                    is_directed=is_directed,
+                    allow_loops=allow_loops,
+                    flattened_clockwise_colors=flattened,
+                )
+            else:
+                return cls(
+                    edge_colors=edge_colors,
+                    is_directed=is_directed,
+                    allow_loops=allow_loops,
+                    flattened_clockwise_binary=flattened,
+                )
 
     @property
     def edge_colors(self) -> int:
         """
-        This property returns the number of proper edge colors for the given graph, i.e., $k$, as
-        an `int`.
+        This property returns the number of proper edge colors in the given graph (resp. batch of
+        graphs), i.e., $k$, as a positive `int` that is at least 2.
         """
 
         return self.__edge_colors
@@ -329,8 +481,9 @@ class Graph:
     @property
     def is_directed(self) -> bool:
         """
-        This property returns the `bool` that determines whether the given graph is directed. The
-        value `True` indicates that the graph is directed.
+        This property returns the `bool` that determines whether the given graph (resp. each graph
+        in the given batch) is directed. The value `True` indicates that the graph (resp. each
+        graph) is directed.
         """
 
         return self.__is_directed
@@ -339,311 +492,616 @@ class Graph:
     def allow_loops(self) -> bool:
         """
         This property returns the `bool` that determines whether loops are allowed in the given
-        graph. The value `True` indicates that loops are allowed.
+        graph (resp. each graph in the given batch). The value `True` indicates that loops are
+        allowed.
         """
 
         return self.__allow_loops
 
     @property
-    def order(self) -> int:
+    def batch_size(self) -> Optional[int]:
         """
-        This property returns the given graph order, as an `int`.
+        In the case of a $k$-edge-colored looped complete graph, this property returns `None`. In
+        the case of a batch of $k$-edge-colored looped complete graphs of the same order, this
+        property returns the batch size, i.e., the number of graphs in the batch, as a positive
+        `int`.
         """
 
-        return self.__order
+        return self.__batch_size
+
+    @property
+    def graph_order(self) -> int:
+        """
+        This property returns the order of the given graph (resp. the common order of all the
+        graphs in the given batch), as a positive `int`.
+        """
+
+        return self.__graph_order
+
+    def __convert_graph_format(
+        self, input_format: GraphFormat, output_format: GraphFormat
+    ) -> None:
+        """
+        This private method performs a direct conversion from the format representation of the
+        given graph (resp. batch of graphs) in a selected input format to the format representation
+        of that graph (resp. batch of graphs) in a selected output format. The following direct
+        conversions are supported:
+
+        1. bitmask format for the out-neighborhoods ↔ adjacency matrix format with binary slices;
+        2. bitmask format for the in-neighborhoods ↔ adjacency matrix format with binary slices;
+        3. adjacency matrix format with binary slices ↔ flattened row-major format with binary
+           slices;
+        4. adjacency matrix format with binary slices ↔ flattened clockwise format with binary
+           slices;
+        5. adjacency matrix format with color numbers ↔ flattened row-major format with color
+           numbers;
+        6. adjacency matrix format with color numbers ↔ flattened clockwise format with color
+           numbers;
+        7. adjacency matrix format with binary slices ↔ adjacency matrix format with color numbers;
+        8. flattened row-major format with binary slices ↔ flattened row-major format with color
+           numbers; and
+        9. flattened clockwise format with binary slices ↔ flattened clockwise format with color
+           numbers.
+
+        A `NotImplementedError` is raised if any other direct conversion is attempted.
+
+        :param input_format: The selected input format, given as an item of the `GraphFormat`
+            enumeration.
+        :param output_format: The selected output format, given as an item of the `GraphFormat`
+            enumeration.
+        """
+
+        # The bitmask format for the out-neighborhoods can be directly converted only to the
+        # adjacency matrix format with binary slices.
+        if input_format == GraphFormat.BITMASK_OUT:
+            if output_format == GraphFormat.ADJACENCY_MATRIX_BINARY:
+                masks = 1 << np.arange(self.__graph_order, dtype=np.uint64)
+                temp = np.expand_dims(self.__bitmask_out, axis=-1) & masks
+                self.__adjacency_matrix_binary = (temp != 0).astype(np.uint8)
+            else:
+                raise NotImplementedError
+
+        # The bitmask format for the in-neighborhoods can be directly converted only to the
+        # adjacency matrix format with binary slices.
+        elif input_format == GraphFormat.BITMASK_IN:
+            if output_format == GraphFormat.ADJACENCY_MATRIX_BINARY:
+                masks = 1 << np.arange(self.__graph_order, dtype=np.uint64)
+                temp = np.expand_dims(self.__bitmask_in, axis=-1) & masks
+                temp = (temp != 0).astype(np.uint8)
+                self.__adjacency_matrix_binary = np.swapaxes(temp, -1, -2)
+            else:
+                raise NotImplementedError
+
+        # The adjacency matrix format with binary slices can be directly converted to any of the
+        # two bitmask formats, to the adjacency matrix format with color numbers, and to any of the
+        # two flattened formats with binary slices.
+        elif input_format == GraphFormat.ADJACENCY_MATRIX_BINARY:
+            if output_format == GraphFormat.BITMASK_OUT:
+                masks = 1 << np.arange(self.__graph_order, dtype=np.uint64)
+                self.__bitmask_out = self.__adjacency_matrix_binary @ masks
+            elif output_format == GraphFormat.BITMASK_IN:
+                masks = 1 << np.arange(self.__graph_order, dtype=np.uint64)
+                self.__bitmask_in = np.tensordot(
+                    masks, self.__adjacency_matrix_binary, axes=(0, -2)
+                )
+            elif output_format == GraphFormat.ADJACENCY_MATRIX_COLORS:
+                self.__adjacency_matrix_colors = binary_slices_to_color_numbers(
+                    input_representation=self.__adjacency_matrix_binary,
+                    is_flattened_format=False,
+                    edge_colors=self.__edge_colors,
+                    allow_loops=self.__allow_loops,
+                )
+            elif output_format == GraphFormat.FLATTENED_ROW_MAJOR_BINARY:
+                self.__flattened_row_major_binary = flatten_from_adjacency_matrix(
+                    adjacency_matrix=self.__adjacency_matrix_binary,
+                    flattened_ordering=FlattenedOrdering.ROW_MAJOR,
+                    is_directed=self.__is_directed,
+                    allow_loops=self.__allow_loops,
+                )
+            elif output_format == GraphFormat.FLATTENED_CLOCKWISE_BINARY:
+                self.__flattened_clockwise_binary = flatten_from_adjacency_matrix(
+                    adjacency_matrix=self.__adjacency_matrix_binary,
+                    flattened_ordering=FlattenedOrdering.CLOCKWISE,
+                    is_directed=self.__is_directed,
+                    allow_loops=self.__allow_loops,
+                )
+            else:
+                raise NotImplementedError
+
+        # The adjacency matrix format with color numbers can be directly converted to the adjacency
+        # matrix format with binary slices, and to any of the two flattened formats with color
+        # numbers.
+        elif input_format == GraphFormat.ADJACENCY_MATRIX_COLORS:
+            if output_format == GraphFormat.ADJACENCY_MATRIX_BINARY:
+                self.__adjacency_matrix_binary = color_numbers_to_binary_slices(
+                    input_representation=self.__adjacency_matrix_colors,
+                    is_flattened_format=False,
+                    edge_colors=self.__edge_colors,
+                    allow_loops=self.__allow_loops,
+                )
+            elif output_format == GraphFormat.FLATTENED_ROW_MAJOR_COLORS:
+                self.__flattened_row_major_colors = flatten_from_adjacency_matrix(
+                    adjacency_matrix=self.__adjacency_matrix_colors,
+                    flattened_ordering=FlattenedOrdering.ROW_MAJOR,
+                    is_directed=self.__is_directed,
+                    allow_loops=self.__allow_loops,
+                )
+            elif output_format == GraphFormat.FLATTENED_CLOCKWISE_COLORS:
+                self.__flattened_clockwise_colors = flatten_from_adjacency_matrix(
+                    adjacency_matrix=self.__adjacency_matrix_colors,
+                    flattened_ordering=FlattenedOrdering.CLOCKWISE,
+                    is_directed=self.__is_directed,
+                    allow_loops=self.__allow_loops,
+                )
+            else:
+                raise NotImplementedError
+
+        # The flattened row-major format with binary slices can be directly converted only to the
+        # adjacency matrix format with binary slices and the flattened row-major format with color
+        # numbers.
+        elif input_format == GraphFormat.FLATTENED_ROW_MAJOR_BINARY:
+            if output_format == GraphFormat.ADJACENCY_MATRIX_BINARY:
+                self.__adjacency_matrix_binary = unflatten_to_adjacency_matrix(
+                    flattened=self.__flattened_row_major_binary,
+                    flattened_ordering=FlattenedOrdering.ROW_MAJOR,
+                    is_directed=self.__is_directed,
+                    allow_loops=self.__allow_loops,
+                    graph_order=self.__graph_order,
+                )
+            elif output_format == GraphFormat.FLATTENED_ROW_MAJOR_COLORS:
+                self.__flattened_row_major_colors = binary_slices_to_color_numbers(
+                    input_representation=self.__flattened_row_major_binary,
+                    is_flattened_format=True,
+                    edge_colors=self.__edge_colors,
+                    allow_loops=self.__allow_loops,
+                )
+            else:
+                raise NotImplementedError
+
+        # The flattened clockwise format with binary slices can be directly converted only to the
+        # adjacency matrix format with binary slices and the flattened clockwise format with color
+        # numbers.
+        elif input_format == GraphFormat.FLATTENED_CLOCKWISE_BINARY:
+            if output_format == GraphFormat.ADJACENCY_MATRIX_BINARY:
+                self.__adjacency_matrix_binary = unflatten_to_adjacency_matrix(
+                    flattened=self.__flattened_clockwise_binary,
+                    flattened_ordering=FlattenedOrdering.CLOCKWISE,
+                    is_directed=self.__is_directed,
+                    allow_loops=self.__allow_loops,
+                    graph_order=self.__graph_order,
+                )
+            elif output_format == GraphFormat.FLATTENED_CLOCKWISE_COLORS:
+                self.__flattened_clockwise_colors = binary_slices_to_color_numbers(
+                    input_representation=self.__flattened_clockwise_binary,
+                    is_flattened_format=True,
+                    edge_colors=self.__edge_colors,
+                    allow_loops=self.__allow_loops,
+                )
+            else:
+                raise NotImplementedError
+
+        # The flattened row-major format with color numbers can be directly converted only to the
+        # adjacency matrix format with color numbers and the flattened row-major format with binary
+        # slices.
+        elif input_format == GraphFormat.FLATTENED_ROW_MAJOR_COLORS:
+            if output_format == GraphFormat.ADJACENCY_MATRIX_COLORS:
+                self.__adjacency_matrix_colors = unflatten_to_adjacency_matrix(
+                    flattened=self.__flattened_row_major_colors,
+                    flattened_ordering=FlattenedOrdering.ROW_MAJOR,
+                    is_directed=self.__is_directed,
+                    allow_loops=self.__allow_loops,
+                    graph_order=self.__graph_order,
+                )
+            elif output_format == GraphFormat.FLATTENED_ROW_MAJOR_BINARY:
+                self.__flattened_row_major_binary = color_numbers_to_binary_slices(
+                    input_representation=self.__flattened_row_major_colors,
+                    is_flattened_format=True,
+                    edge_colors=self.__edge_colors,
+                    allow_loops=self.__allow_loops,
+                )
+            else:
+                raise NotImplementedError
+
+        # The flattened clockwise format with color numbers can be directly converted only to the
+        # adjacency matrix format with color numbers and the flattened clockwise format with binary
+        # slices.
+        elif input_format == GraphFormat.FLATTENED_CLOCKWISE_COLORS:
+            if output_format == GraphFormat.ADJACENCY_MATRIX_COLORS:
+                self.__adjacency_matrix_colors = unflatten_to_adjacency_matrix(
+                    flattened=self.__flattened_clockwise_colors,
+                    flattened_ordering=FlattenedOrdering.CLOCKWISE,
+                    is_directed=self.__is_directed,
+                    allow_loops=self.__allow_loops,
+                    graph_order=self.__graph_order,
+                )
+            elif output_format == GraphFormat.FLATTENED_CLOCKWISE_BINARY:
+                self.__flattened_clockwise_binary = color_numbers_to_binary_slices(
+                    input_representation=self.__flattened_clockwise_colors,
+                    is_flattened_format=True,
+                    edge_colors=self.__edge_colors,
+                    allow_loops=self.__allow_loops,
+                )
+            else:
+                raise NotImplementedError
 
     @property
     def bitmask_out(self) -> np.ndarray:
         """
-        This property returns the `numpy.ndarray` of type `numpy.uint64` that represents the given
-        graph in the bitmask format for the out-neighborhoods (`GraphFormat.BITMASK_OUT`).
+        This property returns the `numpy.ndarray` of type `numpy.uint64` that describes the format
+        representation of the given graph (resp. batch of graphs) in the bitmask format for the
+        out-neighborhoods.
         """
 
         # If the output `np.ndarray` is already known, then just return it.
         if self.__bitmask_out is not None:
             return self.__bitmask_out
 
-        # Otherwise, compute the output `np.ndarray` by using the adjacency matrix format
-        # representation. If the adjacency matrix format representation is also unknown, then it
-        # will first get computed by using one of the remaining three format representations, which
-        # is surely known.
-        color_indices = np.arange(self.__edge_colors, dtype=np.uint8)
-        masks = 1 << np.arange(self.__order, dtype=np.uint64)
-
-        # If the graph is not fully colored, then the reduced bitmask format cannot be used.
-        if np.max(self.adjacency_matrix) == self.__edge_colors:
-            temp = (self.adjacency_matrix == color_indices[:, None, None]).astype(np.uint64)
-            if not self.__allow_loops:
-                np.fill_diagonal(temp[0], 0)
-            result = temp @ masks
-        # Otherwise, we use the reduced bitmask format.
-        else:
-            temp = (self.adjacency_matrix == color_indices[1:, None, None]).astype(np.uint64)
-            result = temp @ masks
-
-        # Update the out-neighborhoods bitmask format representation to make it available for
-        # further use, so that the same conversion does not have to be performed twice.
-        self.__bitmask_out = result
+        # Otherwise, determine the output `np.ndarray` by relying on the adjacency matrix format
+        # with binary slices.
+        self.adjacency_matrix_binary
+        self.__convert_graph_format(
+            input_format=GraphFormat.ADJACENCY_MATRIX_BINARY, output_format=GraphFormat.BITMASK_OUT
+        )
 
         return self.__bitmask_out
 
     @property
     def bitmask_in(self) -> np.ndarray:
         """
-        This property returns the `numpy.ndarray` of type `numpy.uint64` that represents the given
-        graph in the bitmask format for the in-neighborhoods (`GraphFormat.BITMASK_IN`).
+        This property returns the `numpy.ndarray` of type `numpy.uint64` that describes the format
+        representation of the given graph (resp. batch of graphs) in the bitmask format for the
+        in-neighborhoods.
         """
 
         # If the output `np.ndarray` is already known, then just return it.
         if self.__bitmask_in is not None:
             return self.__bitmask_in
 
-        # If the graph is undirected, then just use the bitmask format for the out-neighborhoods
-        # and update the in-neighborhoods bitmask format representation to make it available for
-        # further use.
-        if not self.__is_directed:
-            self.__bitmask_in = self.bitmask_out
-
-            return self.__bitmask_in
-
-        # Otherwise, compute the output `np.ndarray` by using the adjacency matrix format
-        # representation. If the adjacency matrix format representation is also unknown, then it
-        # will first get computed by using one of the remaining three format representations, which
-        # is surely known.
-        color_indices = np.arange(self.__edge_colors, dtype=np.uint8)
-        masks = 1 << np.arange(self.__order, dtype=np.uint64)
-
-        # If the graph is not fully colored, then the reduced bitmask format cannot be used.
-        if np.max(self.adjacency_matrix) == self.__edge_colors:
-            temp = (self.adjacency_matrix.T == color_indices[:, None, None]).astype(np.uint64)
-            if not self.__allow_loops:
-                np.fill_diagonal(temp[0], 0)
-            result = temp @ masks
-        # Otherwise, we use the reduced bitmask format.
-        else:
-            temp = (self.adjacency_matrix.T == color_indices[1:, None, None]).astype(np.uint64)
-            result = temp @ masks
-
-        # Update the in-neighborhoods bitmask format representation to make it available for
-        # further use, so that the same conversion does not have to be performed twice.
-        self.__bitmask_in = result
+        # Otherwise, determine the output `np.ndarray` by relying on the adjacency matrix format
+        # with binary slices.
+        self.adjacency_matrix_binary
+        self.__convert_graph_format(
+            input_format=GraphFormat.ADJACENCY_MATRIX_BINARY, output_format=GraphFormat.BITMASK_IN
+        )
 
         return self.__bitmask_in
 
     @property
-    def adjacency_matrix(self) -> np.ndarray:
+    def adjacency_matrix_colors(self) -> np.ndarray:
         """
-        This property returns the `numpy.ndarray` of type `numpy.uint8` that represents the given
-        graph in the adjacency matrix format (`GraphFormat.ADJACENCY_MATRIX`).
+        This property returns the `numpy.ndarray` of type `numpy.uint8` that describes the format
+        representation of the given graph (resp. batch of graphs) in the adjacency matrix format
+        with color numbers.
         """
 
         # If the output `np.ndarray` is already known, then just return it.
-        if self.__adjacency_matrix is not None:
-            return self.__adjacency_matrix
+        if self.__adjacency_matrix_colors is not None:
+            return self.__adjacency_matrix_colors
 
-        # If the flattened row-major format representation is known, use it to obtain the adjacency
-        # matrix format representation.
-        if self.__flattened_row_major is not None:
-            # Settle the case when the graph is directed, with two subcases depending on whether
-            # loops are allowed.
-            if self.__is_directed:
-                if self.__allow_loops:
-                    result = self.__flattened_row_major.reshape(self.__order, self.__order)
-                else:
-                    result = np.zeros((self.__order, self.__order), dtype=np.uint8)
-                    result[~np.eye(self.__order, dtype=bool)] = self.__flattened_row_major
+        # Otherwise, perform the required conversion directly or indirectly by using the graph
+        # format conversion graph.
+        if (
+            self.__adjacency_matrix_binary is not None
+            or self.__bitmask_out is not None
+            or self.__bitmask_in is not None
+        ):
+            self.adjacency_matrix_binary
+            self.__convert_graph_format(
+                input_format=GraphFormat.ADJACENCY_MATRIX_BINARY,
+                output_format=GraphFormat.ADJACENCY_MATRIX_COLORS,
+            )
+        elif self.__flattened_row_major_colors is not None:
+            self.__convert_graph_format(
+                input_format=GraphFormat.FLATTENED_ROW_MAJOR_COLORS,
+                output_format=GraphFormat.ADJACENCY_MATRIX_COLORS,
+            )
+        elif self.__flattened_clockwise_colors is not None:
+            self.__convert_graph_format(
+                input_format=GraphFormat.FLATTENED_CLOCKWISE_COLORS,
+                output_format=GraphFormat.ADJACENCY_MATRIX_COLORS,
+            )
+        elif self.__flattened_row_major_binary is not None:
+            self.__convert_graph_format(
+                input_format=GraphFormat.FLATTENED_ROW_MAJOR_BINARY,
+                output_format=GraphFormat.FLATTENED_ROW_MAJOR_COLORS,
+            )
+            self.__convert_graph_format(
+                input_format=GraphFormat.FLATTENED_ROW_MAJOR_COLORS,
+                output_format=GraphFormat.ADJACENCY_MATRIX_COLORS,
+            )
+        else:
+            self.__convert_graph_format(
+                input_format=GraphFormat.FLATTENED_CLOCKWISE_BINARY,
+                output_format=GraphFormat.FLATTENED_CLOCKWISE_COLORS,
+            )
+            self.__convert_graph_format(
+                input_format=GraphFormat.FLATTENED_CLOCKWISE_COLORS,
+                output_format=GraphFormat.ADJACENCY_MATRIX_COLORS,
+            )
 
-            # Settle the case when the graph is undirected.
-            else:
-                result = np.zeros((self.__order, self.__order), dtype=np.uint8)
+        return self.__adjacency_matrix_colors
 
-                if self.__allow_loops:
-                    triu_rows, triu_columns = np.triu_indices(self.__order, k=0)
-                else:
-                    triu_rows, triu_columns = np.triu_indices(self.__order, k=1)
+    @property
+    def adjacency_matrix_binary(self) -> np.ndarray:
+        """
+        This property returns the `numpy.ndarray` of type `numpy.uint8` that describes the format
+        representation of the given graph (resp. batch of graphs) in the adjacency matrix format
+        with binary slices.
+        """
 
-                result[triu_rows, triu_columns] = self.__flattened_row_major
-                result[triu_columns, triu_rows] = self.__flattened_row_major
+        # If the output `np.ndarray` is already known, then just return it.
+        if self.__adjacency_matrix_binary is not None:
+            return self.__adjacency_matrix_binary
 
-            # Update the adjacency matrix format representation to make it available for further
-            # use, so that the same conversion does not have to be performed twice.
-            self.__adjacency_matrix = result
-
-            return self.__adjacency_matrix
-
-        # If the flattened clockwise format representation is known, use it to obtain the adjacency
-        # matrix format representation.
-        if self.__flattened_clockwise is not None:
-            result = np.zeros((self.__order, self.__order), dtype=np.uint8)
-
-            # Settle the case when the graph is directed, with two subcases depending on whether
-            # loops are allowed.
-            if self.__is_directed:
-                if self.__allow_loops:
-                    result[0, 0] = self.__flattened_clockwise[0]
-
-                    start = 1
-                    for layer in range(1, self.__order):
-                        result[: layer + 1, layer] = self.__flattened_clockwise[
-                            start : start + layer + 1
-                        ]
-                        start += layer + 1
-
-                        result[layer, :layer] = self.__flattened_clockwise[
-                            start + layer - 1 : start - 1 : -1
-                        ]
-                        start += layer
-
-                else:
-                    start = 0
-                    for layer in range(1, self.__order):
-                        result[:layer, layer] = self.__flattened_clockwise[start : start + layer]
-                        start += layer
-
-                        result[layer, :layer] = self.__flattened_clockwise[
-                            start + layer - 1 : start - 1 : -1
-                        ]
-                        start += layer
-
-            # Settle the case when the graph is undirected.
-            else:
-                if self.__allow_loops:
-                    tril_rows, tril_columns = np.tril_indices(self.__order, k=0)
-                else:
-                    tril_rows, tril_columns = np.tril_indices(self.__order, k=-1)
-
-                result[tril_rows, tril_columns] = self.__flattened_clockwise
-                result[tril_columns, tril_rows] = self.__flattened_clockwise
-
-            # Update the adjacency matrix format representation to make it available for further
-            # use, so that the same conversion does not have to be performed twice.
-            self.__adjacency_matrix = result
-
-            return self.__adjacency_matrix
-
-        # Otherwise, at least one of the two bitmask format representations must be known, hence it
-        # can be used to find the adjacency matrix representation.
-        masks = 1 << np.arange(self.__order, dtype=np.uint64)
+        # Otherwise, perform the required conversion directly or indirectly by using the graph
+        # format conversion graph.
         if self.__bitmask_out is not None:
-            temp = self.__bitmask_out[:, :, None] & masks
+            self.__convert_graph_format(
+                input_format=GraphFormat.BITMASK_OUT,
+                output_format=GraphFormat.ADJACENCY_MATRIX_BINARY,
+            )
+        elif self.__bitmask_in is not None:
+            self.__convert_graph_format(
+                input_format=GraphFormat.BITMASK_IN,
+                output_format=GraphFormat.ADJACENCY_MATRIX_BINARY,
+            )
+        elif self.__adjacency_matrix_colors is not None:
+            self.__convert_graph_format(
+                input_format=GraphFormat.ADJACENCY_MATRIX_COLORS,
+                output_format=GraphFormat.ADJACENCY_MATRIX_BINARY,
+            )
+        elif self.__flattened_row_major_binary is not None:
+            self.__convert_graph_format(
+                input_format=GraphFormat.FLATTENED_ROW_MAJOR_BINARY,
+                output_format=GraphFormat.ADJACENCY_MATRIX_BINARY,
+            )
+        elif self.__flattened_clockwise_binary is not None:
+            self.__convert_graph_format(
+                input_format=GraphFormat.FLATTENED_CLOCKWISE_BINARY,
+                output_format=GraphFormat.ADJACENCY_MATRIX_BINARY,
+            )
         else:
-            temp = self.__bitmask_in[:, :, None] & masks
+            if self.__flattened_row_major_colors is not None:
+                self.__convert_graph_format(
+                    input_format=GraphFormat.FLATTENED_ROW_MAJOR_COLORS,
+                    output_format=GraphFormat.ADJACENCY_MATRIX_COLORS,
+                )
+            else:
+                self.__convert_graph_format(
+                    input_format=GraphFormat.FLATTENED_CLOCKWISE_COLORS,
+                    output_format=GraphFormat.ADJACENCY_MATRIX_COLORS,
+                )
 
-        temp = (temp != 0).astype(np.uint8)
+            self.__convert_graph_format(
+                input_format=GraphFormat.ADJACENCY_MATRIX_COLORS,
+                output_format=GraphFormat.ADJACENCY_MATRIX_BINARY,
+            )
 
-        # If the number of rows of any of the two bitmask format representation matrices matches
-        # the number of proper edge colors, then this means that a standard (non-reduced) bitmask
-        # format is being used.
-        if temp.shape[0] == self.__edge_colors:
-            result = np.full((self.__order, self.__order), self.__edge_colors, dtype=np.uint8)
-            if not self.__allow_loops:
-                np.fill_diagonal(result, 0)
-            weights = np.arange(self.__edge_colors, 0, -1, dtype=np.uint8)
-            result -= np.sum(temp * weights[:, None, None], axis=0)
-
-        # Otherwise, a reduced bitmask format is being used.
-        else:
-            weights = np.arange(1, self.__edge_colors, dtype=np.uint8)
-            result = np.sum(temp * weights[:, None, None], axis=0)
-
-        # If the bitmask format for the in-neighborhoods was used, then the resulting matrix needs
-        # to be transposed.
-        if self.__bitmask_out is None:
-            result = result.T
-
-        # Update the adjacency matrix format representation to make it available for further use,
-        # so that the same conversion does not have to be performed twice.
-        self.__adjacency_matrix = result
-
-        return self.__adjacency_matrix
+        return self.__adjacency_matrix_binary
 
     @property
-    def flattened_row_major(self) -> np.ndarray:
+    def flattened_row_major_colors(self) -> np.ndarray:
         """
-        This property returns the `numpy.ndarray` of type `numpy.uint8` that represents the given
-        graph in the flattened row-major format (`GraphFormat.FLATTENED_ROW_MAJOR`).
+        This property returns the `numpy.ndarray` of type `numpy.uint8` that describes the format
+        representation of the given graph (resp. batch of graphs) in the flattened row-major format
+        with color numbers.
         """
 
         # If the output `np.ndarray` is already known, then just return it.
-        if self.__flattened_row_major is not None:
-            return self.__flattened_row_major
+        if self.__flattened_row_major_colors is not None:
+            return self.__flattened_row_major_colors
 
-        # Otherwise, compute the output `np.ndarray` by using the adjacency matrix format
-        # representation. If the adjacency matrix format representation is also unknown, then it
-        # will first get computed by using one of the remaining three format representations, which
-        # is surely known.
-        if self.__is_directed:
-            if self.__allow_loops:
-                result = self.adjacency_matrix.reshape(-1)
-            else:
-                result = self.adjacency_matrix[~np.eye(self.__order, dtype=bool)]
-
+        # Otherwise, perform a direct conversion from the flattened row-major format with binary
+        # slices, if possible.
+        if self.__flattened_row_major_binary is not None:
+            self.__convert_graph_format(
+                input_format=GraphFormat.FLATTENED_ROW_MAJOR_BINARY,
+                output_format=GraphFormat.FLATTENED_ROW_MAJOR_COLORS,
+            )
+        # Otherwise, determine the output `np.ndarray` by relying on the adjacency matrix format
+        # with color numbers.
         else:
-            if self.__allow_loops:
-                triu_indices = np.triu_indices(self.__order, k=0)
-            else:
-                triu_indices = np.triu_indices(self.__order, k=1)
+            self.adjacency_matrix_colors
+            self.__convert_graph_format(
+                input_format=GraphFormat.ADJACENCY_MATRIX_COLORS,
+                output_format=GraphFormat.FLATTENED_ROW_MAJOR_COLORS,
+            )
 
-            result = self.adjacency_matrix[triu_indices]
-
-        # Update the flattened row-major format representation to make it available for further
-        # use, so that the same conversion does not have to be performed twice.
-        self.__flattened_row_major = result
-
-        return self.__flattened_row_major
+        return self.__flattened_row_major_colors
 
     @property
-    def flattened_clockwise(self) -> np.ndarray:
+    def flattened_row_major_binary(self) -> np.ndarray:
         """
-        This property returns the `numpy.ndarray` of type `numpy.uint8` that represents the given
-        graph in the flattened clockwise format (`GraphFormat.FLATTENED_CLOCKWISE`).
+        This property returns the `numpy.ndarray` of type `numpy.uint8` that describes the format
+        representation of the given graph (resp. batch of graphs) in the flattened row-major format
+        with binary slices.
         """
 
         # If the output `np.ndarray` is already known, then just return it.
-        if self.__flattened_clockwise is not None:
-            return self.__flattened_clockwise
+        if self.__flattened_row_major_binary is not None:
+            return self.__flattened_row_major_binary
 
-        # Otherwise, compute the output `np.ndarray` by using the adjacency matrix format
-        # representation. If the adjacency matrix format representation is also unknown, then it
-        # will first get computed by using one of the remaining three format representations, which
-        # is surely known.
-        if self.__is_directed:
-            # If the graph is directed, divide the case into two subcases depending on whether
-            # loops are allowed.
-            if self.__allow_loops:
-                result = np.zeros((self.__order * self.__order,), dtype=np.uint8)
-                result[0] = self.adjacency_matrix[0, 0]
-
-                start = 1
-                for layer in range(1, self.__order):
-                    result[start : start + layer + 1] = self.adjacency_matrix[: layer + 1, layer]
-                    start += layer + 1
-
-                    result[start : start + layer] = self.adjacency_matrix[layer, layer - 1 :: -1]
-                    start += layer
-
-            else:
-                result = np.zeros((self.__order * (self.__order - 1),), dtype=np.uint8)
-
-                start = 0
-                for layer in range(1, self.__order):
-                    result[start : start + layer] = self.adjacency_matrix[:layer, layer]
-                    start += layer
-
-                    result[start : start + layer] = self.adjacency_matrix[layer, layer - 1 :: -1]
-                    start += layer
-
-        # Settle the case when the graph is undirected.
+        # Otherwise, perform the required conversion directly or indirectly by using the graph
+        # format conversion graph.
+        if self.__flattened_row_major_colors is not None:
+            self.__convert_graph_format(
+                input_format=GraphFormat.FLATTENED_ROW_MAJOR_COLORS,
+                output_format=GraphFormat.FLATTENED_ROW_MAJOR_BINARY,
+            )
+        elif (
+            self.__adjacency_matrix_binary is not None
+            or self.__bitmask_out is not None
+            or self.__bitmask_in is not None
+        ):
+            self.adjacency_matrix_binary
+            self.__convert_graph_format(
+                input_format=GraphFormat.ADJACENCY_MATRIX_BINARY,
+                output_format=GraphFormat.FLATTENED_ROW_MAJOR_BINARY,
+            )
+        elif self.__adjacency_matrix_colors is not None:
+            self.__convert_graph_format(
+                input_format=GraphFormat.ADJACENCY_MATRIX_COLORS,
+                output_format=GraphFormat.FLATTENED_ROW_MAJOR_COLORS,
+            )
+            self.__convert_graph_format(
+                input_format=GraphFormat.FLATTENED_ROW_MAJOR_COLORS,
+                output_format=GraphFormat.FLATTENED_ROW_MAJOR_BINARY,
+            )
         else:
-            if self.__allow_loops:
-                tril_indices = np.tril_indices(self.__order, k=0)
-            else:
-                tril_indices = np.tril_indices(self.__order, k=-1)
+            self.flattened_clockwise_binary
+            self.__convert_graph_format(
+                input_format=GraphFormat.FLATTENED_CLOCKWISE_BINARY,
+                output_format=GraphFormat.ADJACENCY_MATRIX_BINARY,
+            )
+            self.__convert_graph_format(
+                input_format=GraphFormat.ADJACENCY_MATRIX_BINARY,
+                output_format=GraphFormat.FLATTENED_ROW_MAJOR_BINARY,
+            )
 
-            result = self.adjacency_matrix[tril_indices]
+        return self.__flattened_row_major_binary
 
-        # Update the flattened clockwise format representation to make it available for further
-        # use, so that the same conversion does not have to be performed twice.
-        self.__flattened_clockwise = result
+    @property
+    def flattened_clockwise_colors(self) -> np.ndarray:
+        """
+        This property returns the `numpy.ndarray` of type `numpy.uint8` that describes the format
+        representation of the given graph (resp. batch of graphs) in the flattened clockwise format
+        with color numbers.
+        """
 
-        return self.__flattened_clockwise
+        # If the output `np.ndarray` is already known, then just return it.
+        if self.__flattened_clockwise_colors is not None:
+            return self.__flattened_clockwise_colors
+
+        # Otherwise, perform a direct conversion from the flattened clockwise format with binary
+        # slices, if possible.
+        if self.__flattened_clockwise_binary is not None:
+            self.__convert_graph_format(
+                input_format=GraphFormat.FLATTENED_CLOCKWISE_BINARY,
+                output_format=GraphFormat.FLATTENED_CLOCKWISE_COLORS,
+            )
+        # Otherwise, determine the output `np.ndarray` by relying on the adjacency matrix format
+        # with color numbers.
+        else:
+            self.adjacency_matrix_colors
+            self.__convert_graph_format(
+                input_format=GraphFormat.ADJACENCY_MATRIX_COLORS,
+                output_format=GraphFormat.FLATTENED_CLOCKWISE_COLORS,
+            )
+
+        return self.__flattened_clockwise_colors
+
+    @property
+    def flattened_clockwise_binary(self) -> np.ndarray:
+        """
+        This property returns the `numpy.ndarray` of type `numpy.uint8` that describes the format
+        representation of the given graph (resp. batch of graphs) in the flattened clockwise format
+        with binary slices.
+        """
+
+        # If the output `np.ndarray` is already known, then just return it.
+        if self.__flattened_clockwise_binary is not None:
+            return self.__flattened_clockwise_binary
+
+        # Otherwise, perform the required conversion directly or indirectly by using the graph
+        # format conversion graph.
+        if self.__flattened_clockwise_colors is not None:
+            self.__convert_graph_format(
+                input_format=GraphFormat.FLATTENED_CLOCKWISE_COLORS,
+                output_format=GraphFormat.FLATTENED_CLOCKWISE_BINARY,
+            )
+        elif (
+            self.__adjacency_matrix_binary is not None
+            or self.__bitmask_out is not None
+            or self.__bitmask_in is not None
+        ):
+            self.adjacency_matrix_binary
+            self.__convert_graph_format(
+                input_format=GraphFormat.ADJACENCY_MATRIX_BINARY,
+                output_format=GraphFormat.FLATTENED_CLOCKWISE_BINARY,
+            )
+        elif self.__adjacency_matrix_colors is not None:
+            self.__convert_graph_format(
+                input_format=GraphFormat.ADJACENCY_MATRIX_COLORS,
+                output_format=GraphFormat.FLATTENED_CLOCKWISE_COLORS,
+            )
+            self.__convert_graph_format(
+                input_format=GraphFormat.FLATTENED_CLOCKWISE_COLORS,
+                output_format=GraphFormat.FLATTENED_CLOCKWISE_BINARY,
+            )
+        else:
+            self.flattened_row_major_binary
+            self.__convert_graph_format(
+                input_format=GraphFormat.FLATTENED_ROW_MAJOR_BINARY,
+                output_format=GraphFormat.ADJACENCY_MATRIX_BINARY,
+            )
+            self.__convert_graph_format(
+                input_format=GraphFormat.ADJACENCY_MATRIX_BINARY,
+                output_format=GraphFormat.FLATTENED_CLOCKWISE_BINARY,
+            )
+
+        return self.__flattened_clockwise_binary
+
+    def __getitem__(self, index: int) -> Graph:
+        """
+        If the given object models a batch of $k$-edge-colored looped complete graphs of the same
+        order, then this method returns the graph in the batch with the provided index. On the
+        other hand, if the given object models a $k$-edge-colored looped complete graph, then this
+        method should not be used, and if it is, an `IndexError` is raised.
+
+        :param index: The provided index that determines which $k$-edge-colored looped complete
+            graph should be extracted from the batch. This argument must be a nonnegative `int`
+            that is below the batch size of the given batch of graphs.
+
+        :return: The graph in the batch with the provided index, given as a `Graph` object.
+        """
+
+        if self.__batch_size is None:
+            raise IndexError
+
+        # Extract all the computed graph format representations.
+        bitmask_out = None if self.__bitmask_out is None else self.__bitmask_out[index]
+        bitmask_in = None if self.__bitmask_in is None else self.__bitmask_in[index]
+        adjacency_matrix_colors = (
+            None
+            if self.__adjacency_matrix_colors is None
+            else self.__adjacency_matrix_colors[index]
+        )
+        adjacency_matrix_binary = (
+            None
+            if self.__adjacency_matrix_binary is None
+            else self.__adjacency_matrix_binary[index]
+        )
+        flattened_row_major_colors = (
+            None
+            if self.__flattened_row_major_colors is None
+            else self.__flattened_row_major_colors[index]
+        )
+        flattened_row_major_binary = (
+            None
+            if self.__flattened_row_major_binary is None
+            else self.__flattened_row_major_binary[index]
+        )
+        flattened_clockwise_colors = (
+            None
+            if self.__flattened_clockwise_colors is None
+            else self.__flattened_clockwise_colors[index]
+        )
+        flattened_clockwise_binary = (
+            None
+            if self.__flattened_clockwise_binary is None
+            else self.__flattened_clockwise_binary[index]
+        )
+
+        return Graph(
+            edge_colors=self.__edge_colors,
+            is_directed=self.__is_directed,
+            allow_loops=self.__allow_loops,
+            bitmask_out=bitmask_out,
+            bitmask_in=bitmask_in,
+            adjacency_matrix_colors=adjacency_matrix_colors,
+            adjacency_matrix_binary=adjacency_matrix_binary,
+            flattened_row_major_colors=flattened_row_major_colors,
+            flattened_row_major_binary=flattened_row_major_binary,
+            flattened_clockwise_colors=flattened_clockwise_colors,
+            flattened_clockwise_binary=flattened_clockwise_binary,
+        )

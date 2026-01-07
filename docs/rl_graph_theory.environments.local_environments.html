@@ -145,21 +145,8 @@
     </li>
 </ul>
 
-        <div class="childrenKindTitle">Functions</div>
-        <ul>
-    
-    <li class="private">
         
-        
-        
-
-        
-            <div class="itemName"><code><a href="#__compute_edge_indices" class="internal-link" title="rl_graph_theory.environments.local_environments.__compute_edge_indices">__compute<wbr></wbr>_edge<wbr></wbr>_indices</a></code>
-            </div>
-        
-
-    </li>
-</ul> 
+         
 
         
          
@@ -307,11 +294,6 @@ them.</p></div>
     <td>Class</td>
     <td><code><a href="rl_graph_theory.environments.local_environments.LocalSetEnvironment.html" class="internal-link" title="rl_graph_theory.environments.local_environments.LocalSetEnvironment"><wbr></wbr>Local<wbr></wbr>Set<wbr></wbr>Environment</a></code></td>
     <td>This class inherits from the <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code> class and models a graph-building game where the edges (resp. arcs) are all initially fully colored in some manner, and the agent moves from one vertex to another in some way, thereby traversing the existing edges (resp...</td>
-  </tr><tr class="function private">
-    
-    <td>Function</td>
-    <td><code><a href="#__compute_edge_indices" class="internal-link" title="rl_graph_theory.environments.local_environments.__compute_edge_indices">__compute<wbr></wbr>_edge<wbr></wbr>_indices</a></code></td>
-    <td>This auxiliary function considers a $k$-edge-colored looped complete graph, and computes the index of each of the edges (resp. arcs) from a given list, with respect to the flattened row-major format or the flattened clockwise format, as described in the ...</td>
   </tr>
 </table>
           
@@ -320,51 +302,7 @@ them.</p></div>
         </div>
 
         <div id="child-list">
-          <div class="basefunction private">
-  
-  
-  <a name="rl_graph_theory.environments.local_environments.__compute_edge_indices">
-    
-  </a>
-  <a name="__compute_edge_indices">
-    
-  </a>
-  <div class="functionHeader">
-    
-    
-    <span class="py-keyword">def</span>&#160;<span class="py-defname">__compute_edge_indices</span><span class="function-signature long-signature">(<span class="rst-sig-param">graph_order: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code>, </span><span class="rst-sig-param">starting_vertices: <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code>, </span><span class="rst-sig-param">ending_vertices: <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code>, </span><span class="rst-sig-param">flattened_ordering: <code><a href="rl_graph_theory.graphs.graph_format.FlattenedOrdering.html" class="internal-link" title="rl_graph_theory.graphs.graph_format.FlattenedOrdering">FlattenedOrdering</a></code> = <a href="rl_graph_theory.graphs.graph_format.FlattenedOrdering.html#ROW_MAJOR" class="internal-link" title="rl_graph_theory.graphs.graph_format.FlattenedOrdering.ROW_MAJOR">FlattenedOrdering.ROW_MAJOR</a>, </span><span class="rst-sig-param">is_directed: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> = <a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a>, </span><span class="rst-sig-param">allow_loops: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> = <a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a></span>) -&gt; <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code>:</span>
-    
-    <a class="headerLink" href="#__compute_edge_indices" title="rl_graph_theory.environments.local_environments.__compute_edge_indices">
-      
-      
-      ¶
-    </a>
-  </div>
-  <div class="docstring functionBody">
-    
-    <div><p>This auxiliary function considers a $k$-edge-colored looped complete graph, and computes the
-index of each of the edges (resp. arcs) from a given list, with respect to the flattened
-row-major format or the flattened clockwise format, as described in the <code><a href="rl_graph_theory.graphs.graph_format.GraphFormat.html" class="internal-link" title="rl_graph_theory.graphs.graph_format.GraphFormat">GraphFormat</a></code>
-enumeration. The edges (resp. arcs) are given as ordered pairs of vertices consisting of the
-starting vertex and the ending vertex. It is possible to configure which of the two flattened
-orderings should be used to arrange the edges (resp. arcs), as well as select the graph order
-and choose whether the graphs should be directed or undirected, and whether loops should be
-allowed. In the case of undirected graphs, it does not matter which vertex is the starting one
-and which is the ending. If loops are not allowed, then the starting and the ending vertex from
-each pair must be distinct.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">graph<wbr></wbr>_order:</span><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></td><td class="fieldArgDesc">A positive integer that determines the order of the considered graph.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">starting<wbr></wbr>_vertices:</span><code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code></td><td class="fieldArgDesc">A <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> list of type <code><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.int32" class="intersphinx-link">numpy.int32</a></code> that contains the first
-vertex from each of the given ordered pairs of vertices that represent the edges (resp.
-arcs).</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">ending<wbr></wbr>_vertices:</span><code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code></td><td class="fieldArgDesc">A <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> list of type <code><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.int32" class="intersphinx-link">numpy.int32</a></code> that contains the second
-vertex from each of the given ordered pairs of vertices that represent the edges (resp.
-arcs).</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">flattened<wbr></wbr>_ordering:</span><code><a href="rl_graph_theory.graphs.graph_format.FlattenedOrdering.html" class="internal-link" title="rl_graph_theory.graphs.graph_format.FlattenedOrdering">FlattenedOrdering</a></code></td><td class="fieldArgDesc">An item of the <code><a href="rl_graph_theory.graphs.graph_format.FlattenedOrdering.html" class="internal-link" title="rl_graph_theory.graphs.graph_format.FlattenedOrdering">FlattenedOrdering</a></code> enumeration that determines
-whether the edges (resp. arcs) should be arranged in the flattened row-major order or the
-flattened clockwise order. The default value is <code><a href="rl_graph_theory.graphs.graph_format.FlattenedOrdering.html#ROW_MAJOR" class="internal-link" title="rl_graph_theory.graphs.graph_format.FlattenedOrdering.ROW_MAJOR">FlattenedOrdering.ROW_MAJOR</a></code>, i.e., the
-edges (resp. arcs) should be arranged in the flattened row-major order by default.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">is<wbr></wbr>_directed:</span><code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code></td><td class="fieldArgDesc">A boolean that indicates whether the considered graph is a $k$-edge-colored
-looped complete directed graph or a $k$-edge-colored looped complete undirected graph. The
-default value is <code><a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a></code>, i.e., the considered graph is undirected by default.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">allow<wbr></wbr>_loops:</span><code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code></td><td class="fieldArgDesc">A boolean that indicates whether the considered graph is allowed to have
-loops. The default value is <code><a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a></code>, i.e., the considered graph is not allowed to have
-loops by default.</td></tr></table><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
-  </div>
-</div>
+          
         </div>
       
       </main>
@@ -376,7 +314,7 @@ loops by default.</td></tr></table><table class="fieldTable"><tr class="fieldSta
   <div class="container-fluid">
     <a href="index.html">API Documentation</a> for rl-graph-theory,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    25.10.1 at 2025-12-29 22:09:07.
+    25.10.1 at 2026-01-06 02:23:37.
   </div>
 
   <!-- Search related scripts needs to be loaded at the end of HTML 

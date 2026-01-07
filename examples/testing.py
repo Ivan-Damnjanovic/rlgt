@@ -1,7 +1,7 @@
 import numpy as np
 from rl_graph_theory.environments.graph_generators import create_fixed_graph_generator, create_choose_two_graph_generator, create_edge_perturbation_graph_generator, create_random_graph_generator
 from rl_graph_theory.graphs.graph import Graph
-from rl_graph_theory.graphs.graph_format import FlattenedOrdering
+from rl_graph_theory.graphs.graph_formats import FlattenedOrdering
 
 # gb = GraphBatch()
 
@@ -20,11 +20,11 @@ from rl_graph_theory.graphs.graph_format import FlattenedOrdering
 
 
 
-# generator = create_fixed_graph_generator(
-#     Graph.from_flattened(np.array([1, 0, 1, 1, 1, 0, 0, 1, 0, 0], dtype=np.uint8))
-# )
+generator = create_fixed_graph_generator(
+    Graph.from_flattened(np.array([1, 0, 1, 1, 1, 0, 0, 1, 0, 0], dtype=np.uint8))
+)
 
-# print(generator(7).bitmask_out)
+print(generator(7).bitmask_out)
 
 
 
@@ -38,19 +38,19 @@ from rl_graph_theory.graphs.graph_format import FlattenedOrdering
 
 
 
-generator = create_edge_perturbation_graph_generator(
-    initial_graph=Graph.from_flattened(np.array([1, 0, 1, 1, 1, 0, 0, 1, 0, 0], dtype=np.uint8), edge_colors=3),
-    edge_perturbation_probability=0.30,
-    color_selection_probabilities=np.array([0.3, 0.5, 0.2]),
-)
-result = generator(10000).flattened_row_major
+# generator = create_edge_perturbation_graph_generator(
+#     initial_graph=Graph.from_flattened(np.array([1, 0, 1, 1, 1, 0, 0, 1, 0, 0], dtype=np.uint8), edge_colors=3),
+#     edge_perturbation_probability=0.30,
+#     color_selection_probabilities=np.array([0.3, 0.5, 0.2]),
+# )
+# result = generator(10000).flattened_row_major_colors
 
-# print(result)
-# print((result != np.array([1, 0, 1, 1, 1, 0, 0, 1, 0, 0], dtype=np.uint8)).sum() / 100000)
-print(result.dtype)
-print((result == 0).sum() / 100000)
-print((result == 1).sum() / 100000)
-print((result == 2).sum() / 100000)
+# # print(result)
+# # print((result != np.array([1, 0, 1, 1, 1, 0, 0, 1, 0, 0], dtype=np.uint8)).sum() / 100000)
+# print(result.dtype)
+# print((result == 0).sum() / 100000)
+# print((result == 1).sum() / 100000)
+# print((result == 2).sum() / 100000)
 
 
 

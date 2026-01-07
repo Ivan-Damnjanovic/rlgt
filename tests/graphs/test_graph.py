@@ -7,7 +7,7 @@ import pytest
 
 from rl_graph_theory.graphs.graph import Graph
 from rl_graph_theory.graphs.graph_batch import GraphBatch
-from rl_graph_theory.graphs.graph_format import BitmaskType, FlattenedOrdering
+from rl_graph_theory.graphs.graph_formats import BitmaskType, FlattenedOrdering
 
 from .graph_test_cases import (
     GRAPH_BATCH_TEST_CASES_BASIC,
