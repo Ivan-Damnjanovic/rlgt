@@ -1,3 +1,7 @@
+"""
+
+"""
+
 from typing import Callable, Optional
 
 import numpy as np
@@ -8,34 +12,60 @@ from torch.distributions import Categorical
 from ..environments.graph_environment import EpisodeStatus, GraphEnvironment
 from ..environments.graph_generators import create_fixed_graph_generator
 from ..graphs.graph import Graph
-from ..graphs.graph_formats import GraphFormat
+from ..graphs.graph_formats import GraphFormat, FlattenedOrdering
 from .random_action_mechanisms import RandomActionMechanism
 
 
 class DeepCrossEntropyMethod:
+    """
+    Docstring for DeepCrossEntropyMethod
+    """
 
     def __init__(
         self,
         environment: GraphEnvironment,
-        policy_network: nn.Module,
-        optimizer: torch.optim.Optimizer,
-        loss_function: Callable,
         new_candidates_count: int,
         elite_count: int,
         survivors_count: int,
+        policy_network: nn.Module,
+        optimizer: torch.optim.Optimizer,
+        loss_function: Callable,
         random_action_mechanism: RandomActionMechanism,
         rng: Optional[np.random.Generator] = None,
     ):
+        """
+        Docstring for __init__
+        
+        :param self: Description
+        :param environment: Description
+        :type environment: GraphEnvironment
+        :param policy_network: Description
+        :type policy_network: nn.Module
+        :param optimizer: Description
+        :type optimizer: torch.optim.Optimizer
+        :param loss_function: Description
+        :type loss_function: Callable
+        :param new_candidates_count: Description
+        :type new_candidates_count: int
+        :param elite_count: Description
+        :type elite_count: int
+        :param survivors_count: Description
+        :type survivors_count: int
+        :param random_action_mechanism: Description
+        :type random_action_mechanism: RandomActionMechanism
+        :param rng: Description
+        :type rng: Optional[np.random.Generator]
+        """
+
         self._environment: GraphEnvironment = environment
+        self._new_candidates_count: int = new_candidates_count
+        self._elite_count: int = elite_count
+        self._survivors_count: int = survivors_count
 
         self._policy_network: nn.Module = policy_network
         self._optimizer: torch.optim.Optimizer = optimizer
         self._loss_function: Callable = loss_function
         self._device: torch.device = next(self._policy_network.parameters()).device
-
-        self._new_candidates_count: int = new_candidates_count
-        self._elite_count: int = elite_count
-        self._survivors_count: int = survivors_count
         self._random_action_mechanism: RandomActionMechanism = random_action_mechanism
 
         if rng is None:
@@ -96,13 +126,13 @@ class DeepCrossEntropyMethod:
             action_batch_torch = Categorical(logits=logits_batch_torch).sample()
             action_batch = action_batch_torch.cpu().numpy()
 
-            # random_mask = (
-            #     self._rng.random(size=(action_batch.shape[0],)) < random_action_probability
-            # )
-            # entry_count = np.count_nonzero(random_mask)
-            # action_batch[random_mask] = self._rng.integers(
-            #     low=0, high=self._environment.action_number, size=entry_count, dtype=np.int32
-            # )
+            random_mask = (
+                self._rng.random(size=(action_batch.shape[0],)) < random_action_probability
+            )
+            entry_count = np.count_nonzero(random_mask)
+            action_batch[random_mask] = self._rng.integers(
+                low=0, high=self._environment.action_number, size=entry_count, dtype=np.int32
+            )
 
             self._population_actions[action_count, self._survivors_count :] = action_batch
             state_batch, reward_batch, status = self._environment.step_batch(action_batch)
@@ -149,6 +179,9 @@ class DeepCrossEntropyMethod:
         loss = self._loss_function(logits_torch, elite_actions_torch)
         loss.backward()
         self._optimizer.step()
+
+        if self._step_count == 0:
+            assert np.all(survivors_mask[:self._survivors_count] == False)
 
         self._population_states[:, : self._survivors_count, :] = self._population_states[
             :, survivors_mask, :
