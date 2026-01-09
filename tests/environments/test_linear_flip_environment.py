@@ -120,13 +120,10 @@ def test_transition_batch(
 
     _ = env.reset_batch(batch_size)
 
-    print(f"{init_state=}, {next_index=}, {action_batch=}")
     env._state_batch = init_state
     env._step_count = next_index
-    print(f"{env._state_batch=}, {env._step_count=}")
 
-    env._transition_batch(action_batch)
-    print(f"{env._state_batch=}, {env._step_count=}")
+    env._transition_batch(action_batch.flatten())
 
     np.testing.assert_array_equal(env._state_batch, state_batch)
 

@@ -125,7 +125,7 @@ def test_transition_batch(
     env._state_batch = init_state
     env._step_count = next_index
 
-    env._transition_batch(action_batch)
+    env._transition_batch(action_batch.flatten())
 
     np.testing.assert_array_equal(env._state_batch, state_batch)
 
