@@ -433,7 +433,7 @@ TEST_CASES_STATE_BATCH_TO_GRAPH_BATCH_ROW_MAJOR = [
         2,
         False,
         False,
-        np.asarray([[1, 0, 1, 0, 0, 1]], dtype=DTYPE_STATE),
+        np.asarray([[1, 0, 0, 0, 0, 1]], dtype=DTYPE_STATE),
         np.asarray([[1, 0, 2]], dtype=DTYPE_STATE),
     ),
     (
@@ -443,7 +443,7 @@ TEST_CASES_STATE_BATCH_TO_GRAPH_BATCH_ROW_MAJOR = [
         3,
         False,
         False,
-        np.asarray([[1, 0, 1, 0, 1, 0, 0, 0, 1]], dtype=DTYPE_STATE),
+        np.asarray([[1, 0, 0, 0, 1, 0, 0, 0, 1]], dtype=DTYPE_STATE),
         np.asarray([[1, 2, 3]], dtype=DTYPE_STATE),
     ),
 ]
