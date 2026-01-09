@@ -99,6 +99,9 @@ def test_reset_batch(
     np.testing.assert_array_equal(state_batch, env._state_batch)
     np.testing.assert_array_equal(state_batch, expected_state)
 
+    assert state_batch.shape[1] == env.state_length
+    assert state_batch.dtype.type is env.state_dtype
+
 
 @pytest.mark.parametrize(
     "batch_size, graph_order, episode_length, flip_only, flattened_ordering, is_directed, allow_loops, "
@@ -196,3 +199,31 @@ def test_state_batch_to_graph_batch(
             else graph_batch.flattened_row_major_colors
         ),
     )
+
+
+@pytest.mark.parametrize(
+    "env, mask",
+    [
+        (
+            LocalFlipEnvironment(RewardType.PROPER, lambda _: np.empty(0), 2),
+            np.asarray([[False, True, False, True]], np.bool_),
+        ),
+        (
+            LocalFlipEnvironment(RewardType.PROPER, lambda _: np.empty(0), 2, flip_only=True),
+            np.asarray([[False, True]], np.bool_),
+        ),
+        (
+            LocalFlipEnvironment(RewardType.PROPER, lambda _: np.empty(0), 2, allow_loops=True),
+            None,
+        ),
+    ],
+)
+def test_action_mask(env: LocalFlipEnvironment, mask: np.ndarray | None):
+    assert env.action_mask is None
+
+    env.reset_batch(1)
+
+    if mask is None:
+        assert env.action_mask is None
+    else:
+        np.testing.assert_array_equal(env.action_mask, mask)

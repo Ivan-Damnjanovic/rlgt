@@ -101,6 +101,9 @@ def test_reset_batch(
     np.testing.assert_array_equal(state_batch, env._state_batch)
     np.testing.assert_array_equal(state_batch, expected_state)
 
+    assert state_batch.shape[1] == env.state_length
+    assert state_batch.dtype.type is env.state_dtype
+
 
 @pytest.mark.parametrize(
     "batch_size, graph_order, episode_length, flattened_ordering, edge_colors, is_directed, allow_loops, "
@@ -218,3 +221,31 @@ def test_limit():
     np.testing.assert_array_equal(state, [[0] * 253 + [1, 0, 1]])
     np.testing.assert_array_equal(reward, [254])
     assert status is EpisodeStatus.TRUNCATED
+
+
+@pytest.mark.parametrize(
+    "env, mask",
+    [
+        (
+            LocalSetEnvironment(RewardType.PROPER, lambda _: np.empty(0), 2, allow_loops=True),
+            None,
+        ),
+        (
+            LocalSetEnvironment(RewardType.PROPER, lambda _: np.empty(0), 2),
+            np.asarray([[False, True, False, True]], np.bool_),
+        ),
+        (
+            LocalSetEnvironment(RewardType.PROPER, lambda _: np.empty(0), 3),
+            np.asarray([[False, True, True, False, True, True]], np.bool_),
+        ),
+    ],
+)
+def test_action_mask(env: LocalSetEnvironment, mask: np.ndarray | None):
+    assert env.action_mask is None
+
+    env.reset_batch(1)
+
+    if mask is None:
+        assert env.action_mask is None
+    else:
+        np.testing.assert_array_equal(env.action_mask, mask)

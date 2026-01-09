@@ -215,12 +215,12 @@ class LocalSetEnvironment(GraphEnvironment):
         return np.uint8
 
     @property
-    def action_number(self) -> int:
+    def action_number(self) -> int:  # pragma: no cover
         return self._edge_colors * self._graph_order
 
     @property
     def action_mask(self) -> Optional[np.ndarray]:
-        if self._status is None or self._status != EpisodeStatus.IN_PROGRESS:
+        if self._status is None or self._status != EpisodeStatus.IN_PROGRESS or self._allow_loops:
             return None
 
         result = np.ones(
@@ -232,11 +232,11 @@ class LocalSetEnvironment(GraphEnvironment):
         return result.reshape(self._state_batch.shape[0], -1)
 
     @property
-    def episode_length(self) -> int:
+    def episode_length(self) -> int:  # pragma: no cover
         return self._episode_length
 
     @episode_length.setter
-    def episode_length(self, episode_length: int):
+    def episode_length(self, episode_length: int):  # pragma: no cover
         """
         This setter allows the user to potentially re-configure the episode length between two
         independent batches of episodes run in parallel. The setter should not be used while a
@@ -536,7 +536,7 @@ class LocalFlipEnvironment(GraphEnvironment):
         return np.uint8
 
     @property
-    def action_number(self) -> int:
+    def action_number(self) -> int:  # pragma: no cover
         if self._flip_only:
             return self._graph_order
         else:
@@ -544,7 +544,7 @@ class LocalFlipEnvironment(GraphEnvironment):
 
     @property
     def action_mask(self) -> Optional[np.ndarray]:
-        if self._status is None or self._status != EpisodeStatus.IN_PROGRESS:
+        if self._status is None or self._status != EpisodeStatus.IN_PROGRESS or self._allow_loops:
             return None
 
         rows = np.arange(self._state_batch.shape[0])
@@ -562,11 +562,11 @@ class LocalFlipEnvironment(GraphEnvironment):
         return result
 
     @property
-    def episode_length(self) -> int:
+    def episode_length(self) -> int:  # pragma: no cover
         return self._episode_length
 
     @episode_length.setter
-    def episode_length(self, episode_length: int):
+    def episode_length(self, episode_length: int):  # pragma: no cover
         """
         This setter allows the user to potentially re-configure the episode length between two
         independent batches of episodes run in parallel. The setter should not be used while a

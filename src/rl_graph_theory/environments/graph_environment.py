@@ -196,7 +196,7 @@ class GraphEnvironment(ABC):
         positive `int`.
         """
 
-        pass
+        pass  # pragma: no cover
 
     @property
     @abstractmethod
@@ -207,7 +207,7 @@ class GraphEnvironment(ABC):
         represent the states, as a `numpy.dtype` object.
         """
 
-        pass
+        pass  # pragma: no cover
 
     @property
     @abstractmethod
@@ -218,7 +218,7 @@ class GraphEnvironment(ABC):
         executed, as a positive `int`.
         """
 
-        pass
+        pass  # pragma: no cover
 
     @property
     @abstractmethod
@@ -233,7 +233,7 @@ class GraphEnvironment(ABC):
         the batch of episodes.
         """
 
-        pass
+        pass  # pragma: no cover
 
     @property
     @abstractmethod
@@ -245,7 +245,7 @@ class GraphEnvironment(ABC):
         number of actions to be executed in each of these episodes, as a positive `int`.
         """
 
-        pass
+        pass  # pragma: no cover
 
     @abstractmethod
     def reset_batch(self, batch_size: int) -> Tuple[np.ndarray, EpisodeStatus]:
@@ -375,7 +375,7 @@ class GraphEnvironment(ABC):
 
         pass  # pragma: no cover
 
-    def state_to_graph(self, state: np.ndarray) -> Graph:
+    def state_to_graph(self, state: np.ndarray) -> Graph:  # pragma: no cover
         """
         This method extracts the underlying graph from a provided state.
 

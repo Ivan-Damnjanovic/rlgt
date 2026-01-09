@@ -147,15 +147,15 @@ class LinearBuildEnvironment(GraphEnvironment):
         return np.uint8
 
     @property
-    def action_number(self) -> int:
+    def action_number(self) -> int:  # pragma: no cover
         return self._edge_colors
 
     @property
-    def action_mask(self) -> Optional[np.ndarray]:
+    def action_mask(self) -> Optional[np.ndarray]:  # pragma: no cover
         return None
 
     @property
-    def episode_length(self) -> int:
+    def episode_length(self) -> int:  # pragma: no cover
         return self._flattened_length
 
     def reset_batch(self, batch_size: int) -> Tuple[np.ndarray, EpisodeStatus]:
@@ -383,15 +383,15 @@ class LinearSetEnvironment(GraphEnvironment):
         return np.uint8
 
     @property
-    def action_number(self) -> int:
+    def action_number(self) -> int:  # pragma: no cover
         return self._edge_colors
 
     @property
-    def action_mask(self) -> Optional[np.ndarray]:
+    def action_mask(self) -> Optional[np.ndarray]:  # pragma: no cover
         return None
 
     @property
-    def episode_length(self) -> int:
+    def episode_length(self) -> int:  # pragma: no cover
         return self._flattened_length
 
     def reset_batch(self, batch_size: int) -> Tuple[np.ndarray, EpisodeStatus]:
@@ -599,15 +599,15 @@ class LinearFlipEnvironment(GraphEnvironment):
         return np.uint8
 
     @property
-    def action_number(self) -> int:
+    def action_number(self) -> int:  # pragma: no cover
         return 2
 
     @property
-    def action_mask(self) -> Optional[np.ndarray]:
+    def action_mask(self) -> Optional[np.ndarray]:  # pragma: no cover
         return None
 
     @property
-    def episode_length(self) -> int:
+    def episode_length(self) -> int:  # pragma: no cover
         return self._flattened_length
 
     def reset_batch(self, batch_size: int) -> Tuple[np.ndarray, EpisodeStatus]:

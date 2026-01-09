@@ -93,6 +93,9 @@ def test_reset_batch(
     np.testing.assert_array_equal(state_batch, env._state_batch)
     np.testing.assert_array_equal(state_batch, expected_state)
 
+    assert state_batch.shape[1] == env.state_length
+    assert state_batch.dtype.type is env.state_dtype
+
 
 @pytest.mark.parametrize(
     "batch_size, graph_order, flattened_ordering, edge_colors, is_directed, allow_loops, "

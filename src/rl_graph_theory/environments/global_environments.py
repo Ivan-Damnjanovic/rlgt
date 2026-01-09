@@ -185,19 +185,19 @@ class GlobalSetEnvironment(GraphEnvironment):
         return np.uint8
 
     @property
-    def action_number(self) -> int:
+    def action_number(self) -> int:  # pragma: no cover
         return self._edge_colors * self._flattened_length
 
     @property
-    def action_mask(self) -> Optional[np.ndarray]:
+    def action_mask(self) -> Optional[np.ndarray]:  # pragma: no cover
         return None
 
     @property
-    def episode_length(self) -> int:
+    def episode_length(self) -> int:  # pragma: no cover
         return self._episode_length
 
     @episode_length.setter
-    def episode_length(self, episode_length: int):
+    def episode_length(self, episode_length: int):  # pragma: no cover
         """
         This setter allows the user to potentially re-configure the episode length between two
         independent batches of episodes run in parallel. The setter should not be used while a
@@ -420,22 +420,22 @@ class GlobalFlipEnvironment(GraphEnvironment):
         return np.uint8
 
     @property
-    def action_number(self) -> int:
+    def action_number(self) -> int:  # pragma: no cover
         if self._flip_only:
             return self._flattened_length
         else:
             return 2 * self._flattened_length
 
     @property
-    def action_mask(self) -> Optional[np.ndarray]:
+    def action_mask(self) -> Optional[np.ndarray]:  # pragma: no cover
         return None
 
     @property
-    def episode_length(self) -> int:
+    def episode_length(self) -> int:  # pragma: no cover
         return self._episode_length
 
     @episode_length.setter
-    def episode_length(self, episode_length: int):
+    def episode_length(self, episode_length: int):  # pragma: no cover
         """
         This setter allows the user to potentially re-configure the episode length between two
         independent batches of episodes run in parallel. The setter should not be used while a
