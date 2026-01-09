@@ -616,7 +616,7 @@ class LocalFlipEnvironment(GraphEnvironment):
             will be raised.
         """
 
-        new_vertices = action_batch[:, 0] % self._graph_order
+        new_vertices = action_batch % self._graph_order
 
         # If the agent attempts to traverse a nonexisting loop, a `RuntimeError` will be raised.
         if not self._allow_loops:
@@ -642,7 +642,7 @@ class LocalFlipEnvironment(GraphEnvironment):
         # Otherwise, each traversed edge (resp. arc) is either flipped or not flipped, depending on
         # the second entry from the corresponding action, which is binary.
         else:
-            to_flip_or_not_to_flip = action_batch[:, 1]  # // self._graph_order
+            to_flip_or_not_to_flip = action_batch // self._graph_order
             self._state_batch[rows, edge_indices] ^= to_flip_or_not_to_flip.astype(np.uint8)
 
         # Update the current vertex position flags.

@@ -69,8 +69,7 @@ def test_constructor(
 
 
 @pytest.mark.parametrize(
-    "batch_size, graph_order, flattened_ordering, is_directed, allow_loops, "
-    "expected_state",
+    "batch_size, graph_order, flattened_ordering, is_directed, allow_loops, " "expected_state",
     TEST_CASES_RESET_BATCH,
 )
 def test_reset_batch(
@@ -137,7 +136,10 @@ def test_transition_batch(
     env._state_batch = init_state
     env._step_count = next_index
 
-    env._transition_batch(action_batch)
+    if flip_only:
+        env._transition_batch(action_batch.flatten())
+    else:
+        env._transition_batch(action_batch[:, 0] + action_batch[:, 1] * graph_order)
 
     np.testing.assert_array_equal(env._state_batch, state_batch)
 

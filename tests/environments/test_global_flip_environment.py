@@ -130,10 +130,13 @@ def test_transition_batch(
 
     _ = env.reset_batch(batch_size)
 
-    env._state_batch = init_state
+    env._state_batch = init_state.copy()
     env._step_count = next_index
 
-    env._transition_batch(action_batch)
+    if flip_only:
+        env._transition_batch(action_batch.flatten())
+    else:
+        env._transition_batch(action_batch[:, 0] + action_batch[:, 1] * env._flattened_length)
 
     np.testing.assert_array_equal(env._state_batch, state_batch)
 
