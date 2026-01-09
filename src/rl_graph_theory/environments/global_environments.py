@@ -231,6 +231,7 @@ class GlobalSetEnvironment(GraphEnvironment):
 
         recolored_edges = action_batch % self._flattened_length
         new_colors = action_batch // self._flattened_length
+        print(recolored_edges, new_colors, self._flattened_length)
 
         # If the graphs have only two proper edge colors, then the transition can easily be done as
         # follows.

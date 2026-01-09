@@ -136,7 +136,7 @@ def test_transition_batch(
     env._state_batch = init_state
     env._step_count = next_index
 
-    env._transition_batch(action_batch)
+    env._transition_batch(action_batch[:, 0] + action_batch[:, 1] * env._flattened_length)
 
     np.testing.assert_array_equal(env._state_batch, state_batch)
 
@@ -170,12 +170,12 @@ def test_state_batch_to_graph_batch(
 
     graph_batch = env.state_batch_to_graph_batch(state_batch)
     np.testing.assert_array_equal(
-        flattened,
         (
             graph_batch.flattened_clockwise_colors
             if flattened_ordering is FlattenedOrdering.CLOCKWISE
             else graph_batch.flattened_row_major_colors
         ),
+        flattened,
     )
 
 
@@ -191,7 +191,7 @@ def test_limit():
     )
 
     env.reset_batch(1)
-    state, reward, status = env.step_batch(np.asarray([[0, 254]], np.uint8))
+    state, reward, status = env.step_batch(np.asarray([254], np.uint8))
 
     print(state, reward, status)
 
