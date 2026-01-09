@@ -101,11 +101,10 @@ def test_choose_two(graph: tuple[Graph, GraphFormat], prob: float):
     first_graph, graph_format = graph
 
     second_graph = Graph.from_flattened(
-        first_graph.flattened_row_major_colors,
-        FlattenedOrdering.ROW_MAJOR,
-        first_graph.edge_colors,
-        first_graph.is_directed,
-        first_graph.allow_loops,
+        flattened=first_graph.flattened_row_major_colors,
+        edge_colors=first_graph.edge_colors,
+        is_directed=first_graph.is_directed,
+        allow_loops=first_graph.allow_loops,
     )
 
     generator = create_choose_two_graph_generator(
