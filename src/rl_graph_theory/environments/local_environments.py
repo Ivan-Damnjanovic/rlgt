@@ -322,7 +322,7 @@ class LocalSetEnvironment(GraphEnvironment):
 
         # Update the current vertex position flags.
         self._state_batch[rows, self._current_vertices - self._graph_order] = 0
-        self._current_vertices = action_batch[:, 0]
+        self._current_vertices = new_vertices.astype(np.int32)
         self._state_batch[rows, self._current_vertices - self._graph_order] = 1
 
         self._step_count += 1

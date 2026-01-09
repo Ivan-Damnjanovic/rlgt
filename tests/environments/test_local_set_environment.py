@@ -138,7 +138,7 @@ def test_transition_batch(
     env._state_batch = init_state
     env._step_count = next_index
 
-    env._transition_batch(action_batch)
+    env._transition_batch(action_batch[:, 0] + action_batch[:, 1] * graph_order)
 
     np.testing.assert_array_equal(env._state_batch, state_batch)
 
@@ -211,7 +211,7 @@ def test_limit():
     )
 
     env.reset_batch(1)
-    state, reward, status = env.step_batch(np.asarray([[1, 254]], np.uint8))
+    state, reward, status = env.step_batch(np.asarray([1 + 254 * 2], np.uint16))
 
     print(state, reward, status)
 
