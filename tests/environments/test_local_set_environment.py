@@ -214,7 +214,7 @@ def test_limit():
     )
 
     env.reset_batch(1)
-    state, reward, status = env.step_batch(np.asarray([1 + 254 * 2], np.uint16))
+    state, reward, status = env.step_batch(np.asarray([1 + 254 * 2], np.int32))
 
     print(state, reward, status)
 

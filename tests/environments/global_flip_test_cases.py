@@ -11,7 +11,7 @@ from .global_set_test_cases import (
 )
 
 DTYPE_STATE = np.uint8
-DTYPE_ACTION = np.uint8
+DTYPE_ACTION = np.int32
 
 TEST_CASES_CONSTRUCTOR = insert(
     remove_at(gstc_constructor, 5),

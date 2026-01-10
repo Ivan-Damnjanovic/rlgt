@@ -6,7 +6,7 @@ from rl_graph_theory.graphs.graph import FlattenedOrdering
 from ..utils import batchify, replace
 
 DTYPE_STATE = np.uint8
-DTYPE_ACTION = np.int8
+DTYPE_ACTION = np.int32
 
 TEST_CASES_CONSTRUCTOR = [
     (

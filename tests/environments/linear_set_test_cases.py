@@ -9,7 +9,7 @@ from .linear_build_test_cases import TEST_CASES_RESET_BATCH as lbtc_reset_batch
 from .linear_build_test_cases import TEST_CASES_TRANSITION_BATCH as lbtc_transition_batch
 
 DTYPE_STATE = np.uint8
-DTYPE_ACTION = np.int8
+DTYPE_ACTION = np.int32
 
 TEST_CASES_CONSTRUCTOR = [
     (*test_case[:-1], lambda *_: None, test_case[-1]) for test_case in lbtc_constructor

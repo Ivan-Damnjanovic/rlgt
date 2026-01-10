@@ -190,13 +190,13 @@ class LinearBuildEnvironment(GraphEnvironment):
             self._status = EpisodeStatus.TERMINATED
 
     def state_batch_to_graph_batch(self, state_batch: np.ndarray) -> Graph:
-        temp = state_batch.reshape(-1, self._edge_colors, self._flattened_length).copy()
+        temp = state_batch.reshape(-1, self._edge_colors, self._flattened_length)
 
         # If all the underlying graphs are fully colored, then extract them in a reduced flattened
         # format with binary slices.
         if np.all(temp[:, -1, :] == 0):
             return Graph.from_flattened(
-                flattened=temp[:, :-1, :],
+                flattened=temp[:, :-1, :].copy(),
                 flattened_ordering=self._flattened_ordering,
                 color_representation=ColorRepresentation.BINARY_SLICES,
                 edge_colors=self._edge_colors,
@@ -439,10 +439,12 @@ class LinearSetEnvironment(GraphEnvironment):
             self._status = EpisodeStatus.TERMINATED
 
     def state_batch_to_graph_batch(self, state_batch: np.ndarray) -> Graph:
-        temp = state_batch.reshape(-1, self._edge_colors, self._flattened_length).copy()
+        result = state_batch.reshape(-1, self._edge_colors, self._flattened_length)[
+            :, :-1, :
+        ].copy()
 
         return Graph.from_flattened(
-            flattened=temp[:, :-1, :],
+            flattened=result,
             flattened_ordering=self._flattened_ordering,
             color_representation=ColorRepresentation.BINARY_SLICES,
             edge_colors=self._edge_colors,
@@ -654,10 +656,10 @@ class LinearFlipEnvironment(GraphEnvironment):
             self._status = EpisodeStatus.TERMINATED
 
     def state_batch_to_graph_batch(self, state_batch: np.ndarray) -> Graph:
-        temp = state_batch.reshape(-1, 2, self._flattened_length).copy()
+        result = state_batch.reshape(-1, 2, self._flattened_length)[:, :-1, :].copy()
 
         return Graph.from_flattened(
-            flattened=temp[:, :-1, :],
+            flattened=result,
             flattened_ordering=self._flattened_ordering,
             color_representation=ColorRepresentation.BINARY_SLICES,
             is_directed=self._is_directed,

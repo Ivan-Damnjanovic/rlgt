@@ -11,7 +11,7 @@ from .linear_set_test_cases import (
 from ..utils import batchify, replace
 
 DTYPE_STATE = np.uint8
-DTYPE_ACTION = np.uint8
+DTYPE_ACTION = np.int32
 
 TEST_CASES_CONSTRUCTOR = [
     test_case[:4] + test_case[5:] for test_case in lstc_constructor if test_case[4] == 2
