@@ -1,5 +1,7 @@
 """
-
+This ``Python`` module contains the `DeepCrossEntropyMethod` class, which encapsulates the concept
+of a reinforcement learning agent to be used in graph theory applications that applies the
+``PyTorch``-based deep cross entropy method.
 """
 
 from typing import Callable, Optional
@@ -18,7 +20,33 @@ from .random_action_mechanisms import RandomActionMechanism
 
 class DeepCrossEntropyMethod:
     """
-    Docstring for DeepCrossEntropyMethod
+    This class encapsulates the concept of an RL agent to be used in graph theory applications that
+    applies the ``PyTorch``-based deep cross entropy method. The agent operates over a configurable
+    environment given as a `GraphEnvironment` object. In each iteration, the agent generates a
+    predetermined number of graphs through the graph-building game induced by the environment and
+    computes the cumulative reward for each of these episodes run in parallel. The game is played
+    by using a `torch.nn.Module` model to compute the probability for each of the actions to be
+    selected in each episode and in each step. Afterwards, a certain number of episodes with the
+    greatest cumulative reward are used to train the model, while another predetermined number of
+    episodes with the greatest cumulative reward is carried over to the next generation. This
+    finishes one iteration of the agent–environment interaction. The user provides the model that
+    helps select the actions to be executed. Additionally, the user can configure the optimizer
+    that trains the model, given as a `torch.optim.Optimizer` object, as well as the corresponding
+    loss function.
+
+    :ivar _environment: A `GraphEnvironment` object that represents the RL environment whose
+        graph-building game should be used to construct all the graphs.
+    :ivar _new_candidates_count: A positive `int` that determines how many graphs should be
+        constructed in each iteration by running the corresponding number of episodes in parallel.
+    :ivar _elite_count: A positive `int` that determines how many executed episodes with the
+        greatest cumulative reward should be used to train the action prediction model in each
+        iteration.
+    :ivar _survivors_count: A positive `int` that determines how many executed episodes with the
+        greatest cumulative reward should be carried over to the next generation in each iteration.
+    :ivar _policy_network: A `torch.nn.Module` object that represents the action prediction model
+        that is used to compute the probability for each of the actions to be selected in each
+        episode and in each step.
+    :ivar _optimizer: 
     """
 
     def __init__(
@@ -29,8 +57,8 @@ class DeepCrossEntropyMethod:
         survivors_count: int,
         policy_network: nn.Module,
         optimizer: torch.optim.Optimizer,
-        loss_function: Callable,
-        random_action_mechanism: RandomActionMechanism,
+        loss_function: Callable = nn.CrossEntropyLoss(),
+        random_action_mechanism: RandomActionMechanism = None,
         rng: Optional[np.random.Generator] = None,
     ):
         """

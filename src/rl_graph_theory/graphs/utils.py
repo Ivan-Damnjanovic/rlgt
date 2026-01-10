@@ -252,6 +252,8 @@ def unflatten_to_adjacency_matrix(
 
         # Settle the case where a directed graph is converted to a flattened clockwise format.
         else:
+            result = np.zeros((temp.shape[0], graph_order, graph_order), dtype=np.uint8)
+
             if allow_loops:
                 result[:, 0, 0] = temp[:, 0]
 
