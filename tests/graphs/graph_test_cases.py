@@ -5,6 +5,8 @@ module.
 
 import numpy as np
 
+from ..utils import batchify, merge
+
 
 GRAPH_TEST_CASES_BASIC = [
     (
@@ -868,34 +870,6 @@ GRAPH_TEST_CASES_LARGE = [
         np.zeros((0,), dtype=np.uint8),
     ),
 ]
-
-
-def batchify(test_cases, batch_size=1):
-    return [
-        tuple(
-            [batch_size]
-            + [
-                np.stack([item] * batch_size, axis=0) if isinstance(item, np.ndarray) else item
-                for item in test_case
-            ]
-        )
-        for test_case in test_cases
-    ]
-
-
-def merge(test_cases):
-    res = []
-    batch_size = len(test_cases)
-
-    for i in range(len(test_cases[0])):
-        items = [test_case[i] for test_case in test_cases]
-        if isinstance(items[0], np.ndarray):
-            res.append(np.stack(items, axis=0))
-        else:
-            assert len(set(items)) == 1
-            res.append(items[0])
-
-    return tuple([batch_size] + res)
 
 
 GRAPH_BATCH_TEST_CASES_BASIC = [

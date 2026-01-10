@@ -166,7 +166,7 @@ def create_choose_two_graph_generator(
 
     # If the ``rng`` argument is `None`, then use a default `np.random.Generator`.
     if rng is None:
-        rng = np.random.default_rng()
+        rng = np.random.default_rng()  # pragma: no cover
 
     # Depending on the chosen graph format, select the two format representations to be used by the
     # graph generator, as well as the corresponding constructor for creating the output batch of
@@ -317,7 +317,7 @@ def create_edge_perturbation_graph_generator(
 
     # If the ``rng`` argument is `None`, then use a default `np.random.Generator`.
     if rng is None:
-        rng = np.random.default_rng()
+        rng = np.random.default_rng()  # pragma: no cover
 
     if flattened_ordering == FlattenedOrdering.ROW_MAJOR:
         input_representation = initial_graph.flattened_row_major_colors
@@ -423,7 +423,7 @@ def create_random_graph_generator(
 
     # If the ``rng`` argument is `None`, then use a default `np.random.Generator`.
     if rng is None:
-        rng = np.random.default_rng()
+        rng = np.random.default_rng()  # pragma: no cover
 
     flattened_length = graph_order_to_flattened_length(
         graph_order=graph_order,

@@ -215,12 +215,12 @@ class LocalSetEnvironment(GraphEnvironment):
         return np.uint8
 
     @property
-    def action_number(self) -> int:
+    def action_number(self) -> int:  # pragma: no cover
         return self._edge_colors * self._graph_order
 
     @property
     def action_mask(self) -> Optional[np.ndarray]:
-        if self._status is None or self._status != EpisodeStatus.IN_PROGRESS:
+        if self._status is None or self._status != EpisodeStatus.IN_PROGRESS or self._allow_loops:
             return None
 
         result = np.ones(
@@ -232,11 +232,11 @@ class LocalSetEnvironment(GraphEnvironment):
         return result.reshape(self._state_batch.shape[0], -1)
 
     @property
-    def episode_length(self) -> int:
+    def episode_length(self) -> int:  # pragma: no cover
         return self._episode_length
 
     @episode_length.setter
-    def episode_length(self, episode_length: int):
+    def episode_length(self, episode_length: int):  # pragma: no cover
         """
         This setter allows the user to potentially re-configure the episode length between two
         independent batches of episodes run in parallel. The setter should not be used while a
@@ -321,19 +321,23 @@ class LocalSetEnvironment(GraphEnvironment):
             self._state_batch[:, : -self._graph_order] = temp.reshape(temp.shape[0], -1)
 
         # Update the current vertex position flags.
-        self._state_batch[rows, -self._graph_order + self._current_vertices] = 0
+        self._state_batch[rows, self._current_vertices - self._graph_order] = 0
         self._current_vertices = new_vertices
-        self._state_batch[rows, -self._graph_order + self._current_vertices] = 1
+        self._state_batch[rows, self._current_vertices - self._graph_order] = 1
 
         self._step_count += 1
         if self._step_count >= self._episode_length:
             self._status = EpisodeStatus.TRUNCATED
 
     def state_batch_to_graph_batch(self, state_batch: np.ndarray) -> Graph:
-        temp = state_batch[:, : -self._graph_order]
+        result = (
+            state_batch[:, : -self._graph_order]
+            .reshape(-1, self._edge_colors - 1, self._flattened_length)
+            .copy()
+        )
 
         return Graph.from_flattened(
-            flattened=temp.reshape(-1, self._edge_colors - 1, self._flattened_length),
+            flattened=result,
             flattened_ordering=self._flattened_ordering,
             color_representation=ColorRepresentation.BINARY_SLICES,
             edge_colors=self._edge_colors,
@@ -532,7 +536,7 @@ class LocalFlipEnvironment(GraphEnvironment):
         return np.uint8
 
     @property
-    def action_number(self) -> int:
+    def action_number(self) -> int:  # pragma: no cover
         if self._flip_only:
             return self._graph_order
         else:
@@ -540,7 +544,7 @@ class LocalFlipEnvironment(GraphEnvironment):
 
     @property
     def action_mask(self) -> Optional[np.ndarray]:
-        if self._status is None or self._status != EpisodeStatus.IN_PROGRESS:
+        if self._status is None or self._status != EpisodeStatus.IN_PROGRESS or self._allow_loops:
             return None
 
         rows = np.arange(self._state_batch.shape[0])
@@ -558,11 +562,11 @@ class LocalFlipEnvironment(GraphEnvironment):
         return result
 
     @property
-    def episode_length(self) -> int:
+    def episode_length(self) -> int:  # pragma: no cover
         return self._episode_length
 
     @episode_length.setter
-    def episode_length(self, episode_length: int):
+    def episode_length(self, episode_length: int):  # pragma: no cover
         """
         This setter allows the user to potentially re-configure the episode length between two
         independent batches of episodes run in parallel. The setter should not be used while a
@@ -604,7 +608,7 @@ class LocalFlipEnvironment(GraphEnvironment):
         `_state_batch` attribute.
 
         :param action_batch: The batch of actions to be applied to the states in the batch of
-            current states, given as a `numpy.ndarray` matrix of type `numpy.int32` whose entries
+            current states, given as a `numpy.ndarray` matrix of type `numpy.uint8` where the rows
             correspond to the actions. The number of actions in this batch must be the same as the
             number of states in the `_state_batch` attribute.
 
@@ -651,10 +655,12 @@ class LocalFlipEnvironment(GraphEnvironment):
             self._status = EpisodeStatus.TRUNCATED
 
     def state_batch_to_graph_batch(self, state_batch: np.ndarray) -> Graph:
-        temp = state_batch[:, : self._flattened_length]
+        result = (
+            state_batch[:, : self._flattened_length].reshape(-1, 1, self._flattened_length).copy()
+        )
 
         return Graph.from_flattened(
-            flattened=temp.reshape(-1, 1, self._flattened_length),
+            flattened=result,
             flattened_ordering=self._flattened_ordering,
             color_representation=ColorRepresentation.BINARY_SLICES,
             is_directed=self._is_directed,

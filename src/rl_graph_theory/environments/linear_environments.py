@@ -147,15 +147,15 @@ class LinearBuildEnvironment(GraphEnvironment):
         return np.uint8
 
     @property
-    def action_number(self) -> int:
+    def action_number(self) -> int:  # pragma: no cover
         return self._edge_colors
 
     @property
-    def action_mask(self) -> Optional[np.ndarray]:
+    def action_mask(self) -> Optional[np.ndarray]:  # pragma: no cover
         return None
 
     @property
-    def episode_length(self) -> int:
+    def episode_length(self) -> int:  # pragma: no cover
         return self._flattened_length
 
     def reset_batch(self, batch_size: int) -> Tuple[np.ndarray, EpisodeStatus]:
@@ -196,7 +196,7 @@ class LinearBuildEnvironment(GraphEnvironment):
         # format with binary slices.
         if np.all(temp[:, -1, :] == 0):
             return Graph.from_flattened(
-                flattened=temp[:, :-1, :],
+                flattened=temp[:, :-1, :].copy(),
                 flattened_ordering=self._flattened_ordering,
                 color_representation=ColorRepresentation.BINARY_SLICES,
                 edge_colors=self._edge_colors,
@@ -383,15 +383,15 @@ class LinearSetEnvironment(GraphEnvironment):
         return np.uint8
 
     @property
-    def action_number(self) -> int:
+    def action_number(self) -> int:  # pragma: no cover
         return self._edge_colors
 
     @property
-    def action_mask(self) -> Optional[np.ndarray]:
+    def action_mask(self) -> Optional[np.ndarray]:  # pragma: no cover
         return None
 
     @property
-    def episode_length(self) -> int:
+    def episode_length(self) -> int:  # pragma: no cover
         return self._flattened_length
 
     def reset_batch(self, batch_size: int) -> Tuple[np.ndarray, EpisodeStatus]:
@@ -439,10 +439,12 @@ class LinearSetEnvironment(GraphEnvironment):
             self._status = EpisodeStatus.TERMINATED
 
     def state_batch_to_graph_batch(self, state_batch: np.ndarray) -> Graph:
-        temp = state_batch.reshape(-1, self._edge_colors, self._flattened_length)
+        result = state_batch.reshape(-1, self._edge_colors, self._flattened_length)[
+            :, :-1, :
+        ].copy()
 
         return Graph.from_flattened(
-            flattened=temp[:, :-1, :],
+            flattened=result,
             flattened_ordering=self._flattened_ordering,
             color_representation=ColorRepresentation.BINARY_SLICES,
             edge_colors=self._edge_colors,
@@ -599,15 +601,15 @@ class LinearFlipEnvironment(GraphEnvironment):
         return np.uint8
 
     @property
-    def action_number(self) -> int:
+    def action_number(self) -> int:  # pragma: no cover
         return 2
 
     @property
-    def action_mask(self) -> Optional[np.ndarray]:
+    def action_mask(self) -> Optional[np.ndarray]:  # pragma: no cover
         return None
 
     @property
-    def episode_length(self) -> int:
+    def episode_length(self) -> int:  # pragma: no cover
         return self._flattened_length
 
     def reset_batch(self, batch_size: int) -> Tuple[np.ndarray, EpisodeStatus]:
@@ -630,6 +632,17 @@ class LinearFlipEnvironment(GraphEnvironment):
         return self._state_batch, self._status
 
     def _transition_batch(self, action_batch: np.ndarray) -> None:
+        """
+        This method performs the transition process by executing a batch of given actions and
+        applying them element-wise to the states in the batch of current states given by the
+        `_state_batch` attribute.
+
+        :param action_batch: The batch of actions to be applied to the states in the batch of
+            current states, given as a `numpy.ndarray` matrix of type `numpy.uint8` where the rows
+            correspond to the actions. The number of actions in this batch must be the same as the
+            number of states in the `_state_batch` attribute.
+        """
+
         self._state_batch[:, self._step_count] ^= action_batch.astype(np.uint8)
         # Set the current edge (resp. arc) position flags to zero and increment the ``_step_count``
         # attribute.
@@ -643,10 +656,10 @@ class LinearFlipEnvironment(GraphEnvironment):
             self._status = EpisodeStatus.TERMINATED
 
     def state_batch_to_graph_batch(self, state_batch: np.ndarray) -> Graph:
-        temp = state_batch.reshape(-1, 2, self._flattened_length)
+        result = state_batch.reshape(-1, 2, self._flattened_length)[:, :-1, :].copy()
 
         return Graph.from_flattened(
-            flattened=temp[:, :-1, :],
+            flattened=result,
             flattened_ordering=self._flattened_ordering,
             color_representation=ColorRepresentation.BINARY_SLICES,
             is_directed=self._is_directed,

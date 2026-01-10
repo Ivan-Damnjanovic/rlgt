@@ -62,11 +62,11 @@ def verify_instantiated_graph(
     np.testing.assert_array_equal(instance._Graph__adjacency_matrix, adjacency_matrix)
 
     instance = constructor()
-    np.testing.assert_array_equal(instance.flattened_clockwise, flattened_clockwise)
+    np.testing.assert_array_equal(instance.flattened_clockwise_colors, flattened_clockwise)
     np.testing.assert_array_equal(instance._Graph__flattened_clockwise, flattened_clockwise)
 
     instance = constructor()
-    np.testing.assert_array_equal(instance.flattened_row_major, flattened_row_major)
+    np.testing.assert_array_equal(instance.flattened_row_major_colors, flattened_row_major)
     np.testing.assert_array_equal(instance._Graph__flattened_row_major, flattened_row_major)
 
 
@@ -108,11 +108,11 @@ def verify_instantiated_graph_batch(
     """
 
     instance = constructor()
-    assert instance.batch_size == batch_size
-    assert instance.edge_colors == edge_colors
-    assert instance.order == order
-    assert instance.is_directed == is_directed
-    assert instance.allow_loops == allow_loops
+    assert instance.batch_size == batch_size, f"{instance.batch_size}, {batch_size}"
+    assert instance.edge_colors == edge_colors, f"{instance.edge_colors}, {edge_colors}"
+    assert instance.order == order, f"{instance.order}, {order}"
+    assert instance.is_directed == is_directed, f"{instance.is_directed}, {is_directed}"
+    assert instance.allow_loops == allow_loops, f"{instance.allow_loops}, {allow_loops}"
 
     instance = constructor()
     np.testing.assert_array_equal(instance.bitmask_in, bitmask_in)
@@ -127,9 +127,9 @@ def verify_instantiated_graph_batch(
     np.testing.assert_array_equal(instance._GraphBatch__adjacency_matrix, adjacency_matrix)
 
     instance = constructor()
-    np.testing.assert_array_equal(instance.flattened_clockwise, flattened_clockwise)
+    np.testing.assert_array_equal(instance.flattened_clockwise_colors, flattened_clockwise)
     np.testing.assert_array_equal(instance._GraphBatch__flattened_clockwise, flattened_clockwise)
 
     instance = constructor()
-    np.testing.assert_array_equal(instance.flattened_row_major, flattened_row_major)
+    np.testing.assert_array_equal(instance.flattened_row_major_colors, flattened_row_major)
     np.testing.assert_array_equal(instance._GraphBatch__flattened_row_major, flattened_row_major)
