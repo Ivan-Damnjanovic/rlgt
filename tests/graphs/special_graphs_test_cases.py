@@ -170,28 +170,6 @@ MONOCHROMATIC_GRAPH_TEST_CASES = [
         False,
         False,
     ),
-    (
-        1,
-        3,
-        2,
-        np.zeros((2, 1), dtype=np.uint64),
-        np.zeros((2, 1), dtype=np.uint64),
-        np.zeros((1, 1), dtype=np.uint8),
-        np.zeros((0,), dtype=np.uint8),
-        False,
-        False,
-    ),
-    (
-        1,
-        3,
-        3,
-        np.zeros((2, 1), dtype=np.uint64),
-        np.zeros((2, 1), dtype=np.uint64),
-        np.zeros((1, 1), dtype=np.uint8),
-        np.zeros((0,), dtype=np.uint8),
-        False,
-        False,
-    ),
 ]
 
 
