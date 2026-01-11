@@ -146,13 +146,11 @@ MONOCHROMATIC_GRAPH_TEST_CASES = [
                 [0, 0, 0],
                 [0, 0, 0],
                 [0, 0, 0],
-                [0, 0, 0],
             ],
             dtype=np.uint64,
         ),
         np.array(
             [
-                [0, 0, 0],
                 [0, 0, 0],
                 [0, 0, 0],
                 [0, 0, 0],
