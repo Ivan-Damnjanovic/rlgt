@@ -67,51 +67,52 @@ def graph_invariant(graph_batch: Graph):
 # )
 
 
-policy_network = nn.Sequential(
-    nn.Linear(342, 128),
-    nn.ReLU(),
-    # nn.Dropout(0.1),
-    nn.Linear(128, 64),
-    nn.ReLU(),
-    # nn.Dropout(0.1),
-    nn.Linear(64, 4),
-    nn.ReLU(),
-    # nn.Dropout(0.1),
-    nn.Linear(4, 2),
-)
+def main(graph_order: int):
+    policy_network = nn.Sequential(
+        nn.Linear(graph_order * (graph_order - 1), 256),
+        nn.ReLU(),
+        # nn.Dropout(0.1),
+        nn.Linear(256, 256),
+        nn.ReLU(),
+        # nn.Dropout(0.1),
+        nn.Linear(256, 256),
+        nn.ReLU(),
+        # nn.Dropout(0.1),
+        nn.Linear(256, 2),
+    )
 
+    dcem = DeepCrossEntropyMethod(
+        environment=LinearSetEnvironment(
+            reward_type=RewardType.SPARSE,
+            reward_function=graph_invariant,
+            graph_order=16,
+            flattened_ordering=FlattenedOrdering.ROW_MAJOR,
+        ),
+        policy_network=policy_network,
+        optimizer=optim.Adam(policy_network.parameters(), lr=0.003),
+        loss_function=nn.CrossEntropyLoss(),
+        new_candidates_count=1000,
+        elite_count=70,
+        survivors_count=30,
+        random_action_mechanism=create_multiplication_factor_random_action_mechanism(
+            initial_random_action_probability=0.001,
+            waiting_period=10,
+            multiplication_factor=1.1,
+            maximum_random_action_probability=0.100,
+        ),
+    )
 
-dcem = DeepCrossEntropyMethod(
-    environment=LinearSetEnvironment(
-        reward_type=RewardType.SPARSE,
-        reward_function=graph_invariant,
-        graph_order=19,
-        flattened_ordering=FlattenedOrdering.ROW_MAJOR,
-    ),
-    policy_network=policy_network,
-    optimizer=optim.SGD(policy_network.parameters(), lr=0.001),
-    loss_function=nn.CrossEntropyLoss(),
-    new_candidates_count=1000,
-    elite_count=70,
-    survivors_count=60,
-    random_action_mechanism=create_multiplication_factor_random_action_mechanism(
-        initial_random_action_probability=0.001,
-        waiting_period=10,
-        multiplication_factor=1.1,
-        maximum_random_action_probability=0.05,
-    ),
-)
+    dcem.reset()
 
-dcem.reset()
+    while True:
+        dcem.step()
+        print(f"Generations: {dcem.step_count}. Best score: {dcem.best_score:.3f}.")
 
-while True:
-    dcem.step()
-
-    if dcem.step_count % 1 == 0:
-        print(f"Generations: {dcem.step_count}. Best score: {dcem.best_score}.")
-
-        # print(dcem.best_graph.adjacency_matrix_colors)
-
-        if dcem.best_score > 0:
+        if dcem.best_score > 0.0001:
+            print("Success!")
             print(dcem.best_graph.adjacency_matrix_colors)
             break
+
+
+if __name__ == "__main__":
+    main(graph_order=16)

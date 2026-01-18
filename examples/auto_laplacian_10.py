@@ -29,7 +29,7 @@ def graph_invariant(graph_batch: Graph):
     spectrum_batch = np.linalg.eigvalsh(lap_batch)
     mu_batch = spectrum_batch[:, -1]
 
-    temp = np.max(0.5 * and_batch_1 + 1.5 * degree_batch_1, axis=1)
+    temp = np.sqrt(np.max(3 * degree_batch_1 * and_batch_1 + degree_batch_1 * degree_batch_1, axis=1))
     result = mu_batch - temp
 
     result[spectrum_batch[:, 1] < 0.15] = -1000.0
@@ -88,4 +88,4 @@ def main(graph_order: int):
 
 
 if __name__ == "__main__":
-    main(graph_order=20)
+    main(graph_order=18)

@@ -10,7 +10,6 @@ from abc import ABC, abstractmethod
 from typing import Callable
 
 
-
 class RandomActionMechanism(ABC):
     """
     This abstract class encapsulates the concept of a random action mechanism in the context of an
@@ -23,22 +22,35 @@ class RandomActionMechanism(ABC):
     """
 
     @abstractmethod
-    def __call__(self, has_best_score_improved: bool) -> float:
-        """
-        This abstract method must be implemented in any concrete class that inherits from the
-        `RandomActionMechanism` class. It should accept a `bool` that indicates whether the current
-        best score is a strict improvement over the previous best score, and return a `float` from
-        the interval $[0, 1]$ that determines the probability of a random action being executed in
-        the following step.
-
-        :param has_best_score_improved: A `bool` that indicates whether the current best score is a
-            strict improvement over the previous best score from one iteration ago.
-        
-        :return: A `float` from the interval $[0, 1]$ that determines the probability of a random
-            action being executed in the following step.
-        """
-
+    def reset(self) -> None:
         pass
+
+    @abstractmethod
+    def step(self, previous_best_score: float, new_best_score: float) -> None:
+        pass
+
+    @property
+    @abstractmethod
+    def random_action_probability(self) -> float:
+        pass
+
+    # @abstractmethod
+    # def __call__(self, has_best_score_improved: bool) -> float:
+    #     """
+    #     This abstract method must be implemented in any concrete class that inherits from the
+    #     `RandomActionMechanism` class. It should accept a `bool` that indicates whether the current
+    #     best score is a strict improvement over the previous best score, and return a `float` from
+    #     the interval $[0, 1]$ that determines the probability of a random action being executed in
+    #     the following step.
+
+    #     :param has_best_score_improved: A `bool` that indicates whether the current best score is a
+    #         strict improvement over the previous best score from one iteration ago.
+        
+    #     :return: A `float` from the interval $[0, 1]$ that determines the probability of a random
+    #         action being executed in the following step.
+    #     """
+
+    #     pass
 
 
 class NoRandomActionMechanism(RandomActionMechanism):
@@ -48,7 +60,14 @@ class NoRandomActionMechanism(RandomActionMechanism):
     random action is always equal to 0.
     """
 
-    def __call__(self, has_best_score_improved: bool) -> float:
+    def reset(self) -> None:
+        pass
+    
+    def step(self, previous_best_score: float, new_best_score: float) -> None:
+        pass
+
+    @property
+    def random_action_probability(self) -> float:
         return 0.0
 
 
@@ -73,7 +92,14 @@ class ConstantRandomActionMechanism(RandomActionMechanism):
 
         self.__random_action_probability: float = random_action_probability
     
-    def __call__(self, has_best_score_improved: bool) -> float:
+    def reset(self) -> None:
+        pass
+    
+    def step(self, previous_best_score: float, new_best_score: float) -> None:
+        pass
+    
+    @property
+    def random_action_probability(self) -> float:
         return self.__random_action_probability
 
 
@@ -123,39 +149,29 @@ class ExponentialRandomActionMechanism(RandomActionMechanism):
         self.__multiplicative_factor: float = multiplicative_factor
         self.__maximum_random_action_probability: float = maximum_random_action_probability
 
-        self.__random_action_probability: float = initial_random_action_probability
         self.__counter: int = 0
+        self.__random_action_probability: float = initial_random_action_probability
 
-    def __call__(self, has_best_score_improved: bool) -> float:
+    def reset(self) -> None:
+        self.__counter = 0
+        self.__random_action_probability = initial_random_action_probability
 
-
-
-
-def create_multiplication_factor_random_action_mechanism(
-    initial_random_action_probability: float,
-    waiting_period: int,
-    multiplication_factor: float,
-    maximum_random_action_probability: float,
-) -> RandomActionMechanism:
-    counter = 0
-    random_action_probability = initial_random_action_probability
-
-    def result(is_best_score_improved: bool) -> float:
-        nonlocal counter, random_action_probability
-
-        if is_best_score_improved:
-            counter = 0
-            random_action_probability = initial_random_action_probability
+    def step(self, previous_best_score: float, new_best_score: float) -> None:
+        if new_best_score > previous_best_score:
+            self.__counter = 0
+            self.__random_action_probability = initial_random_action_probability
 
         else:
-            counter += 1
-            if counter >= waiting_period:
-                counter -= waiting_period
-                random_action_probability *= multiplication_factor
-                random_action_probability = min(
-                    random_action_probability, maximum_random_action_probability
+            self.__counter += 1
+
+            if self.__counter >= self.__waiting_period:
+                self.__counter -= self.__waiting_period
+                self.__random_action_probability *= self.__multiplicative_factor
+                self.__random_action_probability = min(
+                    self.__random_action_probability, self.__maximum_random_action_probability
                 )
+    
+    @property
+    def random_action_probability(self) -> float:
+        return self.__random_action_probability
 
-        return random_action_probability
-
-    return result

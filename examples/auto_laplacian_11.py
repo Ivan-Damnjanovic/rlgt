@@ -29,7 +29,7 @@ def graph_invariant(graph_batch: Graph):
     spectrum_batch = np.linalg.eigvalsh(lap_batch)
     mu_batch = spectrum_batch[:, -1]
 
-    temp = np.max(0.5 * and_batch_1 + 1.5 * degree_batch_1, axis=1)
+    temp = np.max(2 * and_batch_1 * and_batch_1 * and_batch_1 / degree_batch_1 / degree_batch_1, axis=1)
     result = mu_batch - temp
 
     result[spectrum_batch[:, 1] < 0.15] = -1000.0
@@ -57,16 +57,16 @@ def main(graph_order: int):
             graph_order=graph_order,
         ),
         policy_network=policy_network,
-        optimizer=optim.Adam(policy_network.parameters(), lr=0.003),
+        optimizer=optim.Adam(policy_network.parameters(), lr=0.001),
         loss_function=nn.CrossEntropyLoss(),
-        new_candidates_count=700,
-        elite_count=50,
-        survivors_count=20,
+        new_candidates_count=1000,
+        elite_count=100,
+        survivors_count=25,
         random_action_mechanism=create_multiplication_factor_random_action_mechanism(
             initial_random_action_probability=0.005,
-            waiting_period=10,
-            multiplication_factor=1.1,
-            maximum_random_action_probability=0.100,
+            waiting_period=20,
+            multiplication_factor=1.2,
+            maximum_random_action_probability=0.300,
         ),
     )
 
@@ -88,4 +88,4 @@ def main(graph_order: int):
 
 
 if __name__ == "__main__":
-    main(graph_order=20)
+    main(graph_order=16)
