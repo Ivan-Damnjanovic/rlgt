@@ -1,0 +1,1170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "DTD/xhtml1-strict.dtd">
+<html>
+  
+
+  <head>
+    
+    <title>rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent</title>
+    <meta name="generator" content="pydoctor 25.10.1"> 
+        
+    </meta>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1" />
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="apidocs.css" />
+    <link rel="stylesheet" type="text/css" href="extra.css" />
+    
+</head>
+
+  <body>
+
+    
+
+    <nav class="navbar navbar-default mainnavbar">
+      
+  
+  <div class="container-fluid">
+
+
+    <div class="navbar-header">
+      
+      <div class="navlinks">
+        <span class="navbar-brand">
+          rl-graph-theory <a href="index.html">API Documentation</a>
+        </span>
+
+        <a href="moduleIndex.html">
+          Modules
+        </a>
+
+        <a href="classIndex.html">
+          Classes
+        </a>
+
+        <a href="nameIndex.html">
+          Names
+        </a>
+
+        <div id="search-box-container">
+          <div class="input-group">
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
+            <span class="input-group-btn">
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="apidocs-help-button" title="Help" href="apidocs-help.html"><img src="fonts/info.svg" alt="Help" /></a>
+            </span>
+          </div>
+        </div>
+
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        
+        <div id="search-buttons">
+          <span class="label label-default" id="search-docstrings-button">
+          <label class="checkbox-inline">
+            <input type="checkbox" id="toggle-search-in-docstrings-checkbox" value="false" onclick="toggleSearchInDocstrings()">
+              search in docstrings
+            </input>
+          </label>
+          </span>
+          
+        </div>
+        
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div id="search-status"> </div>
+
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
+
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 10px;">
+          <p>For more information on the search, visit the <a href="apidocs-help.html#rst-search">help page</a>.</p>
+        </div>
+      </div>
+
+    </div>
+
+
+  </div>
+</nav>
+    
+    <div class="container-fluid">
+
+      <!-- Side navigation -->
+      <div class="sidebarcontainer" style="display: none;">
+        
+        <div class="sidebar"><nav class="sidebar">
+  
+
+  <div>
+
+      <div class="thingTitle">
+        <span>Class</span>
+        <code class="thisobject"><a href="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent.html" class="internal-link" title="This class"><wbr></wbr>Deep<wbr></wbr>Cross<wbr></wbr>Entropy<wbr></wbr>Agent</a></code> 
+      </div>
+      
+      <div>
+        
+
+        
+         
+
+        
+        
+
+        <div class="childrenKindTitle">Methods</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#__init__" class="internal-link" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent.__init__">__init__</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#reset" class="internal-link" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent.reset">reset</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#step" class="internal-link" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent.step">step</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        
+         
+
+        <div class="childrenKindTitle">Attributes</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#best_graph" class="internal-link" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent.best_graph">best<wbr></wbr>_graph</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#best_score" class="internal-link" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent.best_score">best<wbr></wbr>_score</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#step_count" class="internal-link" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent.step_count">step<wbr></wbr>_count</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_best_score" class="internal-link" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent._best_score">_best<wbr></wbr>_score</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_device" class="internal-link" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent._device">_device</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_elite_count" class="internal-link" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent._elite_count">_elite<wbr></wbr>_count</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_environment" class="internal-link" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent._environment">_environment</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_loss_function" class="internal-link" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent._loss_function">_loss<wbr></wbr>_function</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_new_candidates_count" class="internal-link" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent._new_candidates_count">_new<wbr></wbr>_candidates<wbr></wbr>_count</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_optimizer" class="internal-link" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent._optimizer">_optimizer</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_policy_network" class="internal-link" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent._policy_network">_policy<wbr></wbr>_network</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_population_actions" class="internal-link" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent._population_actions">_population<wbr></wbr>_actions</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_population_rewards" class="internal-link" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent._population_rewards">_population<wbr></wbr>_rewards</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_population_states" class="internal-link" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent._population_states">_population<wbr></wbr>_states</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_random_action_mechanism" class="internal-link" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent._random_action_mechanism">_random<wbr></wbr>_action<wbr></wbr>_mechanism</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_rng" class="internal-link" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent._rng">_rng</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_step_count" class="internal-link" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent._step_count">_step<wbr></wbr>_count</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_survivors_count" class="internal-link" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent._survivors_count">_survivors<wbr></wbr>_count</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        
+         
+        
+      </div>
+  </div><div>
+
+      <div class="thingTitle">
+        <span>Module</span>
+        <code><a href="rl_graph_theory.agents.deep_cross_entropy_agent.html" class="internal-link" title="The parent of this class">deep<wbr></wbr>_cross<wbr></wbr>_entropy<wbr></wbr>_agent</a></code> 
+      </div>
+      
+      <div>
+        
+
+        
+         
+
+        <div class="childrenKindTitle">Classes</div>
+        <ul>
+    
+    <li class=" thisobject">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent.html" class="internal-link" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent"><wbr></wbr>Deep<wbr></wbr>Cross<wbr></wbr>Entropy<wbr></wbr>Agent</a></code>
+            </div>
+        
+
+    </li>
+</ul>
+
+        
+         
+
+        
+         
+
+        
+         
+
+        
+         
+        
+      </div>
+  </div>
+
+</nav>
+        </div>
+        <div id="collapse-sidebar">
+          <a class="btn btn-link" onclick="toggleSideBarCollapse()" title="Toggle Sidebar Collapse">
+          </a>
+        </div> 
+        <script src="sidebartoggle.js" type="text/javascript"></script>
+       
+      </div>
+
+      <main class="">
+        
+
+        
+
+        <div class="page-header">
+          <h1 class="class"><code><code><a href="index.html" class="internal-link">rl_graph_theory</a></code><wbr></wbr>.<code><a href="rl_graph_theory.agents.html" class="internal-link" title="rl_graph_theory.agents">agents</a></code><wbr></wbr>.<code><a href="rl_graph_theory.agents.deep_cross_entropy_agent.html" class="internal-link" title="rl_graph_theory.agents.deep_cross_entropy_agent">deep_cross_entropy_agent</a></code><wbr></wbr>.<code><a href="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent.html" class="internal-link" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent">DeepCrossEntropyAgent</a></code></code></h1>
+          <div id="show-private">
+            <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
+          </div>
+        </div>
+
+        <div class="categoryHeader">
+          class documentation
+        </div>
+
+        <div class="extrasDocstring">
+          <p class="class-signature"><code><span class="py-keyword">class</span> <span class="py-defname">DeepCrossEntropyAgent</span>(<a href="rl_graph_theory.agents.graph_agent.GraphAgent.html" class="internal-link" title="rl_graph_theory.agents.graph_agent.GraphAgent">GraphAgent</a>):</code></p><p>Constructor: <code><a href="#__init__" class="internal-link" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent.__init__">DeepCrossEntropyAgent(environment, new_candidates_count, elite_count, survivors_count, ...)</a></code></p><p><a href="classIndex.html#rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent">View In Hierarchy</a></p>
+        </div>
+
+        <div class="moduleDocstring">
+          <div><p>This class encapsulates the concept of an RL agent to be used in graph theory applications that
+applies the <tt class="rst-docutils rst-literal">PyTorch</tt>-based deep cross entropy method. The agent operates over a configurable
+environment given as a <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code> object. In each iteration of the learning process,
+the agent generates a predetermined number of graphs through the graph-building game induced by
+the environment and computes the cumulative reward for each of these episodes run in parallel.
+The game is played by using a <code><a href="https://pytorch.org/docs/stable/generated/torch.nn.Module.html#torch.nn.Module" class="intersphinx-link">torch.nn.Module</a></code> model to compute the probability for each of
+the actions to be selected in each episode and in each step. Afterwards, a certain number of
+episodes with the greatest cumulative reward are used to train the model, while another
+predetermined number of episodes with the greatest cumulative reward are carried over to the
+next generation. This finishes one iteration of the learning process. The user provides the
+model that helps select the actions to be executed. Additionally, the user can configure the
+optimizer that trains the model, given as a <code><a href="https://pytorch.org/docs/stable/optim.html#torch.optim.Optimizer" class="intersphinx-link">torch.optim.Optimizer</a></code> object, as well as the loss
+function used during training. Finally, the user can also configure the random action mechanism
+that the RL agent should use. When a random action is supposed to get executed, it gets sampled
+with the uniform probability distribution over all the actions that are available for
+execution.</p></div>
+        </div>
+
+        <div id="split-tables">
+          <table class="children sortable" id="id4">
+  
+  
+  <tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#__init__" class="internal-link" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent.__init__">__init__</a></code></td>
+    <td>This constructor initializes an instance of the <code><a href="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent.html" class="internal-link" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent">DeepCrossEntropyAgent</a></code> class.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#reset" class="internal-link" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent.reset">reset</a></code></td>
+    <td>This abstract method must be implemented in any concrete class that inherits from the <code><a href="rl_graph_theory.agents.graph_agent.GraphAgent.html" class="internal-link" title="rl_graph_theory.agents.graph_agent.GraphAgent">GraphAgent</a></code> class. It should initialize an RL agent and prepare it to start the learning process. If the agent has already been initialized and potentially used, then this method should re-initialize the agent and restart the learning process.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#step" class="internal-link" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent.step">step</a></code></td>
+    <td>This abstract method must be implemented in any concrete class that inherits from the <code><a href="rl_graph_theory.agents.graph_agent.GraphAgent.html" class="internal-link" title="rl_graph_theory.agents.graph_agent.GraphAgent">GraphAgent</a></code> class. It should perform one iteration of the learning process.</td>
+  </tr><tr class="property">
+    
+    <td>Property</td>
+    <td><code><a href="#best_graph" class="internal-link" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent.best_graph">best<wbr></wbr>_graph</a></code></td>
+    <td>This abstract property must be implemented in any concrete class that inherits from the <code><a href="rl_graph_theory.agents.graph_agent.GraphAgent.html" class="internal-link" title="rl_graph_theory.agents.graph_agent.GraphAgent">GraphAgent</a></code> class. If at least one iteration of the learning process has been executed, the property should return a graph that attains the best currently achieved value for the graph invariant that is supposed to get maximized in the configured extremal problem, as a ...</td>
+  </tr><tr class="property">
+    
+    <td>Property</td>
+    <td><code><a href="#best_score" class="internal-link" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent.best_score">best<wbr></wbr>_score</a></code></td>
+    <td>This abstract property must be implemented in any concrete class that inherits from the <code><a href="rl_graph_theory.agents.graph_agent.GraphAgent.html" class="internal-link" title="rl_graph_theory.agents.graph_agent.GraphAgent">GraphAgent</a></code> class. If at least one iteration of the learning process has been executed, the property should return the best currently achieved value for the graph invariant that is supposed to get maximized in the configured extremal problem, as a ...</td>
+  </tr><tr class="property">
+    
+    <td>Property</td>
+    <td><code><a href="#step_count" class="internal-link" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent.step_count">step<wbr></wbr>_count</a></code></td>
+    <td>This abstract property must be implemented in any concrete class that inherits from the <code><a href="rl_graph_theory.agents.graph_agent.GraphAgent.html" class="internal-link" title="rl_graph_theory.agents.graph_agent.GraphAgent">GraphAgent</a></code> class. It should return the number of executed iterations of the learning process, as a nonnegative <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code>...</td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_best_score" class="internal-link" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent._best_score">_best<wbr></wbr>_score</a></code></td>
+    <td>A <code><a href="https://docs.python.org/3/library/functions.html#float" class="intersphinx-link">float</a></code> that determines the best currently achieved value for the graph invariant that is supposed to get maximized in the configured extremal problem, if the RL agent has been initialized, and otherwise, ...</td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_device" class="internal-link" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent._device">_device</a></code></td>
+    <td>A <code><a href="https://pytorch.org/docs/stable/tensor_attributes.html#torch.device" class="intersphinx-link">torch.device</a></code> object that determines on which device the action prediction model is located.</td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_elite_count" class="internal-link" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent._elite_count">_elite<wbr></wbr>_count</a></code></td>
+    <td>A positive <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> that determines how many executed episodes with the greatest cumulative reward should be used to train the action prediction model in each iteration of the learning process.</td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_environment" class="internal-link" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent._environment">_environment</a></code></td>
+    <td>A <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code> object that represents the RL environment that defines the extremal problem of interest and whose graph-building game should be used to construct all the graphs.</td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_loss_function" class="internal-link" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent._loss_function">_loss<wbr></wbr>_function</a></code></td>
+    <td>A function that represents the loss function used during training.</td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_new_candidates_count" class="internal-link" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent._new_candidates_count">_new<wbr></wbr>_candidates<wbr></wbr>_count</a></code></td>
+    <td>A positive <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> that determines how many graphs should be constructed in each iteration of the learning process by running the corresponding number of episodes in parallel.</td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_optimizer" class="internal-link" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent._optimizer">_optimizer</a></code></td>
+    <td>A <code><a href="https://pytorch.org/docs/stable/optim.html#torch.optim.Optimizer" class="intersphinx-link">torch.optim.Optimizer</a></code> object that represents the optimizer responsible for updating the model parameters.</td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_policy_network" class="internal-link" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent._policy_network">_policy<wbr></wbr>_network</a></code></td>
+    <td>A <code><a href="https://pytorch.org/docs/stable/generated/torch.nn.Module.html#torch.nn.Module" class="intersphinx-link">torch.nn.Module</a></code> object that represents the action prediction model that is used to compute the probability for each of the actions to be selected in each episode and in each step.</td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_population_actions" class="internal-link" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent._population_actions">_population<wbr></wbr>_actions</a></code></td>
+    <td>If the RL agent has not been initialized, then <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, and otherwise, a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> matrix of type <code><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.int32" class="intersphinx-link">numpy.int32</a></code> that is used to store all the actions during each iteration of the learning process. The shape of this matrix is ...</td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_population_rewards" class="internal-link" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent._population_rewards">_population<wbr></wbr>_rewards</a></code></td>
+    <td>If the RL agent has not been initialized, then <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, and otherwise, a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> list of type <code><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float32" class="intersphinx-link">numpy.float32</a></code> that is used to store all the cumulative rewards during each iteration of the learning process...</td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_population_states" class="internal-link" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent._population_states">_population<wbr></wbr>_states</a></code></td>
+    <td>If the RL agent has not been initialized, then <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, and otherwise, a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> object that is used to store all the states during each iteration of the learning process. The shape of this tensor is ...</td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_random_action_mechanism" class="internal-link" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent._random_action_mechanism">_random<wbr></wbr>_action<wbr></wbr>_mechanism</a></code></td>
+    <td>A <code><a href="rl_graph_theory.agents.random_action_mechanisms.RandomActionMechanism.html" class="internal-link" title="rl_graph_theory.agents.random_action_mechanisms.RandomActionMechanism">RandomActionMechanism</a></code> object that indicates the random action mechanism that the RL agent should use.</td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_rng" class="internal-link" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent._rng">_rng</a></code></td>
+    <td>The <code><a href="https://numpy.org/doc/stable/reference/random/generator.html#numpy.random.Generator" class="intersphinx-link">numpy.random.Generator</a></code> object that represents the random number generator used for all the probabilistic decisions.</td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_step_count" class="internal-link" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent._step_count">_step<wbr></wbr>_count</a></code></td>
+    <td>A nonnegative <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> that determines the number of executed iterations of the learning process, if the RL agent has been initialized, and otherwise, <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>.</td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_survivors_count" class="internal-link" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent._survivors_count">_survivors<wbr></wbr>_count</a></code></td>
+    <td>A positive <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> that determines how many executed episodes with the greatest cumulative reward should be carried over to the next generation in each iteration of the learning process.</td>
+  </tr>
+</table>
+          
+
+            
+        </div>
+
+        <div id="child-list">
+          <div class="basemethod">
+  
+  
+  <a name="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent.__init__">
+    
+  </a>
+  <a name="__init__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">__init__</span><span class="function-signature long-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">environment: <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code>, </span><span class="rst-sig-param">new_candidates_count: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code>, </span><span class="rst-sig-param">elite_count: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code>, </span><span class="rst-sig-param">survivors_count: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code>, </span><span class="rst-sig-param">policy_network: <code><a href="https://pytorch.org/docs/stable/generated/torch.nn.Module.html#torch.nn.Module" class="intersphinx-link">nn.Module</a></code>, </span><span class="rst-sig-param">optimizer: <code><a href="https://pytorch.org/docs/stable/optim.html#torch.optim.Optimizer" class="intersphinx-link">torch.optim.Optimizer</a></code>, </span><span class="rst-sig-param">loss_function: <code><a href="https://docs.python.org/3/library/typing.html#typing.Callable" class="intersphinx-link">Callable</a></code> = <a href="https://pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html#torch.nn.CrossEntropyLoss" class="intersphinx-link">nn.CrossEntropyLoss</a>(), </span><span class="rst-sig-param">random_action_mechanism: <code><a href="rl_graph_theory.agents.random_action_mechanisms.RandomActionMechanism.html" class="internal-link" title="rl_graph_theory.agents.random_action_mechanisms.RandomActionMechanism">RandomActionMechanism</a></code> = <a href="rl_graph_theory.agents.random_action_mechanisms.NoRandomActionMechanism.html" class="internal-link" title="rl_graph_theory.agents.random_action_mechanisms.NoRandomActionMechanism">NoRandomActionMechanism</a>(), </span><span class="rst-sig-param">rng: <code><a href="https://numpy.org/doc/stable/reference/random/generator.html#numpy.random.Generator" class="intersphinx-link">np.random.Generator</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> = <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></span>):</span>
+    
+    <a class="headerLink" href="#__init__" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent.__init__">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>This constructor initializes an instance of the <code><a href="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent.html" class="internal-link" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent">DeepCrossEntropyAgent</a></code> class.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">environment:</span><code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code></td><td class="fieldArgDesc">The RL environment that defines the extremal problem of interest and
+whose graph-building game should be used to construct all the graphs, given as a
+<code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code> object.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">new<wbr></wbr>_candidates<wbr></wbr>_count:</span><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></td><td class="fieldArgDesc">A positive <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> that determines how many graphs should be
+constructed in each iteration of the learning process by running the corresponding
+number of episodes in parallel.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">elite<wbr></wbr>_count:</span><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></td><td class="fieldArgDesc">A positive <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> that determines how many executed episodes with the
+greatest cumulative reward should be used to train the action prediction model in each
+iteration of the learning process.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">survivors<wbr></wbr>_count:</span><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></td><td class="fieldArgDesc">A positive <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> that determines how many executed episodes with
+the greatest cumulative reward should be carried over to the next generation in each
+iteration of the learning process.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">policy<wbr></wbr>_network:</span><code><a href="https://pytorch.org/docs/stable/generated/torch.nn.Module.html#torch.nn.Module" class="intersphinx-link">nn.Module</a></code></td><td class="fieldArgDesc">The action prediction model that is used to compute the probability
+for each of the actions to be selected in each episode and in each step, given as a
+<code><a href="https://pytorch.org/docs/stable/generated/torch.nn.Module.html#torch.nn.Module" class="intersphinx-link">torch.nn.Module</a></code> object.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">optimizer:</span><code><a href="https://pytorch.org/docs/stable/optim.html#torch.optim.Optimizer" class="intersphinx-link">torch.optim.Optimizer</a></code></td><td class="fieldArgDesc">The optimizer responsible for updating the model parameters, given as a
+<code><a href="https://pytorch.org/docs/stable/optim.html#torch.optim.Optimizer" class="intersphinx-link">torch.optim.Optimizer</a></code> object. The parameters of the action prediction model, i.e.,
+the <tt class="rst-docutils rst-literal">policy_network</tt> argument, must be passed to the optimizer.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">loss<wbr></wbr>_function:</span><code><a href="https://docs.python.org/3/library/typing.html#typing.Callable" class="intersphinx-link">Callable</a></code></td><td class="fieldArgDesc">A function that represents the loss function used during training.
+The default value is the cross entropy loss function, i.e., <tt class="rst-docutils rst-literal">nn.CrossEntropyLoss()</tt>.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">random<wbr></wbr>_action<wbr></wbr>_mechanism:</span><code><a href="rl_graph_theory.agents.random_action_mechanisms.RandomActionMechanism.html" class="internal-link" title="rl_graph_theory.agents.random_action_mechanisms.RandomActionMechanism">RandomActionMechanism</a></code></td><td class="fieldArgDesc">The random action mechanism that the RL agent should use,
+given as a <code><a href="rl_graph_theory.agents.random_action_mechanisms.RandomActionMechanism.html" class="internal-link" title="rl_graph_theory.agents.random_action_mechanisms.RandomActionMechanism">RandomActionMechanism</a></code> object. The default value is
+<tt class="rst-docutils rst-literal">NoRandomActionMechanism()</tt>, i.e., no random actions should be executed by default.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">rng:</span><code><a href="https://numpy.org/doc/stable/reference/random/generator.html#numpy.random.Generator" class="intersphinx-link">np.random.Generator</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code></td><td class="fieldArgDesc">Either <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, or the <code><a href="https://numpy.org/doc/stable/reference/random/generator.html#numpy.random.Generator" class="intersphinx-link">numpy.random.Generator</a></code> object that represents the
+random number generator used for all the probabilistic decisions. If this argument is
+<code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, then a default <code><a href="https://numpy.org/doc/stable/reference/random/generator.html#numpy.random.Generator" class="intersphinx-link">numpy.random.Generator</a></code> object will be used. The default value
+is <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent.reset">
+    
+  </a>
+  <a name="reset">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">reset</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span></span>):</span>
+    
+    <a class="headerLink" href="#reset" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent.reset">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    <div class="interfaceinfo">overrides <code><a href="rl_graph_theory.agents.graph_agent.GraphAgent.html#reset" class="internal-link">rl_graph_theory.agents.graph_agent.GraphAgent.reset</a></code></div>
+    <div><p>This abstract method must be implemented in any concrete class that inherits from the
+<code><a href="rl_graph_theory.agents.graph_agent.GraphAgent.html" class="internal-link" title="rl_graph_theory.agents.graph_agent.GraphAgent">GraphAgent</a></code> class. It should initialize an RL agent and prepare it to start the learning
+process. If the agent has already been initialized and potentially used, then this method
+should re-initialize the agent and restart the learning process.</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent.step">
+    
+  </a>
+  <a name="step">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">step</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span></span>):</span>
+    
+    <a class="headerLink" href="#step" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent.step">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    <div class="interfaceinfo">overrides <code><a href="rl_graph_theory.agents.graph_agent.GraphAgent.html#step" class="internal-link">rl_graph_theory.agents.graph_agent.GraphAgent.step</a></code></div>
+    <div><p>This abstract method must be implemented in any concrete class that inherits from the
+<code><a href="rl_graph_theory.agents.graph_agent.GraphAgent.html" class="internal-link" title="rl_graph_theory.agents.graph_agent.GraphAgent">GraphAgent</a></code> class. It should perform one iteration of the learning process.</p></div>
+  </div>
+</div><div class="baseproperty">
+  
+  
+  <a name="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent.best_graph">
+    
+  </a>
+  <a name="best_graph">
+    
+  </a>
+  <div class="functionHeader">
+    <div><span class="decorator">@<a href="https://docs.python.org/3/library/functions.html#property" class="intersphinx-link">property</a><br /></span></div>
+    <span class="py-defname">best_graph</span>: <code><a href="rl_graph_theory.graphs.graph.Graph.html" class="internal-link" title="rl_graph_theory.graphs.graph.Graph">Graph</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> =
+    
+    <a class="headerLink" href="#best_graph" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent.best_graph">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <code><a href="rl_graph_theory.agents.graph_agent.GraphAgent.html#best_graph" class="internal-link">rl_graph_theory.agents.graph_agent.GraphAgent.best_graph</a></code></div>
+    <div><p>This abstract property must be implemented in any concrete class that inherits from the
+<code><a href="rl_graph_theory.agents.graph_agent.GraphAgent.html" class="internal-link" title="rl_graph_theory.agents.graph_agent.GraphAgent">GraphAgent</a></code> class. If at least one iteration of the learning process has been executed,
+the property should return a graph that attains the best currently achieved value for the
+graph invariant that is supposed to get maximized in the configured extremal problem, as a
+<code><a href="rl_graph_theory.graphs.graph.Graph.html" class="internal-link" title="rl_graph_theory.graphs.graph.Graph">Graph</a></code> object. Otherwise, if no iterations of the learning process have been executed yet,
+then <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> should be returned.</p></div>
+    
+  </div>
+</div><div class="baseproperty">
+  
+  
+  <a name="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent.best_score">
+    
+  </a>
+  <a name="best_score">
+    
+  </a>
+  <div class="functionHeader">
+    <div><span class="decorator">@<a href="https://docs.python.org/3/library/functions.html#property" class="intersphinx-link">property</a><br /></span></div>
+    <span class="py-defname">best_score</span>: <code><a href="https://docs.python.org/3/library/functions.html#float" class="intersphinx-link">float</a></code> =
+    
+    <a class="headerLink" href="#best_score" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent.best_score">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <code><a href="rl_graph_theory.agents.graph_agent.GraphAgent.html#best_score" class="internal-link">rl_graph_theory.agents.graph_agent.GraphAgent.best_score</a></code></div>
+    <div><p>This abstract property must be implemented in any concrete class that inherits from the
+<code><a href="rl_graph_theory.agents.graph_agent.GraphAgent.html" class="internal-link" title="rl_graph_theory.agents.graph_agent.GraphAgent">GraphAgent</a></code> class. If at least one iteration of the learning process has been executed,
+the property should return the best currently achieved value for the graph invariant that
+is supposed to get maximized in the configured extremal problem, as a <code><a href="https://docs.python.org/3/library/functions.html#float" class="intersphinx-link">float</a></code>. Otherwise,
+if no iterations of the learning process have been executed yet, then the value −∞ should
+be returned, again as a <code><a href="https://docs.python.org/3/library/functions.html#float" class="intersphinx-link">float</a></code>.</p></div>
+    
+  </div>
+</div><div class="baseproperty">
+  
+  
+  <a name="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent.step_count">
+    
+  </a>
+  <a name="step_count">
+    
+  </a>
+  <div class="functionHeader">
+    <div><span class="decorator">@<a href="https://docs.python.org/3/library/functions.html#property" class="intersphinx-link">property</a><br /></span></div>
+    <span class="py-defname">step_count</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
+    
+    <a class="headerLink" href="#step_count" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent.step_count">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <code><a href="rl_graph_theory.agents.graph_agent.GraphAgent.html#step_count" class="internal-link">rl_graph_theory.agents.graph_agent.GraphAgent.step_count</a></code></div>
+    <div><p>This abstract property must be implemented in any concrete class that inherits from the
+<code><a href="rl_graph_theory.agents.graph_agent.GraphAgent.html" class="internal-link" title="rl_graph_theory.agents.graph_agent.GraphAgent">GraphAgent</a></code> class. It should return the number of executed iterations of the learning
+process, as a nonnegative <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code>.</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent._best_score">
+    
+  </a>
+  <a name="_best_score">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_best_score</span>: <code><a href="https://docs.python.org/3/library/functions.html#float" class="intersphinx-link">float</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> =
+    
+    <a class="headerLink" href="#_best_score" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent._best_score">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>A <code><a href="https://docs.python.org/3/library/functions.html#float" class="intersphinx-link">float</a></code> that determines the best currently achieved value for the graph
+invariant that is supposed to get maximized in the configured extremal problem, if the RL
+agent has been initialized, and otherwise, <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>.</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent._device">
+    
+  </a>
+  <a name="_device">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_device</span>: <code><a href="https://pytorch.org/docs/stable/tensor_attributes.html#torch.device" class="intersphinx-link">torch.device</a></code> =
+    
+    <a class="headerLink" href="#_device" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent._device">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>A <code><a href="https://pytorch.org/docs/stable/tensor_attributes.html#torch.device" class="intersphinx-link">torch.device</a></code> object that determines on which device the action prediction
+model is located.</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent._elite_count">
+    
+  </a>
+  <a name="_elite_count">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_elite_count</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
+    
+    <a class="headerLink" href="#_elite_count" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent._elite_count">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>A positive <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> that determines how many executed episodes with the
+greatest cumulative reward should be used to train the action prediction model in each
+iteration of the learning process.</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent._environment">
+    
+  </a>
+  <a name="_environment">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_environment</span>: <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code> =
+    
+    <a class="headerLink" href="#_environment" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent._environment">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>A <code><a href="rl_graph_theory.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rl_graph_theory.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code> object that represents the RL environment that defines
+the extremal problem of interest and whose graph-building game should be used to construct
+all the graphs.</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent._loss_function">
+    
+  </a>
+  <a name="_loss_function">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_loss_function</span>: <code><a href="https://docs.python.org/3/library/typing.html#typing.Callable" class="intersphinx-link">Callable</a></code> =
+    
+    <a class="headerLink" href="#_loss_function" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent._loss_function">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>A function that represents the loss function used during training.</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent._new_candidates_count">
+    
+  </a>
+  <a name="_new_candidates_count">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_new_candidates_count</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
+    
+    <a class="headerLink" href="#_new_candidates_count" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent._new_candidates_count">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>A positive <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> that determines how many graphs should be
+constructed in each iteration of the learning process by running the corresponding number
+of episodes in parallel.</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent._optimizer">
+    
+  </a>
+  <a name="_optimizer">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_optimizer</span>: <code><a href="https://pytorch.org/docs/stable/optim.html#torch.optim.Optimizer" class="intersphinx-link">torch.optim.Optimizer</a></code> =
+    
+    <a class="headerLink" href="#_optimizer" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent._optimizer">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>A <code><a href="https://pytorch.org/docs/stable/optim.html#torch.optim.Optimizer" class="intersphinx-link">torch.optim.Optimizer</a></code> object that represents the optimizer responsible
+for updating the model parameters.</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent._policy_network">
+    
+  </a>
+  <a name="_policy_network">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_policy_network</span>: <code><a href="https://pytorch.org/docs/stable/generated/torch.nn.Module.html#torch.nn.Module" class="intersphinx-link">nn.Module</a></code> =
+    
+    <a class="headerLink" href="#_policy_network" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent._policy_network">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>A <code><a href="https://pytorch.org/docs/stable/generated/torch.nn.Module.html#torch.nn.Module" class="intersphinx-link">torch.nn.Module</a></code> object that represents the action prediction model
+that is used to compute the probability for each of the actions to be selected in each
+episode and in each step.</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent._population_actions">
+    
+  </a>
+  <a name="_population_actions">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_population_actions</span>: <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> =
+    
+    <a class="headerLink" href="#_population_actions" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent._population_actions">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>If the RL agent has not been initialized, then <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, and
+otherwise, a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> matrix of type <code><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.int32" class="intersphinx-link">numpy.int32</a></code> that is used to store all the
+actions during each iteration of the learning process. The shape of this matrix is
+<tt class="rst-docutils rst-literal">(episode_length, total_population)</tt>, where <tt class="rst-docutils rst-literal">episode_length</tt> is the predetermined
+episode length from the underlying RL environment, while <tt class="rst-docutils rst-literal">total_population</tt> is the total
+number of executed episodes to be stored, which combines the newly generated ones with
+those carried over from the previous generation. The first dimension corresponds to the
+action trajectory from each episode, while the second dimension corresponds to the executed
+episodes. The episode order must be the same as in the <code><a href="#_population_states" class="internal-link" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent._population_states">_population_states</a></code> attribute.</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent._population_rewards">
+    
+  </a>
+  <a name="_population_rewards">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_population_rewards</span>: <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> =
+    
+    <a class="headerLink" href="#_population_rewards" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent._population_rewards">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>If the RL agent has not been initialized, then <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, and
+otherwise, a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> list of type <code><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float32" class="intersphinx-link">numpy.float32</a></code> that is used to store all the
+cumulative rewards during each iteration of the learning process. The length of this list
+is <tt class="rst-docutils rst-literal">total_population</tt>, i.e., the the total number of executed episodes to be stored,
+which combines the newly generated ones with those carried over from the previous
+generation. The episode order must be the same as in the <code><a href="#_population_states" class="internal-link" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent._population_states">_population_states</a></code> attribute.</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent._population_states">
+    
+  </a>
+  <a name="_population_states">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_population_states</span>: <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> =
+    
+    <a class="headerLink" href="#_population_states" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent._population_states">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>If the RL agent has not been initialized, then <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, and otherwise,
+a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> object that is used to store all the states during each iteration of the
+learning process. The shape of this tensor is <tt class="rst-docutils rst-literal">(episode_length + 1, total_population,
+state_length)</tt>, while its type matches that of the states from the underlying RL
+environment. Here, <tt class="rst-docutils rst-literal">episode_length</tt> is the predetermined episode length from the
+underlying RL environment, <tt class="rst-docutils rst-literal">state_length</tt> is the number of entries in each of the state
+vectors from the underlying RL environment, while <tt class="rst-docutils rst-literal">total_population</tt> is the total number
+of executed episodes to be stored, which combines the newly generated ones with those
+carried over from the previous generation. The first dimension corresponds to the state
+trajectory from each episode, the second dimension corresponds to the executed episodes,
+while the third dimension corresponds to the vector entries. The states from the episodes
+carried over from the previous generation should appear before the states from the newly
+generated episodes.</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent._random_action_mechanism">
+    
+  </a>
+  <a name="_random_action_mechanism">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_random_action_mechanism</span>: <code><a href="rl_graph_theory.agents.random_action_mechanisms.RandomActionMechanism.html" class="internal-link" title="rl_graph_theory.agents.random_action_mechanisms.RandomActionMechanism">RandomActionMechanism</a></code> =
+    
+    <a class="headerLink" href="#_random_action_mechanism" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent._random_action_mechanism">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>A <code><a href="rl_graph_theory.agents.random_action_mechanisms.RandomActionMechanism.html" class="internal-link" title="rl_graph_theory.agents.random_action_mechanisms.RandomActionMechanism">RandomActionMechanism</a></code> object that indicates the random
+action mechanism that the RL agent should use.</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent._rng">
+    
+  </a>
+  <a name="_rng">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_rng</span>: <code><a href="https://numpy.org/doc/stable/reference/random/generator.html#numpy.random.Generator" class="intersphinx-link">np.random.Generator</a></code> =
+    
+    <a class="headerLink" href="#_rng" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent._rng">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>The <code><a href="https://numpy.org/doc/stable/reference/random/generator.html#numpy.random.Generator" class="intersphinx-link">numpy.random.Generator</a></code> object that represents the random number generator
+used for all the probabilistic decisions.</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent._step_count">
+    
+  </a>
+  <a name="_step_count">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_step_count</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> =
+    
+    <a class="headerLink" href="#_step_count" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent._step_count">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>A nonnegative <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> that determines the number of executed iterations of the
+learning process, if the RL agent has been initialized, and otherwise, <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>.</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent._survivors_count">
+    
+  </a>
+  <a name="_survivors_count">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_survivors_count</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
+    
+    <a class="headerLink" href="#_survivors_count" title="rl_graph_theory.agents.deep_cross_entropy_agent.DeepCrossEntropyAgent._survivors_count">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>A positive <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> that determines how many executed episodes with the
+greatest cumulative reward should be carried over to the next generation in each iteration
+of the learning process.</p></div>
+    
+  </div>
+</div>
+        </div>
+      
+      </main>
+    </div>
+
+    <footer class="navbar navbar-default">
+
+  
+  <div class="container-fluid">
+    <a href="index.html">API Documentation</a> for rl-graph-theory,
+  generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
+    25.10.1 at 2026-01-21 00:16:15.
+  </div>
+
+  <!-- Search related scripts needs to be loaded at the end of HTML 
+    parsing not to introduce overhead and display HTML data asap -->
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="searchlib.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
+
+</footer>
+  
+    <script src="pydoctor.js" type="text/javascript"></script>
+
+  </body>
+</html>

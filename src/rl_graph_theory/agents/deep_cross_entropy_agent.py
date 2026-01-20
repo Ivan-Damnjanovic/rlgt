@@ -13,8 +13,8 @@ from torch.distributions import Categorical
 
 from ..environments.graph_environment import EpisodeStatus, GraphEnvironment
 from ..graphs.graph import Graph
-from .random_action_mechanisms import RandomActionMechanism
 from .graph_agent import GraphAgent
+from .random_action_mechanisms import NoRandomActionMechanism, RandomActionMechanism
 
 
 class DeepCrossEntropyAgent(GraphAgent):
@@ -30,8 +30,11 @@ class DeepCrossEntropyAgent(GraphAgent):
     predetermined number of episodes with the greatest cumulative reward are carried over to the
     next generation. This finishes one iteration of the learning process. The user provides the
     model that helps select the actions to be executed. Additionally, the user can configure the
-    optimizer that trains the model, given as a `torch.optim.Optimizer` object, as well as the
-    corresponding loss function.
+    optimizer that trains the model, given as a `torch.optim.Optimizer` object, as well as the loss
+    function used during training. Finally, the user can also configure the random action mechanism
+    that the RL agent should use. When a random action is supposed to get executed, it gets sampled
+    with the uniform probability distribution over all the actions that are available for
+    execution.
 
     :ivar _environment: A `GraphEnvironment` object that represents the RL environment that defines
         the extremal problem of interest and whose graph-building game should be used to construct
@@ -55,6 +58,8 @@ class DeepCrossEntropyAgent(GraphAgent):
         model is located.
     :ivar _random_action_mechanism: A `RandomActionMechanism` object that indicates the random
         action mechanism that the RL agent should use.
+    :ivar _rng: The `numpy.random.Generator` object that represents the random number generator
+        used for all the probabilistic decisions.
     :ivar _step_count: A nonnegative `int` that determines the number of executed iterations of the
         learning process, if the RL agent has been initialized, and otherwise, `None`.
     :ivar _best_score: A `float` that determines the best currently achieved value for the graph
@@ -99,7 +104,7 @@ class DeepCrossEntropyAgent(GraphAgent):
         policy_network: nn.Module,
         optimizer: torch.optim.Optimizer,
         loss_function: Callable = nn.CrossEntropyLoss(),
-        random_action_mechanism: RandomActionMechanism = None,
+        random_action_mechanism: RandomActionMechanism = NoRandomActionMechanism(),
         rng: Optional[np.random.Generator] = None,
     ):
         """
@@ -126,8 +131,8 @@ class DeepCrossEntropyAgent(GraphAgent):
         :param loss_function: A function that represents the loss function used during training.
             The default value is the cross entropy loss function, i.e., ``nn.CrossEntropyLoss()``.
         :param random_action_mechanism: The random action mechanism that the RL agent should use,
-            given as a `RandomActionMechanism` object. If a random action should be executed, then
-            it is sampled with the uniform probability distribution.
+            given as a `RandomActionMechanism` object. The default value is
+            ``NoRandomActionMechanism()``, i.e., no random actions should be executed by default.
         :param rng: Either `None`, or the `numpy.random.Generator` object that represents the
             random number generator used for all the probabilistic decisions. If this argument is
             `None`, then a default `numpy.random.Generator` object will be used. The default value
@@ -162,9 +167,11 @@ class DeepCrossEntropyAgent(GraphAgent):
         self._population_rewards: Optional[np.ndarray] = None
 
     def reset(self) -> None:
-        # Initialize the step count to 0 and the best score to minus infinity.
+        # Initialize the step count to 0 and the best score to minus infinity. Also, initialize the
+        # random action mechanism.
         self._step_count = 0
         self._best_score = float("-inf")
+        self._random_action_mechanism.reset()
 
         # Initialize the population states, the population actions and the population rewards to
         # the zero `np.ndarray` objects of the required shape and type.
@@ -212,27 +219,48 @@ class DeepCrossEntropyAgent(GraphAgent):
                     ~action_mask_torch, float("-inf")
                 )
 
+            # Sample the actions according to the obtained probability distributions.
             action_batch_torch = Categorical(logits=logits_batch_torch).sample()
             action_batch = action_batch_torch.cpu().numpy()
 
-            random_mask = (
-                self._rng.random(size=(action_batch.shape[0],)) < random_action_probability
-            )
-            entry_count = np.count_nonzero(random_mask)
-            action_batch[random_mask] = self._rng.integers(
-                low=0, high=self._environment.action_number, size=entry_count, dtype=np.int32
-            )
+            # Use the random action probability to decide whether each sampled action should be
+            # replaced by a random action.
+            random_mask = self._rng.random(size=action_batch.shape[0]) < random_action_probability
 
+            # Select each required random action among the actions available for execution using
+            # the uniform probability distribution.
+            if np.any(random_mask):
+                probabilities_batch = action_mask[random_mask].astype(np.float32)
+                probabilities_batch /= probabilities_batch.sum(axis=1, keepdims=True)
+
+                action_batch[random_mask] = np.array(
+                    [
+                        self._rng.choice(probabilities_batch.shape[1], p=probabilities)
+                        for probabilities in probabilities_batch
+                    ],
+                    dtype=np.int32,
+                )
+
+            # Store the selected actions and execute them.
             self._population_actions[episode_action_count, self._survivors_count :] = action_batch
             state_batch, reward_batch, status = self._environment.step_batch(action_batch)
 
+            # Update the cumulative rewards and store the newly obtained states.
             self._population_rewards[self._survivors_count :] += reward_batch
             episode_action_count += 1
             self._population_states[episode_action_count, self._survivors_count :, :] = state_batch
 
+        # Initialize the mask that decides which executed episodes should be used to train the
+        # action prediction model.
         elite_mask = np.zeros((self._survivors_count + self._new_candidates_count), dtype=bool)
+        # Initialize the mask that decides which executed episodes should be carried over to the
+        # next generation.
         survivors_mask = np.zeros((self._survivors_count + self._new_candidates_count), dtype=bool)
 
+        # In the first iteration of the learning process, only the last `_new_candidates_count`
+        # executed episodes should be considered because there are no survivor episodes. Therefore,
+        # the first `_survivors_count` episodes correspond to nonexisting episodes, hence they
+        # should be ignored.
         if self._step_count == 0:
             elite_mask[
                 self._survivors_count
@@ -246,6 +274,9 @@ class DeepCrossEntropyAgent(GraphAgent):
                     self._population_rewards[self._survivors_count :], -self._survivors_count
                 )[-self._survivors_count :]
             ] = True
+        # In any subsequent iteration of the learning process, there are survivor episodes from the
+        # previous iteration, so all the episodes from the `np.ndarray` are valid, which means that
+        # they should all be considered.
         else:
             elite_mask[
                 np.argpartition(self._population_rewards, -self._elite_count)[-self._elite_count :]
@@ -256,6 +287,8 @@ class DeepCrossEntropyAgent(GraphAgent):
                 ]
             ] = True
 
+        # Extract the (state, action) pairs from the elite executed episodes, i.e., the executed
+        # episodes that should be used to train the action prediction model.
         elite_states = self._population_states[:-1, elite_mask, :].reshape(
             -1, self._environment.state_length
         )
@@ -263,15 +296,15 @@ class DeepCrossEntropyAgent(GraphAgent):
         elite_states_torch = torch.from_numpy(elite_states.astype(np.float32)).to(self._device)
         elite_actions_torch = torch.from_numpy(elite_actions.astype(np.int64)).to(self._device)
 
+        # Use the optimizer to train the action prediction model.
         self._optimizer.zero_grad()
         logits_torch = self._policy_network(elite_states_torch)
         loss = self._loss_function(logits_torch, elite_actions_torch)
         loss.backward()
         self._optimizer.step()
 
-        if self._step_count == 0:
-            assert np.all(survivors_mask[: self._survivors_count] == False)
-
+        # Extract the states, actions and rewards from the survivor episodes and store them so that
+        # they are available in the next generation.
         self._population_states[:, : self._survivors_count, :] = self._population_states[
             :, survivors_mask, :
         ]
@@ -282,13 +315,15 @@ class DeepCrossEntropyAgent(GraphAgent):
             survivors_mask
         ]
 
+        # Update the best score, and the random action probability through the random action
+        # mechanism.
         new_best_score = np.max(self._population_rewards[: self._survivors_count]).item()
-        if self._best_score is not None:
-            self._is_best_score_improved = not np.isclose(self._best_score, new_best_score)
-        else:
-            self._is_best_score_improved = True
+        self._random_action_mechanism.step(
+            previous_best_score=self._best_score, new_best_score=new_best_score
+        )
         self._best_score = new_best_score
 
+        # Increment the number of executed iterations of the learning process.
         self._step_count += 1
 
     @property
@@ -296,12 +331,12 @@ class DeepCrossEntropyAgent(GraphAgent):
         return self._step_count
 
     @property
-    def best_score(self) -> Optional[float]:
+    def best_score(self) -> float:
         return self._best_score
 
     @property
     def best_graph(self) -> Optional[Graph]:
-        if self._best_score is None:
+        if self._step_count < 1:
             return None
 
         best_index = np.argmax(self._population_rewards[: self._survivors_count])
