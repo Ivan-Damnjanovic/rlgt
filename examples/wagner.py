@@ -4,7 +4,7 @@ import torch.nn as nn
 import torch.optim as optim
 
 from rl_graph_theory.graphs.graph import Graph
-from rl_graph_theory.agents.deep_cross_entropy_method import DeepCrossEntropyMethod
+from rl_graph_theory.agents.deep_cross_entropy_agent import DeepCrossEntropyAgent
 from rl_graph_theory.environments.linear_environments import LinearBuildEnvironment, LinearFlipEnvironment, LinearSetEnvironment
 from rl_graph_theory.environments.global_environments import GlobalSetEnvironment, GlobalFlipEnvironment
 from rl_graph_theory.environments.local_environments import LocalFlipEnvironment, LocalSetEnvironment
@@ -81,7 +81,7 @@ def main(graph_order: int):
         nn.Linear(256, 2),
     )
 
-    dcem = DeepCrossEntropyMethod(
+    dcem = DeepCrossEntropyAgent(
         environment=LinearSetEnvironment(
             reward_type=RewardType.SPARSE,
             reward_function=graph_invariant,

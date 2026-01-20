@@ -119,7 +119,7 @@ class LocalSetEnvironment(GraphEnvironment):
         starting_vertex: int = 0,
     ):
         """
-        This constructor initializes an instance of the `LocalSetEnvironment` object.
+        This constructor initializes an instance of the `LocalSetEnvironment` class.
 
         :param reward_type: An item of the `RewardType` enumeration that determines the (sub)type
             of reward system to be used in the instantiated environment.
@@ -444,7 +444,7 @@ class LocalFlipEnvironment(GraphEnvironment):
         starting_vertex: int = 0,
     ):
         """
-        This constructor initializes an instance of the `LocalFlipEnvironment` object.
+        This constructor initializes an instance of the `LocalFlipEnvironment` class.
 
         :param reward_type: An item of the `RewardType` enumeration that determines the (sub)type
             of reward system to be used in the instantiated environment.

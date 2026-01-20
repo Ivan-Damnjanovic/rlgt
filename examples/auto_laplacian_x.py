@@ -3,7 +3,7 @@ import torch.nn as nn
 import torch.optim as optim
 
 from rl_graph_theory.graphs.graph import Graph
-from rl_graph_theory.agents.deep_cross_entropy_method import DeepCrossEntropyMethod
+from rl_graph_theory.agents.deep_cross_entropy_agent import DeepCrossEntropyAgent
 from rl_graph_theory.environments.linear_environments import LinearBuildEnvironment
 from rl_graph_theory.environments.graph_environment import RewardType
 from rl_graph_theory.agents.random_action_mechanisms import create_multiplication_factor_random_action_mechanism
@@ -49,7 +49,7 @@ policy_network = nn.Sequential(
 )
 
 
-dcem = DeepCrossEntropyMethod(
+dcem = DeepCrossEntropyAgent(
     environment=LinearBuildEnvironment(
         reward_type=RewardType.SPARSE,
         reward_function=graph_invariant,

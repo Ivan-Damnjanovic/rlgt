@@ -97,7 +97,7 @@ class LinearBuildEnvironment(GraphEnvironment):
         allow_loops: bool = False,
     ):
         """
-        This constructor initializes an instance of the `LinearBuildEnvironment` object.
+        This constructor initializes an instance of the `LinearBuildEnvironment` class.
 
         :param reward_type: An item of the `RewardType` enumeration that determines the (sub)type
             of reward system to be used in the instantiated environment.
@@ -306,7 +306,7 @@ class LinearSetEnvironment(GraphEnvironment):
         initial_graph_generator: Optional[GraphGenerator] = None,
     ):
         """
-        This constructor initializes an instance of the `LinearSetEnvironment` object.
+        This constructor initializes an instance of the `LinearSetEnvironment` class.
 
         :param reward_type: An item of the `RewardType` enumeration that determines the (sub)type
             of reward system to be used in the instantiated environment.
@@ -529,7 +529,7 @@ class LinearFlipEnvironment(GraphEnvironment):
         initial_graph_generator: Optional[GraphGenerator] = None,
     ):
         """
-        This constructor initializes an instance of the `LinearFlipEnvironment` object.
+        This constructor initializes an instance of the `LinearFlipEnvironment` class.
 
         :param reward_type: An item of the `RewardType` enumeration that determines the (sub)type
             of reward system to be used in the instantiated environment.
