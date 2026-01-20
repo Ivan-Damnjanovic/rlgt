@@ -98,7 +98,7 @@ class GlobalSetEnvironment(GraphEnvironment):
         initial_graph_generator: Optional[GraphGenerator] = None,
     ):
         """
-        This constructor initializes an instance of the `GlobalSetEnvironment` object.
+        This constructor initializes an instance of the `GlobalSetEnvironment` class.
 
         :param reward_type: An item of the `RewardType` enumeration that determines the (sub)type
             of reward system to be used in the instantiated environment.
@@ -334,7 +334,7 @@ class GlobalFlipEnvironment(GraphEnvironment):
         initial_graph_generator: Optional[GraphGenerator] = None,
     ):
         """
-        This constructor initializes an instance of the `GlobalFlipEnvironment` object.
+        This constructor initializes an instance of the `GlobalFlipEnvironment` class.
 
         :param reward_type: An item of the `RewardType` enumeration that determines the (sub)type
             of reward system to be used in the instantiated environment.

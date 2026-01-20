@@ -41,5 +41,6 @@ html-output = "docs"
 intersphinx = [
     "https://docs.python.org/3/objects.inv",
     "https://numpy.org/doc/stable/objects.inv",
+    "https://pytorch.org/docs/stable/objects.inv",
 ]
 

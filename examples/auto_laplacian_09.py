@@ -4,7 +4,7 @@ import torch.optim as optim
 
 from rl_graph_theory.graphs.graph import Graph
 from rl_graph_theory.graphs.graph_formats import FlattenedOrdering
-from rl_graph_theory.agents.deep_cross_entropy_method import DeepCrossEntropyMethod
+from rl_graph_theory.agents.deep_cross_entropy_agent import DeepCrossEntropyAgent
 from rl_graph_theory.environments.linear_environments import LinearBuildEnvironment, LinearFlipEnvironment
 from rl_graph_theory.environments.local_environments import LocalSetEnvironment
 from rl_graph_theory.environments.global_environments import GlobalSetEnvironment
@@ -44,13 +44,13 @@ def main(graph_order: int):
         nn.Linear(graph_order * (graph_order - 1), 256),
         nn.ReLU(),
         nn.Dropout(0.2),
-        nn.Linear(256, 128),
+        nn.Linear(256, 256),
         nn.ReLU(),
         nn.Dropout(0.2),
-        nn.Linear(128, 2),
+        nn.Linear(256, 2),
     )
 
-    dcem = DeepCrossEntropyMethod(
+    dcem = DeepCrossEntropyAgent(
         environment=LinearBuildEnvironment(
             reward_type=RewardType.SPARSE,
             reward_function=graph_invariant,
@@ -59,14 +59,14 @@ def main(graph_order: int):
         policy_network=policy_network,
         optimizer=optim.Adam(policy_network.parameters(), lr=0.003),
         loss_function=nn.CrossEntropyLoss(),
-        new_candidates_count=500,
-        elite_count=30,
-        survivors_count=10,
+        new_candidates_count=700,
+        elite_count=50,
+        survivors_count=20,
         random_action_mechanism=create_multiplication_factor_random_action_mechanism(
             initial_random_action_probability=0.005,
             waiting_period=10,
             multiplication_factor=1.1,
-            maximum_random_action_probability=0.025,
+            maximum_random_action_probability=0.100,
         ),
     )
 
@@ -88,4 +88,4 @@ def main(graph_order: int):
 
 
 if __name__ == "__main__":
-    main(graph_order=16)
+    main(graph_order=20)

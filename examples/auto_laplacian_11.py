@@ -3,8 +3,11 @@ import torch.nn as nn
 import torch.optim as optim
 
 from rl_graph_theory.graphs.graph import Graph
+from rl_graph_theory.graphs.graph_formats import FlattenedOrdering
 from rl_graph_theory.agents.deep_cross_entropy_agent import DeepCrossEntropyAgent
-from rl_graph_theory.environments.linear_environments import LinearBuildEnvironment
+from rl_graph_theory.environments.linear_environments import LinearBuildEnvironment, LinearFlipEnvironment
+from rl_graph_theory.environments.local_environments import LocalSetEnvironment
+from rl_graph_theory.environments.global_environments import GlobalSetEnvironment
 from rl_graph_theory.environments.graph_environment import RewardType
 from rl_graph_theory.agents.random_action_mechanisms import create_multiplication_factor_random_action_mechanism
 
@@ -26,7 +29,7 @@ def graph_invariant(graph_batch: Graph):
     spectrum_batch = np.linalg.eigvalsh(lap_batch)
     mu_batch = spectrum_batch[:, -1]
 
-    temp = np.max((4.0 * and_batch_1 ** 2) / (and_batch_1 + degree_batch_1), axis=1)
+    temp = np.max(2 * and_batch_1 * and_batch_1 * and_batch_1 / degree_batch_1 / degree_batch_1, axis=1)
     result = mu_batch - temp
 
     result[spectrum_batch[:, 1] < 0.15] = -1000.0
@@ -38,13 +41,13 @@ def graph_invariant(graph_batch: Graph):
 
 def main(graph_order: int):
     policy_network = nn.Sequential(
-        nn.Linear(graph_order * (graph_order - 1), 72),
+        nn.Linear(graph_order * (graph_order - 1), 256),
         nn.ReLU(),
         nn.Dropout(0.2),
-        nn.Linear(72, 12),
+        nn.Linear(256, 256),
         nn.ReLU(),
         nn.Dropout(0.2),
-        nn.Linear(12, 2),
+        nn.Linear(256, 2),
     )
 
     dcem = DeepCrossEntropyAgent(
@@ -54,16 +57,16 @@ def main(graph_order: int):
             graph_order=graph_order,
         ),
         policy_network=policy_network,
-        optimizer=optim.Adam(policy_network.parameters(), lr=0.003),
+        optimizer=optim.Adam(policy_network.parameters(), lr=0.001),
         loss_function=nn.CrossEntropyLoss(),
-        new_candidates_count=200,
-        elite_count=20,
-        survivors_count=5,
+        new_candidates_count=1000,
+        elite_count=100,
+        survivors_count=25,
         random_action_mechanism=create_multiplication_factor_random_action_mechanism(
             initial_random_action_probability=0.005,
-            waiting_period=10,
-            multiplication_factor=1.1,
-            maximum_random_action_probability=0.025,
+            waiting_period=20,
+            multiplication_factor=1.2,
+            maximum_random_action_probability=0.300,
         ),
     )
 
@@ -78,11 +81,11 @@ def main(graph_order: int):
             solution = dcem.best_graph.adjacency_matrix_colors
             
             print(solution)
-            with open(f"examples/auto_laplacian_31_result_{graph_order}.txt", "w") as opened_file:
+            with open(f"examples/auto_laplacian_01_result_{graph_order}.txt", "w") as opened_file:
                 opened_file.write(np.array2string(solution, separator=", "))
 
             break
 
 
 if __name__ == "__main__":
-    main(graph_order=12)
+    main(graph_order=16)
