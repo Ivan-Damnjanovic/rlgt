@@ -230,16 +230,28 @@ class DeepCrossEntropyAgent(GraphAgent):
             # Select each required random action among the actions available for execution using
             # the uniform probability distribution.
             if np.any(random_mask):
-                probabilities_batch = action_mask[random_mask].astype(np.float32)
-                probabilities_batch /= probabilities_batch.sum(axis=1, keepdims=True)
+                # Settle the case where at least one action is not available for execution.
+                if action_mask is not None:
+                    probabilities_batch = action_mask[random_mask].astype(np.float32)
+                    probabilities_batch /= probabilities_batch.sum(axis=1, keepdims=True)
 
-                action_batch[random_mask] = np.array(
-                    [
-                        self._rng.choice(probabilities_batch.shape[1], p=probabilities)
-                        for probabilities in probabilities_batch
-                    ],
-                    dtype=np.int32,
-                )
+                    action_batch[random_mask] = np.array(
+                        [
+                            self._rng.choice(probabilities_batch.shape[1], p=probabilities)
+                            for probabilities in probabilities_batch
+                        ],
+                        dtype=np.int32,
+                    )
+
+                # Settle the case where all the actions are available for execution.
+                else:
+                    entry_count = np.count_nonzero(random_mask)
+                    action_batch[random_mask] = self._rng.integers(
+                        low=0,
+                        high=self._environment.action_number,
+                        size=entry_count,
+                        dtype=np.int32,
+                    )
 
             # Store the selected actions and execute them.
             self._population_actions[episode_action_count, self._survivors_count :] = action_batch
