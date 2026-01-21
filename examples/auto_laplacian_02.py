@@ -45,13 +45,13 @@ def graph_invariant(graph_batch: Graph):
 
 def main(graph_order: int):
     policy_network = nn.Sequential(
-        nn.Linear(graph_order * (graph_order - 1), 72),
+        nn.Linear(graph_order * (graph_order - 1), 256),
         nn.ReLU(),
         nn.Dropout(0.2),
-        nn.Linear(72, 12),
+        nn.Linear(256, 128),
         nn.ReLU(),
         nn.Dropout(0.2),
-        nn.Linear(12, 2),
+        nn.Linear(128, 2),
     )
 
     dcem = DeepCrossEntropyAgent(
@@ -61,16 +61,16 @@ def main(graph_order: int):
             graph_order=graph_order,
         ),
         policy_network=policy_network,
-        optimizer=optim.Adam(policy_network.parameters(), lr=0.003),
+        optimizer=optim.Adam(policy_network.parameters(), lr=0.0002),
         loss_function=nn.CrossEntropyLoss(),
-        new_candidates_count=200,
+        new_candidates_count=300,
         elite_count=20,
         survivors_count=5,
         random_action_mechanism=ExponentialRandomActionMechanism(
             initial_random_action_probability=0.005,
             waiting_period=10,
             multiplicative_factor=1.1,
-            maximum_random_action_probability=0.025,
+            maximum_random_action_probability=0.300,
         ),
     )
 
@@ -92,4 +92,4 @@ def main(graph_order: int):
 
 
 if __name__ == "__main__":
-    main(graph_order=20)
+    main(graph_order=16)

@@ -92,4 +92,4 @@ def main(graph_order: int):
 
 
 if __name__ == "__main__":
-    main(graph_order=16)
+    main(graph_order=14)
