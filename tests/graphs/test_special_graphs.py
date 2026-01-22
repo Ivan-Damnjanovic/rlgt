@@ -40,6 +40,8 @@ from .special_graphs_test_cases import (
 )
 from .utils import verify_instantiated_graph
 
+ALL_FORMATS = {format for format in GraphFormat}
+
 
 @pytest.mark.parametrize(
     "order, edge_colors, selected_edge_color, bitmask_in, bitmask_out, adjacency_matrix, flattened, is_directed, allow_loops",
@@ -56,26 +58,25 @@ def test_monochromatic_graph(
     is_directed: bool,
     allow_loops: bool,
 ):
-    for graph_format in GraphFormat:
-        verify_instantiated_graph(
-            constructor=lambda: MonochromaticGraph(
-                graph_format=graph_format,
-                graph_order=order,
-                edge_colors=edge_colors,
-                selected_color=selected_edge_color,
-                is_directed=is_directed,
-                allow_loops=allow_loops,
-            ),
+    verify_instantiated_graph(
+        constructor=lambda: MonochromaticGraph(
+            graph_formats=ALL_FORMATS,
+            graph_order=order,
             edge_colors=edge_colors,
-            order=order,
-            bitmask_in=bitmask_in,
-            bitmask_out=bitmask_out,
-            adjacency_matrix=adjacency_matrix,
-            flattened_clockwise=flattened,
-            flattened_row_major=flattened,
+            selected_color=selected_edge_color,
             is_directed=is_directed,
             allow_loops=allow_loops,
-        )
+        ),
+        edge_colors=edge_colors,
+        order=order,
+        bitmask_in=bitmask_in,
+        bitmask_out=bitmask_out,
+        adjacency_matrix=adjacency_matrix,
+        flattened_clockwise=flattened,
+        flattened_row_major=flattened,
+        is_directed=is_directed,
+        allow_loops=allow_loops,
+    )
 
 
 @pytest.mark.parametrize("order, bitmask, adjacency_matrix, flattened", EMPTY_GRAPH_TEST_CASES)
@@ -85,17 +86,16 @@ def test_empty_graph(
     adjacency_matrix: np.ndarray,
     flattened: np.ndarray,
 ):
-    for graph_format in GraphFormat:
-        verify_instantiated_graph(
-            constructor=lambda: EmptyGraph(graph_format, order),
-            edge_colors=2,
-            order=order,
-            bitmask_in=bitmask,
-            bitmask_out=bitmask,
-            adjacency_matrix=adjacency_matrix,
-            flattened_clockwise=flattened,
-            flattened_row_major=flattened,
-        )
+    verify_instantiated_graph(
+        constructor=lambda: EmptyGraph(ALL_FORMATS, order),
+        edge_colors=2,
+        order=order,
+        bitmask_in=bitmask,
+        bitmask_out=bitmask,
+        adjacency_matrix=adjacency_matrix,
+        flattened_clockwise=flattened,
+        flattened_row_major=flattened,
+    )
 
 
 @pytest.mark.parametrize("order, bitmask, adjacency_matrix, flattened", COMPLETE_GRAPH_TEST_CASES)
@@ -105,17 +105,16 @@ def test_complete_graph(
     adjacency_matrix: np.ndarray,
     flattened: np.ndarray,
 ):
-    for graph_format in GraphFormat:
-        verify_instantiated_graph(
-            constructor=lambda: CompleteGraph(graph_format, order),
-            edge_colors=2,
-            order=order,
-            bitmask_in=bitmask,
-            bitmask_out=bitmask,
-            adjacency_matrix=adjacency_matrix,
-            flattened_clockwise=flattened,
-            flattened_row_major=flattened,
-        )
+    verify_instantiated_graph(
+        constructor=lambda: CompleteGraph(ALL_FORMATS, order),
+        edge_colors=2,
+        order=order,
+        bitmask_in=bitmask,
+        bitmask_out=bitmask,
+        adjacency_matrix=adjacency_matrix,
+        flattened_clockwise=flattened,
+        flattened_row_major=flattened,
+    )
 
 
 @pytest.mark.parametrize(
@@ -127,17 +126,16 @@ def test_almost_complete_graph(
     adjacency_matrix: np.ndarray,
     flattened: np.ndarray,
 ):
-    for graph_format in GraphFormat:
-        verify_instantiated_graph(
-            constructor=lambda: AlmostCompleteGraph(graph_format, order),
-            edge_colors=2,
-            order=order,
-            bitmask_in=bitmask,
-            bitmask_out=bitmask,
-            adjacency_matrix=adjacency_matrix,
-            flattened_clockwise=flattened,
-            flattened_row_major=flattened,
-        )
+    verify_instantiated_graph(
+        constructor=lambda: AlmostCompleteGraph(ALL_FORMATS, order),
+        edge_colors=2,
+        order=order,
+        bitmask_in=bitmask,
+        bitmask_out=bitmask,
+        adjacency_matrix=adjacency_matrix,
+        flattened_clockwise=flattened,
+        flattened_row_major=flattened,
+    )
 
 
 @pytest.mark.parametrize(
@@ -154,29 +152,18 @@ def test_complete_bipartite_graph(
     flattened_column_first: np.ndarray,
     flattened_row_first: np.ndarray,
 ):
-    for graph_format in GraphFormat:
-        # Unsupported starting graph formats.
-        if graph_format not in [
-            GraphFormat.BITMASK_IN,
-            GraphFormat.BITMASK_OUT,
-            GraphFormat.ADJACENCY_MATRIX_COLORS,
-        ]:
-            with pytest.raises(ValueError):
-                CompleteBipartiteGraph(graph_format, partition_size_1, partition_size_2)
-            continue
-
-        verify_instantiated_graph(
-            constructor=lambda: CompleteBipartiteGraph(
-                graph_format, partition_size_1, partition_size_2
-            ),
-            edge_colors=2,
-            order=order,
-            bitmask_in=bitmask,
-            bitmask_out=bitmask,
-            adjacency_matrix=adjacency_matrix,
-            flattened_clockwise=flattened_column_first,
-            flattened_row_major=flattened_row_first,
-        )
+    verify_instantiated_graph(
+        constructor=lambda: CompleteBipartiteGraph(
+            ALL_FORMATS, partition_size_1, partition_size_2
+        ),
+        edge_colors=2,
+        order=order,
+        bitmask_in=bitmask,
+        bitmask_out=bitmask,
+        adjacency_matrix=adjacency_matrix,
+        flattened_clockwise=flattened_column_first,
+        flattened_row_major=flattened_row_first,
+    )
 
 
 @pytest.mark.parametrize(
@@ -192,27 +179,16 @@ def test_complete_k_partite_graph(
     flattened_column_first: np.ndarray,
     flattened_row_first: np.ndarray,
 ):
-    for graph_format in GraphFormat:
-        # Unsupported starting graph formats.
-        if graph_format not in [
-            GraphFormat.BITMASK_IN,
-            GraphFormat.BITMASK_OUT,
-            GraphFormat.ADJACENCY_MATRIX_COLORS,
-        ]:
-            with pytest.raises(ValueError):
-                CompleteKPartiteGraph(graph_format, partition_sizes)
-            continue
-
-        verify_instantiated_graph(
-            constructor=lambda: CompleteKPartiteGraph(graph_format, partition_sizes),
-            edge_colors=2,
-            order=order,
-            bitmask_in=bitmask,
-            bitmask_out=bitmask,
-            adjacency_matrix=adjacency_matrix,
-            flattened_clockwise=flattened_column_first,
-            flattened_row_major=flattened_row_first,
-        )
+    verify_instantiated_graph(
+        constructor=lambda: CompleteKPartiteGraph(ALL_FORMATS, partition_sizes),
+        edge_colors=2,
+        order=order,
+        bitmask_in=bitmask,
+        bitmask_out=bitmask,
+        adjacency_matrix=adjacency_matrix,
+        flattened_clockwise=flattened_column_first,
+        flattened_row_major=flattened_row_first,
+    )
 
 
 @pytest.mark.parametrize(
@@ -228,17 +204,16 @@ def test_star_graph(
     flattened_column_first: np.ndarray,
     flattened_row_first: np.ndarray,
 ):
-    for graph_format in GraphFormat:
-        verify_instantiated_graph(
-            constructor=lambda: StarGraph(graph_format, order, central_vertex),
-            edge_colors=2,
-            order=order,
-            bitmask_in=bitmask,
-            bitmask_out=bitmask,
-            adjacency_matrix=adjacency_matrix,
-            flattened_clockwise=flattened_column_first,
-            flattened_row_major=flattened_row_first,
-        )
+    verify_instantiated_graph(
+        constructor=lambda: StarGraph(ALL_FORMATS, order, central_vertex),
+        edge_colors=2,
+        order=order,
+        bitmask_in=bitmask,
+        bitmask_out=bitmask,
+        adjacency_matrix=adjacency_matrix,
+        flattened_clockwise=flattened_column_first,
+        flattened_row_major=flattened_row_first,
+    )
 
 
 @pytest.mark.parametrize(
@@ -252,17 +227,16 @@ def test_path_graph(
     flattened_column_first: np.ndarray,
     flattened_row_first: np.ndarray,
 ):
-    for graph_format in GraphFormat:
-        verify_instantiated_graph(
-            constructor=lambda: PathGraph(graph_format, order),
-            edge_colors=2,
-            order=order,
-            bitmask_in=bitmask,
-            bitmask_out=bitmask,
-            adjacency_matrix=adjacency_matrix,
-            flattened_clockwise=flattened_column_first,
-            flattened_row_major=flattened_row_first,
-        )
+    verify_instantiated_graph(
+        constructor=lambda: PathGraph(ALL_FORMATS, order),
+        edge_colors=2,
+        order=order,
+        bitmask_in=bitmask,
+        bitmask_out=bitmask,
+        adjacency_matrix=adjacency_matrix,
+        flattened_clockwise=flattened_column_first,
+        flattened_row_major=flattened_row_first,
+    )
 
 
 @pytest.mark.parametrize(
@@ -276,17 +250,16 @@ def test_cycle_graph(
     flattened_column_first: np.ndarray,
     flattened_row_first: np.ndarray,
 ):
-    for graph_format in GraphFormat:
-        verify_instantiated_graph(
-            constructor=lambda: CycleGraph(graph_format, order),
-            edge_colors=2,
-            order=order,
-            bitmask_out=bitmask,
-            bitmask_in=bitmask,
-            adjacency_matrix=adjacency_matrix,
-            flattened_clockwise=flattened_column_first,
-            flattened_row_major=flattened_row_first,
-        )
+    verify_instantiated_graph(
+        constructor=lambda: CycleGraph(ALL_FORMATS, order),
+        edge_colors=2,
+        order=order,
+        bitmask_out=bitmask,
+        bitmask_in=bitmask,
+        adjacency_matrix=adjacency_matrix,
+        flattened_clockwise=flattened_column_first,
+        flattened_row_major=flattened_row_first,
+    )
 
 
 @pytest.mark.parametrize(
@@ -300,17 +273,16 @@ def test_wheel_graph(
     flattened_column_first: np.ndarray,
     flattened_row_first: np.ndarray,
 ):
-    for graph_format in GraphFormat:
-        verify_instantiated_graph(
-            constructor=lambda: WheelGraph(graph_format, order),
-            edge_colors=2,
-            order=order,
-            bitmask_out=bitmask,
-            bitmask_in=bitmask,
-            adjacency_matrix=adjacency_matrix,
-            flattened_clockwise=flattened_column_first,
-            flattened_row_major=flattened_row_first,
-        )
+    verify_instantiated_graph(
+        constructor=lambda: WheelGraph(ALL_FORMATS, order),
+        edge_colors=2,
+        order=order,
+        bitmask_out=bitmask,
+        bitmask_in=bitmask,
+        adjacency_matrix=adjacency_matrix,
+        flattened_clockwise=flattened_column_first,
+        flattened_row_major=flattened_row_first,
+    )
 
 
 @pytest.mark.parametrize(
@@ -324,17 +296,16 @@ def test_book_graph(
     flattened_column_first: np.ndarray,
     flattened_row_first: np.ndarray,
 ):
-    for graph_format in GraphFormat:
-        verify_instantiated_graph(
-            constructor=lambda: BookGraph(graph_format, index),
-            edge_colors=2,
-            order=index + 2,
-            bitmask_out=bitmask,
-            bitmask_in=bitmask,
-            adjacency_matrix=adjacency_matrix,
-            flattened_clockwise=flattened_column_first,
-            flattened_row_major=flattened_row_first,
-        )
+    verify_instantiated_graph(
+        constructor=lambda: BookGraph(ALL_FORMATS, index),
+        edge_colors=2,
+        order=index + 2,
+        bitmask_out=bitmask,
+        bitmask_in=bitmask,
+        adjacency_matrix=adjacency_matrix,
+        flattened_clockwise=flattened_column_first,
+        flattened_row_major=flattened_row_first,
+    )
 
 
 @pytest.mark.parametrize(
@@ -348,14 +319,13 @@ def test_friendship_graph(
     flattened_column_first: np.ndarray,
     flattened_row_first: np.ndarray,
 ):
-    for graph_format in GraphFormat:
-        verify_instantiated_graph(
-            constructor=lambda: FriendshipGraph(graph_format, index),
-            edge_colors=2,
-            order=2 * index + 1,
-            bitmask_in=bitmask,
-            bitmask_out=bitmask,
-            adjacency_matrix=adjacency_matrix,
-            flattened_clockwise=flattened_column_first,
-            flattened_row_major=flattened_row_first,
-        )
+    verify_instantiated_graph(
+        constructor=lambda: FriendshipGraph(ALL_FORMATS, index),
+        edge_colors=2,
+        order=2 * index + 1,
+        bitmask_in=bitmask,
+        bitmask_out=bitmask,
+        adjacency_matrix=adjacency_matrix,
+        flattened_clockwise=flattened_column_first,
+        flattened_row_major=flattened_row_first,
+    )
