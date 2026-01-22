@@ -1,11 +1,10 @@
 [project]
 name = "rl-graph-theory"
 version = "0.1.0"
-packages = [{ include = "rl_graph_theory", from = "src" }]
 description = "This is a reinforcement learning framework that aims to facilitate research in extremal graph theory."
 authors = [ { name = "Ivan Damnjanović" } ]
 readme = "README.md"
-requires-python = ">=3.12,<3.14"
+requires-python = ">=3.11,<3.14"
 dependencies = [ "numpy>=2.3.4,<3.0" ]
 
 [project.optional-dependencies]
@@ -14,6 +13,9 @@ agents = [ "torch>=2.8,<3.0" ]
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+packages = [{ include = "rl_graph_theory", from = "src" }]
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.4.2"
