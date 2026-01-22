@@ -13,7 +13,7 @@ from rl_graph_theory.agents.random_action_mechanisms import ExponentialRandomAct
 
 
 def auto_laplacian_expression(d, m):
-    return np.sqrt(4 * m ** 3 / d)
+    return np.sqrt(m ** 2 + (3 * m ** 3) / d)
 
 
 def graph_invariant(graph_batch: Graph):
@@ -85,7 +85,7 @@ def main(graph_order: int):
             solution = dcem.best_graph.adjacency_matrix_colors
             
             print(solution)
-            with open(f"examples/auto_laplacian_15_result_{graph_order}.txt", "w") as opened_file:
+            with open(f"examples/auto_laplacian_29_result_{graph_order}.txt", "w") as opened_file:
                 opened_file.write(np.array2string(solution, separator=", "))
 
             break

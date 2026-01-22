@@ -13,7 +13,7 @@ from rl_graph_theory.agents.random_action_mechanisms import ExponentialRandomAct
 
 
 def auto_laplacian_expression(d, m):
-    return np.sqrt(4 * m ** 3 / d)
+    return np.sqrt((3 * d ** 2 + 5 * d * m) / 2)
 
 
 def graph_invariant(graph_batch: Graph):
@@ -30,13 +30,23 @@ def graph_invariant(graph_batch: Graph):
     i = np.arange(adj_batch.shape[1])
     lap_batch[:, i, i] += degree_batch
 
-    spectrum_batch = np.linalg.eigvalsh(lap_batch)
-    mu_batch = spectrum_batch[:, -1]
+    slap_batch = adj_batch
+    i = np.arange(adj_batch.shape[1])
+    slap_batch[:, i, i] += degree_batch
+
+    lspectrum_batch = np.linalg.eigvalsh(lap_batch)
+    mu_batch = lspectrum_batch[:, -1]
+
+    qspectrum_batch = np.linalg.eigvalsh(slap_batch)
+    rho_batch = qspectrum_batch[:, -1]
 
     temp = np.max(auto_laplacian_expression(d=degree_batch_1, m=and_batch_1), axis=1)
-    result = mu_batch - temp
+    result = rho_batch - temp
 
-    result[spectrum_batch[:, 1] < 0.15] = -1000.0
+    reg_batch = np.all(degree_batch == degree_batch[:, [0]], axis=1)
+    result -= reg_batch.astype(np.float32) * 10.0
+
+    result[lspectrum_batch[:, 1] < 0.15] = -1000.0
     result[np.min(degree_batch, axis=1) < 0.5] = -1000.0
     result = result.astype(np.float32)
 
@@ -61,7 +71,7 @@ def main(graph_order: int):
             graph_order=graph_order,
         ),
         policy_network=policy_network,
-        optimizer=optim.Adam(policy_network.parameters(), lr=0.003),
+        optimizer=optim.Adam(policy_network.parameters(), lr=0.001),
         loss_function=nn.CrossEntropyLoss(),
         new_candidates_count=200,
         elite_count=20,
@@ -85,11 +95,11 @@ def main(graph_order: int):
             solution = dcem.best_graph.adjacency_matrix_colors
             
             print(solution)
-            with open(f"examples/auto_laplacian_15_result_{graph_order}.txt", "w") as opened_file:
+            with open(f"examples/auto_laplacian_27_result_{graph_order}.txt", "w") as opened_file:
                 opened_file.write(np.array2string(solution, separator=", "))
 
             break
 
 
 if __name__ == "__main__":
-    main(graph_order=14)
+    main(graph_order=18)
