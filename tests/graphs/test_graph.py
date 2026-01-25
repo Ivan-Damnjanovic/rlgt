@@ -1,377 +1,234 @@
-"""
-This file is used for testing the functionalities from the `rl_graph_theory.graphs.graph` module.
-"""
-
-import numpy as np
 import pytest
+from typing import Any
+import numpy as np
 
 from rl_graph_theory.graphs.graph import Graph
-from rl_graph_theory.graphs.graph_batch import GraphBatch
-from rl_graph_theory.graphs.graph_formats import BitmaskType, FlattenedOrdering
 
-from .graph_test_cases import (
-    GRAPH_BATCH_TEST_CASES_BASIC,
-    GRAPH_BATCH_TEST_CASES_DIRECTED,
-    GRAPH_BATCH_TEST_CASES_DIRECTED_LOOPS,
-    GRAPH_BATCH_TEST_CASES_LARGE,
-    GRAPH_BATCH_TEST_CASES_LOOPS,
-    GRAPH_TEST_CASES_BASIC,
-    GRAPH_TEST_CASES_DIRECTED,
-    GRAPH_TEST_CASES_DIRECTED_LOOPS,
-    GRAPH_TEST_CASES_LARGE,
-    GRAPH_TEST_CASES_LOOPS,
-)
-from .utils import verify_instantiated_graph, verify_instantiated_graph_batch
+from .graph_test_cases import TEST_CASES_CONSTRUCTOR
 
 
 @pytest.mark.parametrize(
-    "edge_colors, order, bitmask, adjacency_matrix, flattened_clockwise, flattened_row_major",
-    GRAPH_TEST_CASES_LARGE,
+    "graph_order, edge_colors, is_directed, allow_loops, kwarg",
+    TEST_CASES_CONSTRUCTOR,
 )
-def test_graph_large(
+def test_constructor(
+    graph_order: int,
     edge_colors: int,
-    order: int,
-    bitmask: np.ndarray,
-    adjacency_matrix: np.ndarray,
-    flattened_clockwise: np.ndarray,
-    flattened_row_major: np.ndarray,
+    is_directed: bool,
+    allow_loops: bool,
+    kwarg: dict[str, np.ndarray],
 ):
-    verify_all(
-        edge_colors,
-        order,
-        bitmask,
-        bitmask,
-        adjacency_matrix,
-        flattened_clockwise,
-        flattened_row_major,
-    )
+    g = Graph(edge_colors=edge_colors, is_directed=is_directed, allow_loops=allow_loops, **kwarg)
+    assert g.graph_order == graph_order
 
 
 @pytest.mark.parametrize(
-    "edge_colors, order, bitmask, adjacency_matrix, flattened_clockwise, flattened_row_major",
-    GRAPH_TEST_CASES_BASIC,
-)
-def test_graph_basic(
-    edge_colors: int,
-    order: int,
-    bitmask: np.ndarray,
-    adjacency_matrix: np.ndarray,
-    flattened_clockwise: np.ndarray,
-    flattened_row_major: np.ndarray,
-):
-    verify_all(
-        edge_colors,
-        order,
-        bitmask,
-        bitmask,
-        adjacency_matrix,
-        flattened_clockwise,
-        flattened_row_major,
-    )
-
-
-@pytest.mark.parametrize(
-    "edge_colors, order, bitmask, adjacency_matrix, flattened_clockwise, flattened_row_major",
-    GRAPH_TEST_CASES_LOOPS,
-)
-def test_graph_loops(
-    edge_colors: int,
-    order: int,
-    bitmask: np.ndarray,
-    adjacency_matrix: np.ndarray,
-    flattened_clockwise: np.ndarray,
-    flattened_row_major: np.ndarray,
-):
-    verify_all(
-        edge_colors,
-        order,
-        bitmask,
-        bitmask,
-        adjacency_matrix,
-        flattened_clockwise,
-        flattened_row_major,
-        allow_loops=True,
-    )
-
-
-@pytest.mark.parametrize(
-    "edge_colors, order, bitmask_in, bitmask_out, adjacency_matrix, flattened_clockwise, flattened_row_major",
-    GRAPH_TEST_CASES_DIRECTED,
-)
-def test_graph_directed(
-    edge_colors: int,
-    order: int,
-    bitmask_in: np.ndarray,
-    bitmask_out: np.ndarray,
-    adjacency_matrix: np.ndarray,
-    flattened_clockwise: np.ndarray,
-    flattened_row_major: np.ndarray,
-):
-    verify_all(
-        edge_colors,
-        order,
-        bitmask_in,
-        bitmask_out,
-        adjacency_matrix,
-        flattened_clockwise,
-        flattened_row_major,
-        is_directed=True,
-    )
-
-
-@pytest.mark.parametrize(
-    "edge_colors, order, bitmask_in, bitmask_out, adjacency_matrix, flattened_clockwise, flattened_row_major",
-    GRAPH_TEST_CASES_DIRECTED_LOOPS,
-)
-def test_graph_directed_loops(
-    edge_colors: int,
-    order: int,
-    bitmask_in: np.ndarray,
-    bitmask_out: np.ndarray,
-    adjacency_matrix: np.ndarray,
-    flattened_clockwise: np.ndarray,
-    flattened_row_major: np.ndarray,
-):
-    verify_all(
-        edge_colors,
-        order,
-        bitmask_in,
-        bitmask_out,
-        adjacency_matrix,
-        flattened_clockwise,
-        flattened_row_major,
-        is_directed=True,
-        allow_loops=True,
-    )
-
-
-def verify_all(
-    edge_colors: int,
-    order: int,
-    bitmask_in: np.ndarray,
-    bitmask_out: np.ndarray,
-    adjacency_matrix: np.ndarray,
-    flattened_clockwise: np.ndarray,
-    flattened_row_major: np.ndarray,
-    is_directed: bool = False,
-    allow_loops: bool = False,
-):
-    cargs = [edge_colors, is_directed, allow_loops]
-    args = [
-        edge_colors,
-        order,
-        bitmask_in,
-        bitmask_out,
-        adjacency_matrix,
-        flattened_clockwise,
-        flattened_row_major,
-        is_directed,
-        allow_loops,
-    ]
-    verify_instantiated_graph(
-        lambda: Graph.from_bitmask(bitmask_out, BitmaskType.OUT_NEIGHBORS, *cargs),
-        *args,
-    )
-    verify_instantiated_graph(
-        lambda: Graph.from_bitmask(bitmask_in, BitmaskType.IN_NEIGHBORS, *cargs),
-        *args,
-    )
-    verify_instantiated_graph(
-        lambda: Graph.from_adjacency_matrix(adjacency_matrix, *cargs),
-        *args,
-    )
-    verify_instantiated_graph(
-        lambda: Graph.from_flattened(flattened_clockwise, FlattenedOrdering.CLOCKWISE, *cargs),
-        *args,
-    )
-    verify_instantiated_graph(
-        lambda: Graph.from_flattened(flattened_row_major, FlattenedOrdering.ROW_MAJOR, *cargs),
-        *args,
-    )
-
-
-@pytest.mark.parametrize(
-    "batch_size, edge_colors, order, bitmask, adjacency_matrix, "
-    "flattened_clockwise, flattened_row_major",
-    GRAPH_BATCH_TEST_CASES_BASIC,
-)
-def test_graph_batch_basic(
-    batch_size: int,
-    edge_colors: int,
-    order: int,
-    bitmask: np.ndarray,
-    adjacency_matrix: np.ndarray,
-    flattened_clockwise: np.ndarray,
-    flattened_row_major: np.ndarray,
-):
-    verify_all_batch(
-        batch_size,
-        edge_colors,
-        order,
-        bitmask,
-        bitmask,
-        adjacency_matrix,
-        flattened_clockwise,
-        flattened_row_major,
-    )
-
-
-@pytest.mark.parametrize(
-    "batch_size, edge_colors, order, bitmask, adjacency_matrix, "
-    "flattened_clockwise, flattened_row_major",
-    GRAPH_BATCH_TEST_CASES_LOOPS,
-)
-def test_graph_batch_loops(
-    batch_size: int,
-    edge_colors: int,
-    order: int,
-    bitmask: np.ndarray,
-    adjacency_matrix: np.ndarray,
-    flattened_clockwise: np.ndarray,
-    flattened_row_major: np.ndarray,
-):
-    verify_all_batch(
-        batch_size,
-        edge_colors,
-        order,
-        bitmask,
-        bitmask,
-        adjacency_matrix,
-        flattened_clockwise,
-        flattened_row_major,
-        allow_loops=True,
-    )
-
-
-@pytest.mark.parametrize(
-    "batch_size, edge_colors, order, bitmask_in, bitmask_out, adjacency_matrix, "
-    "flattened_clockwise, flattened_row_major",
-    GRAPH_BATCH_TEST_CASES_DIRECTED,
-)
-def test_graph_batch_directed(
-    batch_size: int,
-    edge_colors: int,
-    order: int,
-    bitmask_in: np.ndarray,
-    bitmask_out: np.ndarray,
-    adjacency_matrix: np.ndarray,
-    flattened_clockwise: np.ndarray,
-    flattened_row_major: np.ndarray,
-):
-    verify_all_batch(
-        batch_size,
-        edge_colors,
-        order,
-        bitmask_in,
-        bitmask_out,
-        adjacency_matrix,
-        flattened_clockwise,
-        flattened_row_major,
-        is_directed=True,
-    )
-
-
-@pytest.mark.parametrize(
-    "batch_size, edge_colors, order, bitmask_in, bitmask_out, adjacency_matrix, "
-    "flattened_clockwise, flattened_row_major",
-    GRAPH_BATCH_TEST_CASES_DIRECTED_LOOPS,
-)
-def test_graph_batch_directed_loops(
-    batch_size: int,
-    edge_colors: int,
-    order: int,
-    bitmask_in: np.ndarray,
-    bitmask_out: np.ndarray,
-    adjacency_matrix: np.ndarray,
-    flattened_clockwise: np.ndarray,
-    flattened_row_major: np.ndarray,
-):
-    verify_all_batch(
-        batch_size,
-        edge_colors,
-        order,
-        bitmask_in,
-        bitmask_out,
-        adjacency_matrix,
-        flattened_clockwise,
-        flattened_row_major,
-        is_directed=True,
-        allow_loops=True,
-    )
-
-
-@pytest.mark.parametrize(
-    "batch_size, edge_colors, order, bitmask, adjacency_matrix, "
-    "flattened_clockwise, flattened_row_major",
-    GRAPH_BATCH_TEST_CASES_LARGE,
-)
-def test_graph_batch_large(
-    batch_size: int,
-    edge_colors: int,
-    order: int,
-    bitmask: np.ndarray,
-    adjacency_matrix: np.ndarray,
-    flattened_clockwise: np.ndarray,
-    flattened_row_major: np.ndarray,
-):
-    verify_all_batch(
-        batch_size,
-        edge_colors,
-        order,
-        bitmask,
-        bitmask,
-        adjacency_matrix,
-        flattened_clockwise,
-        flattened_row_major,
-    )
-
-
-def verify_all_batch(
-    batch_size: int,
-    edge_colors: int,
-    order: int,
-    bitmask_in: np.ndarray,
-    bitmask_out: np.ndarray,
-    adjacency_matrix: np.ndarray,
-    flattened_clockwise: np.ndarray,
-    flattened_row_major: np.ndarray,
-    is_directed: bool = False,
-    allow_loops: bool = False,
-):
-    cargs = [edge_colors, is_directed, allow_loops]
-    args = [
-        batch_size,
-        edge_colors,
-        order,
-        bitmask_in,
-        bitmask_out,
-        adjacency_matrix,
-        flattened_clockwise,
-        flattened_row_major,
-        is_directed,
-        allow_loops,
-    ]
-    verify_instantiated_graph_batch(
-        lambda: GraphBatch.from_bitmask(bitmask_out, BitmaskType.OUT_NEIGHBORS, *cargs),
-        *args,
-    )
-    verify_instantiated_graph_batch(
-        lambda: GraphBatch.from_bitmask(bitmask_in, BitmaskType.IN_NEIGHBORS, *cargs),
-        *args,
-    )
-    verify_instantiated_graph_batch(
-        lambda: GraphBatch.from_adjacency_matrix(adjacency_matrix, *cargs),
-        *args,
-    )
-    verify_instantiated_graph_batch(
-        lambda: GraphBatch.from_flattened(
-            flattened_clockwise, FlattenedOrdering.CLOCKWISE, *cargs
+    "kwargs, result",
+    [
+        (
+            {"bitmask_out": np.asarray([[2, 1]], np.uint8)},
+            np.asarray([[2, 1]], np.uint8),
         ),
-        *args,
-    )
-    verify_instantiated_graph_batch(
-        lambda: GraphBatch.from_flattened(
-            flattened_row_major, FlattenedOrdering.ROW_MAJOR, *cargs
+        (
+            {"adjacency_matrix_colors": np.asarray([[0, 1], [1, 0]], np.uint8)},
+            np.asarray([[2, 1]], np.uint8),
         ),
-        *args,
-    )
+    ],
+)
+def test_bitmask_out(kwargs: dict[str, Any], result: np.ndarray):
+    graph = Graph(**kwargs)
+    np.testing.assert_array_equal(graph.bitmask_out, result)
+
+
+@pytest.mark.parametrize(
+    "kwargs, result",
+    [
+        (
+            {"bitmask_in": np.asarray([[2, 1]], np.uint8)},
+            np.asarray([[2, 1]], np.uint8),
+        ),
+        (
+            {"adjacency_matrix_colors": np.asarray([[0, 1], [1, 0]], np.uint8)},
+            np.asarray([[2, 1]], np.uint8),
+        ),
+    ],
+)
+def test_bitmask_in(kwargs: dict[str, Any], result: np.ndarray):
+    graph = Graph(**kwargs)
+    np.testing.assert_array_equal(graph.bitmask_in, result)
+
+
+@pytest.mark.parametrize(
+    "kwargs, result",
+    [
+        (
+            {"adjacency_matrix_colors": np.asarray([[0, 1], [1, 0]], np.uint8)},
+            np.asarray([[0, 1], [1, 0]], np.uint8),
+        ),
+        (
+            {"adjacency_matrix_binary": np.asarray([[[0, 1], [1, 0]]], np.uint8)},
+            np.asarray([[0, 1], [1, 0]], np.uint8),
+        ),
+        (
+            {"flattened_row_major_colors": np.asarray([1], np.uint8)},
+            np.asarray([[0, 1], [1, 0]], np.uint8),
+        ),
+        (
+            {"flattened_clockwise_colors": np.asarray([1], np.uint8)},
+            np.asarray([[0, 1], [1, 0]], np.uint8),
+        ),
+        (
+            {"flattened_row_major_binary": np.asarray([[1]], np.uint8)},
+            np.asarray([[0, 1], [1, 0]], np.uint8),
+        ),
+        (
+            {"flattened_clockwise_binary": np.asarray([[1]], np.uint8)},
+            np.asarray([[0, 1], [1, 0]], np.uint8),
+        ),
+    ],
+)
+def test_adjacency_matrix_colors(kwargs: dict[str, Any], result: np.ndarray):
+    graph = Graph(**kwargs)
+    np.testing.assert_array_equal(graph.adjacency_matrix_colors, result)
+
+
+@pytest.mark.parametrize(
+    "kwargs, result",
+    [
+        (
+            {"adjacency_matrix_binary": np.asarray([[[0, 1], [1, 0]]], np.uint8)},
+            np.asarray([[[0, 1], [1, 0]]], np.uint8),
+        ),
+        (
+            {"bitmask_out": np.asarray([[2, 1]], np.uint8)},
+            np.asarray([[[0, 1], [1, 0]]], np.uint8),
+        ),
+        (
+            {"bitmask_in": np.asarray([[2, 1]], np.uint8), "is_directed": True},
+            np.asarray([[[0, 1], [1, 0]]], np.uint8),
+        ),
+        (
+            {"flattened_row_major_colors": np.asarray([1], np.uint8)},
+            np.asarray([[[0, 1], [1, 0]]], np.uint8),
+        ),
+        (
+            {"flattened_clockwise_colors": np.asarray([1], np.uint8)},
+            np.asarray([[[0, 1], [1, 0]]], np.uint8),
+        ),
+        (
+            {"flattened_row_major_binary": np.asarray([[1]], np.uint8)},
+            np.asarray([[[0, 1], [1, 0]]], np.uint8),
+        ),
+        (
+            {"flattened_clockwise_binary": np.asarray([[1]], np.uint8)},
+            np.asarray([[[0, 1], [1, 0]]], np.uint8),
+        ),
+    ],
+)
+def test_adjacency_matrix_binary(kwargs: dict[str, Any], result: np.ndarray):
+    graph = Graph(**kwargs)
+    np.testing.assert_array_equal(graph.adjacency_matrix_binary, result)
+
+
+@pytest.mark.parametrize(
+    "kwargs, result",
+    [
+        (
+            {"flattened_row_major_colors": np.asarray([1], np.uint8)},
+            np.asarray([1], np.uint8),
+        ),
+        (
+            {"flattened_row_major_binary": np.asarray([[1]], np.uint8)},
+            np.asarray([1], np.uint8),
+        ),
+        (
+            {"adjacency_matrix_binary": np.asarray([[[0, 1], [1, 0]]], np.uint8)},
+            np.asarray([1], np.uint8),
+        ),
+    ],
+)
+def test_flattened_row_major_colors(kwargs: dict[str, Any], result: np.ndarray):
+    graph = Graph(**kwargs)
+    np.testing.assert_array_equal(graph.flattened_row_major_colors, result)
+
+
+@pytest.mark.parametrize(
+    "kwargs, result",
+    [
+        (
+            {"flattened_clockwise_colors": np.asarray([1], np.uint8)},
+            np.asarray([1], np.uint8),
+        ),
+        (
+            {"flattened_clockwise_binary": np.asarray([[1]], np.uint8)},
+            np.asarray([1], np.uint8),
+        ),
+        (
+            {"adjacency_matrix_binary": np.asarray([[[0, 1], [1, 0]]], np.uint8)},
+            np.asarray([1], np.uint8),
+        ),
+    ],
+)
+def test_flattened_clockwise_colors(kwargs: dict[str, Any], result: np.ndarray):
+    graph = Graph(**kwargs)
+    np.testing.assert_array_equal(graph.flattened_clockwise_colors, result)
+
+
+@pytest.mark.parametrize(
+    "kwargs, result",
+    [
+        (
+            {"flattened_row_major_binary": np.asarray([[1]], np.uint8)},
+            np.asarray([[1]], np.uint8),
+        ),
+        (
+            {"flattened_row_major_colors": np.asarray([1], np.uint8)},
+            np.asarray([[1]], np.uint8),
+        ),
+        (
+            {"flattened_clockwise_colors": np.asarray([1], np.uint8)},
+            np.asarray([[1]], np.uint8),
+        ),
+        (
+            {"adjacency_matrix_colors": np.asarray([[0, 1], [1, 0]], np.uint8)},
+            np.asarray([[1]], np.uint8),
+        ),
+        (
+            {"adjacency_matrix_binary": np.asarray([[[0, 1], [1, 0]]], np.uint8)},
+            np.asarray([[1]], np.uint8),
+        ),
+    ],
+)
+def test_flattened_row_major_binary(kwargs: dict[str, Any], result: np.ndarray):
+    graph = Graph(**kwargs)
+    np.testing.assert_array_equal(graph.flattened_row_major_binary, result)
+
+
+@pytest.mark.parametrize(
+    "kwargs, result",
+    [
+        (
+            {"flattened_clockwise_binary": np.asarray([[1]], np.uint8)},
+            np.asarray([[1]], np.uint8),
+        ),
+        (
+            {"flattened_row_major_colors": np.asarray([1], np.uint8)},
+            np.asarray([[1]], np.uint8),
+        ),
+        (
+            {"flattened_clockwise_colors": np.asarray([1], np.uint8)},
+            np.asarray([[1]], np.uint8),
+        ),
+        (
+            {"adjacency_matrix_colors": np.asarray([[0, 1], [1, 0]], np.uint8)},
+            np.asarray([[1]], np.uint8),
+        ),
+        (
+            {"adjacency_matrix_binary": np.asarray([[[0, 1], [1, 0]]], np.uint8)},
+            np.asarray([[1]], np.uint8),
+        ),
+    ],
+)
+def test_flattened_clockwise_binary(kwargs: dict[str, Any], result: np.ndarray):
+    graph = Graph(**kwargs)
+    np.testing.assert_array_equal(graph.flattened_clockwise_binary, result)

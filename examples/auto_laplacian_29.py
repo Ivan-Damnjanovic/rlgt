@@ -13,7 +13,7 @@ from rl_graph_theory.agents.random_action_mechanisms import ExponentialRandomAct
 
 
 def auto_laplacian_expression(d, m):
-    return (4 * m ** 2) / (m + d)
+    return np.sqrt(m ** 2 + (3 * m ** 3) / d)
 
 
 def graph_invariant(graph_batch: Graph):
@@ -45,17 +45,17 @@ def graph_invariant(graph_batch: Graph):
 
 def main(graph_order: int):
     policy_network = nn.Sequential(
-        nn.Linear(graph_order * (graph_order - 1) // 2, 72),
+        nn.Linear(graph_order * (graph_order - 1), 72),
         nn.ReLU(),
         nn.Dropout(0.2),
         nn.Linear(72, 12),
         nn.ReLU(),
         nn.Dropout(0.2),
-        nn.Linear(12, graph_order * (graph_order - 1)),
+        nn.Linear(12, 2),
     )
 
     dcem = DeepCrossEntropyAgent(
-        environment=GlobalSetEnvironment(
+        environment=LinearFlipEnvironment(
             reward_type=RewardType.SPARSE,
             reward_function=graph_invariant,
             graph_order=graph_order,
@@ -70,7 +70,7 @@ def main(graph_order: int):
             initial_random_action_probability=0.005,
             waiting_period=10,
             multiplicative_factor=1.1,
-            maximum_random_action_probability=0.300,
+            maximum_random_action_probability=0.025,
         ),
     )
 
@@ -85,11 +85,11 @@ def main(graph_order: int):
             solution = dcem.best_graph.adjacency_matrix_colors
             
             print(solution)
-            with open(f"examples/auto_laplacian_31_result_{graph_order}.txt", "w") as opened_file:
+            with open(f"examples/auto_laplacian_29_result_{graph_order}.txt", "w") as opened_file:
                 opened_file.write(np.array2string(solution, separator=", "))
 
             break
 
 
 if __name__ == "__main__":
-    main(graph_order=12)
+    main(graph_order=14)

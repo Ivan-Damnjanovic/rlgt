@@ -1294,7 +1294,7 @@ files = [
     {file = "setuptools-80.9.0-py3-none-any.whl", hash = "sha256:062d34222ad13e0cc312a4c02d73f059e86a4acbfbdea8f8f76b28c99f306922"},
     {file = "setuptools-80.9.0.tar.gz", hash = "sha256:f36b47402ecde768dbfafc46e8e4207b4360c654f1f3bb84475f0a28628fb19c"},
 ]
-markers = {main = "extra == \"agents\""}
+markers = {main = "extra == \"agents\" and python_version >= \"3.12\""}
 
 [package.extras]
 check = ["pytest-checkdocs (>=2.4)", "pytest-ruff (>=0.2.1) ; sys_platform != \"cygwin\"", "ruff (>=0.8.0) ; sys_platform != \"cygwin\""]
@@ -1542,5 +1542,5 @@ agents = ["torch"]
 
 [metadata]
 lock-version = "2.1"
-python-versions = ">=3.12,<3.14"
-content-hash = "0127568291bdcbb8a1f9558bde5ca37972864d062afde3bd195187e8f96b9e53"
+python-versions = ">=3.11,<3.14"
+content-hash = "3bef32904b3f84443d36c6425515b38f093567b3df46f1a1b54968f7fdb5ce72"
