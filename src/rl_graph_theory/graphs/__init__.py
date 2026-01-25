@@ -7,36 +7,36 @@ auxiliary functions and various classes that are used to construct $k$-edge-colo
 graphs with some particular structure.
 """
 
-# from .graph import Graph
-# from .graph_formats import (
-#     BitmaskType,
-#     ColorRepresentation,
-#     FlattenedOrdering,
-#     GraphFormat,
-# )
-# from .special_graphs import (
-#     AlmostCompleteGraph,
-#     BookGraph,
-#     CompleteBipartiteGraph,
-#     CompleteGraph,
-#     CompleteKPartiteGraph,
-#     CycleGraph,
-#     EmptyGraph,
-#     FriendshipGraph,
-#     MonochromaticGraph,
-#     PathGraph,
-#     StarGraph,
-#     WheelGraph,
-# )
-# from .utils import (
-#     binary_slices_to_color_numbers,
-#     color_numbers_to_binary_slices,
-#     compute_edge_indices,
-#     flatten_from_adjacency_matrix,
-#     flattened_length_to_graph_order,
-#     graph_order_to_flattened_length,
-#     unflatten_to_adjacency_matrix,
-# )
+from .graph import Graph
+from .graph_formats import (
+    BitmaskType,
+    ColorRepresentation,
+    FlattenedOrdering,
+    GraphFormat,
+)
+from .special_graphs import (
+    AlmostCompleteGraph,
+    BookGraph,
+    CompleteBipartiteGraph,
+    CompleteGraph,
+    CompleteKPartiteGraph,
+    CycleGraph,
+    EmptyGraph,
+    FriendshipGraph,
+    MonochromaticGraph,
+    PathGraph,
+    StarGraph,
+    WheelGraph,
+)
+from .utils import (
+    binary_slices_to_color_numbers,
+    color_numbers_to_binary_slices,
+    compute_edge_indices,
+    flatten_from_adjacency_matrix,
+    flattened_length_to_graph_order,
+    graph_order_to_flattened_length,
+    unflatten_to_adjacency_matrix,
+)
 
 
 __all__ = [

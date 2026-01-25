@@ -5,7 +5,7 @@ import torch.optim as optim
 from rl_graph_theory.graphs.graph import Graph
 from rl_graph_theory.graphs.graph_formats import FlattenedOrdering
 from rl_graph_theory.agents.deep_cross_entropy_agent import DeepCrossEntropyAgent
-from rl_graph_theory.environments.linear_environments import LinearBuildEnvironment, LinearFlipEnvironment
+from rl_graph_theory.environments.linear_environments import LinearBuildEnvironment, LinearFlipEnvironment, LinearSetEnvironment
 from rl_graph_theory.environments.local_environments import LocalSetEnvironment
 from rl_graph_theory.environments.global_environments import GlobalSetEnvironment
 from rl_graph_theory.environments.graph_environment import RewardType

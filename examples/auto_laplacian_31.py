@@ -45,17 +45,17 @@ def graph_invariant(graph_batch: Graph):
 
 def main(graph_order: int):
     policy_network = nn.Sequential(
-        nn.Linear(graph_order * (graph_order - 1), 72),
+        nn.Linear(graph_order * (graph_order - 1) // 2, 72),
         nn.ReLU(),
         nn.Dropout(0.2),
         nn.Linear(72, 12),
         nn.ReLU(),
         nn.Dropout(0.2),
-        nn.Linear(12, 2),
+        nn.Linear(12, graph_order * (graph_order - 1)),
     )
 
     dcem = DeepCrossEntropyAgent(
-        environment=LinearBuildEnvironment(
+        environment=GlobalSetEnvironment(
             reward_type=RewardType.SPARSE,
             reward_function=graph_invariant,
             graph_order=graph_order,

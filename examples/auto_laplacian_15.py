@@ -55,7 +55,7 @@ def main(graph_order: int):
     )
 
     dcem = DeepCrossEntropyAgent(
-        environment=LinearBuildEnvironment(
+        environment=LinearFlipEnvironment(
             reward_type=RewardType.SPARSE,
             reward_function=graph_invariant,
             graph_order=graph_order,
