@@ -162,89 +162,110 @@ class PPOAgent(GraphAgent):
     
     def step(self) -> None:
         """
-        Perform one training step: collect batch_size episodes and update policy.
+        Perform one training step: collect batch_size episodes in parallel and update policy.
+        Episodes are collected in parallel for speed, but episode boundaries are tracked
+        to ensure correct per-episode returns calculation.
         """
-        episode_scores = []
-
         # Get the random action probability from the random action mechanism
         random_action_probability = self._random_action_mechanism.random_action_probability
         
-        # Collect batch_size episodes
-        for _ in range(self._batch_size):
-            state_batch, status = self._environment.reset_batch(batch_size=1)
-            state = state_batch[0]
-            episode_reward = 0
+        # Collect batch_size episodes IN PARALLEL
+        # Track episode boundaries for correct returns calculation
+        state_batch, status = self._environment.reset_batch(batch_size=self._batch_size)
+        episode_rewards = np.zeros(self._batch_size, dtype=np.float32)
+        episode_active = np.ones(self._batch_size, dtype=bool)  # Track which episodes are still running
+        
+        # Store per-episode trajectories to calculate returns correctly
+        episode_trajectories = [[] for _ in range(self._batch_size)]
+        
+        while status == EpisodeStatus.IN_PROGRESS:
+            # Select actions for all active episodes
+            state_batch_torch = torch.from_numpy(state_batch.astype(np.float32)).to(self._device)
             
-            while status == EpisodeStatus.IN_PROGRESS:
-                # Select action
-                state_torch = torch.from_numpy(state.astype(np.float32)).unsqueeze(0).to(self._device)
+            with torch.no_grad():
+                logits_batch = self._policy_network(state_batch_torch)
+                values_batch = self._value_network(state_batch_torch)
                 
-                with torch.no_grad():
-                    logits = self._policy_network(state_torch)
-                    value = self._value_network(state_torch)
-                    
-                    # Apply action mask if available
-                    action_mask = self._environment.action_mask
-                    if action_mask is not None:
-                        action_mask_torch = torch.from_numpy(action_mask).to(self._device)
-                        logits = logits.masked_fill(~action_mask_torch, float("-inf"))
-                    
-                    dist = Categorical(logits=logits)
-                    action = dist.sample()
-                    log_prob = dist.log_prob(action)
+                # Apply action mask if available
+                action_mask = self._environment.action_mask
+                if action_mask is not None:
+                    action_mask_torch = torch.from_numpy(action_mask).to(self._device)
+                    logits_batch = logits_batch.masked_fill(~action_mask_torch, float("-inf"))
                 
-                action_value = action.item()
+                dist = Categorical(logits=logits_batch)
+                actions = dist.sample()
+                log_probs = dist.log_prob(actions)
+            
+            action_batch = actions.cpu().numpy()
 
-                # Use the random action probability to decide whether the sampled action should be
-                # replaced by a random action.
-                if self._rng.random() < random_action_probability:
-                    # Select a random action among the actions available for execution using
-                    # the uniform probability distribution.
-                    if action_mask is not None:
-                        probabilities = action_mask[0].astype(np.float32)
-                        probabilities /= probabilities.sum()
-                        action_value = self._rng.choice(len(probabilities), p=probabilities)
-                    else:
-                        action_value = self._rng.integers(
-                            low=0,
-                            high=self._environment.action_number,
-                            dtype=np.int32,
-                        )
-                
-                # Store transition
-                self._buffer_states.append(state_torch.squeeze(0))
-                self._buffer_actions.append(action_value)
-                self._buffer_log_probs.append(log_prob.item())
-                self._buffer_values.append(value.item())
-                
-                # Take action in environment
-                next_state_batch, reward_batch, status = self._environment.step_batch(
-                    np.array([action_value], dtype=np.int32)
-                )
-                
-                # Handle both scalar and array rewards
-                reward = reward_batch[0] if isinstance(reward_batch, np.ndarray) else reward_batch
-                episode_reward += reward
-                
-                self._buffer_rewards.append(reward)
-                self._buffer_dones.append(status != EpisodeStatus.IN_PROGRESS)
-                
-                state = next_state_batch[0]
+            # Apply random actions with configured probability
+            random_mask = self._rng.random(size=self._batch_size) < random_action_probability
+            if np.any(random_mask):
+                if action_mask is not None:
+                    probabilities_batch = action_mask[random_mask].astype(np.float32)
+                    probabilities_batch /= probabilities_batch.sum(axis=1, keepdims=True)
+                    action_batch[random_mask] = np.array(
+                        [self._rng.choice(probabilities_batch.shape[1], p=probs) 
+                         for probs in probabilities_batch],
+                        dtype=np.int32,
+                    )
+                else:
+                    action_batch[random_mask] = self._rng.integers(
+                        low=0,
+                        high=self._environment.action_number,
+                        size=np.count_nonzero(random_mask),
+                        dtype=np.int32,
+                    )
             
-            episode_scores.append(episode_reward)
+            # Store transitions for each episode separately
+            for i in range(self._batch_size):
+                episode_trajectories[i].append({
+                    'state': state_batch_torch[i],
+                    'action': action_batch[i],
+                    'log_prob': log_probs[i].item(),
+                    'value': values_batch[i].item(),
+                })
+            
+            # Take actions in environment
+            next_state_batch, reward_batch, status = self._environment.step_batch(action_batch)
+            
+            # Update episode rewards and store rewards/dones per episode
+            for i in range(self._batch_size):
+                episode_trajectories[i][-1]['reward'] = reward_batch[i]
+                episode_trajectories[i][-1]['done'] = (status != EpisodeStatus.IN_PROGRESS)
+                episode_rewards[i] += reward_batch[i]
+            
+            state_batch = next_state_batch
+        
+        # Now flatten all episode trajectories into the buffer, maintaining episode boundaries
+        for ep_idx, trajectory in enumerate(episode_trajectories):
+            for transition in trajectory:
+                self._buffer_states.append(transition['state'])
+                self._buffer_actions.append(transition['action'])
+                self._buffer_log_probs.append(transition['log_prob'])
+                self._buffer_values.append(transition['value'])
+                self._buffer_rewards.append(transition['reward'])
+                self._buffer_dones.append(transition['done'])
         
         # Update policy using collected experiences
         self._update_policy()
         
         # Track best score and update random action mechanism
-        max_episode_score = max(episode_scores)
+        max_episode_score = float(max(episode_rewards))
         previous_best_score = self._best_score
         if max_episode_score > self._best_score:
             self._best_score = max_episode_score
         
-        self._random_action_mechanism.step(
-            previous_best_score=previous_best_score, current_best_score=self._best_score
-        )
+        # Call random action mechanism step - try both parameter names for compatibility
+        try:
+            self._random_action_mechanism.step(
+                previous_best_score=previous_best_score, current_best_score=self._best_score
+            )
+        except TypeError:
+            # Fallback for ExponentialRandomActionMechanism which uses new_best_score
+            self._random_action_mechanism.step(
+                previous_best_score=previous_best_score, new_best_score=self._best_score
+            )
 
         # Increment the number of executed iterations of the learning process.
         self._step_count += 1
@@ -263,8 +284,11 @@ class PPOAgent(GraphAgent):
         returns = self._calculate_returns()
         returns = torch.tensor(returns, dtype=torch.float32).to(self._device)
         
-        # Normalize returns
-        if len(returns) > 1:
+        # Clip extreme negative returns to help with sparse rewards
+        returns = torch.clamp(returns, min=-100.0)
+        
+        # Normalize returns for stability
+        if len(returns) > 1 and returns.std() > 1e-8:
             returns = (returns - returns.mean()) / (returns.std() + 1e-8)
         
         # PPO update for k epochs
@@ -277,8 +301,10 @@ class PPOAgent(GraphAgent):
             new_log_probs = dist.log_prob(actions)
             entropy = dist.entropy().mean()
             
-            # Calculate advantages
+            # Calculate advantages with normalization
             advantages = returns - values.detach()
+            if len(advantages) > 1 and advantages.std() > 1e-8:
+                advantages = (advantages - advantages.mean()) / (advantages.std() + 1e-8)
             
             # Calculate surrogate losses
             ratio = torch.exp(new_log_probs - old_log_probs)
