@@ -237,8 +237,14 @@ class PPOAgent(GraphAgent):
             
             state_batch = next_state_batch
         
-        # Now flatten all episode trajectories into the buffer, maintaining episode boundaries
-        for ep_idx, trajectory in enumerate(episode_trajectories):
+        # ELITE FILTERING: Only use top episodes for training (like Cross Entropy Method)
+        # This dramatically improves learning for sparse reward problems
+        elite_count = max(20, self._batch_size // 10)  # Top 10% or at least 20
+        elite_indices = np.argpartition(episode_rewards, -elite_count)[-elite_count:]
+        
+        # Only flatten elite episode trajectories into the buffer
+        for ep_idx in elite_indices:
+            trajectory = episode_trajectories[ep_idx]
             for transition in trajectory:
                 self._buffer_states.append(transition['state'])
                 self._buffer_actions.append(transition['action'])
@@ -247,7 +253,7 @@ class PPOAgent(GraphAgent):
                 self._buffer_rewards.append(transition['reward'])
                 self._buffer_dones.append(transition['done'])
         
-        # Update policy using collected experiences
+        # Update policy using collected experiences from elite episodes only
         self._update_policy()
         
         # Track best score and update random action mechanism
@@ -284,12 +290,8 @@ class PPOAgent(GraphAgent):
         returns = self._calculate_returns()
         returns = torch.tensor(returns, dtype=torch.float32).to(self._device)
         
-        # Clip extreme negative returns to help with sparse rewards
-        returns = torch.clamp(returns, min=-100.0)
-        
-        # Normalize returns for stability
-        if len(returns) > 1 and returns.std() > 1e-8:
-            returns = (returns - returns.mean()) / (returns.std() + 1e-8)
+        # DON'T normalize returns for sparse rewards - it destroys the signal!
+        # Elite filtering already selects good episodes, so normalization is harmful
         
         # PPO update for k epochs
         for _ in range(self._k_epochs):
@@ -301,10 +303,9 @@ class PPOAgent(GraphAgent):
             new_log_probs = dist.log_prob(actions)
             entropy = dist.entropy().mean()
             
-            # Calculate advantages with normalization
+            # Calculate advantages WITHOUT normalization for sparse rewards
+            # Normalizing advantages destroys the signal when rewards are sparse
             advantages = returns - values.detach()
-            if len(advantages) > 1 and advantages.std() > 1e-8:
-                advantages = (advantages - advantages.mean()) / (advantages.std() + 1e-8)
             
             # Calculate surrogate losses
             ratio = torch.exp(new_log_probs - old_log_probs)
