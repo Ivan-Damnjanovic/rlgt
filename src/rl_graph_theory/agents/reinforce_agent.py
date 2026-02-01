@@ -306,7 +306,7 @@ class ReinforceAgent(GraphAgent):
             survivors_mask
         ]
         self._population_returns[:, : self._survivors_count] = self._population_returns[
-            survivors_mask
+            :, survivors_mask
         ]
 
         # Update the best score, and the random action probability through the random action

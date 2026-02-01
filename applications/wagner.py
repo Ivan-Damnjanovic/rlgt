@@ -10,7 +10,8 @@ from rl_graph_theory.environments.global_environments import GlobalSetEnvironmen
 from rl_graph_theory.environments.local_environments import LocalFlipEnvironment, LocalSetEnvironment
 from rl_graph_theory.environments.graph_environment import RewardType
 from rl_graph_theory.graphs.graph_formats import FlattenedOrdering
-from rl_graph_theory.agents.random_action_mechanisms import create_multiplication_factor_random_action_mechanism
+from rl_graph_theory.agents.random_action_mechanisms import ExponentialRandomActionMechanism
+from rl_graph_theory.agents.reinforce_agent import ReinforceAgent
 
 
 def graph_invariant(graph_batch: Graph):
@@ -81,7 +82,7 @@ def main(graph_order: int):
         nn.Linear(256, 2),
     )
 
-    dcem = DeepCrossEntropyAgent(
+    dcem = ReinforceAgent(
         environment=LinearSetEnvironment(
             reward_type=RewardType.SPARSE,
             reward_function=graph_invariant,
@@ -90,15 +91,16 @@ def main(graph_order: int):
         ),
         policy_network=policy_network,
         optimizer=optim.Adam(policy_network.parameters(), lr=0.003),
-        loss_function=nn.CrossEntropyLoss(),
         new_candidates_count=1000,
         elite_count=70,
         survivors_count=30,
-        random_action_mechanism=create_multiplication_factor_random_action_mechanism(
-            initial_random_action_probability=0.001,
+        use_baseline=True,
+        discount_factor=1.0,
+        random_action_mechanism=ExponentialRandomActionMechanism(
+            initial_random_action_probability=0.005,
             waiting_period=10,
-            multiplication_factor=1.1,
-            maximum_random_action_probability=0.100,
+            multiplicative_factor=1.1,
+            maximum_random_action_probability=0.025,
         ),
     )
 

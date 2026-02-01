@@ -5,6 +5,7 @@ import torch.optim as optim
 from rl_graph_theory.graphs.graph import Graph
 from rl_graph_theory.graphs.graph_formats import FlattenedOrdering
 from rl_graph_theory.agents.deep_cross_entropy_agent import DeepCrossEntropyAgent
+from rl_graph_theory.agents.reinforce_agent import ReinforceAgent
 from rl_graph_theory.environments.linear_environments import LinearBuildEnvironment, LinearFlipEnvironment
 from rl_graph_theory.environments.local_environments import LocalSetEnvironment
 from rl_graph_theory.environments.global_environments import GlobalSetEnvironment
@@ -54,7 +55,7 @@ def main(graph_order: int):
         nn.Linear(12, 2),
     )
 
-    dcem = DeepCrossEntropyAgent(
+    dcem = ReinforceAgent(
         environment=LinearBuildEnvironment(
             reward_type=RewardType.SPARSE,
             reward_function=graph_invariant,
@@ -62,7 +63,8 @@ def main(graph_order: int):
         ),
         policy_network=policy_network,
         optimizer=optim.Adam(policy_network.parameters(), lr=0.003),
-        loss_function=nn.CrossEntropyLoss(),
+        use_baseline=True,
+        discount_factor=1.0,
         new_candidates_count=200,
         elite_count=20,
         survivors_count=5,
