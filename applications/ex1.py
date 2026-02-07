@@ -46,7 +46,7 @@ dcem = DeepCrossEntropyAgent(
     policy_network=policy_network,
     optimizer=optim.Adam(policy_network.parameters(), lr=0.001),
     loss_function=nn.CrossEntropyLoss(),
-    new_candidates_count=300,
+    candidates_count=300,
     elite_count=30,
     survivors_count=20,
     random_action_mechanism=create_multiplication_factor_random_action_mechanism(

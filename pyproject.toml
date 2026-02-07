@@ -1,8 +1,8 @@
 [project]
-name = "rl-graph-theory"
+name = "RLGT"
 version = "0.1.0"
-description = "This is a reinforcement learning framework that aims to facilitate research in extremal graph theory."
-authors = [ { name = "Ivan Damnjanović" } ]
+description = "This is Reinforcement Learning for Graph Theory (RLGT), a reinforcement learning framework that aims to facilitate future research in extremal graph theory."
+authors = [ { name = "Ivan Damnjanović" }, { name = "Uroš Milivojević" }, { name = "Irena Đorđević" }, { name = "Dragan Stevanović" }]
 readme = "README.md"
 requires-python = ">=3.11,<3.14"
 dependencies = [ "numpy>=2.3.4,<3.0" ]
@@ -15,7 +15,7 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
-packages = [{ include = "rl_graph_theory", from = "src" }]
+packages = [{ include = "rlgt", from = "src" }]
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.4.2"
@@ -33,8 +33,8 @@ profile = "black"
 lines_after_imports = 2
 
 [tool.pydoctor]
-project-name = "rl-graph-theory"
-add-package = ["src/rl_graph_theory"]
+project-name = "rlgt"
+add-package = ["src/rlgt"]
 docformat = "restructuredtext"
 make-html = true
 html-output = "docs"

@@ -1,11 +1,6 @@
 import numpy as np
 
-from rl_graph_theory.graphs import (
-    BitmaskType,
-    ColorRepresentation,
-    FlattenedOrdering,
-    Graph,
-)
+from rlgt.graphs import BitmaskType, ColorRepresentation, FlattenedOrdering, Graph
 
 
 def g1_example():

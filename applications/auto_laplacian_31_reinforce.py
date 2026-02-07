@@ -65,7 +65,7 @@ def main(graph_order: int):
         optimizer=optim.Adam(policy_network.parameters(), lr=0.003),
         use_baseline=True,
         discount_factor=1.0,
-        new_candidates_count=200,
+        candidates_count=200,
         elite_count=20,
         survivors_count=5,
         random_action_mechanism=ExponentialRandomActionMechanism(

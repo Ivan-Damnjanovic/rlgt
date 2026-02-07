@@ -63,7 +63,7 @@ def main(graph_order: int):
         policy_network=policy_network,
         optimizer=optim.Adam(policy_network.parameters(), lr=0.0002),
         loss_function=nn.CrossEntropyLoss(),
-        new_candidates_count=300,
+        candidates_count=300,
         elite_count=20,
         survivors_count=5,
         random_action_mechanism=ExponentialRandomActionMechanism(

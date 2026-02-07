@@ -91,7 +91,7 @@ def main(graph_order: int):
         ),
         policy_network=policy_network,
         optimizer=optim.Adam(policy_network.parameters(), lr=0.003),
-        new_candidates_count=1000,
+        candidates_count=1000,
         elite_count=70,
         survivors_count=30,
         use_baseline=True,

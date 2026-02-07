@@ -2,14 +2,9 @@ import numpy as np
 import torch.nn as nn
 import torch.optim as optim
 
-from rl_graph_theory.graphs.graph import Graph
-from rl_graph_theory.graphs.graph_formats import FlattenedOrdering
-from rl_graph_theory.agents.deep_cross_entropy_agent import DeepCrossEntropyAgent
-from rl_graph_theory.environments.linear_environments import LinearBuildEnvironment, LinearFlipEnvironment
-from rl_graph_theory.environments.local_environments import LocalSetEnvironment
-from rl_graph_theory.environments.global_environments import GlobalSetEnvironment
-from rl_graph_theory.environments.graph_environment import RewardType
-from rl_graph_theory.agents.random_action_mechanisms import ExponentialRandomActionMechanism
+from rlgt.graphs import Graph
+from rlgt.agents import DeepCrossEntropyAgent, ExponentialRandomActionMechanism, ReinforceAgent
+from rlgt.environments import LinearBuildEnvironment, LinearSetEnvironment, LinearFlipEnvironment
 
 
 def auto_laplacian_expression(d, m):
@@ -54,18 +49,15 @@ def main(graph_order: int):
         nn.Linear(12, 2),
     )
 
-    dcem = DeepCrossEntropyAgent(
+    dcem = ReinforceAgent(
         environment=LinearBuildEnvironment(
-            reward_type=RewardType.SPARSE,
-            reward_function=graph_invariant,
+            graph_invariant=graph_invariant,
             graph_order=graph_order,
         ),
         policy_network=policy_network,
+        candidates_count=200,
+        elite_count=30,
         optimizer=optim.Adam(policy_network.parameters(), lr=0.003),
-        loss_function=nn.CrossEntropyLoss(),
-        new_candidates_count=200,
-        elite_count=20,
-        survivors_count=5,
         random_action_mechanism=ExponentialRandomActionMechanism(
             initial_random_action_probability=0.005,
             waiting_period=10,
@@ -73,6 +65,22 @@ def main(graph_order: int):
             maximum_random_action_probability=0.025,
         ),
     )
+
+    # dcem = DeepCrossEntropyAgent(
+    #     environment=LinearBuildEnvironment(
+    #         graph_invariant=graph_invariant,
+    #         graph_order=graph_order,
+    #     ),
+    #     policy_network=policy_network,
+    #     optimizer=optim.Adam(policy_network.parameters(), lr=0.003),
+    #     # random_action_mechanism=ExponentialRandomActionMechanism(
+    #     #     initial_random_action_probability=0.005,
+    #     #     waiting_period=10,
+    #     #     multiplicative_factor=1.1,
+    #     #     maximum_random_action_probability=0.025,
+    #     # ),
+    # )
+
 
     dcem.reset()
 

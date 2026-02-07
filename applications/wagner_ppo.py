@@ -68,8 +68,8 @@ def main(graph_order: int):
             list(policy_network.parameters()) + list(value_network.parameters()), 
             lr=0.0003
         ),
-        batch_size=20,
-        gamma=0.99,
+        new_candidates_count=20,
+        discount_factor=0.99,
         eps_clip=0.2,
         k_epochs=4,
         entropy_coef=0.01,
