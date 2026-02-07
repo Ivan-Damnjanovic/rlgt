@@ -161,11 +161,7 @@ class ReinforceAgent(GraphAgent):
         # ``population_log_probs`` matrix that stores all the log probabilities, with rows
         # corresponding to the steps and columns corresponding to the executed episodes.
         self._population_returns[:, :] = 0
-        population_log_probs = torch.empty(
-            (self._environment.episode_length, self._candidates_count),
-            dtype=torch.float32,
-            device=self._device,
-        )
+        population_log_probs = []
 
         # Set the episode action counter to 0 and use the random action mechanism to obtain the
         # random action probability.
@@ -193,9 +189,7 @@ class ReinforceAgent(GraphAgent):
             action_batch = action_batch_torch.cpu().numpy()
 
             # Store the log probabilities.
-            population_log_probs[episode_action_count, :] = distribution.log_prob(
-                action_batch_torch
-            )
+            population_log_probs.append(distribution.log_prob(action_batch_torch))
 
             # Use the random action probability to decide whether each sampled action should be
             # replaced by a random action.
@@ -221,9 +215,9 @@ class ReinforceAgent(GraphAgent):
                         ],
                         dtype=np.int32,
                     )
-                    population_log_probs[episode_action_count, random_mask] = -np.log(
-                        action_mask[random_mask].sum(axis=1)
-                    )
+                    # population_log_probs[episode_action_count, random_mask] = -np.log(
+                    #     action_mask[random_mask].sum(axis=1)
+                    # )
 
                 # Settle the case where all the actions are available for execution.
                 else:
@@ -234,9 +228,9 @@ class ReinforceAgent(GraphAgent):
                         size=entry_count,
                         dtype=np.int32,
                     )
-                    population_log_probs[episode_action_count, random_mask] = -np.log(
-                        self._environment.action_number
-                    )
+                    # population_log_probs[episode_action_count, random_mask] = -np.log(
+                    #     self._environment.action_number
+                    # )
 
             # Store the selected actions and execute them.
             state_batch, current_graph_invariant_batch, status = self._environment.step_batch(
@@ -280,7 +274,7 @@ class ReinforceAgent(GraphAgent):
         elite_advantages_torch = torch.from_numpy(elite_advantages.astype(np.float32)).to(
             self._device
         )
-        elite_log_probs_torch = population_log_probs[:, elite_mask].reshape(-1)
+        elite_log_probs_torch = torch.cat([population_log_probs[index][elite_mask] for index in range(self._environment.episode_length)]).reshape(-1)
 
         # Recalculate log probs with gradient tracking
         self._optimizer.zero_grad()
