@@ -54,19 +54,19 @@ class DeepCrossEntropyAgent(GraphAgent):
     :ivar _best_score: A `float` representing the best achieved value for the graph invariant, or
         `None` if the agent has not been initialized.
     :ivar _population_states: Either `None` if uninitialized, or a `numpy.ndarray` storing all
-        states during each iteration. Its shape is ``(episode_length + 1, total_population,
-        state_length)``, where ``episode_length`` is the episode length of the RL environment,
-        ``state_length`` is the length of the state vector, and ``total_population`` is the total
-        number of episodes stored. The stored episodes include both newly generated episodes and
-        those carried over from the previous generation. The first dimension corresponds to the
-        state trajectory of each episode, the second to the executed episodes, and the third to the
-        state vector entries. The states from carried-over episodes appear before the newly
-        generated ones.
+        states during each episode trajectory. Its shape is ``(episode_length + 1,
+        total_population, state_length)``, where ``episode_length`` is the episode length of the RL
+        environment, ``state_length`` is the length of the state vectors, and ``total_population``
+        is the total number of episodes stored. The stored episodes include both newly generated
+        episodes and those carried over from the previous generation. The first dimension
+        corresponds to the state trajectory of each episode, the second to the executed episodes,
+        and the third to the state vector entries. The states from carried-over episodes appear
+        before the newly generated ones.
     :ivar _population_actions: Either `None` if uninitialized, or a `numpy.ndarray` of type
-        `numpy.int32` storing all actions during each iteration. Its shape is ``(episode_length,
-        total_population)`` with the first dimension as the action trajectory and the second as the
-        executed episodes. The episode order matches `_population_states`.
-    :ivar _population_scores: Either `None` if uninitialized, or a `numpy.ndarray` of type
+        `numpy.int32` storing all actions during each episode trajectory. Its shape is
+        ``(episode_length, total_population)`` with the first dimension as the action trajectory
+        and the second as the executed episodes. The episode order matches `_population_states`.
+    :ivar _population_scores: Either `None` if uninitialized, or a `numpy.ndarray` vector of type
         `numpy.float32` storing the graph invariant value for each episode. Its length is
         ``total_population`` and the episode order matches `_population_states`.
     """

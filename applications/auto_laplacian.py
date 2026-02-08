@@ -7,11 +7,16 @@ from rlgt.agents import DeepCrossEntropyAgent, ExponentialRandomActionMechanism,
 from rlgt.environments import LinearBuildEnvironment, LinearSetEnvironment, LinearFlipEnvironment, create_fixed_graph_generator, GlobalSetEnvironment, LocalSetEnvironment
 
 
-def auto_laplacian_expression(d, m):
-    return (4 * m ** 2) / (m + d)
+AUTO_LAPLACIAN_EXPRESSIONS = {
+    3: lambda d, m: (m ** 2) / d + m,
+    15: lambda d, m: np.sqrt(4 * m ** 3 / d),
+    28: lambda d, m: np.sqrt((2 * m ** 4) / (d ** 2) + 2 * d * m),
+    29: lambda d, m: np.sqrt(m ** 2 + (3 * m ** 3) / d),
+    31: lambda d, m: (4 * m ** 2) / (m + d),
+}
 
 
-def graph_invariant(graph_batch: Graph):
+def graph_invariant(graph_batch: Graph, expression_index: int):
     adj_batch = graph_batch.adjacency_matrix_colors.astype(np.float64)
     
     degree_batch = adj_batch.sum(axis=2)
@@ -28,18 +33,17 @@ def graph_invariant(graph_batch: Graph):
     spectrum_batch = np.linalg.eigvalsh(lap_batch)
     mu_batch = spectrum_batch[:, -1]
 
-    temp = np.max(auto_laplacian_expression(d=degree_batch_1, m=and_batch_1), axis=1)
+    temp = np.max(AUTO_LAPLACIAN_EXPRESSIONS[expression_index](d=degree_batch_1, m=and_batch_1), axis=1)
     result = mu_batch - temp
 
     result[spectrum_batch[:, 1] < 0.15] = -5.0
     result[np.min(degree_batch, axis=1) < 0.5] = -5.0
-    # result[result == 0] = -1000.0
     result = result.astype(np.float32)
 
     return result
 
 
-def main(graph_order: int):
+def main(graph_order: int, expression_index: int):
     policy_network = nn.Sequential(
         nn.Linear(graph_order * (graph_order - 1) // 2 + graph_order, 72),
         nn.ReLU(),
@@ -50,9 +54,9 @@ def main(graph_order: int):
         nn.Linear(12, graph_order * 2),
     )
 
-    dcem = ReinforceAgent(
+    agent = ReinforceAgent(
         environment=LocalSetEnvironment(
-            graph_invariant=graph_invariant,
+            graph_invariant=lambda graph_batch: graph_invariant(graph_batch=graph_batch, expression_index=expression_index),
             graph_order=graph_order,
             initial_graph_generator=create_fixed_graph_generator(
                 fixed_graph=CycleGraph(
@@ -66,8 +70,6 @@ def main(graph_order: int):
         policy_network=policy_network,
         optimizer=optim.Adam(policy_network.parameters(), lr=0.0005),
         candidates_count=200,
-        # apply_baseline=False,
-        # elite_count=30,
         random_action_mechanism=ExponentialRandomActionMechanism(
             initial_random_action_probability=0.005,
             waiting_period=10,
@@ -76,38 +78,22 @@ def main(graph_order: int):
         ),
     )
 
-    # dcem = DeepCrossEntropyAgent(
-    #     environment=LinearBuildEnvironment(
-    #         graph_invariant=graph_invariant,
-    #         graph_order=graph_order,
-    #     ),
-    #     policy_network=policy_network,
-    #     optimizer=optim.Adam(policy_network.parameters(), lr=0.003),
-    #     # random_action_mechanism=ExponentialRandomActionMechanism(
-    #     #     initial_random_action_probability=0.005,
-    #     #     waiting_period=10,
-    #     #     multiplicative_factor=1.1,
-    #     #     maximum_random_action_probability=0.025,
-    #     # ),
-    # )
-
-
-    dcem.reset()
+    agent.reset()
 
     while True:
-        dcem.step()
-        print(f"Generations: {dcem.step_count}. Best score: {dcem.best_score:.3f}.")
+        agent.step()
+        print(f"Generations: {agent.step_count}. Best score: {agent.best_score:.3f}.")
 
-        if dcem.best_score > 0.0001:
+        if agent.best_score > 0.0001:
             print("Success!")
-            solution = dcem.best_graph.adjacency_matrix_colors
+            solution = agent.best_graph.adjacency_matrix_colors
             
             print(solution)
-            with open(f"applications/auto_laplacian_31_result_{graph_order}.txt", "w") as opened_file:
+            with open(f"applications/auto_laplacian_{expression_index:02}_{graph_order}.txt", "w") as opened_file:
                 opened_file.write(np.array2string(solution, separator=", "))
 
             break
 
 
 if __name__ == "__main__":
-    main(graph_order=14)
+    main(graph_order=14, expression_index=3)

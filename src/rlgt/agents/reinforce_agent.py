@@ -1,5 +1,5 @@
 """
-This ``Python`` module contains the `DeepCrossEntropyAgent` class, which implements a reinforcement
+This ``Python`` module contains the `ReinforceAgent` class, which implements a reinforcement
 learning agent for graph theory applications using the REINFORCE method with ``PyTorch``.
 """
 
@@ -60,6 +60,12 @@ class ReinforceAgent(GraphAgent):
     :ivar _best_graph: A `Graph` object representing a graph attaining the best achieved value for
         the graph invariant, or `None` if the agent has not been initialized or no iterations have
         been executed.
+    :ivar _population_returns: Either `None` if uninitialized, or a `numpy.ndarray` of type
+        `numpy.float32` storing the discounted returns for all executed episodes. Its shape is
+        ``(episode_length, candidates_count)``, where ``episode_length`` is the episode length of
+        the RL environment and ``candidates_count`` is the number of episodes executed in parallel.
+        The first dimension corresponds to the actions within an episode, and the second
+        corresponds to the executed episodes.
     """
 
     def __init__(
@@ -94,7 +100,7 @@ class ReinforceAgent(GraphAgent):
         :param discount_factor: A `float` from the interval $[0, 1]$ representing the discount
             factor to be used while computing the returns. The default value is 0.99.
         :param apply_baseline: A `bool` indicating whether a baseline should be applied to reduce
-            variance. If `True`, the baseline is the mean return over all episodes, computed
+            variance. If `True`, the baseline is the mean return over all elite episodes, computed
             independently for each step. The default value is `True`.
         :param random_action_mechanism: A `RandomActionMechanism` object that governs the
             probability of executing a random action in each step of the graph building game. When
@@ -133,7 +139,6 @@ class ReinforceAgent(GraphAgent):
         self._step_count: Optional[int] = None
         self._best_score: Optional[float] = None
         self._best_graph: Optional[Graph] = None
-
         self._population_returns: Optional[np.ndarray] = None
 
     def reset(self) -> None:
@@ -144,33 +149,20 @@ class ReinforceAgent(GraphAgent):
         self._best_graph = None
         self._random_action_mechanism.reset()
 
-        # Initialize the population states, the population actions and the population returns to
-        # the zero `np.ndarray` objects of the required shape and type.
-        self._population_states = np.zeros(
-            (
-                self._environment.episode_length + 1,
-                self._candidates_count,
-                self._environment.state_length,
-            ),
-            dtype=self._environment.state_dtype,
-        )
-        self._population_actions = np.zeros(
-            (self._environment.episode_length, self._candidates_count), dtype=np.int32
-        )        
+        # Initialize the population returns to the zero `np.ndarray` of type `np.float32` and the
+        # required shape.
         self._population_returns = np.zeros(
             (self._environment.episode_length, self._candidates_count), dtype=np.float32
         )
 
     def step(self) -> None:
-        # Initialize a batch of episodes with the batch size ``_candidates_count`` and store the
-        # starting states to the ``_population_states`` attribute.
-        state_batch, previous_graph_invariant_batch, status = self._environment.reset_batch(
+        # Initialize a batch of episodes with the batch size ``_candidates_count``.
+        state_batch, previous_scores, status = self._environment.reset_batch(
             batch_size=self._candidates_count
         )
 
         # Set the ``_population_returns`` attribute to all zeros. Also, initialize the
-        # ``population_log_probs`` matrix that stores all the log probabilities, with rows
-        # corresponding to the steps and columns corresponding to the executed episodes.
+        # ``population_log_probs`` list that stores all the log probabilities per timestamp.
         self._population_returns[:, :] = 0
         population_log_probs = []
 
@@ -199,7 +191,7 @@ class ReinforceAgent(GraphAgent):
             action_batch_torch = distribution.sample()
             action_batch = action_batch_torch.cpu().numpy()
 
-            # Store the log probabilities.
+            # Store the log probabilities to the ``population_log_probs`` list.
             population_log_probs.append(distribution.log_prob(action_batch_torch))
 
             # Use the random action probability to decide whether each sampled action should be
@@ -226,10 +218,6 @@ class ReinforceAgent(GraphAgent):
                         ],
                         dtype=np.int32,
                     )
-                    # population_log_probs[episode_action_count][random_mask] = -np.log(
-                    #     action_mask[random_mask].sum(axis=1)
-                    # )
-                    # print(population_log_probs[episode_action_count])
 
                 # Settle the case where all the actions are available for execution.
                 else:
@@ -240,77 +228,68 @@ class ReinforceAgent(GraphAgent):
                         size=entry_count,
                         dtype=np.int32,
                     )
-                    # population_log_probs[episode_action_count][random_mask] = -np.log(
-                    #     self._environment.action_number
-                    # )
-                    # print(population_log_probs[episode_action_count])
 
-            # Store the selected actions and execute them.
-            state_batch, current_graph_invariant_batch, status = self._environment.step_batch(
-                action_batch
-            )
+            # Execute the selected actions.
+            state_batch, current_scores, status = self._environment.step_batch(action_batch)
 
             # Compute the batch of rewards.
-            reward_batch = current_graph_invariant_batch - previous_graph_invariant_batch
-            previous_graph_invariant_batch = current_graph_invariant_batch
-            
-            if self._step_count == 0:
-                print(reward_batch)
+            reward_batch = current_scores - previous_scores
+            previous_scores = current_scores
 
-            # Update the returns.
+            # Update the discounted returns.
             weights = self._discount_factor ** np.arange(episode_action_count, -1, -1)
             self._population_returns[: episode_action_count + 1, :] += np.outer(
                 weights, reward_batch
             )
 
-            # Store the newly obtained states.
             episode_action_count += 1
 
         # Compute the mask that decides which executed episodes should be used to train the action
         # prediction model.
         elite_mask = np.zeros((self._candidates_count), dtype=bool)
-
         if self._elite_count is None:
             elite_mask[:] = True
         else:
             elite_mask[
-                np.argpartition(current_graph_invariant_batch, -self._elite_count)[
-                    -self._elite_count :
-                ]
+                np.argpartition(current_scores, -self._elite_count)[-self._elite_count :]
             ] = True
 
         # Compute the advantages for the elite executed episodes. Apply the baselines if requested.
-        filtered_advantages = self._population_returns[:, elite_mask]
+        elite_advantages = self._population_returns[:, elite_mask]
         if self._apply_baseline:
-            filtered_advantages = filtered_advantages - filtered_advantages.mean(
-                axis=1, keepdims=True
-            )
-        elite_advantages = filtered_advantages.reshape(-1)
-
+            elite_advantages = elite_advantages - elite_advantages.mean(axis=1, keepdims=True)
+        elite_advantages = elite_advantages.reshape(-1)
         elite_advantages_torch = torch.from_numpy(elite_advantages.astype(np.float32)).to(
             self._device
         )
-        elite_log_probs_torch = torch.cat([population_log_probs[index][elite_mask] for index in range(self._environment.episode_length)]).reshape(-1)
 
-        # Recalculate log probs with gradient tracking
+        # Prepare the log-probabilities from the elite executed episodes for training.
+        elite_log_probs_torch = torch.cat(
+            [
+                population_log_probs[index][elite_mask]
+                for index in range(self._environment.episode_length)
+            ]
+        ).reshape(-1)
+
+        # Use the optimizer to train the policy network.
         self._optimizer.zero_grad()
-
         loss = -(elite_log_probs_torch * elite_advantages_torch).mean()
         loss.backward()
         torch.nn.utils.clip_grad_norm_(self._policy_network.parameters(), 0.5)
         self._optimizer.step()
 
-        # Update the best score, and the random action probability through the random action
-        # mechanism.
-        best_index = np.argmax(current_graph_invariant_batch)
-        current_best_score = max(self._best_score, current_graph_invariant_batch[best_index])
+        # Update the random action probability through the random action mechanism.
+        best_index = np.argmax(current_scores)
+        current_best_score = max(self._best_score, current_scores[best_index])
         self._random_action_mechanism.step(
             previous_best_score=self._best_score, current_best_score=current_best_score
         )
-        self._best_score = current_best_score
 
-        best_state = state_batch[best_index, :]
-        self._best_graph = self._environment.state_to_graph(best_state)
+        # Update the best graph and the best graph, if needed.
+        if current_best_score > self._best_score:
+            self._best_score = current_best_score
+            best_state = state_batch[best_index, :]
+            self._best_graph = self._environment.state_to_graph(best_state)
 
         # Increment the number of executed iterations of the learning process.
         self._step_count += 1
