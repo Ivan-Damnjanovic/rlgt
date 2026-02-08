@@ -1,13 +1,11 @@
-from sage.all import *
-import rl_graph_theory.graphs as rl_g
-import rl_graph_theory.environments as rl_e
-import rl_graph_theory.agents as rl_a
 import numpy as np
+import rlgt
 import torch.nn as nn
 import torch.optim as optim
+from sage.all import *
 
 
-def graph_invariant(graph_batch: rl_g.Graph):
+def graph_invariant(graph_batch: rlgt.graphs.Graph):
     result = np.zeros(graph_batch.batch_size, dtype=np.float32)
 
     for index in range(graph_batch.batch_size):
@@ -43,19 +41,14 @@ def main(graph_order: int):
         nn.Linear(12, 2),
     )
 
-    dcem = rl_a.DeepCrossEntropyAgent(
-        environment=rl_e.LinearBuildEnvironment(
-            reward_type=rl_e.RewardType.SPARSE,
-            reward_function=graph_invariant,
+    agent = rlgt.agents.DeepCrossEntropyAgent(
+        environment=rlgt.environments.LinearBuildEnvironment(
+            graph_invariant=graph_invariant,
             graph_order=graph_order,
         ),
         policy_network=policy_network,
         optimizer=optim.Adam(policy_network.parameters(), lr=0.003),
-        loss_function=nn.CrossEntropyLoss(),
-        candidates_count=200,
-        elite_count=20,
-        survivors_count=5,
-        random_action_mechanism=rl_a.ExponentialRandomActionMechanism(
+        random_action_mechanism=rlgt.agents.ExponentialRandomActionMechanism(
             initial_random_action_probability=0.005,
             waiting_period=10,
             multiplicative_factor=1.1,
@@ -63,18 +56,18 @@ def main(graph_order: int):
         ),
     )
 
-    dcem.reset()
+    agent.reset()
 
     while True:
-        dcem.step()
-        print(f"Generations: {dcem.step_count}. Best score: {dcem.best_score:.3f}.")
+        agent.step()
+        print(f"Generations: {agent.step_count}. Best score: {agent.best_score:.3f}.")
 
-        if dcem.best_score > 0.0001:
+        if agent.best_score > 0.0001:
             print("Success!")
-            solution = dcem.best_graph.adjacency_matrix_colors
-            
+            solution = agent.best_graph.adjacency_matrix_colors
+
             print(solution)
-            with open(f"examples/auto_laplacian_31_result_{graph_order}.txt", "w") as opened_file:
+            with open(f"applications/wine_glasses_{graph_order}.txt", "w") as opened_file:
                 opened_file.write(np.array2string(solution, separator=", "))
 
             break

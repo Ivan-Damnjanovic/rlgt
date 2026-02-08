@@ -30,42 +30,54 @@ def e1_example():
     print(status)
     print(e1.state_batch_to_graph_batch(state_batch).adjacency_matrix_colors)
 
-    state_batch, graph_invariant_batch, status = e1.step_batch(np.array([0, 0, 0, 1], dtype=np.int32))
+    state_batch, graph_invariant_batch, status = e1.step_batch(
+        np.array([0, 0, 0, 1], dtype=np.int32)
+    )
     print("Step 1")
     print(state_batch)
     print(graph_invariant_batch)
     print(status)
     print(e1.state_batch_to_graph_batch(state_batch).adjacency_matrix_colors)
 
-    state_batch, graph_invariant_batch, status = e1.step_batch(np.array([3, 2, 1, 3], dtype=np.int32))
+    state_batch, graph_invariant_batch, status = e1.step_batch(
+        np.array([3, 2, 1, 3], dtype=np.int32)
+    )
     print("Step 2")
     print(state_batch)
     print(graph_invariant_batch)
     print(status)
     print(e1.state_batch_to_graph_batch(state_batch).adjacency_matrix_colors)
 
-    state_batch, graph_invariant_batch, status = e1.step_batch(np.array([0, 3, 0, 1], dtype=np.int32))
+    state_batch, graph_invariant_batch, status = e1.step_batch(
+        np.array([0, 3, 0, 1], dtype=np.int32)
+    )
     print("Step 3")
     print(state_batch)
     print(graph_invariant_batch)
     print(status)
     print(e1.state_batch_to_graph_batch(state_batch).adjacency_matrix_colors)
 
-    state_batch, graph_invariant_batch, status = e1.step_batch(np.array([1, 0, 2, 2], dtype=np.int32))
+    state_batch, graph_invariant_batch, status = e1.step_batch(
+        np.array([1, 0, 2, 2], dtype=np.int32)
+    )
     print("Step 4")
     print(state_batch)
     print(graph_invariant_batch)
     print(status)
     print(e1.state_batch_to_graph_batch(state_batch).adjacency_matrix_colors)
 
-    state_batch, graph_invariant_batch, status = e1.step_batch(np.array([1, 2, 3, 0], dtype=np.int32))
+    state_batch, graph_invariant_batch, status = e1.step_batch(
+        np.array([1, 2, 3, 0], dtype=np.int32)
+    )
     print("Step 5")
     print(state_batch)
     print(graph_invariant_batch)
     print(status)
     print(e1.state_batch_to_graph_batch(state_batch).adjacency_matrix_colors)
 
-    state_batch, graph_invariant_batch, status = e1.step_batch(np.array([2, 0, 0, 1], dtype=np.int32))
+    state_batch, graph_invariant_batch, status = e1.step_batch(
+        np.array([2, 0, 0, 1], dtype=np.int32)
+    )
     print("Step 6")
     print(state_batch)
     print(graph_invariant_batch)

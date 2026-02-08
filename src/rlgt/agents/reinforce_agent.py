@@ -157,9 +157,22 @@ class ReinforceAgent(GraphAgent):
 
     def step(self) -> None:
         # Initialize a batch of episodes with the batch size ``_candidates_count``.
-        state_batch, previous_scores, status = self._environment.reset_batch(
+        state_batch, current_scores, status = self._environment.reset_batch(
             batch_size=self._candidates_count
         )
+
+        # Initialize the new best score and new best graph.
+        new_best_score = self._best_score
+        new_best_graph = self._best_graph
+
+        # If the RL environment is continuing, then determine the best graph and best score from
+        # the starting timestamp, and update the corresponding variables if needed.
+        if self._environment.is_continuing:
+            timestamp_best = np.max(current_scores)
+            if timestamp_best > new_best_score:
+                new_best_score = timestamp_best
+                best_index = np.argmax(current_scores)
+                new_best_graph = self._environment.state_to_graph(state_batch[best_index, :])
 
         # Set the ``_population_returns`` attribute to all zeros. Also, initialize the
         # ``population_log_probs`` list that stores all the log probabilities per timestamp.
@@ -170,10 +183,6 @@ class ReinforceAgent(GraphAgent):
         # random action probability.
         episode_action_count = 0
         random_action_probability = self._random_action_mechanism.random_action_probability
-
-        # Initialize the new best score and new best graph.
-        new_best_score = self._best_score
-        new_best_graph = self._best_graph
 
         # While the episodes are in progress...
         while status == EpisodeStatus.IN_PROGRESS:
@@ -233,12 +242,10 @@ class ReinforceAgent(GraphAgent):
                         dtype=np.int32,
                     )
 
-            # Execute the selected actions.
-            state_batch, current_scores, status = self._environment.step_batch(action_batch)
-
-            # Compute the batch of rewards.
-            reward_batch = current_scores - previous_scores
+            # Execute the selected actions and compute the batch of rewards.
             previous_scores = current_scores
+            state_batch, current_scores, status = self._environment.step_batch(action_batch)
+            reward_batch = current_scores - previous_scores
 
             # Update the discounted returns.
             weights = self._discount_factor ** np.arange(episode_action_count, -1, -1)
@@ -246,6 +253,9 @@ class ReinforceAgent(GraphAgent):
                 weights, reward_batch
             )
 
+            # If the RL environment is continuing, or the final batch of actions has been executed,
+            # then determine the best graph and best score from the current timestamp, and update
+            # the corresponding variables if needed.
             if self._environment.is_continuing or status != EpisodeStatus.IN_PROGRESS:
                 timestamp_best = np.max(current_scores)
                 if timestamp_best > new_best_score:
@@ -289,7 +299,8 @@ class ReinforceAgent(GraphAgent):
         torch.nn.utils.clip_grad_norm_(self._policy_network.parameters(), 0.5)
         self._optimizer.step()
 
-        # Update the random action probability through the random action mechanism.
+        # Update the random action probability through the random action mechanism, and then update
+        # the best score and best graph.
         self._random_action_mechanism.step(
             previous_best_score=self._best_score, current_best_score=new_best_score
         )

@@ -2,24 +2,24 @@ import numpy as np
 import torch.nn as nn
 import torch.optim as optim
 
-from rlgt.graphs import Graph, MonochromaticGraph, GraphFormat, CycleGraph
-from rlgt.agents import DeepCrossEntropyAgent, ExponentialRandomActionMechanism, ReinforceAgent
-from rlgt.environments import LinearBuildEnvironment, LinearSetEnvironment, LinearFlipEnvironment, create_fixed_graph_generator, GlobalSetEnvironment, LocalSetEnvironment
+from rlgt.agents import ExponentialRandomActionMechanism, ReinforceAgent
+from rlgt.environments import LocalSetEnvironment, create_fixed_graph_generator
+from rlgt.graphs import CycleGraph, Graph, GraphFormat
 
 
 AUTO_LAPLACIAN_EXPRESSIONS = {
-    3: lambda d, m: (m ** 2) / d + m,
-    15: lambda d, m: np.sqrt(4 * m ** 3 / d),
-    26: lambda d, m: np.sqrt(5 * d ** 2 + 11 * d * m) / 2,
-    28: lambda d, m: np.sqrt((2 * m ** 4) / (d ** 2) + 2 * d * m),
-    29: lambda d, m: np.sqrt(m ** 2 + (3 * m ** 3) / d),
-    31: lambda d, m: (4 * m ** 2) / (m + d),
+    3: lambda d, m: (m**2) / d + m,
+    15: lambda d, m: np.sqrt(4 * m**3 / d),
+    26: lambda d, m: np.sqrt(5 * d**2 + 11 * d * m) / 2,
+    28: lambda d, m: np.sqrt((2 * m**4) / (d**2) + 2 * d * m),
+    29: lambda d, m: np.sqrt(m**2 + (3 * m**3) / d),
+    31: lambda d, m: (4 * m**2) / (m + d),
 }
 
 
 def graph_invariant(graph_batch: Graph, expression_index: int):
     adj_batch = graph_batch.adjacency_matrix_colors.astype(np.float64)
-    
+
     degree_batch = adj_batch.sum(axis=2)
     degree_batch_1 = np.maximum(degree_batch, 1)
 
@@ -34,7 +34,9 @@ def graph_invariant(graph_batch: Graph, expression_index: int):
     spectrum_batch = np.linalg.eigvalsh(lap_batch)
     mu_batch = spectrum_batch[:, -1]
 
-    temp = np.max(AUTO_LAPLACIAN_EXPRESSIONS[expression_index](d=degree_batch_1, m=and_batch_1), axis=1)
+    temp = np.max(
+        AUTO_LAPLACIAN_EXPRESSIONS[expression_index](d=degree_batch_1, m=and_batch_1), axis=1
+    )
     result = mu_batch - temp
 
     result[spectrum_batch[:, 1] < 0.15] = -5.0
@@ -57,7 +59,9 @@ def main(graph_order: int, expression_index: int):
 
     agent = ReinforceAgent(
         environment=LocalSetEnvironment(
-            graph_invariant=lambda graph_batch: graph_invariant(graph_batch=graph_batch, expression_index=expression_index),
+            graph_invariant=lambda graph_batch: graph_invariant(
+                graph_batch=graph_batch, expression_index=expression_index
+            ),
             graph_order=graph_order,
             initial_graph_generator=create_fixed_graph_generator(
                 fixed_graph=CycleGraph(
@@ -88,9 +92,13 @@ def main(graph_order: int, expression_index: int):
         if agent.best_score > 0.0001:
             print("Success!")
             solution = agent.best_graph.adjacency_matrix_colors
-            
+
             print(solution)
-            with open(f"applications/auto_laplacian_{expression_index:02}_{graph_order}.txt", "w") as opened_file:
+            with open(
+                "applications/auto_laplacian_results/"
+                + f"reinforce_{expression_index:02}_{graph_order}.txt",
+                "w",
+            ) as opened_file:
                 opened_file.write(np.array2string(solution, separator=", "))
 
             break
@@ -98,6 +106,11 @@ def main(graph_order: int, expression_index: int):
 
 if __name__ == "__main__":
     main(graph_order=16, expression_index=3)
+    print()
     main(graph_order=16, expression_index=15)
+    print()
     main(graph_order=16, expression_index=28)
+    print()
     main(graph_order=16, expression_index=29)
+    print()
+    main(graph_order=16, expression_index=31)

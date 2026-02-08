@@ -2,11 +2,11 @@ from sage.all import *
 
 
 AUTO_LAPLACIAN_EXPRESSIONS = {
-    3: lambda d, m: (m ** 2) / d + m,
-    15: lambda d, m: sqrt(4 * m ** 3 / d),
-    28: lambda d, m: sqrt((2 * m ** 4) / (d ** 2) + 2 * d * m),
-    29: lambda d, m: sqrt(m ** 2 + (3 * m ** 3) / d),
-    31: lambda d, m: (4 * m ** 2) / (m + d),
+    3: lambda d, m: (m**2) / d + m,
+    15: lambda d, m: sqrt(4 * m**3 / d),
+    28: lambda d, m: sqrt((2 * m**4) / (d**2) + 2 * d * m),
+    29: lambda d, m: sqrt(m**2 + (3 * m**3) / d),
+    31: lambda d, m: (4 * m**2) / (m + d),
 }
 
 
@@ -20,9 +20,11 @@ def check(adjacency_matrix, expression_index):
     sum_nd = g.adjacency_matrix() * dseq
     average_nd = vector([i / j for i, j in zip(sum_nd, dseq)])
 
-    right_hand_values = [AUTO_LAPLACIAN_EXPRESSIONS[expression_index](d, m) for d, m in zip(dseq, average_nd)]
+    right_hand_values = [
+        AUTO_LAPLACIAN_EXPRESSIONS[expression_index](d, m) for d, m in zip(dseq, average_nd)
+    ]
     left_hand_side = max(g.spectrum(laplacian=True))
-    
+
     result = left_hand_side - max(right_hand_values)
     print(result)
 

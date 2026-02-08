@@ -91,6 +91,13 @@ class GraphEnvironment(ABC):
     a `GraphInvariantDiff` function, which specifies how graph invariant values change when the
     environment transitions from one batch of underlying graphs to another.
 
+    Conceptually, environments are divided into two types according to the nature of the
+    underlying RL task: the continuing environments and the episodic environments. In continuing
+    environments, the task has no terminal states in the usual RL sense, and the underlying graph
+    associated with each state is guaranteed to be fully colored. In episodic environments, the
+    underlying graph associated with a terminal state is guaranteed to be fully colored, but no
+    such guarantee is made for the underlying graphs associated with non-terminal states.
+
     Concrete subclasses must implement the following abstract properties:
 
     1. `state_length`, which returns the length of the state vectors;
@@ -98,8 +105,7 @@ class GraphEnvironment(ABC):
     3. `action_number`, which returns the total number of available actions;
     4. `action_mask`, which specifies which actions are currently available;
     5. `episode_length`, which returns the predetermined length of each episode; and
-    6. `is_continuing`, which determines whether the RL tasks in the environment are continuing or
-       episodic.
+    6. `is_continuing`, which determines whether the environment is continuing or episodic.
 
     Concrete subclasses must also implement the following abstract methods:
 
@@ -223,8 +229,7 @@ class GraphEnvironment(ABC):
     def is_continuing(self) -> bool:
         """
         This abstract property must be implemented by any concrete subclass. It must return a
-        `bool` indicating whether the RL tasks in the environment are continuing (`True`) or
-        episodic (`False`).
+        `bool` indicating whether the environment is continuing (`True`) or episodic (`False`).
         """
 
         pass
