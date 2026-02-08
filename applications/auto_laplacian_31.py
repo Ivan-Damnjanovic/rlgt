@@ -2,9 +2,9 @@ import numpy as np
 import torch.nn as nn
 import torch.optim as optim
 
-from rlgt.graphs import Graph
+from rlgt.graphs import Graph, MonochromaticGraph, GraphFormat
 from rlgt.agents import DeepCrossEntropyAgent, ExponentialRandomActionMechanism, ReinforceAgent
-from rlgt.environments import LinearBuildEnvironment, LinearSetEnvironment, LinearFlipEnvironment
+from rlgt.environments import LinearBuildEnvironment, LinearSetEnvironment, LinearFlipEnvironment, create_fixed_graph_generator
 
 
 def auto_laplacian_expression(d, m):
@@ -50,20 +50,28 @@ def main(graph_order: int):
     )
 
     dcem = ReinforceAgent(
-        environment=LinearBuildEnvironment(
+        environment=LinearSetEnvironment(
             graph_invariant=graph_invariant,
             graph_order=graph_order,
+            initial_graph_generator=create_fixed_graph_generator(
+                fixed_graph=MonochromaticGraph(
+                    graph_formats={GraphFormat.FLATTENED_ROW_MAJOR_COLORS},
+                    graph_order=graph_order,
+                    selected_color=1,
+                ),
+                graph_format=GraphFormat.FLATTENED_ROW_MAJOR_COLORS,
+            ),
         ),
         policy_network=policy_network,
+        optimizer=optim.Adam(policy_network.parameters(), lr=0.003),
         candidates_count=200,
         elite_count=30,
-        optimizer=optim.Adam(policy_network.parameters(), lr=0.003),
-        random_action_mechanism=ExponentialRandomActionMechanism(
-            initial_random_action_probability=0.005,
-            waiting_period=10,
-            multiplicative_factor=1.1,
-            maximum_random_action_probability=0.025,
-        ),
+        # random_action_mechanism=ExponentialRandomActionMechanism(
+        #     initial_random_action_probability=0.005,
+        #     waiting_period=10,
+        #     multiplicative_factor=1.1,
+        #     maximum_random_action_probability=0.025,
+        # ),
     )
 
     # dcem = DeepCrossEntropyAgent(

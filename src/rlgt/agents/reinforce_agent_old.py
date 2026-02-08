@@ -215,9 +215,9 @@ class ReinforceAgent(GraphAgent):
                         ],
                         dtype=np.int32,
                     )
-                    population_log_probs[episode_action_count, random_mask] = -np.log(
-                        action_mask[random_mask].sum(axis=1)
-                    )
+                    # population_log_probs[episode_action_count, random_mask] = -np.log(
+                    #     action_mask[random_mask].sum(axis=1)
+                    # )
 
                 # Settle the case where all the actions are available for execution.
                 else:
@@ -228,9 +228,9 @@ class ReinforceAgent(GraphAgent):
                         size=entry_count,
                         dtype=np.int32,
                     )
-                    population_log_probs[episode_action_count, random_mask] = -np.log(
-                        self._environment.action_number
-                    )
+                    # population_log_probs[episode_action_count, random_mask] = -np.log(
+                    #     self._environment.action_number
+                    # )
 
             # Store the selected actions and execute them.
             state_batch, current_graph_invariant_batch, status = self._environment.step_batch(
@@ -240,9 +240,6 @@ class ReinforceAgent(GraphAgent):
             # Compute the batch of rewards.
             reward_batch = current_graph_invariant_batch - previous_graph_invariant_batch
             previous_graph_invariant_batch = current_graph_invariant_batch
-            
-            if self._step_count == 0 and episode_action_count == 0:
-                print(reward_batch)
 
             # Update the returns.
             weights = self._discount_factor ** np.arange(episode_action_count, -1, -1)
@@ -278,12 +275,13 @@ class ReinforceAgent(GraphAgent):
             self._device
         )
         elite_log_probs_torch = torch.cat([population_log_probs[index][elite_mask] for index in range(self._environment.episode_length)]).reshape(-1)
+        print(elite_log_probs_torch.requires_grad)
 
         # Recalculate log probs with gradient tracking
         self._optimizer.zero_grad()
         loss = -(elite_log_probs_torch * elite_advantages_torch).mean()
         loss.backward()
-        torch.nn.utils.clip_grad_norm_(self._policy_network.parameters(), 0.5)
+        # torch.nn.utils.clip_grad_norm_(self._policy_network.parameters(), 0.5)
         self._optimizer.step()
 
         # Update the best score, and the random action probability through the random action
