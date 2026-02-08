@@ -2,22 +2,12 @@ import numpy as np
 import torch.nn as nn
 import torch.optim as optim
 
-from rlgt.agents import DeepCrossEntropyAgent, ExponentialRandomActionMechanism
+from rlgt.agents import DeepCrossEntropyAgent
 from rlgt.environments import LinearBuildEnvironment
 from rlgt.graphs import Graph
 
 
-AUTO_LAPLACIAN_EXPRESSIONS = {
-    3: lambda d, m: (m**2) / d + m,
-    15: lambda d, m: np.sqrt(4 * m**3 / d),
-    26: lambda d, m: np.sqrt(5 * d**2 + 11 * d * m) / 2,
-    28: lambda d, m: np.sqrt((2 * m**4) / (d**2) + 2 * d * m),
-    29: lambda d, m: np.sqrt(m**2 + (3 * m**3) / d),
-    31: lambda d, m: (4 * m**2) / (m + d),
-}
-
-
-def graph_invariant(graph_batch: Graph, expression_index: int):
+def graph_invariant(graph_batch: Graph):
     adj_batch = graph_batch.adjacency_matrix_colors.astype(np.float64)
 
     degree_batch = adj_batch.sum(axis=2)
@@ -35,7 +25,7 @@ def graph_invariant(graph_batch: Graph, expression_index: int):
     mu_batch = spectrum_batch[:, -1]
 
     temp = np.max(
-        AUTO_LAPLACIAN_EXPRESSIONS[expression_index](d=degree_batch_1, m=and_batch_1), axis=1
+        and_batch_1 ** 2 / degree_batch_1 + and_batch_1, axis=1
     )
     result = mu_batch - temp
 
@@ -46,7 +36,7 @@ def graph_invariant(graph_batch: Graph, expression_index: int):
     return result
 
 
-def main(graph_order: int, expression_index: int):
+def agent_example(graph_order: int):
     policy_network = nn.Sequential(
         nn.Linear(graph_order * (graph_order - 1), 72),
         nn.ReLU(),
@@ -59,19 +49,11 @@ def main(graph_order: int, expression_index: int):
 
     agent = DeepCrossEntropyAgent(
         environment=LinearBuildEnvironment(
-            graph_invariant=lambda graph_batch: graph_invariant(
-                graph_batch=graph_batch, expression_index=expression_index
-            ),
+            graph_invariant=graph_invariant, 
             graph_order=graph_order,
         ),
         policy_network=policy_network,
         optimizer=optim.Adam(policy_network.parameters(), lr=0.003),
-        random_action_mechanism=ExponentialRandomActionMechanism(
-            initial_random_action_probability=0.005,
-            waiting_period=10,
-            multiplicative_factor=1.1,
-            maximum_random_action_probability=0.100,
-        ),
     )
 
     agent.reset()
@@ -83,24 +65,10 @@ def main(graph_order: int, expression_index: int):
         if agent.best_score > 0.0001:
             print("Success!")
             solution = agent.best_graph.adjacency_matrix_colors
-
             print(solution)
-            with open(
-                f"applications/auto_laplacian_results/dce_{expression_index:02}_{graph_order}.txt",
-                "w",
-            ) as opened_file:
-                opened_file.write(np.array2string(solution, separator=", "))
 
             break
 
 
 if __name__ == "__main__":
-    main(graph_order=16, expression_index=3)
-    print()
-    main(graph_order=16, expression_index=15)
-    print()
-    main(graph_order=16, expression_index=28)
-    print()
-    main(graph_order=16, expression_index=29)
-    print()
-    main(graph_order=16, expression_index=31)
+    agent_example(graph_order=16)

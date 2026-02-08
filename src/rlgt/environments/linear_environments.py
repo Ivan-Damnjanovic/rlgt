@@ -383,7 +383,7 @@ class LinearSetEnvironment(GraphEnvironment):
 
     @property
     def is_continuing(self) -> bool:
-        return True
+        return False
 
     def _initialize_batch(self, batch_size: int) -> None:
         # Use the ``initial_graph_generator`` to generate the initial underlying fully colored
@@ -594,7 +594,7 @@ class LinearFlipEnvironment(GraphEnvironment):
 
     @property
     def is_continuing(self) -> bool:
-        return True
+        return False
 
     def _initialize_batch(self, batch_size: int) -> None:
         # Use the ``initial_graph_generator`` to generate the initial underlying fully colored
