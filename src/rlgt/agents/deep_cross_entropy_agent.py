@@ -243,7 +243,7 @@ class DeepCrossEntropyAgent(GraphAgent):
         self._population_scores[self._survivors_count :] = graph_invariant_batch
 
         # Initialize the mask that decides which executed episodes should be used to train the
-        # action prediction model.
+        # policy network.
         elite_mask = np.zeros((self._survivors_count + self._candidates_count), dtype=bool)
         # Initialize the mask that decides which executed episodes should be carried over to the
         # next generation.

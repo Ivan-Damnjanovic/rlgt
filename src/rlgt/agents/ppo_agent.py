@@ -4,7 +4,7 @@ of a reinforcement learning agent to be used in graph theory applications that a
 ``PyTorch``-based Proximal Policy Optimization (PPO) method.
 """
 
-from typing import Callable, Optional
+from typing import Optional, Callable
 
 import numpy as np
 import torch
@@ -69,19 +69,17 @@ class PPOAgent(GraphAgent):
     def __init__(
         self,
         environment: GraphEnvironment,
-        new_candidates_count: int,
-        elite_count: int,
-        survivors_count: int,
-        discount_factor: float,
         policy_network: nn.Module,
         value_network: nn.Module,
         optimizer: torch.optim.Optimizer,
-        eps_clip: float = 0.2,
-        k_epochs: int = 4,
-        entropy_coef: float = 0.01,
-        value_coef: float = 0.5,
+        candidates_count: int = 200,
+        elite_count: Optional[int] = None,
+        discount_factor: float = 0.99,
+        epochs_count: int = 4,
+        clamp_epsilon: float = 0.2,
+        value_loss_coef: float = 0.5,
         random_action_mechanism: RandomActionMechanism = NoRandomActionMechanism(),
-        rng: Optional[np.random.Generator] = None,
+        random_generator: Optional[np.random.Generator] = None,
     ):
         """
         This constructor initializes an instance of the `PPOAgent` class.
@@ -118,101 +116,106 @@ class PPOAgent(GraphAgent):
         """
 
         self._environment: GraphEnvironment = environment
-        self._new_candidates_count: int = new_candidates_count
-        self._elite_count: int = elite_count
-        self._survivors_count: int = survivors_count
-        self._discount_factor: float = discount_factor
+        # Enforce no sparse setting.
+        self._environment.sparse_setting = False
 
         self._policy_network: nn.Module = policy_network
         self._value_network: nn.Module = value_network
         self._optimizer: torch.optim.Optimizer = optimizer
+        self._value_loss_function: Callable = nn.MSELoss()
 
         # Infer the device from the policy network parameters. If no parameters exist, fall back to
         # the CPU.
         params = list(self._policy_network.parameters())
         self._device: torch.device = params[0].device if params else torch.device("cpu")
 
-        self._eps_clip: float = eps_clip
-        self._k_epochs: int = k_epochs
-        self._entropy_coef: float = entropy_coef
-        self._value_coef: float = value_coef
+        self._candidates_count: int = candidates_count
+        self._elite_count: Optional[int] = elite_count
+        self._discount_factor: float = discount_factor
 
+        self._epochs_count: int = epochs_count
+        self._clamp_epsilon: float = clamp_epsilon
+        self._value_loss_coef: float = value_loss_coef
         self._random_action_mechanism: RandomActionMechanism = random_action_mechanism
 
-        # If the ``rng`` argument is `None`, then use a default `np.random.Generator`.
-        if rng is None:
-            rng = np.random.default_rng()
-        self._rng: np.random.Generator = rng
+        # If the ``random_generator`` argument is `None`, then use a default `np.random.Generator`.
+        if random_generator is None:
+            random_generator = np.random.default_rng()
+        self._random_generator: np.random.Generator = random_generator
 
         self._step_count: Optional[int] = None
         self._best_score: Optional[float] = None
+        self._best_graph: Optional[Graph] = None
+
         self._population_states: Optional[np.ndarray] = None
         self._population_actions: Optional[np.ndarray] = None
-        self._population_rewards: Optional[np.ndarray] = None
         self._population_returns: Optional[np.ndarray] = None
 
-        # Episode buffer for collecting experiences
-        # self._buffer_states = []
-        # self._buffer_actions = []
-        # self._buffer_rewards = []
-        # self._buffer_log_probs = []
-        # self._buffer_values = []
-        # self._buffer_dones = []
-
     def reset(self) -> None:
-        # Initialize the step count to 0 and the best score to minus infinity. Also, initialize the
-        # random action mechanism.
+        # Initialize the step count to 0, the best score to minus infinity, and the best graph to
+        # `None`. Also, initialize the random action mechanism.
         self._step_count = 0
         self._best_score = float("-inf")
+        self._best_graph = None
         self._random_action_mechanism.reset()
 
-        # Initialize the population states, the population actions and the population rewards to
-        # the zero `np.ndarray` objects of the required shape and type.
-        total_population = self._survivors_count + self._new_candidates_count
+        # Initialize the population returns to the zero `np.ndarray` of type `np.float32` and the
+        # required shape.
         self._population_states = np.zeros(
             (
                 self._environment.episode_length + 1,
-                total_population,
+                self._candidates_count,
                 self._environment.state_length,
             ),
             dtype=self._environment.state_dtype,
         )
         self._population_actions = np.zeros(
-            (self._environment.episode_length, total_population), dtype=np.int32
+            (self._environment.episode_length, self._candidates_count), dtype=np.int32
         )
-        self._population_rewards = np.zeros((total_population,), dtype=np.float32)
         self._population_returns = np.zeros(
-            (self._environment.episode_length, total_population), dtype=np.float32
+            (self._environment.episode_length, self._candidates_count), dtype=np.float32
         )
-        self._population_values = np.zeros()
 
     def step(self) -> None:
-        """
-        Perform one training step: collect batch_size episodes in parallel and update policy.
-        Episodes are collected in parallel for speed, but episode boundaries are tracked
-        to ensure correct per-episode returns calculation.
-        """
+        # Initialize a batch of episodes with the batch size ``_candidates_count``.
+        state_batch, current_scores, status = self._environment.reset_batch(
+            batch_size=self._candidates_count
+        )
+        self._population_states[0, :, :] = state_batch
 
-        # Initialize a batch of episodes with the batch size ``_new_candidates_count`` and store
-        # the starting states to the ``_population_states`` attribute. While storing the states,
-        # the final ``_new_candidates_count`` positions should be used (in the second dimension),
-        # while the starting ``_survivors_count`` positions are reserved for the surviving episodes
-        # carried over from the previous generation.
-        state_batch, status = self._environment.reset_batch(batch_size=self._new_candidates_count)
-        self._population_states[0, self._survivors_count :, :] = state_batch
-        self._population_rewards[self._survivors_count :] = 0
-        self._population_returns[:, self._survivors_count :] = 0
+        # Initialize the new best score and new best graph.
+        new_best_score = self._best_score
+        new_best_graph = self._best_graph
+
+        # If the RL environment is continuing, then determine the best graph and best score from
+        # the starting timestamp, and update the corresponding variables if needed.
+        if self._environment.is_continuing:
+            timestamp_best = np.max(current_scores)
+            if timestamp_best > new_best_score:
+                new_best_score = timestamp_best
+                best_index = np.argmax(current_scores)
+                new_best_graph = self._environment.state_to_graph(state_batch[best_index, :])
+
+        # Set the ``_population_returns`` attribute to all zeros. Also, initialize the
+        # ``population_log_probs`` list that stores all the log probabilities per timestamp.
+        self._population_returns[:, :] = 0
+        population_old_log_probs = []
+        population_old_values = []
 
         # Set the episode action counter to 0 and use the random action mechanism to obtain the
         # random action probability.
         episode_action_count = 0
         random_action_probability = self._random_action_mechanism.random_action_probability
 
+        # While the episodes are in progress...
         while status == EpisodeStatus.IN_PROGRESS:
-            # Select actions for all active episodes
+            # Use the policy network to get the probability distribution for each action to be
+            # selected for execution in each of the episodes run in parallel.
             state_batch_torch = torch.from_numpy(state_batch.astype(np.float32)).to(self._device)
             logits_batch_torch = self._policy_network(state_batch_torch)
+            
             values_batch_torch = self._value_network(state_batch_torch)
+            population_old_values.append(values_batch_torch.detach())
 
             # Make it impossible to execute an action that is not available for execution.
             action_mask = self._environment.action_mask
@@ -223,12 +226,19 @@ class PPOAgent(GraphAgent):
                 )
 
             # Sample the actions according to the obtained probability distributions.
-            action_batch_torch = Categorical(logits=logits_batch_torch).sample()
+            distribution = Categorical(logits=logits_batch_torch)
+            action_batch_torch = distribution.sample()
             action_batch = action_batch_torch.cpu().numpy()
+
+            # Store the log probabilities to the ``population_log_probs`` list.
+            population_old_log_probs.append(distribution.log_prob(action_batch_torch).detach())
 
             # Use the random action probability to decide whether each sampled action should be
             # replaced by a random action.
-            random_mask = self._rng.random(size=action_batch.shape[0]) < random_action_probability
+            random_mask = (
+                self._random_generator.random(size=action_batch.shape[0])
+                < random_action_probability
+            )
 
             # Select each required random action among the actions available for execution using
             # the uniform probability distribution.
@@ -240,7 +250,9 @@ class PPOAgent(GraphAgent):
 
                     action_batch[random_mask] = np.array(
                         [
-                            self._rng.choice(probabilities_batch.shape[1], p=probabilities)
+                            self._random_generator.choice(
+                                probabilities_batch.shape[1], p=probabilities
+                            )
                             for probabilities in probabilities_batch
                         ],
                         dtype=np.int32,
@@ -249,186 +261,116 @@ class PPOAgent(GraphAgent):
                 # Settle the case where all the actions are available for execution.
                 else:
                     entry_count = np.count_nonzero(random_mask)
-                    action_batch[random_mask] = self._rng.integers(
+                    action_batch[random_mask] = self._random_generator.integers(
                         low=0,
                         high=self._environment.action_number,
                         size=entry_count,
                         dtype=np.int32,
                     )
 
-            # Store the selected actions and execute them.
-            self._population_actions[episode_action_count, self._survivors_count :] = action_batch
-            state_batch, reward_batch, status = self._environment.step_batch(action_batch)
+            # Execute the selected actions and compute the batch of rewards.
+            previous_scores = current_scores
+            self._population_actions[episode_action_count, :] = action_batch
+            state_batch, current_scores, status = self._environment.step_batch(action_batch)
+            reward_batch = current_scores - previous_scores
 
-            # Update the cumulative rewards and store the newly obtained states.
-            self._population_rewards[self._survivors_count :] += reward_batch
+            # Update the discounted returns.
             weights = self._discount_factor ** np.arange(episode_action_count, -1, -1)
-            self._population_returns[
-                : episode_action_count + 1, self._survivors_count :
-            ] += np.outer(weights, reward_batch)
+            self._population_returns[: episode_action_count + 1, :] += np.outer(
+                weights, reward_batch
+            )
+
+            # If the RL environment is continuing, or the final batch of actions has been executed,
+            # then determine the best graph and best score from the current timestamp, and update
+            # the corresponding variables if needed.
+            if self._environment.is_continuing or status != EpisodeStatus.IN_PROGRESS:
+                timestamp_best = np.max(current_scores)
+                if timestamp_best > new_best_score:
+                    new_best_score = timestamp_best
+                    best_index = np.argmax(current_scores)
+                    new_best_graph = self._environment.state_to_graph(state_batch[best_index, :])
+
             episode_action_count += 1
-            self._population_states[episode_action_count, self._survivors_count :, :] = state_batch
+            self._population_states[episode_action_count, :, :] = state_batch
 
-            # Store transitions for each episode separately
-            for i in range(self._new_candidates_count):
-                episode_trajectories[i].append(
-                    {
-                        "state": state_batch_torch[i],
-                        "action": action_batch[i],
-                        "log_prob": log_probs[i].item(),
-                        "value": values_batch[i].item(),
-                    }
-                )
+        # Compute the mask that decides which executed episodes should be used to train the policy
+        # network and the value network.
+        elite_mask = np.zeros((self._candidates_count), dtype=bool)
+        if self._elite_count is None:
+            elite_mask[:] = True
+        else:
+            elite_mask[
+                np.argpartition(current_scores, -self._elite_count)[-self._elite_count :]
+            ] = True
 
-            # Take actions in environment
-            next_state_batch, reward_batch, status = self._environment.step_batch(action_batch)
+        # Extract the (state, action) pairs from the elite executed episodes, i.e., the executed
+        # episodes that should be used to train the policy network.
+        elite_states = self._population_states[:-1, elite_mask, :].reshape(
+            -1, self._environment.state_length
+        )
+        elite_actions = self._population_actions[:, elite_mask].reshape(-1)
+        elite_states_torch = torch.from_numpy(elite_states.astype(np.float32)).to(self._device)
+        elite_actions_torch = torch.from_numpy(elite_actions.astype(np.int64)).to(self._device)
 
-            # Update episode rewards and store rewards/dones per episode
-            for i in range(self._new_candidates_count):
-                episode_trajectories[i][-1]["reward"] = reward_batch[i]
-                episode_trajectories[i][-1]["done"] = status != EpisodeStatus.IN_PROGRESS
-                episode_rewards[i] += reward_batch[i]
+        # Prepare the log-probabilities from the elite executed episodes for training.
+        elite_log_probs_torch = torch.cat(
+            [
+                population_old_log_probs[index][elite_mask]
+                for index in range(self._environment.episode_length)
+            ]
+        ).reshape(-1)
 
-            state_batch = next_state_batch
+        elite_values_torch = torch.cat(
+            [
+                population_old_values[index][elite_mask]
+                for index in range(self._environment.episode_length)
+            ]
+        ).reshape(-1)
 
-        # ELITE FILTERING: Only use top episodes for training (like Cross Entropy Method)
-        # This dramatically improves learning for sparse reward problems
-        elite_count = max(20, self._new_candidates_count // 10)  # Top 10% or at least 20
-        elite_indices = np.argpartition(episode_rewards, -elite_count)[-elite_count:]
+        # Compute the advantages for the elite executed episodes. Apply the baselines if requested.
+        elite_returns = self._population_returns[:, elite_mask].reshape(-1)
+        elite_returns_torch = torch.from_numpy(elite_returns.astype(np.float32)).to(self._device)
 
-        # Only flatten elite episode trajectories into the buffer
-        for ep_idx in elite_indices:
-            trajectory = episode_trajectories[ep_idx]
-            for transition in trajectory:
-                self._buffer_states.append(transition["state"])
-                self._buffer_actions.append(transition["action"])
-                self._buffer_log_probs.append(transition["log_prob"])
-                self._buffer_values.append(transition["value"])
-                self._buffer_rewards.append(transition["reward"])
-                self._buffer_dones.append(transition["done"])
+        elite_advantages_torch = elite_returns_torch - elite_values_torch
+        elite_advantages_torch = (elite_advantages_torch - elite_advantages_torch.mean()) / (elite_advantages_torch.std() + 1e-8)
 
-        # Update policy using collected experiences from elite episodes only
-        self._update_policy()
+        for _ in range(self._epochs_count):
+            logits_batch_torch = self._policy_network(elite_states_torch)
+            values_batch_torch = self._value_network(elite_states_torch).reshape(-1)
 
-        # Track best score and update random action mechanism
-        max_episode_score = float(max(episode_rewards))
-        previous_best_score = self._best_score
-        if max_episode_score > self._best_score:
-            self._best_score = max_episode_score
+            new_log_probs_torch = Categorical(logits=logits_batch_torch).log_prob(elite_actions_torch)
+            ratio = torch.exp(new_log_probs_torch - elite_log_probs_torch)
+            loss_1 = ratio * elite_advantages_torch
+            loss_2 = torch.clamp(ratio, 1 - self._clamp_epsilon, 1 + self._clamp_epsilon) * elite_advantages_torch
+            policy_loss = torch.min(loss_1, loss_2).mean()
 
-        # Call random action mechanism step - try both parameter names for compatibility
-        try:
-            self._random_action_mechanism.step(
-                previous_best_score=previous_best_score, current_best_score=self._best_score
-            )
-        except TypeError:
-            # Fallback for ExponentialRandomActionMechanism which uses new_best_score
-            self._random_action_mechanism.step(
-                previous_best_score=previous_best_score, new_best_score=self._best_score
-            )
+            value_loss = self._value_loss_function(values_batch_torch, elite_returns_torch)
+            loss = policy_loss + self._value_loss_coef * value_loss
+
+            self._optimizer.zero_grad()
+            loss.backward()
+            torch.nn.utils.clip_grad_norm_(list(self._policy_network.parameters()) + list(self._value_network.parameters()), 0.5)
+            self._optimizer.step()
+
+        # Update the random action probability through the random action mechanism, and then update
+        # the best score and best graph.
+        self._random_action_mechanism.step(
+            previous_best_score=self._best_score, current_best_score=new_best_score
+        )
+        self._best_score = new_best_score
+        self._best_graph = new_best_graph
 
         # Increment the number of executed iterations of the learning process.
         self._step_count += 1
 
-    def _update_policy(self):
-        """Update policy and value networks using PPO algorithm."""
-        if len(self._buffer_states) == 0:
-            return
-
-        # Convert buffer to tensors
-        states = torch.stack(self._buffer_states).to(self._device)
-        actions = torch.tensor(self._buffer_actions, dtype=torch.int64).to(self._device)
-        old_log_probs = torch.tensor(self._buffer_log_probs, dtype=torch.float32).to(self._device)
-
-        # Calculate returns
-        returns = self._calculate_returns()
-        returns = torch.tensor(returns, dtype=torch.float32).to(self._device)
-
-        # DON'T normalize returns for sparse rewards - it destroys the signal!
-        # Elite filtering already selects good episodes, so normalization is harmful
-
-        # PPO update for k epochs
-        for _ in range(self._k_epochs):
-            # Get current policy and value predictions
-            logits = self._policy_network(states)
-            values = self._value_network(states).squeeze()
-
-            dist = Categorical(logits=logits)
-            new_log_probs = dist.log_prob(actions)
-            entropy = dist.entropy().mean()
-
-            # Calculate advantages WITHOUT normalization for sparse rewards
-            # Normalizing advantages destroys the signal when rewards are sparse
-            advantages = returns - values.detach()
-
-            # Calculate surrogate losses
-            ratio = torch.exp(new_log_probs - old_log_probs)
-            surr1 = ratio * advantages
-            surr2 = torch.clamp(ratio, 1 - self._eps_clip, 1 + self._eps_clip) * advantages
-
-            # Total loss
-            policy_loss = -torch.min(surr1, surr2).mean()
-            value_loss = nn.MSELoss()(values, returns)
-            loss = policy_loss + self._value_coef * value_loss - self._entropy_coef * entropy
-
-            # Optimization step
-            self._optimizer.zero_grad()
-            loss.backward()
-            torch.nn.utils.clip_grad_norm_(
-                list(self._policy_network.parameters()) + list(self._value_network.parameters()),
-                0.5,
-            )
-            self._optimizer.step()
-
-        # Clear buffer
-        self._clear_buffer()
-
-    def _calculate_returns(self):
-        """Calculate discounted returns from rewards."""
-        returns = []
-        discounted_sum = 0
-
-        for reward, done in zip(reversed(self._buffer_rewards), reversed(self._buffer_dones)):
-            if done:
-                discounted_sum = 0
-            discounted_sum = reward + self._discount_factor * discounted_sum
-            returns.insert(0, discounted_sum)
-
-        return returns
-
     @property
-    def step_count(self) -> int:
+    def step_count(self) -> Optional[int]:
         return self._step_count
 
     @property
-    def best_score(self) -> float:
+    def best_score(self) -> Optional[float]:
         return self._best_score
 
     @property
     def best_graph(self) -> Optional[Graph]:
-        if self._step_count is None or self._step_count < 1:
-            return None
-
-        # Run one episode with the current policy to get the best graph
-        state_batch, status = self._environment.reset_batch(batch_size=1)
-
-        while status == EpisodeStatus.IN_PROGRESS:
-            state_torch = torch.from_numpy(state_batch.astype(np.float32)).to(self._device)
-
-            with torch.no_grad():
-                logits = self._policy_network(state_torch)
-
-                action_mask = self._environment.action_mask
-                if action_mask is not None:
-                    action_mask_torch = torch.from_numpy(action_mask).to(self._device)
-                    logits = logits.masked_fill(~action_mask_torch, float("-inf"))
-
-                action = Categorical(logits=logits).sample()
-
-            state_batch, reward_batch, status = self._environment.step_batch(action.cpu().numpy())
-
-        # Convert final state to graph
-        final_state = state_batch[0]
-        best_graph = self._environment.state_to_graph(final_state)
-
-        return best_graph
+        return self._best_graph

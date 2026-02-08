@@ -265,8 +265,8 @@ class ReinforceAgent(GraphAgent):
 
             episode_action_count += 1
 
-        # Compute the mask that decides which executed episodes should be used to train the action
-        # prediction model.
+        # Compute the mask that decides which executed episodes should be used to train the policy
+        # network.
         elite_mask = np.zeros((self._candidates_count), dtype=bool)
         if self._elite_count is None:
             elite_mask[:] = True
