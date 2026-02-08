@@ -10,6 +10,7 @@ from rlgt.environments import LinearBuildEnvironment, LinearSetEnvironment, Line
 AUTO_LAPLACIAN_EXPRESSIONS = {
     3: lambda d, m: (m ** 2) / d + m,
     15: lambda d, m: np.sqrt(4 * m ** 3 / d),
+    26: lambda d, m: np.sqrt(5 * d ** 2 + 11 * d * m) / 2,
     28: lambda d, m: np.sqrt((2 * m ** 4) / (d ** 2) + 2 * d * m),
     29: lambda d, m: np.sqrt(m ** 2 + (3 * m ** 3) / d),
     31: lambda d, m: (4 * m ** 2) / (m + d),
@@ -68,13 +69,13 @@ def main(graph_order: int, expression_index: int):
             episode_length=30,
         ),
         policy_network=policy_network,
-        optimizer=optim.Adam(policy_network.parameters(), lr=0.0005),
+        optimizer=optim.Adam(policy_network.parameters(), lr=0.001),
         candidates_count=200,
         random_action_mechanism=ExponentialRandomActionMechanism(
             initial_random_action_probability=0.005,
             waiting_period=10,
             multiplicative_factor=1.1,
-            maximum_random_action_probability=0.050,
+            maximum_random_action_probability=0.100,
         ),
     )
 
@@ -96,4 +97,7 @@ def main(graph_order: int, expression_index: int):
 
 
 if __name__ == "__main__":
-    main(graph_order=14, expression_index=3)
+    main(graph_order=16, expression_index=3)
+    main(graph_order=16, expression_index=15)
+    main(graph_order=16, expression_index=28)
+    main(graph_order=16, expression_index=29)

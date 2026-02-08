@@ -171,6 +171,10 @@ class ReinforceAgent(GraphAgent):
         episode_action_count = 0
         random_action_probability = self._random_action_mechanism.random_action_probability
 
+        # Initialize the new best score and new best graph.
+        new_best_score = self._best_score
+        new_best_graph = self._best_graph
+
         # While the episodes are in progress...
         while status == EpisodeStatus.IN_PROGRESS:
             # Use the policy network to get the probability distribution for each action to be
@@ -242,6 +246,13 @@ class ReinforceAgent(GraphAgent):
                 weights, reward_batch
             )
 
+            if self._environment.is_continuing or status != EpisodeStatus.IN_PROGRESS:
+                timestamp_best = np.max(current_scores)
+                if timestamp_best > new_best_score:
+                    new_best_score = timestamp_best
+                    best_index = np.argmax(current_scores)
+                    new_best_graph = self._environment.state_to_graph(state_batch[best_index, :])
+
             episode_action_count += 1
 
         # Compute the mask that decides which executed episodes should be used to train the action
@@ -279,17 +290,11 @@ class ReinforceAgent(GraphAgent):
         self._optimizer.step()
 
         # Update the random action probability through the random action mechanism.
-        best_index = np.argmax(current_scores)
-        current_best_score = max(self._best_score, current_scores[best_index])
         self._random_action_mechanism.step(
-            previous_best_score=self._best_score, current_best_score=current_best_score
+            previous_best_score=self._best_score, current_best_score=new_best_score
         )
-
-        # Update the best graph and the best graph, if needed.
-        if current_best_score > self._best_score:
-            self._best_score = current_best_score
-            best_state = state_batch[best_index, :]
-            self._best_graph = self._environment.state_to_graph(best_state)
+        self._best_score = new_best_score
+        self._best_graph = new_best_graph
 
         # Increment the number of executed iterations of the learning process.
         self._step_count += 1

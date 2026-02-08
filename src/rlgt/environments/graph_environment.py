@@ -96,8 +96,10 @@ class GraphEnvironment(ABC):
     1. `state_length`, which returns the length of the state vectors;
     2. `state_dtype`, which returns the data type of the state vectors;
     3. `action_number`, which returns the total number of available actions;
-    4. `action_mask`, which specifies which actions are currently available; and
-    5. `episode_length`, which returns the predetermined length of each episode.
+    4. `action_mask`, which specifies which actions are currently available;
+    5. `episode_length`, which returns the predetermined length of each episode; and
+    6. `is_continuing`, which determines whether the RL tasks in the environment are continuing or
+       episodic.
 
     Concrete subclasses must also implement the following abstract methods:
 
@@ -215,6 +217,17 @@ class GraphEnvironment(ABC):
         """
 
         pass  # pragma: no cover
+
+    @property
+    @abstractmethod
+    def is_continuing(self) -> bool:
+        """
+        This abstract property must be implemented by any concrete subclass. It must return a
+        `bool` indicating whether the RL tasks in the environment are continuing (`True`) or
+        episodic (`False`).
+        """
+
+        pass
 
     def reset_batch(
         self, batch_size: int

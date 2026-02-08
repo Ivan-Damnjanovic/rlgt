@@ -152,6 +152,10 @@ class LinearBuildEnvironment(GraphEnvironment):
     def episode_length(self) -> int:  # pragma: no cover
         return self._flattened_length
 
+    @property
+    def is_continuing(self) -> bool:
+        return False
+
     def _initialize_batch(self, batch_size: int) -> None:
         self._state_batch = np.zeros((batch_size, self._state_length), dtype=np.uint8)
         # The zeroth edge (resp. arc) should be properly colored first.
@@ -377,6 +381,10 @@ class LinearSetEnvironment(GraphEnvironment):
     def episode_length(self) -> int:  # pragma: no cover
         return self._flattened_length
 
+    @property
+    def is_continuing(self) -> bool:
+        return True
+
     def _initialize_batch(self, batch_size: int) -> None:
         # Use the ``initial_graph_generator`` to generate the initial underlying fully colored
         # graphs.
@@ -583,6 +591,10 @@ class LinearFlipEnvironment(GraphEnvironment):
     @property
     def episode_length(self) -> int:  # pragma: no cover
         return self._flattened_length
+
+    @property
+    def is_continuing(self) -> bool:
+        return True
 
     def _initialize_batch(self, batch_size: int) -> None:
         # Use the ``initial_graph_generator`` to generate the initial underlying fully colored

@@ -200,6 +200,10 @@ class GlobalSetEnvironment(GraphEnvironment):
 
         self._episode_length = episode_length
 
+    @property
+    def is_continuing(self) -> bool:
+        return True
+
     def _initialize_batch(self, batch_size: int) -> None:
         # Use the ``initial_graph_generator`` to generate the initial underlying fully colored
         # graphs.
@@ -423,6 +427,10 @@ class GlobalFlipEnvironment(GraphEnvironment):
         """
 
         self._episode_length = episode_length
+
+    @property
+    def is_continuing(self) -> bool:
+        return True
 
     def _initialize_batch(self, batch_size: int) -> None:
         # Use the ``initial_graph_generator`` to generate the initial underlying fully colored
