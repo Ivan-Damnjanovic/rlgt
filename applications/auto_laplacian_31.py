@@ -2,9 +2,9 @@ import numpy as np
 import torch.nn as nn
 import torch.optim as optim
 
-from rlgt.graphs import Graph, MonochromaticGraph, GraphFormat
+from rlgt.graphs import Graph, MonochromaticGraph, GraphFormat, CycleGraph
 from rlgt.agents import DeepCrossEntropyAgent, ExponentialRandomActionMechanism, ReinforceAgent
-from rlgt.environments import LinearBuildEnvironment, LinearSetEnvironment, LinearFlipEnvironment, create_fixed_graph_generator
+from rlgt.environments import LinearBuildEnvironment, LinearSetEnvironment, LinearFlipEnvironment, create_fixed_graph_generator, GlobalSetEnvironment, LocalSetEnvironment
 
 
 def auto_laplacian_expression(d, m):
@@ -31,8 +31,9 @@ def graph_invariant(graph_batch: Graph):
     temp = np.max(auto_laplacian_expression(d=degree_batch_1, m=and_batch_1), axis=1)
     result = mu_batch - temp
 
-    result[spectrum_batch[:, 1] < 0.15] = -1000.0
-    result[np.min(degree_batch, axis=1) < 0.5] = -1000.0
+    result[spectrum_batch[:, 1] < 0.15] = -5.0
+    result[np.min(degree_batch, axis=1) < 0.5] = -5.0
+    # result[result == 0] = -1000.0
     result = result.astype(np.float32)
 
     return result
@@ -40,38 +41,39 @@ def graph_invariant(graph_batch: Graph):
 
 def main(graph_order: int):
     policy_network = nn.Sequential(
-        nn.Linear(graph_order * (graph_order - 1), 72),
+        nn.Linear(graph_order * (graph_order - 1) // 2 + graph_order, 72),
         nn.ReLU(),
         nn.Dropout(0.2),
         nn.Linear(72, 12),
         nn.ReLU(),
         nn.Dropout(0.2),
-        nn.Linear(12, 2),
+        nn.Linear(12, graph_order * 2),
     )
 
     dcem = ReinforceAgent(
-        environment=LinearSetEnvironment(
+        environment=LocalSetEnvironment(
             graph_invariant=graph_invariant,
             graph_order=graph_order,
             initial_graph_generator=create_fixed_graph_generator(
-                fixed_graph=MonochromaticGraph(
+                fixed_graph=CycleGraph(
                     graph_formats={GraphFormat.FLATTENED_ROW_MAJOR_COLORS},
                     graph_order=graph_order,
-                    selected_color=1,
                 ),
                 graph_format=GraphFormat.FLATTENED_ROW_MAJOR_COLORS,
             ),
+            episode_length=30,
         ),
         policy_network=policy_network,
-        optimizer=optim.Adam(policy_network.parameters(), lr=0.003),
+        optimizer=optim.Adam(policy_network.parameters(), lr=0.0005),
         candidates_count=200,
-        elite_count=30,
-        # random_action_mechanism=ExponentialRandomActionMechanism(
-        #     initial_random_action_probability=0.005,
-        #     waiting_period=10,
-        #     multiplicative_factor=1.1,
-        #     maximum_random_action_probability=0.025,
-        # ),
+        # apply_baseline=False,
+        # elite_count=30,
+        random_action_mechanism=ExponentialRandomActionMechanism(
+            initial_random_action_probability=0.005,
+            waiting_period=10,
+            multiplicative_factor=1.1,
+            maximum_random_action_probability=0.050,
+        ),
     )
 
     # dcem = DeepCrossEntropyAgent(

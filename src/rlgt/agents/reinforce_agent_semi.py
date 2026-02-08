@@ -134,6 +134,8 @@ class ReinforceAgent(GraphAgent):
         self._best_score: Optional[float] = None
         self._best_graph: Optional[Graph] = None
 
+        self._population_states: Optional[np.ndarray] = None
+        self._population_actions: Optional[np.ndarray] = None
         self._population_returns: Optional[np.ndarray] = None
 
     def reset(self) -> None:
@@ -167,6 +169,7 @@ class ReinforceAgent(GraphAgent):
         state_batch, previous_graph_invariant_batch, status = self._environment.reset_batch(
             batch_size=self._candidates_count
         )
+        self._population_states[0, :, :] = state_batch
 
         # Set the ``_population_returns`` attribute to all zeros. Also, initialize the
         # ``population_log_probs`` matrix that stores all the log probabilities, with rows
@@ -226,10 +229,9 @@ class ReinforceAgent(GraphAgent):
                         ],
                         dtype=np.int32,
                     )
-                    # population_log_probs[episode_action_count][random_mask] = -np.log(
+                    # population_log_probs[episode_action_count, random_mask] = -np.log(
                     #     action_mask[random_mask].sum(axis=1)
                     # )
-                    # print(population_log_probs[episode_action_count])
 
                 # Settle the case where all the actions are available for execution.
                 else:
@@ -240,12 +242,12 @@ class ReinforceAgent(GraphAgent):
                         size=entry_count,
                         dtype=np.int32,
                     )
-                    # population_log_probs[episode_action_count][random_mask] = -np.log(
+                    # population_log_probs[episode_action_count, random_mask] = -np.log(
                     #     self._environment.action_number
                     # )
-                    # print(population_log_probs[episode_action_count])
 
             # Store the selected actions and execute them.
+            self._population_actions[episode_action_count, :] = action_batch
             state_batch, current_graph_invariant_batch, status = self._environment.step_batch(
                 action_batch
             )
@@ -265,6 +267,7 @@ class ReinforceAgent(GraphAgent):
 
             # Store the newly obtained states.
             episode_action_count += 1
+            self._population_states[episode_action_count, :, :] = state_batch
 
         # Compute the mask that decides which executed episodes should be used to train the action
         # prediction model.
@@ -278,6 +281,17 @@ class ReinforceAgent(GraphAgent):
                     -self._elite_count :
                 ]
             ] = True
+
+
+
+        elite_states = self._population_states[:-1, elite_mask, :].reshape(
+            -1, self._environment.state_length
+        )
+        elite_actions = self._population_actions[:, elite_mask].reshape(-1)
+        elite_states_torch = torch.from_numpy(elite_states.astype(np.float32)).to(self._device)
+        elite_actions_torch = torch.from_numpy(elite_actions.astype(np.int64)).to(self._device)
+
+
 
         # Compute the advantages for the elite executed episodes. Apply the baselines if requested.
         filtered_advantages = self._population_returns[:, elite_mask]
@@ -295,7 +309,12 @@ class ReinforceAgent(GraphAgent):
         # Recalculate log probs with gradient tracking
         self._optimizer.zero_grad()
 
-        loss = -(elite_log_probs_torch * elite_advantages_torch).mean()
+        logits_torch = self._policy_network(elite_states_torch)
+        print(logits_torch.shape)
+        log_probs_torch = Categorical(logits=logits_torch).log_prob(elite_actions_torch)
+        print(log_probs_torch.shape)
+
+        loss = -(log_probs_torch * elite_advantages_torch).mean()
         loss.backward()
         torch.nn.utils.clip_grad_norm_(self._policy_network.parameters(), 0.5)
         self._optimizer.step()
