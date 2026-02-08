@@ -1,11 +1,13 @@
 import numpy as np
-import rlgt
+from rlgt import graphs as rlgt_graphs
+from rlgt import environments as rlgt_environments
+from rlgt import agents as rlgt_agents
 import torch.nn as nn
 import torch.optim as optim
 from sage.all import *
 
 
-def graph_invariant(graph_batch: rlgt.graphs.Graph):
+def graph_invariant(graph_batch: rlgt_graphs.Graph):
     result = np.zeros(graph_batch.batch_size, dtype=np.float32)
 
     for index in range(graph_batch.batch_size):
@@ -41,14 +43,14 @@ def main(graph_order: int):
         nn.Linear(12, 2),
     )
 
-    agent = rlgt.agents.DeepCrossEntropyAgent(
-        environment=rlgt.environments.LinearBuildEnvironment(
+    agent = rlgt_agents.DeepCrossEntropyAgent(
+        environment=rlgt_environments.LinearBuildEnvironment(
             graph_invariant=graph_invariant,
             graph_order=graph_order,
         ),
         policy_network=policy_network,
         optimizer=optim.Adam(policy_network.parameters(), lr=0.003),
-        random_action_mechanism=rlgt.agents.ExponentialRandomActionMechanism(
+        random_action_mechanism=rlgt_agents.ExponentialRandomActionMechanism(
             initial_random_action_probability=0.005,
             waiting_period=10,
             multiplicative_factor=1.1,
