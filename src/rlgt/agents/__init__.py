@@ -2,7 +2,7 @@
 The `rlgt.agents` package defines the `GraphAgent` abstract base class, which formalizes a
 reinforcement learning agent for graph theory applications. It also provides three concrete agent
 classes that inherit from `GraphAgent` and implement the Deep-Cross Entropy, REINFORCE and Proximal
-Policy Optimization (PPO) methods, all based on `PyTorch`. In addition, the package includes
+Policy Optimization (PPO) methods, all based on ``PyTorch``. In addition, the package includes
 several auxiliary classes for defining random action mechanisms.
 
 This package can only be used if the optional ``agents`` extra dependencies are installed.

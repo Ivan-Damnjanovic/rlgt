@@ -18,7 +18,7 @@ class RandomActionMechanism(ABC):
     subclasses that inherit from this class must implement the following abstract property:
 
     * `random_action_probability`, which returns the current random action probability as a `float`
-      from the interval $[0, 1]$;
+      from the interval [0, 1];
 
     as well as the following abstract methods:
 
@@ -60,7 +60,7 @@ class RandomActionMechanism(ABC):
     def random_action_probability(self) -> float:
         """
         This abstract property must be implemented by any concrete subclass. It must return the
-        current random action probability as a `float` value from the interval $[0, 1]$.
+        current random action probability as a `float` value from the interval [0, 1].
         """
 
         pass
@@ -90,7 +90,7 @@ class ConstantRandomActionMechanism(RandomActionMechanism):
     mechanism in which the probability of executing a random action is constant and specified at
     construction time.
 
-    :ivar __random_action_probability: A `float` from the interval $[0, 1]$ that determines the
+    :ivar __random_action_probability: A `float` from the interval [0, 1] that determines the
         constant probability with which a random action is executed.
     """
 
@@ -100,7 +100,7 @@ class ConstantRandomActionMechanism(RandomActionMechanism):
         probability.
 
         :param random_action_probability: The constant probability of executing a random action,
-            given as a `float` from the interval $[0, 1]$.
+            given as a `float` from the interval [0, 1].
         """
 
         self.__random_action_probability: float = random_action_probability
@@ -125,18 +125,18 @@ class ExponentialRandomActionMechanism(RandomActionMechanism):
     a fixed maximum threshold. Whenever a strict improvement in the best score is observed, the
     random action probability is reset to its initial value and the adaptation process restarts.
 
-    :ivar __initial_random_action_probability: A `float` from the interval $[0, 1]$ that represents
+    :ivar __initial_random_action_probability: A `float` from the interval [0, 1] that represents
         the initial random action probability.
     :ivar __waiting_period: A positive `int` that specifies how many consecutive iterations without
         an improvement in the best score are required before the random action probability is
         increased.
     :ivar __multiplicative_factor: A `float` greater than 1 that specifies the factor by which the
         random action probability is multiplied when an increase is triggered.
-    :ivar __maximum_random_action_probability: A `float` from the interval $[0, 1]$ that represents
+    :ivar __maximum_random_action_probability: A `float` from the interval [0, 1] that represents
         the maximum allowable value of the random action probability.
     :ivar __counter: A nonnegative `int` that counts the number of iterations since the last
         improvement in the best score or the last update of the random action probability.
-    :ivar __random_action_probability: A `float` from the interval $[0, 1]$ that represents the
+    :ivar __random_action_probability: A `float` from the interval [0, 1] that represents the
         current random action probability.
     """
 
@@ -152,14 +152,14 @@ class ExponentialRandomActionMechanism(RandomActionMechanism):
         exponential adaptation behavior.
 
         :param initial_random_action_probability: The initial random action probability, given as a
-            `float` from the interval $[0, 1]$.
+            `float` from the interval [0, 1].
         :param waiting_period: The number of consecutive iterations without an improvement in the
             best score that are required before the random action probability is increased, given
             as a positive `int`.
         :param multiplicative_factor: The multiplicative factor applied to the random action
             probability when an increase is triggered, given as a `float` greater than 1.
         :param maximum_random_action_probability: The maximum allowable value of the random action
-            probability, given as a `float` from the interval $[0, 1]$.
+            probability, given as a `float` from the interval [0, 1].
         """
 
         self.__initial_random_action_probability: float = initial_random_action_probability

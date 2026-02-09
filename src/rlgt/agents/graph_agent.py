@@ -13,7 +13,7 @@ class GraphAgent(ABC):
     """
     This abstract class encapsulates the concept of a reinforcement learning agent for graph theory
     applications. Such an agent is intended to solve extremal problems in which a given graph
-    invariant is to be maximized over a finite family of fully colored $k$-edge-colored looped
+    invariant is to be maximized over a finite family of fully colored *k*-edge-colored looped
     complete graphs. The agent interacts iteratively with a reinforcement learning environment. The
     environment encodes the extremal problem, including the state representation, the available
     actions and the transition dynamics, while the agent is responsible for steering the learning

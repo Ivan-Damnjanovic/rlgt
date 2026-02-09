@@ -28,8 +28,8 @@ This is a type alias for functions that compute element-wise differences of a gi
 between two batches of graphs. Such functions accept two `Graph` objects representing the two
 batches and return a one-dimensional `numpy.ndarray` of type `numpy.float32`.
 
-Specifically, the $i$-th entry of the output must equal the value of the graph invariant for the
-$i$-th graph in the second batch minus the value of the same invariant for the $i$-th graph in the
+Specifically, the *i*-th entry of the output must equal the value of the graph invariant for the
+*i*-th graph in the second batch minus the value of the same invariant for the *i*-th graph in the
 first batch. The two batches must have the same size, and the corresponding graphs must have the
 same order, the same number of proper edge colors, and the same graph type, meaning that they are
 either all directed or all undirected, and either all allow loops or all disallow them.
@@ -67,7 +67,7 @@ class GraphEnvironment(ABC):
     This abstract class encapsulates the concept of a reinforcement learning (RL) environment for
     graph theory applications. Such an environment is designed to address extremal problems in
     which a specified graph invariant is to be maximized over a finite family of fully colored
-    $k$-edge-colored looped complete graphs.
+    *k*-edge-colored looped complete graphs.
 
     States are represented as fixed-length `numpy.ndarray` vectors. Actions are represented as
     `numpy.int32` integers taking values in the range from 0 to ``action_number - 1``, where
@@ -207,8 +207,8 @@ class GraphEnvironment(ABC):
         This abstract property must be implemented by any concrete subclass. It must return `None`
         if no episodes are currently being run in parallel, or if every action is available in
         every current state. Otherwise, it must return a two-dimensional `numpy.ndarray` matrix
-        ``a`` of type `bool` whose entry ``a[i, j]`` is `True` if and only if action $j$ is
-        available in the current state of the $i$-th episode.
+        ``a`` of type `bool` whose entry ``a[i, j]`` is `True` if and only if action *j* is
+        available in the current state of the *i*-th episode.
         """
 
         pass  # pragma: no cover
@@ -289,8 +289,8 @@ class GraphEnvironment(ABC):
         """
         This method applies a batch of actions to the current batch of episodes and returns the
         resulting batch of states, the corresponding values of the selected graph invariant (if
-        computed), and the updated status of the batch. The $i$-th provided action is applied to
-        the $i$-th state in ``_state_batch``. The order of the returned states and graph invariant
+        computed), and the updated status of the batch. The *i*-th provided action is applied to
+        the *i*-th state in ``_state_batch``. The order of the returned states and graph invariant
         values matches the order of the applied actions and the original states. If the sparse
         setting is enabled, the graph invariant values are computed only when a final state is
         reached. Otherwise, the graph invariant values are computed after every batch of actions,
@@ -368,9 +368,9 @@ class GraphEnvironment(ABC):
         """
         This abstract method must be implemented by any concrete subclass. It extracts the batch of
         underlying graphs corresponding to a provided batch of states. Implementations must return
-        a `Graph` object containing the graphs corresponding to each row in `state_batch`,
-        preserving the row order. This method must be pure and **must not modify** any attributes
-        of the class instance.
+        a `Graph` object containing the graphs corresponding to each row in ``state_batch``,
+        preserving the row order. This method must be pure and must not modify any attributes of
+        the class instance.
 
         :param state_batch: A two-dimensional `numpy.ndarray` whose rows represent individual
             states from which the underlying graphs are to be extracted.
@@ -386,9 +386,9 @@ class GraphEnvironment(ABC):
 
         :param state: A one-dimensional `numpy.ndarray` representing a single state.
 
-        :return: The underlying graph corresponding to `state`, returned as a `Graph` object.
+        :return: The underlying graph corresponding to ``state``, returned as a `Graph` object.
 
-        :note: This method is pure and **does not modify** any attributes of the class instance. It
+        :note: This method is pure and does not modify any attributes of the class instance. It
             internally calls `state_batch_to_graph_batch` with a singleton batch.
         """
 

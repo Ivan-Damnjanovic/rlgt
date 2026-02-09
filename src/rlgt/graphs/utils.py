@@ -1,5 +1,5 @@
 """
-This ``Python`` module provides auxiliary functions for working with $k$-edge-colored looped
+This ``Python`` module provides auxiliary functions for working with *k*-edge-colored looped
 complete graphs. The functions include computing flattened lengths, converting between various
 graph formats, and calculating edge (resp. arc) indices according to a specified edge (resp. arc)
 ordering.
@@ -19,12 +19,12 @@ def graph_order_to_flattened_length(
     allow_loops: bool = False,
 ) -> int:
     """
-    This function computes the flattened length of a $k$-edge-colored looped complete graph given
+    This function computes the flattened length of a *k*-edge-colored looped complete graph given
     its order. The flattened length is the number of entries in the `numpy.ndarray` vector that
     represents the graph structure in either the flattened row-major format with color numbers
     or the flattened clockwise format with color numbers.
 
-    :param graph_order: The order of the considered $k$-edge-colored looped complete graph, given
+    :param graph_order: The order of the considered *k*-edge-colored looped complete graph, given
         as a positive `int`.
     :param is_directed: A `bool` indicating whether the considered graph is directed. The default
         value is `False`, i.e., the graph is undirected by default.
@@ -54,7 +54,7 @@ def flattened_length_to_graph_order(
     allow_loops: bool = False,
 ) -> int:
     """
-    This function computes the order of a $k$-edge-colored looped complete graph given its
+    This function computes the order of a *k*-edge-colored looped complete graph given its
     flattened length. The flattened length is the number of entries in the `numpy.ndarray` vector
     that represents the graph structure in either the flattened row-major format with color numbers
     or the flattened clockwise format with color numbers.
@@ -71,17 +71,17 @@ def flattened_length_to_graph_order(
 
     if is_directed:
         if allow_loops:
-            # Given $n^2$, find $n$.
+            # Given n^2, find n.
             graph_order = isqrt(flattened_length)
         else:
-            # Given $n^2 - n$, find $n$.
+            # Given n^2 - n, find n.
             graph_order = (isqrt(4 * flattened_length + 1) + 1) // 2
     else:
         if allow_loops:
-            # Given \binom{n + 1}{2}$, find $n$.
+            # Given \binom{n + 1}{2}, find n.
             graph_order = (isqrt(8 * flattened_length + 1) - 1) // 2
         else:
-            # Given $\binom{n}{2}$, find $n$.
+            # Given \binom{n}{2}, find n.
             graph_order = (isqrt(8 * flattened_length + 1) + 1) // 2
 
     return graph_order
@@ -314,9 +314,10 @@ def color_numbers_to_binary_slices(
         possible flattened formats, i.e., the flattened row-major format with color numbers or the
         flattened clockwise format with color numbers.
     :param edge_colors: A positive `int` (not below 2) that represents the number of proper edge
-        colors, i.e., $k$, in the considered graph or batch of graphs. The default value is 2.
+        colors, i.e., *k*, in the considered graph or batch of graphs. The default value is 2.
     :param allow_loops: A `bool` that indicates whether the considered graph or batch of graphs
-        is allowed to have loops. The default value is `False`.
+        is allowed to have loops. The default value is `False`, i.e., loops are not allowed by
+        default.
 
     :return: The corresponding output format representation, given as a `numpy.ndarray` of type
         `numpy.uint8`.
@@ -386,15 +387,16 @@ def binary_slices_to_color_numbers(
         possible flattened formats, i.e., the flattened row-major format with color numbers or the
         flattened clockwise format with color numbers.
     :param edge_colors: A positive `int` (not below 2) that represents the number of proper edge
-        colors, i.e., $k$, in the considered graph or batch of graphs. The default value is 2.
+        colors, i.e., *k*, in the considered graph or batch of graphs. The default value is 2.
     :param allow_loops: A `bool` that indicates whether the considered graph or batch of graphs
-        is allowed to have loops. The default value is `False`.
+        is allowed to have loops. The default value is `False`, i.e., loops are not allowed by
+        default.
 
     :return: The corresponding output format representation, given as a `numpy.ndarray` of type
         `numpy.uint8`.
 
     :note: The input format representation can be given in either the reduced binary slice format
-        or the standard (non-reduced) format.
+        or the standard (non-reduced) binary slice format.
     """
 
     # Determine whether the input uses a reduced binary slice format.
@@ -446,7 +448,7 @@ def compute_edge_indices(
     allow_loops: bool = False,
 ) -> np.ndarray:
     """
-    This function considers a $k$-edge-colored looped complete graph and computes the index of each
+    This function considers a *k*-edge-colored looped complete graph and computes the index of each
     edge (resp. arc) from a given list, with respect to the row-major or clockwise ordering as
     described in the `FlattenedOrdering` enumeration. The edges (resp. arcs) are given as ordered
     pairs of vertices consisting of the starting vertex and the ending vertex. The user can select
@@ -466,7 +468,7 @@ def compute_edge_indices(
     :param is_directed: A `bool` that indicates whether the graph is directed. The default value is
         `False`, i.e., the graph is undirected by default.
     :param allow_loops: A `bool` that indicates whether loops are allowed in the graph. The default
-        value is `False`.
+        value is `False`, i.e., loops are not allowed by default.
 
     :return: A `numpy.ndarray` of type `numpy.int32` containing the indices of the edges (resp.
         arcs) with respect to the selected edge (resp. arc) ordering.

@@ -26,12 +26,12 @@ class ReinforceAgent(GraphAgent):
     parallel. Here, while computing a discounted return, a reward is considered to be the increase
     between two consecutive graph invariant values. The agent uses a `torch.nn.Module` model to
     compute the probability of selecting each action in each step of every episode. Afterwards, the
-    log probabilities and returns of a subset of top-performing episodes are used to train the
-    model according to the REINFORCE algorithm. This completes one iteration of the learning
-    process. The user provides the model, configures the optimizer, sets the discount factor,
-    decides whether to apply a baseline to reduce variance, and optionally provides a random action
-    mechanism. When a random action occurs, it is selected uniformly among all actions available in
-    the current state.
+    log probabilities and discounted returns of a subset of top-performing episodes are used to
+    train the model according to the REINFORCE algorithm. This completes one iteration of the
+    learning process. The user provides the model, configures the optimizer, sets the discount
+    factor, decides whether to apply a baseline to reduce variance, and optionally provides a
+    random action mechanism. When a random action occurs, it is selected uniformly among all
+    actions available in the current state.
 
     :ivar _environment: A `GraphEnvironment` object defining the extremal problem and providing the
         graph building game used to construct all the graphs.
@@ -43,8 +43,8 @@ class ReinforceAgent(GraphAgent):
         iteration, i.e., the number of episodes run in parallel.
     :ivar _elite_count: A positive `int` specifying the number of top-performing episodes used to
         train the model in each iteration, or `None` if all the episodes should be used.
-    :ivar _discount_factor: A `float` from the interval $[0, 1]$ representing the discount factor
-        to be used while computing the returns.
+    :ivar _discount_factor: A `float` from the interval [0, 1] representing the discount factor to
+        be used while computing the discounted returns.
     :ivar _apply_baseline: A `bool` indicating whether a baseline should be applied to reduce
         variance. If `True`, the baseline is the mean return over all episodes, computed
         independently for each step.
@@ -64,8 +64,8 @@ class ReinforceAgent(GraphAgent):
         `numpy.float32` storing the discounted returns for all executed episodes. Its shape is
         ``(episode_length, candidates_count)``, where ``episode_length`` is the episode length of
         the RL environment and ``candidates_count`` is the number of episodes executed in parallel.
-        The first dimension corresponds to the actions within an episode, and the second
-        corresponds to the executed episodes.
+        The first dimension corresponds to the timestamps (actions) within an episode, and the
+        second corresponds to the executed episodes.
     """
 
     def __init__(
@@ -88,7 +88,7 @@ class ReinforceAgent(GraphAgent):
         :param policy_network: The policy network used to compute the probability of each action in
             each episode and step, given as a `torch.nn.Module` object.
         :param optimizer: The optimizer responsible for updating the model parameters, given as a
-            `torch.optim.Optimizer` object. The parameters of `policy_network` must be passed to
+            `torch.optim.Optimizer` object. The parameters of ``policy_network`` must be passed to
             it.
         :param candidates_count: A positive `int` specifying how many graphs are generated in each
             iteration by running the corresponding number of episodes in parallel. The default
@@ -97,8 +97,8 @@ class ReinforceAgent(GraphAgent):
             invariant value are used to train the policy network in each iteration of the learning
             process, or `None` to indicate that all executed episodes should be used. The default
             value is `None`.
-        :param discount_factor: A `float` from the interval $[0, 1]$ representing the discount
-            factor to be used while computing the returns. The default value is 0.99.
+        :param discount_factor: A `float` from the interval [0, 1] representing the discount factor
+            to be used while computing the returns. The default value is 0.99.
         :param apply_baseline: A `bool` indicating whether a baseline should be applied to reduce
             variance. If `True`, the baseline is the mean return over all elite episodes, computed
             independently for each step. The default value is `True`.
@@ -284,7 +284,7 @@ class ReinforceAgent(GraphAgent):
             self._device
         )
 
-        # Prepare the log-probabilities from the elite executed episodes for training.
+        # Prepare the log probabilities from the elite executed episodes for training.
         elite_log_probs_torch = torch.cat(
             [
                 population_log_probs[index][elite_mask]

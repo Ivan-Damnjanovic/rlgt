@@ -2,7 +2,7 @@
 name = "RLGT"
 version = "0.1.0"
 description = "This is Reinforcement Learning for Graph Theory (RLGT), a reinforcement learning framework that aims to facilitate future research in extremal graph theory."
-authors = [ { name = "Ivan Damnjanović" }, { name = "Uroš Milivojević" }, { name = "Irena Đorđević" }, { name = "Dragan Stevanović" }]
+authors = [ { name = "Ivan Damnjanović" }, { name = "Uroš Milivojević" }, { name = "Irena Đorđević" }, { name = "Dragan Stevanović" } ]
 readme = "README.md"
 requires-python = ">=3.11,<3.14"
 dependencies = [ "numpy>=2.3.4,<3.0" ]
@@ -33,7 +33,7 @@ profile = "black"
 lines_after_imports = 2
 
 [tool.pydoctor]
-project-name = "rlgt"
+project-name = "RLGT"
 add-package = ["src/rlgt"]
 docformat = "restructuredtext"
 make-html = true

@@ -1,6 +1,6 @@
 """
-This Python module contains the `Graph` class. This class encapsulates the concept of a
-$k$-edge-colored looped complete graph or a batch of $k$-edge-colored looped complete graphs of the
+This ``Python`` module contains the `Graph` class. This class encapsulates the concept of a
+*k*-edge-colored looped complete graph or a batch of *k*-edge-colored looped complete graphs of the
 same order.
 """
 
@@ -27,8 +27,8 @@ from .utils import (
 
 class Graph:
     r"""
-    This class encapsulates the concept of a $k$-edge-colored looped complete graph or a batch of
-    $k$-edge-colored looped complete graphs of the same order, with $k$ being at least 2. If a
+    This class encapsulates the concept of a *k*-edge-colored looped complete graph or a batch of
+    *k*-edge-colored looped complete graphs of the same order, with *k* being at least 2. If a
     single graph is modeled, then it is represented as a quintuple ``(edge_colors, is_directed,
     allow_loops, graph_format, format_representation)``, as explained in the `GraphFormat`
     enumeration. If a batch of graphs is modeled, then the graphs in the batch must be consistent
@@ -39,7 +39,7 @@ class Graph:
     only difference is that all `numpy.ndarray` objects used as format representations have one
     additional leading dimension. More precisely, if ``a`` is the `numpy.ndarray` describing the
     structure of a batch of graphs in a given graph format, then ``a[i]`` is the structural
-    representation of the $i$-th graph in the batch in that format.
+    representation of the *i*-th graph in the batch in that format.
 
     The structure of the graph or batch of graphs can be represented in any of the eight graph
     formats defined in the `GraphFormat` enumeration. The structure is initialized in at least one
@@ -52,10 +52,10 @@ class Graph:
     format is always used whenever possible, i.e., whenever the graph or batch of graphs is fully
     colored.
 
-    :ivar __edge_colors: The number of proper edge colors, i.e., $k$, given as a positive `int`
+    :ivar __edge_colors: The number of proper edge colors, i.e., *k*, given as a positive `int`
         that is at least 2.
     :ivar __is_directed: A `bool` indicating whether the graph or each graph in the batch is a
-        $k$-edge-colored looped complete directed graph or a $k$-edge-colored looped complete
+        *k*-edge-colored looped complete directed graph or a *k*-edge-colored looped complete
         undirected graph.
     :ivar __allow_loops: A `bool` indicating whether the graph or each graph in the batch is
         allowed to have loops. If loops are not allowed, then all loops are removed from the
@@ -115,9 +115,9 @@ class Graph:
         all represent the same graph or the same batch of graphs.
 
         :param edge_colors: A positive `int` that represents the number of proper edge colors,
-            i.e., $k$, and that must be at least 2. The default value is 2.
+            i.e., *k*, and that must be at least 2. The default value is 2.
         :param is_directed: A `bool` indicating whether the graph or each graph in the batch is a
-            $k$-edge-colored looped complete directed graph or a $k$-edge-colored looped complete
+            *k*-edge-colored looped complete directed graph or a *k*-edge-colored looped complete
             undirected graph. The default value is `False`, meaning that the graph or batch of
             graphs is undirected by default.
         :param allow_loops: A `bool` indicating whether the graph or each graph in the batch is
@@ -287,9 +287,9 @@ class Graph:
             `BitmaskType.OUT_NEIGHBORS`, meaning that the graph or batch of graphs is initialized
             in the bitmask format for the out-neighborhoods by default.
         :param edge_colors: A positive `int` that represents the number of proper edge colors,
-            i.e., $k$, and that must be at least 2. The default value is 2.
+            i.e., *k*, and that must be at least 2. The default value is 2.
         :param is_directed: A `bool` indicating whether the graph or each graph in the batch is a
-            $k$-edge-colored looped complete directed graph or a $k$-edge-colored looped complete
+            *k*-edge-colored looped complete directed graph or a *k*-edge-colored looped complete
             undirected graph. The default value is `False`, meaning that the graph or batch of
             graphs is undirected by default.
         :param allow_loops: A `bool` indicating whether the graph or each graph in the batch is
@@ -342,9 +342,9 @@ class Graph:
             default value is `ColorRepresentation.COLOR_NUMBERS`, meaning that the graph or batch
             of graphs is initialized in the adjacency matrix format with color numbers by default.
         :param edge_colors: A positive `int` that represents the number of proper edge colors,
-            i.e., $k$, and that must be at least 2. The default value is 2.
+            i.e., *k*, and that must be at least 2. The default value is 2.
         :param is_directed: A `bool` indicating whether the graph or each graph in the batch is a
-            $k$-edge-colored looped complete directed graph or a $k$-edge-colored looped complete
+            *k*-edge-colored looped complete directed graph or a *k*-edge-colored looped complete
             undirected graph. The default value is `False`, meaning that the graph or batch of
             graphs is undirected by default.
         :param allow_loops: A `bool` indicating whether the graph or each graph in the batch is
@@ -402,9 +402,9 @@ class Graph:
             `ColorRepresentation.COLOR_NUMBERS`, meaning that the graph or batch of graphs is
             initialized in a flattened format with color numbers by default.
         :param edge_colors: A positive `int` that represents the number of proper edge colors,
-            i.e., $k$, and that must be at least 2. The default value is 2.
+            i.e., *k*, and that must be at least 2. The default value is 2.
         :param is_directed: A `bool` indicating whether the graph or each graph in the batch is a
-            $k$-edge-colored looped complete directed graph or a $k$-edge-colored looped complete
+            *k*-edge-colored looped complete directed graph or a *k*-edge-colored looped complete
             undirected graph. The default value is `False`, meaning that the graph or batch of
             graphs is undirected by default.
         :param allow_loops: A `bool` indicating whether the graph or each graph in the batch is
@@ -454,7 +454,7 @@ class Graph:
     def edge_colors(self) -> int:
         """
         This property returns the number of proper edge colors in the given graph or batch of
-        graphs, i.e., $k$, as a positive `int` that is at least 2.
+        graphs, i.e., *k*, as a positive `int` that is at least 2.
         """
 
         return self.__edge_colors
@@ -480,8 +480,8 @@ class Graph:
     @property
     def batch_size(self) -> Optional[int]:
         """
-        This property returns `None` if the object represents a single $k$-edge-colored looped
-        complete graph. If the object represents a batch of $k$-edge-colored looped complete graphs
+        This property returns `None` if the object represents a single *k*-edge-colored looped
+        complete graph. If the object represents a batch of *k*-edge-colored looped complete graphs
         of the same order, then this property returns the batch size, i.e., the number of graphs in
         the batch, as a positive `int`.
         """

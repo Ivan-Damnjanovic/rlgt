@@ -1,0 +1,1300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "DTD/xhtml1-strict.dtd">
+<html>
+  
+
+  <head>
+    
+    <title>rlgt.environments.global_environments.GlobalFlipEnvironment</title>
+    <meta name="generator" content="pydoctor 25.10.1"> 
+        
+    </meta>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1" />
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="apidocs.css" />
+    <link rel="stylesheet" type="text/css" href="extra.css" />
+    
+</head>
+
+  <body>
+
+    
+
+    <nav class="navbar navbar-default mainnavbar">
+      
+  
+  <div class="container-fluid">
+
+
+    <div class="navbar-header">
+      
+      <div class="navlinks">
+        <span class="navbar-brand">
+          RLGT <a href="index.html">API Documentation</a>
+        </span>
+
+        <a href="moduleIndex.html">
+          Modules
+        </a>
+
+        <a href="classIndex.html">
+          Classes
+        </a>
+
+        <a href="nameIndex.html">
+          Names
+        </a>
+
+        <div id="search-box-container">
+          <div class="input-group">
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
+            <span class="input-group-btn">
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="apidocs-help-button" title="Help" href="apidocs-help.html"><img src="fonts/info.svg" alt="Help" /></a>
+            </span>
+          </div>
+        </div>
+
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        
+        <div id="search-buttons">
+          <span class="label label-default" id="search-docstrings-button">
+          <label class="checkbox-inline">
+            <input type="checkbox" id="toggle-search-in-docstrings-checkbox" value="false" onclick="toggleSearchInDocstrings()">
+              search in docstrings
+            </input>
+          </label>
+          </span>
+          
+        </div>
+        
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div id="search-status"> </div>
+
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
+
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 10px;">
+          <p>For more information on the search, visit the <a href="apidocs-help.html#rst-search">help page</a>.</p>
+        </div>
+      </div>
+
+    </div>
+
+
+  </div>
+</nav>
+    
+    <div class="container-fluid">
+
+      <!-- Side navigation -->
+      <div class="sidebarcontainer" style="display: none;">
+        
+        <div class="sidebar"><nav class="sidebar">
+  
+
+  <div>
+
+      <div class="thingTitle">
+        <span>Class</span>
+        <code class="thisobject"><a href="rlgt.environments.global_environments.GlobalFlipEnvironment.html" class="internal-link" title="This class"><wbr></wbr>Global<wbr></wbr>Flip<wbr></wbr>Environment</a></code> 
+      </div>
+      
+      <div>
+        
+
+        
+         
+
+        
+        
+
+        <div class="childrenKindTitle">Methods</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#__init__" class="internal-link" title="rlgt.environments.global_environments.GlobalFlipEnvironment.__init__">__init__</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#episode_length.setter" class="internal-link" title="rlgt.environments.global_environments.GlobalFlipEnvironment.episode_length.setter">episode<wbr></wbr>_length<wbr></wbr>.setter</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#state_batch_to_graph_batch" class="internal-link" title="rlgt.environments.global_environments.GlobalFlipEnvironment.state_batch_to_graph_batch">state<wbr></wbr>_batch<wbr></wbr>_to<wbr></wbr>_graph<wbr></wbr>_batch</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_initialize_batch" class="internal-link" title="rlgt.environments.global_environments.GlobalFlipEnvironment._initialize_batch">_initialize<wbr></wbr>_batch</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_transition_batch" class="internal-link" title="rlgt.environments.global_environments.GlobalFlipEnvironment._transition_batch">_transition<wbr></wbr>_batch</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        <div class="childrenKindTitle">Inherited Methods</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="rlgt.environments.graph_environment.GraphEnvironment.html#reset_batch" class="internal-link" title="rlgt.environments.graph_environment.GraphEnvironment.reset_batch">reset<wbr></wbr>_batch</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="rlgt.environments.graph_environment.GraphEnvironment.html#state_to_graph" class="internal-link" title="rlgt.environments.graph_environment.GraphEnvironment.state_to_graph">state<wbr></wbr>_to<wbr></wbr>_graph</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="rlgt.environments.graph_environment.GraphEnvironment.html#step_batch" class="internal-link" title="rlgt.environments.graph_environment.GraphEnvironment.step_batch">step<wbr></wbr>_batch</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        <div class="childrenKindTitle">Attributes</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#initial_graph_generator" class="internal-link" title="rlgt.environments.global_environments.GlobalFlipEnvironment.initial_graph_generator">initial<wbr></wbr>_graph<wbr></wbr>_generator</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#action_mask" class="internal-link" title="rlgt.environments.global_environments.GlobalFlipEnvironment.action_mask">action<wbr></wbr>_mask</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#action_number" class="internal-link" title="rlgt.environments.global_environments.GlobalFlipEnvironment.action_number">action<wbr></wbr>_number</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#episode_length" class="internal-link" title="rlgt.environments.global_environments.GlobalFlipEnvironment.episode_length">episode<wbr></wbr>_length</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#is_continuing" class="internal-link" title="rlgt.environments.global_environments.GlobalFlipEnvironment.is_continuing">is<wbr></wbr>_continuing</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#state_dtype" class="internal-link" title="rlgt.environments.global_environments.GlobalFlipEnvironment.state_dtype">state<wbr></wbr>_dtype</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#state_length" class="internal-link" title="rlgt.environments.global_environments.GlobalFlipEnvironment.state_length">state<wbr></wbr>_length</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_allow_loops" class="internal-link" title="rlgt.environments.global_environments.GlobalFlipEnvironment._allow_loops">_allow<wbr></wbr>_loops</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_episode_length" class="internal-link" title="rlgt.environments.global_environments.GlobalFlipEnvironment._episode_length">_episode<wbr></wbr>_length</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_flattened_length" class="internal-link" title="rlgt.environments.global_environments.GlobalFlipEnvironment._flattened_length">_flattened<wbr></wbr>_length</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_flattened_ordering" class="internal-link" title="rlgt.environments.global_environments.GlobalFlipEnvironment._flattened_ordering">_flattened<wbr></wbr>_ordering</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_flip_only" class="internal-link" title="rlgt.environments.global_environments.GlobalFlipEnvironment._flip_only">_flip<wbr></wbr>_only</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_is_directed" class="internal-link" title="rlgt.environments.global_environments.GlobalFlipEnvironment._is_directed">_is<wbr></wbr>_directed</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_state_batch" class="internal-link" title="rlgt.environments.global_environments.GlobalFlipEnvironment._state_batch">_state<wbr></wbr>_batch</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_status" class="internal-link" title="rlgt.environments.global_environments.GlobalFlipEnvironment._status">_status</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_step_count" class="internal-link" title="rlgt.environments.global_environments.GlobalFlipEnvironment._step_count">_step<wbr></wbr>_count</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        <div class="childrenKindTitle">Inherited Attributes</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="rlgt.environments.graph_environment.GraphEnvironment.html#sparse_setting" class="internal-link" title="rlgt.environments.graph_environment.GraphEnvironment.sparse_setting">sparse<wbr></wbr>_setting</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="rlgt.environments.graph_environment.GraphEnvironment.html#__graph_batch" class="internal-link" title="rlgt.environments.graph_environment.GraphEnvironment.__graph_batch">__graph<wbr></wbr>_batch</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="rlgt.environments.graph_environment.GraphEnvironment.html#__graph_invariant" class="internal-link" title="rlgt.environments.graph_environment.GraphEnvironment.__graph_invariant">__graph<wbr></wbr>_invariant</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="rlgt.environments.graph_environment.GraphEnvironment.html#__graph_invariant_batch" class="internal-link" title="rlgt.environments.graph_environment.GraphEnvironment.__graph_invariant_batch">__graph<wbr></wbr>_invariant<wbr></wbr>_batch</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="rlgt.environments.graph_environment.GraphEnvironment.html#__graph_invariant_diff" class="internal-link" title="rlgt.environments.graph_environment.GraphEnvironment.__graph_invariant_diff">__graph<wbr></wbr>_invariant<wbr></wbr>_diff</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+        
+      </div>
+  </div><div>
+
+      <div class="thingTitle">
+        <span>Module</span>
+        <code><a href="rlgt.environments.global_environments.html" class="internal-link" title="The parent of this class">global<wbr></wbr>_environments</a></code> 
+      </div>
+      
+      <div>
+        
+
+        
+         
+
+        <div class="childrenKindTitle">Classes</div>
+        <ul>
+    
+    <li class=" thisobject">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="rlgt.environments.global_environments.GlobalFlipEnvironment.html" class="internal-link" title="rlgt.environments.global_environments.GlobalFlipEnvironment"><wbr></wbr>Global<wbr></wbr>Flip<wbr></wbr>Environment</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="rlgt.environments.global_environments.GlobalSetEnvironment.html" class="internal-link" title="rlgt.environments.global_environments.GlobalSetEnvironment"><wbr></wbr>Global<wbr></wbr>Set<wbr></wbr>Environment</a></code>
+            </div>
+        
+
+    </li>
+</ul>
+
+        
+         
+
+        
+         
+
+        
+         
+
+        
+         
+        
+      </div>
+  </div>
+
+</nav>
+        </div>
+        <div id="collapse-sidebar">
+          <a class="btn btn-link" onclick="toggleSideBarCollapse()" title="Toggle Sidebar Collapse">
+          </a>
+        </div> 
+        <script src="sidebartoggle.js" type="text/javascript"></script>
+       
+      </div>
+
+      <main class="">
+        
+
+        
+
+        <div class="page-header">
+          <h1 class="class"><code><code><a href="index.html" class="internal-link">rlgt</a></code><wbr></wbr>.<code><a href="rlgt.environments.html" class="internal-link" title="rlgt.environments">environments</a></code><wbr></wbr>.<code><a href="rlgt.environments.global_environments.html" class="internal-link" title="rlgt.environments.global_environments">global_environments</a></code><wbr></wbr>.<code><a href="rlgt.environments.global_environments.GlobalFlipEnvironment.html" class="internal-link" title="rlgt.environments.global_environments.GlobalFlipEnvironment">GlobalFlipEnvironment</a></code></code></h1>
+          <div id="show-private">
+            <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
+          </div>
+        </div>
+
+        <div class="categoryHeader">
+          class documentation
+        </div>
+
+        <div class="extrasDocstring">
+          <p class="class-signature"><code><span class="py-keyword">class</span> <span class="py-defname">GlobalFlipEnvironment</span>(<a href="rlgt.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rlgt.environments.graph_environment.GraphEnvironment">GraphEnvironment</a>):</code></p><p>Constructor: <code><a href="#__init__" class="internal-link" title="rlgt.environments.global_environments.GlobalFlipEnvironment.__init__">GlobalFlipEnvironment(graph_invariant, graph_order, episode_length, flip_only, ...)</a></code></p><p><a href="classIndex.html#rlgt.environments.global_environments.GlobalFlipEnvironment">View In Hierarchy</a></p>
+        </div>
+
+        <div class="moduleDocstring">
+          <div><p>This class inherits from <code><a href="rlgt.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rlgt.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code> and models a graph building game for constructing
+2-edge-colored looped complete graphs. In this environment, all edges (resp. arcs) are
+initially fully colored in some manner, and at each step, any edge (resp. arc) can be
+potentially flipped. Users can configure the graph order, whether the graphs are directed or
+undirected, whether loops are allowed, and the mechanism for generating the initial fully
+colored graphs, which can be deterministic or nondeterministic.</p>
+<p>The RL tasks in this environment are continuing. The total number of actions to be performed,
+i.e., the episode length, is configurable.</p>
+<p>Each state is represented by a binary <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> vector of type <code><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.uint8" class="intersphinx-link">numpy.uint8</a></code> that encodes
+the current graph in one of the two flattened formats with color numbers. The edge ordering
+(row-major or clockwise) is configurable by the user at initialization and remains fixed.</p>
+<p>The environment supports two modes of operation controlled by the <tt class="rst-docutils rst-literal">flip_only</tt> parameter. If
+<tt class="rst-docutils rst-literal">flip_only</tt> is <code><a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a></code> (the default), each action is a <code><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.int32" class="intersphinx-link">numpy.int32</a></code> integer between 0 and
+<tt class="rst-docutils rst-literal">2 * flattened_length - 1</tt>. In this case, for an action <tt class="rst-docutils rst-literal">a</tt>, <tt class="rst-docutils rst-literal">a % flattened_length</tt> gives
+the index of the edge (resp. arc) to potentially flip, and <tt class="rst-docutils rst-literal">a // flattened_length</tt> is a
+binary value indicating whether the edge should actually be flipped (1) or left unchanged (0).
+If <tt class="rst-docutils rst-literal">flip_only</tt> is <code><a href="https://docs.python.org/3/library/constants.html#True" class="intersphinx-link">True</a></code>, each action is a <code><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.int32" class="intersphinx-link">numpy.int32</a></code> integer between 0 and
+<tt class="rst-docutils rst-literal">flattened_length - 1</tt>, specifying the index of the edge (resp. arc) that must be flipped.</p>
+</div>
+        </div>
+
+        <div id="split-tables">
+          <table class="children sortable" id="id20">
+  
+  
+  <tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#__init__" class="internal-link" title="rlgt.environments.global_environments.GlobalFlipEnvironment.__init__">__init__</a></code></td>
+    <td>This constructor initializes an instance of the <code><a href="rlgt.environments.global_environments.GlobalFlipEnvironment.html" class="internal-link" title="rlgt.environments.global_environments.GlobalFlipEnvironment">GlobalFlipEnvironment</a></code> class.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#episode_length.setter" class="internal-link" title="rlgt.environments.global_environments.GlobalFlipEnvironment.episode_length.setter">episode<wbr></wbr>_length<wbr></wbr>.setter</a></code></td>
+    <td>This setter allows the user to potentially reconfigure the episode length between two independent batches of episodes. It should not be used while a batch of episodes is currently in progress.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#state_batch_to_graph_batch" class="internal-link" title="rlgt.environments.global_environments.GlobalFlipEnvironment.state_batch_to_graph_batch">state<wbr></wbr>_batch<wbr></wbr>_to<wbr></wbr>_graph<wbr></wbr>_batch</a></code></td>
+    <td>This abstract method must be implemented by any concrete subclass. It extracts the batch of underlying graphs corresponding to a provided batch of states. Implementations must return a <code><a href="rlgt.graphs.graph.Graph.html" class="internal-link" title="rlgt.graphs.graph.Graph">Graph</a></code> object containing the graphs corresponding to each row in ...</td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#initial_graph_generator" class="internal-link" title="rlgt.environments.global_environments.GlobalFlipEnvironment.initial_graph_generator">initial<wbr></wbr>_graph<wbr></wbr>_generator</a></code></td>
+    <td>A <code><a href="rlgt.environments.graph_generators.html#GraphGenerator" class="internal-link" title="rlgt.environments.graph_generators.GraphGenerator">GraphGenerator</a></code> function that defines how the underlying fully colored graphs are generated for the initial states. This attribute may be reconfigured between independent batches of episodes.</td>
+  </tr><tr class="property">
+    
+    <td>Property</td>
+    <td><code><a href="#action_mask" class="internal-link" title="rlgt.environments.global_environments.GlobalFlipEnvironment.action_mask">action<wbr></wbr>_mask</a></code></td>
+    <td>This abstract property must be implemented by any concrete subclass. It must return <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> if no episodes are currently being run in parallel, or if every action is available in every current state. Otherwise, it must return a two-dimensional ...</td>
+  </tr><tr class="property">
+    
+    <td>Property</td>
+    <td><code><a href="#action_number" class="internal-link" title="rlgt.environments.global_environments.GlobalFlipEnvironment.action_number">action<wbr></wbr>_number</a></code></td>
+    <td>This abstract property must be implemented by any concrete subclass. It must return the total number of distinct actions that can be executed in the environment, as a positive <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code>.</td>
+  </tr><tr class="property">
+    
+    <td>Property</td>
+    <td><code><a href="#episode_length" class="internal-link" title="rlgt.environments.global_environments.GlobalFlipEnvironment.episode_length">episode<wbr></wbr>_length</a></code></td>
+    <td>This abstract property must be implemented by any concrete subclass. It must return the predetermined common length of all episodes run in parallel, i.e., the total number of actions executed in each episode, as a positive ...</td>
+  </tr><tr class="property">
+    
+    <td>Property</td>
+    <td><code><a href="#is_continuing" class="internal-link" title="rlgt.environments.global_environments.GlobalFlipEnvironment.is_continuing">is<wbr></wbr>_continuing</a></code></td>
+    <td>This abstract property must be implemented by any concrete subclass. It must return a <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> indicating whether the environment is continuing (<code><a href="https://docs.python.org/3/library/constants.html#True" class="intersphinx-link">True</a></code>) or episodic (<code><a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a></code>).</td>
+  </tr><tr class="property">
+    
+    <td>Property</td>
+    <td><code><a href="#state_dtype" class="internal-link" title="rlgt.environments.global_environments.GlobalFlipEnvironment.state_dtype">state<wbr></wbr>_dtype</a></code></td>
+    <td>This abstract property must be implemented by any concrete subclass. It must return the data type of the one-dimensional <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> vectors that represent states, as a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" class="intersphinx-link">numpy.dtype</a></code>.</td>
+  </tr><tr class="property">
+    
+    <td>Property</td>
+    <td><code><a href="#state_length" class="internal-link" title="rlgt.environments.global_environments.GlobalFlipEnvironment.state_length">state<wbr></wbr>_length</a></code></td>
+    <td>This abstract property must be implemented by any concrete subclass. It must return the number of entries in each state vector, i.e., the length of the one-dimensional <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> vectors that represent states, as a positive ...</td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_initialize_batch" class="internal-link" title="rlgt.environments.global_environments.GlobalFlipEnvironment._initialize_batch">_initialize<wbr></wbr>_batch</a></code></td>
+    <td>This abstract method must be implemented by any concrete subclass. It must initialize a batch of episodes of the specified size and update the <code><a href="rlgt.environments.graph_environment.GraphEnvironment.html#_state_batch" class="internal-link" title="rlgt.environments.graph_environment.GraphEnvironment._state_batch">_state_batch</a></code> and <code><a href="rlgt.environments.graph_environment.GraphEnvironment.html#_status" class="internal-link" title="rlgt.environments.graph_environment.GraphEnvironment._status">_status</a></code> attributes so that they represent the newly initialized batch.</td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_transition_batch" class="internal-link" title="rlgt.environments.global_environments.GlobalFlipEnvironment._transition_batch">_transition<wbr></wbr>_batch</a></code></td>
+    <td>This abstract method must be implemented by any concrete subclass. It must apply a batch of actions to the current batch of states and update the <code><a href="rlgt.environments.graph_environment.GraphEnvironment.html#_state_batch" class="internal-link" title="rlgt.environments.graph_environment.GraphEnvironment._state_batch">_state_batch</a></code> and <code><a href="rlgt.environments.graph_environment.GraphEnvironment.html#_status" class="internal-link" title="rlgt.environments.graph_environment.GraphEnvironment._status">_status</a></code> attributes to reflect the resulting states and the updated batch status...</td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_allow_loops" class="internal-link" title="rlgt.environments.global_environments.GlobalFlipEnvironment._allow_loops">_allow<wbr></wbr>_loops</a></code></td>
+    <td>A <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> indicating whether loops are allowed in the graphs to be constructed.</td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_episode_length" class="internal-link" title="rlgt.environments.global_environments.GlobalFlipEnvironment._episode_length">_episode<wbr></wbr>_length</a></code></td>
+    <td>A positive <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> specifying the episode length, i.e., the total number of actions in each episode.</td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_flattened_length" class="internal-link" title="rlgt.environments.global_environments.GlobalFlipEnvironment._flattened_length">_flattened<wbr></wbr>_length</a></code></td>
+    <td>A positive <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> equal to the flattened length of the graphs to be constructed.</td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_flattened_ordering" class="internal-link" title="rlgt.environments.global_environments.GlobalFlipEnvironment._flattened_ordering">_flattened<wbr></wbr>_ordering</a></code></td>
+    <td>An item of the <code><a href="rlgt.graphs.graph_formats.FlattenedOrdering.html" class="internal-link" title="rlgt.graphs.graph_formats.FlattenedOrdering">FlattenedOrdering</a></code> enumeration specifying the edge (resp. arc) ordering (row-major or clockwise).</td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_flip_only" class="internal-link" title="rlgt.environments.global_environments.GlobalFlipEnvironment._flip_only">_flip<wbr></wbr>_only</a></code></td>
+    <td>A <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> specifying whether the selected edges (resp. arcs) must be flipped.</td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_is_directed" class="internal-link" title="rlgt.environments.global_environments.GlobalFlipEnvironment._is_directed">_is<wbr></wbr>_directed</a></code></td>
+    <td>A <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> indicating whether the graphs to be constructed are directed or undirected.</td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_state_batch" class="internal-link" title="rlgt.environments.global_environments.GlobalFlipEnvironment._state_batch">_state<wbr></wbr>_batch</a></code></td>
+    <td>See <code><a href="rlgt.environments.graph_environment.GraphEnvironment.html#_state_batch" class="internal-link" title="rlgt.environments.graph_environment.GraphEnvironment._state_batch">GraphEnvironment._state_batch</a></code>.</td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_status" class="internal-link" title="rlgt.environments.global_environments.GlobalFlipEnvironment._status">_status</a></code></td>
+    <td>See <code><a href="rlgt.environments.graph_environment.GraphEnvironment.html#_status" class="internal-link" title="rlgt.environments.graph_environment.GraphEnvironment._status">GraphEnvironment._status</a></code>.</td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_step_count" class="internal-link" title="rlgt.environments.global_environments.GlobalFlipEnvironment._step_count">_step<wbr></wbr>_count</a></code></td>
+    <td>Either <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> or a nonnegative <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> counting how many actions have been executed in the current batch of episodes. When <code><a href="rlgt.environments.global_environments.GlobalFlipEnvironment.html#_step_count" class="internal-link" title="rlgt.environments.global_environments.GlobalFlipEnvironment._step_count">_step_count</a></code> equals <code><a href="rlgt.environments.global_environments.GlobalFlipEnvironment.html#_episode_length" class="internal-link" title="rlgt.environments.global_environments.GlobalFlipEnvironment._episode_length">_episode_length</a></code>, the episode has reached a final state. This attribute is updated after each call to ...</td>
+  </tr>
+</table>
+          
+            <p class="inheritedFrom">
+              Inherited from <code><a href="rlgt.environments.graph_environment.GraphEnvironment.html" class="internal-link" title="rlgt.environments.graph_environment.GraphEnvironment">GraphEnvironment</a></code>:
+            </p>
+            <table class="children sortable" id="id21">
+  
+  
+  <tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="rlgt.environments.graph_environment.GraphEnvironment.html#reset_batch" class="internal-link" title="rlgt.environments.graph_environment.GraphEnvironment.reset_batch">reset<wbr></wbr>_batch</a></code></td>
+    <td>This method initializes a batch of episodes of a specified size and returns the resulting batch of states, the corresponding values of the selected graph invariant (if computed), and the status of the batch of episodes...</td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="rlgt.environments.graph_environment.GraphEnvironment.html#state_to_graph" class="internal-link" title="rlgt.environments.graph_environment.GraphEnvironment.state_to_graph">state<wbr></wbr>_to<wbr></wbr>_graph</a></code></td>
+    <td>This method extracts the underlying graph corresponding to a single state.</td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="rlgt.environments.graph_environment.GraphEnvironment.html#step_batch" class="internal-link" title="rlgt.environments.graph_environment.GraphEnvironment.step_batch">step<wbr></wbr>_batch</a></code></td>
+    <td>This method applies a batch of actions to the current batch of episodes and returns the resulting batch of states, the corresponding values of the selected graph invariant (if computed), and the updated status of the batch...</td>
+  </tr><tr class="baseinstancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="rlgt.environments.graph_environment.GraphEnvironment.html#sparse_setting" class="internal-link" title="rlgt.environments.graph_environment.GraphEnvironment.sparse_setting">sparse<wbr></wbr>_setting</a></code></td>
+    <td>A <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> indicating whether the graph invariant values should be computed only for the final batch of actions.</td>
+  </tr><tr class="baseinstancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="rlgt.environments.graph_environment.GraphEnvironment.html#__graph_batch" class="internal-link" title="rlgt.environments.graph_environment.GraphEnvironment.__graph_batch">__graph<wbr></wbr>_batch</a></code></td>
+    <td>Either <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> or a <code><a href="rlgt.graphs.graph.Graph.html" class="internal-link" title="rlgt.graphs.graph.Graph">Graph</a></code> object representing the current batch of underlying graphs. This attribute is updated only when required by the sparse setting.</td>
+  </tr><tr class="baseinstancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="rlgt.environments.graph_environment.GraphEnvironment.html#__graph_invariant" class="internal-link" title="rlgt.environments.graph_environment.GraphEnvironment.__graph_invariant">__graph<wbr></wbr>_invariant</a></code></td>
+    <td>A <code><a href="rlgt.environments.graph_environment.html#GraphInvariant" class="internal-link" title="rlgt.environments.graph_environment.GraphInvariant">GraphInvariant</a></code> function specifying the graph invariant to be maximized.</td>
+  </tr><tr class="baseinstancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="rlgt.environments.graph_environment.GraphEnvironment.html#__graph_invariant_batch" class="internal-link" title="rlgt.environments.graph_environment.GraphEnvironment.__graph_invariant_batch">__graph<wbr></wbr>_invariant<wbr></wbr>_batch</a></code></td>
+    <td>Either <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> or a one-dimensional <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> of type <code><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float32" class="intersphinx-link">numpy.float32</a></code> containing the current batch of graph invariant values. As with <code><a href="rlgt.environments.graph_environment.GraphEnvironment.html#__graph_batch" class="internal-link" title="rlgt.environments.graph_environment.GraphEnvironment.__graph_batch">__graph_batch</a></code>, this attribute is updated only when required by the sparse setting.</td>
+  </tr><tr class="baseinstancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="rlgt.environments.graph_environment.GraphEnvironment.html#__graph_invariant_diff" class="internal-link" title="rlgt.environments.graph_environment.GraphEnvironment.__graph_invariant_diff">__graph<wbr></wbr>_invariant<wbr></wbr>_diff</a></code></td>
+    <td>Either <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, indicating that graph invariant values are always computed directly using <code><a href="rlgt.environments.graph_environment.GraphEnvironment.html#__graph_invariant" class="internal-link" title="rlgt.environments.graph_environment.GraphEnvironment.__graph_invariant">__graph_invariant</a></code>, or a <code><a href="rlgt.environments.graph_environment.html#GraphInvariantDiff" class="internal-link" title="rlgt.environments.graph_environment.GraphInvariantDiff">GraphInvariantDiff</a></code> function used to incrementally update invariant values after state transitions.</td>
+  </tr>
+</table>
+            
+
+            
+        </div>
+
+        <div id="child-list">
+          <div class="basemethod">
+  
+  
+  <a name="rlgt.environments.global_environments.GlobalFlipEnvironment.__init__">
+    
+  </a>
+  <a name="__init__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">__init__</span><span class="function-signature long-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">graph_invariant: <code><a href="rlgt.environments.graph_environment.html#GraphInvariant" class="internal-link" title="rlgt.environments.graph_environment.GraphInvariant">GraphInvariant</a></code>, </span><span class="rst-sig-param">graph_order: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code>, </span><span class="rst-sig-param">episode_length: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> = <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>, </span><span class="rst-sig-param">flip_only: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> = <a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a>, </span><span class="rst-sig-param">flattened_ordering: <code><a href="rlgt.graphs.graph_formats.FlattenedOrdering.html" class="internal-link" title="rlgt.graphs.graph_formats.FlattenedOrdering">FlattenedOrdering</a></code> = <a href="rlgt.graphs.graph_formats.FlattenedOrdering.html#ROW_MAJOR" class="internal-link" title="rlgt.graphs.graph_formats.FlattenedOrdering.ROW_MAJOR">FlattenedOrdering.ROW_MAJOR</a>, </span><span class="rst-sig-param">is_directed: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> = <a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a>, </span><span class="rst-sig-param">allow_loops: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> = <a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a>, </span><span class="rst-sig-param">initial_graph_generator: <code><a href="rlgt.environments.graph_generators.html#GraphGenerator" class="internal-link" title="rlgt.environments.graph_generators.GraphGenerator">GraphGenerator</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> = <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>, </span><span class="rst-sig-param">graph_invariant_diff: <code><a href="rlgt.environments.graph_environment.html#GraphInvariantDiff" class="internal-link" title="rlgt.environments.graph_environment.GraphInvariantDiff">GraphInvariantDiff</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> = <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>, </span><span class="rst-sig-param">sparse_setting: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> = <a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a></span>):</span>
+    
+    <a class="headerLink" href="#__init__" title="rlgt.environments.global_environments.GlobalFlipEnvironment.__init__">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    <div class="interfaceinfo">overrides <code><a href="rlgt.environments.graph_environment.GraphEnvironment.html#__init__" class="internal-link">rlgt.environments.graph_environment.GraphEnvironment.__init__</a></code></div>
+    <div><p>This constructor initializes an instance of the <code><a href="rlgt.environments.global_environments.GlobalFlipEnvironment.html" class="internal-link" title="rlgt.environments.global_environments.GlobalFlipEnvironment">GlobalFlipEnvironment</a></code> class.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">graph<wbr></wbr>_invariant:</span><code><a href="rlgt.environments.graph_environment.html#GraphInvariant" class="internal-link" title="rlgt.environments.graph_environment.GraphInvariant">GraphInvariant</a></code></td><td class="fieldArgDesc">A <code><a href="rlgt.environments.graph_environment.html#GraphInvariant" class="internal-link" title="rlgt.environments.graph_environment.GraphInvariant">GraphInvariant</a></code> function that computes the graph invariant
+values associated with a batch of underlying graphs. These values are the quantities to
+be maximized by the environment.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">graph<wbr></wbr>_order:</span><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></td><td class="fieldArgDesc">A positive <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> (not below 2) that represents the graph order of the
+graphs to be constructed.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">episode<wbr></wbr>_length:</span><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code></td><td class="fieldArgDesc">Either <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, or a positive <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> specifying the number of actions
+in each episode. If <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, the episode length defaults to the flattened length of the
+graphs to be constructed. The default value is <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">flip<wbr></wbr>_only:</span><code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code></td><td class="fieldArgDesc">A <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> specifying whether the selected edges (resp. arcs) must be
+flipped. The default value is <code><a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a></code>.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">flattened<wbr></wbr>_ordering:</span><code><a href="rlgt.graphs.graph_formats.FlattenedOrdering.html" class="internal-link" title="rlgt.graphs.graph_formats.FlattenedOrdering">FlattenedOrdering</a></code></td><td class="fieldArgDesc">An item of the <code><a href="rlgt.graphs.graph_formats.FlattenedOrdering.html" class="internal-link" title="rlgt.graphs.graph_formats.FlattenedOrdering">FlattenedOrdering</a></code> enumeration specifying
+whether the edges (resp. arcs) are ordered row-major or clockwise. The default value is
+<code><a href="rlgt.graphs.graph_formats.FlattenedOrdering.html#ROW_MAJOR" class="internal-link" title="rlgt.graphs.graph_formats.FlattenedOrdering.ROW_MAJOR">FlattenedOrdering.ROW_MAJOR</a></code>.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">is<wbr></wbr>_directed:</span><code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code></td><td class="fieldArgDesc">A <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> indicating whether the graphs to be constructed are directed.
+The default value is <code><a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a></code>.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">allow<wbr></wbr>_loops:</span><code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code></td><td class="fieldArgDesc">A <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> indicating whether loops are allowed in the graphs to be
+constructed. The default value is <code><a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a></code>.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">initial<wbr></wbr>_graph<wbr></wbr>_generator:</span><code><a href="rlgt.environments.graph_generators.html#GraphGenerator" class="internal-link" title="rlgt.environments.graph_generators.GraphGenerator">GraphGenerator</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code></td><td class="fieldArgDesc">Either <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> or a <code><a href="rlgt.environments.graph_generators.html#GraphGenerator" class="internal-link" title="rlgt.environments.graph_generators.GraphGenerator">GraphGenerator</a></code> function that
+determines how the initial fully colored graphs are generated for the batch of initial
+states. If <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, all edges (resp. arcs) in all graphs are initially colored with
+color 0. The default value is <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">graph<wbr></wbr>_invariant<wbr></wbr>_diff:</span><code><a href="rlgt.environments.graph_environment.html#GraphInvariantDiff" class="internal-link" title="rlgt.environments.graph_environment.GraphInvariantDiff">GraphInvariantDiff</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code></td><td class="fieldArgDesc">Either <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, indicating that graph invariant values are
+always computed directly using <tt class="rst-docutils rst-literal">graph_invariant</tt>, or a <code><a href="rlgt.environments.graph_environment.html#GraphInvariantDiff" class="internal-link" title="rlgt.environments.graph_environment.GraphInvariantDiff">GraphInvariantDiff</a></code> function
+that computes element-wise differences of the graph invariant values when the
+environment transitions from one batch of underlying graphs to another. The default
+value is <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">sparse<wbr></wbr>_setting:</span><code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code></td><td class="fieldArgDesc">A <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> indicating whether the sparse setting is enabled. If set to
+<code><a href="https://docs.python.org/3/library/constants.html#True" class="intersphinx-link">True</a></code>, the graph invariant values are computed only for the final batch of actions.
+Otherwise, the graph invariant values are computed after every batch of actions. The
+default value is <code><a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a></code>.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="rlgt.environments.global_environments.GlobalFlipEnvironment.episode_length.setter">
+    
+  </a>
+  <a name="episode_length.setter">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <div><span class="decorator">@<a href="#episode_length.setter" class="internal-link" title="rlgt.environments.global_environments.GlobalFlipEnvironment.episode_length.setter">episode_length.setter</a><br /></span></div>
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">episode_length</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">episode_length: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></span>):</span>
+    
+    <a class="headerLink" href="#episode_length.setter" title="rlgt.environments.global_environments.GlobalFlipEnvironment.episode_length.setter">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>This setter allows the user to potentially reconfigure the episode length between two
+independent batches of episodes. It should not be used while a batch of episodes is
+currently in progress.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">episode<wbr></wbr>_length:</span><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></td><td class="fieldArgDesc">A positive <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> specifying the new episode length.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="rlgt.environments.global_environments.GlobalFlipEnvironment.state_batch_to_graph_batch">
+    
+  </a>
+  <a name="state_batch_to_graph_batch">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">state_batch_to_graph_batch</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">state_batch: <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code></span>) -&gt; <code><a href="rlgt.graphs.graph.Graph.html" class="internal-link" title="rlgt.graphs.graph.Graph">Graph</a></code>:</span>
+    
+    <a class="headerLink" href="#state_batch_to_graph_batch" title="rlgt.environments.global_environments.GlobalFlipEnvironment.state_batch_to_graph_batch">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    <div class="interfaceinfo">overrides <code><a href="rlgt.environments.graph_environment.GraphEnvironment.html#state_batch_to_graph_batch" class="internal-link">rlgt.environments.graph_environment.GraphEnvironment.state_batch_to_graph_batch</a></code></div>
+    <div><p>This abstract method must be implemented by any concrete subclass. It extracts the batch of
+underlying graphs corresponding to a provided batch of states. Implementations must return
+a <code><a href="rlgt.graphs.graph.Graph.html" class="internal-link" title="rlgt.graphs.graph.Graph">Graph</a></code> object containing the graphs corresponding to each row in <tt class="rst-docutils rst-literal">state_batch</tt>,
+preserving the row order. This method must be pure and must not modify any attributes of
+the class instance.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">state<wbr></wbr>_batch:</span><code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code></td><td class="fieldArgDesc">A two-dimensional <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> whose rows represent individual
+states from which the underlying graphs are to be extracted.</td></tr></table><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="rlgt.graphs.graph.Graph.html" class="internal-link" title="rlgt.graphs.graph.Graph">Graph</a></code></td><td class="fieldArgDesc">A <code><a href="rlgt.graphs.graph.Graph.html" class="internal-link" title="rlgt.graphs.graph.Graph">Graph</a></code> object representing the extracted batch of graphs.</td></tr></table></div>
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="rlgt.environments.global_environments.GlobalFlipEnvironment.initial_graph_generator">
+    
+  </a>
+  <a name="initial_graph_generator">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">initial_graph_generator</span>: <code><a href="rlgt.environments.graph_generators.html#GraphGenerator" class="internal-link" title="rlgt.environments.graph_generators.GraphGenerator">GraphGenerator</a></code> =
+    
+    <a class="headerLink" href="#initial_graph_generator" title="rlgt.environments.global_environments.GlobalFlipEnvironment.initial_graph_generator">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>A <code><a href="rlgt.environments.graph_generators.html#GraphGenerator" class="internal-link" title="rlgt.environments.graph_generators.GraphGenerator">GraphGenerator</a></code> function that defines how the underlying
+fully colored graphs are generated for the initial states. This attribute may be
+reconfigured between independent batches of episodes.</p></div>
+    
+  </div>
+</div><div class="baseproperty">
+  
+  
+  <a name="rlgt.environments.global_environments.GlobalFlipEnvironment.action_mask">
+    
+  </a>
+  <a name="action_mask">
+    
+  </a>
+  <div class="functionHeader">
+    <div><span class="decorator">@<a href="https://docs.python.org/3/library/functions.html#property" class="intersphinx-link">property</a><br /></span></div>
+    <span class="py-defname">action_mask</span>: <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> =
+    
+    <a class="headerLink" href="#action_mask" title="rlgt.environments.global_environments.GlobalFlipEnvironment.action_mask">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <code><a href="rlgt.environments.graph_environment.GraphEnvironment.html#action_mask" class="internal-link">rlgt.environments.graph_environment.GraphEnvironment.action_mask</a></code></div>
+    <div><p>This abstract property must be implemented by any concrete subclass. It must return <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>
+if no episodes are currently being run in parallel, or if every action is available in
+every current state. Otherwise, it must return a two-dimensional <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> matrix
+<tt class="rst-docutils rst-literal">a</tt> of type <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> whose entry <tt class="rst-docutils rst-literal">a[i, j]</tt> is <code><a href="https://docs.python.org/3/library/constants.html#True" class="intersphinx-link">True</a></code> if and only if action <em>j</em> is
+available in the current state of the <em>i</em>-th episode.</p></div>
+    
+  </div>
+</div><div class="baseproperty">
+  
+  
+  <a name="rlgt.environments.global_environments.GlobalFlipEnvironment.action_number">
+    
+  </a>
+  <a name="action_number">
+    
+  </a>
+  <div class="functionHeader">
+    <div><span class="decorator">@<a href="https://docs.python.org/3/library/functions.html#property" class="intersphinx-link">property</a><br /></span></div>
+    <span class="py-defname">action_number</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
+    
+    <a class="headerLink" href="#action_number" title="rlgt.environments.global_environments.GlobalFlipEnvironment.action_number">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <code><a href="rlgt.environments.graph_environment.GraphEnvironment.html#action_number" class="internal-link">rlgt.environments.graph_environment.GraphEnvironment.action_number</a></code></div>
+    <div><p>This abstract property must be implemented by any concrete subclass. It must return the
+total number of distinct actions that can be executed in the environment, as a positive
+<code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code>.</p></div>
+    
+  </div>
+</div><div class="baseproperty">
+  
+  
+  <a name="rlgt.environments.global_environments.GlobalFlipEnvironment.episode_length">
+    
+  </a>
+  <a name="episode_length">
+    
+  </a>
+  <div class="functionHeader">
+    <div><span class="decorator">@<a href="https://docs.python.org/3/library/functions.html#property" class="intersphinx-link">property</a><br /></span></div>
+    <span class="py-defname">episode_length</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
+    
+    <a class="headerLink" href="#episode_length" title="rlgt.environments.global_environments.GlobalFlipEnvironment.episode_length">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <code><a href="rlgt.environments.graph_environment.GraphEnvironment.html#episode_length" class="internal-link">rlgt.environments.graph_environment.GraphEnvironment.episode_length</a></code></div>
+    <div><p>This abstract property must be implemented by any concrete subclass. It must return the
+predetermined common length of all episodes run in parallel, i.e., the total number of
+actions executed in each episode, as a positive <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code>.</p></div>
+    
+  </div>
+</div><div class="baseproperty">
+  
+  
+  <a name="rlgt.environments.global_environments.GlobalFlipEnvironment.is_continuing">
+    
+  </a>
+  <a name="is_continuing">
+    
+  </a>
+  <div class="functionHeader">
+    <div><span class="decorator">@<a href="https://docs.python.org/3/library/functions.html#property" class="intersphinx-link">property</a><br /></span></div>
+    <span class="py-defname">is_continuing</span>: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> =
+    
+    <a class="headerLink" href="#is_continuing" title="rlgt.environments.global_environments.GlobalFlipEnvironment.is_continuing">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <code><a href="rlgt.environments.graph_environment.GraphEnvironment.html#is_continuing" class="internal-link">rlgt.environments.graph_environment.GraphEnvironment.is_continuing</a></code></div>
+    <div><p>This abstract property must be implemented by any concrete subclass. It must return a
+<code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> indicating whether the environment is continuing (<code><a href="https://docs.python.org/3/library/constants.html#True" class="intersphinx-link">True</a></code>) or episodic (<code><a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a></code>).</p></div>
+    
+  </div>
+</div><div class="baseproperty">
+  
+  
+  <a name="rlgt.environments.global_environments.GlobalFlipEnvironment.state_dtype">
+    
+  </a>
+  <a name="state_dtype">
+    
+  </a>
+  <div class="functionHeader">
+    <div><span class="decorator">@<a href="https://docs.python.org/3/library/functions.html#property" class="intersphinx-link">property</a><br /></span></div>
+    <span class="py-defname">state_dtype</span>: <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" class="intersphinx-link">np.dtype</a></code> =
+    
+    <a class="headerLink" href="#state_dtype" title="rlgt.environments.global_environments.GlobalFlipEnvironment.state_dtype">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <code><a href="rlgt.environments.graph_environment.GraphEnvironment.html#state_dtype" class="internal-link">rlgt.environments.graph_environment.GraphEnvironment.state_dtype</a></code></div>
+    <div><p>This abstract property must be implemented by any concrete subclass. It must return the
+data type of the one-dimensional <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> vectors that represent states, as a
+<code><a href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" class="intersphinx-link">numpy.dtype</a></code>.</p></div>
+    
+  </div>
+</div><div class="baseproperty">
+  
+  
+  <a name="rlgt.environments.global_environments.GlobalFlipEnvironment.state_length">
+    
+  </a>
+  <a name="state_length">
+    
+  </a>
+  <div class="functionHeader">
+    <div><span class="decorator">@<a href="https://docs.python.org/3/library/functions.html#property" class="intersphinx-link">property</a><br /></span></div>
+    <span class="py-defname">state_length</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
+    
+    <a class="headerLink" href="#state_length" title="rlgt.environments.global_environments.GlobalFlipEnvironment.state_length">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <code><a href="rlgt.environments.graph_environment.GraphEnvironment.html#state_length" class="internal-link">rlgt.environments.graph_environment.GraphEnvironment.state_length</a></code></div>
+    <div><p>This abstract property must be implemented by any concrete subclass. It must return the
+number of entries in each state vector, i.e., the length of the one-dimensional
+<code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> vectors that represent states, as a positive <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code>.</p></div>
+    
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="rlgt.environments.global_environments.GlobalFlipEnvironment._initialize_batch">
+    
+  </a>
+  <a name="_initialize_batch">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">_initialize_batch</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">batch_size: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></span>):</span>
+    
+    <a class="headerLink" href="#_initialize_batch" title="rlgt.environments.global_environments.GlobalFlipEnvironment._initialize_batch">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    <div class="interfaceinfo">overrides <code><a href="rlgt.environments.graph_environment.GraphEnvironment.html#_initialize_batch" class="internal-link">rlgt.environments.graph_environment.GraphEnvironment._initialize_batch</a></code></div>
+    <div><p>This abstract method must be implemented by any concrete subclass. It must initialize a
+batch of episodes of the specified size and update the <code><a href="#_state_batch" class="internal-link" title="rlgt.environments.graph_environment.GraphEnvironment._state_batch">_state_batch</a></code> and <code><a href="#_status" class="internal-link" title="rlgt.environments.graph_environment.GraphEnvironment._status">_status</a></code>
+attributes so that they represent the newly initialized batch.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">batch<wbr></wbr>_size:</span><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></td><td class="fieldArgDesc">The number of episodes to initialize in the batch, given as a positive
+<code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code>.</td></tr></table></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="rlgt.environments.global_environments.GlobalFlipEnvironment._transition_batch">
+    
+  </a>
+  <a name="_transition_batch">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">_transition_batch</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">action_batch: <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code></span>):</span>
+    
+    <a class="headerLink" href="#_transition_batch" title="rlgt.environments.global_environments.GlobalFlipEnvironment._transition_batch">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    <div class="interfaceinfo">overrides <code><a href="rlgt.environments.graph_environment.GraphEnvironment.html#_transition_batch" class="internal-link">rlgt.environments.graph_environment.GraphEnvironment._transition_batch</a></code></div>
+    <div><p>This abstract method must be implemented by any concrete subclass. It must apply a batch of
+actions to the current batch of states and update the <code><a href="#_state_batch" class="internal-link" title="rlgt.environments.graph_environment.GraphEnvironment._state_batch">_state_batch</a></code> and <code><a href="#_status" class="internal-link" title="rlgt.environments.graph_environment.GraphEnvironment._status">_status</a></code>
+attributes to reflect the resulting states and the updated batch status. Implementations
+may also update additional subclass-specific attributes as required.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">action<wbr></wbr>_batch:</span><code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code></td><td class="fieldArgDesc">A one-dimensional <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> of type <code><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.int32" class="intersphinx-link">numpy.int32</a></code> containing the
+actions to be applied. The length of <tt class="rst-docutils rst-literal">action_batch</tt> must match the number of states
+in <tt class="rst-docutils rst-literal">_state_batch</tt>.</td></tr></table></div>
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="rlgt.environments.global_environments.GlobalFlipEnvironment._allow_loops">
+    
+  </a>
+  <a name="_allow_loops">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_allow_loops</span>: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> =
+    
+    <a class="headerLink" href="#_allow_loops" title="rlgt.environments.global_environments.GlobalFlipEnvironment._allow_loops">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>A <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> indicating whether loops are allowed in the graphs to be
+constructed.</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="rlgt.environments.global_environments.GlobalFlipEnvironment._episode_length">
+    
+  </a>
+  <a name="_episode_length">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_episode_length</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
+    
+    <a class="headerLink" href="#_episode_length" title="rlgt.environments.global_environments.GlobalFlipEnvironment._episode_length">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>A positive <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> specifying the episode length, i.e., the total number
+of actions in each episode.</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="rlgt.environments.global_environments.GlobalFlipEnvironment._flattened_length">
+    
+  </a>
+  <a name="_flattened_length">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_flattened_length</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
+    
+    <a class="headerLink" href="#_flattened_length" title="rlgt.environments.global_environments.GlobalFlipEnvironment._flattened_length">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>A positive <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> equal to the flattened length of the graphs to be
+constructed.</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="rlgt.environments.global_environments.GlobalFlipEnvironment._flattened_ordering">
+    
+  </a>
+  <a name="_flattened_ordering">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_flattened_ordering</span>: <code><a href="rlgt.graphs.graph_formats.FlattenedOrdering.html" class="internal-link" title="rlgt.graphs.graph_formats.FlattenedOrdering">FlattenedOrdering</a></code> =
+    
+    <a class="headerLink" href="#_flattened_ordering" title="rlgt.environments.global_environments.GlobalFlipEnvironment._flattened_ordering">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>An item of the <code><a href="rlgt.graphs.graph_formats.FlattenedOrdering.html" class="internal-link" title="rlgt.graphs.graph_formats.FlattenedOrdering">FlattenedOrdering</a></code> enumeration specifying the edge
+(resp. arc) ordering (row-major or clockwise).</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="rlgt.environments.global_environments.GlobalFlipEnvironment._flip_only">
+    
+  </a>
+  <a name="_flip_only">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_flip_only</span>: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> =
+    
+    <a class="headerLink" href="#_flip_only" title="rlgt.environments.global_environments.GlobalFlipEnvironment._flip_only">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>A <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> specifying whether the selected edges (resp. arcs) must be flipped.</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="rlgt.environments.global_environments.GlobalFlipEnvironment._is_directed">
+    
+  </a>
+  <a name="_is_directed">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_is_directed</span>: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> =
+    
+    <a class="headerLink" href="#_is_directed" title="rlgt.environments.global_environments.GlobalFlipEnvironment._is_directed">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>A <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> indicating whether the graphs to be constructed are directed or
+undirected.</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="rlgt.environments.global_environments.GlobalFlipEnvironment._state_batch">
+    
+  </a>
+  <a name="_state_batch">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_state_batch</span> =
+    
+    <a class="headerLink" href="#_state_batch" title="rlgt.environments.global_environments.GlobalFlipEnvironment._state_batch">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <code><a href="rlgt.environments.graph_environment.GraphEnvironment.html#_state_batch" class="internal-link">rlgt.environments.graph_environment.GraphEnvironment._state_batch</a></code></div>
+    <div><p>See <code><a href="rlgt.environments.graph_environment.GraphEnvironment.html#_state_batch" class="internal-link" title="rlgt.environments.graph_environment.GraphEnvironment._state_batch">GraphEnvironment._state_batch</a></code>.</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="rlgt.environments.global_environments.GlobalFlipEnvironment._status">
+    
+  </a>
+  <a name="_status">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_status</span> =
+    
+    <a class="headerLink" href="#_status" title="rlgt.environments.global_environments.GlobalFlipEnvironment._status">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <code><a href="rlgt.environments.graph_environment.GraphEnvironment.html#_status" class="internal-link">rlgt.environments.graph_environment.GraphEnvironment._status</a></code></div>
+    <div><p>See <code><a href="rlgt.environments.graph_environment.GraphEnvironment.html#_status" class="internal-link" title="rlgt.environments.graph_environment.GraphEnvironment._status">GraphEnvironment._status</a></code>.</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="rlgt.environments.global_environments.GlobalFlipEnvironment._step_count">
+    
+  </a>
+  <a name="_step_count">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_step_count</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> =
+    
+    <a class="headerLink" href="#_step_count" title="rlgt.environments.global_environments.GlobalFlipEnvironment._step_count">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>Either <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> or a nonnegative <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> counting how many actions have been
+executed in the current batch of episodes. When <code><a href="#_step_count" class="internal-link" title="rlgt.environments.global_environments.GlobalFlipEnvironment._step_count">_step_count</a></code> equals <code><a href="#_episode_length" class="internal-link" title="rlgt.environments.global_environments.GlobalFlipEnvironment._episode_length">_episode_length</a></code>, the
+episode has reached a final state. This attribute is updated after each call to
+<code><a href="rlgt.environments.graph_environment.GraphEnvironment.html#reset_batch" class="internal-link" title="rlgt.environments.graph_environment.GraphEnvironment.reset_batch">GraphEnvironment.reset_batch</a></code> or <code><a href="rlgt.environments.graph_environment.GraphEnvironment.html#step_batch" class="internal-link" title="rlgt.environments.graph_environment.GraphEnvironment.step_batch">GraphEnvironment.step_batch</a></code>.</p></div>
+    
+  </div>
+</div>
+        </div>
+      
+      </main>
+    </div>
+
+    <footer class="navbar navbar-default">
+
+  
+  <div class="container-fluid">
+    <a href="index.html">API Documentation</a> for RLGT,
+  generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
+    25.10.1 at 2026-02-09 14:40:05.
+  </div>
+
+  <!-- Search related scripts needs to be loaded at the end of HTML 
+    parsing not to introduce overhead and display HTML data asap -->
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="searchlib.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
+
+</footer>
+  
+    <script src="pydoctor.js" type="text/javascript"></script>
+
+  </body>
+</html>

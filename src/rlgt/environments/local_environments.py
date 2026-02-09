@@ -1,6 +1,6 @@
 """
 This ``Python`` module defines two local reinforcement learning environments that inherit from the
-`GraphEnvironment` class and model graph-building games in which the edges (resp. arcs) are
+`GraphEnvironment` class and model graph building games in which the edges (resp. arcs) are
 initially fully colored in some predetermined manner. In these environments, the agent moves
 between vertices according to a specified traversal strategy, thereby traversing existing edges
 (resp. arcs) and properly recoloring them as part of the interaction process.
@@ -25,7 +25,7 @@ from .graph_generators import GraphGenerator, create_fixed_graph_generator
 
 class LocalSetEnvironment(GraphEnvironment):
     """
-    This class inherits from the `GraphEnvironment` class and models a graph-building game in which
+    This class inherits from the `GraphEnvironment` class and models a graph building game in which
     the edges (resp. arcs) are initially fully colored in some manner, and an agent moves between
     vertices, thereby traversing existing edges (resp. arcs) and properly recoloring them. More
     precisely, at each step the agent is located at a vertex and selects an edge incident to this
@@ -44,7 +44,7 @@ class LocalSetEnvironment(GraphEnvironment):
     ``(edge_colors - 1) * flattened_length + graph_order``, where ``edge_colors`` is the configured
     number of proper edge colors, ``graph_order`` is the configured graph order, and
     ``flattened_length`` is the flattened length of the graphs to be constructed. In the state
-    vector, the first ``flattened_length`` bits indicate which edges (resp. arcs) are currently of
+    vectors, the first ``flattened_length`` bits indicate which edges (resp. arcs) are currently of
     color 1, the next ``flattened_length`` bits indicate which edges (resp. arcs) are currently of
     color 2, and this pattern continues up to color ``edge_colors - 1``. The ordering of edges
     (resp. arcs) within these blocks is determined by the selected flattened ordering, which can be
@@ -82,10 +82,12 @@ class LocalSetEnvironment(GraphEnvironment):
         i.e., the number ``(_edge_colors - 1) * _flattened_length + _graph_order``.
     :ivar _episode_length: A positive `int` specifying the episode length, i.e., the total number
         of actions in each episode.
+    :ivar _current_vertices: Either `None` or a `numpy.ndarray` of type `numpy.int32` specifying
+        the vertex where the agent is currently located in each episode run in parallel.
     :ivar _step_count: Either `None` or a nonnegative `int` counting how many actions have been
         executed in the current batch of episodes. When `_step_count` equals `_episode_length`, the
         episode has reached a final state. This attribute is updated after each call to
-        `reset_batch` or `step_batch`.
+        `GraphEnvironment.reset_batch` or `GraphEnvironment.step_batch`.
     """
 
     def __init__(
@@ -126,8 +128,8 @@ class LocalSetEnvironment(GraphEnvironment):
             determines how the initial fully colored graphs are generated for the batch of initial
             states. If `None`, all edges (resp. arcs) in all graphs are initially colored with
             color 0. The default value is `None`.
-        :param starting_vertex: A nonnegative `int` strictly less than `graph_order` specifying the
-            vertex at which the agent starts the recoloring procedure. The default value is 0.
+        :param starting_vertex: A nonnegative `int` strictly less than ``graph_order`` specifying
+            the vertex at which the agent starts the recoloring procedure. The default value is 0.
         :param graph_invariant_diff: Either `None`, indicating that graph invariant values are
             always computed directly using ``graph_invariant``, or a `GraphInvariantDiff` function
             that computes element-wise differences of the graph invariant values when the
@@ -336,7 +338,7 @@ class LocalSetEnvironment(GraphEnvironment):
 
 class LocalFlipEnvironment(GraphEnvironment):
     """
-    This class inherits from the `GraphEnvironment` class and models a graph-building game used for
+    This class inherits from the `GraphEnvironment` class and models a graph building game used for
     constructing 2-edge-colored looped complete graphs in which the edges (resp. arcs) are
     initially fully colored in some manner, and the agent moves from one vertex to another, thereby
     traversing existing edges (resp. arcs) and potentially flipping them. More precisely, in each
@@ -354,7 +356,7 @@ class LocalFlipEnvironment(GraphEnvironment):
     Each state is represented by a binary `numpy.ndarray` of type `numpy.uint8` and length
     ``flattened_length + graph_order``, where ``graph_order`` is the configured graph order and
     ``flattened_length`` is the flattened length of the graphs to be constructed. In the state
-    vector, the first ``flattened_length`` bits indicate which of the ``flattened_length`` edges
+    vectors, the first ``flattened_length`` bits indicate which of the ``flattened_length`` edges
     (resp. arcs) are currently of color 1. The edges (resp. arcs) are ordered according to the
     selected flattened ordering, which may be either row-major or clockwise. The final
     ``graph_order`` bits form a one-hot encoding of the vertex at which the agent is currently
@@ -391,10 +393,12 @@ class LocalFlipEnvironment(GraphEnvironment):
         constructed.
     :ivar _episode_length: A positive `int` specifying the episode length, i.e., the total number
         of actions in each episode.
+    :ivar _current_vertices: Either `None` or a `numpy.ndarray` of type `numpy.int32` specifying
+        the vertex where the agent is currently located in each episode run in parallel.
     :ivar _step_count: Either `None` or a nonnegative `int` counting how many actions have been
         executed in the current batch of episodes. When `_step_count` equals `_episode_length`, the
         episode has reached a final state. This attribute is updated after each call to
-        `reset_batch` or `step_batch`.
+        `GraphEnvironment.reset_batch` or `GraphEnvironment.step_batch`.
     """
 
     def __init__(
@@ -435,9 +439,9 @@ class LocalFlipEnvironment(GraphEnvironment):
             determines how the initial fully colored graphs are generated for the batch of initial
             states. If `None`, all edges (resp. arcs) in all graphs are initially colored with
             color 0. The default value is `None`.
-        :param starting_vertex: A nonnegative `int` strictly less than `graph_order` specifying the
-            vertex at which the agent starts the potential flipping procedure. The default value is
-            0.
+        :param starting_vertex: A nonnegative `int` strictly less than ``graph_order`` specifying
+            the vertex at which the agent starts the potential flipping procedure. The default
+            value is 0.
         :param graph_invariant_diff: Either `None`, indicating that graph invariant values are
             always computed directly using ``graph_invariant``, or a `GraphInvariantDiff` function
             that computes element-wise differences of the graph invariant values when the

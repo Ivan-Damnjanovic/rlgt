@@ -1,10 +1,10 @@
 """
-This ``Python`` module contains the `PPOAgent` class, which encapsulates the concept
-of a reinforcement learning agent to be used in graph theory applications that applies the
-``PyTorch``-based Proximal Policy Optimization (PPO) method.
+This ``Python`` module contains the `PPOAgent` class, which implements a reinforcement learning
+agent for graph theory applications using the Proximal Policy Optimization (PPO) method with
+``PyTorch``.
 """
 
-from typing import Optional, Callable
+from typing import Callable, Optional
 
 import numpy as np
 import torch
@@ -19,51 +19,76 @@ from .random_action_mechanisms import NoRandomActionMechanism, RandomActionMecha
 
 class PPOAgent(GraphAgent):
     """
-    This class encapsulates the concept of an RL agent to be used in graph theory applications that
-    applies the ``PyTorch``-based Proximal Policy Optimization (PPO) method. The agent operates over
-    a configurable environment given as a `GraphEnvironment` object. In each iteration of the learning
-    process, the agent generates a predetermined number of graphs through the graph-building game induced
-    by the environment and computes the cumulative reward for each of these episodes. The game is played
-    by using actor-critic architecture with a policy network (`torch.nn.Module`) and a value network
-    (`torch.nn.Module`). The policy network computes action probabilities, while the value network
-    estimates state values. The agent uses the PPO algorithm to update both networks based on collected
-    experiences. Additionally, the user can configure the optimizer that trains both networks, given as a
-    `torch.optim.Optimizer` object. Finally, the user can also configure the random action mechanism
-    that the RL agent should use. When a random action is supposed to get executed, it gets sampled
-    with the uniform probability distribution over all the actions that are available for execution.
+    This class encapsulates a reinforcement learning agent for graph theory applications using the
+    ``PyTorch``-based Proximal Policy Optimization (PPO) method. The agent operates on a
+    configurable environment given as a `GraphEnvironment` object. In each iteration of the
+    learning process, the agent generates a predetermined number of graphs by playing the graph
+    building game defined by the environment and computes the graph invariant values and all
+    discounted returns for each episode run in parallel. Here, while computing a discounted return,
+    a reward is considered to be the increase between two consecutive graph invariant values. The
+    agent uses an actor-critic architecture, with a `torch.nn.Module` model (policy network)
+    applied to compute the probability of selecting each action in each step of every episode, and
+    another `torch.nn.Module` model (value network) applied to estimate the value that quantifies
+    the desirability of each state. Afterwards, the log probabilities and discounted returns of a
+    subset of top-performing episodes are used to train both models according to the PPO algorithm.
+    The training is performed over a configurable number of epochs. This completes one iteration of
+    the learning process. The user provides both models, configures the optimizer, sets the
+    discount factor, selects the number of epochs to be executed, configures the clamping epsilon
+    coefficient and the value loss coefficient, and optionally provides a random action mechanism.
+    When a random action occurs, it is selected uniformly among all actions available in the
+    current state.
 
-    :ivar _environment: A `GraphEnvironment` object that represents the RL environment that defines
-        the extremal problem of interest and whose graph-building game should be used to construct
-        all the graphs.
-    :ivar _policy_network: A `torch.nn.Module` object that represents the policy network (actor)
-        that is used to compute the probability for each of the actions to be selected.
-    :ivar _value_network: A `torch.nn.Module` object that represents the value network (critic)
-        that estimates the state values for advantage calculation.
-    :ivar _optimizer: A `torch.optim.Optimizer` object that represents the optimizer responsible
-        for updating both network parameters.
-    :ivar _device: A `torch.device` object that determines on which device the networks are located.
-    :ivar _batch_size: A positive `int` that determines how many episodes should be collected before
-        performing a policy update.
-    :ivar _gamma: A `float` in the range [0, 1] representing the discount factor for returns.
-    :ivar _eps_clip: A positive `float` representing the PPO clipping parameter.
-    :ivar _k_epochs: A positive `int` determining how many epochs to perform during each PPO update.
-    :ivar _entropy_coef: A nonnegative `float` representing the entropy coefficient for exploration.
-    :ivar _value_coef: A nonnegative `float` representing the value loss coefficient.
-    :ivar _random_action_mechanism: A `RandomActionMechanism` object that indicates the random
-        action mechanism that the RL agent should use.
-    :ivar _rng: The `numpy.random.Generator` object that represents the random number generator
-        used for all the probabilistic decisions.
-    :ivar _step_count: A nonnegative `int` that determines the number of executed iterations of the
-        learning process, if the RL agent has been initialized, and otherwise, `None`.
-    :ivar _best_score: A `float` that determines the best currently achieved value for the graph
-        invariant that is supposed to get maximized in the configured extremal problem, if the RL
-        agent has been initialized, and otherwise, `None`.
-    :ivar _buffer_states: A list used to store states during episode collection.
-    :ivar _buffer_actions: A list used to store actions during episode collection.
-    :ivar _buffer_rewards: A list used to store rewards during episode collection.
-    :ivar _buffer_log_probs: A list used to store log probabilities during episode collection.
-    :ivar _buffer_values: A list used to store value estimates during episode collection.
-    :ivar _buffer_dones: A list used to store episode termination flags during episode collection.
+    :ivar _environment: A `GraphEnvironment` object defining the extremal problem and providing the
+        graph building game used to construct all the graphs.
+    :ivar _policy_network: A `torch.nn.Module` object predicting the action probabilities for each
+        step in each episode.
+    :ivar _value_network: A `torch.nn.Module` object predicting the state values for each step in
+        each episode.
+    :ivar _optimizer: A `torch.optim.Optimizer` object that updates the parameters of both models.
+    :ivar _value_loss_function: A function implementing the MSE loss used for training the value
+        network.
+    :ivar _device: A `torch.device` object indicating the device where the models reside.
+    :ivar _candidates_count: A positive `int` specifying the number of graphs constructed per
+        iteration, i.e., the number of episodes run in parallel.
+    :ivar _elite_count: A positive `int` specifying the number of top-performing episodes used to
+        train the model in each iteration, or `None` if all the episodes should be used.
+    :ivar _discount_factor: A `float` from the interval [0, 1] representing the discount factor to
+        be used while computing the discounted returns.
+    :ivar _epochs_count: A positive `int` specifying the number of epochs executed in each learning
+        iteration of the PPO method.
+    :ivar _clamp_epsilon: A `float` from the interval [0, 1] representing the clamping epsilon
+        coefficient used while computing the policy loss in each epoch of a learning iteration.
+    :ivar _value_loss_coef: A positive `float` representing the coefficient that scales the value
+        loss while computing the total loss.
+    :ivar _random_action_mechanism: A `RandomActionMechanism` object that determines the
+        probability of executing a random action. When a random action is selected, it is sampled
+        uniformly among all available actions in the current state.
+    :ivar _random_generator: A `numpy.random.Generator` object used for all probabilistic
+        decisions.
+    :ivar _step_count: A nonnegative `int` representing the number of executed iterations, or
+        `None` if the agent has not been initialized.
+    :ivar _best_score: A `float` representing the best achieved value for the graph invariant, or
+        `None` if the agent has not been initialized.
+    :ivar _best_graph: A `Graph` object representing a graph attaining the best achieved value for
+        the graph invariant, or `None` if the agent has not been initialized or no iterations have
+        been executed.
+    :ivar _population_states: Either `None` if uninitialized, or a `numpy.ndarray` storing all
+        states during each episode trajectory. Its shape is ``(episode_length + 1,
+        candidates_count, state_length)``, where ``episode_length`` is the episode length of the RL
+        environment, ``state_length`` is the length of the state vectors, and ``candidates_count``
+        is the number of episodes executed in parallel. The first dimension corresponds to the
+        state trajectory within an episode, the second to the executed episodes, and the third to
+        the state vector entries.
+    :ivar _population_actions: Either `None` if uninitialized, or a `numpy.ndarray` of type
+        `numpy.int32` storing all actions during each episode trajectory. Its shape is
+        ``(episode_length, candidates_count)``, where the first dimension corresponds to the action
+        trajectory within an episode and the second to the executed episodes. The episode order
+        matches `_population_states`.
+    :ivar _population_returns: Either `None` if uninitialized, or a `numpy.ndarray` of type
+        `numpy.float32` storing the discounted returns for all executed episodes. Its shape is
+        ``(episode_length, candidates_count)``, where the first dimension corresponds to the
+        timestamps (actions) within an episode and the second to the executed episodes. The episode
+        order matches `_population_states`.
     """
 
     def __init__(
@@ -84,34 +109,40 @@ class PPOAgent(GraphAgent):
         """
         This constructor initializes an instance of the `PPOAgent` class.
 
-        :param environment: The RL environment that defines the extremal problem of interest and
-            whose graph-building game should be used to construct all the graphs, given as a
-            `GraphEnvironment` object.
-        :param policy_network: The policy network (actor) that is used to compute the probability
-            for each of the actions to be selected, given as a `torch.nn.Module` object.
-        :param value_network: The value network (critic) that estimates state values for advantage
-            calculation, given as a `torch.nn.Module` object.
-        :param optimizer: The optimizer responsible for updating both network parameters, given as a
-            `torch.optim.Optimizer` object. The parameters of both the policy network and value
-            network must be passed to the optimizer.
-        :param batch_size: A positive `int` that determines how many episodes should be collected
-            before performing a policy update. The default value is 32.
-        :param gamma: A `float` in the range [0, 1] representing the discount factor for returns.
-            The default value is 0.99.
-        :param eps_clip: A positive `float` representing the PPO clipping parameter. The default
-            value is 0.2.
-        :param k_epochs: A positive `int` determining how many epochs to perform during each PPO
-            update. The default value is 4.
-        :param entropy_coef: A nonnegative `float` representing the entropy coefficient for
-            exploration. The default value is 0.01.
-        :param value_coef: A nonnegative `float` representing the value loss coefficient. The
-            default value is 0.5.
-        :param random_action_mechanism: The random action mechanism that the RL agent should use,
-            given as a `RandomActionMechanism` object. The default value is
-            ``NoRandomActionMechanism()``, i.e., no random actions should be executed by default.
-        :param rng: Either `None`, or the `numpy.random.Generator` object that represents the
-            random number generator used for all the probabilistic decisions. If this argument is
-            `None`, then a default `numpy.random.Generator` object will be used. The default value
+        :param environment: The RL environment defining the extremal problem and providing the
+            graph building game, given as a `GraphEnvironment` object.
+        :param policy_network: The policy network used to compute the probability of each action in
+            each episode and step, given as a `torch.nn.Module` object.
+        :param value_network: The value network used to compute the state value of each episode and
+            step, given as a `torch.nn.Module` object. This value and policy networks must reside
+            in the same device.
+        :param optimizer: The optimizer responsible for updating the parameters of both models,
+            given as a `torch.optim.Optimizer` object. The parameters of both ``policy_network``
+            and ``value_network`` must be passed to it.
+        :param candidates_count: A positive `int` specifying how many graphs are generated in each
+            iteration by running the corresponding number of episodes in parallel. The default
+            value is 200.
+        :param elite_count: A positive `int` specifying how many episodes with the greatest graph
+            invariant value are used to train the policy network and value network in each
+            iteration of the learning process, or `None` to indicate that all executed episodes
+            should be used. The default value is `None`.
+        :param discount_factor: A `float` from the interval [0, 1] representing the discount factor
+            to be used while computing the returns. The default value is 0.99.
+        :param epochs_count: A positive `int` specifying the number of epochs executed in each
+            learning iteration of the PPO method. The default value is 4.
+        :param clamp_epsilon: A positive `float` from the interval [0, 1] representing the clamping
+            epsilon coefficient used while computing the policy loss in each epoch of a learning
+            iteration. The default value is 0.2.
+        :param value_loss_coef: A positive `float` representing the coefficient that scales the
+            value loss while computing the total loss. The default value is 0.5.
+        :param random_action_mechanism: A `RandomActionMechanism` object that governs the
+            probability of executing a random action in each step of the graph building game. When
+            a random action is triggered, the agent ignores the action predicted by the policy
+            network and instead selects an action uniformly at random among all available actions.
+            By default, this is ``NoRandomActionMechanism()``, meaning that no random actions are
+            ever executed.
+        :param random_generator: Either `None`, or a `numpy.random.Generator` used for
+            probabilistic decisions. If `None`, a default generator will be used. The default value
             is `None`.
         """
 
@@ -132,7 +163,6 @@ class PPOAgent(GraphAgent):
         self._candidates_count: int = candidates_count
         self._elite_count: Optional[int] = elite_count
         self._discount_factor: float = discount_factor
-
         self._epochs_count: int = epochs_count
         self._clamp_epsilon: float = clamp_epsilon
         self._value_loss_coef: float = value_loss_coef
@@ -159,8 +189,8 @@ class PPOAgent(GraphAgent):
         self._best_graph = None
         self._random_action_mechanism.reset()
 
-        # Initialize the population returns to the zero `np.ndarray` of type `np.float32` and the
-        # required shape.
+        # Initialize the population states, the population actions and the population returns to
+        # the zero `np.ndarray` objects of the required shape and type.
         self._population_states = np.zeros(
             (
                 self._environment.episode_length + 1,
@@ -177,7 +207,8 @@ class PPOAgent(GraphAgent):
         )
 
     def step(self) -> None:
-        # Initialize a batch of episodes with the batch size ``_candidates_count``.
+        # Initialize a batch of episodes with the batch size ``_candidates_count`` and store the
+        # starting states to the ``_population_states`` attribute.
         state_batch, current_scores, status = self._environment.reset_batch(
             batch_size=self._candidates_count
         )
@@ -197,7 +228,8 @@ class PPOAgent(GraphAgent):
                 new_best_graph = self._environment.state_to_graph(state_batch[best_index, :])
 
         # Set the ``_population_returns`` attribute to all zeros. Also, initialize the
-        # ``population_log_probs`` list that stores all the log probabilities per timestamp.
+        # ``population_old_log_probs`` and ``population_old_values`` lists that store all the log
+        # probabilities per timestamp and all the state values per timestamp, respectively.
         self._population_returns[:, :] = 0
         population_old_log_probs = []
         population_old_values = []
@@ -213,7 +245,9 @@ class PPOAgent(GraphAgent):
             # selected for execution in each of the episodes run in parallel.
             state_batch_torch = torch.from_numpy(state_batch.astype(np.float32)).to(self._device)
             logits_batch_torch = self._policy_network(state_batch_torch)
-            
+
+            # Use the value network to get the state values and store them to the
+            # ``population_old_values`` list.
             values_batch_torch = self._value_network(state_batch_torch)
             population_old_values.append(values_batch_torch.detach())
 
@@ -230,7 +264,7 @@ class PPOAgent(GraphAgent):
             action_batch_torch = distribution.sample()
             action_batch = action_batch_torch.cpu().numpy()
 
-            # Store the log probabilities to the ``population_log_probs`` list.
+            # Store the log probabilities to the ``population_old_log_probs`` list.
             population_old_log_probs.append(distribution.log_prob(action_batch_torch).detach())
 
             # Use the random action probability to decide whether each sampled action should be
@@ -268,7 +302,7 @@ class PPOAgent(GraphAgent):
                         dtype=np.int32,
                     )
 
-            # Execute the selected actions and compute the batch of rewards.
+            # Store the selected actions, execute them, and compute the batch of rewards.
             previous_scores = current_scores
             self._population_actions[episode_action_count, :] = action_batch
             state_batch, current_scores, status = self._environment.step_batch(action_batch)
@@ -290,6 +324,7 @@ class PPOAgent(GraphAgent):
                     best_index = np.argmax(current_scores)
                     new_best_graph = self._environment.state_to_graph(state_batch[best_index, :])
 
+            # Store the newly obtained states.
             episode_action_count += 1
             self._population_states[episode_action_count, :, :] = state_batch
 
@@ -304,7 +339,7 @@ class PPOAgent(GraphAgent):
             ] = True
 
         # Extract the (state, action) pairs from the elite executed episodes, i.e., the executed
-        # episodes that should be used to train the policy network.
+        # episodes that should be used to train the policy network and the value network.
         elite_states = self._population_states[:-1, elite_mask, :].reshape(
             -1, self._environment.state_length
         )
@@ -312,14 +347,14 @@ class PPOAgent(GraphAgent):
         elite_states_torch = torch.from_numpy(elite_states.astype(np.float32)).to(self._device)
         elite_actions_torch = torch.from_numpy(elite_actions.astype(np.int64)).to(self._device)
 
-        # Prepare the log-probabilities from the elite executed episodes for training.
+        # Prepare the log probabilities from the elite executed episodes for training.
         elite_log_probs_torch = torch.cat(
             [
                 population_old_log_probs[index][elite_mask]
                 for index in range(self._environment.episode_length)
             ]
         ).reshape(-1)
-
+        # Prepare the state values from the elite executed episodes for training.
         elite_values_torch = torch.cat(
             [
                 population_old_values[index][elite_mask]
@@ -327,29 +362,44 @@ class PPOAgent(GraphAgent):
             ]
         ).reshape(-1)
 
-        # Compute the advantages for the elite executed episodes. Apply the baselines if requested.
+        # Prepare the discounted returns from the elite executed episodes for training. Also,
+        # compute the advantages and normalize them.
         elite_returns = self._population_returns[:, elite_mask].reshape(-1)
         elite_returns_torch = torch.from_numpy(elite_returns.astype(np.float32)).to(self._device)
 
         elite_advantages_torch = elite_returns_torch - elite_values_torch
-        elite_advantages_torch = (elite_advantages_torch - elite_advantages_torch.mean()) / (elite_advantages_torch.std() + 1e-8)
+        elite_advantages_torch = (elite_advantages_torch - elite_advantages_torch.mean()) / (
+            elite_advantages_torch.std() + 1e-8
+        )
 
+        # For each epoch...
         for _ in range(self._epochs_count):
             logits_batch_torch = self._policy_network(elite_states_torch)
             values_batch_torch = self._value_network(elite_states_torch).reshape(-1)
 
-            new_log_probs_torch = Categorical(logits=logits_batch_torch).log_prob(elite_actions_torch)
+            # Compute the policy loss.
+            new_log_probs_torch = Categorical(logits=logits_batch_torch).log_prob(
+                elite_actions_torch
+            )
             ratio = torch.exp(new_log_probs_torch - elite_log_probs_torch)
             loss_1 = ratio * elite_advantages_torch
-            loss_2 = torch.clamp(ratio, 1 - self._clamp_epsilon, 1 + self._clamp_epsilon) * elite_advantages_torch
+            loss_2 = (
+                torch.clamp(ratio, 1 - self._clamp_epsilon, 1 + self._clamp_epsilon)
+                * elite_advantages_torch
+            )
             policy_loss = torch.min(loss_1, loss_2).mean()
 
+            # Compute the value loss and the total loss.
             value_loss = self._value_loss_function(values_batch_torch, elite_returns_torch)
             loss = policy_loss + self._value_loss_coef * value_loss
 
+            # Use the optimizer to train both models.
             self._optimizer.zero_grad()
             loss.backward()
-            torch.nn.utils.clip_grad_norm_(list(self._policy_network.parameters()) + list(self._value_network.parameters()), 0.5)
+            torch.nn.utils.clip_grad_norm_(
+                list(self._policy_network.parameters()) + list(self._value_network.parameters()),
+                0.5,
+            )
             self._optimizer.step()
 
         # Update the random action probability through the random action mechanism, and then update

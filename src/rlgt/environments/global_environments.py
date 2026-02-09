@@ -1,6 +1,6 @@
 """
 This ``Python`` module defines two global reinforcement learning environments that inherit from the
-`GraphEnvironment` class. These environments model graph-building games in which the edges (resp.
+`GraphEnvironment` class. These environments model graph building games in which the edges (resp.
 arcs) are initially fully colored in some predetermined manner, and at each step, any edge (resp.
 arc) can be properly recolored with any color.
 """
@@ -24,7 +24,7 @@ from .graph_generators import GraphGenerator, create_fixed_graph_generator
 
 class GlobalSetEnvironment(GraphEnvironment):
     """
-    This class inherits from the `GraphEnvironment` class and models a graph-building game in which
+    This class inherits from the `GraphEnvironment` class and models a graph building game in which
     the edges (resp. arcs) are initially fully colored in some manner, and at each step, any edge
     (resp. arc) can be potentially recolored with any color. Users can configure the graph order,
     the number of proper edge colors, whether the graphs are directed or undirected, whether loops
@@ -35,17 +35,17 @@ class GlobalSetEnvironment(GraphEnvironment):
     performed, i.e., the episode length, is configurable.
 
     Each state is represented by a binary `numpy.ndarray` vector of type `numpy.uint8` and length
-    ``(_edge_colors - 1) * _flattened_length``, where ``_edge_colors`` is the configured number of
-    proper edge colors, and ``_flattened_length`` is the flattened length of the graphs. In the
-    state vector, the first ``_flattened_length`` bits indicate which edges (resp. arcs) currently
-    have color 1, the next ``_flattened_length`` bits indicate which edges (resp. arcs) currently
-    have color 2, and this pattern continues up to color ``_edge_colors - 1``. The edges (resp.
+    ``(edge_colors - 1) * flattened_length``, where ``edge_colors`` is the configured number of
+    proper edge colors, and ``flattened_length`` is the flattened length of the graphs. In the
+    state vectors, the first ``flattened_length`` bits indicate which edges (resp. arcs) currently
+    have color 1, the next ``flattened_length`` bits indicate which edges (resp. arcs) currently
+    have color 2, and this pattern continues up to color ``edge_colors - 1``. The edges (resp.
     arcs) are ordered according to the selected `FlattenedOrdering` (row-major or clockwise).
 
     Each action is represented by a `numpy.int32` integer between 0 and
-    ``_edge_colors * _flattened_length - 1``. Given an action number ``a``, the edge (resp. arc) to
-    be recolored is determined by ``a % _flattened_length``, and the color to assign is determined
-    by ``a // _flattened_length``.
+    ``edge_colors * flattened_length - 1``. Given an action number ``a``, the edge (resp. arc) to
+    be recolored is determined by ``a % flattened_length``, and the color to assign is determined
+    by ``a // flattened_length``.
 
     :ivar _state_batch: See the description of the `GraphEnvironment._state_batch` attribute.
     :ivar _status: See the description of the `GraphEnvironment._status` attribute.
@@ -62,14 +62,14 @@ class GlobalSetEnvironment(GraphEnvironment):
         reconfigured between independent batches of episodes.
     :ivar _flattened_length: A positive `int` equal to the flattened length of the graphs to be
         constructed.
-    :ivar _state_length: A positive `int` equal to ``(_edge_colors - 1) * _flattened_length``, i.e.,
-        the length of each state vector.
+    :ivar _state_length: A positive `int` equal to ``(_edge_colors - 1) * _flattened_length``,
+        i.e., the length of each state vector.
     :ivar _episode_length: A positive `int` specifying the episode length, i.e., the total number
         of actions in each episode.
     :ivar _step_count: Either `None` or a nonnegative `int` counting how many actions have been
         executed in the current batch of episodes. When `_step_count` equals `_episode_length`, the
         episode has reached a final state. This attribute is updated after each call to
-        `reset_batch` or `step_batch`.
+        `GraphEnvironment.reset_batch` or `GraphEnvironment.step_batch`.
     """
 
     def __init__(
@@ -255,7 +255,7 @@ class GlobalSetEnvironment(GraphEnvironment):
 
 class GlobalFlipEnvironment(GraphEnvironment):
     """
-    This class inherits from `GraphEnvironment` and models a graph-building game for constructing
+    This class inherits from `GraphEnvironment` and models a graph building game for constructing
     2-edge-colored looped complete graphs. In this environment, all edges (resp. arcs) are
     initially fully colored in some manner, and at each step, any edge (resp. arc) can be
     potentially flipped. Users can configure the graph order, whether the graphs are directed or
@@ -269,12 +269,12 @@ class GlobalFlipEnvironment(GraphEnvironment):
     the current graph in one of the two flattened formats with color numbers. The edge ordering
     (row-major or clockwise) is configurable by the user at initialization and remains fixed.
 
-    The environment supports two modes of operation controlled by the `flip_only` parameter. If
-    `flip_only` is `False` (the default), each action is a `numpy.int32` integer between 0 and
+    The environment supports two modes of operation controlled by the ``flip_only`` parameter. If
+    ``flip_only`` is `False` (the default), each action is a `numpy.int32` integer between 0 and
     ``2 * flattened_length - 1``. In this case, for an action ``a``, ``a % flattened_length`` gives
     the index of the edge (resp. arc) to potentially flip, and ``a // flattened_length`` is a
     binary value indicating whether the edge should actually be flipped (1) or left unchanged (0).
-    If `flip_only` is `True`, each action is a `numpy.int32` integer between 0 and
+    If ``flip_only`` is `True`, each action is a `numpy.int32` integer between 0 and
     ``flattened_length - 1``, specifying the index of the edge (resp. arc) that must be flipped.
 
     :ivar _state_batch: See `GraphEnvironment._state_batch`.
@@ -296,7 +296,7 @@ class GlobalFlipEnvironment(GraphEnvironment):
     :ivar _step_count: Either `None` or a nonnegative `int` counting how many actions have been
         executed in the current batch of episodes. When `_step_count` equals `_episode_length`, the
         episode has reached a final state. This attribute is updated after each call to
-        `reset_batch` or `step_batch`.
+        `GraphEnvironment.reset_batch` or `GraphEnvironment.step_batch`.
     """
 
     def __init__(

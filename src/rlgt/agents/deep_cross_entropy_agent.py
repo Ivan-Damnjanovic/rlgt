@@ -59,13 +59,14 @@ class DeepCrossEntropyAgent(GraphAgent):
         environment, ``state_length`` is the length of the state vectors, and ``total_population``
         is the total number of episodes stored. The stored episodes include both newly generated
         episodes and those carried over from the previous generation. The first dimension
-        corresponds to the state trajectory of each episode, the second to the executed episodes,
+        corresponds to the state trajectory within an episode, the second to the executed episodes,
         and the third to the state vector entries. The states from carried-over episodes appear
         before the newly generated ones.
     :ivar _population_actions: Either `None` if uninitialized, or a `numpy.ndarray` of type
         `numpy.int32` storing all actions during each episode trajectory. Its shape is
-        ``(episode_length, total_population)`` with the first dimension as the action trajectory
-        and the second as the executed episodes. The episode order matches `_population_states`.
+        ``(episode_length, total_population)``, where the first dimension corresponds to the action
+        trajectory within an episode and the second to the executed episodes. The episode order
+        matches `_population_states`.
     :ivar _population_scores: Either `None` if uninitialized, or a `numpy.ndarray` vector of type
         `numpy.float32` storing the graph invariant value for each episode. Its length is
         ``total_population`` and the episode order matches `_population_states`.
@@ -90,7 +91,7 @@ class DeepCrossEntropyAgent(GraphAgent):
         :param policy_network: The policy network used to compute the probability of each action in
             each episode and step, given as a `torch.nn.Module` object.
         :param optimizer: The optimizer responsible for updating the model parameters, given as a
-            `torch.optim.Optimizer` object. The parameters of `policy_network` must be passed to
+            `torch.optim.Optimizer` object. The parameters of ``policy_network`` must be passed to
             it.
         :param candidates_count: A positive `int` specifying how many graphs are generated in each
             iteration by running the corresponding number of episodes in parallel. The default

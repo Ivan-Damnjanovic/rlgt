@@ -1,9 +1,9 @@
 """
-The `rlgt.graphs` package provides the `Graph` class, which models a $k$-edge-colored looped
-complete graph as well as a batch of $k$-edge-colored looped complete graphs of the same order. The
+The `rlgt.graphs` package provides the `Graph` class, which models a *k*-edge-colored looped
+complete graph as well as a batch of *k*-edge-colored looped complete graphs of the same order. The
 package also provides the `GraphFormat` enumeration, which defines the formats used to represent a
-$k$-edge-colored looped complete graph, along with several auxiliary functions and supporting
-classes for constructing $k$-edge-colored looped complete graphs with specific structures.
+*k*-edge-colored looped complete graph, along with several auxiliary functions and supporting
+classes for constructing *k*-edge-colored looped complete graphs with specific structures.
 """
 
 from .graph import Graph

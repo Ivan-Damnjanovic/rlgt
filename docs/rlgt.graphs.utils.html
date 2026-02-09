@@ -1,0 +1,673 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "DTD/xhtml1-strict.dtd">
+<html>
+  
+
+  <head>
+    
+    <title>rlgt.graphs.utils</title>
+    <meta name="generator" content="pydoctor 25.10.1"> 
+        
+    </meta>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1" />
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="apidocs.css" />
+    <link rel="stylesheet" type="text/css" href="extra.css" />
+    
+</head>
+
+  <body>
+
+    
+
+    <nav class="navbar navbar-default mainnavbar">
+      
+  
+  <div class="container-fluid">
+
+
+    <div class="navbar-header">
+      
+      <div class="navlinks">
+        <span class="navbar-brand">
+          RLGT <a href="index.html">API Documentation</a>
+        </span>
+
+        <a href="moduleIndex.html">
+          Modules
+        </a>
+
+        <a href="classIndex.html">
+          Classes
+        </a>
+
+        <a href="nameIndex.html">
+          Names
+        </a>
+
+        <div id="search-box-container">
+          <div class="input-group">
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
+            <span class="input-group-btn">
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="apidocs-help-button" title="Help" href="apidocs-help.html"><img src="fonts/info.svg" alt="Help" /></a>
+            </span>
+          </div>
+        </div>
+
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        
+        <div id="search-buttons">
+          <span class="label label-default" id="search-docstrings-button">
+          <label class="checkbox-inline">
+            <input type="checkbox" id="toggle-search-in-docstrings-checkbox" value="false" onclick="toggleSearchInDocstrings()">
+              search in docstrings
+            </input>
+          </label>
+          </span>
+          
+        </div>
+        
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div id="search-status"> </div>
+
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
+
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 10px;">
+          <p>For more information on the search, visit the <a href="apidocs-help.html#rst-search">help page</a>.</p>
+        </div>
+      </div>
+
+    </div>
+
+
+  </div>
+</nav>
+    
+    <div class="container-fluid">
+
+      <!-- Side navigation -->
+      <div class="sidebarcontainer" style="display: none;">
+        
+        <div class="sidebar"><nav class="sidebar">
+  
+
+  <div>
+
+      <div class="thingTitle">
+        <span>Module</span>
+        <code class="thisobject"><a href="rlgt.graphs.utils.html" class="internal-link" title="This module">utils</a></code> 
+      </div>
+      
+      <div>
+        
+
+        
+         
+
+        
+        
+
+        <div class="childrenKindTitle">Functions</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#binary_slices_to_color_numbers" class="internal-link" title="rlgt.graphs.utils.binary_slices_to_color_numbers">binary<wbr></wbr>_slices<wbr></wbr>_to<wbr></wbr>_color<wbr></wbr>_numbers</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#color_numbers_to_binary_slices" class="internal-link" title="rlgt.graphs.utils.color_numbers_to_binary_slices">color<wbr></wbr>_numbers<wbr></wbr>_to<wbr></wbr>_binary<wbr></wbr>_slices</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#compute_edge_indices" class="internal-link" title="rlgt.graphs.utils.compute_edge_indices">compute<wbr></wbr>_edge<wbr></wbr>_indices</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#flatten_from_adjacency_matrix" class="internal-link" title="rlgt.graphs.utils.flatten_from_adjacency_matrix">flatten<wbr></wbr>_from<wbr></wbr>_adjacency<wbr></wbr>_matrix</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#flattened_length_to_graph_order" class="internal-link" title="rlgt.graphs.utils.flattened_length_to_graph_order">flattened<wbr></wbr>_length<wbr></wbr>_to<wbr></wbr>_graph<wbr></wbr>_order</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#graph_order_to_flattened_length" class="internal-link" title="rlgt.graphs.utils.graph_order_to_flattened_length">graph<wbr></wbr>_order<wbr></wbr>_to<wbr></wbr>_flattened<wbr></wbr>_length</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#unflatten_to_adjacency_matrix" class="internal-link" title="rlgt.graphs.utils.unflatten_to_adjacency_matrix">unflatten<wbr></wbr>_to<wbr></wbr>_adjacency<wbr></wbr>_matrix</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        
+         
+
+        
+         
+
+        
+         
+        
+      </div>
+  </div><div>
+
+      <div class="thingTitle">
+        <span>Package</span>
+        <code><a href="rlgt.graphs.html" class="internal-link" title="The parent of this module">graphs</a></code> 
+      </div>
+      
+      <div>
+        
+
+        <div class="childrenKindTitle">Modules</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="rlgt.graphs.graph.html" class="internal-link" title="rlgt.graphs.graph">graph</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="rlgt.graphs.graph_formats.html" class="internal-link" title="rlgt.graphs.graph_formats">graph<wbr></wbr>_formats</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="rlgt.graphs.special_graphs.html" class="internal-link" title="rlgt.graphs.special_graphs">special<wbr></wbr>_graphs</a></code>
+            </div>
+        
+
+    </li><li class=" thisobject">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="rlgt.graphs.utils.html" class="internal-link" title="rlgt.graphs.utils">utils</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        
+        
+
+        
+         
+
+        
+         
+
+        
+         
+
+        
+         
+        
+      </div>
+  </div>
+
+</nav>
+        </div>
+        <div id="collapse-sidebar">
+          <a class="btn btn-link" onclick="toggleSideBarCollapse()" title="Toggle Sidebar Collapse">
+          </a>
+        </div> 
+        <script src="sidebartoggle.js" type="text/javascript"></script>
+       
+      </div>
+
+      <main class="">
+        
+
+        
+
+        <div class="page-header">
+          <h1 class="module"><code><code><a href="index.html" class="internal-link">rlgt</a></code><wbr></wbr>.<code><a href="rlgt.graphs.html" class="internal-link" title="rlgt.graphs">graphs</a></code><wbr></wbr>.<code><a href="rlgt.graphs.utils.html" class="internal-link" title="rlgt.graphs.utils">utils</a></code></code></h1>
+          <div id="show-private">
+            <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
+          </div>
+        </div>
+
+        <div class="categoryHeader">
+          module documentation
+        </div>
+
+        <div class="extrasDocstring">
+          
+        </div>
+
+        <div class="moduleDocstring">
+          <div><p>This <tt class="rst-docutils rst-literal">Python</tt> module provides auxiliary functions for working with <em>k</em>-edge-colored looped
+complete graphs. The functions include computing flattened lengths, converting between various
+graph formats, and calculating edge (resp. arc) indices according to a specified edge (resp. arc)
+ordering.</p></div>
+        </div>
+
+        <div id="split-tables">
+          <table class="children sortable" id="id71">
+  
+  
+  <tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#binary_slices_to_color_numbers" class="internal-link" title="rlgt.graphs.utils.binary_slices_to_color_numbers">binary<wbr></wbr>_slices<wbr></wbr>_to<wbr></wbr>_color<wbr></wbr>_numbers</a></code></td>
+    <td>This function performs a format representation conversion from a graph format with binary slices to the corresponding format with color numbers. In other words, it performs the following conversions:</td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#color_numbers_to_binary_slices" class="internal-link" title="rlgt.graphs.utils.color_numbers_to_binary_slices">color<wbr></wbr>_numbers<wbr></wbr>_to<wbr></wbr>_binary<wbr></wbr>_slices</a></code></td>
+    <td>This function performs a format representation conversion from a graph format with color numbers to the corresponding format with binary slices. In other words, it performs the following conversions:</td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#compute_edge_indices" class="internal-link" title="rlgt.graphs.utils.compute_edge_indices">compute<wbr></wbr>_edge<wbr></wbr>_indices</a></code></td>
+    <td>This function considers a <em>k</em>-edge-colored looped complete graph and computes the index of each edge (resp. arc) from a given list, with respect to the row-major or clockwise ordering as described in the ...</td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#flatten_from_adjacency_matrix" class="internal-link" title="rlgt.graphs.utils.flatten_from_adjacency_matrix">flatten<wbr></wbr>_from<wbr></wbr>_adjacency<wbr></wbr>_matrix</a></code></td>
+    <td>This function converts a graph or batch of graphs from an adjacency matrix format to a flattened format. In other words, it performs one of the following conversions depending on the input:</td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#flattened_length_to_graph_order" class="internal-link" title="rlgt.graphs.utils.flattened_length_to_graph_order">flattened<wbr></wbr>_length<wbr></wbr>_to<wbr></wbr>_graph<wbr></wbr>_order</a></code></td>
+    <td>This function computes the order of a <em>k</em>-edge-colored looped complete graph given its flattened length. The flattened length is the number of entries in the <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> vector that represents the graph structure in either the flattened row-major format with color numbers or the flattened clockwise format with color numbers.</td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#graph_order_to_flattened_length" class="internal-link" title="rlgt.graphs.utils.graph_order_to_flattened_length">graph<wbr></wbr>_order<wbr></wbr>_to<wbr></wbr>_flattened<wbr></wbr>_length</a></code></td>
+    <td>This function computes the flattened length of a <em>k</em>-edge-colored looped complete graph given its order. The flattened length is the number of entries in the <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> vector that represents the graph structure in either the flattened row-major format with color numbers or the flattened clockwise format with color numbers.</td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#unflatten_to_adjacency_matrix" class="internal-link" title="rlgt.graphs.utils.unflatten_to_adjacency_matrix">unflatten<wbr></wbr>_to<wbr></wbr>_adjacency<wbr></wbr>_matrix</a></code></td>
+    <td>This function converts a graph or a batch of graphs from a flattened format to an adjacency matrix format. Specifically, it performs one of the following conversions depending on the input:</td>
+  </tr>
+</table>
+          
+
+            
+        </div>
+
+        <div id="child-list">
+          <div class="basefunction">
+  
+  
+  <a name="rlgt.graphs.utils.binary_slices_to_color_numbers">
+    
+  </a>
+  <a name="binary_slices_to_color_numbers">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">binary_slices_to_color_numbers</span><span class="function-signature long-signature">(<span class="rst-sig-param">input_representation: <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code>, </span><span class="rst-sig-param">is_flattened_format: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code>, </span><span class="rst-sig-param">edge_colors: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> = 2, </span><span class="rst-sig-param">allow_loops: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> = <a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a></span>) -&gt; <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code>:</span>
+    
+    <a class="headerLink" href="#binary_slices_to_color_numbers" title="rlgt.graphs.utils.binary_slices_to_color_numbers">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>This function performs a format representation conversion from a graph format with binary
+slices to the corresponding format with color numbers. In other words, it performs the
+following conversions:</p>
+<ol class="rst-arabic rst-simple">
+<li>adjacency matrix format with binary slices → adjacency matrix format with color numbers;</li>
+<li>flattened row-major format with binary slices → flattened row-major format with color
+numbers; and</li>
+<li>flattened clockwise format with binary slices → flattened clockwise format with color
+numbers.</li>
+</ol>
+<p>The function also supports batch-mode operations. If the input contains multiple graphs
+arranged along leading dimensions, the conversion is applied independently to each graph, while
+preserving all leading dimensions.</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">input<wbr></wbr>_representation:</span><code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code></td><td class="fieldArgDesc">The input format representation, given as a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> of
+type <code><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.uint8" class="intersphinx-link">numpy.uint8</a></code>.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">is<wbr></wbr>_flattened<wbr></wbr>_format:</span><code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code></td><td class="fieldArgDesc">A <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> that determines whether the input format is one of the two
+possible flattened formats, i.e., the flattened row-major format with color numbers or the
+flattened clockwise format with color numbers.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">edge<wbr></wbr>_colors:</span><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></td><td class="fieldArgDesc">A positive <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> (not below 2) that represents the number of proper edge
+colors, i.e., <em>k</em>, in the considered graph or batch of graphs. The default value is 2.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">allow<wbr></wbr>_loops:</span><code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code></td><td class="fieldArgDesc">A <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> that indicates whether the considered graph or batch of graphs
+is allowed to have loops. The default value is <code><a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a></code>, i.e., loops are not allowed by
+default.</td></tr></table><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code></td><td class="fieldArgDesc">The corresponding output format representation, given as a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> of type
+<code><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.uint8" class="intersphinx-link">numpy.uint8</a></code>.</td></tr></table><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Note</td></tr><tr><td colspan="2">The input format representation can be given in either the reduced binary slice format
+or the standard (non-reduced) binary slice format.</td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="rlgt.graphs.utils.color_numbers_to_binary_slices">
+    
+  </a>
+  <a name="color_numbers_to_binary_slices">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">color_numbers_to_binary_slices</span><span class="function-signature long-signature">(<span class="rst-sig-param">input_representation: <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code>, </span><span class="rst-sig-param">is_flattened_format: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code>, </span><span class="rst-sig-param">edge_colors: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> = 2, </span><span class="rst-sig-param">allow_loops: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> = <a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a></span>) -&gt; <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code>:</span>
+    
+    <a class="headerLink" href="#color_numbers_to_binary_slices" title="rlgt.graphs.utils.color_numbers_to_binary_slices">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>This function performs a format representation conversion from a graph format with color
+numbers to the corresponding format with binary slices. In other words, it performs the
+following conversions:</p>
+<ol class="rst-arabic rst-simple">
+<li>adjacency matrix format with color numbers → adjacency matrix format with binary slices;</li>
+<li>flattened row-major format with color numbers → flattened row-major format with binary
+slices; and</li>
+<li>flattened clockwise format with color numbers → flattened clockwise format with binary
+slices.</li>
+</ol>
+<p>The function also supports batch-mode operations. If the input has leading dimensions, the
+conversion is applied independently to each matrix slice defined by the last two dimensions
+(for adjacency matrices) or vector slice defined by the last dimension (for flattened formats),
+while preserving all leading dimensions.</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">input<wbr></wbr>_representation:</span><code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code></td><td class="fieldArgDesc">The input format representation, given as a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> of
+type <code><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.uint8" class="intersphinx-link">numpy.uint8</a></code>.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">is<wbr></wbr>_flattened<wbr></wbr>_format:</span><code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code></td><td class="fieldArgDesc">A <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> that determines whether the input format is one of the two
+possible flattened formats, i.e., the flattened row-major format with color numbers or the
+flattened clockwise format with color numbers.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">edge<wbr></wbr>_colors:</span><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></td><td class="fieldArgDesc">A positive <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> (not below 2) that represents the number of proper edge
+colors, i.e., <em>k</em>, in the considered graph or batch of graphs. The default value is 2.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">allow<wbr></wbr>_loops:</span><code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code></td><td class="fieldArgDesc">A <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> that indicates whether the considered graph or batch of graphs
+is allowed to have loops. The default value is <code><a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a></code>, i.e., loops are not allowed by
+default.</td></tr></table><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code></td><td class="fieldArgDesc">The corresponding output format representation, given as a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> of type
+<code><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.uint8" class="intersphinx-link">numpy.uint8</a></code>.</td></tr></table><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Note</td></tr><tr><td colspan="2">The output is given in the corresponding reduced format with binary slices whenever
+possible, i.e., when all the considered graphs are fully colored.</td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="rlgt.graphs.utils.compute_edge_indices">
+    
+  </a>
+  <a name="compute_edge_indices">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">compute_edge_indices</span><span class="function-signature long-signature">(<span class="rst-sig-param">graph_order: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code>, </span><span class="rst-sig-param">starting_vertices: <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code>, </span><span class="rst-sig-param">ending_vertices: <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code>, </span><span class="rst-sig-param">flattened_ordering: <code><a href="rlgt.graphs.graph_formats.FlattenedOrdering.html" class="internal-link" title="rlgt.graphs.graph_formats.FlattenedOrdering">FlattenedOrdering</a></code> = <a href="rlgt.graphs.graph_formats.FlattenedOrdering.html#ROW_MAJOR" class="internal-link" title="rlgt.graphs.graph_formats.FlattenedOrdering.ROW_MAJOR">FlattenedOrdering.ROW_MAJOR</a>, </span><span class="rst-sig-param">is_directed: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> = <a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a>, </span><span class="rst-sig-param">allow_loops: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> = <a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a></span>) -&gt; <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code>:</span>
+    
+    <a class="headerLink" href="#compute_edge_indices" title="rlgt.graphs.utils.compute_edge_indices">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>This function considers a <em>k</em>-edge-colored looped complete graph and computes the index of each
+edge (resp. arc) from a given list, with respect to the row-major or clockwise ordering as
+described in the <code><a href="rlgt.graphs.graph_formats.FlattenedOrdering.html" class="internal-link" title="rlgt.graphs.graph_formats.FlattenedOrdering">FlattenedOrdering</a></code> enumeration. The edges (resp. arcs) are given as ordered
+pairs of vertices consisting of the starting vertex and the ending vertex. The user can select
+the edge (resp. arc) ordering, the graph order, whether the graphs are directed or undirected,
+and whether loops are allowed. For undirected graphs, the starting and ending vertices of a
+pair are interchangeable. If loops are not allowed, then the starting and the ending vertex
+from each pair must be distinct.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">graph<wbr></wbr>_order:</span><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></td><td class="fieldArgDesc">A positive <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> that specifies the order of the considered graph.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">starting<wbr></wbr>_vertices:</span><code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code></td><td class="fieldArgDesc">A <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> of type <code><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.int32" class="intersphinx-link">numpy.int32</a></code> containing the starting
+vertices of the edges (resp. arcs) whose indices are to be computed.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">ending<wbr></wbr>_vertices:</span><code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code></td><td class="fieldArgDesc">A <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> of type <code><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.int32" class="intersphinx-link">numpy.int32</a></code> containing the ending
+vertices of the edges (resp. arcs) whose indices are to be computed.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">flattened<wbr></wbr>_ordering:</span><code><a href="rlgt.graphs.graph_formats.FlattenedOrdering.html" class="internal-link" title="rlgt.graphs.graph_formats.FlattenedOrdering">FlattenedOrdering</a></code></td><td class="fieldArgDesc">An item of the <code><a href="rlgt.graphs.graph_formats.FlattenedOrdering.html" class="internal-link" title="rlgt.graphs.graph_formats.FlattenedOrdering">FlattenedOrdering</a></code> enumeration that specifies
+whether the edges (resp. arcs) should be arranged in row-major order or clockwise order.
+The default value is <code><a href="rlgt.graphs.graph_formats.FlattenedOrdering.html#ROW_MAJOR" class="internal-link" title="rlgt.graphs.graph_formats.FlattenedOrdering.ROW_MAJOR">FlattenedOrdering.ROW_MAJOR</a></code>.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">is<wbr></wbr>_directed:</span><code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code></td><td class="fieldArgDesc">A <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> that indicates whether the graph is directed. The default value is
+<code><a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a></code>, i.e., the graph is undirected by default.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">allow<wbr></wbr>_loops:</span><code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code></td><td class="fieldArgDesc">A <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> that indicates whether loops are allowed in the graph. The default
+value is <code><a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a></code>, i.e., loops are not allowed by default.</td></tr></table><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code></td><td class="fieldArgDesc">A <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> of type <code><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.int32" class="intersphinx-link">numpy.int32</a></code> containing the indices of the edges (resp.
+arcs) with respect to the selected edge (resp. arc) ordering.</td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="rlgt.graphs.utils.flatten_from_adjacency_matrix">
+    
+  </a>
+  <a name="flatten_from_adjacency_matrix">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">flatten_from_adjacency_matrix</span><span class="function-signature long-signature">(<span class="rst-sig-param">adjacency_matrix: <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code>, </span><span class="rst-sig-param">flattened_ordering: <code><a href="rlgt.graphs.graph_formats.FlattenedOrdering.html" class="internal-link" title="rlgt.graphs.graph_formats.FlattenedOrdering">FlattenedOrdering</a></code>, </span><span class="rst-sig-param">is_directed: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> = <a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a>, </span><span class="rst-sig-param">allow_loops: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> = <a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a></span>) -&gt; <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code>:</span>
+    
+    <a class="headerLink" href="#flatten_from_adjacency_matrix" title="rlgt.graphs.utils.flatten_from_adjacency_matrix">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>This function converts a graph or batch of graphs from an adjacency matrix format to a
+flattened format. In other words, it performs one of the following conversions depending on the
+input:</p>
+<ol class="rst-arabic rst-simple">
+<li>adjacency matrix format with color numbers → flattened row-major format with color numbers;</li>
+<li>adjacency matrix format with binary slices → flattened row-major format with binary slices;</li>
+<li>adjacency matrix format with color numbers → flattened clockwise format with color numbers;
+and</li>
+<li>adjacency matrix format with binary slices → flattened clockwise format with binary slices.</li>
+</ol>
+<p>The function also supports batch-mode operations. Specifically, the input may have an arbitrary
+number of leading dimensions, in which case the conversion is applied independently to each
+matrix slice defined by the last two dimensions, while all leading dimensions remain unchanged.</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">adjacency<wbr></wbr>_matrix:</span><code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code></td><td class="fieldArgDesc">The adjacency matrix representation of the graph or batch of graphs
+(with color numbers or binary slices), given as a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> of type <code><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.uint8" class="intersphinx-link">numpy.uint8</a></code>.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">flattened<wbr></wbr>_ordering:</span><code><a href="rlgt.graphs.graph_formats.FlattenedOrdering.html" class="internal-link" title="rlgt.graphs.graph_formats.FlattenedOrdering">FlattenedOrdering</a></code></td><td class="fieldArgDesc">An item of the <code><a href="rlgt.graphs.graph_formats.FlattenedOrdering.html" class="internal-link" title="rlgt.graphs.graph_formats.FlattenedOrdering">FlattenedOrdering</a></code> enumeration that specifies
+whether the output should use a row-major or clockwise edge (resp. arc) ordering.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">is<wbr></wbr>_directed:</span><code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code></td><td class="fieldArgDesc">A <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> indicating whether the graph or each graph in the batch is
+directed. The default value is <code><a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a></code>, i.e., the graphs are undirected by default.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">allow<wbr></wbr>_loops:</span><code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code></td><td class="fieldArgDesc">A <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> indicating whether loops are allowed in the graph or each graph in
+the batch. The default value is <code><a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a></code>, i.e., loops are not allowed by default.</td></tr></table><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code></td><td class="fieldArgDesc">The flattened format representation of the graph or batch of graphs, given as a
+<code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> of type <code><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.uint8" class="intersphinx-link">numpy.uint8</a></code>. The output shape preserves the leading dimensions
+of the input, with the last two dimensions replaced by the flattened length.</td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="rlgt.graphs.utils.flattened_length_to_graph_order">
+    
+  </a>
+  <a name="flattened_length_to_graph_order">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">flattened_length_to_graph_order</span><span class="function-signature long-signature">(<span class="rst-sig-param">flattened_length: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code>, </span><span class="rst-sig-param">is_directed: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> = <a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a>, </span><span class="rst-sig-param">allow_loops: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> = <a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a></span>) -&gt; <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code>:</span>
+    
+    <a class="headerLink" href="#flattened_length_to_graph_order" title="rlgt.graphs.utils.flattened_length_to_graph_order">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>This function computes the order of a <em>k</em>-edge-colored looped complete graph given its
+flattened length. The flattened length is the number of entries in the <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> vector
+that represents the graph structure in either the flattened row-major format with color numbers
+or the flattened clockwise format with color numbers.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">flattened<wbr></wbr>_length:</span><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></td><td class="fieldArgDesc">The flattened length of the considered graph, given as a nonnegative
+<code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code>.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">is<wbr></wbr>_directed:</span><code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code></td><td class="fieldArgDesc">A <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> indicating whether the considered graph is directed. The default
+value is <code><a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a></code>, i.e., the graph is undirected by default.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">allow<wbr></wbr>_loops:</span><code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code></td><td class="fieldArgDesc">A <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> indicating whether the considered graph is allowed to have loops.
+The default value is <code><a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a></code>, i.e., loops are not allowed by default.</td></tr></table><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></td><td class="fieldArgDesc">The computed graph order, given as a positive <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code>.</td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="rlgt.graphs.utils.graph_order_to_flattened_length">
+    
+  </a>
+  <a name="graph_order_to_flattened_length">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">graph_order_to_flattened_length</span><span class="function-signature long-signature">(<span class="rst-sig-param">graph_order: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code>, </span><span class="rst-sig-param">is_directed: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> = <a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a>, </span><span class="rst-sig-param">allow_loops: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> = <a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a></span>) -&gt; <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code>:</span>
+    
+    <a class="headerLink" href="#graph_order_to_flattened_length" title="rlgt.graphs.utils.graph_order_to_flattened_length">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>This function computes the flattened length of a <em>k</em>-edge-colored looped complete graph given
+its order. The flattened length is the number of entries in the <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> vector that
+represents the graph structure in either the flattened row-major format with color numbers
+or the flattened clockwise format with color numbers.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">graph<wbr></wbr>_order:</span><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></td><td class="fieldArgDesc">The order of the considered <em>k</em>-edge-colored looped complete graph, given
+as a positive <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code>.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">is<wbr></wbr>_directed:</span><code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code></td><td class="fieldArgDesc">A <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> indicating whether the considered graph is directed. The default
+value is <code><a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a></code>, i.e., the graph is undirected by default.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">allow<wbr></wbr>_loops:</span><code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code></td><td class="fieldArgDesc">A <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> indicating whether the considered graph is allowed to have loops.
+The default value is <code><a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a></code>, i.e., loops are not allowed by default.</td></tr></table><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></td><td class="fieldArgDesc">The computed flattened length, given as a nonnegative <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code>.</td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="rlgt.graphs.utils.unflatten_to_adjacency_matrix">
+    
+  </a>
+  <a name="unflatten_to_adjacency_matrix">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">unflatten_to_adjacency_matrix</span><span class="function-signature long-signature">(<span class="rst-sig-param">flattened: <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code>, </span><span class="rst-sig-param">flattened_ordering: <code><a href="rlgt.graphs.graph_formats.FlattenedOrdering.html" class="internal-link" title="rlgt.graphs.graph_formats.FlattenedOrdering">FlattenedOrdering</a></code>, </span><span class="rst-sig-param">is_directed: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> = <a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a>, </span><span class="rst-sig-param">allow_loops: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> = <a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a>, </span><span class="rst-sig-param">graph_order: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> = <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></span>) -&gt; <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code>:</span>
+    
+    <a class="headerLink" href="#unflatten_to_adjacency_matrix" title="rlgt.graphs.utils.unflatten_to_adjacency_matrix">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>This function converts a graph or a batch of graphs from a flattened format to an adjacency
+matrix format. Specifically, it performs one of the following conversions depending on the
+input:</p>
+<ol class="rst-arabic rst-simple">
+<li>flattened row-major format with color numbers → adjacency matrix format with color numbers;</li>
+<li>flattened row-major format with binary slices → adjacency matrix format with binary slices;</li>
+<li>flattened clockwise format with color numbers → adjacency matrix format with color numbers;
+and</li>
+<li>flattened clockwise format with binary slices → adjacency matrix format with binary slices.</li>
+</ol>
+<p>The function supports batch-mode operations. If the input has leading dimensions, the
+conversion is applied independently to each vector slice defined by the last dimension, while
+preserving the leading dimensions.</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">flattened:</span><code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code></td><td class="fieldArgDesc">The input flattened format representation (with color numbers or binary
+slices) for the graph or batch of graphs, given as a <code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> of type <code><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.uint8" class="intersphinx-link">numpy.uint8</a></code>.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">flattened<wbr></wbr>_ordering:</span><code><a href="rlgt.graphs.graph_formats.FlattenedOrdering.html" class="internal-link" title="rlgt.graphs.graph_formats.FlattenedOrdering">FlattenedOrdering</a></code></td><td class="fieldArgDesc">An item of the <code><a href="rlgt.graphs.graph_formats.FlattenedOrdering.html" class="internal-link" title="rlgt.graphs.graph_formats.FlattenedOrdering">FlattenedOrdering</a></code> enumeration that specifies
+whether the input uses a flattened or clockwise edge (resp. arc) ordering.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">is<wbr></wbr>_directed:</span><code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code></td><td class="fieldArgDesc">A <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> indicating whether the graph or each graph in the batch is
+directed. The default value is <code><a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a></code>, i.e., the graphs are undirected by default.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">allow<wbr></wbr>_loops:</span><code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code></td><td class="fieldArgDesc">A <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> indicating whether loops are allowed in the graph or each graph in
+the batch. The default value is <code><a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a></code>, i.e., loops are not allowed by default.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">graph<wbr></wbr>_order:</span><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a> | <a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code></td><td class="fieldArgDesc">Either <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> or a positive <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> specifying the order of the graph(s). If
+<code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, then the graph order is computed from the flattened length using
+<code><a href="#flattened_length_to_graph_order" class="internal-link" title="rlgt.graphs.utils.flattened_length_to_graph_order">flattened_length_to_graph_order</a></code>. Otherwise, the provided value is used directly. The
+default value is <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>.</td></tr></table><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">np.ndarray</a></code></td><td class="fieldArgDesc">The adjacency matrix representation of the graph or batch of graphs, given as a
+<code><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" class="intersphinx-link">numpy.ndarray</a></code> of type <code><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.uint8" class="intersphinx-link">numpy.uint8</a></code>. The output preserves any leading dimensions and has
+the last two dimensions equal to the graph order.</td></tr></table></div>
+  </div>
+</div>
+        </div>
+      
+      </main>
+    </div>
+
+    <footer class="navbar navbar-default">
+
+  
+  <div class="container-fluid">
+    <a href="index.html">API Documentation</a> for RLGT,
+  generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
+    25.10.1 at 2026-02-09 14:40:05.
+  </div>
+
+  <!-- Search related scripts needs to be loaded at the end of HTML 
+    parsing not to introduce overhead and display HTML data asap -->
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="searchlib.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
+
+</footer>
+  
+    <script src="pydoctor.js" type="text/javascript"></script>
+
+  </body>
+</html>
