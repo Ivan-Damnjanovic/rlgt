@@ -3,7 +3,7 @@ import torch.nn as nn
 import torch.optim as optim
 
 from rlgt.agents import ExponentialRandomActionMechanism, ReinforceAgent
-from rlgt.environments import LocalSetEnvironment, create_fixed_graph_generator
+from rlgt.environments import LocalSetEnvironment, create_fixed_graph_generator, GlobalFlipEnvironment
 from rlgt.graphs import CycleGraph, Graph, GraphFormat
 
 
@@ -48,21 +48,22 @@ def graph_invariant(graph_batch: Graph, expression_index: int):
 
 def main(graph_order: int, expression_index: int):
     policy_network = nn.Sequential(
-        nn.Linear(graph_order * (graph_order - 1) // 2 + graph_order, 72),
+        nn.Linear(graph_order * (graph_order - 1) // 2, 72),
         nn.ReLU(),
         nn.Dropout(0.2),
         nn.Linear(72, 12),
         nn.ReLU(),
         nn.Dropout(0.2),
-        nn.Linear(12, graph_order * 2),
+        nn.Linear(12, graph_order * (graph_order - 1)),
     )
 
     agent = ReinforceAgent(
-        environment=LocalSetEnvironment(
+        environment=GlobalFlipEnvironment(
             graph_invariant=lambda graph_batch: graph_invariant(
                 graph_batch=graph_batch, expression_index=expression_index
             ),
             graph_order=graph_order,
+            flip_only=True,
             initial_graph_generator=create_fixed_graph_generator(
                 fixed_graph=CycleGraph(
                     graph_formats={GraphFormat.FLATTENED_ROW_MAJOR_COLORS},

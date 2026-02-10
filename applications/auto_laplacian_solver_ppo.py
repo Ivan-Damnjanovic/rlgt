@@ -84,7 +84,7 @@ def main(graph_order: int, expression_index: int):
         ),
         policy_network=policy_network,
         value_network=value_network,
-        optimizer=optim.Adam(list(policy_network.parameters()) + list(value_network.parameters()), lr=0.003),
+        optimizer=optim.Adam(list(policy_network.parameters()) + list(value_network.parameters()), lr=0.0005),
         random_action_mechanism=ExponentialRandomActionMechanism(
             initial_random_action_probability=0.005,
             waiting_period=10,
@@ -114,10 +114,10 @@ def main(graph_order: int, expression_index: int):
 
 
 if __name__ == "__main__":
-    # main(graph_order=16, expression_index=3)
-    # print()
-    # main(graph_order=16, expression_index=15)
-    # print()
+    main(graph_order=16, expression_index=3)
+    print()
+    main(graph_order=16, expression_index=15)
+    print()
     main(graph_order=16, expression_index=28)
     print()
     main(graph_order=16, expression_index=29)
