@@ -7,43 +7,72 @@ from rlgt.environments import LinearBuildEnvironment
 from rlgt.graphs import Graph
 
 
-AUTO_LAPLACIAN_EXPRESSIONS = {
+LAPLACIAN_EXPRESSIONS = {
     3: lambda d, m: (m**2) / d + m,
     15: lambda d, m: np.sqrt(4 * m**3 / d),
     26: lambda d, m: np.sqrt(5 * d**2 + 11 * d * m) / 2,
     28: lambda d, m: np.sqrt((2 * m**4) / (d**2) + 2 * d * m),
     29: lambda d, m: np.sqrt(m**2 + (3 * m**3) / d),
     31: lambda d, m: (4 * m**2) / (m + d),
+    36: lambda du, mu, dv, mv: 2 * (mu**2 + mv**2) / (du + dv),
 }
 
 
-def graph_invariant(graph_batch: Graph, expression_index: int):
-    adj_batch = graph_batch.adjacency_matrix_colors.astype(np.float64)
+def graph_invariant_family(graph_batch: Graph, expression_index: int):
+    # Extract the adjacency matrices.
+    adjacency_matrix_batch = graph_batch.adjacency_matrix_colors.astype(np.float64)
 
-    degree_batch = adj_batch.sum(axis=2)
-    degree_batch_1 = np.maximum(degree_batch, 1)
+    # Compute the vertex degrees.
+    d_batch = adjacency_matrix_batch.sum(axis=2)
+    d_batch_fixed = np.maximum(d_batch, 1)
 
-    and_batch = adj_batch @ degree_batch[..., None]
-    and_batch = and_batch[..., 0] / degree_batch_1
-    and_batch_1 = np.maximum(and_batch, 1)
+    # Compute the average degrees of the vertex neighbors.
+    m_batch = adjacency_matrix_batch @ d_batch[..., None]
+    m_batch = m_batch[..., 0] / d_batch_fixed
+    m_batch_fixed = np.maximum(m_batch, 1)
 
-    lap_batch = -adj_batch
-    i = np.arange(adj_batch.shape[1])
-    lap_batch[:, i, i] += degree_batch
+    # Compute the Laplacian matrices.
+    laplacian_matrix_batch = -adjacency_matrix_batch
+    index_range = np.arange(adjacency_matrix_batch.shape[1])
+    laplacian_matrix_batch[:, index_range, index_range] += d_batch
 
-    spectrum_batch = np.linalg.eigvalsh(lap_batch)
+    # Compute the Laplacian spectral radii.
+    spectrum_batch = np.linalg.eigvalsh(laplacian_matrix_batch)
     mu_batch = spectrum_batch[:, -1]
 
-    temp = np.max(
-        AUTO_LAPLACIAN_EXPRESSIONS[expression_index](d=degree_batch_1, m=and_batch_1), axis=1
+    if expression_index <= 32:    
+        right_hand_side_batch = np.max(
+            LAPLACIAN_EXPRESSIONS[expression_index](d_batch_fixed, m_batch_fixed), axis=1
+        )
+    else:
+        b, u, v = np.nonzero(np.triu(graph_batch.adjacency_matrix_colors, k=1))
+        
+        du = d_batch_fixed[b, u]
+        mu = m_batch_fixed[b, u]
+        dv = d_batch_fixed[b, v]
+        mv = m_batch_fixed[b, v]
+
+        all_right_hand_sides = LAPLACIAN_EXPRESSIONS[expression_index](du, mu, dv, mv)
+
+        right_hand_side_batch = np.full(graph_batch.batch_size, -np.inf)
+        np.maximum.at(right_hand_side_batch, b, all_right_hand_sides)
+
+    # Compute the differences between the left-hand side and the right-hand side.
+    result = mu_batch - right_hand_side_batch
+
+    # Determine whether each of the graphs is connected or disconnected.
+    temp = graph_batch.adjacency_matrix_colors.astype(bool) | np.eye(
+        graph_batch.graph_order, dtype=bool
     )
-    result = mu_batch - temp
+    power = 1
+    while power < graph_batch.graph_order - 1:
+        temp = (temp @ temp).astype(bool)
+        power *= 2
 
-    result[spectrum_batch[:, 1] < 0.15] = -5.0
-    result[np.min(degree_batch, axis=1) < 0.5] = -5.0
-    result = result.astype(np.float32)
+    # Punish the disconnected graphs.
+    result[~np.all(temp[:, 0, :], axis=1)] = -10.0
 
-    return result
+    return result.astype(np.float32)
 
 
 def main(graph_order: int, expression_index: int):
@@ -59,7 +88,7 @@ def main(graph_order: int, expression_index: int):
 
     agent = DeepCrossEntropyAgent(
         environment=LinearBuildEnvironment(
-            graph_invariant=lambda graph_batch: graph_invariant(
+            graph_invariant=lambda graph_batch: graph_invariant_family(
                 graph_batch=graph_batch, expression_index=expression_index
             ),
             graph_order=graph_order,
