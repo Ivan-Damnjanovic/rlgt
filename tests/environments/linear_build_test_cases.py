@@ -1,7 +1,7 @@
 import numpy as np
 
-from rl_graph_theory.environments.graph_environment import EpisodeStatus, RewardType
-from rl_graph_theory.graphs.graph import FlattenedOrdering
+from rlgt.environments.graph_environment import EpisodeStatus
+from rlgt.graphs.graph import FlattenedOrdering
 
 from ..utils import batchify, replace
 
@@ -10,7 +10,6 @@ DTYPE_ACTION = np.int32
 
 TEST_CASES_CONSTRUCTOR = [
     (
-        RewardType.PROPER,
         lambda _: np.empty(0),
         2,
         FlattenedOrdering.ROW_MAJOR,
@@ -20,7 +19,6 @@ TEST_CASES_CONSTRUCTOR = [
         1,
     ),
     (
-        RewardType.SPARSE,
         lambda _: np.empty(1),
         2,
         FlattenedOrdering.ROW_MAJOR,
@@ -30,7 +28,6 @@ TEST_CASES_CONSTRUCTOR = [
         1,
     ),
     (
-        RewardType.TELESCOPIC,
         lambda _: np.empty(2),
         2,
         FlattenedOrdering.ROW_MAJOR,
@@ -40,7 +37,6 @@ TEST_CASES_CONSTRUCTOR = [
         1,
     ),
     (
-        RewardType.PROPER,
         lambda _: np.empty(0),
         2,
         FlattenedOrdering.ROW_MAJOR,
@@ -50,7 +46,6 @@ TEST_CASES_CONSTRUCTOR = [
         1,
     ),
     (
-        RewardType.PROPER,
         lambda _: np.empty(0),
         3,
         FlattenedOrdering.ROW_MAJOR,
@@ -60,7 +55,6 @@ TEST_CASES_CONSTRUCTOR = [
         3,
     ),
     (
-        RewardType.PROPER,
         lambda _: np.empty(0),
         4,
         FlattenedOrdering.ROW_MAJOR,
@@ -70,7 +64,6 @@ TEST_CASES_CONSTRUCTOR = [
         6,
     ),
     (
-        RewardType.PROPER,
         lambda _: np.empty(0),
         4,
         FlattenedOrdering.ROW_MAJOR,
@@ -80,7 +73,6 @@ TEST_CASES_CONSTRUCTOR = [
         6 * 2,
     ),
     (
-        RewardType.PROPER,
         lambda _: np.empty(0),
         4,
         FlattenedOrdering.ROW_MAJOR,
@@ -90,7 +82,6 @@ TEST_CASES_CONSTRUCTOR = [
         6 + 4,
     ),
     (
-        RewardType.PROPER,
         lambda _: np.empty(0),
         4,
         FlattenedOrdering.ROW_MAJOR,
@@ -100,7 +91,6 @@ TEST_CASES_CONSTRUCTOR = [
         6 * 2 + 4,
     ),
     (
-        RewardType.PROPER,
         lambda _: np.empty(0),
         4,
         FlattenedOrdering.CLOCKWISE,
@@ -110,7 +100,6 @@ TEST_CASES_CONSTRUCTOR = [
         6,
     ),
     (
-        RewardType.PROPER,
         lambda _: np.empty(0),
         4,
         FlattenedOrdering.CLOCKWISE,
@@ -120,7 +109,6 @@ TEST_CASES_CONSTRUCTOR = [
         6 * 2,
     ),
     (
-        RewardType.PROPER,
         lambda _: np.empty(0),
         4,
         FlattenedOrdering.CLOCKWISE,
@@ -130,7 +118,6 @@ TEST_CASES_CONSTRUCTOR = [
         6 + 4,
     ),
     (
-        RewardType.PROPER,
         lambda _: np.empty(0),
         4,
         FlattenedOrdering.CLOCKWISE,

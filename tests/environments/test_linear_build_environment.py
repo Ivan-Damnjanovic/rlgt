@@ -1,12 +1,11 @@
 import numpy as np
 import pytest
 
-from rl_graph_theory.environments.linear_environments import (
+from rlgt.environments.linear_environments import (
     EpisodeStatus,
-    RewardType,
     LinearBuildEnvironment,
 )
-from rl_graph_theory.graphs.graph import FlattenedOrdering
+from rlgt.graphs.graph import FlattenedOrdering
 
 from .linear_build_test_cases import (
     TEST_CASES_CONSTRUCTOR,
@@ -17,12 +16,11 @@ from .linear_build_test_cases import (
 
 
 @pytest.mark.parametrize(
-    "reward_type, reward_function, graph_order, flattened_ordering, "
+    "reward_function, graph_order, flattened_ordering, "
     "edge_colors, is_directed, allow_loops, expected_flattened_length",
     TEST_CASES_CONSTRUCTOR,
 )
 def test_constructor(
-    reward_type,
     reward_function,
     graph_order,
     flattened_ordering,
@@ -32,7 +30,6 @@ def test_constructor(
     expected_flattened_length,
 ):
     env = LinearBuildEnvironment(
-        reward_type,
         reward_function,
         graph_order,
         flattened_ordering,
@@ -41,7 +38,6 @@ def test_constructor(
         allow_loops,
     )
 
-    assert getattr(env, "__GraphEnvironment_reward_type", reward_type)
     assert getattr(env, "__GraphEnvironment_reward_function", reward_function)
 
     assert env._state_batch is None
@@ -71,7 +67,6 @@ def test_reset_batch(
     expected_state,
 ):
     env = LinearBuildEnvironment(
-        RewardType.PROPER,
         lambda _: np.empty(0),
         graph_order,
         flattened_ordering,
@@ -80,7 +75,7 @@ def test_reset_batch(
         allow_loops,
     )
 
-    state_batch, status = env.reset_batch(batch_size)
+    state_batch, _, status = env.reset_batch(batch_size)
 
     assert env._step_count == 0
     assert status is env._status is EpisodeStatus.IN_PROGRESS
@@ -111,7 +106,6 @@ def test_transition_batch(
     status,
 ):
     env = LinearBuildEnvironment(
-        RewardType.PROPER,
         lambda _: np.empty(0),
         graph_order,
         flattened_ordering,
@@ -147,7 +141,6 @@ def test_state_batch_to_graph_batch(
     flattened,
 ):
     env = LinearBuildEnvironment(
-        RewardType.PROPER,
         lambda _: np.empty(0),
         graph_order,
         flattened_ordering,
@@ -169,7 +162,6 @@ def test_state_batch_to_graph_batch(
 
 def test_limit():
     env = LinearBuildEnvironment(
-        RewardType.TELESCOPIC,
         lambda a: np.sum(a.flattened_row_major_colors, axis=1, dtype=np.int32),
         graph_order=2,
         flattened_ordering=FlattenedOrdering.ROW_MAJOR,
@@ -182,5 +174,5 @@ def test_limit():
     state, reward, status = env.step_batch(np.asarray([[254]], np.uint8))
 
     np.testing.assert_array_equal(state, [[0] * 253 + [1, 0]])
-    np.testing.assert_array_equal(reward, [-1])
+    np.testing.assert_array_equal(reward, [254])
     assert status is EpisodeStatus.TERMINATED

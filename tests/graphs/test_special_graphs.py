@@ -1,6 +1,6 @@
 """
 This file is used for testing the functionalities from the
-`rl_graph_theory.graphs.special_graphs` module.
+`rlgt.graphs.special_graphs` module.
 """
 
 from typing import List
@@ -8,8 +8,8 @@ from typing import List
 import numpy as np
 import pytest
 
-from rl_graph_theory.graphs.graph import GraphFormat
-from rl_graph_theory.graphs.special_graphs import (
+from rlgt.graphs.graph import GraphFormat
+from rlgt.graphs.special_graphs import (
     AlmostCompleteGraph,
     BookGraph,
     CompleteBipartiteGraph,

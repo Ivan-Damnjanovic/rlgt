@@ -1,16 +1,12 @@
 import numpy as np
 import pytest
-from rl_graph_theory.environments.graph_environment import (
-    GraphEnvironment,
-    RewardType,
-    EpisodeStatus,
-)
+from rlgt.environments.graph_environment import GraphEnvironment, EpisodeStatus
 
 
-class StepRewardTestingEnvironment(GraphEnvironment):
+class StepTestingEnvironment(GraphEnvironment):
     transition_function = None
 
-    def reset_batch(self, batch_size):
+    def _initialize_batch(self, batch_size):
         self._state_batch = np.zeros((batch_size, 1), np.uint8)
         self._status = EpisodeStatus.IN_PROGRESS
 
@@ -38,9 +34,12 @@ class StepRewardTestingEnvironment(GraphEnvironment):
     def state_length():
         return
 
+    def is_continuing():
+        return
+
 
 def test_not_in_progress():
-    env = StepRewardTestingEnvironment(RewardType.SPARSE, lambda _: None)
+    env = StepTestingEnvironment(lambda _: None, sparse_setting=True)
     env.reset_batch(1)
 
     env._status = EpisodeStatus.TERMINATED
@@ -82,23 +81,20 @@ def test_sparese(batch_size, state_batch, status):
         np.testing.assert_array_equal(graph_batch, state_batch)
         return np.ones((batch_size,))
 
-    def t(self: StepRewardTestingEnvironment, action_batch):
+    def t(self: StepTestingEnvironment, action_batch):
         self._state_batch = state_batch
         self._status = status
 
-    env = StepRewardTestingEnvironment(RewardType.SPARSE, r)
+    env = StepTestingEnvironment(r, sparse_setting=True)
     env.reset_batch(batch_size)
     env.transition_function = t
 
     _, calculated_reward, _ = env.step_batch(None)
 
-    np.testing.assert_array_equal(
-        calculated_reward,
-        np.full(
-            (batch_size,),
-            int(status is EpisodeStatus.TERMINATED),
-        ),
-    )
+    if status is EpisodeStatus.TERMINATED:
+        np.testing.assert_array_equal(calculated_reward, np.full((batch_size,), 1))
+    else:
+        assert calculated_reward is None
 
 
 @pytest.mark.parametrize(
@@ -118,10 +114,10 @@ def test_telesopic(batch_size, state_batch_value):
 
         return np.full((batch_size,), c[0])  # Reward is 1 on the first call, and 2 on the second.
 
-    def t(self: StepRewardTestingEnvironment, action_batch):
+    def t(self: StepTestingEnvironment, action_batch):
         self._state_batch[...] = state_batch_value
 
-    env = StepRewardTestingEnvironment(RewardType.TELESCOPIC, r)
+    env = StepTestingEnvironment(lambda _: 0, r)
     env.reset_batch(batch_size)
     env.transition_function = t
 
@@ -129,7 +125,7 @@ def test_telesopic(batch_size, state_batch_value):
 
     # Reward function returns 1 for the new state and 2 for the old state,
     # difference is always -1.
-    np.testing.assert_array_equal(calculated_reward, np.full((batch_size,), -1))
+    np.testing.assert_array_equal(calculated_reward, np.full((batch_size,), 2))
 
 
 @pytest.mark.parametrize(
@@ -142,10 +138,10 @@ def test_proper(batch_size, state_batch_value):
         assert np.all(old_graph_batch == 0)
         return np.ones((batch_size,))
 
-    def t(self: StepRewardTestingEnvironment, action_batch):
+    def t(self: StepTestingEnvironment, action_batch):
         self._state_batch[...] = state_batch_value
 
-    env = StepRewardTestingEnvironment(RewardType.PROPER, r)
+    env = StepTestingEnvironment(lambda _: 0, r)
     env.reset_batch(batch_size)
     env.transition_function = t
 

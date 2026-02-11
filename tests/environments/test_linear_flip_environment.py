@@ -1,11 +1,10 @@
 import numpy as np
 import pytest
 
-from rl_graph_theory.environments.linear_environments import (
+from rlgt.environments.linear_environments import (
     EpisodeStatus,
     FlattenedOrdering,
     LinearFlipEnvironment,
-    RewardType,
 )
 
 from .linear_flip_test_cases import (
@@ -17,12 +16,11 @@ from .linear_flip_test_cases import (
 
 
 @pytest.mark.parametrize(
-    "reward_type, reward_function, graph_order, flattened_ordering, "
+    "reward_function, graph_order, flattened_ordering, "
     "is_directed, allow_loops, initial_graph_generator, expected_flattened_length",
     TEST_CASES_CONSTRUCTOR,
 )
 def test_constructor(
-    reward_type,
     reward_function,
     graph_order,
     flattened_ordering,
@@ -32,7 +30,6 @@ def test_constructor(
     expected_flattened_length,
 ):
     env = LinearFlipEnvironment(
-        reward_type,
         reward_function,
         graph_order,
         flattened_ordering,
@@ -41,7 +38,6 @@ def test_constructor(
         initial_graph_generator,
     )
 
-    assert getattr(env, "__GraphEnvironment_reward_type", reward_type)
     assert getattr(env, "__GraphEnvironment_reward_function", reward_function)
 
     assert env._is_directed == is_directed
@@ -71,7 +67,6 @@ def test_reset_batch(
     initial_graph_generator,
 ):
     env = LinearFlipEnvironment(
-        RewardType.PROPER,
         lambda _: np.empty(0),
         graph_order,
         flattened_ordering,
@@ -80,7 +75,7 @@ def test_reset_batch(
         initial_graph_generator,
     )
 
-    state_batch, status = env.reset_batch(batch_size)
+    state_batch, _, status = env.reset_batch(batch_size)
 
     assert env._step_count == 0
     assert status is env._status is EpisodeStatus.IN_PROGRESS
@@ -110,7 +105,6 @@ def test_transition_batch(
     status,
 ):
     env = LinearFlipEnvironment(
-        RewardType.PROPER,
         lambda _: np.empty(0),
         graph_order,
         flattened_ordering,
@@ -144,7 +138,6 @@ def test_state_batch_to_graph_batch(
     flattened,
 ):
     env = LinearFlipEnvironment(
-        RewardType.PROPER,
         lambda _: np.empty(0),
         graph_order,
         flattened_ordering,

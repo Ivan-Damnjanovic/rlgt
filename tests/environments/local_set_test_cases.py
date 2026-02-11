@@ -2,8 +2,8 @@ from copy import deepcopy
 
 import numpy as np
 
-from rl_graph_theory.environments.graph_environment import EpisodeStatus
-from rl_graph_theory.graphs.graph import FlattenedOrdering
+from rlgt.environments.graph_environment import EpisodeStatus
+from rlgt.graphs.graph import FlattenedOrdering
 
 from ..utils import batchify, replace
 from .global_set_test_cases import TEST_CASES_CONSTRUCTOR as gstc_constructor
