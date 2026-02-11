@@ -1,7 +1,7 @@
 import numpy as np
 
-from rl_graph_theory.graphs.graph import FlattenedOrdering
-from rl_graph_theory.environments.graph_environment import EpisodeStatus
+from rlgt.graphs.graph import FlattenedOrdering
+from rlgt.environments.graph_environment import EpisodeStatus
 
 from ..utils import batchify, replace
 from .linear_build_test_cases import TEST_CASES_CONSTRUCTOR as lbtc_constructor

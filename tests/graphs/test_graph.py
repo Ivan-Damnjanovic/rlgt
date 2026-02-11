@@ -2,7 +2,7 @@ import pytest
 from typing import Any
 import numpy as np
 
-from rl_graph_theory.graphs.graph import Graph
+from rlgt.graphs.graph import Graph
 
 from .graph_test_cases import TEST_CASES_CONSTRUCTOR
 

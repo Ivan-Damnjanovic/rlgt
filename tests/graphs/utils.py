@@ -1,13 +1,13 @@
 """
 This testing module contains two utility functions to be used by the functions that directly test
-the functionalities from the `rl_graph_theory.graphs` package.
+the functionalities from the `rlgt.graphs` package.
 """
 
 from typing import Callable
 
 import numpy as np
 
-from rl_graph_theory.graphs.graph import Graph
+from rlgt.graphs.graph import Graph
 
 
 def verify_instantiated_graph(

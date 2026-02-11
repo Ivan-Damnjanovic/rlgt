@@ -1,11 +1,10 @@
 import numpy as np
 import pytest
 
-from rl_graph_theory.environments.local_environments import (
+from rlgt.environments.local_environments import (
     EpisodeStatus,
     FlattenedOrdering,
     LocalFlipEnvironment,
-    RewardType,
 )
 
 from .local_flip_test_cases import (
@@ -17,12 +16,11 @@ from .local_flip_test_cases import (
 
 
 @pytest.mark.parametrize(
-    "reward_type, reward_function, graph_order, episode_length, flip_only, flattened_ordering, "
+    "reward_function, graph_order, episode_length, flip_only, flattened_ordering, "
     "is_directed, allow_loops, initial_graph_generator, expected_flattened_length",
     TEST_CASES_CONSTRUCTOR,
 )
 def test_constructor(
-    reward_type,
     reward_function,
     graph_order,
     episode_length,
@@ -34,7 +32,6 @@ def test_constructor(
     expected_flattened_length,
 ):
     env = LocalFlipEnvironment(
-        reward_type,
         reward_function,
         graph_order,
         episode_length,
@@ -45,7 +42,6 @@ def test_constructor(
         initial_graph_generator,
     )
 
-    assert getattr(env, "__GraphEnvironment_reward_type", reward_type)
     assert getattr(env, "__GraphEnvironment_reward_function", reward_function)
 
     assert env._flip_only == flip_only
@@ -81,7 +77,6 @@ def test_reset_batch(
     expected_state,
 ):
     env = LocalFlipEnvironment(
-        RewardType.PROPER,
         lambda _: np.empty(0),
         graph_order,
         None,
@@ -91,7 +86,7 @@ def test_reset_batch(
         allow_loops,
     )
 
-    state_batch, status = env.reset_batch(batch_size)
+    state_batch, _, status = env.reset_batch(batch_size)
 
     assert env._step_count == 0
     assert status is env._status is EpisodeStatus.IN_PROGRESS
@@ -123,7 +118,6 @@ def test_transition_batch(
     status,
 ):
     env = LocalFlipEnvironment(
-        RewardType.PROPER,
         lambda _: np.empty(0),
         graph_order,
         episode_length,
@@ -151,7 +145,6 @@ def test_transition_batch(
 
 def test_transition_batch_runtime_error():
     env = LocalFlipEnvironment(
-        RewardType.PROPER,
         lambda _: np.empty(0),
         graph_order=2,
         episode_length=None,
@@ -180,7 +173,6 @@ def test_state_batch_to_graph_batch(
     flattened,
 ):
     env = LocalFlipEnvironment(
-        RewardType.PROPER,
         lambda _: np.empty(0),
         graph_order,
         None,
@@ -205,15 +197,15 @@ def test_state_batch_to_graph_batch(
     "env, mask",
     [
         (
-            LocalFlipEnvironment(RewardType.PROPER, lambda _: np.empty(0), 2),
+            LocalFlipEnvironment(lambda _: np.empty(0), 2),
             np.asarray([[False, True, False, True]], np.bool_),
         ),
         (
-            LocalFlipEnvironment(RewardType.PROPER, lambda _: np.empty(0), 2, flip_only=True),
+            LocalFlipEnvironment(lambda _: np.empty(0), 2, flip_only=True),
             np.asarray([[False, True]], np.bool_),
         ),
         (
-            LocalFlipEnvironment(RewardType.PROPER, lambda _: np.empty(0), 2, allow_loops=True),
+            LocalFlipEnvironment(lambda _: np.empty(0), 2, allow_loops=True),
             None,
         ),
     ],

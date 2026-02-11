@@ -1,13 +1,13 @@
 import numpy as np
 import pytest
 
-from rl_graph_theory.environments.graph_generators import (
+from rlgt.environments.graph_generators import (
     create_choose_two_graph_generator,
     create_edge_perturbation_graph_generator,
     create_fixed_graph_generator,
     create_random_graph_generator,
 )
-from rl_graph_theory.graphs.graph import FlattenedOrdering, Graph, GraphFormat
+from rlgt.graphs.graph import FlattenedOrdering, Graph, GraphFormat
 
 GRAPHS = [
     Graph.from_flattened(
@@ -312,7 +312,7 @@ def test_edge_pertrubation(
         edge_perturbation_probability=edge_prob,
         color_selection_probabilities=color_prob,
         flattened_ordering=ordering,
-        rng=rng,
+        random_generator=rng,
     )(batch_size)
 
     np.testing.assert_array_equal(out.flattened_row_major_colors, result)
@@ -432,7 +432,7 @@ def test_random_graph(
         edge_colors=edge_colors,
         is_directed=is_directed,
         allow_loops=allow_loops,
-        rng=rng,
+        random_generator=rng,
     )(batch_size)
 
     np.testing.assert_array_equal(out.flattened_row_major_colors, result)
