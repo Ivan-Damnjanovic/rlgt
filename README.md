@@ -56,7 +56,7 @@ This package depends on `graphs` and `environments`, and requires **PyTorch** to
 
 ```
 .
-├── src/rlgt
+├── src/rlgt/
 ├── tests/
 ├── examples/
 └── docs/
@@ -71,10 +71,10 @@ This package depends on `graphs` and `environments`, and requires **PyTorch** to
 
 RLGT emphasizes reproducibility, stability and clean code. The framework uses:
 
-- **Poetry** — for dependency management and packaging;
-- **Black** — for automatic code formatting;
-- **isort** — for consistent import sorting; and  
-- **pytest** — for unit testing of framework features.
+* **Poetry** — for dependency management and packaging;
+* **Black** — for automatic code formatting;
+* **isort** — for consistent import sorting; and  
+* **pytest** — for unit testing of framework features.
 
 **Poetry** manages both required and optional dependencies, ensuring a clean and reproducible setup. **Black** and **isort** enforce a consistent code style, and **pytest** guarantees reliability through automated testing.
 
