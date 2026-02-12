@@ -8,13 +8,74 @@ from rlgt.graphs import Graph
 
 
 LAPLACIAN_EXPRESSIONS = {
-    3: lambda d, m: (m**2) / d + m,
+    1:  lambda d, m: np.sqrt(4 * d**3 / m),
+    2:  lambda d, m: 2 * m**2 / d,
+    3:  lambda d, m: m**2 / d + m,
+    4:  lambda d, m: 2 * d**2 / m,
+    5:  lambda d, m: d**2 / m + m,
+    6:  lambda d, m: np.sqrt(m**2 + 3 * d**2),
+    7:  lambda d, m: d**2 / m + d,
+    8:  lambda d, m: np.sqrt(d * (m + 3 * d)),
+    9:  lambda d, m: (m + 3 * d) / 2,
+    10: lambda d, m: np.sqrt(d * (d + 3 * m)),
+    11: lambda d, m: 2 * m**3 / d**2,
+    12: lambda d, m: np.sqrt(2 * m**2 + 2 * d**2),
+    13: lambda d, m: 2 * m**4 / d**3,
+    14: lambda d, m: 2 * d**3 / m**2,
     15: lambda d, m: np.sqrt(4 * m**3 / d),
+    16: lambda d, m: 2 * d**4 / m**3,
+    17: lambda d, m: (5 * d**4 + 11 * m**4)**0.25,
+    18: lambda d, m: np.sqrt(2 * m**3 / d + 2 * d**2),
+    19: lambda d, m: (4 * d**4 + 12 * d * m**3)**0.25,
+    20: lambda d, m: np.sqrt(7 * d**2 + 9 * m**2) / 2,
+    21: lambda d, m: np.sqrt(d**3 / m + 3 * m**2),
+    22: lambda d, m: (2 * d**4 + 14 * d**2 * m**2)**0.25,
+    23: lambda d, m: np.sqrt(d**2 + 3 * d * m),
+    24: lambda d, m: (6 * d**4 + 10 * m**4)**0.25,
+    25: lambda d, m: (3 * d**4 + 13 * d**2 * m**2)**0.25,
     26: lambda d, m: np.sqrt(5 * d**2 + 11 * d * m) / 2,
-    28: lambda d, m: np.sqrt((2 * m**4) / (d**2) + 2 * d * m),
-    29: lambda d, m: np.sqrt(m**2 + (3 * m**3) / d),
-    31: lambda d, m: (4 * m**2) / (m + d),
+    27: lambda d, m: np.sqrt(3 * d**2 + 5 * d * m) / 2,
+    28: lambda d, m: np.sqrt(2 * m**4 / d**2 + 2 * d * m),
+    29: lambda d, m: np.sqrt(m**2 + 3 * m**3 / d),
+    30: lambda d, m: m**3 / d**2 + d**2 / m,
+    31: lambda d, m: 4 * m**2 / (m + d),
+    32: lambda d, m: np.sqrt(m**3 * (m + 3 * d)) / d,
+    33: lambda du, mu, dv, mv: 2 * (du + dv) - (mu + mv),
+    34: lambda du, mu, dv, mv: 2 * (du**2 + dv**2) / (du + dv),
+    35: lambda du, mu, dv, mv: 2 * (du**2 + dv**2) / (mu + mv),
     36: lambda du, mu, dv, mv: 2 * (mu**2 + mv**2) / (du + dv),
+    37: lambda du, mu, dv, mv: np.sqrt(2 * (du**2 + dv**2)),
+    38: lambda du, mu, dv, mv: 2 + np.sqrt(2 * (du - 1)**2 + 2 * (dv - 1)**2),
+    39: lambda du, mu, dv, mv: 2 + np.sqrt(2 * (du**2 + dv**2) - 4 * (mu + mv) + 4),
+    40: lambda du, mu, dv, mv: 2 + np.sqrt(2 * ((mu - 1)**2 + (mv - 1)**2) + (du**2 + dv**2) - (du * mu + dv * mv)),
+    41: lambda du, mu, dv, mv: 2 + (mu + mv) - (du + dv) + np.sqrt(2 * (du**2 + dv**2) - 4 * (mu + mv) + 4),
+    42: lambda du, mu, dv, mv: np.sqrt(du**2 + dv**2 + 2 * mu * mv),
+    43: lambda du, mu, dv, mv: 2 + np.sqrt(3 * (mu**2 + mv**2) - 2 * mu * mv - 4 * (du + dv) + 4),
+    44: lambda du, mu, dv, mv: 2 + np.sqrt(2 * ((du - 1)**2 + (dv - 1)**2 + mu * mv - du * dv)),
+    45: lambda du, mu, dv, mv: 2 + np.sqrt((du - dv)**2 + 2 * (du * mu + dv * mv) - 4 * (mu + mv) + 4),
+    46: lambda du, mu, dv, mv: 2 + np.sqrt(2 * (du**2 + dv**2) - 16 * (du * dv) / (mu + mv) + 4),
+    47: lambda du, mu, dv, mv: (2 * (du**2 + dv**2) - (mu - mv)**2) / (du + dv),
+    48: lambda du, mu, dv, mv: 2 * (du**2 + dv**2) / (2 + np.sqrt(2 * (du**2 + dv**2) - 4 * (mu + mv) + 4)),
+    49: lambda du, mu, dv, mv: 2 + np.sqrt(2 * (mu**2 + mv**2) + (du - dv)**2 - 4 * (du + dv) + 4),
+    50: lambda du, mu, dv, mv: (du**2 + dv**2 + mu * mv - du * dv) / (du + dv),
+    51: lambda du, mu, dv, mv: 2 * (mu + mv) - 4 * (mu * mv) / (du + dv),
+    52: lambda du, mu, dv, mv: 2 + np.sqrt(np.sqrt(8 * (mu**4 + mv**4) - 8 * (du**2 + dv**2) + 4) - 4 * (du + dv) + 6),
+    53: lambda du, mu, dv, mv: 2 + np.sqrt(np.sqrt(8 * (mu**4 + mv**4) - 8 * (du * mu + dv * mv) + 4) - 4 * (du + dv) + 6),
+    54: lambda du, mu, dv, mv: 2 + np.sqrt(2 * (mu**2 + mv**2) + (du * mu + dv * mv) - (du**2 + dv**2) - 4 * (du + dv) + 4),
+    55: lambda du, mu, dv, mv: 2 + np.sqrt(3 * (mu**2 + mv**2) - (du**2 + dv**2) - 4 * (mu + mv) + 4),
+    56: lambda du, mu, dv, mv: ((du**2 + dv**2) * (mu + mv)) / (2 * du * dv),
+    57: lambda du, mu, dv, mv: 2 + np.sqrt(2 * (mu**2 + mv**2) - 8 * (du**2 + dv**2) / (mu + mv) + 4),
+    58: lambda du, mu, dv, mv: 2 + np.sqrt(2 * (mu**2 + mu * mv + mv**2) - (du * mu + dv * mv) - 4 * (du + dv) + 4),
+    59: lambda du, mu, dv, mv: (2 * (mu**2 + mu * mv + mv**2) - (du**2 + dv**2)) / (mu + mv),
+    60: lambda du, mu, dv, mv: 2 + np.sqrt(2 * (mu**2 + mu * mv + mv**2) - (du**2 + dv**2) - 4 * (du + dv) + 4),
+    61: lambda du, mu, dv, mv: (2 * (mu**2 + mv**2)) / (2 + np.sqrt(2 * ((du - 1)**2 + (dv - 1)**2))),
+    62: lambda du, mu, dv, mv: 2 + np.sqrt(mu**2 + 4 * mu * mv + mv**2 - 2 * du * dv - 4 * (du + dv) + 4),
+    63: lambda du, mu, dv, mv: du + dv + mu + mv - 4 * (du * dv) / (mu + mv),
+    64: lambda du, mu, dv, mv: (mu * mv * (du + dv)) / (du * dv),
+    65: lambda du, mu, dv, mv: ((mu + mv) * (du * mu + dv * mv)) / (2 * mu * mv),
+    66: lambda du, mu, dv, mv: (mu**2 + 4 * mu * mv + mv**2 - (du * mu + dv * mv)) / (du + dv),
+    67: lambda du, mu, dv, mv: ((mu + mv) * (du * mu + dv * mv)) / (2 * du * dv),
+    68: lambda du, mu, dv, mv: 2 + np.sqrt((mu - mv)**2 + 4 * du * dv - 4 * (mu + mv) + 4),
 }
 
 
@@ -53,6 +114,7 @@ def graph_invariant_family(graph_batch: Graph, expression_index: int):
         mv = m_batch_fixed[b, v]
 
         all_right_hand_sides = LAPLACIAN_EXPRESSIONS[expression_index](du, mu, dv, mv)
+        np.nan_to_num(all_right_hand_sides, nan=-1000.0, copy=False)
 
         right_hand_side_batch = np.full(graph_batch.batch_size, -np.inf)
         np.maximum.at(right_hand_side_batch, b, all_right_hand_sides)
@@ -95,6 +157,9 @@ def main(graph_order: int, expression_index: int):
         ),
         policy_network=policy_network,
         optimizer=optim.Adam(policy_network.parameters(), lr=0.003),
+        candidates_count=500,
+        elite_count=75,
+        survivors_count=100,
         random_action_mechanism=ExponentialRandomActionMechanism(
             initial_random_action_probability=0.005,
             waiting_period=10,
@@ -124,12 +189,17 @@ def main(graph_order: int, expression_index: int):
 
 
 if __name__ == "__main__":
-    main(graph_order=16, expression_index=3)
-    print()
-    main(graph_order=16, expression_index=15)
-    print()
-    main(graph_order=16, expression_index=28)
-    print()
-    main(graph_order=16, expression_index=29)
-    print()
-    main(graph_order=16, expression_index=31)
+    # main(graph_order=16, expression_index=3)
+    # print()
+    # main(graph_order=16, expression_index=15)
+    # print()
+    # main(graph_order=16, expression_index=28)
+    # print()
+    # main(graph_order=16, expression_index=29)
+    # print()
+    # main(graph_order=16, expression_index=31)
+
+    # for expression_index in [52, 53, 54, 55]:
+    #     main(graph_order=16, expression_index=expression_index)
+    
+    main(graph_order=20, expression_index=42)
