@@ -1,10 +1,11 @@
 import numpy as np
-from rlgt import graphs as rlgt_graphs
-from rlgt import environments as rlgt_environments
-from rlgt import agents as rlgt_agents
 import torch.nn as nn
 import torch.optim as optim
 from sage.all import *
+
+from rlgt import agents as rlgt_agents
+from rlgt import environments as rlgt_environments
+from rlgt import graphs as rlgt_graphs
 
 
 def graph_invariant(graph_batch: rlgt_graphs.Graph):

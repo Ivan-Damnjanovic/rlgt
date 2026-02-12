@@ -4,9 +4,19 @@ import numpy as np
 import torch.nn as nn
 import torch.optim as optim
 
-from rlgt.agents import DeepCrossEntropyAgent, ExponentialRandomActionMechanism, ReinforceAgent, PPOAgent
-from rlgt.environments import LinearBuildEnvironment, GlobalFlipEnvironment, create_fixed_graph_generator, LocalSetEnvironment
-from rlgt.graphs import Graph, CycleGraph, GraphFormat
+from rlgt.agents import (
+    DeepCrossEntropyAgent,
+    ExponentialRandomActionMechanism,
+    PPOAgent,
+    ReinforceAgent,
+)
+from rlgt.environments import (
+    GlobalFlipEnvironment,
+    LinearBuildEnvironment,
+    LocalSetEnvironment,
+    create_fixed_graph_generator,
+)
+from rlgt.graphs import CycleGraph, Graph, GraphFormat
 
 
 # The expressions used to construct the right-hand sides of the inequalities from
@@ -128,7 +138,7 @@ def compute_graph_invariant(graph_batch: Graph, expression_index: int):
     :return: The computed batch of graph invariant values, given as a `numpy.ndarray` of type
         `numpy.float32`.
     """
-    
+
     # Extract the adjacency matrices.
     adjacency_matrix_batch = graph_batch.adjacency_matrix_colors.astype(np.float64)
 
@@ -223,6 +233,7 @@ def solve_dce(graph_order: int, expression_index: int):
         ),
     )
 
+    print(f"Conjecture {expression_index}:")
     agent.reset()
 
     while True:
@@ -234,8 +245,11 @@ def solve_dce(graph_order: int, expression_index: int):
             solution = agent.best_graph.adjacency_matrix_colors
             print(solution)
 
-            with open("applications/auto_laplacian_solutions.pkl", "rb") as opened_file:
-                all_solutions = pickle.load(opened_file)
+            try:
+                with open("applications/auto_laplacian_solutions.pkl", "rb") as opened_file:
+                    all_solutions = pickle.load(opened_file)
+            except:
+                all_solutions = []
 
             all_solutions.append(solution)
 
@@ -243,6 +257,9 @@ def solve_dce(graph_order: int, expression_index: int):
                 pickle.dump(all_solutions, opened_file)
 
             break
+
+        if agent.step_count >= 2000:
+            agent.reset()
 
 
 def solve_reinforce(graph_order: int, expression_index: int):
@@ -282,6 +299,7 @@ def solve_reinforce(graph_order: int, expression_index: int):
         ),
     )
 
+    print(f"Conjecture {expression_index}:")
     agent.reset()
 
     while True:
@@ -293,8 +311,11 @@ def solve_reinforce(graph_order: int, expression_index: int):
             solution = agent.best_graph.adjacency_matrix_colors
             print(solution)
 
-            with open("applications/auto_laplacian_solutions.pkl", "rb") as opened_file:
-                all_solutions = pickle.load(opened_file)
+            try:
+                with open("applications/auto_laplacian_solutions.pkl", "rb") as opened_file:
+                    all_solutions = pickle.load(opened_file)
+            except:
+                all_solutions = []
 
             all_solutions.append(solution)
 
@@ -302,6 +323,9 @@ def solve_reinforce(graph_order: int, expression_index: int):
                 pickle.dump(all_solutions, opened_file)
 
             break
+
+        if agent.step_count >= 2000:
+            agent.reset()
 
 
 def solve_ppo(graph_order: int, expression_index: int):
@@ -353,6 +377,7 @@ def solve_ppo(graph_order: int, expression_index: int):
         ),
     )
 
+    print(f"Conjecture {expression_index}:")
     agent.reset()
 
     while True:
@@ -364,8 +389,11 @@ def solve_ppo(graph_order: int, expression_index: int):
             solution = agent.best_graph.adjacency_matrix_colors
             print(solution)
 
-            with open("applications/auto_laplacian_solutions.pkl", "rb") as opened_file:
-                all_solutions = pickle.load(opened_file)
+            try:
+                with open("applications/auto_laplacian_solutions.pkl", "rb") as opened_file:
+                    all_solutions = pickle.load(opened_file)
+            except:
+                all_solutions = []
 
             all_solutions.append(solution)
 
@@ -374,6 +402,24 @@ def solve_ppo(graph_order: int, expression_index: int):
 
             break
 
+        if agent.step_count >= 2000:
+            agent.reset()
+
 
 if __name__ == "__main__":
-    solve_dce(graph_order=20, expression_index=42)
+    try:
+        with open("applications/auto_laplacian_solutions.pkl", "rb") as opened_file:
+            all_solutions = pickle.load(opened_file)
+    except:
+        all_solutions = []
+
+    converted_solutions = []
+    for solution in all_solutions:
+        g = Graph.from_adjacency_matrix(solution)
+        bitmask = g.bitmask_out[0]
+        converted_solutions.append(bitmask)
+
+    with open("applications/auto_laplacian_solutions.txt", "w") as opened_file:
+        for solution in converted_solutions:
+            line = " ".join(str(x) for x in solution)
+            opened_file.write(line + "\n")

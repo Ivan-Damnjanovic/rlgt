@@ -164,6 +164,9 @@ class DeepCrossEntropyAgent(GraphAgent):
         )
         self._population_scores = np.zeros((total_population,), dtype=np.float32)
 
+        # Reset the policy network parameters.
+        self._policy_network.apply(lambda m: getattr(m, "reset_parameters", lambda: None)())
+
     def step(self) -> None:
         # Initialize a batch of episodes with the batch size ``_candidates_count`` and store the
         # starting states to the ``_population_states`` attribute. While storing the states, the

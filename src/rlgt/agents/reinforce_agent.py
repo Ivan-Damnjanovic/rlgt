@@ -155,6 +155,9 @@ class ReinforceAgent(GraphAgent):
             (self._environment.episode_length, self._candidates_count), dtype=np.float32
         )
 
+        # Reset the policy network parameters.
+        self._policy_network.apply(lambda m: getattr(m, "reset_parameters", lambda: None)())
+
     def step(self) -> None:
         # Initialize a batch of episodes with the batch size ``_candidates_count``.
         state_batch, current_scores, status = self._environment.reset_batch(

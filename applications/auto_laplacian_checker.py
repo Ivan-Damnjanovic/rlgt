@@ -1,6 +1,9 @@
 import pickle
 
+import numpy as np
 from sage.all import *
+
+import rlgt.graphs as rlgt_graphs
 
 
 # The expressions used to construct the right-hand sides of the inequalities from
@@ -54,8 +57,7 @@ LAPLACIAN_EXPRESSIONS = {
     + sqrt(2 * (du**2 + dv**2) - 4 * (mu + mv) + 4),
     42: lambda du, mu, dv, mv: sqrt(du**2 + dv**2 + 2 * mu * mv),
     43: lambda du, mu, dv, mv: 2 + sqrt(3 * (mu**2 + mv**2) - 2 * mu * mv - 4 * (du + dv) + 4),
-    44: lambda du, mu, dv, mv: 2
-    + sqrt(2 * ((du - 1) ** 2 + (dv - 1) ** 2 + mu * mv - du * dv)),
+    44: lambda du, mu, dv, mv: 2 + sqrt(2 * ((du - 1) ** 2 + (dv - 1) ** 2 + mu * mv - du * dv)),
     45: lambda du, mu, dv, mv: 2
     + sqrt((du - dv) ** 2 + 2 * (du * mu + dv * mv) - 4 * (mu + mv) + 4),
     46: lambda du, mu, dv, mv: 2 + sqrt(2 * (du**2 + dv**2) - 16 * (du * dv) / (mu + mv) + 4),
@@ -63,8 +65,7 @@ LAPLACIAN_EXPRESSIONS = {
     48: lambda du, mu, dv, mv: 2
     * (du**2 + dv**2)
     / (2 + sqrt(2 * (du**2 + dv**2) - 4 * (mu + mv) + 4)),
-    49: lambda du, mu, dv, mv: 2
-    + sqrt(2 * (mu**2 + mv**2) + (du - dv) ** 2 - 4 * (du + dv) + 4),
+    49: lambda du, mu, dv, mv: 2 + sqrt(2 * (mu**2 + mv**2) + (du - dv) ** 2 - 4 * (du + dv) + 4),
     50: lambda du, mu, dv, mv: 2 * (du**2 + dv**2 + mu * mv - du * dv) / (du + dv),
     51: lambda du, mu, dv, mv: 2 * (mu + mv) - 4 * (mu * mv) / (du + dv),
     52: lambda du, mu, dv, mv: 2
@@ -73,11 +74,9 @@ LAPLACIAN_EXPRESSIONS = {
     + sqrt(sqrt(8 * (mu**4 + mv**4) - 8 * (du * mu + dv * mv) + 4) - 4 * (du + dv) + 6),
     54: lambda du, mu, dv, mv: 2
     + sqrt(2 * (mu**2 + mv**2) + (du * mu + dv * mv) - (du**2 + dv**2) - 4 * (du + dv) + 4),
-    55: lambda du, mu, dv, mv: 2
-    + sqrt(3 * (mu**2 + mv**2) - (du**2 + dv**2) - 4 * (mu + mv) + 4),
+    55: lambda du, mu, dv, mv: 2 + sqrt(3 * (mu**2 + mv**2) - (du**2 + dv**2) - 4 * (mu + mv) + 4),
     56: lambda du, mu, dv, mv: ((du**2 + dv**2) * (mu + mv)) / (2 * du * dv),
-    57: lambda du, mu, dv, mv: 2
-    + sqrt(2 * (mu**2 + mv**2) - 8 * (du**2 + dv**2) / (mu + mv) + 4),
+    57: lambda du, mu, dv, mv: 2 + sqrt(2 * (mu**2 + mv**2) - 8 * (du**2 + dv**2) / (mu + mv) + 4),
     58: lambda du, mu, dv, mv: 2
     + sqrt(2 * (mu**2 + mu * mv + mv**2) - (du * mu + dv * mv) - 4 * (du + dv) + 4),
     59: lambda du, mu, dv, mv: (2 * (mu**2 + mu * mv + mv**2) - (du**2 + dv**2)) / (mu + mv),
@@ -117,23 +116,32 @@ def check(adjacency_matrix, expression_index):
         ]
     else:
         right_hand_values = [
-            LAPLACIAN_EXPRESSIONS[expression_index](d_values[u], m_values[u], d_values[v], m_values[v]) for u, v, _ in g.edges()
+            LAPLACIAN_EXPRESSIONS[expression_index](
+                d_values[u], m_values[u], d_values[v], m_values[v]
+            )
+            for u, v, _ in g.edges()
         ]
 
     result = left_hand_side - max(right_hand_values)
+    if not result.imag().is_zero():
+        result = -1.0
+
     if float(result) > 0.0001:
         if expression_index not in RESOLUTIONS:
             RESOLUTIONS[expression_index] = []
-        
+
         RESOLUTIONS[expression_index].append(adjacency_matrix)
 
 
 if __name__ == "__main__":
-    with open("applications/auto_laplacian_solutions.pkl", "rb") as opened_file:
-        all_solutions = pickle.load(opened_file)
+    with open("applications/auto_laplacian_solutions.txt", "r") as opened_file:
+        for line in opened_file:
+            bitmask = np.array([[int(entry) for entry in line.split()]], dtype=np.uint64)
+            adjacency_matrix = rlgt_graphs.Graph.from_bitmask(bitmask).adjacency_matrix_colors
 
-    for adjacency_matrix in all_solutions:
-        for expression_index in range(1, 69):
-            check(adjacency_matrix, expression_index)
+            for expression_index in range(1, 69):
+                check(adjacency_matrix, expression_index)
 
-    print(RESOLUTIONS)
+    resolved_expressions = list(RESOLUTIONS.keys())
+    resolved_expressions.sort()
+    print(resolved_expressions)

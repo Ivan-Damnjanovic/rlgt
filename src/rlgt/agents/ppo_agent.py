@@ -206,6 +206,10 @@ class PPOAgent(GraphAgent):
             (self._environment.episode_length, self._candidates_count), dtype=np.float32
         )
 
+        # Reset the policy network parameters and the value network parameters.
+        self._policy_network.apply(lambda m: getattr(m, "reset_parameters", lambda: None)())
+        self._value_network.apply(lambda m: getattr(m, "reset_parameters", lambda: None)())
+
     def step(self) -> None:
         # Initialize a batch of episodes with the batch size ``_candidates_count`` and store the
         # starting states to the ``_population_states`` attribute.
