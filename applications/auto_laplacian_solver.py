@@ -112,7 +112,7 @@ LAPLACIAN_EXPRESSIONS = {
 }
 
 
-def compute_graph_invariant(graph_batch: Graph, expression_index: int):
+def compute_graph_invariant(graph_batch: Graph, expression_index: int) -> np.ndarray:
     r"""
     This function computes a graph invariant of the form
     \[
@@ -203,6 +203,19 @@ def compute_graph_invariant(graph_batch: Graph, expression_index: int):
 
 
 def solve_dce(graph_order: int, expression_index: int):
+    """
+    This function attempts to find a counterexample of a configured order to a selected conjectured
+    inequality from:
+        V. Brankov, P. Hansen and D. Stevanović, Automated conjectures on upper bounds for the
+        largest Laplacian eigenvalue of graphs, Linear Algebra Appl. 414 (2006), 407-424;
+    using the Deep Cross-Entropy agent.
+
+    :param graph_order: A positive `int` not less than 2 specifying the order of the graphs that
+        should be built for the purpose of potentially finding a counterexample.
+    :param expression_index: A positive `int` between 1 and 68 specifying which of the 68
+        inequalities should be attempted to be refuted.
+    """
+
     policy_network = nn.Sequential(
         nn.Linear(graph_order * (graph_order - 1), 72),
         nn.ReLU(),
@@ -234,6 +247,7 @@ def solve_dce(graph_order: int, expression_index: int):
     )
 
     print(f"Conjecture {expression_index}:")
+    print("Starting...")
     agent.reset()
 
     while True:
@@ -241,28 +255,37 @@ def solve_dce(graph_order: int, expression_index: int):
         print(f"Learning iterations: {agent.step_count}. Best score: {agent.best_score:.3f}.")
 
         if agent.best_score > 0.0001:
+            best_graph = agent.best_graph
+
             print("Success! The following graph is a solution:")
-            solution = agent.best_graph.adjacency_matrix_colors
-            print(solution)
+            print(best_graph.adjacency_matrix_colors)
 
-            try:
-                with open("applications/auto_laplacian_solutions.pkl", "rb") as opened_file:
-                    all_solutions = pickle.load(opened_file)
-            except:
-                all_solutions = []
-
-            all_solutions.append(solution)
-
-            with open("applications/auto_laplacian_solutions.pkl", "wb") as opened_file:
-                pickle.dump(all_solutions, opened_file)
+            # Save the solution in the bitmask format as a new line.
+            with open("applications/auto_laplacian_solutions.txt", "a") as opened_file:
+                line = " ".join(str(entry) for entry in best_graph.bitmask_out[-1])
+                opened_file.write(line + "\n")
 
             break
 
         if agent.step_count >= 2000:
+            print("Restarting...")
             agent.reset()
 
 
 def solve_reinforce(graph_order: int, expression_index: int):
+    """
+    This function attempts to find a counterexample of a configured order to a selected conjectured
+    inequality from:
+        V. Brankov, P. Hansen and D. Stevanović, Automated conjectures on upper bounds for the
+        largest Laplacian eigenvalue of graphs, Linear Algebra Appl. 414 (2006), 407-424;
+    using the REINFORCE agent.
+
+    :param graph_order: A positive `int` not less than 2 specifying the order of the graphs that
+        should be built for the purpose of potentially finding a counterexample.
+    :param expression_index: A positive `int` between 1 and 68 specifying which of the 68
+        inequalities should be attempted to be refuted.
+    """
+
     policy_network = nn.Sequential(
         nn.Linear(graph_order * (graph_order - 1) // 2, 72),
         nn.ReLU(),
@@ -300,6 +323,7 @@ def solve_reinforce(graph_order: int, expression_index: int):
     )
 
     print(f"Conjecture {expression_index}:")
+    print("Starting...")
     agent.reset()
 
     while True:
@@ -307,28 +331,37 @@ def solve_reinforce(graph_order: int, expression_index: int):
         print(f"Learning iterations: {agent.step_count}. Best score: {agent.best_score:.3f}.")
 
         if agent.best_score > 0.0001:
+            best_graph = agent.best_graph
+
             print("Success! The following graph is a solution:")
-            solution = agent.best_graph.adjacency_matrix_colors
-            print(solution)
+            print(best_graph.adjacency_matrix_colors)
 
-            try:
-                with open("applications/auto_laplacian_solutions.pkl", "rb") as opened_file:
-                    all_solutions = pickle.load(opened_file)
-            except:
-                all_solutions = []
-
-            all_solutions.append(solution)
-
-            with open("applications/auto_laplacian_solutions.pkl", "wb") as opened_file:
-                pickle.dump(all_solutions, opened_file)
+            # Save the solution in the bitmask format as a new line.
+            with open("applications/auto_laplacian_solutions.txt", "a") as opened_file:
+                line = " ".join(str(entry) for entry in best_graph.bitmask_out[-1])
+                opened_file.write(line + "\n")
 
             break
 
-        if agent.step_count >= 2000:
+        if agent.step_count >= 400:
+            print("Restarting...")
             agent.reset()
 
 
 def solve_ppo(graph_order: int, expression_index: int):
+    """
+    This function attempts to find a counterexample of a configured order to a selected conjectured
+    inequality from:
+        V. Brankov, P. Hansen and D. Stevanović, Automated conjectures on upper bounds for the
+        largest Laplacian eigenvalue of graphs, Linear Algebra Appl. 414 (2006), 407-424;
+    using the Proximal Policy Optimization (PPO) agent.
+
+    :param graph_order: A positive `int` not less than 2 specifying the order of the graphs that
+        should be built for the purpose of potentially finding a counterexample.
+    :param expression_index: A positive `int` between 1 and 68 specifying which of the 68
+        inequalities should be attempted to be refuted.
+    """
+
     policy_network = nn.Sequential(
         nn.Linear(graph_order * (graph_order - 1) // 2 + graph_order, 72),
         nn.ReLU(),
@@ -378,6 +411,7 @@ def solve_ppo(graph_order: int, expression_index: int):
     )
 
     print(f"Conjecture {expression_index}:")
+    print("Starting...")
     agent.reset()
 
     while True:
@@ -385,41 +419,25 @@ def solve_ppo(graph_order: int, expression_index: int):
         print(f"Learning iterations: {agent.step_count}. Best score: {agent.best_score:.3f}.")
 
         if agent.best_score > 0.0001:
+            best_graph = agent.best_graph
+
             print("Success! The following graph is a solution:")
-            solution = agent.best_graph.adjacency_matrix_colors
-            print(solution)
+            print(best_graph.adjacency_matrix_colors)
 
-            try:
-                with open("applications/auto_laplacian_solutions.pkl", "rb") as opened_file:
-                    all_solutions = pickle.load(opened_file)
-            except:
-                all_solutions = []
-
-            all_solutions.append(solution)
-
-            with open("applications/auto_laplacian_solutions.pkl", "wb") as opened_file:
-                pickle.dump(all_solutions, opened_file)
+            # Save the solution in the bitmask format as a new line.
+            with open("applications/auto_laplacian_solutions.txt", "a") as opened_file:
+                line = " ".join(str(entry) for entry in best_graph.bitmask_out[-1])
+                opened_file.write(line + "\n")
 
             break
 
-        if agent.step_count >= 2000:
+        if agent.step_count >= 400:
+            print("Restarting...")
             agent.reset()
 
 
 if __name__ == "__main__":
-    try:
-        with open("applications/auto_laplacian_solutions.pkl", "rb") as opened_file:
-            all_solutions = pickle.load(opened_file)
-    except:
-        all_solutions = []
-
-    converted_solutions = []
-    for solution in all_solutions:
-        g = Graph.from_adjacency_matrix(solution)
-        bitmask = g.bitmask_out[0]
-        converted_solutions.append(bitmask)
-
-    with open("applications/auto_laplacian_solutions.txt", "w") as opened_file:
-        for solution in converted_solutions:
-            line = " ".join(str(x) for x in solution)
-            opened_file.write(line + "\n")
+    for expression_index in [3, 36]:
+        solve_dce(16, expression_index)
+        solve_reinforce(16, expression_index)
+        solve_ppo(16, expression_index)

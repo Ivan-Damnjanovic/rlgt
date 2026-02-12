@@ -90,6 +90,7 @@ def a1_example(graph_order: int):
     )
 
     print("Deep Cross-Entropy agent + Linear Build environment")
+    print("Starting...")
     agent.reset()
 
     while True:
@@ -98,10 +99,13 @@ def a1_example(graph_order: int):
 
         if agent.best_score > 0.0001:
             print("Success! The following graph is a solution:")
-            solution = agent.best_graph.adjacency_matrix_colors
-            print(solution)
+            print(agent.best_graph.adjacency_matrix_colors)
 
             break
+
+        if agent.step_count >= 1000:
+            print("Restarting...")
+            agent.reset()
 
 
 def a2_example(graph_order: int):
@@ -134,6 +138,7 @@ def a2_example(graph_order: int):
     )
 
     print("REINFORCE agent + Global Flip environment")
+    print("Starting...")
     agent.reset()
 
     while True:
@@ -142,10 +147,13 @@ def a2_example(graph_order: int):
 
         if agent.best_score > 0.0001:
             print("Success! The following graph is a solution:")
-            solution = agent.best_graph.adjacency_matrix_colors
-            print(solution)
+            print(agent.best_graph.adjacency_matrix_colors)
 
             break
+
+        if agent.step_count >= 200:
+            print("Restarting...")
+            agent.reset()
 
 
 def a3_example(graph_order: int):
@@ -190,6 +198,7 @@ def a3_example(graph_order: int):
     )
 
     print("PPO agent + Local Set environment")
+    print("Starting...")
     agent.reset()
 
     while True:
@@ -198,10 +207,13 @@ def a3_example(graph_order: int):
 
         if agent.best_score > 0.0001:
             print("Success! The following graph is a solution:")
-            solution = agent.best_graph.adjacency_matrix_colors
-            print(solution)
+            print(agent.best_graph.adjacency_matrix_colors)
 
             break
+
+        if agent.step_count >= 200:
+            print("Restarting...")
+            agent.reset()
 
 
 if __name__ == "__main__":

@@ -1,8 +1,7 @@
-import pickle
-
 import numpy as np
 from sage.all import *
 
+# Make sure not to have a collision with the `SageMath` package names!
 import rlgt.graphs as rlgt_graphs
 
 
@@ -95,21 +94,52 @@ LAPLACIAN_EXPRESSIONS = {
 }
 
 
+# This should be a dictionary whose keys are the expression indices (integers between 1 and 68),
+# with the values corresponding to lists of adjacency matrices representing all the discovered
+# counterexample graphs.
 RESOLUTIONS = {}
 
 
-def check(adjacency_matrix, expression_index):
+def check(adjacency_matrix: np.ndarray, expression_index: int):
+    r"""
+    This function determines whether a connected simple graph represented through an adjacency
+    matrix is a counterexample to a conjectured inequality of the form
+    \[
+        \mu \le \max_{v \in V} h(d(v), m(v))
+    \]
+    or
+    \[
+        \mu \le \max_{uv \in E} h(d(u), m(u), d(v), m(v))
+    \]
+    where $\mu$ is the Laplacian spectral radius, $d(v)$ is the degree of a vertex $v$, $m(v)$ is
+    the average degree of the neighbors of a vertex $v$, and $h$ is one of the 68 right-hand side
+    expressions from
+        V. Brankov, P. Hansen and D. Stevanović, Automated conjectures on upper bounds for the
+        largest Laplacian eigenvalue of graphs, Linear Algebra Appl. 414 (2006), 407-424.
+    The maximum is taken over all the graph vertices $v$ or the graph edges $uv$, depending on the
+    right-hand side expression. If the provided graph is indeed a counterexample, then the global
+    ``RESOLUTIONS`` dictionary is updated accordingly.
+
+    :param adjacency_matrix: The adjacency matrix of the provided graph, given as a `numpy.ndarray`
+        matrix of type `numpy.uint8`.
+    :param expression_integer: A positive `int` between 1 and 68 specifying which of the 68
+        conjectured inequalities should be tested.
+    """
+    
     g = Graph(matrix(ZZ, adjacency_matrix))
 
+    # The graph must be connected and on at least two vertices.
     assert g.order() >= 2 and g.is_connected()
-    # g.show()
 
+    # Compute the vertex degrees and the average degrees of the vertex neighbors.
     d_values = vector([g.degree(v) for v in g.vertices()])
     temp_sums = g.adjacency_matrix() * d_values
     m_values = vector([temp_sum / degree for temp_sum, degree in zip(temp_sums, d_values)])
 
+    # Compute the left-hand side.
     left_hand_side = max(g.spectrum(laplacian=True))
 
+    # Compute all the right-hand values depending on the selected conjectured inequality.
     if expression_index <= 32:
         right_hand_values = [
             LAPLACIAN_EXPRESSIONS[expression_index](d, m) for d, m in zip(d_values, m_values)
@@ -122,10 +152,13 @@ def check(adjacency_matrix, expression_index):
             for u, v, _ in g.edges()
         ]
 
+    # Compute the difference between the left-hand side and the right-hand side.
     result = left_hand_side - max(right_hand_values)
     if not result.imag().is_zero():
+        print(f"Problem! {expression_index}, {adjacency_matrix}")
         result = -1.0
 
+    # If the left-hand side is greater, then a counterexample has been found.
     if float(result) > 0.0001:
         if expression_index not in RESOLUTIONS:
             RESOLUTIONS[expression_index] = []
@@ -134,14 +167,17 @@ def check(adjacency_matrix, expression_index):
 
 
 if __name__ == "__main__":
+    # Iterate through all the discovered solution graphs.
     with open("applications/auto_laplacian_solutions.txt", "r") as opened_file:
         for line in opened_file:
             bitmask = np.array([[int(entry) for entry in line.split()]], dtype=np.uint64)
             adjacency_matrix = rlgt_graphs.Graph.from_bitmask(bitmask).adjacency_matrix_colors
 
+            # Inspect whether each of these graphs refutes each of the conjectured inequalities.
             for expression_index in range(1, 69):
                 check(adjacency_matrix, expression_index)
 
+    # Print all the refuted conjectures.
     resolved_expressions = list(RESOLUTIONS.keys())
     resolved_expressions.sort()
     print(resolved_expressions)
