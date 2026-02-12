@@ -1,13 +1,13 @@
 import numpy as np
 from sage.all import *
 
-# Make sure not to have a collision with the `SageMath` package names!
+# Make sure not to have a collision with the ``SageMath`` package names!
 import rlgt.graphs as rlgt_graphs
 
 
 # The expressions used to construct the right-hand sides of the inequalities from
-#     V. Brankov, P. Hansen and D. Stevanović, Automated conjectures on upper bounds for the
-#     largest Laplacian eigenvalue of graphs, Linear Algebra Appl. 414 (2006), 407-424.
+# * V. Brankov, P. Hansen and D. Stevanović, Automated conjectures on upper bounds for the largest
+#   Laplacian eigenvalue of graphs, Linear Algebra Appl. 414 (2006), 407-424.
 LAPLACIAN_EXPRESSIONS = {
     1: lambda d, m: sqrt(4 * d**3 / m),
     2: lambda d, m: 2 * m**2 / d,
@@ -114,8 +114,10 @@ def check(adjacency_matrix: np.ndarray, expression_index: int):
     where $\mu$ is the Laplacian spectral radius, $d(v)$ is the degree of a vertex $v$, $m(v)$ is
     the average degree of the neighbors of a vertex $v$, and $h$ is one of the 68 right-hand side
     expressions from
-        V. Brankov, P. Hansen and D. Stevanović, Automated conjectures on upper bounds for the
-        largest Laplacian eigenvalue of graphs, Linear Algebra Appl. 414 (2006), 407-424.
+
+    * V. Brankov, P. Hansen and D. Stevanović, Automated conjectures on upper bounds for the
+      largest Laplacian eigenvalue of graphs, Linear Algebra Appl. 414 (2006), 407-424.
+
     The maximum is taken over all the graph vertices $v$ or the graph edges $uv$, depending on the
     right-hand side expression. If the provided graph is indeed a counterexample, then the global
     ``RESOLUTIONS`` dictionary is updated accordingly.

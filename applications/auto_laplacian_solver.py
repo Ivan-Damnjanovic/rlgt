@@ -20,8 +20,8 @@ from rlgt.graphs import CycleGraph, Graph, GraphFormat
 
 
 # The expressions used to construct the right-hand sides of the inequalities from
-#     V. Brankov, P. Hansen and D. Stevanović, Automated conjectures on upper bounds for the
-#     largest Laplacian eigenvalue of graphs, Linear Algebra Appl. 414 (2006), 407-424.
+# * V. Brankov, P. Hansen and D. Stevanović, Automated conjectures on upper bounds for the largest
+#   Laplacian eigenvalue of graphs, Linear Algebra Appl. 414 (2006), 407-424.
 LAPLACIAN_EXPRESSIONS = {
     1: lambda d, m: np.sqrt(4 * d**3 / m),
     2: lambda d, m: 2 * m**2 / d,
@@ -125,8 +125,10 @@ def compute_graph_invariant(graph_batch: Graph, expression_index: int) -> np.nda
     for a provided batch of graphs, where $\mu$ is the Laplacian spectral radius, $d(v)$ is the
     degree of a vertex $v$, $m(v)$ is the average degree of the neighbors of a vertex $v$, and $h$
     is one of the 68 right-hand side expressions from
-        V. Brankov, P. Hansen and D. Stevanović, Automated conjectures on upper bounds for the
-        largest Laplacian eigenvalue of graphs, Linear Algebra Appl. 414 (2006), 407-424.
+
+    * V. Brankov, P. Hansen and D. Stevanović, Automated conjectures on upper bounds for the
+      largest Laplacian eigenvalue of graphs, Linear Algebra Appl. 414 (2006), 407-424.
+
     The maximum is taken over all the graph vertices $v$ or the graph edges $uv$, depending on the
     right-hand side expression. An input graph is assumed to be connected; otherwise, a score of
     -10.0 is returned.
@@ -206,8 +208,10 @@ def solve_dce(graph_order: int, expression_index: int):
     """
     This function attempts to find a counterexample of a configured order to a selected conjectured
     inequality from:
-        V. Brankov, P. Hansen and D. Stevanović, Automated conjectures on upper bounds for the
-        largest Laplacian eigenvalue of graphs, Linear Algebra Appl. 414 (2006), 407-424;
+
+    * V. Brankov, P. Hansen and D. Stevanović, Automated conjectures on upper bounds for the
+      largest Laplacian eigenvalue of graphs, Linear Algebra Appl. 414 (2006), 407-424;
+
     using the Deep Cross-Entropy agent.
 
     :param graph_order: A positive `int` not less than 2 specifying the order of the graphs that
@@ -276,8 +280,10 @@ def solve_reinforce(graph_order: int, expression_index: int):
     """
     This function attempts to find a counterexample of a configured order to a selected conjectured
     inequality from:
-        V. Brankov, P. Hansen and D. Stevanović, Automated conjectures on upper bounds for the
-        largest Laplacian eigenvalue of graphs, Linear Algebra Appl. 414 (2006), 407-424;
+
+    * V. Brankov, P. Hansen and D. Stevanović, Automated conjectures on upper bounds for the
+      largest Laplacian eigenvalue of graphs, Linear Algebra Appl. 414 (2006), 407-424;
+
     using the REINFORCE agent.
 
     :param graph_order: A positive `int` not less than 2 specifying the order of the graphs that
@@ -352,8 +358,10 @@ def solve_ppo(graph_order: int, expression_index: int):
     """
     This function attempts to find a counterexample of a configured order to a selected conjectured
     inequality from:
-        V. Brankov, P. Hansen and D. Stevanović, Automated conjectures on upper bounds for the
-        largest Laplacian eigenvalue of graphs, Linear Algebra Appl. 414 (2006), 407-424;
+
+    * V. Brankov, P. Hansen and D. Stevanović, Automated conjectures on upper bounds for the
+      largest Laplacian eigenvalue of graphs, Linear Algebra Appl. 414 (2006), 407-424;
+
     using the Proximal Policy Optimization (PPO) agent.
 
     :param graph_order: A positive `int` not less than 2 specifying the order of the graphs that
