@@ -130,6 +130,10 @@ def solve(graph_order: int):
 
             break
 
+        if agent.step_count >= 100 and agent.best_score < -100.0:
+            print("Restarting...")
+            agent.reset()
+
         if agent.step_count >= 500:
             print("Restarting...")
             agent.reset()
