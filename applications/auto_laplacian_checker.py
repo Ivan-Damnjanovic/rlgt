@@ -125,7 +125,7 @@ def check(adjacency_matrix: np.ndarray, expression_index: int):
     :param expression_integer: A positive `int` between 1 and 68 specifying which of the 68
         conjectured inequalities should be tested.
     """
-    
+
     g = Graph(matrix(ZZ, adjacency_matrix))
 
     # The graph must be connected and on at least two vertices.
@@ -152,13 +152,16 @@ def check(adjacency_matrix: np.ndarray, expression_index: int):
             for u, v, _ in g.edges()
         ]
 
-    # Compute the difference between the left-hand side and the right-hand side.
-    result = left_hand_side - max(right_hand_values)
-    if not result.imag().is_zero():
-        print(f"Problem! {expression_index}, {adjacency_matrix}")
-        result = -1.0
+    # Ignore the invalid values on the right-hand side if some of the square roots have a negative
+    # argument.
+    right_hand_values = [
+        value if isinstance(value, float) or value.imag().is_zero() else -1000
+        for value in right_hand_values
+    ]
 
-    # If the left-hand side is greater, then a counterexample has been found.
+    # Compute the difference between the left-hand side and the right-hand side. If the left-hand
+    # side is greater, then a counterexample has been found.
+    result = left_hand_side - max(right_hand_values)
     if float(result) > 0.0001:
         if expression_index not in RESOLUTIONS:
             RESOLUTIONS[expression_index] = []
