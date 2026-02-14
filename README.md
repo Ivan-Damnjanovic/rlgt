@@ -1,5 +1,11 @@
 # Reinforcement Learning for Graph Theory (RLGT)
 
+[![PyPI](https://img.shields.io/pypi/v/rlgt)](https://pypi.org/project/rlgt/)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![Imports: isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336)](https://pycqa.github.io/isort/)
+[![Check formatting](https://github.com/Ivan-Damnjanovic/rlgt/actions/workflows/formatting.yml/badge.svg)](https://github.com/Ivan-Damnjanovic/rlgt/actions/workflows/formatting.yml)
+[![Run tests](https://github.com/Ivan-Damnjanovic/rlgt/actions/workflows/pytest.yml/badge.svg?branch=main)](https://github.com/Ivan-Damnjanovic/rlgt/actions/workflows/pytest.yml)
+
 **Reinforcement Learning for Graph Theory (RLGT)** is a modular reinforcement learning (RL) framework designed to support research in extremal graph theory. RLGT aims to systematize and extend previous RL-based approaches for constructing extremal graphs and counterexamples to graph-theoretic conjectures. The framework provides a clean, modular and extensible codebase suitable for future research.
 
 ## Motivation
