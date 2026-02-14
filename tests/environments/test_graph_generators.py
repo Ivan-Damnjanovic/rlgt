@@ -9,6 +9,7 @@ from rlgt.environments.graph_generators import (
 )
 from rlgt.graphs.graph import FlattenedOrdering, Graph, GraphFormat
 
+
 GRAPHS = [
     Graph.from_flattened(
         np.asarray([1], dtype=np.uint8),

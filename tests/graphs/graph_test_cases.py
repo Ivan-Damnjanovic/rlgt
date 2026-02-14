@@ -1,5 +1,6 @@
 import numpy as np
 
+
 TEST_CASES_CONSTRUCTOR = [
     (2, 2, False, False, {"bitmask_out": np.asarray([[2, 1]], np.uint8)}),
     (2, 2, False, False, {"bitmask_in": np.asarray([[2, 1]], np.uint8)}),

@@ -6,6 +6,7 @@ from rlgt.graphs.graph import FlattenedOrdering
 from ..utils import batchify, insert, replace
 from .linear_set_test_cases import TEST_CASES_CONSTRUCTOR as lstc_constructor
 
+
 DTYPE_STATE = np.uint8
 DTYPE_ACTION = np.int32
 

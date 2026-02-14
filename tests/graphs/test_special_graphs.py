@@ -40,6 +40,7 @@ from .special_graphs_test_cases import (
 )
 from .utils import verify_instantiated_graph
 
+
 ALL_FORMATS = {format for format in GraphFormat}
 
 

@@ -1,6 +1,7 @@
 import numpy as np
 import pytest
-from rlgt.environments.graph_environment import GraphEnvironment, EpisodeStatus
+
+from rlgt.environments.graph_environment import EpisodeStatus, GraphEnvironment
 
 
 class StepTestingEnvironment(GraphEnvironment):

@@ -10,6 +10,7 @@ from .global_set_test_cases import (
     TEST_CASES_STATE_BATCH_TO_GRAPH_BATCH as gstc_state_batch_to_graph_batch,
 )
 
+
 DTYPE_STATE = np.uint8
 DTYPE_ACTION = np.int32
 

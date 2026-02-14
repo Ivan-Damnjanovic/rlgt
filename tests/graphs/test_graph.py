@@ -1,6 +1,7 @@
-import pytest
 from typing import Any
+
 import numpy as np
+import pytest
 
 from rlgt.graphs.graph import Graph
 

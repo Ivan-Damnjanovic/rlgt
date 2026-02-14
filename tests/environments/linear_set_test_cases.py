@@ -1,12 +1,15 @@
 import numpy as np
 
-from rlgt.graphs.graph import FlattenedOrdering
 from rlgt.environments.graph_environment import EpisodeStatus
+from rlgt.graphs.graph import FlattenedOrdering
 
 from ..utils import batchify, replace
 from .linear_build_test_cases import TEST_CASES_CONSTRUCTOR as lbtc_constructor
 from .linear_build_test_cases import TEST_CASES_RESET_BATCH as lbtc_reset_batch
-from .linear_build_test_cases import TEST_CASES_TRANSITION_BATCH as lbtc_transition_batch
+from .linear_build_test_cases import (
+    TEST_CASES_TRANSITION_BATCH as lbtc_transition_batch,
+)
+
 
 DTYPE_STATE = np.uint8
 DTYPE_ACTION = np.int32
