@@ -86,7 +86,7 @@ TODO
 
 ## Documentation
 
-Detailed documentation is available in the [`docs`](./docs) directory.
+Detailed documentation is available at [`https://ivan-damnjanovic.github.io/rlgt/`](https://ivan-damnjanovic.github.io/rlgt/).
 
 ## Citation
 
