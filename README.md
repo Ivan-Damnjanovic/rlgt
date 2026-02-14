@@ -58,14 +58,16 @@ This package depends on `graphs` and `environments`, and requires **PyTorch** to
 .
 ├── src/rlgt/
 ├── tests/
+├── docs/
 ├── examples/
-└── docs/
+└── applications/
 ```
 
 * [`src/rlgt`](./src/rlgt) contains the full modular implementation of the framework.
-* [`tests`](./tests) contains the unit tests that enhance the code stability.  
-* [`examples`](./examples) contains several examples that demonstrate how to define graphs and environments, and train agents.  
+* [`tests`](./tests) contains the unit tests that enhance the code stability.
 * [`docs`](./docs) contains the documentation that provides detailed explanations and usage guidelines.
+* [`examples`](./examples) contains several examples that demonstrate how to define graphs and environments, and train agents.  
+* [`applications`](./applications) contains the applications of this framework to concrete graph theory problems.
 
 ## Tooling and Code Quality
 
