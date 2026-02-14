@@ -43,7 +43,7 @@ This package depends on `graphs` and `environments`, and requires **PyTorch** to
 
 ## Layered Architecture
 
-* **graphs**  
+* **graphs**
   This package has no internal dependencies and serves as the foundational layer of the framework.
 
 * **environments**  
@@ -82,7 +82,17 @@ RLGT emphasizes reproducibility, stability and clean code. The framework uses:
 
 ## Installation
 
-TODO
+The framework can be installed via **pip** as follows:
+
+```
+pip install rlgt
+```
+
+If you also want to use the `agents` package, then the additional dependencies need to be installed with:
+
+```
+pip install rlgt[agents]
+```
 
 ## Documentation
 
