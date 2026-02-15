@@ -104,6 +104,7 @@ def e2_example():
             ),
             graph_format=GraphFormat.FLATTENED_ROW_MAJOR_COLORS,
         ),
+        sparse_setting=True,
     )
 
     print("Global Flip environment")
