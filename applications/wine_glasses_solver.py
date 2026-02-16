@@ -13,9 +13,9 @@ def graph_invariant(graph_batch: rlgt_graphs.Graph) -> np.ndarray:
     r"""
     This function computes the graph invariant
     \[
-        \mathcal{E} - 2 \mu \sqrt{\Delta}
+        \mathcal{E} - 2 \nu \sqrt{\Delta}
     \]
-    for a provided batch of graphs, where $\mathcal{E}$ is the graph energy, $\mu$ is the matching
+    for a provided batch of graphs, where $\mathcal{E}$ is the graph energy, $\nu$ is the matching
     number, and $\Delta$ is the maximum vertex degree, in accordance with the conjectured
     inequality from
 
@@ -53,26 +53,26 @@ def graph_invariant(graph_batch: rlgt_graphs.Graph) -> np.ndarray:
             continue
 
         # Compute the matching number.
-        mu = len(g.matching())
+        nu = len(g.matching())
 
         # Compute the graph energy.
         eigenvalues = g.adjacency_matrix().eigenvalues()
         energy = sum(abs(eigenvalue) for eigenvalue in eigenvalues)
 
         # Finally, compute the graph invariant value.
-        scores[index] = energy - 2 * mu * sqrt(delta)
+        scores[index] = energy - 2 * nu * sqrt(delta)
 
     return scores
 
 
 def solve(graph_order: int):
-    """
+    r"""
     This function attempts to find a counterexample of a configured order to the conjectured
     inequality
     \[
-        \mathcal{E} \le 2 \mu \sqrt{\Delta}
+        \mathcal{E} \le 2 \nu \sqrt{\Delta}
     \]
-    where $\mathcal{E}$ is the graph energy, $\mu$ is the matching number, and $\Delta$ is the
+    where $\mathcal{E}$ is the graph energy, $\nu$ is the matching number, and $\Delta$ is the
     maximum vertex degree, from
 
     * S. Akbari, A. Alazemi and M. Anđelić, Upper bounds on the energy of graphs in terms of

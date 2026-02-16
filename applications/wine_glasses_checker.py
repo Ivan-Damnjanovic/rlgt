@@ -10,9 +10,9 @@ def check(adjacency_matrix):
     This function determines whether a connected simple graph with maximum vertex degree below 6
     represented through an adjacency matrix is a counterexample to the conjectured inequality
     \[
-        \mathcal{E} \le 2 \mu \sqrt{\Delta}
+        \mathcal{E} \le 2 \nu \sqrt{\Delta}
     \]
-    where $\mathcal{E}$ is the graph energy, $\mu$ is the matching number, and $\Delta$ is the
+    where $\mathcal{E}$ is the graph energy, $\nu$ is the matching number, and $\Delta$ is the
     maximum vertex degree, from
 
     * S. Akbari, A. Alazemi and M. Anđelić, Upper bounds on the energy of graphs in terms of
@@ -34,13 +34,13 @@ def check(adjacency_matrix):
     assert delta < 6
 
     # Compute the matching number.
-    mu = len(g.matching())
+    nu = len(g.matching())
 
     # Compute the graph energy.
     eigenvalues = g.adjacency_matrix().eigenvalues()
     energy = sum(abs(eval) for eval in eigenvalues)
 
-    if float(energy - 2 * mu * sqrt(delta)) > 0.005:
+    if float(energy - 2 * nu * sqrt(delta)) > 0.005:
         print(adjacency_matrix)
 
 
