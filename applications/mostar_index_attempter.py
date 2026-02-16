@@ -9,7 +9,7 @@ from rlgt import environments as rlgt_environments
 from rlgt import graphs as rlgt_graphs
 
 
-def graph_invariant(graph_batch: rlgt_graphs.Graph) -> np.ndarray:
+def mostar_index(graph_batch: rlgt_graphs.Graph) -> np.ndarray:
     r"""
     This function computes the Mostar index for a provided batch of graphs, i.e., the graph
     invariant
@@ -96,7 +96,7 @@ def attempt(graph_order: int, stop_when_conjectured_maximum: bool = True):
 
     agent = rlgt_agents.DeepCrossEntropyAgent(
         environment=rlgt_environments.LinearBuildEnvironment(
-            graph_invariant=graph_invariant,
+            graph_invariant=mostar_index,
             graph_order=graph_order,
         ),
         policy_network=policy_network,
