@@ -108,4 +108,4 @@ Detailed documentation is available at [`https://ivan-damnjanovic.github.io/rlgt
 
 If you use RLGT in academic work, please cite the associated paper:
 
-TODO
+* I. Damnjanović, U. Milivojević, I. Đorđević and D. Stevanović, RLGT: A reinforcement learning framework for extremal graph theory, 2026, [`arXiv:2602.17276`](https://arxiv.org/abs/2602.17276).
