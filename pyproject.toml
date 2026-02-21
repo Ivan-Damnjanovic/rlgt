@@ -1,6 +1,6 @@
 [project]
 name = "RLGT"
-version = "1.0.0"
+version = "1.0.1"
 description = "This is Reinforcement Learning for Graph Theory (RLGT), a reinforcement learning framework that aims to facilitate future research in extremal graph theory."
 authors = [ { name = "Ivan Damnjanović" }, { name = "Uroš Milivojević" }, { name = "Irena Đorđević" }, { name = "Dragan Stevanović" } ]
 readme = "README.md"
